@@ -27,7 +27,7 @@ export default function Header() {
       initial="hidden"
       animate="visible"
     >
-      <div className="flex items-center justify-between lg:mx-8">
+      <div className="my-auto flex justify-between lg:mx-8">
         <LogoTradimedika />
         <DarkModeToggle />
       </div>
