@@ -23,7 +23,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className={`flex items-center gap-2 rounded-full border-2 px-4 py-2 transition delay-150 duration-300 ease-in-out ${
+          className={`flex items-center gap-2 rounded-full border-2 px-4 py-2 transition duration-300 ease-in-out ${
             isDarkMode
               ? "bg-accent/20 border-accent/60 text-accent"
               : "bg-light border-dark/60 text-dark"
@@ -44,7 +44,7 @@ export default function Hero() {
       >
         <h1 className="text-4xl font-semibold md:text-5xl lg:text-6xl">
           <span
-            className={`${isDarkMode ? "text-light" : "text-dark"} transition delay-150 duration-300 ease-in-out`}
+            className={`${isDarkMode ? "text-light" : "text-dark"} transition duration-300 ease-in-out`}
           >
             Soulagez vos symptomes
           </span>
@@ -58,7 +58,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className={`${isDarkMode ? "text-light/70" : "text-dark/70"} mb-4 max-w-2xl text-center text-base transition delay-150 duration-300 ease-in-out md:text-lg lg:mb-8`}
+        className={`${isDarkMode ? "text-light/70" : "text-dark/70"} mb-4 max-w-2xl text-center text-base transition duration-300 ease-in-out md:text-lg lg:mb-8`}
       >
         Les bienfaits de la médecine douce pour traiter vos maux du quotidien.
       </motion.p>
@@ -74,14 +74,14 @@ export default function Hero() {
           className={`"border-dark/10 relative flex items-center rounded-lg border shadow-sm`}
         >
           <HiMagnifyingGlass
-            className={`absolute left-4 text-xl transition delay-150 duration-300 ease-in-out ${isDarkMode ? "text-light/60" : "text-dark/60"}`}
+            className={`absolute left-4 text-xl transition duration-300 ease-in-out ${isDarkMode ? "text-light/60" : "text-dark/60"}`}
           />
           <input
             type="text"
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
             placeholder="Entrez vos symptomes (ex: maux de tete, fatigue...)"
-            className={`transition delay-150 duration-300 ease-in-out ${isDarkMode ? "ring-light/40 text-light bg-light/10" : "ring-dark/50 text-dark bg-white "} focus:ring-accent w-full rounded-lg py-4 pr-4 pl-12 text-sm ring-2 focus:outline-none lg:text-base`}
+            className={`transition duration-300 ease-in-out ${isDarkMode ? "ring-light/40 text-light bg-light/10" : "ring-dark/50 text-dark bg-white "} focus:ring-accent w-full rounded-lg py-4 pr-4 pl-12 text-sm ring-2 focus:outline-none lg:text-base`}
           />
         </div>
       </motion.div>
@@ -122,7 +122,7 @@ export default function Hero() {
           >
             <FaCheck className="text-accent text-sm" />
             <span
-              className={`text-sm font-semibold transition delay-150 duration-300 ease-in-out ${isDarkMode ? "text-light/80" : "text-dark/60"} `}
+              className={`text-sm font-semibold transition duration-300 ease-in-out ${isDarkMode ? "text-light/80" : "text-dark/60"} `}
             >
               {feature}
             </span>

@@ -6,10 +6,10 @@ const Footer = () => {
   const { isDarkMode } = useTheme();
   return (
     <footer
-      className={`w-full transition delay-150 duration-300 ease-in-out lg:py-4 ${isDarkMode ? "text-light bg-dark" : "text-dark bg-light"}`}
+      className={`w-full transition duration-300 ease-in-out lg:py-4 ${isDarkMode ? "text-light bg-dark" : "text-dark bg-light"}`}
     >
       <div
-        className={`mx-auto flex w-full flex-col items-center justify-center border-t-2 border-dashed py-2 transition delay-150 duration-300 ease-in-out lg:w-3/4 ${isDarkMode ? "border-light/60" : "border-dark/80 "}`}
+        className={`mx-auto flex w-full flex-col items-center justify-center border-t-2 border-dashed py-2 transition duration-300 ease-in-out lg:w-3/4 ${isDarkMode ? "border-light/60" : "border-dark/80 "}`}
       >
         {/* Logo */}
         <div className="mb-4">
@@ -23,14 +23,14 @@ const Footer = () => {
           <a
             href="/mention-legales"
             rel="noopener noreferrer"
-            className={`hover:text-accent font-medium underline underline-offset-2 transition delay-150 duration-300 ease-in-out hover:font-semibold ${isDarkMode ? "text-light" : "text-dark"}`}
+            className={`hover:text-accent font-medium underline underline-offset-2 transition duration-300 ease-in-out hover:font-semibold ${isDarkMode ? "text-light" : "text-dark"}`}
           >
             Mentions Légales
           </a>
           <a
             href="/privacy-policy"
             rel="noopener noreferrer"
-            className={`hover:text-accent font-medium underline underline-offset-2 transition delay-150 duration-300 ease-in-out hover:font-semibold ${isDarkMode ? "text-light" : "text-dark"}`}
+            className={`hover:text-accent font-medium underline underline-offset-2 transition duration-300 ease-in-out hover:font-semibold ${isDarkMode ? "text-light" : "text-dark"}`}
           >
             Politique de Confidentialité
           </a>
@@ -38,7 +38,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <p
-          className={`text-xs text-gray-600 transition delay-150 duration-300 ease-in-out ${isDarkMode ? "text-neutral-500 " : "text-neutral-600"}`}
+          className={`text-xs text-gray-600 transition duration-300 ease-in-out ${isDarkMode ? "text-neutral-500 " : "text-neutral-600"}`}
         >
           © 2026 - Tous droits réservés - Application Française 🟦​⬜​🟥​
         </p>

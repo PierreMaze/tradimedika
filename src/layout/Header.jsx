@@ -25,7 +25,7 @@ export default function Header() {
   const { isDarkMode } = useTheme();
   return (
     <motion.header
-      className={`sticky top-0 right-0 left-0 z-50 h-20 w-full border-b-2 border-dashed px-6 py-4 transition delay-150 duration-300 ease-in-out lg:w-3/4 ${isDarkMode ? "bg-dark border-light/60" : "bg-light border-dark/80"}`}
+      className={`sticky top-0 right-0 left-0 z-50 h-20 w-full border-b-2 border-dashed px-6 py-4 transition duration-300 ease-in-out lg:w-3/4 ${isDarkMode ? "bg-dark border-light/60" : "bg-light border-dark/80"}`}
       variants={headerVariants}
       initial="hidden"
       animate="visible"

@@ -17,7 +17,7 @@ const LogoTradimedika = () => {
           <PiPlantFill className="text-accent text-3xl lg:text-4xl" />
         </span>
         <span
-          className={`text-2xl font-black tracking-wide transition delay-150 duration-300 ease-in-out lg:text-3xl ${isDarkMode ? "text-light" : "text-dark"}`}
+          className={`text-2xl font-black tracking-wide transition duration-300 ease-in-out lg:text-3xl ${isDarkMode ? "text-light" : "text-dark"}`}
         >
           TRADIMEDIKA
         </span>
