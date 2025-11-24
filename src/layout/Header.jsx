@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import DarkModeToggle from "../components/btn/DarkModeToggle";
 import LogoTradimedika from "./components/LogoTradimedika";
-const Header = () => {
+
+export default function Header() {
 	return (
 		<header
 			className="
@@ -16,6 +17,4 @@ const Header = () => {
 			<DarkModeToggle />
 		</header>
 	);
-};
-
-export default Header;
+}

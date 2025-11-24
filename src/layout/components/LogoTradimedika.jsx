@@ -1,6 +1,6 @@
 import { PiPlantFill } from "react-icons/pi";
 
-const LogoTradimedika = () => {
+export default function LogoTradimedika() {
 	return (
 		<>
 			<a
@@ -17,5 +17,4 @@ const LogoTradimedika = () => {
 			</a>
 		</>
 	);
-};
-export default LogoTradimedika;
+}

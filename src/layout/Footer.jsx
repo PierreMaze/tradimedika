@@ -2,7 +2,7 @@ import LogoTradimedika from "./components/LogoTradimedika";
 import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { PiPlantFill } from "react-icons/pi";
 
-const Footer = () => {
+export default function Footer() {
 	return (
 		<footer
 			className="
@@ -57,6 +57,4 @@ const Footer = () => {
 			</p>
 		</footer>
 	);
-};
-
-export default Footer;
+}
