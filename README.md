@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![TRADIMEDIKA Preview](https://img.shields.io/badge/Portfolio-1.0-FFFFFF?style=for-the-badge&logo=dev.to&logoColor=FFFFFF)](https://tradimedika.netlify.app/)
+[![TRADIMEDIKA Preview](https://img.shields.io/badge/TRADIMEDIKA-FFFFFF?style=for-the-badge&logo=dev.to&logoColor=FFFFFF)](https://tradimedika.netlify.app/)
 [![React](https://img.shields.io/badge/React-19.2.0-38B2AC?style=for-the-badge&logo=react&logoColor=38B2AC)](https://react.dev/)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4.3-61DAFB?style=for-the-badge&logo=tailwind-css&logoColor=61DAFB)](https://tailwindcss.com/)
 [![Framer Motion](https://img.shields.io/badge/Framer%20Motion-12.23.22-BE185D?style=for-the-badge&logo=framer&logoColor=BE185D)](https://motion.dev/)
