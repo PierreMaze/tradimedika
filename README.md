@@ -189,8 +189,8 @@ pnpm lint             # Vérification ESLint
 pnpm fix              # Correction automatique Prettier
 
 # Maintenance
-pnpm clean            # Nettoyage des dépendances
-pnpm reset            # Reset complet du projet
+pnpm clean            # Nettoyage des dépendances uniquement
+pnpm reset            # Redémarrage du client avec suppression + ré-installation des dépendances
 pnpm preload          # Installation + démarrage rapide
 ```
 
