@@ -22,7 +22,6 @@
 - [✨ Fonctionnalités](#-fonctionnalités)
 - [🛠️ Stack technique](#️-stack-technique)
 - [🚀 Installation](#-installation)
-- [🏗️ Architecture](#️-architecture)
 - [🎨 Design System](#-design-system)
 - [⚡ Performance](#-performance)
 - [📚 Scripts disponibles](#-scripts-disponibles)
@@ -34,7 +33,7 @@
 
 #### Ce site propose un traitement naturel pour soulager les symptômes immédiatement, grâce à des aliments du quotidien, le tout dans une interface élégante et performante.
 
->_Il ne remplace pas un professionnel de santé. Consultez un médecin ou appelez les urgences : ce sont les personnes compétentes pour vous aider._
+###### >_Il ne remplace pas un professionnel de santé. Consultez un médecin ou appelez les urgences : ce sont les personnes compétentes pour vous aider._
 
 ### 🎨 Caractéristiques principales
 
@@ -44,6 +43,12 @@
 - **Accessibilité** : Conforme aux standards WCAG 2.1 AA (à venir)
 - **SEO optimisé** : Meta tags et structure sémantique (à venir)
 
+
+### 📚 Documentation  
+- [Convention de nommage des branches](./docs/CONVENTION_BRANCH.md)  
+- [Convention de la création d'une PR](./docs/CONVENTION_PR.md)  
+- [Architecture](./docs/ARCHITECTURE.md)  
+- [Historique des versions](./CHANGELOG.md)  
 ---
 
 ## ✨ Fonctionnalités
@@ -127,32 +132,6 @@ pnpm build
 # Ou avec npm
 npm run build
 ```
-
----
-
-## 🏗️ Architecture
-
-```
-src/
-├── components/         # Composants réutilisables
-│   └── ui/             # Composants UI de base
-├── constants/          # Constantes
-├── contexts/           # Contextes React
-├── data/               # Données statiques
-├── hooks/              # Hooks personnalisés
-├── layout/             # Layout et navigation
-├── pages/              # Pages de l'application
-└── utils/              # Utilitaires
-```
-
-### 🎯 Principes architecturaux
-
-- **Composants modulaires** et réutilisables
-- **Séparation des responsabilités** claire
-- **Hooks personnalisés** pour la logique métier
-- **Contextes** pour la gestion d'état global
-- **Utilitaires** pour les fonctions communes
-
 ---
 
 ## 🎨 Design System
