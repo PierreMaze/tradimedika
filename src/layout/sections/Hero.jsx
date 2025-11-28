@@ -1,1 +1,1 @@
-const Hero
+const Hero;
