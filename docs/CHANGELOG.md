@@ -11,6 +11,13 @@
 - Smooth, infinite animation using Framer Motion with randomized offsets, rotations, and scales
 - Component is non-intrusive and fully reusable
 
+
+### <u>bug:</u>
+
+- Bug fix where `LeafFall.jsx` does not appear in the background when dark mode is enabled, especially for the main input field.
+- `LeafFall` display returns to correct immediately after the light theme change, without requiring a second activation.
+- `LeafFall` flashes when it disappears to the bottom of the screen.
+
 ---
 
 ## [0.1.0] - 2025-11-28
