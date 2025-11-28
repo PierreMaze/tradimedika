@@ -2,6 +2,17 @@
 
 ---
 
+## [0.1.2] - 2025-11-28
+### <u>fix:</u>
+- Fixed leaf opacity starting at wrong value - now correctly capped at 0.7 maximum for better visibility
+- Fixed leaves falling straight down - now all leaves move continuously left-right throughout their fall with varied phase offsets
+
+### <u>bug:</u>
+- Bug not fix where `LeafFall.jsx` does not appear in the background when dark mode is enabled, especially for the main input field.
+
+
+---
+
 ## [0.1.1] - 2025-11-28
 
 ### <u>feat:</u>
