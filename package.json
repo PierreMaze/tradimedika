@@ -1,8 +1,10 @@
+
 {
   "name": "tradimedika",
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "homepage": "http://PierreMaze.github.io/tradimedika",
   "prettier": {
     "plugins": [
       "prettier-plugin-tailwindcss"
@@ -10,13 +12,15 @@
   },
   "scripts": {
     "dev": "vite",
-    "reset": "pnpm run clean && pnpm i && pnpm run dev",
-    "preload": "pnpm i && pnpm run dev",
+    "reset": "pnpm clean && pnpm i && pnpm dev",
+    "preload": "pnpm i && pnpm dev",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "fix": "prettier --write .",
-    "clean": "rm -rf node_modules pnpm-lock.yaml package-lock.json dist && clear"
+    "clean": "rm -rf node_modules pnpm-lock.yaml package-lock.json dist && clear",
+    "redeploy": "pnpm build",
+	  "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.17",
@@ -38,6 +42,7 @@
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
+    "gh-pages": "^6.3.0",
     "globals": "^16.5.0",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.7.1",
