@@ -14,7 +14,9 @@ const LogoTradimedika = () => {
         className="flex items-center gap-2"
       >
         <span>
-          <PiPlantFill className="text-accent text-3xl lg:text-4xl" />
+          <PiPlantFill
+            className={`transition duration-300 ease-in-out ${isDarkMode ? "text-emerald-500" : "text-emerald-600"} text-3xl lg:text-4xl`}
+          />
         </span>
         <span
           className={`text-2xl font-black tracking-wide transition duration-300 ease-in-out lg:text-3xl ${isDarkMode ? "text-light" : "text-dark"}`}

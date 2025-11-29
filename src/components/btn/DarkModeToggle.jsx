@@ -12,15 +12,15 @@ export default function DarkModeToggle() {
       onClick={toggleDarkMode}
       className={`group relative flex h-8 w-14 cursor-pointer items-center rounded-full border-2 p-1 transition-all duration-300 ease-out ${
         isDarkMode
-          ? "bg-accent border-accent/80 justify-end"
-          : "bg-light border-dark justify-start"
+          ? "justify-end border-emerald-500/80 bg-emerald-500"
+          : "border-dark justify-start bg-white"
       }`}
     >
       {/* Glow / halo UX */}
       <motion.span
         layout
         className={`pointer-events-none absolute inset-0 z-0 rounded-full border-none transition-opacity duration-300 ${
-          isDarkMode ? "bg-accent opacity-30" : "opacity-0"
+          isDarkMode ? "bg-emerald-500 opacity-30" : "opacity-0"
         }`}
       />
 
@@ -28,7 +28,7 @@ export default function DarkModeToggle() {
         layout
         transition={{ type: "spring", bounce: 0.25, duration: 0.25 }}
         className={`z-10 flex h-6 w-6 items-center justify-center rounded-full text-current group-hover:scale-105 ${
-          isDarkMode ? "bg-light " : "bg-dark "
+          isDarkMode ? "bg-white " : "bg-dark "
         }`}
       >
         {isDarkMode ? (
@@ -37,7 +37,7 @@ export default function DarkModeToggle() {
           />
         ) : (
           <HiMoon
-            className={`text-light text-xs transition-colors duration-300`}
+            className={`text-xs text-white transition-colors duration-300`}
           />
         )}
       </motion.div>
