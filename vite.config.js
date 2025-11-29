@@ -12,7 +12,7 @@ export default defineConfig({
       },
     }),
   ],
-  base: '/tradimedika/',
+  base: "/tradimedika/",
   server: {
     port: 3000,
     open: true,

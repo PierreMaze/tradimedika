@@ -34,6 +34,7 @@
 #### Ce site propose un traitement naturel pour soulager les symptômes immédiatement, grâce à des aliments du quotidien, le tout dans une interface élégante et performante.
 
 ### ⚠️ Disclamer ⚠️
+
 > _Il ne remplace pas un professionnel de santé. Consultez un médecin ou appelez les urgences : ce sont les personnes les plus compétentes pour vous aider._
 
 ### 🎨 Caractéristiques principales
@@ -88,7 +89,6 @@
 - **Lighthouse** - Audit de performance automatique
 
 ---
-
 
 ## 🎨 Design System
 
