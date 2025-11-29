@@ -4,8 +4,16 @@
 
 ## [0.1.3] - 2025-11-28
 
+### <u>fix:</u>
+
+- Correct vertical content alignment in layout components
+- Add explicit height to `header` to ensure consistent centering
+- Fix y-axis spacing in `footer`
+
 ### <u>update:</u>
 
+- Replace custom `accent` color variable with Tailwind `emerald`
+- Improve UI/UX consistency across layout
 - Update balise`<link>` in file `index.hmtl`
 
 ---
