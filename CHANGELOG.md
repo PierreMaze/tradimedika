@@ -20,9 +20,7 @@
 
 ### <u>standardization:</u>
 
-- Standardizes Tailwind classes `bg-light dark:bg-dark` across sections
 - Harmonizes heading size hierarchy (h1–h4) for UI consistency
-- Improves overall text contrast: `text-dark` and `dark:text-light`
 - Simplifies the color palette: removes custom accent variables
 - Ensure badge, input field, and interactive elements properly layer above background animation
 
