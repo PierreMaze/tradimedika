@@ -35,7 +35,7 @@
 
 ### ⚠️ Disclamer ⚠️
 
-> _Il ne remplace pas un professionnel de santé. Consultez un médecin ou appelez les urgences : ce sont les personnes les plus compétentes pour vous aider._
+> _Si vous avez besoin d'aide, prenez rendez-vous avec un médecin ou appelez les services d'urgence : ce sont les personnes les plus compétentes pour vous assister.._
 
 ### 🎨 Caractéristiques principales
 
