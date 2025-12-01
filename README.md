@@ -35,7 +35,7 @@
 
 ### ⚠️ Disclamer ⚠️
 
-> _Ce site ne remplace pas la médecine traditionnelle, mais plutot une alternative de l'instant "T", prenez rendez-vous avec un médecin ou appelez les d'urgence : ce sont les personnes les plus compétentes pour vous assister._
+> _Ce site ne remplace pas la médecine traditionnelle, mais plutot une alternative à l'instant "T", prenez rendez-vous avec un médecin ou appelez les d'urgence : ce sont les personnes les plus compétentes pour vous assister._
 
 ### 🎨 Caractéristiques principales
 
