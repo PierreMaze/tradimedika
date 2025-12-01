@@ -35,7 +35,7 @@
 
 ### ⚠️ Disclamer ⚠️
 
-> _Si vous avez besoin d'aide, prenez rendez-vous avec un médecin ou appelez les services d'urgence : ce sont les personnes les plus compétentes pour vous assister.._
+> _Ce site ne remplace pas la médecine traditionnelle, mais plutot une alternative pour l'instant "T", prenez rendez-vous avec un médecin ou appelez les d'urgence : ce sont les personnes les plus compétentes pour vous assister.._
 
 ### 🎨 Caractéristiques principales
 
