@@ -2,6 +2,27 @@
 
 ---
 
+## [0.1.4] - 2025-12-01
+
+### <u>fix:</u>
+
+- Corrige le comportement du thème sombre sur les composants `Layout` et `Sidebar`
+- Répare l’overflow horizontal du layout sur mobile
+- Ajuste le spacing des sections `Hero` et `Features`
+- Corrige l’affichage du bouton CTA principal en mode sombre
+- Corrige la mauvaise valeur d’import `accent-light` dans `tailwind.config.js`
+
+### <u>update:</u>
+
+- Uniformise les classes Tailwind `bg-light dark:bg-dark` sur les sections
+- Harmonise la hiérarchie des tailles de titres (h1–h4) pour cohérence UI
+- Améliore le contraste général des textes : `text-dark` et `dark:text-light`
+- Simplifie la palette de couleurs : retrait des variables accent custom
+- Optimise la structure dans `index.html` (balises meta + link + ordre CSS)
+- Ajustements mineurs d’UX sur les labels et les états hover
+
+---
+
 ## [0.1.3] - 2025-11-28
 
 ### <u>fix:</u>

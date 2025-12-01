@@ -18,7 +18,7 @@ export default function Hero() {
   };
   return (
     <div className="container mx-auto mt-8 mb-4 flex flex-col items-center justify-center px-4">
-      {/* 🌿 Explosion de plantes en arrière-plan */}
+      {/* 🌿 Chute de plantes en arrière-plan */}
       <Suspense fallback={null}>
         <LeafFall />
       </Suspense>
@@ -35,10 +35,10 @@ export default function Hero() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className={`flex items-center gap-2 rounded-full border-2 px-4 py-2 transition duration-300 ease-in-out ${
+            className={`pointer-events-none flex items-center gap-2 rounded-full border-2 px-4 py-2 shadow-lg transition duration-300 ease-in-out ${
               isDarkMode
                 ? "bg-accent/20 border-emerald-500/60 text-emerald-500"
-                : "bg-light border-dark/60 text-dark"
+                : "border-dark/60 text-dark bg-white"
             } `}
           >
             <GiSprout
@@ -47,7 +47,7 @@ export default function Hero() {
               }`}
             />
             <span className="font-sans text-sm font-semibold">
-              Medecine douce & naturelle
+              Méthode Douce & Naturelle
             </span>
           </motion.div>
         </div>
@@ -62,7 +62,7 @@ export default function Hero() {
             <span
               className={`${isDarkMode ? "text-light" : "text-dark"} transition duration-300 ease-in-out`}
             >
-              Soulagez vos symptomes
+              Soulagez vos symptômes
             </span>
             <br />
             <span
@@ -80,7 +80,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className={`${isDarkMode ? "text-light/70" : "text-dark/70"} mb-4 max-w-2xl text-center text-base transition duration-300 ease-in-out md:text-lg lg:mb-8`}
         >
-          Les bienfaits de la médecine douce pour traiter vos maux du quotidien.
+          Les bienfaits de la méthode douce pour traiter vos maux du quotidien.
         </motion.p>
 
         {/* Champ de recherche */}
@@ -100,7 +100,7 @@ export default function Hero() {
               type="text"
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
-              placeholder="Entrez vos symptomes (ex: maux de tete, fatigue...)"
+              placeholder="Entrez vos symptômes (ex: maux de tête, fatigue...)"
               className={`transition duration-300 ease-in-out ${isDarkMode ? "ring-light/40 text-light bg-light/10 focus:ring-emerald-500" : "ring-dark/50 text-dark bg-white focus:ring-emerald-600"} w-full rounded-lg py-4 pr-4 pl-12 text-sm ring-2 focus:outline-none lg:text-base`}
             />
           </div>
@@ -116,7 +116,7 @@ export default function Hero() {
           onClick={handleSearch}
           className={`transition duration-300 ease-in-out ${isDarkMode ? "bg-emerald-500 hover:bg-emerald-500/90" : "bg-emerald-600 hover:bg-emerald-600/90"} flex items-center gap-2 rounded-lg px-8 py-4 font-semibold text-white shadow-lg transition-colors`}
         >
-          <span>Decouvrir mes solutions</span>
+          <span>Découvrir nos solutions</span>
           <IoMdArrowForward className="text-xl" />
         </motion.button>
 
@@ -131,7 +131,7 @@ export default function Hero() {
             "+100 plantes & aliments",
             "Santé naturelle",
             "Gratuit",
-            "Ne stock pas vos données",
+            "Ne stocke pas vos données",
           ].map((feature, index) => (
             <motion.div
               key={feature}
