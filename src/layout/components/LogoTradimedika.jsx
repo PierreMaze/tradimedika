@@ -19,7 +19,7 @@ const LogoTradimedika = () => {
           />
         </span>
         <span
-          className={`text-2xl font-black tracking-wide transition duration-300 ease-in-out lg:text-3xl ${isDarkMode ? "text-light" : "text-dark"}`}
+          className={`text-2xl font-black tracking-wide transition duration-300 ease-in-out lg:text-3xl 2xl:text-4xl ${isDarkMode ? "text-light" : "text-dark"}`}
         >
           TRADIMEDIKA
         </span>

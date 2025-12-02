@@ -1,16 +1,32 @@
 # Change Log
 
+---
+
 ## [0.1.5] - 2025-12-02
 
 ### <u>refactor:</u>
 
 - Integrate Framer Motion in Footer component for smooth fade-in animation
 - Add synchronized animation timing between Hero and Footer sections
+- Restructure Hero.jsx into three logical content groups (Badge+Title+Subtitle, Search+CTA, Features)
+- Replace cascading margin classes (`mt-*`, `mb-*`) with `gap-y-*` utilities for consistent spacing
+- Implement responsive spacing: `gap-y-2/lg:gap-y-4` within groups, `gap-y-4/lg:gap-y-8` between groups
+- Improve visual hierarchy and content organization for better UX/UI
 
 ### <u>fix:</u>
 
 - Fix vertical centering of Header content by adding flexbox alignment
 - Resolve layout alignment issues in Header component
+- Fix Hero section spacing hierarchy by implementing content grouping strategy
+- Resolve mobile spacing issues where labels stick to CTA button
+- Add proper vertical spacing between subtitle and search input
+- Remove inconsistent manual margins in favor of flexbox gap utilities
+
+### <u>standardization:</u>
+
+- Unify spacing system across Hero component using flexbox gap utilities
+- Establish clear micro-typography patterns within content groups
+- Create consistent spacing hierarchy between major content sections
 
 ---
 

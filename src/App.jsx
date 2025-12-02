@@ -9,7 +9,7 @@ function App() {
 
   return (
     <div
-      className={`${isDarkMode ? "bg-dark" : "bg-light"} flex h-screen flex-col items-center justify-between transition duration-300 ease-in-out lg:h-full`}
+      className={`${isDarkMode ? "bg-dark" : "bg-light"} flex h-screen flex-col items-center justify-between transition duration-300 ease-in-out`}
     >
       <Header />
       <Hero />
