@@ -1,5 +1,19 @@
 # Change Log
 
+## [0.1.5] - 2025-12-02
+
+### <u>refactor:</u>
+
+- Integrate Framer Motion in Footer component for smooth fade-in animation
+- Add synchronized animation timing between Hero and Footer sections
+
+### <u>fix:</u>
+
+- Fix vertical centering of Header content by adding flexbox alignment
+- Resolve layout alignment issues in Header component
+
+---
+
 ## [0.1.4] - 2025-12-01
 
 ### <u>fix:</u>
@@ -8,6 +22,7 @@
 - Fixes horizontal layout overflow on mobile
 - Fixes the display of the main CTA button in dark mode
 - Fixes the incorrect `accent-light`
+
 ### <u>refactor:</u>
 
 - Improve LeafFall fade-out animation with smooth, natural easing curve
