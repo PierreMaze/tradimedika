@@ -27,9 +27,9 @@ export default function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="z-20 flex flex-col items-center justify-center gap-y-4 lg:gap-y-8 xl:gap-y-16 2xl:gap-y-20"
+        className="z-20 flex flex-col items-center justify-center gap-y-8 lg:gap-y-12 xl:gap-y-16 2xl:gap-y-20"
       >
-        <div className="flex flex-col items-center gap-y-2 lg:gap-y-4 2xl:gap-y-8">
+        <div className="flex flex-col items-center gap-y-4 lg:gap-y-6 2xl:gap-y-8">
           {/* Tag "Medecine douce & naturelle" */}
           <div className="mx-auto w-fit">
             <motion.div
@@ -87,7 +87,7 @@ export default function Hero() {
         </div>
 
         {/* GROUP 2: Search Input + CTA Button */}
-        <div className="flex w-full max-w-2xl flex-col items-center gap-y-2 lg:gap-y-4 2xl:gap-y-8">
+        <div className="flex w-full max-w-2xl flex-col items-center gap-y-4 lg:gap-y-6 2xl:gap-y-8">
           {/* Champ de recherche */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
