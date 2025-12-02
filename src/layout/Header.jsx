@@ -25,14 +25,18 @@ export default function Header() {
   const { isDarkMode } = useTheme();
   return (
     <motion.header
-      className={`sticky top-0 right-0 left-0 z-50 h-20 w-full border-b-2 border-dashed px-6 py-4 transition duration-300 ease-in-out lg:w-3/4 2xl:w-2/3 ${isDarkMode ? "bg-dark border-light/60" : "bg-light border-dark/80"}`}
+      className={`border-4transition sticky top-0 right-0 left-0 z-50 h-20 w-full duration-300 ease-in-out ${isDarkMode ? "bg-dark" : "bg-light"}`}
       variants={headerVariants}
       initial="hidden"
       animate="visible"
     >
-      <div className="my-auto flex h-full items-center justify-between lg:mx-8">
-        <LogoTradimedika />
-        <DarkModeToggle />
+      <div
+        className={`border-out mx-auto flex min-h-full w-full items-center border-b-2 border-dashed transition duration-300 ease-in-out lg:w-3/4 2xl:w-2/3 ${isDarkMode ? "border-light/60" : "border-dark/80 "}`}
+      >
+        <div className="flex h-auto w-full items-center justify-between lg:mx-8">
+          <LogoTradimedika />
+          <DarkModeToggle />
+        </div>
       </div>
     </motion.header>
   );
