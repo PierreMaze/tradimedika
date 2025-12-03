@@ -2,6 +2,17 @@
 
 ---
 
+## [0.1.6] - 2025-12-03
+
+### <u>add:</u>
+
+- Added `db.json` static database file containing 100+ natural remedies and traditional foods
+- Database includes detailed information: names, types, categories, symptoms, uses, contraindications, and properties
+- Comprehensive data structure covering herbs, spices, foods, oils, vinegars, beverages, and fermented products
+- Each entry includes dosage, frequency, and usage instructions for traditional medicine reference
+
+---
+
 ## [0.1.5] - 2025-12-02
 
 ### <u>refactor:</u>
