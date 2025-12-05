@@ -12,6 +12,11 @@
 
 [🌐 **Voir le site**](https://pierremaze.github.io/tradimedika/) • [🐛 **Signaler un bug**](https://github.com/PierreMaze/) • [💬 **Discuter**](https://www.linkedin.com/in/pierremazelaygue/)
 
+[![TRADIMEDIKA](https://img.shields.io/badge/TRADIMEDIKA-0.1.7.1-1a1a1a?style=for-the-badge&logo=leaflet&logoColor=00bd7e)](https://pierremaze.github.io/tradimedika/)
+
+
+
+
 </div>
 
 ---
