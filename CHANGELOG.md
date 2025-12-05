@@ -2,6 +2,46 @@
 
 ---
 
+## [0.1.7] - 2025-12-05
+
+### <u>add:</u>
+
+- Added `src/data/symptoms.json` containing 32 standardized symptom entries for autocomplete functionality
+- Added `src/data/synonyms.json` with bidirectional synonym mapping (e.g., "mal de tête" ↔ "maux de tête")
+- Added `SymptomsSelector` component with intelligent autocomplete and keyboard navigation
+- Added anti-duplicate filtering: selected symptoms automatically hidden from dropdown
+- Added synonym detection: selecting one variant hides all synonyms from suggestions
+- Added 5-symptom selection limit with warning message and input disable state
+- Added symptom capitalization for display without breaking internal comparisons
+- Added ARIA attributes for accessibility (combobox, listbox, aria-expanded, aria-selected)
+
+### <u>refactor:</u>
+
+- Externalized synonym data from hardcoded constants to `synonyms.json` for better maintainability
+- Removed badge/tag UI from Hero component (deferred to separate feature)
+- Removed `handleRemoveSymptom` function and `HiXMark` import (no longer needed)
+- Updated Hero component to manage multi-selection state with `selectedSymptoms` array
+- Simplified SymptomsSelector by importing synonym data instead of hardcoding
+
+### <u>standardization:</u>
+
+- Standardized symptom format: all entries use spaces (e.g., "mal de tête") instead of underscores
+- Established consistent data structure for future symptom additions
+- Unified display format with automatic capitalization (e.g., "Anémie", "Rhume")
+
+### <u>optimization:</u>
+
+- Reduced bundle size by -2.51 kB (CSS: -1.12 kB, JS: -1.39 kB) from badge removal
+- Implemented efficient filtering with `includes()` for case-insensitive search
+- Optimized dropdown rendering with max 10 results limit
+
+### <u>update:</u>
+
+- Updated Hero component to integrate SymptomsSelector with multi-selection capability
+- Improved UX with real-time filtering, keyboard navigation, and visual feedback
+
+---
+
 ## [0.1.6] - 2025-12-03
 
 ### <u>add:</u>
