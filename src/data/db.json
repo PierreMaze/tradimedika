@@ -1725,7 +1725,7 @@
   {
     "id": 90,
     "name": "Kombucha",
-       "type": "boisson",
+    "type": "boisson",
     "category": ["probiotique", "digestion"],
     "symptoms": ["digestion"],
     "uses": [

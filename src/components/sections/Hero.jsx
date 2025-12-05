@@ -3,18 +3,38 @@ import { motion } from "framer-motion";
 import { Suspense, useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 import { GiSprout } from "react-icons/gi";
-import { HiMagnifyingGlass } from "react-icons/hi2";
 import { IoMdArrowForward } from "react-icons/io";
 import { useTheme } from "../../context/ThemeContext";
 import LeafFall from "../LeafFall";
+import SymptomsSelector from "../symptoms/SymptomsSelector";
 
 export default function Hero() {
   const { isDarkMode } = useTheme();
-  const [searchValue, setSearchValue] = useState("");
+  const [selectedSymptoms, setSelectedSymptoms] = useState([]);
+
+  const handleSymptomSelect = (symptom) => {
+    // Vérifier la limite de 5 symptômes
+    if (selectedSymptoms.length >= 5) {
+      console.warn("Limite de 5 symptômes atteinte");
+      return;
+    }
+
+    // Vérifier si le symptôme n'est pas déjà dans la liste (anti-doublon)
+    if (!selectedSymptoms.includes(symptom)) {
+      setSelectedSymptoms([...selectedSymptoms, symptom]);
+      console.log("Symptôme ajouté:", symptom, "Liste:", [
+        ...selectedSymptoms,
+        symptom,
+      ]);
+    } else {
+      console.log("Symptôme déjà sélectionné:", symptom);
+    }
+  };
 
   const handleSearch = () => {
     // Logique de recherche à implémenter
-    console.log("Recherche:", searchValue);
+    console.log("Recherche pour symptômes:", selectedSymptoms);
+    // TODO: Filtrer db.json par selectedSymptoms
   };
   return (
     <div className="container mx-auto mt-8 mb-4 flex flex-col items-center justify-center px-4">
@@ -88,27 +108,18 @@ export default function Hero() {
 
         {/* GROUP 2: Search Input + CTA Button */}
         <div className="flex w-full max-w-2xl flex-col items-center gap-y-4 lg:gap-y-6 2xl:gap-y-8">
-          {/* Champ de recherche */}
+          {/* Champ de recherche avec autocomplete */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             className="w-full"
           >
-            <div
-              className={`"border-dark/10 relative flex items-center rounded-lg border shadow-sm`}
-            >
-              <HiMagnifyingGlass
-                className={`absolute left-4 text-xl transition duration-300 ease-in-out ${isDarkMode ? "text-light" : "text-dark/60"}`}
-              />
-              <input
-                type="text"
-                value={searchValue}
-                onChange={(e) => setSearchValue(e.target.value)}
-                placeholder="Entrez vos symptômes (ex: maux de tête, fatigue...)"
-                className={`transition duration-300 ease-in-out ${isDarkMode ? "text-light bg-dark placeholder-neutral-400 ring-neutral-500 focus:ring-emerald-500" : "text-dark bg-white placeholder-neutral-700 ring-neutral-600 focus:ring-emerald-600"} w-full rounded-lg py-4 pr-4 pl-12 text-sm ring-2 focus:outline-none lg:text-base 2xl:text-lg`}
-              />
-            </div>
+            <SymptomsSelector
+              onSymptomSelect={handleSymptomSelect}
+              selectedSymptoms={selectedSymptoms}
+              placeholder="Entrez vos symptômes (ex: fatigue, digestion...)"
+            />
           </motion.div>
 
           {/* Bouton CTA */}
