@@ -1,5 +1,5 @@
 // context/ThemeContext.jsx
-import { createContext, useContext } from "react";
+import { createContext, useContext, useMemo } from "react";
 import { useDarkMode } from "../hooks/useDarkMode";
 
 const ThemeContext = createContext(undefined);
@@ -9,10 +9,22 @@ const ThemeContext = createContext(undefined);
  * Évite les prop drilling et optimise les re-renders
  */
 export function ThemeProvider({ children }) {
-  const darkMode = useDarkMode();
+  const { isDarkMode, toggleDarkMode, enableDark, disableDark } = useDarkMode();
+
+  // Memoize context value to prevent unnecessary re-renders
+  // Only re-create when darkMode values actually change
+  const value = useMemo(
+    () => ({
+      isDarkMode,
+      toggleDarkMode,
+      enableDark,
+      disableDark,
+    }),
+    [isDarkMode, toggleDarkMode, enableDark, disableDark],
+  );
 
   return (
-    <ThemeContext.Provider value={darkMode}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 }
 

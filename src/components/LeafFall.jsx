@@ -1,10 +1,8 @@
 import { motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 import { GiFallingLeaf } from "react-icons/gi";
-import { useTheme } from "../context/ThemeContext";
 
 export default function LeafFall() {
-  const { isDarkMode } = useTheme();
   const [show, setShow] = useState(false);
 
   // Détection mobile vs desktop
@@ -125,7 +123,7 @@ export default function LeafFall() {
         >
           <GiFallingLeaf
             size={24 * leaf.scale}
-            className={`drop-shadow-lg ${isDarkMode ? "text-emerald-500/75" : "text-emerald-600/75"}`}
+            className="text-emerald-800/80 drop-shadow-lg dark:text-emerald-500/75"
           />
         </motion.div>
       ))}

@@ -2,6 +2,106 @@
 
 ---
 
+## [0.2.1] - 2025-12-06
+
+### <u>add:</u>
+
+- Added `src/hooks/useSymptomTags.js` hook for centralized symptom selection logic with max 5 limit and anti-duplicate validation
+- Added `src/components/tag/SymptomTag.jsx` component displaying individual symptom as interactive pill badge with delete functionality
+- Added `src/components/tag/ListSymptomTag.jsx` container component for rendering symptom tags with responsive layout (centered mobile, left-aligned desktop)
+- Added Framer Motion enter/exit animations for symptom tags with 0.3s fade and scale transitions
+- Added `AnimatePresence mode="popLayout"` for smooth tag removal animations with layout shift handling
+- Added Backspace keyboard shortcut to delete last selected symptom when input is empty
+- Added animated warning message with Framer Motion when 5-symptom limit is reached
+- Added `IoMdWarning` icon to limit warning message for better visual hierarchy
+- Added clickable badge functionality allowing entire tag to be clicked for removal (not just X icon)
+- Added focus ring styling (`focus:ring-2`) on tag buttons for accessibility
+- Added `onRemoveSymptom` prop to `SymptomsSelector.jsx` for Backspace delete integration
+
+### <u>update:</u>
+
+- Updated `SymptomsSelector.jsx` to import from renamed `symptomList.json` and `synonymsSymptomList.json` files
+- Updated warning message styling with border, background color, and icon for improved UX
+- Updated `Hero.jsx` to use composition pattern with `SymptomsSection` wrapper component isolating symptom state
+- Updated tag design with `cursor-pointer`, `tracking-wider`, and hover states for better interactivity
+
+### <u>refactor:</u>
+
+- Refactored `Hero.jsx` to remove local symptom state management (extracted to `useSymptomTags()` hook)
+- Refactored symptom selection logic into reusable `useSymptomTags()` hook with `addSymptom()` and `removeSymptom()` functions
+- Refactored Hero component state management using composition pattern to prevent unnecessary re-renders of title, subtitle, and CTA button
+- Created `SymptomsSection` component outside Hero function to avoid re-creation on each render
+- Simplified `handleSearch()` in `Hero.jsx` by removing console.log statements (kept TODO for future implementation)
+
+### <u>delete:</u>
+
+- Deleted `src/data/symptoms.json` file (renamed to `symptomList.json`)
+- Deleted `src/data/synonyms.json` file (renamed to `synonymsSymptomList.json`)
+- Removed console.log debugging statements from `Hero.jsx` symptom selection logic
+
+### <u>standardization:</u>
+
+- Standardized data file naming with more descriptive names: `symptomList.json` and `synonymsSymptomList.json`
+- Standardized symptom tag animations at 0.3s duration for consistency with Hero section secondary elements
+- Established composition pattern for state isolation following React best practices
+- Unified focus styling with `focus:ring-2 focus:ring-emerald-300` across interactive tag elements
+
+### <u>optimization:</u>
+
+- Optimized Hero component re-renders by isolating symptom state in `SymptomsSection` wrapper (Hero no longer re-renders on symptom changes)
+- Improved performance by avoiding unnecessary re-creation of `SymptomsSection` component (defined outside Hero)
+- Reduced JavaScript execution by using CSS-based theming (`dark:` classes) for tag styling instead of Context consumption
+
+---
+
+## [0.2.0] - 2025-12-06
+
+### <u>refactor:</u>
+
+- Refactored dark mode implementation to use Tailwind CSS v4 `dark:` variants instead of Context-based conditional styling
+- Refactored `ThemeContext.jsx` to properly memoize context value with `useMemo()` for performance optimization
+- Refactored `App.jsx` to remove `useTheme()` dependency and use CSS `dark:` classes
+- Refactored `Hero.jsx` to eliminate Context consumption for styling (6 dark mode conditional blocks removed)
+- Refactored `Header.jsx` to use pure CSS `dark:` variants for background and border colors
+- Refactored `Footer.jsx` to remove `useTheme()` and adopt `dark:` utility classes
+- Refactored `LogoTradimedika.jsx` to use CSS-only dark mode styling
+- Refactored `LeafFall.jsx` to remove Context dependency for leaf color changes
+- Refactored `SymptomsSelector.jsx` to use `dark:` variants for all interactive states (input, dropdown, hover)
+
+### <u>add:</u>
+
+- Added `@custom-variant dark (&:where(.dark, .dark *))` directive in `src/index.css` for Tailwind v4 dark mode support
+- Added `html.dark body` CSS rule for dark mode background color
+- Added proper destructuring of `useDarkMode()` values in `ThemeProvider` for memoization stability
+
+### <u>optimization:</u>
+
+- Optimized React re-renders: reduced from 10 components to 1 component (`DarkModeToggle`) when toggling dark mode
+- Optimized Context API usage: only `DarkModeToggle.jsx` now consumes `useTheme()` for toggle logic
+- Achieved 90% reduction in JavaScript re-renders on theme change (styles update via CSS only)
+- Improved memoization strategy in `ThemeContext` by using individual dependencies instead of object reference
+
+### <u>standardization:</u>
+
+- Standardized dark mode implementation across all components using Tailwind CSS v4 best practices
+- Aligned with React.dev guidelines: "Even when a component is memoized, it will still re-render when a context that it's using changes"
+- Established CSS-first approach for theming: Context for logic, CSS for styling
+- Unified dark mode class names following Tailwind v4 `dark:` convention
+
+### <u>fix:</u>
+
+- Fixed `useMemo()` implementation in `ThemeContext.jsx` by destructuring `useDarkMode()` values before memoization
+- Fixed Tailwind v4 dark mode not working due to missing `@custom-variant` directive
+- Fixed unnecessary re-renders caused by non-memoized Context value objects
+
+### <u>update:</u>
+
+- Updated `src/index.css` to include Tailwind v4 dark mode configuration with `@custom-variant`
+- Updated all component styling to use `dark:` variants: `dark:bg-dark`, `dark:text-light`, `dark:border-light/60`
+- Updated `ThemeProvider` to create stable memoized context value object
+
+---
+
 ## [0.1.7] - 2025-12-05
 
 ### <u>add:</u>

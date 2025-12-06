@@ -1,9 +1,7 @@
 // tradimedika-v1/src/layout/components/LogoTradimedika.jsx
 import { PiPlantFill } from "react-icons/pi";
-import { useTheme } from "../../context/ThemeContext";
 
 const LogoTradimedika = () => {
-  const { isDarkMode } = useTheme();
   return (
     <>
       <a
@@ -14,13 +12,9 @@ const LogoTradimedika = () => {
         className="flex items-center gap-2"
       >
         <span>
-          <PiPlantFill
-            className={`transition duration-300 ease-in-out ${isDarkMode ? "text-emerald-500" : "text-emerald-600"} text-3xl lg:text-4xl`}
-          />
+          <PiPlantFill className="text-3xl text-emerald-600 transition duration-300 ease-in-out lg:text-4xl dark:text-emerald-500" />
         </span>
-        <span
-          className={`text-2xl font-black tracking-wide transition duration-300 ease-in-out lg:text-3xl 2xl:text-4xl ${isDarkMode ? "text-light" : "text-dark"}`}
-        >
+        <span className="text-dark dark:text-light text-2xl font-black tracking-wide transition duration-300 ease-in-out lg:text-3xl 2xl:text-4xl">
           TRADIMEDIKA
         </span>
       </a>

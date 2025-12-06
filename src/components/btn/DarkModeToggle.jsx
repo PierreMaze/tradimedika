@@ -10,7 +10,7 @@ export default function DarkModeToggle() {
     <motion.button
       aria-label="Toggle dark mode"
       onClick={toggleDarkMode}
-      className={`group relative flex h-8 w-14 cursor-pointer items-center rounded-full border-2 p-1 transition-all duration-300 ease-out ${
+      className={`group relative flex h-8 w-14 cursor-pointer items-center rounded-lg border-2 p-1 transition-all duration-300 ease-out ${
         isDarkMode
           ? "justify-end border-emerald-500/80 bg-emerald-500"
           : "border-dark justify-start bg-white"
@@ -19,7 +19,7 @@ export default function DarkModeToggle() {
       {/* Glow / halo UX */}
       <motion.span
         layout
-        className={`pointer-events-none absolute inset-0 z-0 rounded-full border-none transition-opacity duration-300 ${
+        className={`pointer-events-none absolute inset-0 z-0 rounded-lg border-none transition-opacity duration-300 ${
           isDarkMode ? "bg-emerald-500 opacity-30" : "opacity-0"
         }`}
       />
@@ -27,7 +27,7 @@ export default function DarkModeToggle() {
       <motion.div
         layout
         transition={{ type: "spring", bounce: 0.25, duration: 0.25 }}
-        className={`z-10 flex h-6 w-6 items-center justify-center rounded-full text-current group-hover:scale-105 ${
+        className={`z-10 flex h-6 w-6 items-center justify-center rounded-md text-current group-hover:scale-105 ${
           isDarkMode ? "bg-white " : "bg-dark "
         }`}
       >

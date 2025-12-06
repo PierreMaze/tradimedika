@@ -7,6 +7,9 @@
   --font-poppins: "Poppins", sans-serif;
 }
 
+/* Configure dark mode variant for Tailwind v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
 html {
   scroll-behavior: smooth;
 
@@ -15,4 +18,8 @@ html {
     background: var(--color-light);
     font-size: 1rem;
   }
+}
+
+html.dark body {
+  background: var(--color-dark);
 }
