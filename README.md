@@ -132,7 +132,6 @@
 
 **Pierre MAZELAYGUE** - Développeur Full Stack
 
-- 🌐 **Portfolio** : [https://pixel-stone.netlify.app/](https://pixel-stone.netlify.app/)
 - 📧 **Email** : [promazelaygue@gmail.com](mailto:promazelaygue@gmail.com)
 - 💼 **LinkedIn** : [linkedin.com/in/pierre-mazelaygue](https://linkedin.com/in/pierre-mazelaygue)
 - 🐙 **GitHub** : [github.com/PierreMaze](https://github.com/PierreMaze)
