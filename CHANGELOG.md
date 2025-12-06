@@ -2,6 +2,58 @@
 
 ---
 
+## [0.2.1] - 2025-12-06
+
+### <u>add:</u>
+
+- Added `src/hooks/useSymptomTags.js` hook for centralized symptom selection logic with max 5 limit and anti-duplicate validation
+- Added `src/components/tag/SymptomTag.jsx` component displaying individual symptom as interactive pill badge with delete functionality
+- Added `src/components/tag/ListSymptomTag.jsx` container component for rendering symptom tags with responsive layout (centered mobile, left-aligned desktop)
+- Added Framer Motion enter/exit animations for symptom tags with 0.3s fade and scale transitions
+- Added `AnimatePresence mode="popLayout"` for smooth tag removal animations with layout shift handling
+- Added Backspace keyboard shortcut to delete last selected symptom when input is empty
+- Added animated warning message with Framer Motion when 5-symptom limit is reached
+- Added `IoMdWarning` icon to limit warning message for better visual hierarchy
+- Added clickable badge functionality allowing entire tag to be clicked for removal (not just X icon)
+- Added focus ring styling (`focus:ring-2`) on tag buttons for accessibility
+- Added `onRemoveSymptom` prop to `SymptomsSelector.jsx` for Backspace delete integration
+
+### <u>update:</u>
+
+- Updated `SymptomsSelector.jsx` to import from renamed `symptomList.json` and `synonymsSymptomList.json` files
+- Updated warning message styling with border, background color, and icon for improved UX
+- Updated `Hero.jsx` to use composition pattern with `SymptomsSection` wrapper component isolating symptom state
+- Updated tag design with `cursor-pointer`, `tracking-wider`, and hover states for better interactivity
+
+### <u>refactor:</u>
+
+- Refactored `Hero.jsx` to remove local symptom state management (extracted to `useSymptomTags()` hook)
+- Refactored symptom selection logic into reusable `useSymptomTags()` hook with `addSymptom()` and `removeSymptom()` functions
+- Refactored Hero component state management using composition pattern to prevent unnecessary re-renders of title, subtitle, and CTA button
+- Created `SymptomsSection` component outside Hero function to avoid re-creation on each render
+- Simplified `handleSearch()` in `Hero.jsx` by removing console.log statements (kept TODO for future implementation)
+
+### <u>delete:</u>
+
+- Deleted `src/data/symptoms.json` file (renamed to `symptomList.json`)
+- Deleted `src/data/synonyms.json` file (renamed to `synonymsSymptomList.json`)
+- Removed console.log debugging statements from `Hero.jsx` symptom selection logic
+
+### <u>standardization:</u>
+
+- Standardized data file naming with more descriptive names: `symptomList.json` and `synonymsSymptomList.json`
+- Standardized symptom tag animations at 0.3s duration for consistency with Hero section secondary elements
+- Established composition pattern for state isolation following React best practices
+- Unified focus styling with `focus:ring-2 focus:ring-emerald-300` across interactive tag elements
+
+### <u>optimization:</u>
+
+- Optimized Hero component re-renders by isolating symptom state in `SymptomsSection` wrapper (Hero no longer re-renders on symptom changes)
+- Improved performance by avoiding unnecessary re-creation of `SymptomsSection` component (defined outside Hero)
+- Reduced JavaScript execution by using CSS-based theming (`dark:` classes) for tag styling instead of Context consumption
+
+---
+
 ## [0.2.0] - 2025-12-06
 
 ### <u>refactor:</u>

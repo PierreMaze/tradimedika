@@ -36,7 +36,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <p className="text-xs text-neutral-600 transition duration-300 ease-in-out dark:text-neutral-500">
-          © 2026 - Tous droits réservés - Application Française 🟦​⬜​🟥​
+          © TRADIMEDIKA 2026 - Tous droits réservés
         </p>
       </div>
     </motion.footer>

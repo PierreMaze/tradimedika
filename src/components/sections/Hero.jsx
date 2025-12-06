@@ -1,39 +1,42 @@
 // tradimedika-v1/src/components/sections/Hero.jsx
 import { motion } from "framer-motion";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import { FaCheck } from "react-icons/fa6";
 import { GiSprout } from "react-icons/gi";
 import { IoMdArrowForward } from "react-icons/io";
+import { useSymptomTags } from "../../hooks/useSymptomTags";
 import LeafFall from "../LeafFall";
 import SymptomsSelector from "../input/SymptomsSelector";
+import ListSymptomTag from "../tag/ListSymptomTag";
+
+/**
+ * Composant wrapper pour isoler le state des symptômes
+ * Défini en dehors de Hero pour éviter re-création à chaque render
+ */
+function SymptomsSection() {
+  const { selectedSymptoms, addSymptom, removeSymptom } = useSymptomTags();
+
+  return (
+    <div className="flex w-full flex-col gap-y-2">
+      <SymptomsSelector
+        onSymptomSelect={addSymptom}
+        onRemoveSymptom={removeSymptom}
+        selectedSymptoms={selectedSymptoms}
+        placeholder="Entrez vos symptômes (ex: fatigue, digestion...)"
+      />
+      <ListSymptomTag
+        symptoms={selectedSymptoms}
+        onRemoveSymptom={removeSymptom}
+      />
+    </div>
+  );
+}
 
 export default function Hero() {
-  const [selectedSymptoms, setSelectedSymptoms] = useState([]);
-
-  const handleSymptomSelect = (symptom) => {
-    // Vérifier la limite de 5 symptômes
-    if (selectedSymptoms.length >= 5) {
-      console.warn("Limite de 5 symptômes atteinte");
-      return;
-    }
-
-    // Vérifier si le symptôme n'est pas déjà dans la liste (anti-doublon)
-    if (!selectedSymptoms.includes(symptom)) {
-      setSelectedSymptoms([...selectedSymptoms, symptom]);
-      console.log("Symptôme ajouté:", symptom, "Liste:", [
-        ...selectedSymptoms,
-        symptom,
-      ]);
-    } else {
-      console.log("Symptôme déjà sélectionné:", symptom);
-    }
-  };
-
   const handleSearch = () => {
-    // Logique de recherche à implémenter
-    console.log("Recherche pour symptômes:", selectedSymptoms);
-    // TODO: Filtrer db.json par selectedSymptoms
+    // TODO: Implémenter logique de recherche avec symptômes sélectionnés
   };
+
   return (
     <div className="container mx-auto mt-8 mb-4 flex flex-col items-center justify-center px-4">
       {/* 🌿 Chute de plantes en arrière-plan */}
@@ -69,7 +72,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-center"
           >
-            <h1 className="text-4xl font-semibold lg:text-6xl 2xl:text-8xl">
+            <h1 className="text-5xl font-semibold lg:text-6xl 2xl:text-8xl">
               <span className="text-dark dark:text-light transition duration-300 ease-in-out">
                 Soulagez vos symptômes
               </span>
@@ -93,19 +96,15 @@ export default function Hero() {
         </div>
 
         {/* GROUP 2: Search Input + CTA Button */}
-        <div className="flex w-full max-w-2xl flex-col items-center gap-y-4 lg:gap-y-6 2xl:gap-y-8">
-          {/* Champ de recherche avec autocomplete */}
+        <div className="flex w-full flex-col items-center gap-y-4 lg:gap-y-6 2xl:gap-y-8">
+          {/* Champ de recherche avec autocomplete + tags */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             className="w-full"
           >
-            <SymptomsSelector
-              onSymptomSelect={handleSymptomSelect}
-              selectedSymptoms={selectedSymptoms}
-              placeholder="Entrez vos symptômes (ex: fatigue, digestion...)"
-            />
+            <SymptomsSection />
           </motion.div>
 
           {/* Bouton CTA */}
@@ -114,9 +113,9 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
             onClick={handleSearch}
-            className="flex cursor-pointer items-center gap-2 rounded-lg bg-emerald-600 px-8 py-4 font-semibold text-white shadow-lg transition-colors duration-300 ease-in-out hover:bg-emerald-600/90 lg:text-base 2xl:text-lg dark:bg-emerald-700"
+            className="flex cursor-pointer items-center gap-2 rounded-lg bg-emerald-600 px-8 py-4 font-semibold text-white shadow-lg hover:bg-emerald-600/90 lg:text-base 2xl:text-lg dark:bg-emerald-700"
           >
             <span>Découvrir nos solutions</span>
             <IoMdArrowForward className="text-xl" />

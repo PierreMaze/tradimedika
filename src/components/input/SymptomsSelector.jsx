@@ -1,9 +1,11 @@
 // tradimedika/src/components/symptoms/SymptomsSelector.jsx
-import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
+import { useEffect, useRef, useState } from "react";
 import { HiMagnifyingGlass } from "react-icons/hi2";
-import symptomsData from "../../data/symptoms.json";
-import synonymsData from "../../data/synonyms.json";
+import { IoMdWarning } from "react-icons/io";
+import symptomsData from "../../data/symptomList.json";
+import synonymsData from "../../data/synonymsSymptomList.json";
 
 // Fonction pour capitaliser la première lettre d'un symptôme
 const capitalizeSymptom = (symptom) => {
@@ -23,6 +25,7 @@ const isSymptomOrSynonymSelected = (symptom, selectedSymptoms) => {
 
 export default function SymptomsSelector({
   onSymptomSelect,
+  onRemoveSymptom,
   selectedSymptoms = [],
   placeholder,
 }) {
@@ -86,6 +89,20 @@ export default function SymptomsSelector({
 
   // Gestion du clavier
   const handleKeyDown = (e) => {
+    // Backspace sur input vide → supprime le dernier tag
+    if (
+      e.key === "Backspace" &&
+      inputValue === "" &&
+      selectedSymptoms.length > 0
+    ) {
+      e.preventDefault();
+      const lastSymptom = selectedSymptoms[selectedSymptoms.length - 1];
+      if (onRemoveSymptom) {
+        onRemoveSymptom(lastSymptom);
+      }
+      return;
+    }
+
     if (!isOpen || filteredSymptoms.length === 0) {
       if (e.key === "Escape") {
         setInputValue("");
@@ -169,7 +186,7 @@ export default function SymptomsSelector({
   }, []);
 
   return (
-    <div className="relative w-full">
+    <div className="relative mx-auto w-full max-w-2xl">
       {/* Input avec icône de recherche */}
       <div className="border-dark/10 relative flex items-center rounded-lg border shadow-sm dark:border-neutral-700">
         <HiMagnifyingGlass className="text-dark/60 dark:text-light absolute left-4 text-xl transition duration-300 ease-in-out" />
@@ -194,12 +211,25 @@ export default function SymptomsSelector({
         />
       </div>
 
-      {/* Message de limite atteinte */}
-      {selectedSymptoms.length >= 5 && (
-        <p className="mt-2 text-sm font-medium text-amber-600 dark:text-amber-400">
-          Limite de 5 symptômes atteinte. Supprimez-en un pour continuer.
-        </p>
-      )}
+      {/* Message de limite atteinte avec animation */}
+      <AnimatePresence>
+        {selectedSymptoms.length >= 5 && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+            className="mt-2 flex items-center gap-2 rounded-lg border-2 border-amber-500 bg-amber-200/50 px-4 py-2 dark:border-amber-500/80 dark:bg-amber-900/20"
+          >
+            <IoMdWarning className="text-lg text-amber-600 dark:text-amber-400" />
+            <p className="text-sm font-medium text-amber-700 dark:text-amber-400">
+              Limite de 5 symptômes atteinte.
+              <span className="font-bold"> Supprimez-en un</span> ou
+              <span className="font-bold"> continuer</span>.
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Dropdown des suggestions */}
       {isOpen && (
@@ -218,7 +248,7 @@ export default function SymptomsSelector({
                 aria-selected={selectedIndex === index}
                 onClick={() => handleSelectSymptom(symptom)}
                 onMouseEnter={() => setSelectedIndex(index)}
-                className={`cursor-pointer px-4 py-3 text-sm transition duration-150 ease-in-out lg:text-base 2xl:text-lg ${
+                className={`cursor-pointer px-4 py-3 text-sm tracking-wider transition duration-150 ease-in-out lg:text-base 2xl:text-lg ${
                   selectedIndex === index
                     ? "bg-emerald-600 text-white"
                     : "text-dark dark:text-light hover:bg-neutral-100 dark:hover:bg-neutral-800"
@@ -240,6 +270,7 @@ export default function SymptomsSelector({
 
 SymptomsSelector.propTypes = {
   onSymptomSelect: PropTypes.func.isRequired,
+  onRemoveSymptom: PropTypes.func,
   selectedSymptoms: PropTypes.arrayOf(PropTypes.string),
   placeholder: PropTypes.string,
 };
