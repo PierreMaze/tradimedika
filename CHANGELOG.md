@@ -2,6 +2,26 @@
 
 ---
 
+## [0.3.2] - 2025-12-07
+
+### <u>fix:</u>
+
+- Fixed results display behavior to persist across multiple searches instead of disappearing after 2 seconds
+- Fixed button state to show "Recherche effectuée" feedback for 2 seconds while keeping results visible
+
+### <u>update:</u>
+
+- Updated `useSymptomSubmit.js` to maintain `hasSubmitted` state with 2-second delay for button feedback only
+- Updated `Hero.jsx` results display to use `results !== null` instead of `hasSubmitted` for persistent visibility
+- Updated UX flow: button resets to "Découvrir nos solutions" after 2 seconds while results remain displayed
+
+### <u>optimization:</u>
+
+- Optimized user experience by decoupling button state from results visibility
+- Improved results persistence: subsequent searches update the count without hiding the results panel
+
+---
+
 ## [0.3.1] - 2025-12-07
 
 ### <u>add:</u>

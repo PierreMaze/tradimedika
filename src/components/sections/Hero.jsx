@@ -70,7 +70,7 @@ function SymptomsSection() {
         whileHover={!isDisabled && !isLoading ? { scale: 1.05 } : {}}
         whileTap={!isDisabled && !isLoading ? { scale: 0.95 } : {}}
         transition={{ duration: 0.2 }}
-        className={`flex items-center justify-center gap-2 rounded-lg px-8 py-4 font-semibold shadow-lg transition duration-300 ease-in-out lg:text-base 2xl:text-lg ${
+        className={`mx-auto flex w-full items-center justify-center gap-2 rounded-lg px-7 py-3.5 font-semibold shadow-lg transition duration-300 ease-in-out md:max-w-80 lg:text-base 2xl:text-lg ${
           isDisabled || isLoading
             ? "cursor-not-allowed bg-neutral-400 opacity-50 dark:bg-neutral-600"
             : "bg-emerald-600 text-white hover:bg-emerald-600/90 dark:bg-emerald-700 dark:hover:bg-emerald-700/90"
@@ -100,7 +100,7 @@ function SymptomsSection() {
 
       {/* Affichage des résultats */}
       <AnimatePresence>
-        {hasSubmitted && (
+        {results !== null && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

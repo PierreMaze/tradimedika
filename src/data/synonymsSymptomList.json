@@ -1,8 +1,4 @@
 {
-  "mal de tete": [
-    "maux de tete"
-  ],
-  "maux de tete": [
-    "mal de tete"
-  ]
+  "mal de tete": ["maux de tete"],
+  "maux de tete": ["mal de tete"]
 }

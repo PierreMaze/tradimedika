@@ -31,10 +31,16 @@ export default [
       ],
       // JS
       eqeqeq: ["error", "always"],
-      "no-console": ["warn", { allow: ["warn", "error", "log", "group", "groupEnd", "table"] }],
+      "no-console": [
+        "warn",
+        { allow: ["warn", "error", "log", "group", "groupEnd", "table"] },
+      ],
       "no-debugger": "error",
       "prefer-const": "warn",
-      "no-unused-vars": ["error", { varsIgnorePattern: "^_", argsIgnorePattern: "^_" }],
+      "no-unused-vars": [
+        "error",
+        { varsIgnorePattern: "^_", argsIgnorePattern: "^_" },
+      ],
     },
   },
 ];

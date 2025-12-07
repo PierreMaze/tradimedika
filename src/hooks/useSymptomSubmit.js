@@ -1,6 +1,6 @@
 // src/hooks/useSymptomSubmit.js
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import db from "../data/db.json";
 import { findMatchingRemedies } from "../utils/remedyMatcher";
 
@@ -12,8 +12,9 @@ import { findMatchingRemedies } from "../utils/remedyMatcher";
  * - État de chargement avec délai simulé (300-500ms)
  * - Recherche des remèdes correspondants
  * - Logging structuré des résultats
+ * - État "Recherche effectuée" pendant 2 secondes
  *
- * @returns {Object} { handleSubmit, isLoading, results, hasSubmitted, isDisabled }
+ * @returns {Object} { handleSubmit, isLoading, results, hasSubmitted, error }
  */
 export function useSymptomSubmit() {
   const [isLoading, setIsLoading] = useState(false);
@@ -75,6 +76,17 @@ export function useSymptomSubmit() {
       }
     }, delay);
   };
+
+  // Auto-reset de hasSubmitted après 2 secondes (pour l'état du bouton uniquement)
+  useEffect(() => {
+    if (hasSubmitted) {
+      const timer = setTimeout(() => {
+        setHasSubmitted(false);
+      }, 2000); // 2 secondes
+
+      return () => clearTimeout(timer);
+    }
+  }, [hasSubmitted]);
 
   return {
     handleSubmit,

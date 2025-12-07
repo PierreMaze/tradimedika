@@ -25,10 +25,10 @@ export default function SymptomTag({ symptom, onRemove }) {
       aria-label={`Supprimer ${symptom}`}
       className="flex cursor-pointer items-center gap-2 rounded-md bg-emerald-600 px-3 py-2 text-white shadow-md transition duration-150 ease-in-out hover:scale-105 hover:bg-emerald-600 focus:ring-2 focus:ring-emerald-300 focus:outline-none dark:bg-emerald-700 dark:hover:bg-emerald-600"
     >
-      <IoMdClose className="text-lg" />
       <span className="text-sm font-medium tracking-wider lg:text-base">
         {capitalizeSymptom(symptom)}
       </span>
+      <IoMdClose className="text-lg" />
     </motion.button>
   );
 }
