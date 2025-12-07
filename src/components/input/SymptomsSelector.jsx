@@ -6,6 +6,7 @@ import { HiMagnifyingGlass } from "react-icons/hi2";
 import { IoMdWarning } from "react-icons/io";
 import symptomsData from "../../data/symptomList.json";
 import synonymsData from "../../data/synonymsSymptomList.json";
+import { normalizeSymptom } from "../../utils/normalizeSymptom";
 
 // Fonction pour capitaliser la première lettre d'un symptôme
 const capitalizeSymptom = (symptom) => {
@@ -28,6 +29,7 @@ export default function SymptomsSelector({
   onRemoveSymptom,
   selectedSymptoms = [],
   placeholder,
+  onSubmit,
 }) {
   const [inputValue, setInputValue] = useState("");
   const [filteredSymptoms, setFilteredSymptoms] = useState([]);
@@ -53,7 +55,7 @@ export default function SymptomsSelector({
     );
   }, []);
 
-  // Filtrage en temps réel (case-insensitive, max 10 résultats)
+  // Filtrage en temps réel (normalisé, max 10 résultats)
   // Exclut les symptômes déjà sélectionnés ET leurs synonymes
   useEffect(() => {
     if (inputValue.trim() === "") {
@@ -63,10 +65,11 @@ export default function SymptomsSelector({
       return;
     }
 
+    // Normaliser l'input pour la recherche (les données sont déjà normalisées)
+    const normalizedInput = normalizeSymptom(inputValue);
+
     const filtered = symptomsData
-      .filter((symptom) =>
-        symptom.toLowerCase().includes(inputValue.toLowerCase()),
-      )
+      .filter((symptom) => symptom.includes(normalizedInput))
       .filter(
         (symptom) => !isSymptomOrSynonymSelected(symptom, selectedSymptoms),
       )
@@ -132,6 +135,9 @@ export default function SymptomsSelector({
           handleSelectSymptom(filteredSymptoms[selectedIndex]);
         } else if (filteredSymptoms.length === 1) {
           handleSelectSymptom(filteredSymptoms[0]);
+        } else if (!isOpen && selectedSymptoms.length > 0 && onSubmit) {
+          // Si dropdown fermé et symptômes sélectionnés, soumettre
+          onSubmit();
         }
         break;
 
@@ -273,9 +279,11 @@ SymptomsSelector.propTypes = {
   onRemoveSymptom: PropTypes.func,
   selectedSymptoms: PropTypes.arrayOf(PropTypes.string),
   placeholder: PropTypes.string,
+  onSubmit: PropTypes.func,
 };
 
 SymptomsSelector.defaultProps = {
   selectedSymptoms: [],
   placeholder: "Entrez vos symptômes...",
+  onSubmit: null,
 };

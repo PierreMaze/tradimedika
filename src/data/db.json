@@ -4,7 +4,7 @@
     "name": "Citron",
     "type": "aliment",
     "category": ["immunité", "digestif", "détox"],
-    "symptoms": ["digestion", "détox", "immunité"],
+    "symptoms": ["digestion", "detox", "immunite"],
     "uses": [
       {
         "form": "jus",
@@ -23,7 +23,7 @@
     "name": "Ail",
     "type": "aliment",
     "category": ["antibactérien", "cardio", "immunité"],
-    "symptoms": ["infection", "immunité", "cholestérol"],
+    "symptoms": ["infection", "immunite", "cholesterol"],
     "uses": [
       {
         "form": "cru",
@@ -61,7 +61,7 @@
     "name": "Carotte",
     "type": "aliment",
     "category": ["vision", "peau", "nutrition"],
-    "symptoms": ["peau", "vision", "immunité"],
+    "symptoms": ["peau", "vision", "immunite"],
     "uses": [
       {
         "form": "consommation",
@@ -120,7 +120,7 @@
     "name": "Huile d’olive",
     "type": "huile",
     "category": ["cardio", "antioxydant"],
-    "symptoms": ["inflammation", "cholestérol"],
+    "symptoms": ["inflammation", "cholesterol"],
     "uses": [
       {
         "form": "consommation",
@@ -177,7 +177,7 @@
     "name": "Vinaigre de cidre",
     "type": "vinaigre",
     "category": ["glycémie", "détox", "digestif"],
-    "symptoms": ["digestion", "diabète"],
+    "symptoms": ["digestion", "diabete"],
     "uses": [
       {
         "form": "dilué",
@@ -216,7 +216,7 @@
     "name": "Vinaigre balsamique",
     "type": "vinaigre",
     "category": ["digestif", "antioxydant"],
-    "symptoms": ["digestion", "cholestérol"],
+    "symptoms": ["digestion", "cholesterol"],
     "uses": [
       {
         "form": "assaisonnement",
@@ -292,7 +292,7 @@
     "name": "Persil",
     "type": "herbe",
     "category": ["détox", "circulation", "nutrition"],
-    "symptoms": ["rétention_eau", "digestion"],
+    "symptoms": ["retention eau", "digestion"],
     "uses": [
       {
         "form": "feuilles",
@@ -311,7 +311,7 @@
     "name": "Gingembre",
     "type": "épice",
     "category": ["anti-nausée", "digestif", "énergie"],
-    "symptoms": ["nausée", "fatigue", "digestion"],
+    "symptoms": ["nausee", "fatigue", "digestion"],
     "uses": [
       {
         "form": "infusion",
@@ -350,7 +350,7 @@
     "name": "Sel marin",
     "type": "aliment",
     "category": ["minéraux", "circulation"],
-    "symptoms": ["déshydratation"],
+    "symptoms": ["deshydratation"],
     "uses": [
       {
         "form": "assaisonnement",
@@ -466,7 +466,7 @@
     "name": "Menthe",
     "type": "herbe",
     "category": ["digestif", "rafraîchissant"],
-    "symptoms": ["digestion", "nausée"],
+    "symptoms": ["digestion", "nausee"],
     "uses": [
       {
         "form": "infusion",
@@ -524,7 +524,7 @@
     "name": "Vinaigre de riz",
     "type": "vinaigre",
     "category": ["digestion", "détox"],
-    "symptoms": ["digestion", "glycémie"],
+    "symptoms": ["digestion", "glycemie"],
     "uses": [
       {
         "form": "assaisonnement",
@@ -657,7 +657,7 @@
     "name": "Cannelle",
     "type": "épice",
     "category": ["glycémie", "antioxydant"],
-    "symptoms": ["diabète", "digestion"],
+    "symptoms": ["diabete", "digestion"],
     "uses": [
       {
         "form": "poudre",
@@ -695,7 +695,7 @@
     "name": "Coriandre",
     "type": "herbe",
     "category": ["digestif", "détox"],
-    "symptoms": ["digestion", "rétention_eau"],
+    "symptoms": ["digestion", "retention eau"],
     "uses": [
       {
         "form": "feuilles",
@@ -733,7 +733,7 @@
     "name": "Citron vert",
     "type": "aliment",
     "category": ["immunité", "digestif"],
-    "symptoms": ["digestion", "détox"],
+    "symptoms": ["digestion", "detox"],
     "uses": [
       {
         "form": "jus",
@@ -752,7 +752,7 @@
     "name": "Citronnelle",
     "type": "herbe",
     "category": ["calmante", "digestif"],
-    "symptoms": ["stress", "nausée"],
+    "symptoms": ["stress", "nausee"],
     "uses": [
       {
         "form": "infusion",
@@ -772,7 +772,7 @@
     "name": "Amandes",
     "type": "aliment",
     "category": ["énergie", "cardio", "nutrition"],
-    "symptoms": ["fatigue", "cholestérol"],
+    "symptoms": ["fatigue", "cholesterol"],
     "uses": [
       {
         "form": "cru",
@@ -791,7 +791,7 @@
     "name": "Noisettes",
     "type": "aliment",
     "category": ["énergie", "cardio", "antioxydant"],
-    "symptoms": ["fatigue", "cholestérol"],
+    "symptoms": ["fatigue", "cholesterol"],
     "uses": [
       {
         "form": "cru",
@@ -810,7 +810,7 @@
     "name": "Noix",
     "type": "aliment",
     "category": ["cardio", "cerveau", "antioxydant"],
-    "symptoms": ["cholestérol", "cognition"],
+    "symptoms": ["cholesterol", "cognition"],
     "uses": [
       {
         "form": "cru",
@@ -867,7 +867,7 @@
     "name": "Graines de sésame",
     "type": "aliment",
     "category": ["os", "énergie"],
-    "symptoms": ["fatigue", "déminéralisation"],
+    "symptoms": ["fatigue", "demineralisation"],
     "uses": [
       {
         "form": "graines",
@@ -905,7 +905,7 @@
     "name": "Avoine",
     "type": "aliment",
     "category": ["glycémie", "digestion", "énergie"],
-    "symptoms": ["cholestérol", "digestion"],
+    "symptoms": ["cholesterol", "digestion"],
     "uses": [
       {
         "form": "flocons",
@@ -1076,7 +1076,7 @@
     "name": "Saumon",
     "type": "aliment",
     "category": ["cardio", "cerveau", "anti-inflammatoire"],
-    "symptoms": ["cholestérol", "inflammation", "cognition"],
+    "symptoms": ["cholesterol", "inflammation", "cognition"],
     "uses": [
       {
         "form": "cuisson",
@@ -1095,7 +1095,7 @@
     "name": "Sardines",
     "type": "aliment",
     "category": ["os", "cardio"],
-    "symptoms": ["cholestérol", "déminéralisation"],
+    "symptoms": ["cholesterol", "demineralisation"],
     "uses": [
       {
         "form": "conserve",
@@ -1190,7 +1190,7 @@
     "name": "Pomme",
     "type": "aliment",
     "category": ["digestion", "immunité"],
-    "symptoms": ["digestion", "détox"],
+    "symptoms": ["digestion", "detox"],
     "uses": [
       {
         "form": "cru",
@@ -1228,7 +1228,7 @@
     "name": "Orange",
     "type": "aliment",
     "category": ["immunité", "antioxydant"],
-    "symptoms": ["fatigue", "immunité"],
+    "symptoms": ["fatigue", "immunite"],
     "uses": [
       {
         "form": "cru",
@@ -1342,7 +1342,7 @@
     "name": "Aubergine",
     "type": "aliment",
     "category": ["digestion", "cardio"],
-    "symptoms": ["cholestérol"],
+    "symptoms": ["cholesterol"],
     "uses": [
       {
         "form": "cuisson",
@@ -1456,7 +1456,7 @@
     "name": "Épinard",
     "type": "aliment",
     "category": ["fer", "antioxydant"],
-    "symptoms": ["fatigue", "anémie"],
+    "symptoms": ["fatigue", "anemie"],
     "uses": [
       {
         "form": "cru_vapeur",
@@ -1532,7 +1532,7 @@
     "name": "Gingembre frais",
     "type": "épice",
     "category": ["anti-nausée", "énergie", "digestif"],
-    "symptoms": ["nausée", "digestion", "fatigue"],
+    "symptoms": ["nausee", "digestion", "fatigue"],
     "uses": [
       {
         "form": "infusion",
@@ -1572,7 +1572,7 @@
     "name": "Cannelle",
     "type": "épice",
     "category": ["glycémie", "digestion"],
-    "symptoms": ["diabète", "digestion"],
+    "symptoms": ["diabete", "digestion"],
     "uses": [
       {
         "form": "poudre",
@@ -1629,7 +1629,7 @@
     "name": "Menthe poivrée",
     "type": "plante",
     "category": ["digestif", "anti-nausée"],
-    "symptoms": ["nausée", "digestion"],
+    "symptoms": ["nausee", "digestion"],
     "uses": [
       {
         "form": "infusion",
@@ -1708,7 +1708,7 @@
     "name": "Vinaigre de cidre",
     "type": "condiment",
     "category": ["digestion", "glycémie"],
-    "symptoms": ["digestion", "diabète"],
+    "symptoms": ["digestion", "diabete"],
     "uses": [
       {
         "form": "dilué",
@@ -1841,7 +1841,7 @@
     "name": "Orge",
     "type": "aliment",
     "category": ["glycémie", "digestion"],
-    "symptoms": ["cholestérol"],
+    "symptoms": ["cholesterol"],
     "uses": [
       {
         "form": "cuisson",
@@ -1879,7 +1879,7 @@
     "name": "Ail des ours",
     "type": "plante",
     "category": ["détox", "cardio"],
-    "symptoms": ["cholestérol", "digestion"],
+    "symptoms": ["cholesterol", "digestion"],
     "uses": [
       {
         "form": "cru",
@@ -1898,7 +1898,7 @@
     "name": "Huile de noix",
     "type": "condiment",
     "category": ["cardio", "cerveau"],
-    "symptoms": ["cholestérol"],
+    "symptoms": ["cholesterol"],
     "uses": [
       {
         "form": "assaisonnement",

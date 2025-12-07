@@ -2,6 +2,73 @@
 
 ---
 
+## [0.3.1] - 2025-12-07
+
+### <u>add:</u>
+
+- Added `src/utils/normalizeSymptom.js` utility function for complete symptom normalization (lowercase, remove accents, standardize separators)
+- Added `src/utils/remedyMatcher.js` utility for matching remedies to symptoms with relevance scoring
+- Added `src/hooks/useSymptomSubmit.js` hook for managing symptom submission with loading states, results, and error handling
+- Added `scripts/normalizeData.js` migration script to normalize all symptoms in JSON files
+- Added `scripts/validateData.js` validation script to ensure data consistency and normalization compliance
+- Added symptom submission button with three states: default, loading (spinner), and success (checkmark)
+- Added symptom counter badge displaying "X/5 symptômes sélectionnés"
+- Added loading state with animated spinner (300-500ms simulated delay)
+- Added success state with checkmark icon after submission
+- Added results display with animations showing remedy count or "no results" message
+- Added Enter key support in SymptomsSelector to submit when dropdown is closed
+- Added structured console logging with `console.group` and `console.table` for remedy results
+- Added ARIA labels (`aria-label`, `aria-busy`, `aria-disabled`) for accessibility
+- Added `onSubmit` prop to SymptomsSelector for keyboard submission support
+
+### <u>update:</u>
+
+- Updated all symptoms in `symptomList.json` (31 symptoms) to normalized format (removed accents: "immunité" → "immunite", "cholestérol" → "cholesterol", etc.)
+- Updated all symptoms in `db.json` (101 remedies) to match normalized format
+- Updated `synonymsSymptomList.json` to use normalized symptom keys and values
+- Updated `useSymptomTags.js` to use `normalizeSymptom()` instead of simple `.toLowerCase()`
+- Updated `SymptomsSelector.jsx` filtering to use normalized input matching
+- Updated `Hero.jsx` with major refactor: moved submission button into `SymptomsSection` component
+- Updated button styling with disabled state (opacity-50, cursor-not-allowed) when no symptoms selected
+- Updated SymptomsSection to integrate both symptom selection and submission logic in one cohesive component
+
+### <u>refactor:</u>
+
+- Refactored Hero component to remove redundant CTA button (now integrated in SymptomsSection)
+- Refactored SymptomsSection as pure component depending only on internal hooks (composition pattern)
+- Refactored symptom matching to use pre-normalized data for optimal performance (no runtime normalization overhead)
+- Simplified ESLint configuration to use only installed packages (removed missing dependencies)
+
+### <u>delete:</u>
+
+- Deleted duplicate symptom "maux de tête" (merged with "mal de tête" → normalized as "mal de tete")
+- Removed old placeholder `handleSearch()` function from Hero component
+- Removed standalone CTA button (replaced by integrated submission button in SymptomsSection)
+
+### <u>standardization:</u>
+
+- Standardized all symptom data to normalized format: lowercase, no accents, no hyphens/underscores, spaces only
+- Standardized symptom separators: "rétention_eau" → "retention eau" (underscore to space)
+- Established normalization function as single source of truth for symptom comparison
+- Unified loading animation duration across components (300-500ms)
+
+### <u>optimization:</u>
+
+- Optimized symptom matching by normalizing data once at build time instead of runtime
+- Optimized component re-renders by isolating submission state in SymptomsSection (Hero doesn't re-render on state changes)
+- Optimized data structure: deduplicated symptomList from 32 to 31 unique symptoms
+
+### <u>features:</u>
+
+- **Symptom Submission System**: Complete workflow from selection to remedy matching with visual feedback
+- **Relevance Scoring**: Remedies sorted by number of matching symptoms, then alphabetically
+- **Loading States**: Professional UX with spinner, disabled states, and success animations
+- **Keyboard Accessibility**: Full Enter key support for submission
+- **Developer Tools**: Structured console logging with remedy details table
+- **Data Normalization**: Robust system for handling accented French symptoms with flexible user input
+
+---
+
 ## [0.3.0] - 2025-12-06
 
 ### <u>add:</u>

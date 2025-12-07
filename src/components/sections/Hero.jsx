@@ -1,9 +1,10 @@
 // tradimedika-v1/src/components/sections/Hero.jsx
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Suspense } from "react";
 import { FaCheck } from "react-icons/fa6";
 import { GiSprout } from "react-icons/gi";
 import { IoMdArrowForward } from "react-icons/io";
+import { useSymptomSubmit } from "../../hooks/useSymptomSubmit";
 import { useSymptomTags } from "../../hooks/useSymptomTags";
 import LeafFall from "../LeafFall";
 import SymptomsSelector from "../input/SymptomsSelector";
@@ -12,31 +13,143 @@ import ListSymptomTag from "../tag/ListSymptomTag";
 /**
  * Composant wrapper pour isoler le state des symptômes
  * Défini en dehors de Hero pour éviter re-création à chaque render
+ *
+ * Pure component : dépend uniquement de ses propres hooks internes
+ * Pas besoin de React.memo car c'est un composant racine de composition
  */
 function SymptomsSection() {
   const { selectedSymptoms, addSymptom, removeSymptom } = useSymptomTags();
+  const { handleSubmit, isLoading, results, hasSubmitted } = useSymptomSubmit();
+
+  const onSubmit = () => {
+    handleSubmit(selectedSymptoms);
+  };
+
+  const isDisabled = selectedSymptoms.length === 0;
 
   return (
-    <div className="flex w-full flex-col gap-y-2">
+    <div className="flex w-full flex-col gap-y-4">
       <SymptomsSelector
         onSymptomSelect={addSymptom}
         onRemoveSymptom={removeSymptom}
         selectedSymptoms={selectedSymptoms}
+        onSubmit={onSubmit}
         placeholder="Entrez vos symptômes (ex: fatigue, digestion...)"
       />
       <ListSymptomTag
         symptoms={selectedSymptoms}
         onRemoveSymptom={removeSymptom}
       />
+
+      {/* Compteur de symptômes */}
+      {selectedSymptoms.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.3 }}
+          className="text-center"
+        >
+          <span className="text-sm font-medium text-neutral-600 transition duration-300 ease-in-out dark:text-neutral-400">
+            {selectedSymptoms.length}/5 symptômes sélectionnés
+          </span>
+        </motion.div>
+      )}
+
+      {/* Bouton de soumission */}
+      <motion.button
+        onClick={onSubmit}
+        disabled={isDisabled || isLoading}
+        aria-label={
+          isDisabled
+            ? "Sélectionnez au moins un symptôme"
+            : "Découvrir les remèdes naturels"
+        }
+        aria-busy={isLoading}
+        aria-disabled={isDisabled}
+        whileHover={!isDisabled && !isLoading ? { scale: 1.05 } : {}}
+        whileTap={!isDisabled && !isLoading ? { scale: 0.95 } : {}}
+        transition={{ duration: 0.2 }}
+        className={`flex items-center justify-center gap-2 rounded-lg px-8 py-4 font-semibold shadow-lg transition duration-300 ease-in-out lg:text-base 2xl:text-lg ${
+          isDisabled || isLoading
+            ? "cursor-not-allowed bg-neutral-400 opacity-50 dark:bg-neutral-600"
+            : "bg-emerald-600 text-white hover:bg-emerald-600/90 dark:bg-emerald-700 dark:hover:bg-emerald-700/90"
+        }`}
+      >
+        {isLoading ? (
+          <>
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+              className="h-5 w-5 rounded-full border-2 border-white border-t-transparent"
+            />
+            <span>Recherche en cours...</span>
+          </>
+        ) : hasSubmitted ? (
+          <>
+            <FaCheck className="text-xl" />
+            <span>Recherche effectuée</span>
+          </>
+        ) : (
+          <>
+            <span>Découvrir nos solutions</span>
+            <IoMdArrowForward className="text-xl" />
+          </>
+        )}
+      </motion.button>
+
+      {/* Affichage des résultats */}
+      <AnimatePresence>
+        {hasSubmitted && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+            className="mt-2 rounded-lg border-2 p-4"
+            style={{
+              borderColor:
+                results && results.length > 0 ? "#10b981" : "#f59e0b",
+              backgroundColor:
+                results && results.length > 0
+                  ? "rgba(16, 185, 129, 0.1)"
+                  : "rgba(245, 158, 11, 0.1)",
+            }}
+          >
+            {results && results.length > 0 ? (
+              <div>
+                <p className="text-lg font-semibold text-emerald-700 transition duration-300 ease-in-out dark:text-emerald-400">
+                  ✅ {results.length} remède{results.length > 1 ? "s" : ""}{" "}
+                  trouvé{results.length > 1 ? "s" : ""}
+                </p>
+                <p className="mt-1 text-sm text-neutral-600 transition duration-300 ease-in-out dark:text-neutral-400">
+                  Consultez la console pour voir les détails (F12)
+                </p>
+              </div>
+            ) : (
+              <div>
+                <p className="text-lg font-semibold text-amber-700 transition duration-300 ease-in-out dark:text-amber-400">
+                  ⚠️ Aucun remède trouvé
+                </p>
+                <p className="mt-1 text-sm text-neutral-600 transition duration-300 ease-in-out dark:text-neutral-400">
+                  Essayez d'autres symptômes ou reformulez votre recherche
+                </p>
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
 
+/**
+ * Composant Hero principal
+ *
+ * Pure component de composition - Ne contient que de la structure et de la présentation
+ * Le state est isolé dans SymptomsSection pour éviter les re-renders inutiles
+ */
 export default function Hero() {
-  const handleSearch = () => {
-    // TODO: Implémenter logique de recherche avec symptômes sélectionnés
-  };
-
   return (
     <div className="container mx-auto mt-8 mb-4 flex flex-col items-center justify-center px-4">
       {/* 🌿 Chute de plantes en arrière-plan */}
@@ -95,32 +208,15 @@ export default function Hero() {
           </motion.p>
         </div>
 
-        {/* GROUP 2: Search Input + CTA Button */}
-        <div className="flex w-full flex-col items-center gap-y-4 lg:gap-y-6 2xl:gap-y-8">
-          {/* Champ de recherche avec autocomplete + tags */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="w-full"
-          >
-            <SymptomsSection />
-          </motion.div>
-
-          {/* Bouton CTA */}
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            onClick={handleSearch}
-            className="flex cursor-pointer items-center gap-2 rounded-lg bg-emerald-600 px-8 py-4 font-semibold text-white shadow-lg hover:bg-emerald-600/90 lg:text-base 2xl:text-lg dark:bg-emerald-700"
-          >
-            <span>Découvrir nos solutions</span>
-            <IoMdArrowForward className="text-xl" />
-          </motion.button>
-        </div>
+        {/* GROUP 2: Symptom Selector with Submit */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="w-full"
+        >
+          <SymptomsSection />
+        </motion.div>
 
         {/* GROUP 3: Features List */}
         <motion.div

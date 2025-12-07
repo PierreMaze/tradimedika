@@ -1,10 +1,11 @@
 // hooks/useSymptomTags.js
 import { useState } from "react";
+import { normalizeSymptom } from "../utils/normalizeSymptom";
 
 /**
  * Hook personnalisé pour gérer la sélection de symptômes
  * - Limite max: 5 symptômes
- * - Anti-doublon avec normalisation (trim + lowercase)
+ * - Anti-doublon avec normalisation complète (trim + lowercase + accents + tirets)
  * - Ajout/suppression avec validation
  *
  * @returns {Object} { selectedSymptoms, addSymptom, removeSymptom, isAtLimit }
@@ -17,7 +18,7 @@ export function useSymptomTags() {
    * @param {string} symptom - Symptôme à ajouter
    */
   const addSymptom = (symptom) => {
-    const normalized = symptom.trim().toLowerCase();
+    const normalized = normalizeSymptom(symptom.trim());
 
     // Limite max de 5 symptômes
     if (selectedSymptoms.length >= 5) {
