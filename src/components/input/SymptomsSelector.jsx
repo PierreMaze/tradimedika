@@ -79,7 +79,7 @@ export default function SymptomsSelector({
 
   // Filtrage en temps réel avec matching flexible (avec/sans accents)
   // Exclut les symptômes déjà sélectionnés ET leurs synonymes
-  // Propose le symptôme principal si un synonyme est saisi
+  // Propose UNIQUEMENT les symptômes principaux (clés de synonymsData), jamais les synonymes
   useEffect(() => {
     if (inputValue.trim() === "") {
       setFilteredSymptoms([]);
@@ -91,18 +91,23 @@ export default function SymptomsSelector({
     // Normaliser l'input pour matching flexible (sans accents)
     const normalizedInput = normalizeForMatching(inputValue);
 
-    // 1. Chercher dans symptomList.json (symptômes principaux)
-    const directMatches = symptomsData.filter((symptom) =>
-      normalizeForMatching(symptom).includes(normalizedInput)
-    );
-
-    // 2. Chercher via synonymes (recherche inverse)
+    // 1. Chercher via synonymes (recherche inverse) - PRIORITÉ
     const mainSymptomsFromSynonym = findMainSymptomsFromSynonym(inputValue);
-    const synonymMatches = mainSymptomsFromSynonym.filter(
-      (symptom) => !directMatches.includes(symptom)
-    );
 
-    // 3. Séparer exact matches et partial matches
+    // 2. Chercher dans symptomList.json (symptômes principaux uniquement)
+    // Exclure les symptômes qui sont des synonymes (valeurs de synonymsData)
+    const allSynonymValues = Object.values(synonymsData).flat();
+
+    const directMatches = symptomsData.filter((symptom) => {
+      // Ne pas inclure si c'est un synonyme (valeur dans synonymsData)
+      if (allSynonymValues.some(syn => normalizeForMatching(syn) === normalizeForMatching(symptom))) {
+        return false;
+      }
+      // Inclure si le symptom matche l'input
+      return normalizeForMatching(symptom).includes(normalizedInput);
+    });
+
+    // 3. Séparer exact matches et partial matches (seulement pour directMatches)
     const exactMatches = directMatches.filter(
       (symptom) => normalizeForMatching(symptom) === normalizedInput
     );
@@ -110,15 +115,17 @@ export default function SymptomsSelector({
       (symptom) => normalizeForMatching(symptom) !== normalizedInput
     );
 
-    // 4. Combiner dans l'ordre : exact → partial → synonymes
+    // 4. Combiner dans l'ordre : synonymes → exact → partial
+    // Les synonymes en premier car si l'utilisateur tape "stress", on veut "anxiété" avant tout
     const combinedResults = [
+      ...mainSymptomsFromSynonym,
       ...exactMatches,
       ...partialMatches,
-      ...synonymMatches,
     ];
 
-    // 5. Filtrer les symptômes déjà sélectionnés et appliquer limite
-    const filtered = combinedResults
+    // 5. Dédupliquer et filtrer les symptômes déjà sélectionnés
+    const uniqueResults = [...new Set(combinedResults)];
+    const filtered = uniqueResults
       .filter((symptom) => !isSymptomOrSynonymSelected(symptom, selectedSymptoms))
       .slice(0, 10); // Limite de 10 appliquée APRÈS combinaison
 

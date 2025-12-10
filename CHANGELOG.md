@@ -2,6 +2,37 @@
 
 ---
 
+## [0.4.1] - 2025-12-09
+
+### <u>add:</u>
+
+- Added "mal de ventre" synonym to `src/data/synonymsSymptomList.json` for "troubles digestifs"
+
+### <u>update:</u>
+
+- Updated filtering logic in `SymptomsSelector.jsx` to exclude synonym values from autocomplete dropdown
+
+### <u>fix:</u>
+
+- Fixed autocomplete displaying synonyms (values) instead of only main symptoms (keys)
+- Fixed duplicate entries when typing synonyms that exist in both `symptomList.json` and `synonymsSymptomList.json`
+- Fixed "stress" showing both "Stress" and "Anxiété" - now shows only "Anxiété"
+- Fixed "rage de dents" showing duplicate - now shows only "Mal de dents"
+- Fixed "digestion" showing duplicate - now shows only "Troubles digestifs"
+
+### <u>refactor:</u>
+
+- Refactored filtering to prioritize synonym matches over direct matches
+- Refactored result combination order: synonyms → exact matches → partial matches
+- Added deduplication with `Set()` to eliminate potential duplicates
+
+### <u>optimization:</u>
+
+- Optimized autocomplete by filtering out synonym values from `symptomList.json` matches
+- Improved UX by showing only relevant main symptoms, reducing confusion
+
+---
+
 ## [0.4.0] - 2025-12-09
 
 ### <u>add:</u>
