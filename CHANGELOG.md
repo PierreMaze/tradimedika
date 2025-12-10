@@ -2,6 +2,58 @@
 
 ---
 
+## [0.6.0] - 2025-12-10
+
+### <u>add:</u>
+
+- Added `src/components/navigation/` directory for navigation-related components
+- Added `BreadCrumb.jsx` component for dynamic breadcrumb navigation trail
+- Added breadcrumb hierarchy support: Home, Home > Remedies, Home > Remedies > Remedy #X
+- Added `buildBreadcrumbPath()` utility function to convert URL pathname to breadcrumb segments
+- Added `segmentToLabel()` helper function to transform URL slugs into human-readable French labels
+- Added `BreadcrumbItem` sub-component for rendering individual breadcrumb links
+- Added ARIA accessibility attributes (`aria-label`, `aria-current="page"`) to breadcrumb navigation
+- Added PropTypes validation for `BreadcrumbItem` component
+- Added `IoChevronForward` icon from `react-icons` as breadcrumb separator
+- Added responsive text sizing (`text-xs sm:text-sm`) for mobile-first design
+
+### <u>update:</u>
+
+- Updated `src/layout/LayoutRemedyResult.jsx` to integrate `<BreadCrumb />` component above `<Outlet />`
+- Updated `ARCHITECTURE.md` to include `navigation/` folder in components structure
+- Updated `README.md` version badge from `0.5.0` to `0.6.0`
+- Updated `package.json` version from `0.5.0` to `0.6.0`
+
+### <u>refactor:</u>
+
+- Refactored `LayoutRemedyResult.jsx` documentation comments to remove "Future implementation" placeholder for BreadCrumb
+
+### <u>standardization:</u>
+
+- Standardized breadcrumb navigation pattern using React Router hooks (`useLocation()`, `useParams()`)
+- Established consistent French labeling: "Accueil" (Home), "Remèdes" (Remedies), "Remède #X" (Remedy #X)
+- Unified breadcrumb styling with emerald accent color and dark mode support
+
+### <u>features:</u>
+
+- **Dynamic Breadcrumb Navigation**: Automatically generates navigation trail based on current route
+- **Clickable Breadcrumb Links**: All segments except the last are clickable using `NavLink`
+- **Smart Rendering**: Breadcrumb hidden on homepage (only shows for nested routes)
+- **Dark Mode Support**: Full theming with `dark:` Tailwind variants
+- **Accessible Navigation**: Semantic HTML (`<nav>`, `<ol>`, `<li>`) with ARIA labels
+- **Responsive Design**: Mobile-optimized text sizing and spacing
+- **Route Integration**: Seamless integration with React Router v6 using `useLocation()` and `useParams()`
+
+### <u>issues resolved:</u>
+
+- Issue #38: Created BreadCrumb component for navigation hierarchy visualization
+
+---
+
+# Change Log
+
+---
+
 ## [0.5.0] - 2025-12-10
 
 ### <u>add:</u>

@@ -6,6 +6,7 @@ src/
 ├── components/         # Composants réutilisables
 │   ├── btn/            # Composants boutons (DarkModeToggle, etc.)
 │   ├── input/          # Composants d'entrée (SymptomsSelector, etc.)
+│   ├── navigation/     # Composants de navigation (BreadCrumb)
 │   ├── sections/       # Sections de page (Hero, etc.)
 │   └── tag/            # Composants tags et badges (SymptomTag, ListSymptomTag)
 ├── context/            # Contextes React (ThemeContext)
