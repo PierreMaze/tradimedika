@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 
 function NotFound() {
   return (
-    <main className="container mx-auto flex flex-grow flex-col items-center justify-center px-4 py-8">
+    <main className="container mx-auto flex grow flex-col items-center justify-center px-4 py-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

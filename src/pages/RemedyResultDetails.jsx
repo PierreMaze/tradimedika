@@ -1,5 +1,6 @@
 // tradimedika-v1/src/pages/RemedyResultDetails.jsx
-import { useParams, Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import BreadCrumb from "../components/navigation/BreadCrumb";
 
 /**
  * RemedyResultDetails Page - Placeholder
@@ -17,19 +18,21 @@ function RemedyResultDetails() {
 
   return (
     <div className="text-dark dark:text-light w-full transition duration-300 ease-in-out">
+      {/* Breadcrumb Navigation */}
+      <BreadCrumb />
       <h1 className="mb-4 text-3xl font-bold lg:text-4xl">
         Détails du Remède #{id}
       </h1>
-      <p className="text-neutral-600 dark:text-neutral-400 mb-8 text-lg">
+      <p className="mb-8 text-lg text-neutral-600 dark:text-neutral-400">
         Cette page affichera les informations complètes sur le remède
         sélectionné.
       </p>
 
       <div className="bg-light dark:bg-dark border-dark/20 dark:border-light/20 mb-8 rounded-lg border-2 border-dashed p-8 transition duration-300 ease-in-out">
-        <p className="text-neutral-500 dark:text-neutral-500 text-sm">
+        <p className="text-sm text-neutral-500 dark:text-neutral-500">
           🚧 Page en construction
         </p>
-        <p className="text-neutral-600 dark:text-neutral-400 mt-2 text-xs">
+        <p className="mt-2 text-xs text-neutral-600 dark:text-neutral-400">
           Issue #41 • Issue #38
         </p>
       </div>
@@ -37,13 +40,13 @@ function RemedyResultDetails() {
       <div className="flex flex-col gap-4 sm:flex-row">
         <Link
           to="/remedies"
-          className="bg-emerald-600 hover:bg-emerald-700 rounded-lg px-6 py-3 text-center font-semibold text-white transition duration-200"
+          className="rounded-lg bg-emerald-600 px-6 py-3 text-center font-semibold text-white transition duration-200 hover:bg-emerald-700"
         >
           ← Retour aux résultats
         </Link>
         <Link
           to="/"
-          className="border-emerald-600 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950 rounded-lg border-2 px-6 py-3 text-center font-semibold transition duration-200"
+          className="rounded-lg border-2 border-emerald-600 px-6 py-3 text-center font-semibold text-emerald-600 transition duration-200 hover:bg-emerald-50 dark:hover:bg-emerald-950"
         >
           Nouvelle recherche
         </Link>
