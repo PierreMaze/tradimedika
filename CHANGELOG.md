@@ -2,6 +2,77 @@
 
 ---
 
+## [0.7.0] - 2025-12-10
+
+### <u>add:</u>
+
+- Added `src/components/filter/` directory for filtering-related components
+- Added `FilterTag.jsx` pure component for individual clickable filter tag (radio button behavior)
+- Added `ListFilterTag.jsx` layout component for displaying filter tags list with animations
+- Added `FilterRemedyResult.jsx` logic container component for managing tag-based remedy filtering
+- Added tag-based filtering system to `RemedyResult.jsx` page with "Tous" (All) default tag
+- Added automatic navigation from Hero to `/remedies` page after symptom submission
+- Added alphabetically sorted filter tags extracted from matched remedies
+- Added empty state message when no remedies match selected filter tag
+- Added visual active/inactive states for filter tags (emerald for active, neutral for inactive)
+- Added Framer Motion animations for filter tag enter/exit transitions
+- Added ARIA accessibility attributes (`aria-pressed`, `aria-label`) to filter tags
+- Added `useMemo` optimization in `RemedyResult.jsx` for symptoms and matched remedies calculation
+- Added component remounting strategy using `key` prop to reset filter state on symptom change
+
+### <u>update:</u>
+
+- Updated `src/hooks/useSymptomSubmit.js` to include `useNavigate()` from React Router
+- Updated `handleSubmit()` function in `useSymptomSubmit.js` to navigate to `/remedies` with symptoms in state
+- Updated `RemedyResult.jsx` from placeholder to fully functional page with filtering capabilities
+- Updated `RemedyResult.jsx` to retrieve symptoms from `location.state` using `useLocation()` hook
+- Updated `RemedyResult.jsx` to display matched remedies count and detailed remedy cards
+- Updated `RemedyResult.jsx` to show symptom badges in remedy cards with match count
+- Updated `ARCHITECTURE.md` to include `filter/` folder in components structure
+- Updated `README.md` version badge from `0.6.0` to `0.7.0`
+- Updated `package.json` version from `0.6.0` to `0.7.0`
+
+### <u>refactor:</u>
+
+- Refactored `RemedyResult.jsx` to use `useMemo` for `selectedSymptoms` and `matchedRemedies` to prevent unnecessary recalculations
+- Refactored filtering logic to use pure component architecture (FilterTag → ListFilterTag → FilterRemedyResult)
+- Refactored filter state management to avoid `setState` in `useEffect` (React best practice)
+- Extracted `extractUniqueSymptoms()` pure function for computing available filter tags
+
+### <u>optimization:</u>
+
+- Optimized `RemedyResult.jsx` with `useMemo` to prevent recalculation of symptoms and remedies on every render
+- Optimized filtering calculations using direct computation during render (React Compiler auto-optimization)
+- Optimized component re-renders by using `key` prop on `FilterRemedyResult` to force remount on symptom change
+
+### <u>standardization:</u>
+
+- Standardized filter tag styling to match existing `SymptomTag` component design (without close icon)
+- Established pure component architecture pattern for filter system (presentation/logic separation)
+- Unified filter tag behavior as radio buttons (single selection, always one active)
+- Standardized dark mode support across all filter components with `dark:` Tailwind variants
+
+### <u>features:</u>
+
+- **Tag-Based Filtering**: Filter remedy results by individual symptoms with single-selection radio behavior
+- **Automatic Navigation**: Seamless transition from Hero symptom search to RemedyResult page
+- **Smart Filter UI**: Dynamic tag generation from matched remedies, sorted alphabetically
+- **Pure Component Architecture**: Clean separation between FilterTag (presentation), ListFilterTag (layout), and FilterRemedyResult (logic)
+- **React Router Integration**: State-based navigation passing symptoms from Hero to RemedyResult
+- **Empty State Handling**: Distinct messages for "no remedies found" vs "no match for filter"
+- **Performance Optimized**: useMemo hooks prevent unnecessary recalculations
+- **Accessible Filtering**: Full ARIA support with keyboard navigation
+- **Responsive Filter UI**: Mobile-first design with flex-wrap layout
+- **Dark Mode Support**: Complete theming for all filter components
+
+### <u>issues resolved:</u>
+
+- Issue #43: Created tag-based filter system on remedies results page with radio button behavior
+- Fixed ESLint warnings for `setState` in `useEffect` by using `useMemo` and component remounting
+- Fixed exhaustive-deps warnings by properly memoizing `selectedSymptoms`
+
+---
+
 ## [0.6.0] - 2025-12-10
 
 ### <u>add:</u>

@@ -1,6 +1,7 @@
 // src/hooks/useSymptomSubmit.js
 
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import db from "../data/db.json";
 import { findMatchingRemedies } from "../utils/remedyMatcher";
 
@@ -17,6 +18,7 @@ import { findMatchingRemedies } from "../utils/remedyMatcher";
  * @returns {Object} { handleSubmit, isLoading, results, hasSubmitted, error }
  */
 export function useSymptomSubmit() {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState(null);
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -48,6 +50,11 @@ export function useSymptomSubmit() {
         // Mettre à jour les résultats
         setResults(matchingRemedies);
         setHasSubmitted(true);
+
+        // Navigation vers la page des résultats avec les symptômes en state
+        navigate("/remedies", {
+          state: { symptoms: selectedSymptoms },
+        });
 
         // Logging structuré pour debug
         console.group("🔍 Résultats de recherche");

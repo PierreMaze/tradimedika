@@ -25,7 +25,7 @@ function RemedyResultDetails() {
         sélectionné.
       </p>
 
-      <div className="bg-light dark:bg-dark border-dark/20 dark:border-light/20 mb-8 rounded-lg border-2 border-dashed p-8 transition duration-300 ease-in-out">
+      <div className="bg-light dark:bg-dark border-dark/20 dark:border-light/20 z-20 mb-8 rounded-lg border-2 border-dashed p-8 transition duration-300 ease-in-out">
         <p className="text-sm text-neutral-500 dark:text-neutral-500">
           🚧 Page en construction
         </p>

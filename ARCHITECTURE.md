@@ -5,6 +5,7 @@ src/
 ├── assets/             # Images, fonts, et ressources statiques
 ├── components/         # Composants réutilisables
 │   ├── btn/            # Composants boutons (DarkModeToggle, etc.)
+│   ├── filter/         # Composants de filtrage (FilterTag, ListFilterTag, FilterRemedyResult)
 │   ├── input/          # Composants d'entrée (SymptomsSelector, etc.)
 │   ├── navigation/     # Composants de navigation (BreadCrumb)
 │   ├── sections/       # Sections de page (Hero, etc.)
