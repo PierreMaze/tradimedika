@@ -2,6 +2,67 @@
 
 ---
 
+## [0.9.0] - 2025-12-10
+
+### <u>add:</u>
+
+- Added `generateSlug()` function in `src/utils/remedyMatcher.js` for URL-safe slug generation from remedy names
+- Added `getRemedyBySlug()` function in `src/utils/remedyMatcher.js` for fetching remedies by slug instead of ID
+- Added complete implementation of `RemedyResultDetails.jsx` page with mobile-first responsive design
+- Added Hero section with remedy image, type badge, and safety badges (pregnancy, children age, verified)
+- Added structured sections for properties, symptoms, uses, contraindications, tips, and allergens
+- Added conditional rendering for all remedy data fields (only shows if data exists)
+- Added warning/info cards with colored borders for contraindications (red), tips (blue), and allergens (yellow)
+- Added compact usage display format (form + dose + frequency on one line)
+- Added static back button below breadcrumb navigation
+- Added Framer Motion animations for page entry, staggered sections, and image hover
+- Added `RemedyResultNotFound` component integration for invalid remedy slugs
+- Added ARIA accessibility attributes (`aria-label`, semantic HTML)
+- Added dark mode support across all remedy detail sections
+
+### <u>update:</u>
+
+- Updated `src/routes/Router.jsx` to use `:slug` parameter instead of `:id` for remedy routes
+- Updated route path from `/remedies/:id` to `/remedes/:slug` (French URL)
+- Updated `RemedyResultDetails.jsx` to fetch remedies using `getRemedyBySlug()` instead of `getRemedyById()`
+- Updated `BreadCrumb.jsx` to display remedy name dynamically instead of "Remède #ID"
+- Updated `BreadCrumb.jsx` to fetch remedy data using `getRemedyBySlug()` for label generation
+- Updated `segmentToLabel()` function to accept `remedyName` parameter
+- Updated `buildBreadcrumbPath()` function to pass remedy name to label generator
+- Updated `RemedyCard.jsx` to generate navigation links with slugs using `generateSlug(name)`
+- Updated all internal links from `/remedies` to `/remedes` in `RemedyResultDetails.jsx`
+- Updated `BreadCrumb.jsx` labels mapping to support `/remedes` route
+- Updated `package.json` version from `0.8.0` to `0.9.0`
+- Updated `README.md` version badge from `0.8.0` to `0.9.0`
+
+### <u>refactor:</u>
+
+- Refactored `RemedyResultDetails.jsx` from placeholder to fully functional detail page (56 lines → 435 lines)
+- Refactored URL structure from numeric IDs (`/remedies/0`) to semantic slugs (`/remedes/citron`)
+- Refactored breadcrumb logic to dynamically fetch and display remedy names
+- Extracted slug generation logic into reusable utility function
+- Simplified remedy lookup by slug with comprehensive error handling
+
+### <u>optimization:</u>
+
+- Optimized slug generation to preserve French accents (SEO-friendly URLs: `thé-vert`, `jus-de-citron`)
+- Optimized breadcrumb rendering by fetching remedy data only when `params.slug` exists
+- Removed unused `id` destructuring from `RemedyCard.jsx` (now uses `name` for slug generation)
+
+### <u>standardization:</u>
+
+- Standardized URL pattern across application: all remedy links now use slug-based navigation
+- Standardized breadcrumb display format: "Accueil > Remèdes > [Nom du remède]"
+- Standardized route naming: consistent use of `/remedes` (French) instead of `/remedies` (English)
+
+### <u>issues resolved:</u>
+
+- Issue #49: Implementation of remedy result details page with complete data display
+- User request: Breadcrumb now displays remedy name instead of "Remède #ID"
+- User request: URLs now use semantic slugs instead of numeric IDs
+
+---
+
 ## [0.8.1] - 2025-12-10
 
 ### <u>documentation:</u>

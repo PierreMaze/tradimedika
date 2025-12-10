@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { IoChevronForward } from "react-icons/io5";
 import { NavLink, useLocation, useParams } from "react-router-dom";
 import { LINK_INTERNAL_STYLES } from "../../constants/linkStyles";
+import db from "../../data/db.json";
+import { getRemedyBySlug } from "../../utils/remedyMatcher";
 
 /**
  * BreadCrumb Component - Navigation breadcrumb trail
@@ -13,7 +15,7 @@ import { LINK_INTERNAL_STYLES } from "../../constants/linkStyles";
  * Hierarchy:
  * - / → "Accueil"
  * - /remedies → "Accueil > Remèdes"
- * - /remedies/:id → "Accueil > Remèdes > Remède #X"
+ * - /remedies/:slug → "Accueil > Remèdes > [Nom du remède]"
  *
  * Features:
  * - Dynamic path generation using useLocation()
@@ -25,17 +27,18 @@ import { LINK_INTERNAL_STYLES } from "../../constants/linkStyles";
 
 /**
  * Convert URL segment to readable label
- * @param {string} segment - URL segment (e.g., "remedies", "5")
- * @param {boolean} isId - Whether segment is a dynamic ID
+ * @param {string} segment - URL segment (e.g., "remedies", "citron")
+ * @param {boolean} isSlug - Whether segment is a remedy slug
+ * @param {string|null} remedyName - Name of the remedy if found
  * @returns {string} Human-readable label
  */
-const segmentToLabel = (segment, isId = false) => {
-  if (isId) {
-    return `Remède #${segment}`;
+const segmentToLabel = (segment, isSlug = false, remedyName = null) => {
+  if (isSlug && remedyName) {
+    return remedyName; // Affiche "Citron" au lieu de "citron"
   }
 
   const labels = {
-    remedies: "Remèdes",
+    remedes: "Remèdes",
   };
 
   return labels[segment] || segment;
@@ -45,9 +48,10 @@ const segmentToLabel = (segment, isId = false) => {
  * Build breadcrumb path array from current location
  * @param {string} pathname - Current URL pathname
  * @param {Object} params - URL parameters from useParams()
+ * @param {string|null} remedyName - Name of the remedy if on detail page
  * @returns {Array} Array of {label, path} objects
  */
-const buildBreadcrumbPath = (pathname, params) => {
+const buildBreadcrumbPath = (pathname, params, remedyName = null) => {
   const breadcrumbs = [{ label: "Accueil", path: "/" }];
 
   // Remove leading/trailing slashes and split
@@ -60,10 +64,10 @@ const buildBreadcrumbPath = (pathname, params) => {
     if (!segment) return; // Skip empty segments
 
     currentPath += `/${segment}`;
-    const isId = params.id && segment === params.id;
+    const isSlug = params.slug && segment === params.slug;
 
     breadcrumbs.push({
-      label: segmentToLabel(segment, isId),
+      label: segmentToLabel(segment, isSlug, remedyName),
       path: currentPath,
     });
   });
@@ -115,8 +119,15 @@ function BreadCrumb() {
   const location = useLocation();
   const params = useParams();
 
+  // Récupérer le remède si on est sur une page de détail
+  const remedy = params.slug ? getRemedyBySlug(params.slug, db) : null;
+
   // Build breadcrumb path from current route
-  const pathSegments = buildBreadcrumbPath(location.pathname, params);
+  const pathSegments = buildBreadcrumbPath(
+    location.pathname,
+    params,
+    remedy?.name,
+  );
 
   // Don't show breadcrumb on home page (only one segment)
   if (pathSegments.length <= 1) {

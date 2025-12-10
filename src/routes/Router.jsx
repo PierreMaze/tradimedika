@@ -13,12 +13,12 @@ import RemedyResultDetails from "../pages/RemedyResultDetails";
  * Routes:
  * - / → Home page (Hero component)
  * - /remedies → Remedy results list (nested in LayoutRemedyResult)
- * - /remedies/:id → Remedy detail page (nested in LayoutRemedyResult)
+ * - /remedies/:slug → Remedy detail page (nested in LayoutRemedyResult)
  * - * → NotFound page (404 error)
  *
  * Layout Structure:
  * - LayoutApp: Global layout (Header + Outlet + Footer) wraps all routes
- * - LayoutRemedyResult: Specific layout for remedy pages (future: BreadCrumb)
+ * - LayoutRemedyResult: Specific layout for remedy pages (includes BreadCrumb)
  */
 
 function Router() {
@@ -26,9 +26,9 @@ function Router() {
     <Routes>
       <Route element={<LayoutApp />}>
         <Route index element={<Home />} />
-        <Route path="remedies" element={<LayoutRemedyResult />}>
+        <Route path="remedes" element={<LayoutRemedyResult />}>
           <Route index element={<RemedyResult />} />
-          <Route path=":id" element={<RemedyResultDetails />} />
+          <Route path=":slug" element={<RemedyResultDetails />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Route>

@@ -30,7 +30,7 @@
       "Faire un test de tolérance sur 3 jours",
       "Le citron ne 'nettoie' pas le foie - c'est un mythe"
     ],
-    "image": "https://cdn.pixabay.com/photo/2016/03/31/21/16/citrus-1296291_1280.png",
+    "image": "https://cdn-icons-png.flaticon.com/512/4056/4056931.png",
     "pregnancySafe": true,
     "childrenAge": null,
     "allergens": ["agrumes"],
@@ -67,7 +67,7 @@
       "Efficacité non prouvée scientifiquement",
       "Ne remplace pas un traitement médical"
     ],
-    "image": "https://cdn.pixabay.com/photo/2014/12/21/23/59/onion-576534_1280.png",
+    "image": "https://cdn-icons-png.flaticon.com/512/15618/15618168.png",
     "pregnancySafe": true,
     "childrenAge": null,
     "allergens": [],
@@ -108,7 +108,7 @@
       "Ne pas dépasser 2 jours d'utilisation",
       "Arrêter en cas d'irritation"
     ],
-    "image": "clove",
+    "image": "https://cdn-icons-png.flaticon.com/512/7014/7014075.png ",
     "pregnancySafe": false,
     "childrenAge": 12,
     "allergens": [],
@@ -145,7 +145,7 @@
       "Ne pas chauffer au-delà de 40°C pour préserver les propriétés",
       "Choisir du miel brut et local si possible"
     ],
-    "image": "https://cdn.pixabay.com/photo/2013/07/13/10/14/honey-156826_1280.png",
+    "image": "https://cdn-icons-png.flaticon.com/512/3413/3413290.png ",
     "pregnancySafe": true,
     "childrenAge": 1,
     "allergens": ["pollen"],
@@ -185,7 +185,7 @@
       "Arrêter 1 semaine avant toute chirurgie",
       "Peut causer une mauvaise haleine"
     ],
-    "image": "https://cdn.pixabay.com/photo/2024/07/12/16/51/garlic-8890743_1280.png",
+    "image": "https://cdn-icons-png.flaticon.com/512/15618/15618172.png",
     "pregnancySafe": false,
     "childrenAge": null,
     "allergens": [],
@@ -218,7 +218,7 @@
       "Ne dispense pas de consulter si la diarrhée persiste",
       "Penser à bien s'hydrater en parallèle"
     ],
-    "image": "https://cdn.pixabay.com/photo/2022/04/21/12/34/rice-grains-7147376_1280.png",
+    "image": "https://cdn-icons-png.flaticon.com/512/2714/2714036.png",
     "pregnancySafe": true,
     "childrenAge": null,
     "allergens": [],
@@ -255,7 +255,7 @@
       "Effet prébiotique bénéfique pour la flore intestinale",
       "Peut causer des ballonnements chez certaines personnes"
     ],
-    "image": "https://cdn.pixabay.com/photo/2016/03/31/22/00/banana-1296779_1280.png",
+    "image": "https://cdn-icons-png.flaticon.com/512/17502/17502228.png",
     "pregnancySafe": true,
     "childrenAge": null,
     "allergens": ["pollen"],
@@ -298,7 +298,7 @@
       "Efficacité scientifiquement prouvée",
       "Gingembre frais > poudre pour les propriétés"
     ],
-    "image": "https://cdn.pixabay.com/photo/2016/03/31/15/40/ginger-1293466_1280.png",
+    "image": "https://cdn-icons-png.flaticon.com/512/5281/5281043.png",
     "pregnancySafe": null,
     "childrenAge": 6,
     "allergens": [],
@@ -345,7 +345,7 @@
       "Boire le soir pour meilleur effet sur le sommeil",
       "Études validant les effets anti-dépression post-partum"
     ],
-    "image": "https://cdn.pixabay.com/photo/2021/03/14/14/24/chamomile-6094459_1280.png",
+    "image": "https://cdn-icons-png.flaticon.com/512/8669/8669890.png",
     "pregnancySafe": false,
     "childrenAge": 12,
     "allergens": ["asteracees"],
@@ -386,7 +386,7 @@
       "Ne pas utiliser huile essentielle chez enfants <6 ans",
       "Excellente pour syndrome intestin irritable (sauf RGO)"
     ],
-    "image": "https://cdn.pixabay.com/photo/2013/07/12/17/46/mint-152410_1280.png",
+    "image": "https://cdn-icons-png.flaticon.com/512/6692/6692125.png",
     "pregnancySafe": false,
     "childrenAge": 6,
     "allergens": [],
@@ -429,7 +429,7 @@
       "Consommation excessive = fatigue paradoxale",
       "Risque de dépendance et symptômes de sevrage"
     ],
-    "image": "https://cdn.pixabay.com/photo/2018/02/24/10/01/coffee-3177691_1280.png",
+    "image": "https://cdn-icons-png.flaticon.com/512/3219/3219300.png",
     "pregnancySafe": null,
     "childrenAge": 12,
     "allergens": [],
@@ -468,7 +468,7 @@
       "Consulter professionnel santé avant usage si traitement en cours",
       "Ne pas utiliser baies crues (toxiques)"
     ],
-    "image": "https://binette-et-jardin.ouest-france.fr/images/dossiers/historique/sureau-100541.jpg",
+    "image": "https://cdn-icons-png.flaticon.com/512/12924/12924832.png",
     "pregnancySafe": false,
     "childrenAge": 2,
     "allergens": [],
@@ -509,7 +509,7 @@
       "Risque allergie croisée : pollen olive, venin abeille",
       "Arrêter avant toute intervention chirurgicale"
     ],
-    "image": "https://cdn.pixabay.com/photo/2014/12/22/00/00/pineapples-576576_1280.png",
+    "image": "https://cdn-icons-png.flaticon.com/512/18651/18651070.png",
     "pregnancySafe": true,
     "childrenAge": 6,
     "allergens": ["pollen olive", "venin abeille"],
@@ -548,7 +548,7 @@
       "Le sorbitol peut aggraver symptômes du Syndrome de l'intestin irritable (SII)",
       "Intégrer dans alimentation équilibrée"
     ],
-    "image": "https://cdn.pixabay.com/photo/2012/04/12/13/27/plum-30034_1280.png",
+    "image": "https://cdn-icons-png.flaticon.com/512/15841/15841651.png",
     "pregnancySafe": true,
     "childrenAge": null,
     "allergens": [],

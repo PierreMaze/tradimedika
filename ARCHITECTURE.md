@@ -7,7 +7,8 @@ src/
 │   ├── btn/            # Composants boutons (DarkModeToggle, etc.)
 │   ├── filter/         # Composants de filtrage (FilterTag, ListFilterTag, FilterRemedyResult)
 │   ├── input/          # Composants d'entrée (SymptomsSelector, etc.)
-│   ├── navigation/     # Composants de navigation (BreadCrumb)
+│   ├── navigation/     # Composants de navigation (BreadCrumb avec support slug)
+│   ├── remedy/         # Composants d'affichage des remèdes (RemedyCard, RemedyResultList, RemedyResultNotFound)
 │   ├── sections/       # Sections de page (Hero, etc.)
 │   └── tag/            # Composants tags et badges (SymptomTag, ListSymptomTag)
 ├── context/            # Contextes React (ThemeContext)
@@ -17,5 +18,5 @@ src/
 │   └── components/     # Composants spécifiques au layout (LogoTradimedika)
 ├── pages/              # Pages de l'application (Home, RemedyResult, RemedyResultDetails, NotFound)
 ├── routes/             # Configuration du routage React Router (Router.jsx)
-└── utils/              # Fonctions utilitaires (normalizeSymptom, remedyMatcher)
+└── utils/              # Fonctions utilitaires (normalizeSymptom, remedyMatcher avec slug generation)
 ```

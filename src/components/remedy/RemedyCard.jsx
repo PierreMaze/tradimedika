@@ -2,10 +2,11 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { generateSlug } from "../../utils/remedyMatcher";
 
 /**
  * Carte individuelle pour afficher un remède
- * - Entièrement cliquable (wrapper Link vers /remedies/:id)
+ * - Entièrement cliquable (wrapper Link vers /remedes/:slug)
  * - Affiche: image, nom, type, description, propriétés, sécurité grossesse, âge enfants, vérification professionnelle
  * - Design responsive avec animations Framer Motion
  * - Support mode sombre
@@ -13,7 +14,6 @@ import PropTypes from "prop-types";
  */
 export default function RemedyCard({ remedy }) {
   const {
-    id,
     name,
     type,
     description,
@@ -40,7 +40,7 @@ export default function RemedyCard({ remedy }) {
       transition={{ duration: 0.3 }}
     >
       <Link
-        to={`/remedies/${id}`}
+        to={`/remedes/${generateSlug(name)}`}
         aria-label={`Voir les détails de ${name}`}
         className="block h-full"
       >

@@ -85,3 +85,113 @@ export function findMatchingRemedies(selectedSymptoms, database) {
 
   return matches;
 }
+
+/**
+ * Récupère un remède par son ID depuis la base de données
+ *
+ * @param {string|number} id - L'ID du remède à récupérer
+ * @param {Array} database - Base de données des remèdes (db.json)
+ * @returns {Object|null} - Le remède trouvé ou null
+ *
+ * @example
+ * const remedy = getRemedyById("0", db);
+ * const remedy = getRemedyById(0, db);
+ */
+export function getRemedyById(id, database) {
+  // Validation des entrées
+  if (id === undefined || id === null || id === "") {
+    console.warn("[remedyMatcher] ID invalide fourni à getRemedyById");
+    return null;
+  }
+
+  if (!Array.isArray(database) || database.length === 0) {
+    console.error("[remedyMatcher] Base de données invalide ou vide");
+    return null;
+  }
+
+  // Convertir l'ID en nombre (vient de useParams comme string)
+  const numericId = Number(id);
+
+  // Vérifier que la conversion a réussi
+  if (isNaN(numericId)) {
+    console.warn(
+      `[remedyMatcher] ID "${id}" n'est pas convertible en nombre`,
+    );
+    return null;
+  }
+
+  // Rechercher le remède
+  const remedy = database.find((item) => item.id === numericId);
+
+  if (!remedy) {
+    console.warn(
+      `[remedyMatcher] Aucun remède trouvé avec l'ID ${numericId}`,
+    );
+    return null;
+  }
+
+  return remedy;
+}
+
+/**
+ * Génère un slug URL-safe depuis le nom d'un remède
+ *
+ * @param {string} name - Le nom du remède
+ * @returns {string} - Le slug formaté (lowercase, tirets, accents préservés)
+ *
+ * @example
+ * generateSlug("Citron") // "citron"
+ * generateSlug("Jus de Citron") // "jus-de-citron"
+ * generateSlug("Thé Vert") // "thé-vert"
+ */
+export function generateSlug(name) {
+  if (!name || typeof name !== "string") {
+    console.warn("[remedyMatcher] Nom invalide fourni à generateSlug");
+    return "";
+  }
+
+  return name
+    .toLowerCase() // Lowercase
+    .trim() // Supprime les espaces début/fin
+    .replace(/\s+/g, "-") // Espaces → tirets
+    .replace(/[^a-z0-9àâäéèêëïîôùûüÿçœ-]/g, ""); // Garde lettres, chiffres, accents français, tirets
+}
+
+/**
+ * Récupère un remède par son slug depuis la base de données
+ *
+ * @param {string} slug - Le slug du remède (ex: "citron", "thé-vert")
+ * @param {Array} database - Base de données des remèdes (db.json)
+ * @returns {Object|null} - Le remède trouvé ou null
+ *
+ * @example
+ * const remedy = getRemedyBySlug("citron", db);
+ * const remedy = getRemedyBySlug("thé-vert", db);
+ */
+export function getRemedyBySlug(slug, database) {
+  // Validation des entrées
+  if (!slug || typeof slug !== "string") {
+    console.warn("[remedyMatcher] Slug invalide fourni à getRemedyBySlug");
+    return null;
+  }
+
+  if (!Array.isArray(database) || database.length === 0) {
+    console.error("[remedyMatcher] Base de données invalide ou vide");
+    return null;
+  }
+
+  // Rechercher le remède dont le slug correspond
+  const remedy = database.find((item) => {
+    if (!item.name) return false;
+    return generateSlug(item.name) === slug;
+  });
+
+  if (!remedy) {
+    console.warn(
+      `[remedyMatcher] Aucun remède trouvé avec le slug "${slug}"`,
+    );
+    return null;
+  }
+
+  return remedy;
+}
