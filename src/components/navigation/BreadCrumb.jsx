@@ -2,6 +2,7 @@
 import PropTypes from "prop-types";
 import { IoChevronForward } from "react-icons/io5";
 import { NavLink, useLocation, useParams } from "react-router-dom";
+import { LINK_INTERNAL_STYLES } from "../../constants/linkStyles";
 
 /**
  * BreadCrumb Component - Navigation breadcrumb trail
@@ -80,7 +81,7 @@ function BreadcrumbItem({ item, isLast }) {
         <>
           <NavLink
             to={item.path}
-            className="transform font-medium text-emerald-600 underline decoration-current underline-offset-2 duration-150 ease-in-out transform-fill hover:text-emerald-600 dark:text-emerald-500 dark:hover:text-emerald-500"
+            className={LINK_INTERNAL_STYLES}
             aria-label={`Naviguer vers ${item.label}`}
           >
             {item.label}

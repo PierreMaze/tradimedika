@@ -1,6 +1,7 @@
 // tradimedika-v1/src/layout/Footer.jsx
 import { motion } from "framer-motion";
 import LogoTradimedika from "./LogoTradimedika";
+import { LINK_EXTERNAL_STYLES } from "../../constants/linkStyles";
 
 const Footer = () => {
   return (
@@ -21,14 +22,14 @@ const Footer = () => {
           <a
             href="/mention-legales"
             rel="noopener noreferrer"
-            className="hover:text-accent text-dark dark:text-light font-medium underline underline-offset-2 transition duration-300 ease-in-out hover:font-semibold"
+            className={LINK_EXTERNAL_STYLES}
           >
             Mentions Légales
           </a>
           <a
             href="/privacy-policy"
             rel="noopener noreferrer"
-            className="hover:text-accent text-dark dark:text-light font-medium underline underline-offset-2 transition duration-300 ease-in-out hover:font-semibold"
+            className={LINK_EXTERNAL_STYLES}
           >
             Politique de Confidentialité
           </a>
