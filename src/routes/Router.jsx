@@ -1,11 +1,11 @@
 // tradimedika-v1/src/routes/Router.jsx
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import LayoutApp from "../layout/LayoutApp";
 import LayoutRemedyResult from "../layout/LayoutRemedyResult";
 import Home from "../pages/Home";
+import NotFound from "../pages/NotFound";
 import RemedyResult from "../pages/RemedyResult";
 import RemedyResultDetails from "../pages/RemedyResultDetails";
-import NotFound from "../pages/NotFound";
 
 /**
  * Router Configuration - React Router v6.30.2
