@@ -9,14 +9,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 /**
- * Normalise un symptôme (copie de src/utils/normalizeSymptom.js)
+ * Normalise un symptôme AVEC accents (copie de src/utils/normalizeSymptom.js)
+ * Cette version CONSERVE les accents français
  */
 function normalizeSymptom(symptom) {
   if (typeof symptom !== "string") return "";
   return symptom
     .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
     .replace(/[-_]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
@@ -40,30 +39,33 @@ const db = JSON.parse(readFileSync(PATHS.db, "utf-8"));
 let errors = 0;
 let warnings = 0;
 
-// ==================== 1. VÉRIFIER ABSENCE D'ACCENTS ====================
+// ==================== 1. VÉRIFIER ACCENTS FRANÇAIS VALIDES ====================
 
-console.log("📝 Vérification 1: Absence d'accents...");
+console.log("📝 Vérification 1: Accents français valides...");
 
-const accentPattern = /[àâäéèêëïîôùûüÿçÀÂÄÉÈÊËÏÎÔÙÛÜŸÇ]/;
+// Pattern pour détecter des caractères invalides (non-français)
+// Accepte: a-z, accents français, œ, apostrophes, espaces
+const invalidCharPattern = /[^a-zàâäéèêëïîôùûüÿçœ'\s]/;
+let invalidChars = 0;
 
 // symptomList
 symptomList.forEach((symptom) => {
-  if (accentPattern.test(symptom)) {
-    console.error(`  ❌ Accent trouvé dans symptomList: "${symptom}"`);
-    errors++;
+  if (invalidCharPattern.test(symptom)) {
+    console.error(`  ❌ Caractère invalide dans symptomList: "${symptom}"`);
+    invalidChars++;
   }
 });
 
 // synonyms
 Object.entries(synonyms).forEach(([key, values]) => {
-  if (accentPattern.test(key)) {
-    console.error(`  ❌ Accent trouvé dans clé de synonyms: "${key}"`);
-    errors++;
+  if (invalidCharPattern.test(key)) {
+    console.error(`  ❌ Caractère invalide dans clé de synonyms: "${key}"`);
+    invalidChars++;
   }
   values.forEach((value) => {
-    if (accentPattern.test(value)) {
-      console.error(`  ❌ Accent trouvé dans valeur de synonyms: "${value}"`);
-      errors++;
+    if (invalidCharPattern.test(value)) {
+      console.error(`  ❌ Caractère invalide dans valeur de synonyms: "${value}"`);
+      invalidChars++;
     }
   });
 });
@@ -71,28 +73,30 @@ Object.entries(synonyms).forEach(([key, values]) => {
 // db
 db.forEach((remedy) => {
   remedy.symptoms.forEach((symptom) => {
-    if (accentPattern.test(symptom)) {
+    if (invalidCharPattern.test(symptom)) {
       console.error(
-        `  ❌ Accent trouvé dans db.json (${remedy.name}): "${symptom}"`,
+        `  ❌ Caractère invalide dans db.json (${remedy.name}): "${symptom}"`,
       );
-      errors++;
+      invalidChars++;
     }
   });
 });
 
-if (errors === 0) {
-  console.log("  ✅ Aucun accent détecté\n");
+if (invalidChars === 0) {
+  console.log("  ✅ Tous les caractères sont valides (français avec accents)\n");
+} else {
+  errors += invalidChars;
 }
 
 // ==================== 2. VÉRIFIER ABSENCE DE - ET _ ====================
 
 console.log("📝 Vérification 2: Absence de tirets et underscores...");
 
-const invalidCharPattern = /[-_]/;
+const dashUnderscorePattern = /[-_]/;
 
 // symptomList
 symptomList.forEach((symptom) => {
-  if (invalidCharPattern.test(symptom)) {
+  if (dashUnderscorePattern.test(symptom)) {
     console.error(
       `  ❌ Caractère invalide (-/_) dans symptomList: "${symptom}"`,
     );
@@ -102,14 +106,14 @@ symptomList.forEach((symptom) => {
 
 // synonyms
 Object.entries(synonyms).forEach(([key, values]) => {
-  if (invalidCharPattern.test(key)) {
+  if (dashUnderscorePattern.test(key)) {
     console.error(
       `  ❌ Caractère invalide (-/_) dans clé de synonyms: "${key}"`,
     );
     errors++;
   }
   values.forEach((value) => {
-    if (invalidCharPattern.test(value)) {
+    if (dashUnderscorePattern.test(value)) {
       console.error(
         `  ❌ Caractère invalide (-/_) dans valeur de synonyms: "${value}"`,
       );
@@ -121,7 +125,7 @@ Object.entries(synonyms).forEach(([key, values]) => {
 // db
 db.forEach((remedy) => {
   remedy.symptoms.forEach((symptom) => {
-    if (invalidCharPattern.test(symptom)) {
+    if (dashUnderscorePattern.test(symptom)) {
       console.error(
         `  ❌ Caractère invalide (-/_) dans db.json (${remedy.name}): "${symptom}"`,
       );

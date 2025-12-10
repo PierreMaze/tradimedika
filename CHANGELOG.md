@@ -2,6 +2,128 @@
 
 ---
 
+## [0.4.1] - 2025-12-09
+
+### <u>add:</u>
+
+- Added "mal de ventre" synonym to `src/data/synonymsSymptomList.json` for "troubles digestifs"
+
+### <u>update:</u>
+
+- Updated filtering logic in `SymptomsSelector.jsx` to exclude synonym values from autocomplete dropdown
+
+### <u>fix:</u>
+
+- Fixed autocomplete displaying synonyms (values) instead of only main symptoms (keys)
+- Fixed duplicate entries when typing synonyms that exist in both `symptomList.json` and `synonymsSymptomList.json`
+- Fixed "stress" showing both "Stress" and "Anxiété" - now shows only "Anxiété"
+- Fixed "rage de dents" showing duplicate - now shows only "Mal de dents"
+- Fixed "digestion" showing duplicate - now shows only "Troubles digestifs"
+
+### <u>refactor:</u>
+
+- Refactored filtering to prioritize synonym matches over direct matches
+- Refactored result combination order: synonyms → exact matches → partial matches
+- Added deduplication with `Set()` to eliminate potential duplicates
+
+### <u>optimization:</u>
+
+- Optimized autocomplete by filtering out synonym values from `symptomList.json` matches
+- Improved UX by showing only relevant main symptoms, reducing confusion
+
+---
+
+## [0.4.0] - 2025-12-09
+
+### <u>add:</u>
+
+- Added `findMainSymptomsFromSynonym()` function in `src/components/input/SymptomsSelector.jsx` for reverse synonym lookup
+- Added multiple new synonyms to `src/data/synonymsSymptomList.json` for improved search coverage
+
+### <u>update:</u>
+
+- Updated `src/data/synonymsSymptomList.json` with enriched synonym mappings:
+  - "mal de dents" : added "carie" and "maux de dents"
+  - "mal de gorge" : added "maux de gorge", "gorge irritée", "gorge douloureuse"
+  - "troubles digestifs" : added "maux d'estomac", "maux de ventre", "mal au ventre"
+- Updated autocomplete filtering logic in `SymptomsSelector.jsx` to support multiple main symptoms from single synonym
+
+### <u>refactor:</u>
+
+- Refactored `findMainSymptomFromSynonym()` to `findMainSymptomsFromSynonym()` (plural) returning array instead of single value
+- Refactored synonym matching to return ALL matching main symptoms instead of only the first one
+
+### <u>fix:</u>
+
+- Fixed autocomplete showing only one symptom when typing synonym that matches multiple entries
+- Fixed "maux" query now correctly returns "Mal de tête", "Mal de dents", "Mal de gorge" (all matching symptoms)
+
+### <u>features:</u>
+
+- **Multi-Symptom Synonym Lookup**: Typing a synonym now suggests ALL related main symptoms
+- **Enhanced Search Coverage**: 23+ new synonym variations added for better discoverability
+- **Example**: typing "maux" now shows all "mal de..." symptoms instead of just one
+
+---
+
+## [0.3.3] - 2025-12-09
+
+### <u>add:</u>
+
+- Added `normalizeForMatching()` function in `src/utils/normalizeSymptom.js` for accent-insensitive matching
+- Added `validate-symptoms.js` script for validating JSON data consistency and structure
+- Added support for French special characters (œ, apostrophes) in validation patterns
+
+### <u>update:</u>
+
+- Updated `src/utils/normalizeSymptom.js` to preserve French accents in symptom display (é, è, à, ô, etc.)
+- Updated `src/hooks/useSymptomTags.js` to use flexible duplicate detection (accent-insensitive)
+- Updated `src/components/input/SymptomsSelector.jsx` with accent-insensitive filtering for better UX
+- Updated `src/utils/remedyMatcher.js` to support flexible matching (accepts "diarrhee" OR "diarrhée")
+- Updated `scripts/validateData.js` validation rules to accept French accents instead of rejecting them
+- Updated `src/data/db.json` with 14 verified remedies (reduced from 101) with proper French accents
+- Updated `src/data/symptomList.json` to 23 symptoms with correct French spelling (accents preserved)
+- Updated `src/data/synonymsSymptomList.json` with 19 synonym mappings and proper accent usage
+- Updated `validate-symptoms.js` to use ES module imports instead of CommonJS `require()`
+
+### <u>refactor:</u>
+
+- Refactored normalization system from "remove accents" to "preserve accents with flexible matching"
+- Refactored symptom matching logic to compare normalized versions while displaying original text
+- Simplified synonym validation to unidirectional structure (removed bidirectional requirement)
+
+### <u>delete:</u>
+
+- Deleted `scripts/normalizeData.js` migration script (no longer needed with new accent-preserving strategy)
+
+### <u>fix:</u>
+
+- Fixed symptom matching failures caused by accent mismatches between user input and database
+- Fixed validation script rejecting valid French characters (œ in "œdème", apostrophes in "manque d'énergie")
+- Fixed inconsistent accent usage in `db.json` (glycemie → glycémie, diarrhee → diarrhée, nausee → nausée, anxiete → anxiété)
+- Fixed "haut-le-cœur" containing hyphen (normalized to "haut le cœur")
+
+### <u>standardization:</u>
+
+- Standardized French orthography across all JSON files with proper accent usage
+- Established dual normalization pattern: `normalizeSymptom()` for display, `normalizeForMatching()` for comparison
+- Unified validation rules to accept French special characters (à, â, ä, é, è, ê, ë, ï, î, ô, ù, û, ü, ÿ, ç, œ, ')
+
+### <u>optimization:</u>
+
+- Optimized database size: reduced `db.json` from 2266 lines to 599 lines (~73% reduction)
+- Improved user experience with flexible search (users don't need to type accents correctly)
+- Enhanced data quality with scientifically verified information for 14 core remedies
+
+### <u>features:</u>
+
+- **Flexible Accent Matching**: Users can search "diarrhee" or "diarrhée" - both work perfectly
+- **Proper French Display**: All symptoms display with correct French spelling and accents
+- **Enhanced Validation**: Comprehensive validation scripts ensuring data consistency
+- **Streamlined Database**: Focused, high-quality dataset with verified natural remedies
+
+---
+
 ## [0.3.2] - 2025-12-07
 
 ### <u>fix:</u>

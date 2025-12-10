@@ -1,4 +1,39 @@
 {
-  "mal de tete": ["maux de tete"],
-  "maux de tete": ["mal de tete"]
+  "mal de tête": ["maux de tête", "céphalée", "migraine"],
+  "mal de dents": [
+    "rage de dents",
+    "douleur dentaire",
+    "carie",
+    "maux de dents"
+  ],
+  "mal de gorge": [
+    "angine",
+    "pharyngite",
+    "maux de gorge",
+    "gorge irritée",
+    "gorge douloureuse"
+  ],
+  "troubles digestifs": [
+    "digestion",
+    "problèmes digestifs",
+    "maux d'estomac",
+    "maux de ventre",
+    "mal au ventre",
+    "mal de ventre"
+  ],
+  "crampes musculaires": ["crampes"],
+  "diarrhée": ["selles liquides", "gastro"],
+  "nausée": ["mal des transports", "envie de vomir", "haut le cœur"],
+  "anxiété": ["stress", "angoisse", "nervosité", "tension"],
+  "insomnie": ["troubles du sommeil", "difficulté à dormir"],
+  "inflammation": ["gonflement", "douleur inflammatoire", "œdème"],
+  "diabète": ["glycémie", "taux de sucre", "hyperglycémie"],
+  "rhume": ["froid", "nez qui coule"],
+  "grippe": ["influenza", "état grippal"],
+  "toux": ["toux sèche", "toux grasse"],
+  "fatigue": ["épuisement", "asthénie", "manque d'énergie", "épuisement"],
+  "constipation": ["transit lent", "difficultés à aller à la selle"],
+  "ballonnements": ["gaz intestinaux", "ventre gonflé", "flatulences"],
+  "concentration": ["attention", "focus", "vigilance"],
+  "vers intestinaux": ["parasites intestinaux", "oxyures"]
 }

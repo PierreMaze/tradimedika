@@ -1,11 +1,12 @@
 // hooks/useSymptomTags.js
 import { useState } from "react";
-import { normalizeSymptom } from "../utils/normalizeSymptom";
+import { normalizeSymptom, normalizeForMatching } from "../utils/normalizeSymptom";
 
 /**
  * Hook personnalisé pour gérer la sélection de symptômes
  * - Limite max: 5 symptômes
- * - Anti-doublon avec normalisation complète (trim + lowercase + accents + tirets)
+ * - Anti-doublon flexible (avec/sans accents)
+ * - Stockage avec accents pour affichage correct
  * - Ajout/suppression avec validation
  *
  * @returns {Object} { selectedSymptoms, addSymptom, removeSymptom, isAtLimit }
@@ -15,19 +16,26 @@ export function useSymptomTags() {
 
   /**
    * Ajoute un symptôme à la liste avec validation
+   * - Stocke avec accents pour affichage correct
+   * - Détection de doublons insensible aux accents
    * @param {string} symptom - Symptôme à ajouter
    */
   const addSymptom = (symptom) => {
-    const normalized = normalizeSymptom(symptom.trim());
+    const normalizedDisplay = normalizeSymptom(symptom.trim()); // Avec accents
+    const normalizedMatching = normalizeForMatching(symptom.trim()); // Sans accents
 
     // Limite max de 5 symptômes
     if (selectedSymptoms.length >= 5) {
       return;
     }
 
-    // Vérification anti-doublon
-    if (!selectedSymptoms.includes(normalized)) {
-      setSelectedSymptoms([...selectedSymptoms, normalized]);
+    // Vérification anti-doublon (insensible aux accents)
+    const isDuplicate = selectedSymptoms.some(
+      (s) => normalizeForMatching(s) === normalizedMatching
+    );
+
+    if (!isDuplicate) {
+      setSelectedSymptoms([...selectedSymptoms, normalizedDisplay]);
     }
   };
 

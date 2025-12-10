@@ -10,7 +10,8 @@ src/
 │   └── tag/            # Composants tags et badges (SymptomTag, ListSymptomTag)
 ├── context/            # Contextes React (ThemeContext)
 ├── data/               # Données statiques (db.json, symptomList.json, synonymsSymptomList.json)
-├── hooks/              # Hooks personnalisés (useDarkMode, useLocalStorage, useMediaQuery, useSymptomTags)
-└── layout/             # Layout et navigation (Header, Footer)
-    └── components/     # Composants spécifiques au layout (LogoTradimedika)
+├── hooks/              # Hooks personnalisés (useDarkMode, useLocalStorage, useMediaQuery, useSymptomTags, useSymptomSubmit)
+├── layout/             # Layout et navigation (Header, Footer)
+│   └── components/     # Composants spécifiques au layout (LogoTradimedika)
+└── utils/              # Fonctions utilitaires (normalizeSymptom, remedyMatcher)
 ```

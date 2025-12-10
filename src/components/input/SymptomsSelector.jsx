@@ -6,7 +6,7 @@ import { HiMagnifyingGlass } from "react-icons/hi2";
 import { IoMdWarning } from "react-icons/io";
 import symptomsData from "../../data/symptomList.json";
 import synonymsData from "../../data/synonymsSymptomList.json";
-import { normalizeSymptom } from "../../utils/normalizeSymptom";
+import { normalizeForMatching } from "../../utils/normalizeSymptom";
 
 // Fonction pour capitaliser la première lettre d'un symptôme
 const capitalizeSymptom = (symptom) => {
@@ -18,10 +18,32 @@ const getSynonymGroup = (symptom) => {
   return [symptom, ...(synonymsData[symptom] || [])];
 };
 
+// Fonction pour trouver TOUS les symptômes principaux à partir d'un synonyme
+const findMainSymptomsFromSynonym = (searchTerm) => {
+  const normalized = normalizeForMatching(searchTerm);
+  const matchedSymptoms = [];
+
+  // Parcourir toutes les entrées de synonymsData
+  for (const [mainSymptom, synonyms] of Object.entries(synonymsData)) {
+    // Vérifier si le terme recherché correspond à un synonyme
+    if (
+      synonyms.some((syn) => normalizeForMatching(syn).includes(normalized))
+    ) {
+      matchedSymptoms.push(mainSymptom);
+    }
+  }
+  return matchedSymptoms; // Retourne un array (peut être vide)
+};
+
 // Fonction pour vérifier si un symptôme ou ses synonymes sont déjà sélectionnés
+// Utilise normalizeForMatching pour matching flexible (insensible aux accents)
 const isSymptomOrSynonymSelected = (symptom, selectedSymptoms) => {
   const synonymGroup = getSynonymGroup(symptom);
-  return synonymGroup.some((s) => selectedSymptoms.includes(s));
+  return synonymGroup.some((s) =>
+    selectedSymptoms.some((selected) =>
+      normalizeForMatching(s) === normalizeForMatching(selected)
+    )
+  );
 };
 
 export default function SymptomsSelector({
@@ -55,8 +77,9 @@ export default function SymptomsSelector({
     );
   }, []);
 
-  // Filtrage en temps réel (normalisé, max 10 résultats)
+  // Filtrage en temps réel avec matching flexible (avec/sans accents)
   // Exclut les symptômes déjà sélectionnés ET leurs synonymes
+  // Propose UNIQUEMENT les symptômes principaux (clés de synonymsData), jamais les synonymes
   useEffect(() => {
     if (inputValue.trim() === "") {
       setFilteredSymptoms([]);
@@ -65,15 +88,46 @@ export default function SymptomsSelector({
       return;
     }
 
-    // Normaliser l'input pour la recherche (les données sont déjà normalisées)
-    const normalizedInput = normalizeSymptom(inputValue);
+    // Normaliser l'input pour matching flexible (sans accents)
+    const normalizedInput = normalizeForMatching(inputValue);
 
-    const filtered = symptomsData
-      .filter((symptom) => symptom.includes(normalizedInput))
-      .filter(
-        (symptom) => !isSymptomOrSynonymSelected(symptom, selectedSymptoms),
-      )
-      .slice(0, 10);
+    // 1. Chercher via synonymes (recherche inverse) - PRIORITÉ
+    const mainSymptomsFromSynonym = findMainSymptomsFromSynonym(inputValue);
+
+    // 2. Chercher dans symptomList.json (symptômes principaux uniquement)
+    // Exclure les symptômes qui sont des synonymes (valeurs de synonymsData)
+    const allSynonymValues = Object.values(synonymsData).flat();
+
+    const directMatches = symptomsData.filter((symptom) => {
+      // Ne pas inclure si c'est un synonyme (valeur dans synonymsData)
+      if (allSynonymValues.some(syn => normalizeForMatching(syn) === normalizeForMatching(symptom))) {
+        return false;
+      }
+      // Inclure si le symptom matche l'input
+      return normalizeForMatching(symptom).includes(normalizedInput);
+    });
+
+    // 3. Séparer exact matches et partial matches (seulement pour directMatches)
+    const exactMatches = directMatches.filter(
+      (symptom) => normalizeForMatching(symptom) === normalizedInput
+    );
+    const partialMatches = directMatches.filter(
+      (symptom) => normalizeForMatching(symptom) !== normalizedInput
+    );
+
+    // 4. Combiner dans l'ordre : synonymes → exact → partial
+    // Les synonymes en premier car si l'utilisateur tape "stress", on veut "anxiété" avant tout
+    const combinedResults = [
+      ...mainSymptomsFromSynonym,
+      ...exactMatches,
+      ...partialMatches,
+    ];
+
+    // 5. Dédupliquer et filtrer les symptômes déjà sélectionnés
+    const uniqueResults = [...new Set(combinedResults)];
+    const filtered = uniqueResults
+      .filter((symptom) => !isSymptomOrSynonymSelected(symptom, selectedSymptoms))
+      .slice(0, 10); // Limite de 10 appliquée APRÈS combinaison
 
     setFilteredSymptoms(filtered);
     setIsOpen(filtered.length > 0);

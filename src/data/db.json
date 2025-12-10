@@ -3,1932 +3,556 @@
     "id": 0,
     "name": "Citron",
     "type": "aliment",
-    "category": ["immunité", "digestif", "détox"],
-    "symptoms": ["digestion", "detox", "immunite"],
+    "description": "Fruit riche en vitamine C (53 mg/100g) et antioxydants, le citron est reconnu pour ses propriétés stimulantes de la bile et ses effets sur la glycémie. Bien que ses vertus détox soient largement exagérées, il possède des bienfaits scientifiquement prouvés sur la digestion des graisses.",
+    "symptoms": ["troubles digestifs", "glycémie"],
+    "properties": [
+      { "name": "antioxydant", "score": 7, "category": "digestion" },
+      { "name": "vitamine C", "score": 8, "category": "immunite" }
+    ],
     "uses": [
       {
-        "form": "jus",
-        "dose_ml": 10,
-        "frequency": "1 par jour",
-        "description": "Presser un demi-citron dans de l'eau tiède le matin."
+        "form": ["jus", "dilué"],
+        "dose": { "value": 10, "unit": "ml" },
+        "frequency": { "value": 1, "unit": "jour" },
+        "duration": { "value": null, "unit": "" },
+        "description": "Presser un demi-citron dans de l'eau tiède le matin. Boire lentement avant le petit-déjeuner pour stimuler la digestion."
       }
     ],
-    "contraindications": ["ulcères", "reflux"],
-    "properties": ["antioxydant", "digestif", "antimicrobien"],
-    "description": "Fruit riche en vitamine C favorisant la digestion et l’immunité.",
-    "image": "lemon"
+    "contraindications": [
+      "ulcères gastriques",
+      "reflux gastro-œsophagien",
+      "sensibilité acide",
+      "problèmes dentaires"
+    ],
+    "tips": [
+      "TOUJOURS consommer dilué dans de l'eau",
+      "Utiliser une paille pour protéger l'émail dentaire",
+      "Faire un test de tolérance sur 3 jours",
+      "Le citron ne 'nettoie' pas le foie - c'est un mythe"
+    ],
+    "image": "lemon",
+    "pregnancySafe": true,
+    "childrenAge": null,
+    "allergens": ["agrumes"],
+    "alternatives": [],
+    "verifiedByProfessional": true
   },
   {
     "id": 1,
-    "name": "Ail",
+    "name": "Oignon",
     "type": "aliment",
-    "category": ["antibactérien", "cardio", "immunité"],
-    "symptoms": ["infection", "immunite", "cholesterol"],
+    "description": "Légume contenant des composés soufrés et de la quercétine (antioxydant). Utilisé traditionnellement contre le rhume, bien qu'il n'existe actuellement aucune étude scientifique de qualité validant son efficacité contre la toux et le rhume.",
+    "symptoms": ["rhume", "toux"],
+    "properties": [
+      { "name": "antimicrobien", "score": 7, "category": "désinfectant" },
+      { "name": "atténue", "score": 7, "category": "calment" }
+    ],
     "uses": [
       {
-        "form": "cru",
-        "dose_piece": 1,
-        "frequency": "quotidien",
-        "description": "Consommer 1 gousse d’ail cru par jour."
+        "form": ["infusion", "vapeur"],
+        "dose": { "value": 2, "unit": "oignon(s)" },
+        "frequency": { "value": 1, "unit": "jour" },
+        "duration": { "value": 3, "unit": "jours" },
+        "description": "Couper 2 oignons grossièrement en rondelles, faire bouillir dans l'eau pendant 5 minutes, puis placer le récipient dans la pièce pour respirer les vapeurs.."
       }
     ],
-    "contraindications": ["anticoagulants"],
-    "properties": ["antimicrobien", "fluidifiant", "anti-inflammatoire"],
-    "description": "Aliment puissant réputé pour soutenir l’immunité et la santé cardiovasculaire.",
-    "image": "garlic"
+    "contraindications": [
+      "troubles digestifs",
+      "irritations gastriques",
+      "traitement médical en cours"
+    ],
+    "tips": [
+      "Consulter un médecin si les symptômes persistent",
+      "Éviter la consommation crue excessive qui peut irriter la gorge",
+      "Efficacité non prouvée scientifiquement",
+      "Ne remplace pas un traitement médical"
+    ],
+    "image": "onion",
+    "pregnancySafe": true,
+    "childrenAge": null,
+    "allergens": [],
+    "alternatives": [],
+    "verifiedByProfessional": false
   },
   {
     "id": 2,
-    "name": "Oignon",
-    "type": "aliment",
-    "category": ["immunité", "digestif", "circulation"],
-    "symptoms": ["digestion", "infection", "circulation"],
+    "name": "Clou de girofle",
+    "type": "épice",
+    "description": "Épice contenant de l'eugénol, molécule aux propriétés anesthésiques et antiseptiques reconnues. Utilisé depuis des siècles pour soulager temporairement les douleurs dentaires. IMPORTANT : Ne remplace PAS une consultation chez le dentiste.",
+    "symptoms": ["mal de dents", "rage de dents"],
+    "properties": [
+      { "name": "anesthesique", "score": 8, "category": "calment" },
+      { "name": "antiseptique", "score": 7, "category": "désinfectant" }
+    ],
     "uses": [
       {
-        "form": "consommation",
-        "dose_g": 50,
-        "frequency": "quotidien",
-        "description": "Consommer cru ou cuit dans les plats."
+        "form": ["application directe", "huile essentielle"],
+        "dose": { "value": 1, "unit": "clou" },
+        "frequency": { "value": 2, "unit": "fois par jour" },
+        "duration": { "value": 2, "unit": "jours maximum" },
+        "description": "Écraser légèrement un clou de girofle entre les doigts et le placer au contact de la dent douloureuse. OU diluer 1 goutte d'huile essentielle dans de l'huile d'olive et appliquer avec un coton-tige. Maximum 2-3 fois par jour. CONSULTER RAPIDEMENT UN DENTISTE."
       }
     ],
-    "contraindications": [],
-    "properties": ["prébiotique", "antioxydant", "antimicrobien"],
-    "description": "Légume riche en composés soufrés stimulant la flore intestinale.",
-    "image": "onion"
+    "contraindications": [
+      "grossesse",
+      "allaitement",
+      "enfants de moins de 12 ans",
+      "antécédents d'épilepsie",
+      "ulcères",
+      "troubles de la coagulation"
+    ],
+    "tips": [
+      "Ne JAMAIS appliquer l'huile essentielle pure (risque de brûlure)",
+      "Toujours diluer dans une huile végétale",
+      "Consulter un dentiste rapidement - ne pas retarder les soins",
+      "Ne pas dépasser 2 jours d'utilisation",
+      "Arrêter en cas d'irritation"
+    ],
+    "image": "clove",
+    "pregnancySafe": false,
+    "childrenAge": 12,
+    "allergens": [],
+    "alternatives": [],
+    "verifiedByProfessional": true
   },
   {
     "id": 3,
-    "name": "Carotte",
+    "name": "Miel",
     "type": "aliment",
-    "category": ["vision", "peau", "nutrition"],
-    "symptoms": ["peau", "vision", "immunite"],
+    "description": "Substance naturelle aux propriétés antibactériennes, antifongiques et antiseptiques reconnues. Études scientifiques confirmant son efficacité contre la toux, parfois aussi efficace que certains sirops. ATTENTION CRITIQUE : INTERDIT aux nourrissons de moins d'1 an (risque de botulisme infantile).",
+    "symptoms": ["toux", "mal de gorge"],
+    "properties": [
+      { "name": "atténue", "score": 8, "category": "calment" },
+      { "name": "antiseptique", "score": 9, "category": "désinfectant" }
+    ],
     "uses": [
       {
-        "form": "consommation",
-        "dose_g": 100,
-        "frequency": "quotidien",
-        "description": "Consommer crue, cuite ou en jus."
+        "form": ["pur", "dilué", "infusion"],
+        "dose": { "value": 5, "unit": "ml (1 cuillère à café)" },
+        "frequency": { "value": 2, "unit": "fois par jour" },
+        "duration": { "value": 7, "unit": "jours" },
+        "description": "Consommer 1 cuillère à café de miel pur ou dilué dans une boisson tiède (thé, tisane de thym). Laisser fondre lentement dans la bouche pour apaiser la gorge. Pour enfants : adapter la dose selon l'âge."
       }
     ],
-    "contraindications": [],
-    "properties": ["antioxydant", "beta-carotene"],
-    "description": "Légume riche en provitamine A bénéfique pour la peau et la vue.",
-    "image": "carrot"
+    "contraindications": [
+      "nourrissons de moins d'1 an (RISQUE DE BOTULISME)",
+      "diabète",
+      "allergie au pollen"
+    ],
+    "tips": [
+      "JAMAIS avant 1 an - risque mortel de botulisme infantile",
+      "Privilégier le miel de thym ou d'eucalyptus pour la toux",
+      "Ne pas chauffer au-delà de 40°C pour préserver les propriétés",
+      "Choisir du miel brut et local si possible"
+    ],
+    "image": "honey",
+    "pregnancySafe": true,
+    "childrenAge": 1,
+    "allergens": ["pollen"],
+    "alternatives": [],
+    "verifiedByProfessional": true
   },
   {
     "id": 4,
-    "name": "Thym",
-    "type": "herbe",
-    "category": ["respiration", "antiseptique", "digestif"],
-    "symptoms": ["toux", "rhume", "digestion"],
+    "name": "Ail",
+    "type": "aliment",
+    "description": "Aliment riche en allicine aux propriétés antibactériennes, antivirales et antifongiques. Renforce le système immunitaire et possède une activité anticoagulante légère. L'usage contre les vers intestinaux repose sur la tradition sans études cliniques validées.",
+    "symptoms": ["troubles digestifs", "vers intestinaux"],
+    "properties": [
+      { "name": "antimicrobien", "score": 8, "category": "digestion" },
+      { "name": "immunostimulant", "score": 7, "category": "immunité" }
+    ],
     "uses": [
       {
-        "form": "infusion",
-        "dose_g": 2,
-        "duration_min": 10,
-        "frequency": "2 par jour",
-        "description": "Infuser 2g de thym sec pendant 10 minutes."
+        "form": ["cru", "hache"],
+        "dose": { "value": 1, "unit": "gousse" },
+        "frequency": { "value": 1, "unit": "fois par jour" },
+        "duration": { "value": null, "unit": "au besoin" },
+        "description": "Consommer 1 à 2 gousses d'ail cru par jour, finement hachées ou écrasées pour libérer l'allicine. Intégrer dans les plats ou salades. L'ail cuit perd une partie de ses principes actifs. Attendre 10 minutes après écrasement avant consommation."
       }
     ],
-    "contraindications": ["grossesse"],
-    "properties": ["expectorant", "antiseptique"],
-    "description": "Herbe reconnue pour soulager la toux et améliorer la digestion.",
-    "image": "thyme"
+    "contraindications": [
+      "anticoagulants",
+      "intervention chirurgicale prévue (arrêt 2 semaines avant)",
+      "troubles de la coagulation",
+      "Si excès risque de brûlures gastriques",
+      "reflux"
+    ],
+    "tips": [
+      "Toujours consommer cru pour conserver les propriétés",
+      "Écraser ou hacher et attendre 10 min avant de manger",
+      "Ne pas en abuser (risque de brûlures gastriques)",
+      "Arrêter 1 semaine avant toute chirurgie",
+      "Peut causer une mauvaise haleine"
+    ],
+    "image": "garlic",
+    "pregnancySafe": false,
+    "childrenAge": null,
+    "allergens": [],
+    "alternatives": [],
+    "verifiedByProfessional": true
   },
   {
     "id": 5,
-    "name": "Romarin",
-    "type": "herbe",
-    "category": ["énergie", "digestif", "circulation"],
-    "symptoms": ["fatigue", "digestion", "foie"],
+    "name": "Riz blanc",
+    "type": "aliment",
+    "description": "Aliment sans résidu, pauvre en fibres et très digeste. L'amidon qu'il contient aide à épaissir les selles. Bien qu'il ne traite pas directement la diarrhée, il permet au système digestif de se reposer et facilite la récupération.",
+    "symptoms": ["diarrhée"],
+    "properties": [
+      { "name": "digestion facile", "score": 9, "category": "digestion" }
+    ],
     "uses": [
       {
-        "form": "infusion",
-        "dose_g": 3,
-        "duration_min": 10,
-        "frequency": "1 par jour",
-        "description": "Infuser les feuilles dans de l’eau chaude."
+        "form": ["cuit", "eau de riz"],
+        "dose": { "value": 100, "unit": "g (cuit)" },
+        "frequency": { "value": 3, "unit": "fois par jour" },
+        "duration": { "value": 2, "unit": "jours" },
+        "description": "Bien rincer le riz pour enlever les pesticides. Cuire à l'eau et consommer nature ou légèrement salé. L'eau de cuisson du riz peut également être bue (riche en amidon). Éviter d'ajouter beurre, huile ou épices."
       }
     ],
-    "contraindications": ["hypertension", "grossesse"],
-    "properties": ["stimulant", "cholérétique"],
-    "description": "Plante tonique favorisant le foie et la digestion.",
-    "image": "rosemary"
+    "contraindications": ["constipation chronique", "intolérance au riz"],
+    "tips": [
+      "TOUJOURS bien rincer le riz avant cuisson",
+      "Éviter les aliments gras, sucrés ou épicés en même temps",
+      "L'eau de riz est également efficace",
+      "Ne dispense pas de consulter si la diarrhée persiste",
+      "Penser à bien s'hydrater en parallèle"
+    ],
+    "image": "whiterice",
+    "pregnancySafe": true,
+    "childrenAge": null,
+    "allergens": [],
+    "alternatives": [6],
+    "verifiedByProfessional": true
   },
   {
     "id": 6,
-    "name": "Huile d’olive",
-    "type": "huile",
-    "category": ["cardio", "antioxydant"],
-    "symptoms": ["inflammation", "cholesterol"],
+    "name": "Banane",
+    "type": "aliment",
+    "description": "Fruit riche en pectine (fibre soluble) et potassium. Effet sur le transit dépend de la maturité : banane verte = constipante (riche en amidon résistant), banane jaune à taches brunes = laxative. Efficace contre la diarrhée grâce à la pectine et l'amidon.",
+    "symptoms": ["diarrhée", "constipation", "crampes musculaires"],
+    "properties": [
+      { "name": "potassium", "score": 9, "category": "digestion" }
+    ],
     "uses": [
       {
-        "form": "consommation",
-        "dose_ml": 10,
-        "frequency": "quotidien",
-        "description": "Utiliser en assaisonnement ou cuisson douce."
+        "form": ["cru", "ecrasee"],
+        "dose": { "value": 1, "unit": "banane" },
+        "frequency": { "value": 3, "unit": "heures (espacer)" },
+        "duration": { "value": 2, "unit": "jours" },
+        "description": "Pour la diarrhée : choisir une banane jaune à taches brunes (bon compromis pectine/sucre) et pour la constipation : choisir une banane jaune à taches brunes (bien mûr). Consommer entière ou écrasée/en compote. Espacer de 3-4h entre chaque banane pour laisser l'intestin se reposer."
       }
     ],
-    "contraindications": [],
-    "properties": ["polyphenols", "lipides_sains"],
-    "description": "Huile bénéfique pour le cœur et l’inflammation.",
-    "image": "oliveoil"
+    "contraindications": [
+      "allergie aux pollens",
+      "diabète (surveiller)",
+      "syndrome de l'intestin irritable (selon tolérance)"
+    ],
+    "tips": [
+      "Banane verte = constipe, banane mûre = régule",
+      "Espacer de 3-4h entre chaque prise",
+      "Riche en potassium : bon pour les crampes musculaires",
+      "Effet prébiotique bénéfique pour la flore intestinale",
+      "Peut causer des ballonnements chez certaines personnes"
+    ],
+    "image": "banana",
+    "pregnancySafe": true,
+    "childrenAge": null,
+    "allergens": ["pollen"],
+    "alternatives": [],
+    "verifiedByProfessional": true
   },
   {
     "id": 7,
-    "name": "Beurre",
-    "type": "aliment",
-    "category": ["énergie", "peau"],
-    "symptoms": ["fatigue"],
+    "name": "Gingembre frais",
+    "type": "épice",
+    "description": "Racine contenant des gingérols et shogaols, reconnus pour leurs propriétés anti-nausée par action directe sur l'estomac. Approuvé par la coopération scientifique européenne en phytothérapie. Effet stimulant et anti-inflammatoire puissant.",
+    "symptoms": ["nausée", "digestion", "fatigue"],
+    "properties": [
+      { "name": "anti nausée", "score": 9, "category": "calment" },
+      { "name": "anti inflammatoire", "score": 8, "category": "digestion" },
+      { "name": "stimulant", "score": 7, "category": "energie" }
+    ],
     "uses": [
       {
-        "form": "consommation",
-        "dose_g": 10,
-        "frequency": "quotidien",
-        "description": "Consommer cru ou en cuisson douce."
+        "form": ["infusion", "rape", "frais"],
+        "dose": { "value": 5, "unit": "g (3-4 rondelles)" },
+        "frequency": { "value": 2, "unit": "fois par jour" },
+        "duration": { "value": 7, "unit": "jours" },
+        "description": "Couper 3-4 rondelles de racine fraîche, faire bouillir dans l'eau pendant 10 minutes, puis boire lentement. Peut également être râpé dans des plats. Pour les nausées : commencer par de petites doses."
       }
     ],
-    "contraindications": ["cholestérol"],
-    "properties": ["vitamineA", "lipides"],
-    "description": "Produit laitier riche en vitamines liposolubles.",
-    "image": "butter"
+    "contraindications": [
+      "calculs biliaires",
+      "obstruction biliaire",
+      "ulcères",
+      "anticoagulants",
+      "diabète (surveiller)",
+      "hypertension (surveiller)",
+      "grossesse excessive"
+    ],
+    "tips": [
+      "CONTRE-INDICATION MAJEURE : calculs biliaires",
+      "Augmente la production de bile (effet cholérétique)",
+      "Peut interagir avec anticoagulants et médicaments diabète",
+      "Efficacité scientifiquement prouvée",
+      "Gingembre frais > poudre pour les propriétés"
+    ],
+    "image": "ginger",
+    "pregnancySafe": null,
+    "childrenAge": 6,
+    "allergens": [],
+    "alternatives": [],
+    "verifiedByProfessional": true
   },
   {
     "id": 8,
-    "name": "Lait",
-    "type": "aliment",
-    "category": ["os", "nutrition"],
-    "symptoms": ["fatigue", "nutrition"],
+    "name": "Camomille",
+    "type": "plante",
+    "description": "Plante contenant de l'apigénine, un antioxydant agissant sur le cerveau pour combattre l'insomnie. Études validant les effets sur le sommeil et la dépression post-partum. Propriétés digestives reconnues. ATTENTION : Risque de contractions utérines pendant la grossesse.",
+    "symptoms": [
+      "insomnie",
+      "stress",
+      "anxiété",
+      "digestion",
+      "ballonnements",
+      "spasmophilie"
+    ],
+    "properties": [
+      { "name": "antispasmodique", "score": 8, "category": "calment" },
+      { "name": "améliore la digestion", "score": 7, "category": "digestion" },
+      { "name": "anti inflammatoire", "score": 6, "category": "digestion" }
+    ],
     "uses": [
       {
-        "form": "boisson",
-        "dose_ml": 200,
-        "frequency": "1 par jour",
-        "description": "Consommer nature ou avec repas."
+        "form": ["infusion"],
+        "dose": { "value": 2, "unit": "g (1 sachet)" },
+        "frequency": { "value": 2, "unit": "fois par jour" },
+        "duration": { "value": 14, "unit": "jours" },
+        "description": "Infuser 2g de fleurs séchées dans de l'eau chaude pendant 10 minutes. Boire bien chaud, de préférence le soir après le repas pour favoriser le sommeil et la digestion. Peut être consommée quotidiennement."
       }
     ],
-    "contraindications": ["intolérance_lactose"],
-    "properties": ["calcium", "proteines"],
-    "description": "Source de protéines et de calcium.",
-    "image": "milk"
+    "contraindications": [
+      "grossesse (1er et 2e trimestre - risque de contractions)",
+      "allaitement",
+      "allergie aux astéracées",
+      "anticoagulants",
+      "intervention chirurgicale (arrêt 2 semaines avant)"
+    ],
+    "tips": [
+      "CONTRE-INDIQUÉE pendant la grossesse (risque de contractions)",
+      "Peut être utilisée pour déclencher un accouchement tardif (plus de 41 semaines) sous avis médical",
+      "Boire le soir pour meilleur effet sur le sommeil",
+      "Études validant les effets anti-dépression post-partum"
+    ],
+    "image": "chamomile",
+    "pregnancySafe": false,
+    "childrenAge": 12,
+    "allergens": ["asteracees"],
+    "alternatives": [10],
+    "verifiedByProfessional": true
   },
   {
     "id": 9,
-    "name": "Vinaigre de cidre",
-    "type": "vinaigre",
-    "category": ["glycémie", "détox", "digestif"],
-    "symptoms": ["digestion", "diabete"],
+    "name": "Menthe poivrée",
+    "type": "plante",
+    "description": "Plante contenant du menthol aux propriétés antispasmodiques et digestives. Étude de 1996 montrant une efficacité équivalente au paracétamol contre les céphalées de tension. ATTENTION CRITIQUE : CONTRE-INDIQUÉE en cas de reflux gastro-œsophagien (aggrave les symptômes).",
+    "symptoms": ["digestion", "ballonnements", "nausée", "mal de tête"],
+    "properties": [
+      { "name": "antispasmodique", "score": 9, "category": "calment" },
+      { "name": "améliore la digestion", "score": 8, "category": "digestion" },
+      { "name": "anti-douleur", "score": 7, "category": "calment" }
+    ],
     "uses": [
       {
-        "form": "dilué",
-        "dose_ml": 10,
-        "frequency": "1 par jour",
-        "description": "Diluer 1 cuillère dans un verre d’eau."
+        "form": ["infusion"],
+        "dose": { "value": 2, "unit": "g" },
+        "frequency": { "value": 3, "unit": "fois par jour" },
+        "duration": { "value": 7, "unit": "jours" },
+        "description": "Infuser 2g de feuilles séchées dans de l'eau chaude pendant 10 minutes. Boire après les repas pour faciliter la digestion. Pour les maux de tête : application locale d'huile essentielle diluée sur les tempes (adultes uniquement)."
       }
     ],
-    "contraindications": ["ulcères"],
-    "properties": ["acidifiant", "microbiote"],
-    "description": "Vinaigre stimulant la digestion et l’équilibre glycémique.",
-    "image": "applevinegar"
+    "contraindications": [
+      "reflux gastro-œsophagien (CRITIQUE - aggrave les symptômes)",
+      "hernie hiatale",
+      "enfants de moins de 6 ans",
+      "grossesse",
+      "calculs biliaires"
+    ],
+    "tips": [
+      "CONTRE-INDICATION MAJEURE : reflux et hernie hiatale",
+      "Peut aggraver le reflux gastro-œsophagien (RGO) en relaxant le sphincter œsophagien",
+      "Efficacité prouvée sur les céphalées de tension",
+      "Ne pas utiliser huile essentielle chez enfants <6 ans",
+      "Excellente pour syndrome intestin irritable (sauf RGO)"
+    ],
+    "image": "peppermint",
+    "pregnancySafe": false,
+    "childrenAge": 6,
+    "allergens": [],
+    "alternatives": [24],
+    "verifiedByProfessional": true
   },
   {
     "id": 10,
-    "name": "Mélisse",
-    "type": "plante",
-    "category": ["calmante", "digestif"],
-    "symptoms": ["stress", "insomnie", "digestion"],
+    "name": "Café noir",
+    "type": "boisson",
+    "description": "Boisson contenant de la caféine (stimulant du système nerveux central) qui bloque les récepteurs d'adénosine. Améliore vigilance, concentration et performances cognitives. Double rôle sur les maux de tête : peut les soulager ET les déclencher. Risque d'anxiété à haute dose.",
+    "symptoms": ["fatigue", "mal de tête", "trouble de la concentration"],
+    "properties": [
+      { "name": "stimulant", "score": 9, "category": "energie" },
+      { "name": "analgesique", "score": 6, "category": "calment" }
+    ],
     "uses": [
       {
-        "form": "infusion",
-        "dose_g": 2,
-        "duration_min": 10,
-        "frequency": "2 par jour",
-        "description": "Infuser 2g de feuilles dans l’eau chaude."
+        "form": ["boisson"],
+        "dose": { "value": 200, "unit": "ml (1 tasse)" },
+        "frequency": { "value": 3, "unit": "tasses maximum par jour" },
+        "duration": { "value": null, "unit": "" },
+        "description": "Consommer 1 à 3 tasses de café noir par jour (200-400mg de caféine) pour stimuler la concentration et réduire la fatigue. Éviter après 16h pour préserver le sommeil. Commencer par de petites doses si non habitué."
       }
     ],
-    "contraindications": [],
-    "properties": ["calmante", "antispasmodique"],
-    "description": "Plante relaxante utilisée pour le stress et la digestion.",
-    "image": "lemonbalm"
+    "contraindications": [
+      "anxiété",
+      "insomnie",
+      "hypertension",
+      "grossesse (limiter)",
+      "troubles cardiovasculaires",
+      "ulcères",
+      "reflux"
+    ],
+    "tips": [
+      "Limite recommandée : 2-4 tasses/jour (200-400mg caféine)",
+      "Plus de 5 tasses/jour : risque anxiété et insomnie",
+      "Double effet sur migraines : peut soulager OU déclencher",
+      "Éviter après 16h pour ne pas perturber le sommeil",
+      "Consommation excessive = fatigue paradoxale",
+      "Risque de dépendance et symptômes de sevrage"
+    ],
+    "image": "coffee",
+    "pregnancySafe": null,
+    "childrenAge": 12,
+    "allergens": [],
+    "alternatives": [],
+    "verifiedByProfessional": true
   },
   {
     "id": 11,
-    "name": "Vinaigre balsamique",
-    "type": "vinaigre",
-    "category": ["digestif", "antioxydant"],
-    "symptoms": ["digestion", "cholesterol"],
+    "name": "Sureau noir",
+    "type": "plante",
+    "description": "Plante riche en antioxydants et anthocyanes. Études montrant une réduction de 3 jours des symptômes de grippe. Bloque la réplication virale. CONTRE-INDICATION MAJEURE : maladies auto-immunes (stimule le système immunitaire).",
+    "symptoms": ["rhume", "grippe"],
+    "properties": [
+      { "name": "immunostimulant", "score": 8, "category": "immunité" }
+    ],
     "uses": [
       {
-        "form": "assaisonnement",
-        "dose_ml": 10,
-        "frequency": "quotidien",
-        "description": "Ajouter sur légumes, salades ou viandes."
+        "form": ["sirop"],
+        "dose": { "value": 10, "unit": "ml (1-2 cuillères à café)" },
+        "frequency": { "value": 1, "unit": "fois par jour" },
+        "duration": { "value": 7, "unit": "jours" },
+        "description": "Adultes : 1 à 2 cuillères à café de sirop de sureau par jour dès les premiers signes de rhume. Enfants +3 ans : dose pédiatrique selon recommandations. Peut être pris en prévention pendant la saison hivernale."
       }
     ],
-    "contraindications": ["reflux", "ulcères"],
-    "properties": ["antioxydant", "digestif"],
-    "description": "Vinaigre sucré issu du raisin stimulant la digestion et la santé cardiovasculaire.",
-    "image": "balsamicvinegar"
+    "contraindications": [
+      "maladies auto-immunes (CRITIQUE)",
+      "grossesse",
+      "allaitement",
+      "enfants de moins de 2 ans",
+      "traitement immunosuppresseur"
+    ],
+    "tips": [
+      "CONTRE-INDICATION MAJEURE : maladies auto-immunes",
+      "Stimule fortement le système immunitaire",
+      "Efficacité prouvée : réduit symptômes grippe de 3 jours",
+      "Consulter professionnel santé avant usage si traitement en cours",
+      "Ne pas utiliser baies crues (toxiques)"
+    ],
+    "image": "elderberry",
+    "pregnancySafe": false,
+    "childrenAge": 2,
+    "allergens": [],
+    "alternatives": [],
+    "verifiedByProfessional": true
   },
   {
     "id": 12,
-    "name": "Vinaigre de vin",
-    "type": "vinaigre",
-    "category": ["digestif", "détox"],
-    "symptoms": ["digestion"],
+    "name": "Ananas",
+    "type": "aliment",
+    "description": "Fruit contenant de la bromélaïne, enzyme aux propriétés anti-inflammatoires et mucolytiques. Action décongestionnante sur les voies respiratoires. Usage traditionnel au Brésil, Mexique et Venezuela. CONTRE-INDICATION : anticoagulants (effet fluidifiant sanguin).",
+    "symptoms": ["rhume", "inflammation"],
+    "properties": [
+      { "name": "anti inflammatoire", "score": 8, "category": "calment" }
+    ],
     "uses": [
       {
-        "form": "assaisonnement",
-        "dose_ml": 5,
-        "frequency": "quotidien",
-        "description": "Utiliser sur crudités et salades."
+        "form": ["jus", "frais", "morceaux"],
+        "dose": { "value": 150, "unit": "ml ou 100g" },
+        "frequency": { "value": 1, "unit": "fois par jour" },
+        "duration": { "value": 5, "unit": "jours" },
+        "description": "Consommer 1 petit verre de jus d'ananas frais par jour ou 100g de fruit frais. La bromélaïne est plus concentrée dans le cœur de l'ananas. Consommer frais pour préserver les enzymes (la chaleur détruit la bromélaïne)."
       }
     ],
-    "contraindications": ["ulcères"],
-    "properties": ["acide organique", "antimicrobien"],
-    "description": "Vinaigre traditionnel facilitant la digestion et la flore intestinale.",
-    "image": "winevinegar"
+    "contraindications": [
+      "anticoagulants",
+      "intervention chirurgicale prévue (arrêt 1 semaines avant)",
+      "hémophilie",
+      "allergie (pollen olive, venin abeille)",
+      "ulcères",
+      "reflux"
+    ],
+    "tips": [
+      "CONTRE-INDICATION : anticoagulants et chirurgie",
+      "Bromélaïne concentrée dans le cœur du fruit",
+      "Toujours consommer frais (chaleur détruit enzyme)",
+      "Ne pas abuser : aggrave reflux et brûlures estomac",
+      "Risque allergie croisée : pollen olive, venin abeille",
+      "Arrêter avant toute intervention chirurgicale"
+    ],
+    "image": "pineapple",
+    "pregnancySafe": true,
+    "childrenAge": 6,
+    "allergens": ["pollen olive", "venin abeille"],
+    "alternatives": [],
+    "verifiedByProfessional": true
   },
   {
     "id": 13,
-    "name": "Vinaigre rouge",
-    "type": "vinaigre",
-    "category": ["cardio", "antioxydant"],
-    "symptoms": ["circulation", "digestion"],
-    "uses": [
-      {
-        "form": "assaisonnement",
-        "dose_ml": 10,
-        "frequency": "occasionnel",
-        "description": "Utiliser dans des marinades ou salades."
-      }
-    ],
-    "contraindications": ["reflux"],
-    "properties": ["polyphenols", "digestif"],
-    "description": "Vinaigre issu du vin rouge, riche en polyphénols protecteurs.",
-    "image": "redvinegar"
-  },
-  {
-    "id": 14,
-    "name": "Miel",
+    "name": "Pruneaux",
     "type": "aliment",
-    "category": ["antibactérien", "digestion", "anti-inflammatoire"],
-    "symptoms": ["toux", "infection", "gorge"],
-    "uses": [
-      {
-        "form": "consommation",
-        "dose_g": 10,
-        "frequency": "1-2 par jour",
-        "description": "Consommer pur ou dilué dans une boisson tiède."
-      }
-    ],
-    "contraindications": ["diabète", "enfants_bebe"],
-    "properties": ["antimicrobien", "cicatrisation", "prébiotique"],
-    "description": "Substance naturelle nourricière, apaisante pour la gorge et antibactérienne.",
-    "image": "honey"
-  },
-  {
-    "id": 15,
-    "name": "Persil",
-    "type": "herbe",
-    "category": ["détox", "circulation", "nutrition"],
-    "symptoms": ["retention eau", "digestion"],
-    "uses": [
-      {
-        "form": "feuilles",
-        "dose_g": 5,
-        "frequency": "quotidien",
-        "description": "Ajouter cru sur plats ou salades."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["diurétique", "vitamineC", "antioxydant"],
-    "description": "Herbe riche en micronutriments soutenant reins et digestion.",
-    "image": "parsley"
-  },
-  {
-    "id": 16,
-    "name": "Gingembre",
-    "type": "épice",
-    "category": ["anti-nausée", "digestif", "énergie"],
-    "symptoms": ["nausee", "fatigue", "digestion"],
-    "uses": [
-      {
-        "form": "infusion",
-        "dose_g": 5,
-        "duration_min": 10,
-        "frequency": "1-2 par jour",
-        "description": "Infuser racine fraîche ou séchée dans l'eau chaude."
-      }
-    ],
-    "contraindications": ["calculs_biliaires", "grossesse_excessive"],
-    "properties": ["stimulant", "anti-inflammatoire", "antioxydant"],
-    "description": "Racine tonique puissante contre les nausées et la fatigue.",
-    "image": "ginger"
-  },
-  {
-    "id": 17,
-    "name": "Poivre noir",
-    "type": "épice",
-    "category": ["digestif", "anti-inflammatoire"],
-    "symptoms": ["digestion"],
-    "uses": [
-      {
-        "form": "épice",
-        "dose_g": 1,
-        "frequency": "quotidien",
-        "description": "Assaisonner les plats en petites quantités."
-      }
-    ],
-    "contraindications": ["ulcères"],
-    "properties": ["piperine", "antioxydant", "thermogenese"],
-    "description": "Épice stimulant la digestion et l’absorption nutritionnelle.",
-    "image": "blackpepper"
-  },
-  {
-    "id": 18,
-    "name": "Sel marin",
-    "type": "aliment",
-    "category": ["minéraux", "circulation"],
-    "symptoms": ["deshydratation"],
-    "uses": [
-      {
-        "form": "assaisonnement",
-        "dose_g": 2,
-        "frequency": "quotidien",
-        "description": "Utiliser avec modération sur les plats."
-      }
-    ],
-    "contraindications": ["hypertension"],
-    "properties": ["électrolytes", "minéralisation"],
-    "description": "Sel naturel contenant des oligo-éléments essentiels.",
-    "image": "seasalt"
-  },
-  {
-    "id": 19,
-    "name": "Crème",
-    "type": "aliment",
-    "category": ["nutrition", "énergie"],
-    "symptoms": ["fatigue"],
-    "uses": [
-      {
-        "form": "consommation",
-        "dose_g": 30,
-        "frequency": "occasionnel",
-        "description": "Utiliser pour sauces, pâtisseries ou plats."
-      }
-    ],
-    "contraindications": ["cholestérol", "intolérance_lactose"],
-    "properties": ["lipides", "vitamineA"],
-    "description": "Produit laitier riche favorisant l'apport énergétique.",
-    "image": "cream"
-  },
-  {
-    "id": 20,
-    "name": "Ail des ours",
-    "type": "herbe",
-    "category": ["immunité", "digestif"],
-    "symptoms": ["infection", "digestion"],
-    "uses": [
-      {
-        "form": "feuilles",
-        "dose_g": 10,
-        "frequency": "quotidien",
-        "description": "Consommer cru dans salades, pestos ou sauces."
-      }
-    ],
-    "contraindications": ["anticoagulants"],
-    "properties": ["antimicrobien", "digestif"],
-    "description": "Plante sauvage riche en composés soufrés, bénéfique pour le tube digestif.",
-    "image": "wildgarlic"
-  },
-  {
-    "id": 21,
-    "name": "Romarin frais",
-    "type": "herbe",
-    "category": ["circulation", "digestif", "énergie"],
-    "symptoms": ["fatigue", "digestion"],
-    "uses": [
-      {
-        "form": "infusion",
-        "dose_g": 3,
-        "duration_min": 10,
-        "frequency": "1-2 par jour",
-        "description": "Infuser dans de l'eau chaude."
-      }
-    ],
-    "contraindications": ["grossesse", "hypertension"],
-    "properties": ["stimulant", "cholérétique"],
-    "description": "Herbe aromatique tonique digestive et hépatique.",
-    "image": "freshrosemary"
-  },
-  {
-    "id": 22,
-    "name": "Laurier",
-    "type": "herbe",
-    "category": ["digestif", "respiration"],
-    "symptoms": ["digestion", "rhume"],
-    "uses": [
-      {
-        "form": "infusion",
-        "dose_g": 2,
-        "duration_min": 10,
-        "frequency": "1 par jour",
-        "description": "Infuser 1 ou 2 feuilles."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["antimicrobien", "digestif"],
-    "description": "Feuille aromatique calmant les spasmes digestifs et soutenant la respiration.",
-    "image": "bayleaf"
-  },
-  {
-    "id": 23,
-    "name": "Basilic",
-    "type": "herbe",
-    "category": ["calmante", "digestif"],
-    "symptoms": ["digestion", "stress"],
-    "uses": [
-      {
-        "form": "feuilles",
-        "dose_g": 5,
-        "frequency": "quotidien",
-        "description": "Ajouter cru aux plats."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["relaxant", "antispasmodique"],
-    "description": "Herbe aromatique apaisante aidant la digestion et l’anxiété.",
-    "image": "basil"
-  },
-  {
-    "id": 24,
-    "name": "Menthe",
-    "type": "herbe",
-    "category": ["digestif", "rafraîchissant"],
-    "symptoms": ["digestion", "nausee"],
-    "uses": [
-      {
-        "form": "infusion",
-        "dose_g": 2,
-        "duration_min": 10,
-        "frequency": "1-3 par jour",
-        "description": "Infuser feuilles fraîches ou séchées."
-      }
-    ],
-    "contraindications": ["reflux"],
-    "properties": ["antispasmodique", "digestif"],
-    "description": "Herbe rafraîchissante soulageant nausées et ballonnements.",
-    "image": "mint"
-  },
-  {
-    "id": 25,
-    "name": "Vinaigre de xérès",
-    "type": "vinaigre",
-    "category": ["digestif", "cardio"],
-    "symptoms": ["digestion"],
-    "uses": [
-      {
-        "form": "assaisonnement",
-        "dose_ml": 10,
-        "frequency": "occasionnel",
-        "description": "Utiliser pour sauces, poissons et légumes."
-      }
-    ],
-    "contraindications": ["ulcères"],
-    "properties": ["polyphenols", "digestif"],
-    "description": "Vinaigre complexe issu du vin de xérès, apprécié pour la digestion.",
-    "image": "sherryvinegar"
-  },
-  {
-    "id": 26,
-    "name": "Vinaigre balsamique blanc",
-    "type": "vinaigre",
-    "category": ["digestif", "antioxydant"],
-    "symptoms": ["digestion"],
-    "uses": [
-      {
-        "form": "assaisonnement",
-        "dose_ml": 10,
-        "frequency": "quotidien",
-        "description": "Ajouter sur salades, crudités et légumes crus."
-      }
-    ],
-    "contraindications": ["ulcères"],
-    "properties": ["acide organique", "digestif"],
-    "description": "Vinaigre doux et fruité, plus léger que le balsamique classique.",
-    "image": "whitebalsamicvinegar"
-  },
-  {
-    "id": 27,
-    "name": "Vinaigre de riz",
-    "type": "vinaigre",
-    "category": ["digestion", "détox"],
-    "symptoms": ["digestion", "glycemie"],
-    "uses": [
-      {
-        "form": "assaisonnement",
-        "dose_ml": 5,
-        "frequency": "quotidien",
-        "description": "Utiliser pour riz, sushis ou salades."
-      }
-    ],
-    "contraindications": ["ulcères"],
-    "properties": ["acide doux", "équilibre intestinal"],
-    "description": "Vinaigre asiatique léger aidant à la digestion et la glycémie.",
-    "image": "ricevinegar"
-  },
-  {
-    "id": 28,
-    "name": "Poivre blanc",
-    "type": "épice",
-    "category": ["digestif"],
-    "symptoms": ["digestion"],
-    "uses": [
-      {
-        "form": "épice",
-        "dose_g": 1,
-        "frequency": "quotidien",
-        "description": "Assaisonner soupes, sauces et plats délicats."
-      }
-    ],
-    "contraindications": ["ulcères"],
-    "properties": ["piperine", "anti-inflammatoire"],
-    "description": "Variété douce de poivre facilitant la digestion.",
-    "image": "whitepepper"
-  },
-  {
-    "id": 29,
-    "name": "Poivre rose",
-    "type": "épice",
-    "category": ["digestif", "antioxydant"],
-    "symptoms": ["digestion"],
-    "uses": [
-      {
-        "form": "épice",
-        "dose_g": 1,
-        "frequency": "occasionnel",
-        "description": "Parsemer sur plats froids ou fromages."
-      }
-    ],
-    "contraindications": ["allergies"],
-    "properties": ["antioxydant", "digestif"],
-    "description": "Baie aromatique douce améliorant la digestion et la circulation.",
-    "image": "pinkpepper"
-  },
-  {
-    "id": 30,
-    "name": "Curcuma",
-    "type": "épice",
-    "category": ["anti-inflammatoire", "antioxydant"],
-    "symptoms": ["douleurs", "digestion", "inflammation"],
-    "uses": [
-      {
-        "form": "poudre",
-        "dose_g": 3,
-        "frequency": "quotidien",
-        "description": "Mélanger dans un lait chaud ou sur les plats."
-      }
-    ],
-    "contraindications": ["calculs_biliaires"],
-    "properties": ["curcumine", "anti-inflammatoire"],
-    "description": "Épice dorée fortement anti-inflammatoire.",
-    "image": "turmeric"
-  },
-  {
-    "id": 31,
-    "name": "Cumin",
-    "type": "épice",
-    "category": ["digestif"],
-    "symptoms": ["ballonnements", "digestion"],
-    "uses": [
-      {
-        "form": "épice",
-        "dose_g": 2,
-        "frequency": "quotidien",
-        "description": "Assaisonner légumineuses et légumes."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["carminatif", "antioxydant"],
-    "description": "Épice chaude réduisant ballonnements et spasmes.",
-    "image": "cumin"
-  },
-  {
-    "id": 32,
-    "name": "Paprika",
-    "type": "épice",
-    "category": ["antioxydant", "circulation"],
-    "symptoms": ["fatigue"],
-    "uses": [
-      {
-        "form": "épice",
-        "dose_g": 2,
-        "frequency": "quotidien",
-        "description": "Parsemer sur grillades ou légumes."
-      }
-    ],
-    "contraindications": ["ulcères"],
-    "properties": ["capsaïcine", "vitamineC"],
-    "description": "Épice douce riche en vitamine C, stimulant léger.",
-    "image": "paprika"
-  },
-  {
-    "id": 33,
-    "name": "Chili",
-    "type": "épice",
-    "category": ["circulation", "métabolisme"],
-    "symptoms": ["digestion", "fatigue"],
-    "uses": [
-      {
-        "form": "épice",
-        "dose_g": 0.5,
-        "frequency": "quotidien",
-        "description": "Ajouter par petites quantités."
-      }
-    ],
-    "contraindications": ["ulcères", "reflux"],
-    "properties": ["capsaïcine", "thermogenese"],
-    "description": "Épice piquante stimulant le métabolisme et la circulation.",
-    "image": "chili"
-  },
-  {
-    "id": 34,
-    "name": "Cannelle",
-    "type": "épice",
-    "category": ["glycémie", "antioxydant"],
-    "symptoms": ["diabete", "digestion"],
-    "uses": [
-      {
-        "form": "poudre",
-        "dose_g": 2,
-        "frequency": "quotidien",
-        "description": "Ajouter dans boissons ou desserts."
-      }
-    ],
-    "contraindications": ["grossesse_excessive"],
-    "properties": ["antioxydant", "hypoglycémiante"],
-    "description": "Épice sucrée régulant la glycémie et la digestion.",
-    "image": "cinnamon"
-  },
-  {
-    "id": 35,
-    "name": "Noix de muscade",
-    "type": "épice",
-    "category": ["digestif", "sommeil"],
-    "symptoms": ["insomnie", "digestion"],
-    "uses": [
-      {
-        "form": "râpée",
-        "dose_g": 0.2,
-        "frequency": "occasionnel",
-        "description": "Saupoudrer dans lait chaud ou plats."
-      }
-    ],
-    "contraindications": ["forte_dose"],
-    "properties": ["sédative_légère", "antispasmodique"],
-    "description": "Épice chaude calmante à utiliser en petite quantité.",
-    "image": "nutmeg"
-  },
-  {
-    "id": 36,
-    "name": "Coriandre",
-    "type": "herbe",
-    "category": ["digestif", "détox"],
-    "symptoms": ["digestion", "retention eau"],
-    "uses": [
-      {
-        "form": "feuilles",
-        "dose_g": 5,
-        "frequency": "quotidien",
-        "description": "Ajouter crue aux plats."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["carminatif", "détox"],
-    "description": "Herbe verte apaisant les gaz et stimulant reins et foie.",
-    "image": "cilantro"
-  },
-  {
-    "id": 37,
-    "name": "Curcuma frais",
-    "type": "épice",
-    "category": ["anti-inflammatoire"],
-    "symptoms": ["douleurs", "digestion"],
-    "uses": [
-      {
-        "form": "racine",
-        "dose_g": 5,
-        "frequency": "1 par jour",
-        "description": "Râper ou mixer dans plats et boissons."
-      }
-    ],
-    "contraindications": ["calculs_biliaires"],
-    "properties": ["curcumine", "antioxydant"],
-    "description": "Racine puissante anti-inflammatoire en version brute.",
-    "image": "freshturmeric"
-  },
-  {
-    "id": 38,
-    "name": "Citron vert",
-    "type": "aliment",
-    "category": ["immunité", "digestif"],
-    "symptoms": ["digestion", "detox"],
-    "uses": [
-      {
-        "form": "jus",
-        "dose_ml": 10,
-        "frequency": "quotidien",
-        "description": "Presser dans de l'eau tiède ou plats."
-      }
-    ],
-    "contraindications": ["reflux"],
-    "properties": ["vitamineC", "antimicrobien"],
-    "description": "Agrume acide stimulant digestion et immunité.",
-    "image": "lime"
-  },
-  {
-    "id": 39,
-    "name": "Citronnelle",
-    "type": "herbe",
-    "category": ["calmante", "digestif"],
-    "symptoms": ["stress", "nausee"],
-    "uses": [
-      {
-        "form": "infusion",
-        "dose_g": 3,
-        "duration_min": 10,
-        "frequency": "1-2 par jour",
-        "description": "Infuser tiges fraîches en morceaux."
-      }
-    ],
-    "contraindications": ["grossesse"],
-    "properties": ["antispasmodique", "calmante"],
-    "description": "Plante tropicale apaisant la digestion et les tensions.",
-    "image": "lemongrass"
-  },
-  {
-    "id": 40,
-    "name": "Amandes",
-    "type": "aliment",
-    "category": ["énergie", "cardio", "nutrition"],
-    "symptoms": ["fatigue", "cholesterol"],
-    "uses": [
-      {
-        "form": "cru",
-        "dose_g": 20,
-        "frequency": "quotidien",
-        "description": "Consommer à jeun ou encas."
-      }
-    ],
-    "contraindications": ["allergie"],
-    "properties": ["oméga9", "magnésium"],
-    "description": "Fruit sec riche en bons lipides et nutriments.",
-    "image": "almonds"
-  },
-  {
-    "id": 41,
-    "name": "Noisettes",
-    "type": "aliment",
-    "category": ["énergie", "cardio", "antioxydant"],
-    "symptoms": ["fatigue", "cholesterol"],
-    "uses": [
-      {
-        "form": "cru",
-        "dose_g": 20,
-        "frequency": "quotidien",
-        "description": "Consommer en encas ou ajout dans plats."
-      }
-    ],
-    "contraindications": ["allergie"],
-    "properties": ["vitamineE", "lipides_sains"],
-    "description": "Fruit sec riche en vitamine E et lipides cardiosains.",
-    "image": "hazelnuts"
-  },
-  {
-    "id": 42,
-    "name": "Noix",
-    "type": "aliment",
-    "category": ["cardio", "cerveau", "antioxydant"],
-    "symptoms": ["cholesterol", "cognition"],
-    "uses": [
-      {
-        "form": "cru",
-        "dose_g": 20,
-        "frequency": "quotidien",
-        "description": "Consommer 3 à 5 noix par jour."
-      }
-    ],
-    "contraindications": ["allergie"],
-    "properties": ["omega3", "polyphenols"],
-    "description": "Fruit sec très riche en oméga-3 et antioxydants.",
-    "image": "walnuts"
-  },
-  {
-    "id": 43,
-    "name": "Graines de chia",
-    "type": "aliment",
-    "category": ["détox", "énergie", "digestion"],
-    "symptoms": ["digestion", "fatigue"],
-    "uses": [
-      {
-        "form": "trempé",
-        "dose_g": 15,
-        "frequency": "quotidien",
-        "description": "Tremper dans liquide pendant 20 minutes."
-      }
-    ],
-    "contraindications": ["occlusion", "crises_diverticulites"],
-    "properties": ["fibres", "omega3"],
-    "description": "Graines riches en fibres, hydratantes et énergétiques.",
-    "image": "chia"
-  },
-  {
-    "id": 44,
-    "name": "Graines de lin",
-    "type": "aliment",
-    "category": ["digestif", "anti-inflammatoire"],
-    "symptoms": ["constipation", "digestion"],
-    "uses": [
-      {
-        "form": "moulu",
-        "dose_g": 10,
-        "frequency": "quotidien",
-        "description": "Ajouter à yaourts, compotes ou salades."
-      }
-    ],
-    "contraindications": ["occlusion"],
-    "properties": ["fibres", "omega3"],
-    "description": "Graines mucilagineuses aidant le transit et l’inflammation.",
-    "image": "flaxseed"
-  },
-  {
-    "id": 45,
-    "name": "Graines de sésame",
-    "type": "aliment",
-    "category": ["os", "énergie"],
-    "symptoms": ["fatigue", "demineralisation"],
-    "uses": [
-      {
-        "form": "graines",
-        "dose_g": 10,
-        "frequency": "quotidien",
-        "description": "Parsemer sur plats ou tahini."
-      }
-    ],
-    "contraindications": ["allergie"],
-    "properties": ["calcium", "vitamineB"],
-    "description": "Graines minérales soutenant os et énergie.",
-    "image": "sesame"
-  },
-  {
-    "id": 46,
-    "name": "Graines de tournesol",
-    "type": "aliment",
-    "category": ["énergie", "peau"],
-    "symptoms": ["fatigue", "peau"],
-    "uses": [
-      {
-        "form": "cru",
-        "dose_g": 15,
-        "frequency": "quotidien",
-        "description": "Ajouter à salades, granola ou à sec."
-      }
-    ],
-    "contraindications": ["allergie"],
-    "properties": ["vitamineE", "magnésium"],
-    "description": "Graines riches en vitamine E et nutriments.",
-    "image": "sunflowerseeds"
-  },
-  {
-    "id": 47,
-    "name": "Avoine",
-    "type": "aliment",
-    "category": ["glycémie", "digestion", "énergie"],
-    "symptoms": ["cholesterol", "digestion"],
-    "uses": [
-      {
-        "form": "flocons",
-        "dose_g": 40,
-        "frequency": "quotidien",
-        "description": "Consommer en porridge ou muesli."
-      }
-    ],
-    "contraindications": ["intolérance_gluten"],
-    "properties": ["bêta_glucane", "fibres"],
-    "description": "Céréale douce équilibrant la glycémie et le transit.",
-    "image": "oats"
-  },
-  {
-    "id": 48,
-    "name": "Quinoa",
-    "type": "aliment",
-    "category": ["protéines", "digestion"],
-    "symptoms": ["fatigue", "nutrition"],
-    "uses": [
-      {
-        "form": "bouilli",
-        "dose_g": 70,
-        "frequency": "occasionnel",
-        "description": "Cuire 10-15 min et consommer chaud ou froid."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["acides_aminés", "fibres"],
-    "description": "Pseudocéréale protéinée digestive.",
-    "image": "quinoa"
-  },
-  {
-    "id": 49,
-    "name": "Riz complet",
-    "type": "aliment",
-    "category": ["digestion", "glycémie"],
-    "symptoms": ["constipation", "fatigue"],
-    "uses": [
-      {
-        "form": "cuisson",
-        "dose_g": 75,
-        "frequency": "quotidien",
-        "description": "Cuire 25-30 minutes."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["fibres", "magnésium"],
-    "description": "Céréale complète riche en minéraux et fibres.",
-    "image": "brownrice"
-  },
-  {
-    "id": 50,
-    "name": "Riz basmati",
-    "type": "aliment",
-    "category": ["digestion", "glycémie"],
-    "symptoms": ["digestion"],
-    "uses": [
-      {
-        "form": "cuisson",
-        "dose_g": 70,
-        "frequency": "quotidien",
-        "description": "Cuire 12-15 minutes."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["index_bas", "énergétique"],
-    "description": "Variété de riz à IG modéré favorisant digestion stable.",
-    "image": "basmatirice"
-  },
-  {
-    "id": 51,
-    "name": "Lentilles",
-    "type": "aliment",
-    "category": ["protéines", "digestion", "énergie"],
-    "symptoms": ["fatigue", "nutrition"],
-    "uses": [
-      {
-        "form": "cuisson",
-        "dose_g": 80,
-        "frequency": "2-3 par semaine",
-        "description": "Cuire lentilles 20-30 min."
-      }
-    ],
-    "contraindications": ["ballonnements"],
-    "properties": ["fer", "fibres"],
-    "description": "Légumineuse riche en fibres et minéraux.",
-    "image": "lentils"
-  },
-  {
-    "id": 52,
-    "name": "Pois chiches",
-    "type": "aliment",
-    "category": ["protéines", "digestion"],
-    "symptoms": ["fatigue", "nutrition"],
-    "uses": [
-      {
-        "form": "cuisson",
-        "dose_g": 90,
-        "frequency": "2-3 par semaine",
-        "description": "Tremper 8h puis cuire 1h."
-      }
-    ],
-    "contraindications": ["ballonnements"],
-    "properties": ["fibres", "fer"],
-    "description": "Légumineuse nutritive soutenant énergie et microbiote.",
-    "image": "chickpeas"
-  },
-  {
-    "id": 53,
-    "name": "Haricots rouges",
-    "type": "aliment",
-    "category": ["protéines", "digestion"],
-    "symptoms": ["fatigue", "nutrition"],
-    "uses": [
-      {
-        "form": "cuisson",
-        "dose_g": 90,
-        "frequency": "2-3 par semaine",
-        "description": "Tremper 8-12h puis cuire 1h30."
-      }
-    ],
-    "contraindications": ["ballonnements"],
-    "properties": ["fer", "fibres"],
-    "description": "Source de fer et fibres, régule énergie et microbiote.",
-    "image": "redbeans"
-  },
-  {
-    "id": 54,
-    "name": "Oeufs",
-    "type": "aliment",
-    "category": ["protéines", "énergie"],
-    "symptoms": ["fatigue", "nutrition"],
-    "uses": [
-      {
-        "form": "cuisson",
-        "dose_piece": 2,
-        "frequency": "quotidien",
-        "description": "Cuire selon préférence."
-      }
-    ],
-    "contraindications": ["cholestérol"],
-    "properties": ["acides_aminés", "b12"],
-    "description": "Aliment complet riche en protéines et vitamines.",
-    "image": "eggs"
-  },
-  {
-    "id": 55,
-    "name": "Poulet",
-    "type": "aliment",
-    "category": ["protéines", "énergie"],
-    "symptoms": ["fatigue", "nutrition"],
-    "uses": [
-      {
-        "form": "cuisson",
-        "dose_g": 150,
-        "frequency": "3-4 par semaine",
-        "description": "Cuire sans friture excessive."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["protéines", "b6"],
-    "description": "Viande blanche maigre idéale pour récupération et énergie.",
-    "image": "chicken"
-  },
-  {
-    "id": 56,
-    "name": "Saumon",
-    "type": "aliment",
-    "category": ["cardio", "cerveau", "anti-inflammatoire"],
-    "symptoms": ["cholesterol", "inflammation", "cognition"],
-    "uses": [
-      {
-        "form": "cuisson",
-        "dose_g": 130,
-        "frequency": "2-3 par semaine",
-        "description": "Cuire doucement ou à la vapeur."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["omega3", "vitamineD"],
-    "description": "Poisson gras riche en oméga-3 et vitamine D.",
-    "image": "salmon"
-  },
-  {
-    "id": 57,
-    "name": "Sardines",
-    "type": "aliment",
-    "category": ["os", "cardio"],
-    "symptoms": ["cholesterol", "demineralisation"],
-    "uses": [
-      {
-        "form": "conserve",
-        "dose_g": 100,
-        "frequency": "2-3 par semaine",
-        "description": "Consommer avec arêtes si possible."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["calcium", "omega3"],
-    "description": "Poisson riche en calcium et oméga-3.",
-    "image": "sardines"
-  },
-  {
-    "id": 58,
-    "name": "Thon",
-    "type": "aliment",
-    "category": ["protéines", "énergie"],
-    "symptoms": ["fatigue", "nutrition"],
-    "uses": [
-      {
-        "form": "grillade",
-        "dose_g": 130,
-        "frequency": "1-2 par semaine",
-        "description": "Cuire rapidement, éviter sur-cuisson."
-      }
-    ],
-    "contraindications": ["mercure"],
-    "properties": ["protéines", "b12"],
-    "description": "Poisson riche en protéines et vitamine B12.",
-    "image": "tuna"
-  },
-  {
-    "id": 59,
-    "name": "Fromage blanc",
-    "type": "aliment",
-    "category": ["protéines", "digestion"],
-    "symptoms": ["nutrition"],
-    "uses": [
-      {
-        "form": "consommation",
-        "dose_g": 150,
-        "frequency": "quotidien",
-        "description": "Consommer nature ou accompagné."
-      }
-    ],
-    "contraindications": ["intolérance_lactose"],
-    "properties": ["protéines", "calcium"],
-    "description": "Produit laitier léger et riche en protéines.",
-    "image": "cottagecheese"
-  },
-  {
-    "id": 60,
-    "name": "Yaourt grec",
-    "type": "aliment",
-    "category": ["digestion", "immunité"],
-    "symptoms": ["digestion"],
-    "uses": [
-      {
-        "form": "consommation",
-        "dose_g": 150,
-        "frequency": "quotidien",
-        "description": "Consommer nature ou avec fruits."
-      }
-    ],
-    "contraindications": ["intolérance_lactose"],
-    "properties": ["probiotiques", "protéines"],
-    "description": "Yaourt riche en probiotiques améliorant digestion et microbiote.",
-    "image": "greekyogurt"
-  },
-  {
-    "id": 61,
-    "name": "Banane",
-    "type": "aliment",
-    "category": ["énergie", "digestion", "sport"],
-    "symptoms": ["fatigue", "crampes"],
-    "uses": [
-      {
-        "form": "cru",
-        "dose_g": 120,
-        "frequency": "quotidien",
-        "description": "Consommer à jeun ou en collation."
-      }
-    ],
-    "contraindications": ["diabète"],
-    "properties": ["potassium", "fibres"],
-    "description": "Fruit énergétique riche en potassium favorable aux muscles.",
-    "image": "banana"
-  },
-  {
-    "id": 62,
-    "name": "Pomme",
-    "type": "aliment",
-    "category": ["digestion", "immunité"],
-    "symptoms": ["digestion", "detox"],
-    "uses": [
-      {
-        "form": "cru",
-        "dose_g": 150,
-        "frequency": "quotidien",
-        "description": "Consommer entière ou en compote."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["pectine", "antioxydant"],
-    "description": "Fruit doux stabilisant digestion et glycémie.",
-    "image": "apple"
-  },
-  {
-    "id": 63,
-    "name": "Poire",
-    "type": "aliment",
-    "category": ["digestion", "détox"],
-    "symptoms": ["constipation", "digestion"],
-    "uses": [
-      {
-        "form": "cru",
-        "dose_g": 160,
-        "frequency": "quotidien",
-        "description": "Consommer entière, jus ou compote."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["fibres", "hydratation"],
-    "description": "Fruit hydratant riche en fibres solubles.",
-    "image": "pear"
-  },
-  {
-    "id": 64,
-    "name": "Orange",
-    "type": "aliment",
-    "category": ["immunité", "antioxydant"],
-    "symptoms": ["fatigue", "immunite"],
-    "uses": [
-      {
-        "form": "cru",
-        "dose_g": 150,
-        "frequency": "quotidien",
-        "description": "Consommer entière ou en jus frais."
-      }
-    ],
-    "contraindications": ["reflux"],
-    "properties": ["vitamineC", "flavonoïdes"],
-    "description": "Agrume riche en vitamine C renforçant défenses.",
-    "image": "orange"
-  },
-  {
-    "id": 65,
-    "name": "Fraise",
-    "type": "aliment",
-    "category": ["antioxydant", "immunité"],
-    "symptoms": ["peau", "inflammation"],
-    "uses": [
-      {
-        "form": "cru",
-        "dose_g": 100,
-        "frequency": "occasionnel",
-        "description": "Consommer entière ou en smoothie."
-      }
-    ],
-    "contraindications": ["allergie"],
-    "properties": ["vitamineC", "polyphenols"],
-    "description": "Fruit rouge riche en antioxydants protecteurs.",
-    "image": "strawberry"
-  },
-  {
-    "id": 66,
-    "name": "Myrtille",
-    "type": "aliment",
-    "category": ["vision", "antioxydant", "cerveau"],
-    "symptoms": ["cognition", "vision"],
-    "uses": [
-      {
-        "form": "cru",
-        "dose_g": 80,
-        "frequency": "quotidien",
-        "description": "Consommer nature ou en smoothie."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["anthocyanes", "neuroprotecteur"],
-    "description": "Baie protectrice du cerveau et de la vue.",
-    "image": "blueberry"
-  },
-  {
-    "id": 67,
-    "name": "Framboise",
-    "type": "aliment",
-    "category": ["antioxydant", "digestion"],
-    "symptoms": ["constipation", "peau"],
-    "uses": [
-      {
-        "form": "cru",
-        "dose_g": 80,
-        "frequency": "occasionnel",
-        "description": "Consommer seule ou en dessert."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["fibres", "polyphenols"],
-    "description": "Baie riche en fibres et micronutriments.",
-    "image": "raspberry"
-  },
-  {
-    "id": 68,
-    "name": "Tomate",
-    "type": "aliment",
-    "category": ["cardio", "antioxydant"],
-    "symptoms": ["inflammation", "peau"],
-    "uses": [
-      {
-        "form": "cru",
-        "dose_g": 120,
-        "frequency": "quotidien",
-        "description": "Consommer en salade ou sauce."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["lycopene", "vitamineC"],
-    "description": "Fruit-légume riche en lycopène protecteur cardiovasculaire.",
-    "image": "tomato"
-  },
-  {
-    "id": 69,
-    "name": "Concombre",
-    "type": "aliment",
-    "category": ["détox", "hydratation"],
-    "symptoms": ["digestion", "peau"],
-    "uses": [
-      {
-        "form": "cru",
-        "dose_g": 120,
-        "frequency": "quotidien",
-        "description": "Ajouter en salade ou smoothie."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["hydratation", "silice"],
-    "description": "Légume très hydratant bénéfique pour la peau.",
-    "image": "cucumber"
-  },
-  {
-    "id": 70,
-    "name": "Aubergine",
-    "type": "aliment",
-    "category": ["digestion", "cardio"],
-    "symptoms": ["cholesterol"],
-    "uses": [
-      {
-        "form": "cuisson",
-        "dose_g": 120,
-        "frequency": "occasionnel",
-        "description": "Cuire au four ou à la poêle."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["fibres", "polyphenols"],
-    "description": "Légume violet protecteur du cœur.",
-    "image": "eggplant"
-  },
-  {
-    "id": 71,
-    "name": "Brocoli",
-    "type": "aliment",
-    "category": ["détox", "immunité", "anti-inflammatoire"],
-    "symptoms": ["inflammation", "digestion"],
-    "uses": [
-      {
-        "form": "cuisson_vapeur",
-        "dose_g": 120,
-        "frequency": "3-4 par semaine",
-        "description": "Cuire à la vapeur 5-7 minutes."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["sulforaphane", "vitamineC"],
-    "description": "Crucifère riche en composés détoxifiants.",
-    "image": "broccoli"
-  },
-  {
-    "id": 72,
-    "name": "Chou-fleur",
-    "type": "aliment",
-    "category": ["détox", "digestion"],
-    "symptoms": ["digestion"],
-    "uses": [
-      {
-        "form": "cuisson",
-        "dose_g": 120,
-        "frequency": "2-3 par semaine",
-        "description": "Cuire vapeur ou rôtir."
-      }
-    ],
-    "contraindications": ["ballonnements"],
-    "properties": ["fibres", "glucosinolates"],
-    "description": "Crucifère soutien digestion et foie.",
-    "image": "cauliflower"
-  },
-  {
-    "id": 73,
-    "name": "Chou rouge",
-    "type": "aliment",
-    "category": ["détox", "antioxydant"],
-    "symptoms": ["digestion", "inflammation"],
-    "uses": [
-      {
-        "form": "cru",
-        "dose_g": 100,
-        "frequency": "occasionnel",
-        "description": "Consommer en salade ou fermenté."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["anthocyanes", "fibres"],
-    "description": "Crucifère coloré riche en pigments protecteurs.",
-    "image": "redcabbage"
-  },
-  {
-    "id": 74,
-    "name": "Courgette",
-    "type": "aliment",
-    "category": ["hydratation", "digestion"],
-    "symptoms": ["digestion"],
-    "uses": [
-      {
-        "form": "cuisson",
-        "dose_g": 130,
-        "frequency": "quotidien",
-        "description": "Cuire vapeur, four ou poêle."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["fibres", "vitamineA"],
-    "description": "Légume hydratant facile à digérer.",
-    "image": "zucchini"
-  },
-  {
-    "id": 75,
-    "name": "Champignon de Paris",
-    "type": "aliment",
-    "category": ["immunité", "nutrition"],
-    "symptoms": ["fatigue"],
-    "uses": [
-      {
-        "form": "cuisson",
-        "dose_g": 100,
-        "frequency": "3-4 par semaine",
-        "description": "Cuire à la poêle ou en omelette."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["vitamineD", "b12"],
-    "description": "Champignon riche en nutriments bénéfiques.",
-    "image": "mushroom"
-  },
-  {
-    "id": 76,
-    "name": "Épinard",
-    "type": "aliment",
-    "category": ["fer", "antioxydant"],
-    "symptoms": ["fatigue", "anemie"],
-    "uses": [
-      {
-        "form": "cru_vapeur",
-        "dose_g": 80,
-        "frequency": "quotidien",
-        "description": "Cru en salade ou cuit léger."
-      }
-    ],
-    "contraindications": ["calculs_rénaux"],
-    "properties": ["fer", "acide_folique"],
-    "description": "Légume vert riche en fer et vitamines.",
-    "image": "spinach"
-  },
-  {
-    "id": 77,
-    "name": "Patate douce",
-    "type": "aliment",
-    "category": ["énergie", "glycémie"],
-    "symptoms": ["fatigue", "digestion"],
-    "uses": [
-      {
-        "form": "cuisson_four",
-        "dose_g": 160,
-        "frequency": "2-3 par semaine",
-        "description": "Cuire entière ou en cubes au four."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["beta_carotene", "fibres"],
-    "description": "Tubercule nourrissant à IG faible.",
-    "image": "sweetpotato"
-  },
-  {
-    "id": 78,
-    "name": "Pomme de terre",
-    "type": "aliment",
-    "category": ["énergie", "sport"],
-    "symptoms": ["fatigue"],
-    "uses": [
-      {
-        "form": "cuisson",
-        "dose_g": 150,
-        "frequency": "occasionnel",
-        "description": "Cuire vapeur ou four."
-      }
-    ],
-    "contraindications": ["diabète"],
-    "properties": ["amidon", "potassium"],
-    "description": "Tubercule énergétique riche en potassium.",
-    "image": "potato"
-  },
-  {
-    "id": 79,
-    "name": "Betterave",
-    "type": "aliment",
-    "category": ["circulation", "sport", "antioxydant"],
-    "symptoms": ["circulation", "fatigue"],
-    "uses": [
-      {
-        "form": "cru_râpé",
-        "dose_g": 100,
-        "frequency": "3-4 par semaine",
-        "description": "Consommer crue en salade ou jus."
-      }
-    ],
-    "contraindications": ["calculs_rénaux"],
-    "properties": ["nitrates", "antioxydant"],
-    "description": "Légume racine améliorant circulation et endurance.",
-    "image": "beetroot"
-  },
-  {
-    "id": 80,
-    "name": "Gingembre frais",
-    "type": "épice",
-    "category": ["anti-nausée", "énergie", "digestif"],
-    "symptoms": ["nausee", "digestion", "fatigue"],
-    "uses": [
-      {
-        "form": "infusion",
-        "dose_g": 5,
-        "discipline": "durée",
-        "duration_min": 10,
-        "frequency": "1-2 par jour",
-        "description": "Râper racine et infuser dans eau chaude."
-      }
-    ],
-    "contraindications": ["calculs_biliaires"],
-    "properties": ["anti-inflammatoire", "stimulant"],
-    "description": "Racine tonique puissante pour nausées et énergie.",
-    "image": "freshginger"
-  },
-  {
-    "id": 81,
-    "name": "Curcuma",
-    "type": "épice",
-    "category": ["anti-inflammatoire", "détox"],
-    "symptoms": ["inflammation", "digestion"],
-    "uses": [
-      {
-        "form": "poudre",
-        "dose_g": 2,
-        "frequency": "quotidien",
-        "description": "Ajouter aux plats ou boissons avec du poivre noir."
-      }
-    ],
-    "contraindications": ["calculs_biliaires"],
-    "properties": ["curcumine"],
-    "description": "Épice anti-inflammatoire majeure.",
-    "image": "turmeric"
-  },
-  {
-    "id": 82,
-    "name": "Cannelle",
-    "type": "épice",
-    "category": ["glycémie", "digestion"],
-    "symptoms": ["diabete", "digestion"],
-    "uses": [
-      {
-        "form": "poudre",
-        "dose_g": 1,
-        "frequency": "quotidien",
-        "description": "Parsemer boissons ou desserts."
-      }
-    ],
-    "contraindications": ["grossesse"],
-    "properties": ["polyphenols"],
-    "description": "Régule glycémie et digestion.",
-    "image": "cinnamon"
-  },
-  {
-    "id": 83,
-    "name": "Paprika",
-    "type": "épice",
-    "category": ["digestion", "antioxydant"],
-    "symptoms": ["digestion"],
-    "uses": [
-      {
-        "form": "poudre",
-        "dose_g": 1,
-        "frequency": "occasionnel",
-        "description": "Assaisonnement pour plats."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["capasaicine", "vitamineA"],
-    "description": "Épice douce stimulante digestive.",
-    "image": "paprika"
-  },
-  {
-    "id": 84,
-    "name": "Curry",
-    "type": "épice",
-    "category": ["digestion", "anti-inflammatoire"],
-    "symptoms": ["digestion"],
-    "uses": [
-      {
-        "form": "poudre",
-        "dose_g": 2,
-        "frequency": "occasionnel",
-        "description": "Assaisonnement dans sauces et plats."
-      }
-    ],
-    "contraindications": ["reflux"],
-    "properties": ["curcumine", "épices_mixtes"],
-    "description": "Mélange digestif et stimulant.",
-    "image": "curry"
-  },
-  {
-    "id": 85,
-    "name": "Menthe poivrée",
-    "type": "plante",
-    "category": ["digestif", "anti-nausée"],
-    "symptoms": ["nausee", "digestion"],
-    "uses": [
-      {
-        "form": "infusion",
-        "dose_g": 2,
-        "duration_min": 9,
-        "frequency": "2 par jour",
-        "description": "Infuser feuilles 9 minutes."
-      }
-    ],
-    "contraindications": ["reflux"],
-    "properties": ["menthol"],
-    "description": "Plante digestive et antispasmodique.",
-    "image": "peppermint"
-  },
-  {
-    "id": 86,
-    "name": "Thym",
-    "type": "plante",
-    "category": ["respiratoire", "immunité"],
-    "symptoms": ["toux", "rhume"],
-    "uses": [
-      {
-        "form": "infusion",
-        "dose_g": 2,
-        "duration_min": 10,
-        "frequency": "2 par jour",
-        "description": "Infuser 10 min."
-      }
-    ],
-    "contraindications": ["grossesse"],
-    "properties": ["thymol"],
-    "description": "Plante antiseptique respiratoire.",
-    "image": "thyme"
-  },
-  {
-    "id": 87,
-    "name": "Romarin",
-    "type": "plante",
-    "category": ["détox", "circulation", "mémoire"],
-    "symptoms": ["fatigue", "digestion"],
-    "uses": [
-      {
-        "form": "infusion",
-        "dose_g": 2,
-        "duration_min": 8,
-        "frequency": "1 par jour",
-        "description": "Infuser 8 min."
-      }
-    ],
-    "contraindications": ["hypertension"],
-    "properties": ["cinéole"],
-    "description": "Stimulant hépatique et cérébral.",
-    "image": "rosemary"
-  },
-  {
-    "id": 88,
-    "name": "Sauce soja",
-    "type": "aliment",
-    "category": ["probiotique", "minéraux"],
-    "symptoms": ["digestion"],
-    "uses": [
-      {
-        "form": "assaisonnement",
-        "dose_g": 10,
-        "frequency": "occasionnel",
-        "description": "Utiliser en assaisonnement."
-      }
-    ],
-    "contraindications": ["hypertension"],
-    "properties": ["fermentation"],
-    "description": "Condiment fermenté riche en umami.",
-    "image": "soy sauce"
-  },
-  {
-    "id": 89,
-    "name": "Vinaigre de cidre",
-    "type": "condiment",
-    "category": ["digestion", "glycémie"],
-    "symptoms": ["digestion", "diabete"],
-    "uses": [
-      {
-        "form": "dilué",
-        "dose_g": 10,
-        "frequency": "1 par jour",
-        "description": "1 cuillère dans 200 ml d'eau."
-      }
-    ],
-    "contraindications": ["reflux"],
-    "properties": ["acide_acétique"],
-    "description": "Régule glycémie et motilité digestive.",
-    "image": "apple vinegar"
-  },
-  {
-    "id": 90,
-    "name": "Kombucha",
-    "type": "boisson",
-    "category": ["probiotique", "digestion"],
-    "symptoms": ["digestion"],
-    "uses": [
-      {
-        "form": "boisson",
-        "dose_ml": 150,
-        "frequency": "quotidien",
-        "description": "Boire frais."
-      }
-    ],
-    "contraindications": ["grossesse"],
-    "properties": ["ferments"],
-    "description": "Boisson fermentée bénéfique microbiote.",
-    "image": "kombucha"
-  },
-  {
-    "id": 91,
-    "name": "Kefir de lait",
-    "type": "boisson",
-    "category": ["probiotique", "immunité"],
-    "symptoms": ["digestion"],
-    "uses": [
-      {
-        "form": "boisson",
-        "dose_ml": 150,
-        "frequency": "quotidien",
-        "description": "Boire nature."
-      }
-    ],
-    "contraindications": ["intolérance_lactose"],
-    "properties": ["ferments_lactiques"],
-    "description": "Boisson fermentée équilibrant microbiote.",
-    "image": "milk kefir"
-  },
-  {
-    "id": 92,
-    "name": "Chou fermenté (choucroute)",
-    "type": "aliment",
-    "category": ["probiotique", "détox"],
-    "symptoms": ["digestion"],
-    "uses": [
-      {
-        "form": "fermenté",
-        "dose_g": 80,
-        "frequency": "2-3 par semaine",
-        "description": "Consommer cru non pasteurisé."
-      }
-    ],
-    "contraindications": ["hypertension"],
-    "properties": ["fermentation"],
-    "description": "Source naturelle de probiotiques et vitamines.",
-    "image": "sauerkraut"
-  },
-  {
-    "id": 93,
-    "name": "Laitue",
-    "type": "aliment",
-    "category": ["hydratation", "calmante"],
-    "symptoms": ["digestion", "insomnie"],
-    "uses": [
-      {
-        "form": "cru",
-        "dose_g": 80,
-        "frequency": "quotidien",
-        "description": "Consommer en salade."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["fibres", "lactucarium"],
-    "description": "Légume léger calmant et hydratant.",
-    "image": "lettuce"
-  },
-  {
-    "id": 94,
-    "name": "Fèves",
-    "type": "aliment",
-    "category": ["protéines", "fer"],
-    "symptoms": ["fatigue"],
-    "uses": [
-      {
-        "form": "cuisson",
-        "dose_g": 90,
-        "frequency": "2-3 par semaine",
-        "description": "Cuire 25 minutes."
-      }
-    ],
-    "contraindications": ["favisme"],
-    "properties": ["L-dopa"],
-    "description": "Légumineuse nutritive et stimulante mentale.",
-    "image": "broad beans"
-  },
-  {
-    "id": 95,
-    "name": "Sarrasin",
-    "type": "aliment",
-    "category": ["protéines", "glycémie"],
-    "symptoms": ["digestion"],
-    "uses": [
-      {
-        "form": "cuisson",
-        "dose_g": 70,
-        "frequency": "quotidien",
-        "description": "Cuire 15 min."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["rutine"],
-    "description": "Céréale sans gluten bénéfique circulation.",
-    "image": "buckwheat"
-  },
-  {
-    "id": 96,
-    "name": "Orge",
-    "type": "aliment",
-    "category": ["glycémie", "digestion"],
-    "symptoms": ["cholesterol"],
-    "uses": [
-      {
-        "form": "cuisson",
-        "dose_g": 70,
-        "frequency": "quotidien",
-        "description": "Cuire 25-30 min."
-      }
-    ],
-    "contraindications": ["gluten"],
-    "properties": ["beta_glucane"],
-    "description": "Céréale riche en fibres régulant glycémie.",
-    "image": "barley"
-  },
-  {
-    "id": 97,
-    "name": "Cacao pur",
-    "type": "aliment",
-    "category": ["antioxydant", "humeur"],
-    "symptoms": ["fatigue", "stress"],
-    "uses": [
-      {
-        "form": "poudre",
-        "dose_g": 5,
-        "frequency": "quotidien",
-        "description": "Ajouter à boissons chaudes."
-      }
-    ],
-    "contraindications": ["reflux"],
-    "properties": ["polyphenols", "theobromine"],
-    "description": "Superfood stimulant et antioxydant.",
-    "image": "cacao"
-  },
-  {
-    "id": 98,
-    "name": "Ail des ours",
-    "type": "plante",
-    "category": ["détox", "cardio"],
-    "symptoms": ["cholesterol", "digestion"],
-    "uses": [
-      {
-        "form": "cru",
-        "dose_g": 4,
-        "frequency": "2-3 par semaine",
-        "description": "Hacher et ajouter à salade."
-      }
-    ],
-    "contraindications": [],
-    "properties": ["allicine"],
-    "description": "Plante puissante pour détox et cœur.",
-    "image": "wild garlic"
-  },
-  {
-    "id": 99,
-    "name": "Huile de noix",
-    "type": "condiment",
-    "category": ["cardio", "cerveau"],
-    "symptoms": ["cholesterol"],
-    "uses": [
-      {
-        "form": "assaisonnement",
-        "dose_g": 10,
-        "frequency": "quotidien",
-        "description": "Ne pas cuire, utiliser à froid."
-      }
-    ],
-    "contraindications": ["allergie"],
-    "properties": ["omega3"],
-    "description": "Source d'oméga-3 pour cœur et cerveau.",
-    "image": "walnut oil"
-  },
-  {
-    "id": 100,
-    "name": "Graisse de coco",
-    "type": "gras",
-    "category": ["énergie", "cuisson"],
-    "symptoms": ["fatigue"],
-    "uses": [
-      {
-        "form": "cuisson",
-        "dose_g": 8,
-        "frequency": "occasionnel",
-        "description": "Utiliser pour cuisson haute température."
-      }
-    ],
-    "contraindications": ["cholestérol"],
-    "properties": ["MCT"],
-    "description": "Lipide rapide, bon pour énergie.",
-    "image": "coconut oil"
+    "description": "Fruit séché riche en fibres (7g/100g) et sorbitol. Reconnu scientifiquement pour son efficacité contre la constipation. Action laxative douce par stimulation du transit et hydratation des selles.",
+    "symptoms": ["constipation"],
+    "properties": [
+      { "name": "laxatif", "score": 9, "category": "digestion" },
+      { "name": "fibres", "score": 8, "category": "digestion" }
+    ],
+    "uses": [
+      {
+        "form": ["rehydrate", "jus"],
+        "dose": { "value": 5, "unit": "pruneaux" },
+        "frequency": { "value": 1, "unit": "fois par jour" },
+        "duration": { "value": null, "unit": "" },
+        "description": "Consommer 3 à 5 pruneaux réhydratés (trempés dans l'eau) par jour, de préférence le matin à jeun. Ou boire un verre de jus de pruneaux. Ne pas dépasser 8 pruneaux/jour. Boire beaucoup d'eau en parallèle."
+      }
+    ],
+    "contraindications": [
+      "syndrome intestin irritable",
+      "diabète (surveiller)",
+      "anticoagulants (riches en vitamine K)",
+      "diarrhée"
+    ],
+    "tips": [
+      "Dose raisonnable : 3-5 pruneaux/jour maximum",
+      "Au-delà : risque de ballonnements, crampes, diarrhée",
+      "Toujours boire beaucoup d'eau en même temps",
+      "Le sorbitol peut aggraver symptômes du Syndrome de l'intestin irritable (SII)",
+      "Intégrer dans alimentation équilibrée"
+    ],
+    "image": "prunes",
+    "pregnancySafe": true,
+    "childrenAge": null,
+    "allergens": [],
+    "alternatives": [62, 63],
+    "verifiedByProfessional": true
   }
 ]

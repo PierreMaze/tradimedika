@@ -106,7 +106,7 @@ function SymptomsSection() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4 }}
-            className="mt-2 rounded-lg border-2 p-4"
+            className="mx-auto mt-2 w-full rounded-lg border-2 p-4 md:max-w-xl"
             style={{
               borderColor:
                 results && results.length > 0 ? "#10b981" : "#f59e0b",

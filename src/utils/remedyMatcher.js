@@ -1,24 +1,26 @@
 // src/utils/remedyMatcher.js
+import { normalizeForMatching } from "./normalizeSymptom";
 
 /**
  * Trouve les remèdes correspondant aux symptômes sélectionnés
  *
  * Logique de matching :
- * 1. Filtre les remèdes qui ont au moins 1 symptôme en commun
- * 2. Calcule le score de pertinence (nombre de symptômes matchés)
- * 3. Trie par score décroissant, puis alphabétiquement
+ * 1. Matching flexible (insensible aux accents) entre symptômes sélectionnés et DB
+ * 2. Filtre les remèdes qui ont au moins 1 symptôme en commun
+ * 3. Calcule le score de pertinence (nombre de symptômes matchés)
+ * 4. Trie par score décroissant, puis alphabétiquement
  *
- * @param {string[]} selectedSymptoms - Symptômes sélectionnés (déjà normalisés)
+ * @param {string[]} selectedSymptoms - Symptômes sélectionnés (avec ou sans accents)
  * @param {Array} database - Base de données des remèdes (db.json)
  * @returns {Array<{remedy: Object, matchCount: number, matchedSymptoms: string[]}>}
  *
  * @example
  * const results = findMatchingRemedies(
- *   ["fatigue", "digestion"],
+ *   ["fatigue", "diarrhée"],  // Accepte avec/sans accents
  *   db
  * );
  * // [
- * //   { remedy: {...}, matchCount: 2, matchedSymptoms: ["fatigue", "digestion"] },
+ * //   { remedy: {...}, matchCount: 2, matchedSymptoms: ["fatigue", "diarrhée"] },
  * //   { remedy: {...}, matchCount: 1, matchedSymptoms: ["fatigue"] }
  * // ]
  */
@@ -45,9 +47,13 @@ export function findMatchingRemedies(selectedSymptoms, database) {
         return null;
       }
 
-      // Trouver les symptômes qui matchent
+      // Trouver les symptômes qui matchent (matching flexible, insensible aux accents)
       const matchedSymptoms = selectedSymptoms.filter((selectedSymptom) =>
-        remedy.symptoms.includes(selectedSymptom),
+        remedy.symptoms.some(
+          (remedySymptom) =>
+            normalizeForMatching(selectedSymptom) ===
+            normalizeForMatching(remedySymptom)
+        )
       );
 
       // Si aucun match, on exclut ce remède

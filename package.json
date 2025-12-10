@@ -1,7 +1,7 @@
 {
   "name": "tradimedika",
   "private": true,
-  "version": "0.3.2",
+  "version": "0.4.1",
   "type": "module",
   "homepage": "http://pierremaze.github.io/tradimedika",
   "prettier": {
@@ -16,12 +16,13 @@
     "preview": "vite preview",
     "fix": "prettier --write .",
     "validate-data": "node scripts/validateData.js",
-    "normalize-data": "node scripts/normalizeData.js",
     "clean": "rm -rf node_modules pnpm-lock.yaml package-lock.json dist && clear",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist -f",
+    "ccu": "ccusage blocks --live"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.17",
+    "ccusage": "^17.1.8",
     "framer-motion": "^12.23.24",
     "prop-types": "^15.8.1",
     "react": "^19.2.0",
@@ -31,6 +32,7 @@
     "tailwindcss": "^4.1.17"
   },
   "devDependencies": {
+    "@chongdashu/cc-statusline": "^1.3.2",
     "@eslint/js": "^9.39.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
