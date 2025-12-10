@@ -2,6 +2,73 @@
 
 ---
 
+## [0.5.0] - 2025-12-10
+
+### <u>add:</u>
+
+- Added `src/routes/` directory for centralized routing configuration
+- Added `src/routes/Router.jsx` managing all application routes with React Router v6.30.2
+- Added `src/pages/` directory structure for page-level components
+- Added `src/pages/Home.jsx` page wrapping existing `Hero.jsx` component
+- Added `src/pages/RemedyResult.jsx` placeholder page for remedy search results (Issue #41)
+- Added `src/pages/RemedyResultDetails.jsx` placeholder page for individual remedy details (Issue #41)
+- Added `src/pages/NotFound.jsx` custom 404 error page with navigation and helpful suggestions
+- Added `src/layout/LayoutApp.jsx` global layout component with `<Header />`, `<Outlet />`, `<Footer />` structure
+- Added `src/layout/LayoutRemedyResult.jsx` specific layout for remedy pages with breadcrumb placeholder (Issue #38)
+- Added `<BrowserRouter>` wrapper in `src/main.jsx` for React Router v6 client-side routing
+- Added nested route structure: `/remedies` and `/remedies/:id` under `LayoutRemedyResult`
+- Added 404 catch-all route (`*`) redirecting to `NotFound.jsx` page
+- Added Framer Motion animations in `NotFound.jsx` for smooth page transitions
+- Added back navigation buttons in `RemedyResultDetails.jsx` ("Retour aux résultats" and "Nouvelle recherche")
+
+### <u>update:</u>
+
+- Updated `package.json` to downgrade `react-router-dom` from `^7.9.6` to `6.30.2` for compatibility
+- Updated `src/App.jsx` to use `<Router />` component instead of direct `<Hero />` rendering
+- Updated `src/main.jsx` to wrap application with `<BrowserRouter>` for routing support
+- Updated `README.md` version badge from `0.4.1` to `0.5.0`
+- Updated `ARCHITECTURE.md` to include new `pages/`, `routes/`, and expanded `layout/` directories
+
+### <u>refactor:</u>
+
+- Refactored application architecture from single-page to multi-page structure with React Router v6
+- Refactored `App.jsx` from layout component to simple router wrapper
+- Refactored page layouts with composition pattern: `LayoutApp` wraps all routes, `LayoutRemedyResult` wraps remedy pages
+- Extracted page-specific containers from components to dedicated `pages/` directory
+
+### <u>standardization:</u>
+
+- Standardized routing configuration in centralized `src/routes/Router.jsx` file
+- Established consistent page structure pattern with placeholder comments for future issues
+- Unified layout hierarchy: global layout (`LayoutApp`) → specific layout (`LayoutRemedyResult`) → page content
+- Standardized route paths: `/` (home), `/remedies` (list), `/remedies/:id` (details), `*` (404)
+
+### <u>optimization:</u>
+
+- Optimized component re-renders by separating layout concerns from routing logic
+- Improved code organization with clear separation: `routes/`, `pages/`, `layout/` directories
+- Prepared architecture for future component integration (Issues #38, #41, #43, #44)
+
+### <u>features:</u>
+
+- **React Router v6 Integration**: Complete client-side routing with nested routes and layouts
+- **Multi-Page Architecture**: Foundation for home, results, details, and 404 pages
+- **Nested Layouts**: Global layout (Header/Footer) + specific remedy layout (breadcrumb space)
+- **404 Error Handling**: Custom NotFound page with helpful navigation and visual feedback
+- **Placeholder Pages**: Structure ready for future component development (Issue #41)
+- **Scalable Routing**: Architecture supports easy addition of new routes and layouts
+
+### <u>issues resolved:</u>
+
+- Issue #42: Created main application pages (Home, RemedyResult, RemedyResultDetails)
+- Issue #39: Setup global routing with React Router v6 and layouts (LayoutApp, LayoutRemedyResult, NotFound)
+
+---
+
+# Change Log
+
+---
+
 ## [0.4.1] - 2025-12-09
 
 ### <u>add:</u>

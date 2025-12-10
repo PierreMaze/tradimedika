@@ -11,7 +11,9 @@ src/
 ├── context/            # Contextes React (ThemeContext)
 ├── data/               # Données statiques (db.json, symptomList.json, synonymsSymptomList.json)
 ├── hooks/              # Hooks personnalisés (useDarkMode, useLocalStorage, useMediaQuery, useSymptomTags, useSymptomSubmit)
-├── layout/             # Layout et navigation (Header, Footer)
+├── layout/             # Layout et navigation (Header, Footer, LayoutApp, LayoutRemedyResult)
 │   └── components/     # Composants spécifiques au layout (LogoTradimedika)
+├── pages/              # Pages de l'application (Home, RemedyResult, RemedyResultDetails, NotFound)
+├── routes/             # Configuration du routage React Router (Router.jsx)
 └── utils/              # Fonctions utilitaires (normalizeSymptom, remedyMatcher)
 ```

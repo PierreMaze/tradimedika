@@ -1,7 +1,7 @@
 {
   "name": "tradimedika",
   "private": true,
-  "version": "0.4.1",
+  "version": "0.5.0",
   "type": "module",
   "homepage": "http://pierremaze.github.io/tradimedika",
   "prettier": {
@@ -28,7 +28,7 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-icons": "^5.5.0",
-    "react-router-dom": "^7.9.6",
+    "react-router-dom": "6.30.2",
     "tailwindcss": "^4.1.17"
   },
   "devDependencies": {
