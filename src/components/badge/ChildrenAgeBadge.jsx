@@ -33,7 +33,7 @@ function ChildrenAgeBadge({
       title={`Ce remède est adapté aux enfants à partir de ${age} ans`}
     >
       <MdOutlineChildCare className={sizeClasses[size]} aria-hidden="true" />
-      {showLabel && `Enfants ${age}+ ans`}
+      {showLabel && `Enfants +${age} ans`}
     </span>
   );
 }

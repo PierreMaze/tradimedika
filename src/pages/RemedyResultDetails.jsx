@@ -106,7 +106,7 @@ function RemedyResultDetails() {
 
             {/* Pregnancy Safe Badge */}
             {remedy.pregnancySafe === true && (
-              <PregnancyBadge/>
+              <PregnancyBadge />
             )}
 
             {/* Children Age Badge */}
@@ -249,9 +249,9 @@ function RemedyResultDetails() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
-          className="mb-6 rounded-lg border-l-4 border-yellow-500 bg-yellow-100 p-4 shadow-md transition duration-300 lg:p-6 dark:bg-yellow-950"
+          className="mb-6 rounded-lg border-l-4 border-red-500 bg-red-100 p-4 shadow-md transition duration-300 lg:p-6 dark:bg-red-950"
         >
-          <h2 className="mb-3 flex items-center gap-2 text-xl font-semibold text-yellow-800 lg:text-2xl dark:text-yellow-200">
+          <h2 className="mb-3 flex items-center gap-2 text-xl font-semibold text-red-800 lg:text-2xl dark:text-red-200">
             <HiExclamationTriangle className="h-6 w-6" aria-hidden="true" />
             Contraindications
           </h2>
@@ -259,9 +259,9 @@ function RemedyResultDetails() {
             {remedy.contraindications.map((contraindication, index) => (
               <li
                 key={index}
-                className="text-sm leading-relaxed text-amber-800 capitalize dark:text-amber-200"
+                className="text-sm leading-relaxed font-medium text-red-800 capitalize dark:text-red-200"
               >
-                {contraindication}
+                {capitalizeFirstLetter(contraindication, true)}
               </li>
             ))}
           </ul>

@@ -100,7 +100,7 @@ function BadgeInfoTooltip() {
         onMouseLeave={handleMouseLeave}
         aria-label="Informations sur les badges"
         aria-expanded={isOpen}
-        className="inline-flex h-12 w-12 items-center justify-center rounded-lg ring-2 ring-neutral-300 bg-white text-neutral-800 shadow-md transition duration-200 hover:ring-emerald-600 hover:text-emerald-600 focus:ring-2 focus:ring-emerald-300 focus:outline-none dark:ring-neutral-600 dark:bg-neutral-800 dark:text-neutral-100 dark:hover:ring-emerald-500 dark:hover:text-emerald-500"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-lg ring-2 ring-neutral-300 bg-white text-neutral-800 shadow-md transition duration-200 hover:ring-emerald-600 hover:text-emerald-600 focus:ring-2 focus:ring-emerald-300 focus:outline-none dark:ring-neutral-600 dark:bg-neutral-800 dark:text-neutral-100 dark:hover:ring-emerald-500 dark:hover:text-emerald-500"
       >
         <GrCircleQuestion className="h-6 w-6" />
       </button>
@@ -138,7 +138,7 @@ function BadgeInfoTooltip() {
               y: 20,
             }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed left-1/2 top-1/2 z-50 w-lg max-w-md lg:w-135 lg:max-w-3xl -translate-x-1/2 -translate-y-1/2 rounded-lg ring ring-neutral-300 bg-neutral-100 p-5 shadow-xl dark:ring-neutral-600 dark:bg-neutral-800 lg:absolute lg:left-0 lg:top-full lg:mt-2 lg:translate-x-0 lg:translate-y-0"
+            className="fixed left-1/2 top-1/2 z-50 lg:mx-0 w-full max-w-sm lg:w-142 lg:max-w-3xl -translate-x-1/2 -translate-y-1/2 rounded-lg ring ring-neutral-300 bg-neutral-100 p-5 shadow-xl dark:ring-neutral-600 dark:bg-neutral-800 lg:absolute lg:left-0 lg:top-full lg:mt-2 lg:translate-x-0 lg:translate-y-0"
             style={{
               // Desktop: slide from top
               ...(window.innerWidth >= 1024 && {
@@ -161,29 +161,29 @@ function BadgeInfoTooltip() {
             </h3>
 
             {/* Liste des badges */}
-            <div className="space-y-4">
+            <div className="space-y-6">
               {/* Badge Vérifié */}
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-2 lg:gap-4 flex-col lg:flex-row">
                 <VerifiedBadge />
                 <p className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
-                  Ce remède a été confirmé comme sûr, vérifier les
-                  contre-indications
+                  Ce remède a été confirmé comme sûr, <span className="text-emerald-600 dark:text-emerald-500 font-medium">vérifier les
+                  contre-indications.</span>
                 </p>
               </div>
 
               {/* Badge Grossesse OK */}
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-2 lg:gap-4 flex-col lg:flex-row">
                 <PregnancyBadge variant="default" />
                 <p className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
-                  Ce remède peut être utilisé sans danger pendant la grossesse
+                  Ce remède peut être utilisé sans danger pendant la grossesse.
                 </p>
               </div>
 
               {/* Badge Enfants X+ ans */}
-              <div className="flex items-start gap-3">
-                <ChildrenAgeBadge age={3} />
+              <div className="flex items-start gap-2 lg:gap-4 flex-col lg:flex-row">
+                <ChildrenAgeBadge age={"X"} />
                 <p className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
-                  Ce remède est adapté aux enfants à partir de X ans
+                  Ce remède est adapté aux enfants de plus de X ans.
                 </p>
               </div>
             </div>
