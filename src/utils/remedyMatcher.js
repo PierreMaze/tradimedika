@@ -114,9 +114,7 @@ export function getRemedyById(id, database) {
 
   // Vérifier que la conversion a réussi
   if (isNaN(numericId)) {
-    console.warn(
-      `[remedyMatcher] ID "${id}" n'est pas convertible en nombre`,
-    );
+    console.warn(`[remedyMatcher] ID "${id}" n'est pas convertible en nombre`);
     return null;
   }
 
@@ -124,9 +122,7 @@ export function getRemedyById(id, database) {
   const remedy = database.find((item) => item.id === numericId);
 
   if (!remedy) {
-    console.warn(
-      `[remedyMatcher] Aucun remède trouvé avec l'ID ${numericId}`,
-    );
+    console.warn(`[remedyMatcher] Aucun remède trouvé avec l'ID ${numericId}`);
     return null;
   }
 
@@ -187,9 +183,7 @@ export function getRemedyBySlug(slug, database) {
   });
 
   if (!remedy) {
-    console.warn(
-      `[remedyMatcher] Aucun remède trouvé avec le slug "${slug}"`,
-    );
+    console.warn(`[remedyMatcher] Aucun remède trouvé avec le slug "${slug}"`);
     return null;
   }
 

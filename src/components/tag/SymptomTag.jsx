@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { IoMdClose } from "react-icons/io";
+import { BUTTON_PRIMARY_STYLES } from "../../constants/buttonStyles";
 
 // Fonction helper pour capitaliser la première lettre
 const capitalizeSymptom = (symptom) => {
@@ -23,7 +24,7 @@ export default function SymptomTag({ symptom, onRemove }) {
       transition={{ duration: 0.3 }}
       onClick={() => onRemove(symptom)}
       aria-label={`Supprimer ${symptom}`}
-      className="flex cursor-pointer items-center gap-2 rounded-md bg-emerald-600 px-3 py-2 text-white shadow-md transition duration-150 ease-in-out hover:scale-105 hover:bg-emerald-600 focus:ring-2 focus:ring-emerald-300 focus:outline-none dark:bg-emerald-700 dark:hover:bg-emerald-600"
+      className={`flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 shadow-md ${BUTTON_PRIMARY_STYLES}`}
     >
       <span className="text-sm font-medium tracking-wider lg:text-base">
         {capitalizeSymptom(symptom)}

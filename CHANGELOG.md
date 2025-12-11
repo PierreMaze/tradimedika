@@ -2,6 +2,78 @@
 
 ---
 
+## [0.9.1] - 2025-12-11
+
+### <u>add:</u>
+
+- Added `src/constants/buttonStyles.js` for reusable button styling constants
+- Added `state` prop to Link components in `RemedyCard.jsx` to pass selectedSymptoms to detail page
+- Added `state` prop to "Retour aux résultats" Link components in `RemedyResultDetails.jsx` to preserve search state
+- Added `selectedSymptoms` extraction from `location.state` in `RemedyResultDetails.jsx`
+- Added conditional `state` prop to BreadCrumb NavLink for "/remedes" path to preserve navigation state
+- Added `selectedSymptoms` prop to `RemedyResultList` component signature
+- Added `selectedSymptoms` prop to `RemedyCard` component signature
+- Added missing `motion` and `Link` imports to `RemedyResult.jsx`
+
+### <u>update:</u>
+
+- Updated `RemedyResult.jsx` to pass `selectedSymptoms` prop to `RemedyResultList` component
+- Updated `RemedyResultList.jsx` to receive and propagate `selectedSymptoms` to child `RemedyCard` components
+- Updated `RemedyCard.jsx` to receive `selectedSymptoms` and pass via Link state to detail page
+- Updated `RemedyCard.jsx` image display: changed from `aspect-video` to `aspect-square` (1:1 ratio)
+- Updated `RemedyCard.jsx` image styling: changed from `object-cover` to `object-scale-down` with `p-4` padding
+- Updated `RemedyResultDetails.jsx` to extract symptoms from `location.state` and return in both "Retour" buttons
+- Updated `RemedyResultDetails.jsx` image display: changed from `aspect-video` to `aspect-square` (1:1 ratio)
+- Updated `RemedyResultDetails.jsx` image styling: changed from `object-cover` to `object-scale-down` with `p-6` padding
+- Updated `BreadCrumb.jsx` to extract `selectedSymptoms` from `location.state` and pass to BreadcrumbItem components
+- Updated `BreadCrumbItem` function signature to accept `selectedSymptoms` prop
+- Updated `FilterTag.jsx`, `ListFilterTag.jsx`, `Hero.jsx`, and `SymptomTag.jsx` to use buttonStyles constant
+- Updated PropTypes for `RemedyResultList`, `RemedyCard`, and `BreadCrumbItem` to include `selectedSymptoms` validation
+- Updated `package.json` version from `0.9.0` to `0.9.1`
+
+### <u>refactor:</u>
+
+- Refactored button styling across components to use centralized `buttonStyles.js` constant
+- Refactored navigation state management to use React Router `location.state` for symptom persistence
+- Refactored image aspect ratios from 16:9 to 1:1 for better display of square Flaticon icons (512x512px)
+
+### <u>fix:</u>
+
+- Fixed navigation state loss when returning from remedy detail page to results page
+- Fixed "Retour aux résultats" buttons not preserving search results (both top and bottom buttons)
+- Fixed BreadCrumb "Remèdes" link not preserving state when clicked
+- Fixed search functionality from home page by adding missing imports to RemedyResult.jsx
+- Fixed image cropping issue by changing aspect ratio to square and using object-scale-down
+- Fixed images being cut off by using object-scale-down instead of object-cover
+
+### <u>optimization:</u>
+
+- Optimized image display quality by preventing upscaling with object-scale-down
+- Optimized navigation UX by preserving search context across page transitions
+- Optimized code reusability with centralized button styling constants
+
+### <u>standardization:</u>
+
+- Standardized image aspect ratio across remedy cards and details pages (1:1 square)
+- Standardized state passing pattern for selectedSymptoms across navigation chain
+- Standardized button styling with reusable constants across filter and tag components
+- Established navigation state persistence pattern using React Router location.state
+
+### <u>features:</u>
+
+- **Navigation State Persistence**: Search results now persist when navigating between remedy list and detail pages
+- **Improved Image Display**: Full icons displayed without cropping using 1:1 aspect ratio and object-scale-down
+- **State-Aware BreadCrumb**: Clicking "Remèdes" in breadcrumb preserves search results
+- **Centralized Button Styles**: Reusable styling constants for consistent UI across components
+
+### <u>issues resolved:</u>
+
+- User-reported bug: Navigation state loss when returning from detail page showing empty results
+- User-reported bug: Search from home page not displaying remedies (missing imports)
+- User-reported UX issue: Images being cropped due to 16:9 aspect ratio on square icons
+
+---
+
 ## [0.9.0] - 2025-12-10
 
 ### <u>add:</u>

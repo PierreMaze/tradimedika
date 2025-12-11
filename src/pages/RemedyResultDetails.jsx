@@ -1,6 +1,6 @@
 // tradimedika-v1/src/pages/RemedyResultDetails.jsx
 import { motion } from "framer-motion";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import RemedyResultNotFound from "../components/remedy/RemedyResultNotFound";
 import db from "../data/db.json";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
@@ -17,6 +17,8 @@ import { getRemedyBySlug } from "../utils/remedyMatcher";
 
 function RemedyResultDetails() {
   const { slug } = useParams();
+  const location = useLocation();
+  const selectedSymptoms = location.state?.symptoms || [];
   const remedy = getRemedyBySlug(slug, db);
 
   // Si le remède n'existe pas, afficher composant NotFound
@@ -50,6 +52,7 @@ function RemedyResultDetails() {
       >
         <Link
           to="/remedes"
+          state={{ symptoms: selectedSymptoms }}
           aria-label="Retour aux résultats"
           className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition duration-200 hover:bg-emerald-700 hover:shadow-lg focus:ring-2 focus:ring-emerald-300 focus:outline-none"
         >
@@ -77,15 +80,13 @@ function RemedyResultDetails() {
         className="mb-6 grid gap-6 lg:mb-8 lg:grid-cols-5 lg:gap-8"
       >
         {/* Image */}
-        <div className="lg:col-span-2">
-          <div className="aspect-video w-full overflow-hidden rounded-lg bg-neutral-100 shadow-md dark:bg-neutral-700">
+        <div className="lg:col-span-2 2xl:col-span-1">
+          <div className="aspect-square w-full overflow-hidden rounded-lg bg-neutral-300 shadow-md dark:bg-neutral-700">
             <motion.img
               src={remedy.image}
               alt={`Illustration de ${remedy.name}`}
-              className="h-full w-full object-cover"
+              className="mx-auto h-full w-2/3 object-scale-down p-6 lg:w-3/4 2xl:w-4/5"
               loading="lazy"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
             />
           </div>
         </div>
@@ -217,7 +218,7 @@ function RemedyResultDetails() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.5 + index * 0.05 }}
-                className="rounded-md bg-emerald-600 px-3 py-2 text-sm font-medium text-white shadow-md dark:bg-emerald-700"
+                className="rounded-md bg-orange-100 px-3 py-2 text-sm font-medium text-yellow-800 shadow-md dark:bg-yellow-700 dark:text-yellow-100"
               >
                 {capitalizeFirstLetter(symptom, true)}
               </motion.span>
@@ -296,9 +297,9 @@ function RemedyResultDetails() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
-          className="mb-6 rounded-lg border-l-4 border-amber-500 bg-amber-100 p-4 shadow-md transition duration-300 lg:p-6 dark:bg-amber-950"
+          className="mb-6 rounded-lg border-l-4 border-yellow-500 bg-yellow-100 p-4 shadow-md transition duration-300 lg:p-6 dark:bg-yellow-950"
         >
-          <h2 className="mb-3 flex items-center gap-2 text-xl font-semibold text-amber-800 lg:text-2xl dark:text-amber-200">
+          <h2 className="mb-3 flex items-center gap-2 text-xl font-semibold text-yellow-800 lg:text-2xl dark:text-yellow-200">
             <svg
               className="h-6 w-6"
               fill="none"
@@ -411,6 +412,7 @@ function RemedyResultDetails() {
         {/* Bouton Retour */}
         <Link
           to="/remedes"
+          state={{ symptoms: selectedSymptoms }}
           aria-label="Retour aux résultats"
           className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition duration-200 hover:bg-emerald-700 hover:shadow-lg focus:ring-2 focus:ring-emerald-300 focus:outline-none"
         >

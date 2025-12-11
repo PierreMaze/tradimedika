@@ -12,7 +12,11 @@ import RemedyResultNotFound from "./RemedyResultNotFound";
  * - Utilise AnimatePresence pour les animations enter/exit
  * - Gère deux scénarios d'état vide (pas de résultats initiaux vs pas de correspondance après filtrage)
  */
-export default function RemedyResultList({ remedies, hasMatchingRemedies }) {
+export default function RemedyResultList({
+  remedies,
+  hasMatchingRemedies,
+  selectedSymptoms,
+}) {
   // Si aucun remède dans la liste filtrée
   if (remedies.length === 0) {
     // Si hasMatchingRemedies est true, cela signifie qu'il y a des résultats mais le filtre les exclut tous
@@ -29,9 +33,13 @@ export default function RemedyResultList({ remedies, hasMatchingRemedies }) {
     <div className="w-full">
       {/* Grille responsive pour les cartes de remèdes */}
       <AnimatePresence mode="sync">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-4 grid grid-cols-1 gap-6 md:grid-cols-2 lg:-mx-4 lg:grid-cols-3 2xl:gap-12">
           {remedies.map((result) => (
-            <RemedyCard key={result.remedy.id} remedy={result.remedy} />
+            <RemedyCard
+              key={result.remedy.id}
+              remedy={result.remedy}
+              selectedSymptoms={selectedSymptoms}
+            />
           ))}
         </div>
       </AnimatePresence>
@@ -48,4 +56,5 @@ RemedyResultList.propTypes = {
     }),
   ).isRequired,
   hasMatchingRemedies: PropTypes.bool.isRequired,
+  selectedSymptoms: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

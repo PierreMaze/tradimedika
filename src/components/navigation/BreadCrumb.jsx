@@ -78,13 +78,18 @@ const buildBreadcrumbPath = (pathname, params, remedyName = null) => {
 /**
  * BreadcrumbItem - Individual breadcrumb link or text
  */
-function BreadcrumbItem({ item, isLast }) {
+function BreadcrumbItem({ item, isLast, selectedSymptoms }) {
   return (
     <li className="flex items-center gap-2">
       {!isLast ? (
         <>
           <NavLink
             to={item.path}
+            state={
+              item.path === "/remedes" && selectedSymptoms.length > 0
+                ? { symptoms: selectedSymptoms }
+                : undefined
+            }
             className={LINK_INTERNAL_STYLES}
             aria-label={`Naviguer vers ${item.label}`}
           >
@@ -110,6 +115,7 @@ BreadcrumbItem.propTypes = {
     path: PropTypes.string.isRequired,
   }).isRequired,
   isLast: PropTypes.bool.isRequired,
+  selectedSymptoms: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 /**
@@ -118,6 +124,7 @@ BreadcrumbItem.propTypes = {
 function BreadCrumb() {
   const location = useLocation();
   const params = useParams();
+  const selectedSymptoms = location.state?.symptoms || [];
 
   // Récupérer le remède si on est sur une page de détail
   const remedy = params.slug ? getRemedyBySlug(params.slug, db) : null;
@@ -142,6 +149,7 @@ function BreadCrumb() {
             key={item.path}
             item={item}
             isLast={index === pathSegments.length - 1}
+            selectedSymptoms={selectedSymptoms}
           />
         ))}
       </ol>

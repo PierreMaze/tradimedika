@@ -9,6 +9,7 @@ import { useSymptomTags } from "../../hooks/useSymptomTags";
 import LeafFall from "../LeafFall";
 import SymptomsSelector from "../input/SymptomsSelector";
 import ListSymptomTag from "../tag/ListSymptomTag";
+import { BUTTON_PRIMARY_STYLES } from "../../constants/buttonStyles";
 
 /**
  * Composant wrapper pour isoler le state des symptômes
@@ -67,13 +68,13 @@ function SymptomsSection() {
         }
         aria-busy={isLoading}
         aria-disabled={isDisabled}
-        whileHover={!isDisabled && !isLoading ? { scale: 1.05 } : {}}
-        whileTap={!isDisabled && !isLoading ? { scale: 0.95 } : {}}
+        whileHover={!isDisabled && !isLoading}
+        whileTap={!isDisabled && !isLoading}
         transition={{ duration: 0.2 }}
         className={`mx-auto flex w-full items-center justify-center gap-2 rounded-lg px-7 py-3.5 font-semibold shadow-lg transition duration-300 ease-in-out md:max-w-80 lg:text-base 2xl:text-lg ${
           isDisabled || isLoading
             ? "cursor-not-allowed bg-neutral-400 opacity-50 dark:bg-neutral-600"
-            : "bg-emerald-600 text-white hover:bg-emerald-600/90 dark:bg-emerald-700 dark:hover:bg-emerald-700/90"
+            : BUTTON_PRIMARY_STYLES
         }`}
       >
         {isLoading ? (

@@ -12,7 +12,7 @@ import { generateSlug } from "../../utils/remedyMatcher";
  * - Support mode sombre
  * - Accessible avec aria-label
  */
-export default function RemedyCard({ remedy }) {
+export default function RemedyCard({ remedy, selectedSymptoms }) {
   const {
     name,
     type,
@@ -43,27 +43,28 @@ export default function RemedyCard({ remedy }) {
     >
       <Link
         to={`/remedes/${generateSlug(name)}`}
+        state={{ symptoms: selectedSymptoms }}
         aria-label={`Voir les détails de ${name}`}
         className="block h-full"
       >
-        <div className="group h-full overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-md transition duration-300 ease-in-out hover:scale-102 hover:shadow-lg dark:border-neutral-700 dark:bg-neutral-800">
+        <div className="group h-full overflow-hidden rounded-lg bg-white shadow-md ring-2 ring-neutral-300 transition duration-300 ease-in-out hover:shadow-lg hover:ring-emerald-500 dark:bg-neutral-800 dark:ring-neutral-600">
           {/* Image */}
           {image && (
-            <div className="aspect-video w-full overflow-hidden bg-neutral-100 dark:bg-neutral-700">
+            <div className="aspect-square w-full overflow-hidden bg-neutral-50 dark:bg-neutral-700">
               <img
                 src={image}
                 alt={`Illustration de ${name}`}
-                className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                className="mx-auto h-full w-2/3 object-scale-down p-4 transition duration-300 lg:w-3/4 2xl:w-4/5"
                 loading="lazy"
               />
             </div>
           )}
 
           {/* Contenu */}
-          <div className="p-4 lg:p-6">
+          <div className="p-6">
             {/* En-tête avec nom et type */}
             <div className="mb-3 flex items-start justify-between gap-2">
-              <h3 className="text-xl font-bold text-neutral-900 lg:text-2xl dark:text-neutral-100">
+              <h3 className="text-start text-xl font-bold text-neutral-900 lg:text-2xl dark:text-neutral-100">
                 {name}
               </h3>
               <span
@@ -193,4 +194,5 @@ RemedyCard.propTypes = {
     childrenAge: PropTypes.number,
     verifiedByProfessional: PropTypes.bool,
   }).isRequired,
+  selectedSymptoms: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
