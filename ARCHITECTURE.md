@@ -19,5 +19,5 @@ src/
 │   └── components/     # Composants spécifiques au layout (LogoTradimedika)
 ├── pages/              # Pages de l'application (Home, RemedyResult, RemedyResultDetails, NotFound)
 ├── routes/             # Configuration du routage React Router (Router.jsx)
-└── utils/              # Fonctions utilitaires (normalizeSymptom, remedyMatcher avec slug generation)
+└── utils/              # Fonctions utilitaires (normalizeSymptom, remedyMatcher avec slug generation, formatSegmentLabel pour BreadCrumb)
 ```

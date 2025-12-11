@@ -4,6 +4,7 @@ import { IoChevronForward } from "react-icons/io5";
 import { NavLink, useLocation, useParams } from "react-router-dom";
 import { LINK_INTERNAL_STYLES } from "../../constants/linkStyles";
 import db from "../../data/db.json";
+import { formatSegmentLabel } from "../../utils/formatSegmentLabel";
 import { getRemedyBySlug } from "../../utils/remedyMatcher";
 
 /**
@@ -27,21 +28,35 @@ import { getRemedyBySlug } from "../../utils/remedyMatcher";
 
 /**
  * Convert URL segment to readable label
- * @param {string} segment - URL segment (e.g., "remedies", "citron")
+ *
+ * Priorité de transformation :
+ * 1. Si c'est un slug et qu'on a le nom du remède depuis la DB → utiliser le nom exact
+ * 2. Si c'est un segment avec label statique (ex: "remedes") → utiliser le label
+ * 3. Sinon → formater le segment avec formatSegmentLabel (décodage URI + capitalisation)
+ *
+ * @param {string} segment - URL segment (e.g., "remedes", "citron", "thé-vert", "th%C3%A9-vert")
  * @param {boolean} isSlug - Whether segment is a remedy slug
  * @param {string|null} remedyName - Name of the remedy if found
  * @returns {string} Human-readable label
  */
 const segmentToLabel = (segment, isSlug = false, remedyName = null) => {
+  // Priorité 1: Nom du remède depuis la DB (garantit l'exactitude)
   if (isSlug && remedyName) {
     return remedyName; // Affiche "Citron" au lieu de "citron"
   }
 
+  // Priorité 2: Labels statiques pour les routes connues
   const labels = {
     remedes: "Remèdes",
   };
 
-  return labels[segment] || segment;
+  if (labels[segment]) {
+    return labels[segment];
+  }
+
+  // Priorité 3: Formatage intelligent du segment
+  // (décode URI, remplace tirets par espaces, capitalise)
+  return formatSegmentLabel(segment);
 };
 
 /**

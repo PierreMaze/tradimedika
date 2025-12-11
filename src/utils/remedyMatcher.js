@@ -156,13 +156,18 @@ export function generateSlug(name) {
 /**
  * Récupère un remède par son slug depuis la base de données
  *
- * @param {string} slug - Le slug du remède (ex: "citron", "thé-vert")
+ * Cette fonction gère automatiquement le décodage des URLs encodées.
+ * Les navigateurs encodent souvent les accents (ex: "thé-vert" → "th%C3%A9-vert").
+ * Cette fonction décode le slug avant de faire la recherche pour garantir le matching.
+ *
+ * @param {string} slug - Le slug du remède (ex: "citron", "thé-vert", "th%C3%A9-vert")
  * @param {Array} database - Base de données des remèdes (db.json)
  * @returns {Object|null} - Le remède trouvé ou null
  *
  * @example
  * const remedy = getRemedyBySlug("citron", db);
  * const remedy = getRemedyBySlug("thé-vert", db);
+ * const remedy = getRemedyBySlug("th%C3%A9-vert", db); // URL encodée → trouve "Thé Vert"
  */
 export function getRemedyBySlug(slug, database) {
   // Validation des entrées
@@ -176,14 +181,28 @@ export function getRemedyBySlug(slug, database) {
     return null;
   }
 
+  // Décoder le slug au cas où il serait encodé (ex: th%C3%A9-vert → thé-vert)
+  let decodedSlug = slug;
+  try {
+    decodedSlug = decodeURIComponent(slug);
+  } catch (error) {
+    console.warn(
+      `[remedyMatcher] Erreur lors du décodage du slug "${slug}"`,
+      error,
+    );
+    // Continue avec le slug original si le décodage échoue
+  }
+
   // Rechercher le remède dont le slug correspond
   const remedy = database.find((item) => {
     if (!item.name) return false;
-    return generateSlug(item.name) === slug;
+    return generateSlug(item.name) === decodedSlug;
   });
 
   if (!remedy) {
-    console.warn(`[remedyMatcher] Aucun remède trouvé avec le slug "${slug}"`);
+    console.warn(
+      `[remedyMatcher] Aucun remède trouvé avec le slug "${decodedSlug}"`,
+    );
     return null;
   }
 

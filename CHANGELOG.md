@@ -2,6 +2,63 @@
 
 ---
 
+## [0.11.1] - 2025-12-11
+
+### <u>add:</u>
+
+- Added `src/utils/formatSegmentLabel.js` utility function for BreadCrumb label formatting
+- Added `decodeURIComponent()` logic in `getRemedyBySlug()` to handle URL-encoded slugs (ex: `th%C3%A9-vert` → `thé-vert`)
+- Added intelligent fallback in `segmentToLabel()` using `formatSegmentLabel()` for unknown segments
+
+### <u>update:</u>
+
+- Updated `src/utils/remedyMatcher.js` to decode URI-encoded slugs before matching remedies
+- Updated `src/components/navigation/BreadCrumb.jsx` to use `formatSegmentLabel()` for better label display
+- Updated `segmentToLabel()` function with 3-level priority system (remedy name > static labels > formatted segment)
+- Updated JSDoc documentation in `getRemedyBySlug()` to reflect new URI decoding behavior
+- Updated `package.json` version from `0.11.0` to `0.11.1`
+- Updated `README.md` version badge from `0.11.0` to `0.11.1`
+- Updated `ARCHITECTURE.md` to include `formatSegmentLabel` in utils section
+
+### <u>fix:</u>
+
+- Fixed BreadCrumb displaying corrupted characters with URL-encoded accents (ex: `th%C3%A9-vert` now correctly shows "Thé Vert")
+- Fixed BreadCrumb showing raw slugs instead of formatted labels for unknown remedies (ex: `huile-de-coco` → "Huile De Coco")
+- Fixed `getRemedyBySlug()` failing to match remedies when browser encodes accents in URLs
+- Fixed missing capitalization and space conversion in BreadCrumb labels
+
+### <u>refactor:</u>
+
+- Refactored BreadCrumb label transformation logic into dedicated `formatSegmentLabel()` utility
+- Refactored `segmentToLabel()` to use structured priority system with clear documentation
+
+### <u>optimization:</u>
+
+- Optimized BreadCrumb display with try/catch error handling for URI decoding failures
+- Improved remedy matching robustness by handling both encoded and non-encoded URL slugs
+
+### <u>standardization:</u>
+
+- Standardized BreadCrumb label formatting with consistent capitalization rules
+- Standardized URI decoding pattern across slug matching system
+
+### <u>features:</u>
+
+- **Smart URI Decoding**: BreadCrumb automatically decodes URL-encoded characters (`%C3%A9` → `é`)
+- **Intelligent Label Formatting**: Unknown segments display as formatted labels (hyphens → spaces, capitalized)
+- **Robust Slug Matching**: Remedies can be found with both encoded and non-encoded URLs
+- **French Accent Support**: Full support for French accents in URLs and BreadCrumb display
+- **Graceful Fallback**: If remedy not found in database, BreadCrumb still displays clean formatted label
+
+### <u>issues resolved:</u>
+
+- GitHub Issue #53: Correction of unusual characters in BreadCrumb (accents, hyphens, slugs)
+- User request: Fix corrupted accent display in navigation breadcrumb
+- Fixed BreadCrumb showing `th%C3%A9-vert` instead of "Thé Vert"
+- Fixed BreadCrumb showing `menthe-poivree` instead of "Menthe Poivrée"
+
+---
+
 ## [0.11.0] - 2025-12-11
 
 ### <u>add:</u>
