@@ -8,7 +8,7 @@ export default function LeafFall() {
   // Détection mobile vs desktop
   const isMobile = window.innerWidth < 768;
   const COUNT = isMobile ? 5 : 10;
-  const START_FALL_AFTER = 2000;
+  const START_FALL_AFTER = 0;
 
   useEffect(() => {
     const timer = setTimeout(() => setShow(true), START_FALL_AFTER);
@@ -18,15 +18,15 @@ export default function LeafFall() {
   // Initialiser les feuilles avec useState pour garantir la pureté
   // La fonction d'initialisation n'est appelée qu'une seule fois au montage
   const [leaves] = useState(() => {
-    return Array.from({ length: COUNT }).map((_, i) => {
-      const startX = (i + 0.5) * (100 / COUNT);
+    return Array.from({ length: COUNT }).map(() => {
+      const startX = Math.random() * 100;
       const startY = -10;
       const scale = 1;
       const duration = Math.random() * 12 + 16;
       const amplitude = Math.random() * 80 + 60;
       const rotationStart = Math.random() * 360;
-      // Délai progressif pour que les feuilles tombent les unes après les autres
-      const delay = i * 2.5 + Math.random() * 1;
+      // Délai aléatoire pour que les feuilles tombent de manière aléatoire
+      const delay = Math.random() * 8;
 
       const KEYFRAMES_COUNT = 10;
 
