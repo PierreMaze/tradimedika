@@ -125,7 +125,7 @@ export default function LeafFall() {
         >
           <GiFallingLeaf
             size={24 * leaf.scale}
-            className="text-emerald-800/80 drop-shadow-lg dark:text-emerald-500/75"
+            className="text-emerald-700/75 drop-shadow-lg dark:text-emerald-500/75"
           />
         </motion.div>
       ))}
