@@ -106,7 +106,7 @@ function RemedyResultDetails() {
 
             {/* Pregnancy Safe Badge */}
             {remedy.pregnancySafe === true && (
-              <PregnancyBadge variant="ok" />
+              <PregnancyBadge/>
             )}
 
             {/* Children Age Badge */}

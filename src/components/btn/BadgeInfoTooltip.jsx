@@ -138,7 +138,7 @@ function BadgeInfoTooltip() {
               y: 20,
             }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed left-1/2 top-1/2 z-50 w-[90vw] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg ring ring-neutral-300 bg-neutral-100 p-5 shadow-xl dark:ring-neutral-600 dark:bg-neutral-800 lg:absolute lg:left-0 lg:top-full lg:mt-2 lg:translate-x-0 lg:translate-y-0"
+            className="fixed left-1/2 top-1/2 z-50 w-lg max-w-md lg:w-135 lg:max-w-3xl -translate-x-1/2 -translate-y-1/2 rounded-lg ring ring-neutral-300 bg-neutral-100 p-5 shadow-xl dark:ring-neutral-600 dark:bg-neutral-800 lg:absolute lg:left-0 lg:top-full lg:mt-2 lg:translate-x-0 lg:translate-y-0"
             style={{
               // Desktop: slide from top
               ...(window.innerWidth >= 1024 && {
