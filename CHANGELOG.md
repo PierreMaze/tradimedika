@@ -2,6 +2,45 @@
 
 ---
 
+## [0.10.0] - 2025-12-11
+
+### <u>add:</u>
+
+- Added `src/components/badge/` directory for reusable badge components
+- Added `VerifiedBadge.jsx` component with `HiCheckCircle` icon from `react-icons/hi2`
+- Added `PregnancyBadge.jsx` component with `HiHeart` icon from `react-icons/hi2`
+- Added `ChildrenAgeBadge.jsx` component with `HiFaceSmile` icon from `react-icons/hi2`
+- Added `BadgeInfoTooltip.jsx` component to explain badge meanings with hover/click interactions
+- Added React Icons imports (`HiArrowLeft`, `HiExclamationTriangle`, `HiLightBulb`, `HiInformationCircle`, `HiXMark`) from `react-icons/hi2`
+
+### <u>update:</u>
+
+- Updated `RemedyCard.jsx` to use badge components instead of inline SVG (3 replacements)
+- Updated `RemedyResultDetails.jsx` to use React Icons for all icons (10 replacements: 2 arrows, 3 badges, 3 section icons)
+- Updated `BadgeInfoTooltip.jsx` to use badge components and `HiXMark` icon (4 replacements)
+- Updated `RemedyResultNotFound.jsx` to use `HiArrowLeft` icon (1 replacement)
+- Updated all badge components with PropTypes validation and dark mode support
+
+### <u>refactor:</u>
+
+- Refactored all custom inline SVG icons to use React Icons library (Heroicons v2)
+- Refactored badge display logic into reusable components (`VerifiedBadge`, `PregnancyBadge`, `ChildrenAgeBadge`)
+- Refactored 20 SVG instances replaced by 8 unique React Icons across 4 files
+
+### <u>optimization:</u>
+
+- Optimized bundle size by replacing ~200 lines of SVG code with React Icons imports
+- Optimized component reusability with centralized badge components
+- Optimized tree-shaking with individual icon imports from `react-icons/hi2`
+
+### <u>standardization:</u>
+
+- Standardized icon library usage across the application (Heroicons v2 from `react-icons/hi2`)
+- Standardized badge component structure with consistent props API (`className`, `size`, `showLabel`)
+- Standardized icon accessibility with `aria-hidden="true"` attribute
+
+---
+
 ## [0.9.1] - 2025-12-11
 
 ### <u>add:</u>

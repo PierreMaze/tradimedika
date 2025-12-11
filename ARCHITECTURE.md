@@ -4,7 +4,8 @@
 src/
 ├── assets/             # Images, fonts, et ressources statiques
 ├── components/         # Composants réutilisables
-│   ├── btn/            # Composants boutons (DarkModeToggle, etc.)
+│   ├── badge/          # Composants badges réutilisables (VerifiedBadge, PregnancyBadge, ChildrenAgeBadge)
+│   ├── btn/            # Composants boutons (DarkModeToggle, BadgeInfoTooltip)
 │   ├── filter/         # Composants de filtrage (FilterTag, ListFilterTag, FilterRemedyResult)
 │   ├── input/          # Composants d'entrée (SymptomsSelector, etc.)
 │   ├── navigation/     # Composants de navigation (BreadCrumb avec support slug)

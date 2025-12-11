@@ -1,6 +1,7 @@
 // components/remedy/RemedyResultNotFound.jsx
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { HiArrowLeft } from "react-icons/hi2";
 
 /**
  * Composant d'état vide pour les résultats de remèdes
@@ -59,20 +60,7 @@ export default function RemedyResultNotFound({
           to="/"
           className="inline-flex items-center gap-2 rounded-md bg-emerald-600 px-4 py-2 text-sm font-medium text-white shadow-md transition duration-300 ease-in-out hover:scale-105 hover:bg-emerald-700 focus:ring-2 focus:ring-emerald-300 focus:outline-none dark:bg-emerald-700 dark:hover:bg-emerald-600"
         >
-          <svg
-            className="h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
-            />
-          </svg>
+          <HiArrowLeft className="h-5 w-5" aria-hidden="true" />
           Retour à l&apos;accueil
         </Link>
       )}

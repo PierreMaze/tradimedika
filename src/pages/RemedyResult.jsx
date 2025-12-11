@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import FilterRemedyResult from "../components/filter/FilterRemedyResult";
 import RemedyResultList from "../components/remedy/RemedyResultList";
+import BadgeInfoTooltip from "../components/btn/BadgeInfoTooltip";
 import db from "../data/db.json";
 import { findMatchingRemedies } from "../utils/remedyMatcher";
 
@@ -43,12 +44,12 @@ function RemedyResult() {
 
   return (
     <>
-      {/* Bouton Retour */}
+      {/* Bouton Retour et Info Badges */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
-        className="mb-6"
+        className="mb-6 flex items-center gap-3"
       >
         <Link
           to="/"
@@ -69,6 +70,7 @@ function RemedyResult() {
             />
           </svg>
         </Link>
+        <BadgeInfoTooltip />
       </motion.div>
       <div className="text-dark dark:text-light flex flex-col items-center text-center transition duration-300 ease-in-out">
         {/* Titre principal */}

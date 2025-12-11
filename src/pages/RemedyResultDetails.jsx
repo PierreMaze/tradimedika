@@ -1,7 +1,17 @@
 // tradimedika-v1/src/pages/RemedyResultDetails.jsx
 import { motion } from "framer-motion";
 import { Link, useLocation, useParams } from "react-router-dom";
+import {
+  HiArrowLeft,
+  HiExclamationTriangle,
+  HiLightBulb,
+  HiInformationCircle,
+} from "react-icons/hi2";
 import RemedyResultNotFound from "../components/remedy/RemedyResultNotFound";
+import BadgeInfoTooltip from "../components/btn/BadgeInfoTooltip";
+import VerifiedBadge from "../components/badge/VerifiedBadge";
+import PregnancyBadge from "../components/badge/PregnancyBadge";
+import ChildrenAgeBadge from "../components/badge/ChildrenAgeBadge";
 import db from "../data/db.json";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 import { getRemedyBySlug } from "../utils/remedyMatcher";
@@ -43,12 +53,12 @@ function RemedyResultDetails() {
       transition={{ duration: 0.4 }}
       className="text-dark dark:text-light w-full transition duration-300 ease-in-out"
     >
-      {/* Bouton Retour */}
+      {/* Bouton Retour et Info Badges */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
-        className="mb-6"
+        className="mb-6 flex items-center gap-3"
       >
         <Link
           to="/remedes"
@@ -56,21 +66,10 @@ function RemedyResultDetails() {
           aria-label="Retour aux résultats"
           className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition duration-200 hover:bg-emerald-700 hover:shadow-lg focus:ring-2 focus:ring-emerald-300 focus:outline-none"
         >
-          <svg
-            className="h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
-            />
-          </svg>
+          <HiArrowLeft className="h-5 w-5" aria-hidden="true" />
           Retour aux résultats
         </Link>
+        <BadgeInfoTooltip />
       </motion.div>
       {/* Header Hero Section */}
       <motion.div
@@ -103,63 +102,16 @@ function RemedyResultDetails() {
             </span>
 
             {/* Verified Badge */}
-            {remedy.verifiedByProfessional && (
-              <span className="flex items-center gap-1.5 rounded-md bg-sky-100 px-3 py-1.5 text-xs font-semibold text-sky-800 transition duration-300 dark:bg-sky-900 dark:text-sky-200">
-                <svg
-                  className="h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                Vérifié
-              </span>
-            )}
+            {remedy.verifiedByProfessional && <VerifiedBadge />}
 
             {/* Pregnancy Safe Badge */}
             {remedy.pregnancySafe === true && (
-              <span className="flex items-center gap-1.5 rounded-md bg-lime-100 px-3 py-1.5 text-xs font-semibold text-lime-800 transition duration-300 dark:bg-lime-900 dark:text-lime-200">
-                <svg
-                  className="h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                  />
-                </svg>
-                Grossesse OK
-              </span>
+              <PregnancyBadge variant="ok" />
             )}
 
             {/* Children Age Badge */}
             {remedy.childrenAge !== null && (
-              <span className="flex items-center gap-1.5 rounded-md bg-blue-100 px-3 py-1.5 text-xs font-semibold text-blue-800 transition duration-300 dark:bg-blue-900 dark:text-blue-200">
-                <svg
-                  className="h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                Enfants {remedy.childrenAge}+ ans
-              </span>
+              <ChildrenAgeBadge age={remedy.childrenAge} />
             )}
           </div>
 
@@ -300,19 +252,7 @@ function RemedyResultDetails() {
           className="mb-6 rounded-lg border-l-4 border-yellow-500 bg-yellow-100 p-4 shadow-md transition duration-300 lg:p-6 dark:bg-yellow-950"
         >
           <h2 className="mb-3 flex items-center gap-2 text-xl font-semibold text-yellow-800 lg:text-2xl dark:text-yellow-200">
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-              />
-            </svg>
+            <HiExclamationTriangle className="h-6 w-6" aria-hidden="true" />
             Contraindications
           </h2>
           <ul className="list-disc space-y-1 pl-5">
@@ -337,19 +277,7 @@ function RemedyResultDetails() {
           className="mb-6 rounded-lg border-l-4 border-sky-500 bg-sky-50 p-4 shadow-md transition duration-300 lg:p-6 dark:bg-sky-900/20"
         >
           <h2 className="mb-3 flex items-center gap-2 text-xl font-semibold text-sky-800 lg:text-2xl dark:text-sky-300">
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-              />
-            </svg>
+            <HiLightBulb className="h-6 w-6" aria-hidden="true" />
             Conseils pratiques
           </h2>
           <ul className="list-disc space-y-1 pl-5">
@@ -374,19 +302,7 @@ function RemedyResultDetails() {
           className="mb-6 rounded-lg border-l-4 border-yellow-500 bg-yellow-50 p-4 shadow-md transition duration-300 lg:p-6 dark:bg-yellow-900/20"
         >
           <h2 className="mb-3 flex items-center gap-2 text-xl font-semibold text-yellow-800 lg:text-2xl dark:text-yellow-300">
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+            <HiInformationCircle className="h-6 w-6" aria-hidden="true" />
             Allergènes potentiels
           </h2>
           <div className="flex flex-wrap gap-2">
@@ -416,19 +332,7 @@ function RemedyResultDetails() {
           aria-label="Retour aux résultats"
           className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition duration-200 hover:bg-emerald-700 hover:shadow-lg focus:ring-2 focus:ring-emerald-300 focus:outline-none"
         >
-          <svg
-            className="h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
-            />
-          </svg>
+          <HiArrowLeft className="h-5 w-5" aria-hidden="true" />
           Retour aux résultats
         </Link>
         <Link

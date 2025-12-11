@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
 import { generateSlug } from "../../utils/remedyMatcher";
+import VerifiedBadge from "../badge/VerifiedBadge";
+import PregnancyBadge from "../badge/PregnancyBadge";
+import ChildrenAgeBadge from "../badge/ChildrenAgeBadge";
 /**
  * Carte individuelle pour afficher un remède
  * - Entièrement cliquable (wrapper Link vers /remedes/:slug)
@@ -100,74 +103,9 @@ export default function RemedyCard({ remedy, selectedSymptoms }) {
 
             {/* Badges de sécurité */}
             <div className="flex flex-wrap gap-2">
-              {verifiedByProfessional && (
-                <span
-                  className="inline-flex items-center gap-1 rounded-md bg-sky-100 px-2 py-1 text-xs font-medium text-sky-800 dark:bg-sky-900 dark:text-sky-200"
-                  title="Vérifié par un professionnel de santé"
-                >
-                  <svg
-                    className="h-4 w-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                    />
-                  </svg>
-                  Vérifié
-                </span>
-              )}
-
-              {pregnancySafe && (
-                <span
-                  className="inline-flex items-center gap-1 rounded-md bg-lime-100 px-2 py-1 text-xs font-medium text-lime-800 dark:bg-lime-900 dark:text-lime-200"
-                  title="Sûr pendant la grossesse"
-                >
-                  <svg
-                    className="h-4 w-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  Grossesse
-                </span>
-              )}
-
-              {childrenAge !== null && (
-                <span
-                  className="inline-flex items-center gap-1 rounded-md bg-blue-100 px-2 py-1 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-200"
-                  title={`Adapté aux enfants de ${childrenAge} ans et plus`}
-                >
-                  <svg
-                    className="h-4 w-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  {childrenAge}+ ans
-                </span>
-              )}
+              {verifiedByProfessional && <VerifiedBadge />}
+              {pregnancySafe && <PregnancyBadge variant="default" />}
+              {childrenAge !== null && <ChildrenAgeBadge age={childrenAge} />}
             </div>
           </div>
         </div>
