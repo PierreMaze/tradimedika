@@ -52,7 +52,7 @@ export function useSymptomSubmit() {
         setHasSubmitted(true);
 
         // Navigation vers la page des résultats avec les symptômes en state
-        navigate("/remedies", {
+        navigate("/remedes", {
           state: { symptoms: selectedSymptoms },
         });
 

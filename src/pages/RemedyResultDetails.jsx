@@ -1,9 +1,10 @@
 // tradimedika-v1/src/pages/RemedyResultDetails.jsx
-import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import db from "../data/db.json";
-import { getRemedyBySlug } from "../utils/remedyMatcher";
+import { Link, useParams } from "react-router-dom";
 import RemedyResultNotFound from "../components/remedy/RemedyResultNotFound";
+import db from "../data/db.json";
+import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
+import { getRemedyBySlug } from "../utils/remedyMatcher";
 
 /**
  * RemedyResultDetails Page
@@ -26,13 +27,11 @@ function RemedyResultDetails() {
   // Configuration des couleurs par type
   const typeColors = {
     aliment:
-      "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+      "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200",
+    boisson: "bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200",
     épice:
       "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
-    plante:
-      "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
-    boisson:
-      "bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200",
+    plante: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
   };
 
   return (
@@ -42,6 +41,34 @@ function RemedyResultDetails() {
       transition={{ duration: 0.4 }}
       className="text-dark dark:text-light w-full transition duration-300 ease-in-out"
     >
+      {/* Bouton Retour */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+        className="mb-6"
+      >
+        <Link
+          to="/remedes"
+          aria-label="Retour aux résultats"
+          className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition duration-200 hover:bg-emerald-700 hover:shadow-lg focus:ring-2 focus:ring-emerald-300 focus:outline-none"
+        >
+          <svg
+            className="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"
+            />
+          </svg>
+          Retour aux résultats
+        </Link>
+      </motion.div>
       {/* Header Hero Section */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -69,14 +96,34 @@ function RemedyResultDetails() {
           <div className="mb-3 flex flex-wrap items-center gap-2">
             {/* Type Badge */}
             <span
-              className={`rounded-md px-3 py-1.5 text-xs font-semibold uppercase tracking-wide transition duration-300 ${typeColors[remedy.type] || typeColors.aliment}`}
+              className={`rounded-md px-3 py-1.5 text-xs font-semibold tracking-wide uppercase transition duration-300 ${typeColors[remedy.type] || typeColors.aliment}`}
             >
               {remedy.type}
             </span>
 
+            {/* Verified Badge */}
+            {remedy.verifiedByProfessional && (
+              <span className="flex items-center gap-1.5 rounded-md bg-sky-100 px-3 py-1.5 text-xs font-semibold text-sky-800 transition duration-300 dark:bg-sky-900 dark:text-sky-200">
+                <svg
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                Vérifié
+              </span>
+            )}
+
             {/* Pregnancy Safe Badge */}
             {remedy.pregnancySafe === true && (
-              <span className="flex items-center gap-1.5 rounded-md bg-purple-100 px-3 py-1.5 text-xs font-semibold text-purple-800 transition duration-300 dark:bg-purple-900 dark:text-purple-200">
+              <span className="flex items-center gap-1.5 rounded-md bg-lime-100 px-3 py-1.5 text-xs font-semibold text-lime-800 transition duration-300 dark:bg-lime-900 dark:text-lime-200">
                 <svg
                   className="h-4 w-4"
                   fill="none"
@@ -96,7 +143,7 @@ function RemedyResultDetails() {
 
             {/* Children Age Badge */}
             {remedy.childrenAge !== null && (
-              <span className="flex items-center gap-1.5 rounded-md bg-pink-100 px-3 py-1.5 text-xs font-semibold text-pink-800 transition duration-300 dark:bg-pink-900 dark:text-pink-200">
+              <span className="flex items-center gap-1.5 rounded-md bg-blue-100 px-3 py-1.5 text-xs font-semibold text-blue-800 transition duration-300 dark:bg-blue-900 dark:text-blue-200">
                 <svg
                   className="h-4 w-4"
                   fill="none"
@@ -113,67 +160,16 @@ function RemedyResultDetails() {
                 Enfants {remedy.childrenAge}+ ans
               </span>
             )}
-
-            {/* Verified Badge */}
-            {remedy.verifiedByProfessional && (
-              <span className="flex items-center gap-1.5 rounded-md bg-teal-100 px-3 py-1.5 text-xs font-semibold text-teal-800 transition duration-300 dark:bg-teal-900 dark:text-teal-200">
-                <svg
-                  className="h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                Vérifié
-              </span>
-            )}
           </div>
 
           {/* Title */}
-          <h1 className="mb-3 text-3xl font-bold lg:text-4xl">
-            {remedy.name}
-          </h1>
+          <h1 className="mb-3 text-3xl font-bold lg:text-4xl">{remedy.name}</h1>
 
           {/* Description (courte pour mobile) */}
-          <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 lg:text-base">
+          <p className="text-sm leading-relaxed text-neutral-600 lg:text-base dark:text-neutral-400">
             {remedy.description}
           </p>
         </div>
-      </motion.div>
-
-      {/* Bouton Retour */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3 }}
-        className="mb-6"
-      >
-        <Link
-          to="/remedes"
-          aria-label="Retour aux résultats"
-          className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition duration-200 hover:bg-emerald-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-300"
-        >
-          <svg
-            className="h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
-            />
-          </svg>
-          Retour aux résultats
-        </Link>
       </motion.div>
 
       {/* Propriétés Section */}
@@ -182,7 +178,7 @@ function RemedyResultDetails() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="mb-6 rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition duration-300 dark:border-neutral-700 dark:bg-neutral-800 lg:p-6"
+          className="mb-6 rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition duration-300 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800"
         >
           <h2 className="mb-4 text-2xl font-semibold lg:text-3xl">
             Propriétés
@@ -194,7 +190,7 @@ function RemedyResultDetails() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.4 + index * 0.05 }}
-                className="rounded-md bg-emerald-100 px-3 py-1.5 text-sm font-medium capitalize text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200"
+                className="rounded-md bg-emerald-100 px-3 py-1.5 text-sm font-medium text-emerald-800 capitalize dark:bg-emerald-900 dark:text-emerald-200"
               >
                 {prop.name}
               </motion.span>
@@ -209,7 +205,7 @@ function RemedyResultDetails() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="mb-6 rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition duration-300 dark:border-neutral-700 dark:bg-neutral-800 lg:p-6"
+          className="mb-6 rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition duration-300 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800"
         >
           <h2 className="mb-4 text-2xl font-semibold lg:text-3xl">
             Symptômes traités
@@ -221,9 +217,9 @@ function RemedyResultDetails() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.5 + index * 0.05 }}
-                className="rounded-md bg-emerald-600 px-3 py-2 text-sm font-medium capitalize text-white shadow-md dark:bg-emerald-700"
+                className="rounded-md bg-emerald-600 px-3 py-2 text-sm font-medium text-white shadow-md dark:bg-emerald-700"
               >
-                {symptom}
+                {capitalizeFirstLetter(symptom, true)}
               </motion.span>
             ))}
           </div>
@@ -236,7 +232,7 @@ function RemedyResultDetails() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="mb-6 rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition duration-300 dark:border-neutral-700 dark:bg-neutral-800 lg:p-6"
+          className="mb-6 rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition duration-300 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800"
         >
           <h2 className="mb-4 text-2xl font-semibold lg:text-3xl">
             Utilisations
@@ -253,9 +249,7 @@ function RemedyResultDetails() {
                 <div className="mb-1 flex flex-wrap items-center gap-2 text-sm font-semibold text-neutral-700 dark:text-neutral-300">
                   {/* Forme */}
                   {use.form && use.form.length > 0 && (
-                    <span className="capitalize">
-                      {use.form.join(", ")}
-                    </span>
+                    <span className="capitalize">{use.form.join(", ")}</span>
                   )}
                   {/* Dose */}
                   {use.dose && use.dose.value && (
@@ -302,9 +296,9 @@ function RemedyResultDetails() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
-          className="mb-6 rounded-lg border-l-4 border-red-500 bg-red-50 p-4 shadow-md transition duration-300 dark:bg-red-900/20 lg:p-6"
+          className="mb-6 rounded-lg border-l-4 border-amber-500 bg-amber-100 p-4 shadow-md transition duration-300 lg:p-6 dark:bg-amber-950"
         >
-          <h2 className="mb-3 flex items-center gap-2 text-xl font-semibold text-red-800 dark:text-red-300 lg:text-2xl">
+          <h2 className="mb-3 flex items-center gap-2 text-xl font-semibold text-amber-800 lg:text-2xl dark:text-amber-200">
             <svg
               className="h-6 w-6"
               fill="none"
@@ -324,7 +318,7 @@ function RemedyResultDetails() {
             {remedy.contraindications.map((contraindication, index) => (
               <li
                 key={index}
-                className="text-sm capitalize leading-relaxed text-red-700 dark:text-red-300"
+                className="text-sm leading-relaxed text-amber-800 capitalize dark:text-amber-200"
               >
                 {contraindication}
               </li>
@@ -339,9 +333,9 @@ function RemedyResultDetails() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="mb-6 rounded-lg border-l-4 border-blue-500 bg-blue-50 p-4 shadow-md transition duration-300 dark:bg-blue-900/20 lg:p-6"
+          className="mb-6 rounded-lg border-l-4 border-sky-500 bg-sky-50 p-4 shadow-md transition duration-300 lg:p-6 dark:bg-sky-900/20"
         >
-          <h2 className="mb-3 flex items-center gap-2 text-xl font-semibold text-blue-800 dark:text-blue-300 lg:text-2xl">
+          <h2 className="mb-3 flex items-center gap-2 text-xl font-semibold text-sky-800 lg:text-2xl dark:text-sky-300">
             <svg
               className="h-6 w-6"
               fill="none"
@@ -361,7 +355,7 @@ function RemedyResultDetails() {
             {remedy.tips.map((tip, index) => (
               <li
                 key={index}
-                className="text-sm leading-relaxed text-blue-700 dark:text-blue-300"
+                className="text-sm leading-relaxed text-sky-800 dark:text-sky-300"
               >
                 {tip}
               </li>
@@ -376,9 +370,9 @@ function RemedyResultDetails() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
-          className="mb-6 rounded-lg border-l-4 border-yellow-500 bg-yellow-50 p-4 shadow-md transition duration-300 dark:bg-yellow-900/20 lg:p-6"
+          className="mb-6 rounded-lg border-l-4 border-yellow-500 bg-yellow-50 p-4 shadow-md transition duration-300 lg:p-6 dark:bg-yellow-900/20"
         >
-          <h2 className="mb-3 flex items-center gap-2 text-xl font-semibold text-yellow-800 dark:text-yellow-300 lg:text-2xl">
+          <h2 className="mb-3 flex items-center gap-2 text-xl font-semibold text-yellow-800 lg:text-2xl dark:text-yellow-300">
             <svg
               className="h-6 w-6"
               fill="none"
@@ -398,7 +392,7 @@ function RemedyResultDetails() {
             {remedy.allergens.map((allergen, index) => (
               <span
                 key={index}
-                className="rounded-md bg-yellow-200 px-3 py-1.5 text-sm font-medium capitalize text-yellow-900 dark:bg-yellow-800 dark:text-yellow-100"
+                className="rounded-md bg-yellow-200 px-3 py-1.5 text-sm font-medium text-yellow-900 capitalize dark:bg-yellow-800 dark:text-yellow-100"
               >
                 {allergen}
               </span>
@@ -414,15 +408,30 @@ function RemedyResultDetails() {
         transition={{ delay: 1 }}
         className="flex flex-col gap-4 sm:flex-row"
       >
+        {/* Bouton Retour */}
         <Link
           to="/remedes"
-          className="rounded-lg bg-emerald-600 px-6 py-3 text-center font-semibold text-white transition duration-200 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-300"
+          aria-label="Retour aux résultats"
+          className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition duration-200 hover:bg-emerald-700 hover:shadow-lg focus:ring-2 focus:ring-emerald-300 focus:outline-none"
         >
-          ← Retour aux résultats
+          <svg
+            className="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"
+            />
+          </svg>
+          Retour aux résultats
         </Link>
         <Link
           to="/"
-          className="rounded-lg border-2 border-emerald-600 px-6 py-3 text-center font-semibold text-emerald-600 transition duration-200 hover:bg-emerald-50 focus:outline-none focus:ring-2 focus:ring-emerald-300 dark:hover:bg-emerald-950"
+          className="rounded-lg border-2 border-emerald-600 px-6 py-3 text-center font-semibold text-emerald-700 transition duration-200 hover:bg-emerald-600 hover:text-white focus:ring-2 focus:ring-emerald-300 focus:outline-none dark:hover:bg-emerald-600 dark:hover:text-white"
         >
           Nouvelle recherche
         </Link>

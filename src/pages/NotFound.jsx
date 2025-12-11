@@ -1,6 +1,6 @@
 // tradimedika-v1/src/pages/NotFound.jsx
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 /**
  * NotFound Page - 404 Error Handler
@@ -46,7 +46,7 @@ function NotFound() {
             Retour à l&apos;accueil
           </Link>
           <Link
-            to="/remedies"
+            to="/remedes"
             className="rounded-lg border-2 border-emerald-600 px-6 py-3 font-semibold text-emerald-600 transition duration-200 hover:bg-emerald-50 dark:hover:bg-emerald-950"
           >
             Explorer les remèdes

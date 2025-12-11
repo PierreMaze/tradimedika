@@ -1,9 +1,9 @@
 // components/remedy/RemedyCard.jsx
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
 import { generateSlug } from "../../utils/remedyMatcher";
-
 /**
  * Carte individuelle pour afficher un remède
  * - Entièrement cliquable (wrapper Link vers /remedes/:slug)
@@ -26,7 +26,9 @@ export default function RemedyCard({ remedy }) {
 
   // Type badges avec couleurs différentes
   const typeStyles = {
-    aliment: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
+    aliment:
+      "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200",
+    boisson: "bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200",
     épice:
       "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
     plante: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
@@ -72,7 +74,7 @@ export default function RemedyCard({ remedy }) {
             </div>
 
             {/* Description */}
-            <p className="mb-4 line-clamp-3 text-sm text-neutral-600 lg:text-base dark:text-neutral-400">
+            <p className="mb-4 line-clamp-3 text-start text-sm text-neutral-600 lg:text-base dark:text-neutral-400">
               {description}
             </p>
 
@@ -82,12 +84,9 @@ export default function RemedyCard({ remedy }) {
                 {properties.slice(0, 3).map((prop, index) => (
                   <span
                     key={index}
-                    className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-3 py-1 text-xs font-medium text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200"
+                    className="inline-flex items-center gap-1 rounded-md bg-emerald-100 px-3 py-1 text-xs font-medium text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200"
                   >
-                    {prop.name}
-                    <span className="text-xs opacity-75">
-                      ({prop.score}/10)
-                    </span>
+                    {capitalizeFirstLetter(prop.name, true)}
                   </span>
                 ))}
                 {properties.length > 3 && (
@@ -100,9 +99,32 @@ export default function RemedyCard({ remedy }) {
 
             {/* Badges de sécurité */}
             <div className="flex flex-wrap gap-2">
+              {verifiedByProfessional && (
+                <span
+                  className="inline-flex items-center gap-1 rounded-md bg-sky-100 px-2 py-1 text-xs font-medium text-sky-800 dark:bg-sky-900 dark:text-sky-200"
+                  title="Vérifié par un professionnel de santé"
+                >
+                  <svg
+                    className="h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                    />
+                  </svg>
+                  Vérifié
+                </span>
+              )}
+
               {pregnancySafe && (
                 <span
-                  className="inline-flex items-center gap-1 rounded-md bg-purple-100 px-2 py-1 text-xs font-medium text-purple-800 dark:bg-purple-900 dark:text-purple-200"
+                  className="inline-flex items-center gap-1 rounded-md bg-lime-100 px-2 py-1 text-xs font-medium text-lime-800 dark:bg-lime-900 dark:text-lime-200"
                   title="Sûr pendant la grossesse"
                 >
                   <svg
@@ -125,7 +147,7 @@ export default function RemedyCard({ remedy }) {
 
               {childrenAge !== null && (
                 <span
-                  className="inline-flex items-center gap-1 rounded-md bg-pink-100 px-2 py-1 text-xs font-medium text-pink-800 dark:bg-pink-900 dark:text-pink-200"
+                  className="inline-flex items-center gap-1 rounded-md bg-blue-100 px-2 py-1 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-200"
                   title={`Adapté aux enfants de ${childrenAge} ans et plus`}
                 >
                   <svg
@@ -143,29 +165,6 @@ export default function RemedyCard({ remedy }) {
                     />
                   </svg>
                   {childrenAge}+ ans
-                </span>
-              )}
-
-              {verifiedByProfessional && (
-                <span
-                  className="inline-flex items-center gap-1 rounded-md bg-teal-100 px-2 py-1 text-xs font-medium text-teal-800 dark:bg-teal-900 dark:text-teal-200"
-                  title="Vérifié par un professionnel de santé"
-                >
-                  <svg
-                    className="h-4 w-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                    />
-                  </svg>
-                  Vérifié
                 </span>
               )}
             </div>
