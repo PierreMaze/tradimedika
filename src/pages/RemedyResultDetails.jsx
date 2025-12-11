@@ -337,6 +337,7 @@ function RemedyResultDetails() {
         </Link>
         <Link
           to="/"
+          aria-label="Retour à l'accueil"
           className="rounded-lg border-2 border-emerald-600 px-6 py-3 text-center font-semibold dark:text-emerald-500 text-emerald-600 transition duration-200 hover:bg-emerald-600 hover:text-white focus:ring-2 focus:ring-emerald-300 focus:outline-none dark:hover:bg-emerald-600 dark:hover:text-white"
         >
           Nouvelle recherche
