@@ -100,7 +100,7 @@ function BadgeInfoTooltip() {
         onMouseLeave={handleMouseLeave}
         aria-label="Informations sur les badges"
         aria-expanded={isOpen}
-        className="inline-flex h-10 w-10 items-center justify-center rounded-lg ring-2 ring-neutral-300 bg-white text-neutral-800 shadow-md transition duration-200 hover:ring-emerald-600 hover:text-emerald-600 focus:ring-2 focus:ring-emerald-300 focus:outline-none dark:ring-neutral-600 dark:bg-neutral-800 dark:text-neutral-100 dark:hover:ring-emerald-500 dark:hover:text-emerald-500"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white text-neutral-800 shadow-md ring-2 ring-neutral-300 transition duration-200 hover:text-emerald-600 hover:ring-emerald-600 focus:ring-2 focus:ring-emerald-300 focus:outline-none dark:bg-neutral-800 dark:text-neutral-100 dark:ring-neutral-600 dark:hover:text-emerald-500 dark:hover:ring-emerald-500"
       >
         <GrCircleQuestion className="h-6 w-6" />
       </button>
@@ -138,7 +138,7 @@ function BadgeInfoTooltip() {
               y: 20,
             }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed left-1/2 top-1/2 z-50 lg:mx-0 w-full max-w-sm lg:w-142 lg:max-w-3xl -translate-x-1/2 -translate-y-1/2 rounded-lg ring ring-neutral-300 bg-neutral-100 p-5 shadow-xl dark:ring-neutral-600 dark:bg-neutral-800 lg:absolute lg:left-0 lg:top-full lg:mt-2 lg:translate-x-0 lg:translate-y-0"
+            className="fixed top-1/2 left-1/2 z-50 w-full max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-lg bg-neutral-100 p-5 shadow-xl ring ring-neutral-300 lg:absolute lg:top-full lg:left-0 lg:mx-0 lg:mt-2 lg:w-142 lg:max-w-3xl lg:translate-x-0 lg:translate-y-0 dark:bg-neutral-800 dark:ring-neutral-600"
             style={{
               // Desktop: slide from top
               ...(window.innerWidth >= 1024 && {
@@ -150,29 +150,31 @@ function BadgeInfoTooltip() {
             <button
               onClick={closeTooltip}
               aria-label="Fermer"
-              className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full text-neutral-600 transition duration-200 hover:bg-neutral-200 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-100 lg:hidden"
+              className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full text-neutral-600 transition duration-200 hover:bg-neutral-200 hover:text-neutral-900 lg:hidden dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-100"
             >
               <HiXMark className="h-5 w-5" aria-hidden="true" />
             </button>
 
             {/* Titre */}
-            <h3 className="mb-4 pr-8 text-lg font-bold text-neutral-800 dark:text-neutral-100 lg:pr-0">
+            <h3 className="mb-4 pr-8 text-lg font-bold text-neutral-800 lg:pr-0 dark:text-neutral-100">
               Signification des badges
             </h3>
 
             {/* Liste des badges */}
             <div className="space-y-6">
               {/* Badge Vérifié */}
-              <div className="flex items-start lg:items-center gap-2 lg:gap-4 flex-col lg:flex-row">
+              <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-4">
                 <VerifiedBadge />
                 <p className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
-                  Ce remède a été confirmé comme sûr, <span className="text-emerald-600 dark:text-emerald-500 font-medium">vérifier les
-                  contre-indications.</span>
+                  Ce remède a été confirmé comme sûr,{" "}
+                  <span className="font-medium text-emerald-600 dark:text-emerald-500">
+                    vérifier les contre-indications.
+                  </span>
                 </p>
               </div>
 
               {/* Badge Grossesse OK */}
-              <div className="flex items-start lg:items-center gap-2 lg:gap-4 flex-col lg:flex-row">
+              <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-4">
                 <PregnancyBadge variant="default" />
                 <p className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
                   Ce remède peut être utilisé sans danger pendant la grossesse.
@@ -180,7 +182,7 @@ function BadgeInfoTooltip() {
               </div>
 
               {/* Badge Enfants X+ ans */}
-              <div className="flex items-start lg:items-center gap-2 lg:gap-4 flex-col lg:flex-row">
+              <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-4">
                 <ChildrenAgeBadge age={"X"} />
                 <p className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
                   Ce remède est adapté aux enfants de plus de X ans.

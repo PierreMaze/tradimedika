@@ -1,8 +1,0 @@
-// tradimedika-v1/src/App.jsx
-import Router from "./routes/Router";
-
-function App() {
-  return <Router />;
-}
-
-export default App;
