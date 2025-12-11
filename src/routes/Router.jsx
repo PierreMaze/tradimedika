@@ -1,5 +1,5 @@
 // tradimedika-v1/src/routes/Router.jsx
-import { Route, Routes } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import LayoutApp from "../layout/LayoutApp";
 import LayoutRemedyResult from "../layout/LayoutRemedyResult";
 import Home from "../pages/Home";
@@ -8,32 +8,61 @@ import RemedyResult from "../pages/RemedyResult";
 import RemedyResultDetails from "../pages/RemedyResultDetails";
 
 /**
- * Router Configuration - React Router v6.30.2
+ * Router Configuration - React Router v6.30.2 with Data Router API
  *
  * Routes:
  * - / → Home page (Hero component)
- * - /remedies → Remedy results list (nested in LayoutRemedyResult)
- * - /remedies/:slug → Remedy detail page (nested in LayoutRemedyResult)
+ * - /remedes → Remedy results list (nested in LayoutRemedyResult)
+ * - /remedes/:slug → Remedy detail page (nested in LayoutRemedyResult)
  * - * → NotFound page (404 error)
  *
  * Layout Structure:
  * - LayoutApp: Global layout (Header + Outlet + Footer) wraps all routes
  * - LayoutRemedyResult: Specific layout for remedy pages (includes BreadCrumb)
+ *
+ * Using createBrowserRouter (Data Router API) for:
+ * - ScrollRestoration support
+ * - React Router v7 compatibility
+ * - Better performance and features
  */
 
-function Router() {
-  return (
-    <Routes>
-      <Route element={<LayoutApp />}>
-        <Route index element={<Home />} />
-        <Route path="remedes" element={<LayoutRemedyResult />}>
-          <Route index element={<RemedyResult />} />
-          <Route path=":slug" element={<RemedyResultDetails />} />
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Route>
-    </Routes>
-  );
-}
+const router = createBrowserRouter(
+  [
+    {
+      element: <LayoutApp />,
+      children: [
+        {
+          index: true,
+          element: <Home />,
+        },
+        {
+          path: "remedes",
+          element: <LayoutRemedyResult />,
+          children: [
+            {
+              index: true,
+              element: <RemedyResult />,
+            },
+            {
+              path: ":slug",
+              element: <RemedyResultDetails />,
+            },
+          ],
+        },
+        {
+          path: "*",
+          element: <NotFound />,
+        },
+      ],
+    },
+  ],
+  {
+    basename: import.meta.env.BASE_URL,
+    future: {
+      v7_startTransition: true,
+      v7_relativeSplatPath: true,
+    },
+  },
+);
 
-export default Router;
+export default router;

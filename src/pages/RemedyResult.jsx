@@ -119,13 +119,13 @@ function RemedyResult() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
-        className="w-full mt-12 flex justify-center"
+        className="mt-12 flex w-full justify-center"
       >
         {/* Bouton Retour */}
         <Link
           to="/"
           aria-label="Retour à l'accueil"
-          className="inline-flex justify-center items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition duration-200 hover:bg-emerald-700 hover:shadow-lg focus:ring-2 focus:ring-emerald-300 focus:outline-none"
+          className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition duration-200 hover:bg-emerald-700 hover:shadow-lg focus:ring-2 focus:ring-emerald-300 focus:outline-none"
         >
           Nouvelle recherche
         </Link>

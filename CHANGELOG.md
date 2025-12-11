@@ -2,6 +2,67 @@
 
 ---
 
+## [0.11.0] - 2025-12-11
+
+### <u>add:</u>
+
+- Added `<ScrollRestoration />` component from `react-router-dom` in `src/layout/LayoutApp.jsx`
+- Added scroll-to-top functionality on every route change for improved user experience
+- Added automatic scroll position restoration on browser back button navigation
+- Added Data Router API support with `createBrowserRouter()` for React Router v7 compatibility
+
+### <u>update:</u>
+
+- Updated `src/routes/Router.jsx` from `<Routes>` component-based routing to `createBrowserRouter()` object-based routing
+- Updated `src/main.jsx` to use `<RouterProvider>` instead of `<BrowserRouter>` wrapper
+- Updated router configuration to include `basename` and `future` flags in `createBrowserRouter()` options
+- Updated `src/layout/LayoutApp.jsx` to import `ScrollRestoration` from `react-router-dom`
+- Updated route structure from JSX `<Route>` elements to object-based route configuration
+- Updated `package.json` version from `0.10.0` to `0.11.0`
+- Updated `README.md` version badge from `0.10.0` to `0.11.0`
+
+### <u>delete:</u>
+
+- Deleted `src/App.jsx` file (no longer needed with `RouterProvider` architecture)
+
+### <u>refactor:</u>
+
+- Refactored routing system from component-based (`<BrowserRouter>`, `<Routes>`, `<Route>`) to Data Router API (`createBrowserRouter`, `RouterProvider`)
+- Refactored router initialization from `src/App.jsx` wrapper to direct `RouterProvider` in `src/main.jsx`
+- Refactored route configuration from JSX syntax to plain JavaScript object structure
+- Refactored application entry point to simplify component hierarchy (removed intermediate `App.jsx` layer)
+
+### <u>optimization:</u>
+
+- Optimized routing architecture for React Router v7 readiness and future data-loading features
+- Improved scroll behavior with native `<ScrollRestoration />` using sessionStorage for position tracking
+- Reduced component nesting by eliminating unnecessary `App.jsx` wrapper component
+
+### <u>standardization:</u>
+
+- Standardized routing pattern to React Router v6.4+ Data Router API (modern best practice)
+- Established scroll restoration pattern using official React Router component instead of custom hooks
+- Unified router configuration in single `createBrowserRouter()` call with centralized options
+
+### <u>features:</u>
+
+- **Automatic Scroll-to-Top**: Navigation to new pages automatically scrolls to top for better UX
+- **Scroll Position Restoration**: Browser back button restores previous scroll position seamlessly
+- **React Router v7 Ready**: Data Router API enables future migration to React Router v7
+- **SessionStorage Persistence**: Scroll positions persist across page reloads during session
+- **Instant Scroll Behavior**: No animation delays - immediate scroll to top on route change
+- **Breadcrumb Compatible**: Works seamlessly with existing BreadCrumb navigation component
+- **State Preservation**: Symptom state passing via `location.state` continues to work unchanged
+
+### <u>issues resolved:</u>
+
+- User request: Scroll to top automatically when changing pages for better user experience
+- User request: Prepare application for React Router v7 migration with Data Router API
+- Fixed scroll position remaining unchanged during navigation (users had to manually scroll up)
+- Fixed lack of scroll restoration on back button navigation
+
+---
+
 ## [0.10.0] - 2025-12-11
 
 ### <u>add:</u>

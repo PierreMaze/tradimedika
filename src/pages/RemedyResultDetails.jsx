@@ -105,9 +105,7 @@ function RemedyResultDetails() {
             {remedy.verifiedByProfessional && <VerifiedBadge />}
 
             {/* Pregnancy Safe Badge */}
-            {remedy.pregnancySafe === true && (
-              <PregnancyBadge />
-            )}
+            {remedy.pregnancySafe === true && <PregnancyBadge />}
 
             {/* Children Age Badge */}
             {remedy.childrenAge !== null && (
@@ -124,61 +122,61 @@ function RemedyResultDetails() {
           </p>
         </div>
       </motion.div>
-<div  className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-6">
-      {/* Propriétés Section */}
-      {remedy.properties && remedy.properties.length > 0 && (
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="mb-6 rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition duration-300 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800"
-        >
-          <h2 className="mb-4 text-2xl font-semibold lg:text-3xl">
-            Propriétés
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {remedy.properties.map((prop, index) => (
-              <motion.span
-                key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4 + index * 0.05 }}
-                className="rounded-md bg-emerald-100 px-3 py-1.5 text-sm font-medium text-emerald-800 capitalize dark:bg-emerald-900 dark:text-emerald-200"
-              >
-                {prop.name}
-              </motion.span>
-            ))}
-          </div>
-        </motion.section>
-      )}
+      <div className="grid grid-cols-1 gap-0 lg:grid-cols-2 lg:gap-6">
+        {/* Propriétés Section */}
+        {remedy.properties && remedy.properties.length > 0 && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="mb-6 rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition duration-300 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800"
+          >
+            <h2 className="mb-4 text-2xl font-semibold lg:text-3xl">
+              Propriétés
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              {remedy.properties.map((prop, index) => (
+                <motion.span
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.4 + index * 0.05 }}
+                  className="rounded-md bg-emerald-100 px-3 py-1.5 text-sm font-medium text-emerald-800 capitalize dark:bg-emerald-900 dark:text-emerald-200"
+                >
+                  {prop.name}
+                </motion.span>
+              ))}
+            </div>
+          </motion.section>
+        )}
 
-      {/* Symptômes Section */}
-      {remedy.symptoms && remedy.symptoms.length > 0 && (
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="mb-6 rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition duration-300 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800"
-        >
-          <h2 className="mb-4 text-2xl font-semibold lg:text-3xl">
-            Symptômes traités
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {remedy.symptoms.map((symptom, index) => (
-              <motion.span
-                key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.5 + index * 0.05 }}
-                className="rounded-md bg-orange-100 px-3 py-2 text-sm font-medium text-yellow-800 shadow-md dark:bg-yellow-700 dark:text-yellow-100"
-              >
-                {capitalizeFirstLetter(symptom, true)}
-              </motion.span>
-            ))}
-          </div>
-        </motion.section>
-      )}
-</div>
+        {/* Symptômes Section */}
+        {remedy.symptoms && remedy.symptoms.length > 0 && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="mb-6 rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition duration-300 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800"
+          >
+            <h2 className="mb-4 text-2xl font-semibold lg:text-3xl">
+              Symptômes traités
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              {remedy.symptoms.map((symptom, index) => (
+                <motion.span
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.5 + index * 0.05 }}
+                  className="rounded-md bg-orange-100 px-3 py-2 text-sm font-medium text-yellow-800 shadow-md dark:bg-yellow-700 dark:text-yellow-100"
+                >
+                  {capitalizeFirstLetter(symptom, true)}
+                </motion.span>
+              ))}
+            </div>
+          </motion.section>
+        )}
+      </div>
       {/* Utilisations Section */}
       {remedy.uses && remedy.uses.length > 0 && (
         <motion.section
@@ -330,7 +328,7 @@ function RemedyResultDetails() {
           to="/remedes"
           state={{ symptoms: selectedSymptoms }}
           aria-label="Retour aux résultats"
-          className="inline-flex justify-center items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition duration-200 hover:bg-emerald-700 hover:shadow-lg focus:ring-2 focus:ring-emerald-300 focus:outline-none"
+          className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition duration-200 hover:bg-emerald-700 hover:shadow-lg focus:ring-2 focus:ring-emerald-300 focus:outline-none"
         >
           <HiArrowLeft className="h-5 w-5" aria-hidden="true" />
           Retour aux résultats
@@ -338,7 +336,7 @@ function RemedyResultDetails() {
         <Link
           to="/"
           aria-label="Retour à l'accueil"
-          className="rounded-lg border-2 border-emerald-600 px-6 py-3 text-center font-semibold dark:text-emerald-500 text-emerald-600 transition duration-200 hover:bg-emerald-600 hover:text-white focus:ring-2 focus:ring-emerald-300 focus:outline-none dark:hover:bg-emerald-600 dark:hover:text-white"
+          className="rounded-lg border-2 border-emerald-600 px-6 py-3 text-center font-semibold text-emerald-600 transition duration-200 hover:bg-emerald-600 hover:text-white focus:ring-2 focus:ring-emerald-300 focus:outline-none dark:text-emerald-500 dark:hover:bg-emerald-600 dark:hover:text-white"
         >
           Nouvelle recherche
         </Link>
