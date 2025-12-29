@@ -1,11 +1,21 @@
 // tradimedika-v1/src/routes/Router.jsx
+import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import LayoutApp from "../layout/LayoutApp";
 import LayoutRemedyResult from "../layout/LayoutRemedyResult";
-import Home from "../pages/Home";
-import NotFound from "../pages/NotFound";
-import RemedyResult from "../pages/RemedyResult";
-import RemedyResultDetails from "../pages/RemedyResultDetails";
+
+// Lazy-loaded page components for code-splitting
+const Home = lazy(() => import("../pages/Home"));
+const NotFound = lazy(() => import("../pages/NotFound"));
+const RemedyResult = lazy(() => import("../pages/RemedyResult"));
+const RemedyResultDetails = lazy(() => import("../pages/RemedyResultDetails"));
+
+// Loading fallback component
+const LoadingFallback = () => (
+  <div className="flex min-h-screen items-center justify-center">
+    <div className="h-12 w-12 animate-spin rounded-full border-4 border-emerald-600 border-t-transparent"></div>
+  </div>
+);
 
 /**
  * Router Configuration - React Router v6.30.2 with Data Router API
@@ -20,6 +30,11 @@ import RemedyResultDetails from "../pages/RemedyResultDetails";
  * - LayoutApp: Global layout (Header + Outlet + Footer) wraps all routes
  * - LayoutRemedyResult: Specific layout for remedy pages (includes BreadCrumb)
  *
+ * Performance Optimizations:
+ * - Lazy loading: All pages loaded with React.lazy() for code-splitting
+ * - Suspense: Each route wrapped with Suspense for loading states
+ * - Code splitting: Pages loaded on-demand, reducing initial bundle size
+ *
  * Using createBrowserRouter (Data Router API) for:
  * - ScrollRestoration support
  * - React Router v7 compatibility
@@ -33,7 +48,11 @@ const router = createBrowserRouter(
       children: [
         {
           index: true,
-          element: <Home />,
+          element: (
+            <Suspense fallback={<LoadingFallback />}>
+              <Home />
+            </Suspense>
+          ),
         },
         {
           path: "remedes",
@@ -41,17 +60,29 @@ const router = createBrowserRouter(
           children: [
             {
               index: true,
-              element: <RemedyResult />,
+              element: (
+                <Suspense fallback={<LoadingFallback />}>
+                  <RemedyResult />
+                </Suspense>
+              ),
             },
             {
               path: ":slug",
-              element: <RemedyResultDetails />,
+              element: (
+                <Suspense fallback={<LoadingFallback />}>
+                  <RemedyResultDetails />
+                </Suspense>
+              ),
             },
           ],
         },
         {
           path: "*",
-          element: <NotFound />,
+          element: (
+            <Suspense fallback={<LoadingFallback />}>
+              <NotFound />
+            </Suspense>
+          ),
         },
       ],
     },

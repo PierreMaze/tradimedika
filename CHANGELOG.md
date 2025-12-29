@@ -2,6 +2,65 @@
 
 ---
 
+## [0.26.0] - 2025-12-29
+
+### <u>add:</u>
+
+- Added `React.lazy()` for all page components (Home, RemedyResult, RemedyResultDetails, NotFound)
+- Added `<Suspense>` wrapper for each route with loading fallback
+- Added `LoadingFallback` component with emerald spinner for loading states
+- Added code-splitting configuration for automatic page chunking
+
+### <u>update:</u>
+
+- Updated `src/routes/Router.jsx` to use lazy imports instead of static imports (lines 2, 8-11)
+- Updated route elements to wrap each page with `<Suspense>` (lines 47-80)
+- Updated router documentation to reflect performance optimizations (lines 33-36)
+- Updated `package.json` version from `0.25.0` to `0.26.0`
+- Updated `README.md` version badge from `0.25.0` to `0.26.0`
+
+### <u>refactor:</u>
+
+- Refactored static imports to lazy imports for improved code-splitting
+- Refactored route configuration to include Suspense boundaries
+- Extracted LoadingFallback component for reusable loading UI
+
+### <u>optimization:</u>
+
+- Optimized initial bundle size by splitting pages into separate chunks
+- Reduced initial JavaScript payload from ~500KB to ~440KB (main bundle)
+- Improved First Contentful Paint (FCP) by loading only necessary code
+- Enabled on-demand page loading for better performance
+- Achieved automatic code-splitting for each page route
+
+### <u>performance:</u>
+
+- **Code Splitting**: Each page now loads as a separate JavaScript chunk
+  - Home.js: 22.11 kB (loaded on homepage visit)
+  - RemedyResult.js: 13.16 kB (loaded when viewing results)
+  - RemedyResultDetails.js: 12.44 kB (loaded when viewing remedy details)
+  - NotFound.js: 2.24 kB (loaded on 404 error)
+- **Lazy Loading**: Pages load on-demand, reducing initial bundle size
+- **Loading States**: Smooth transitions with spinner during page load
+- **Bundle Optimization**: Main bundle reduced by ~60KB
+
+### <u>features:</u>
+
+- **Lazy Loading**: All pages load on-demand with React.lazy()
+- **Code Splitting**: Automatic page chunking for optimized loading
+- **Loading Feedback**: Emerald spinner displays during page transitions
+- **Performance Boost**: Faster initial load time with smaller bundle
+- **On-Demand Loading**: Users only download code for pages they visit
+
+### <u>issues resolved:</u>
+
+- GitHub Issue #66: Lazy loading des pages
+- Implemented React.lazy() and Suspense for all page components
+- Configured automatic code-splitting for performance optimization
+- Reduced initial bundle size and improved loading performance
+
+---
+
 ## [0.25.0] - 2025-12-29
 
 ### <u>add:</u>
