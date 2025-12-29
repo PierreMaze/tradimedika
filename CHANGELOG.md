@@ -2,6 +2,59 @@
 
 ---
 
+## [0.22.0] - 2025-12-29
+
+### <u>add:</u>
+
+- Added `react-error-boundary` (v6.0.1) dependency for modern error handling
+- Added `src/components/errors/ErrorFallback.jsx` functional fallback component
+- Added error fallback UI with user-friendly error message and recovery options
+- Added "Recharger la page" button to reset error boundary
+- Added "Retour à l'accueil" button to navigate home on error
+- Added error logging with `logger.error()` for debugging
+- Added detailed error stack trace display in development mode (dev-only)
+- Added dark mode support for error UI (bg-dark, text-light)
+
+### <u>update:</u>
+
+- Updated `src/main.jsx` to use `<ErrorBoundary>` from react-error-boundary
+- Updated error handling architecture with modern React Error Boundary pattern
+- Updated to use functional component approach instead of class component
+- Updated `package.json` version from `0.21.0` to `0.22.0`
+- Updated `README.md` version badge from `0.21.0` to `0.22.0`
+
+### <u>fix:</u>
+
+- Fixed application crash causing blank white screen on unhandled React errors
+- Fixed lack of user feedback when component errors occur
+- Fixed poor user experience during error states (no recovery options)
+- Fixed missing error logging for React component crashes
+
+### <u>reliability:</u>
+
+- Established Error Boundary as safety net for React component errors
+- Improved error recovery with reload and home navigation options
+- Enhanced user experience with friendly error messages instead of blank screens
+- Prevented full application crashes from propagating to root
+
+### <u>features:</u>
+
+- **Error Recovery UI**: User-friendly fallback interface when errors occur
+- **Reload Button**: Quick recovery with page reload functionality
+- **Home Navigation**: Alternative recovery path to return to homepage
+- **Development Details**: Stack trace and error details visible in dev mode only
+- **Dark Mode Support**: Error UI fully supports dark/light theme switching
+- **Comprehensive Logging**: All errors logged via logger.error() for debugging
+
+### <u>issues resolved:</u>
+
+- GitHub Issue #60: Gestion d'erreurs incomplète - ErrorBoundary React
+- Implemented React Error Boundary with fallback UI and recovery options
+- Wrapped application in `<ErrorBoundary>` component in main.jsx
+- Note: `useLocalStorage.js` already has try/catch error handling from Issue #55
+
+---
+
 ## [0.21.0] - 2025-12-29
 
 ### <u>update:</u>
