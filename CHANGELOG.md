@@ -4,7 +4,7 @@
 
 ## [0.28.0] - 2025-12-30
 
-### 🔒 <u>security:</u>
+### <u>security:</u>
 
 - Added input validation system with whitelist approach (`src/utils/validation.js`)
   - `validateSymptom()` - Validates symptoms against symptomList.json
@@ -28,7 +28,7 @@
   - Validates decoded slugs to prevent bypass attempts
   - Rejects malformed or suspicious slug patterns
 
-### ⚡ <u>performance:</u>
+### <u>performance:</u>
 
 - Optimized RemedyCard component with React.memo
   - Custom comparison function for optimal re-render prevention
@@ -55,7 +55,7 @@
   - `useMemo` for meta tag calculations (pageTitle, pageDescription, canonicalUrl)
   - Prevents unnecessary callback recreations and recalculations
 
-### ♿ <u>accessibility:</u>
+### <u>accessibility:</u>
 
 - Added `useReducedMotion` hook (`src/hooks/useReducedMotion.js`)
   - Detects `prefers-reduced-motion: reduce` media query
@@ -70,7 +70,7 @@
   - Maintained proper focus management throughout application
   - All interactive elements remain keyboard accessible
 
-### 📦 <u>add:</u>
+### <u>add:</u>
 
 - Added `src/utils/validation.js` - Comprehensive input validation utilities
 - Added `src/hooks/useReducedMotion.js` - Accessibility hook for motion preferences
@@ -86,7 +86,7 @@
   - `src/hooks/useLocalStorage.test.js` (19 tests) - LocalStorage hook tests
   - `src/hooks/useSymptomTags.test.js` (14 tests) - Symptom tags hook tests
 
-### 🔄 <u>update:</u>
+### <u>update:</u>
 
 - Updated `src/pages/RemedyResult.jsx`
   - Integrated `parseAndValidateSymptoms()` for query parameter sanitization
@@ -116,7 +116,7 @@
 - Updated `package.json` version from `0.27.0` to `0.28.0`
 - Updated `README.md` version badge from `0.27.0` to `0.28.0`
 
-### 🧪 <u>tests:</u>
+### <u>tests:</u>
 
 - Increased test coverage from ~30% to **97.33%**
 - Added 144 new tests (total: 202 tests vs 58 before)
@@ -140,7 +140,7 @@
   - Integration tests: Component rendering, user workflows
   - Error handling tests: Edge cases, malformed inputs, quota errors
 
-### 🎨 <u>refactoring:</u>
+### <u>refactoring:</u>
 
 - Created reusable SEO component (`src/components/seo/SEO.jsx`)
   - Centralized Helmet meta tag management
@@ -156,7 +156,7 @@
   - `ALL_SYNONYM_VALUES` in SymptomsSelector
   - Reduces object recreation on every render
 
-### 📊 <u>metrics:</u>
+### <u>metrics:</u>
 
 - **Tests**: 58 → 202 (+248% increase)
 - **Coverage**: ~30% → 97.33% (+224% increase)
@@ -165,7 +165,7 @@
 - **Autocomplete lag**: -50% (caching)
 - **Animation delays**: 0.4-1.0s → 0.2-0.5s (-50% to -75%)
 
-### 🐛 <u>fixes:</u>
+### <u>fixes:</u>
 
 - Fixed potential XSS vulnerabilities in query parameter handling
 - Fixed information disclosure through detailed error logs in production
@@ -176,7 +176,7 @@
 - Fixed missing security headers exposing application to attacks
 - Fixed uncaught errors in localStorage quota exceeded scenarios
 
-### 🔧 <u>chore:</u>
+### <u>chore:</u>
 
 - Organized test files by feature/component
 - Improved code documentation with JSDoc comments
