@@ -2,6 +2,75 @@
 
 ---
 
+## [0.25.0] - 2025-12-29
+
+### <u>add:</u>
+
+- Added `react-helmet-async` (v2.0.5) dependency for dynamic SEO meta tags management
+- Added `<HelmetProvider>` wrapper in `src/main.jsx` to enable Helmet functionality app-wide
+- Added `<Helmet>` component in `src/pages/Home.jsx` with static SEO meta tags
+- Added `<Helmet>` component in `src/pages/RemedyResult.jsx` with dynamic meta tags based on symptoms
+- Added `<Helmet>` component in `src/pages/RemedyResultDetails.jsx` with dynamic meta tags based on remedy
+- Added Open Graph meta tags for Facebook sharing on all pages
+- Added Twitter Card meta tags for Twitter sharing on all pages
+- Added canonical URLs for each page to prevent duplicate content issues
+- Added base SEO meta tags in `index.html` (description, keywords, author, robots)
+- Added theme color meta tag (#10b981 emerald) for mobile browsers
+- Added dynamic page titles based on content (symptoms, remedy name)
+- Added dynamic descriptions with remedy count and symptom details
+
+### <u>update:</u>
+
+- Updated `src/main.jsx` to wrap application with `<HelmetProvider>` (line 5, 13, 19)
+- Updated `src/pages/Home.jsx` to include comprehensive SEO meta tags (lines 2, 8-28)
+- Updated `src/pages/RemedyResult.jsx` to generate dynamic meta tags from symptoms (lines 6, 58-91)
+- Updated `src/pages/RemedyResultDetails.jsx` to generate dynamic meta tags from remedy data (lines 4, 50-75)
+- Updated `index.html` to include base meta tags: description, keywords, author, robots, canonical, theme-color (lines 14-30)
+- Updated `package.json` version from `0.24.0` to `0.25.0`
+- Updated `package.json` to include `react-helmet-async` in dependencies (line 39)
+- Updated `README.md` version badge from `0.24.0` to `0.25.0`
+
+### <u>fix:</u>
+
+- Fixed missing SEO meta tags across all pages (no description, keywords, or social sharing tags)
+- Fixed default Vite title "TRADIMEDIKA" not reflecting page content
+- Fixed lack of Open Graph support for Facebook link previews
+- Fixed missing Twitter Card support for Twitter link previews
+- Fixed absence of canonical URLs causing potential duplicate content SEO issues
+- Fixed mobile browser theme color not matching app's emerald branding
+
+### <u>seo:</u>
+
+- Established comprehensive SEO foundation with meta tags on all pages
+- Implemented dynamic meta tags adapting to user search context (symptoms, remedy)
+- Configured Open Graph protocol for rich social media previews
+- Set up Twitter Card metadata for enhanced Twitter sharing
+- Added canonical URLs to prevent search engine duplicate content penalties
+- Optimized page titles for search engine discoverability and user context
+- Enhanced mobile browser experience with theme color matching app design
+
+### <u>features:</u>
+
+- **Dynamic SEO**: Meta tags automatically update based on selected symptoms and viewed remedies
+- **Social Sharing**: Rich previews on Facebook and Twitter with Open Graph and Twitter Card support
+- **Search Engine Optimization**: Proper meta descriptions, keywords, and canonical URLs for better ranking
+- **Page-Specific Titles**: Home, results, and detail pages have contextual titles
+- **Mobile Theme Color**: Browsers display emerald (#10b981) theme color in address bar
+- **Shareable Content**: Each page has unique meta tags optimized for social media sharing
+- **SEO-Friendly URLs**: Canonical URLs prevent duplicate content issues
+- **Author Attribution**: Meta author tag credits Pierre MAZELAYGUE
+- **Robot Instructions**: Meta robots tag ensures proper search engine indexing
+
+### <u>issues resolved:</u>
+
+- GitHub Issue #65: SEO non optimisé
+- Implemented react-helmet-async for dynamic meta tags management
+- Added comprehensive SEO meta tags across Home, RemedyResult, and RemedyResultDetails pages
+- Configured Open Graph and Twitter Card support for social sharing
+- Updated index.html with base SEO meta tags and theme color
+
+---
+
 ## [0.24.0] - 2025-12-29
 
 ### <u>add:</u>

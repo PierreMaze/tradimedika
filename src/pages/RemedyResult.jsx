@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import FilterRemedyResult from "../components/filter/FilterRemedyResult";
 import RemedyResultList from "../components/remedy/RemedyResultList";
 import BadgeInfoTooltip from "../components/btn/BadgeInfoTooltip";
@@ -54,8 +55,42 @@ function RemedyResult() {
   // État uniquement pour les remèdes filtrés par les tags
   const [filteredRemedies, setFilteredRemedies] = useState(matchedRemedies);
 
+  // Generate dynamic meta tags
+  const pageTitle =
+    selectedSymptoms.length > 0
+      ? `Remèdes pour ${selectedSymptoms.join(", ")} - TRADIMEDIKA`
+      : "Résultats des remèdes - TRADIMEDIKA";
+
+  const pageDescription =
+    matchedRemedies.length > 0
+      ? `${matchedRemedies.length} remède${matchedRemedies.length > 1 ? "s" : ""} naturel${matchedRemedies.length > 1 ? "s" : ""} trouvé${matchedRemedies.length > 1 ? "s" : ""} pour ${selectedSymptoms.join(", ")}`
+      : `Recherche de remèdes naturels pour ${selectedSymptoms.join(", ")}`;
+
+  const canonicalUrl =
+    selectedSymptoms.length > 0
+      ? `https://pierremaze.github.io/tradimedika/remedes?symptoms=${encodeURIComponent(selectedSymptoms.join(","))}`
+      : "https://pierremaze.github.io/tradimedika/remedes";
+
   return (
     <>
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <link rel="canonical" href={canonicalUrl} />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:url" content={canonicalUrl} />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+      </Helmet>
+
       {/* Bouton Retour et Info Badges */}
       <motion.div
         initial={{ opacity: 0 }}
