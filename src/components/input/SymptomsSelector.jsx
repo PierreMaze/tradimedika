@@ -6,7 +6,10 @@ import { HiMagnifyingGlass } from "react-icons/hi2";
 import { IoMdWarning } from "react-icons/io";
 import symptomsData from "../../data/symptomList.json";
 import synonymsData from "../../data/synonymsSymptomList.json";
+import { createLogger } from "../../utils/logger";
 import { normalizeForMatching } from "../../utils/normalizeSymptom";
+
+const logger = createLogger("SymptomsSelector");
 
 // Fonction pour capitaliser la première lettre d'un symptôme
 const capitalizeSymptom = (symptom) => {
@@ -62,17 +65,15 @@ export default function SymptomsSelector({
   // Validation initiale du JSON (logs de développement)
   useEffect(() => {
     if (!Array.isArray(symptomsData)) {
-      console.error(
-        "[SymptomsSelector] Error: symptoms.json is not a valid array",
-      );
+      logger.error("Error: symptoms.json is not a valid array");
       return;
     }
     if (symptomsData.length === 0) {
-      console.warn("[SymptomsSelector] Warning: symptoms.json is empty");
+      logger.warn("Warning: symptoms.json is empty");
       return;
     }
-    console.log(
-      `[SymptomsSelector] Successfully loaded ${symptomsData.length} symptoms from symptoms.json`,
+    logger.debug(
+      `Successfully loaded ${symptomsData.length} symptoms from symptoms.json`,
     );
   }, []);
 

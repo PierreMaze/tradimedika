@@ -2,6 +2,67 @@
 
 ---
 
+## [0.19.0] - 2025-12-29
+
+### <u>add:</u>
+
+- Added `src/utils/logger.js` utility for conditional logging based on environment
+- Added `createLogger(context)` function with debug, info, warn, error levels
+- Added group, groupEnd, and table methods to logger for structured logging
+- Added environment detection (import.meta.env.DEV) for dev/prod logging
+
+### <u>update:</u>
+
+- Updated `src/hooks/useSymptomSubmit.js` to use logger instead of console (5 occurrences)
+- Updated `src/components/input/SymptomsSelector.jsx` to use logger instead of console (3 occurrences)
+- Updated `src/utils/remedyMatcher.js` to use logger instead of console (10 occurrences)
+- Updated `src/hooks/useLocalStorage.js` to use logger instead of console (2 occurrences)
+- Updated `src/utils/formatSegmentLabel.js` to use logger instead of console (2 occurrences)
+- Updated `src/utils/normalizeSymptom.js` to use logger instead of console (2 occurrences)
+- Updated `package.json` version from `0.18.0` to `0.19.0`
+- Updated `README.md` version badge from `0.18.0` to `0.19.0`
+
+### <u>fix:</u>
+
+- Fixed console pollution in production with 26 console.* calls across 6 files
+- Fixed potential security issue with data exposure in browser console
+- Fixed performance overhead from unnecessary logging in production
+
+### <u>refactor:</u>
+
+- Refactored all console.log calls to logger.debug (dev-only)
+- Refactored all console.warn calls to logger.warn (dev + prod)
+- Refactored all console.error calls to logger.error (dev + prod)
+- Refactored console.group/groupEnd/table to logger methods (dev-only)
+
+### <u>optimization:</u>
+
+- Optimized production bundle by removing debug/info logs (no-op in prod)
+- Improved developer experience with consistent logging format across codebase
+- Reduced console noise in production while keeping critical warnings/errors
+
+### <u>standardization:</u>
+
+- Standardized logging pattern with context-based logger instances
+- Established consistent log message format: `[context] message`
+- Unified logging approach across all utils, hooks, and components
+
+### <u>features:</u>
+
+- **Environment-Aware Logging**: Debug/info logs only appear in development mode
+- **Structured Logging**: Support for console.group, console.table in development
+- **Context Tracking**: Each logger instance prefixed with module name for easy debugging
+- **Production-Safe**: Warnings and errors still visible in production for monitoring
+- **Developer-Friendly**: Rich logging experience in development without production overhead
+
+### <u>issues resolved:</u>
+
+- GitHub Issue #55: Console.log en production - Pollution de la console et risques de sécurité
+- Removed 26 console.* occurrences across 6 files
+- Implemented centralized logging utility with environment detection
+
+---
+
 ## [0.18.0] - 2025-12-11
 
 ### <u>add:</u>

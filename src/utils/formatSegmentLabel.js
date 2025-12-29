@@ -1,4 +1,7 @@
 // src/utils/formatSegmentLabel.js
+import { createLogger } from "./logger";
+
+const logger = createLogger("formatSegmentLabel");
 
 /**
  * Formate un segment d'URL en label lisible pour le BreadCrumb
@@ -20,9 +23,7 @@
 export function formatSegmentLabel(segment) {
   // Validation des entrées
   if (!segment || typeof segment !== "string") {
-    console.warn(
-      "[formatSegmentLabel] Segment invalide fourni à formatSegmentLabel",
-    );
+    logger.warn("Segment invalide fourni à formatSegmentLabel");
     return "";
   }
 
@@ -45,10 +46,7 @@ export function formatSegmentLabel(segment) {
     return capitalized;
   } catch (error) {
     // Fallback si le décodage URI échoue
-    console.warn(
-      `[formatSegmentLabel] Erreur lors du décodage de "${segment}"`,
-      error,
-    );
+    logger.warn(`Erreur lors du décodage de "${segment}"`, error);
 
     // Continuer sans décodage URI
     return segment

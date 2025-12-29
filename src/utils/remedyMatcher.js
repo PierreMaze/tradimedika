@@ -1,5 +1,8 @@
 // src/utils/remedyMatcher.js
+import { createLogger } from "./logger";
 import { normalizeForMatching } from "./normalizeSymptom";
+
+const logger = createLogger("remedyMatcher");
 
 /**
  * Trouve les remèdes correspondant aux symptômes sélectionnés
@@ -27,12 +30,12 @@ import { normalizeForMatching } from "./normalizeSymptom";
 export function findMatchingRemedies(selectedSymptoms, database) {
   // Validation des entrées
   if (!Array.isArray(selectedSymptoms) || selectedSymptoms.length === 0) {
-    console.warn("[remedyMatcher] Aucun symptôme sélectionné");
+    logger.warn("Aucun symptôme sélectionné");
     return [];
   }
 
   if (!Array.isArray(database) || database.length === 0) {
-    console.error("[remedyMatcher] Base de données invalide ou vide");
+    logger.error("Base de données invalide ou vide");
     return [];
   }
 
@@ -41,9 +44,7 @@ export function findMatchingRemedies(selectedSymptoms, database) {
     .map((remedy) => {
       // Vérifier que le remède a un champ symptoms valide
       if (!Array.isArray(remedy.symptoms)) {
-        console.warn(
-          `[remedyMatcher] Remède "${remedy.name}" sans champ symptoms valide`,
-        );
+        logger.warn(`Remède "${remedy.name}" sans champ symptoms valide`);
         return null;
       }
 
@@ -100,12 +101,12 @@ export function findMatchingRemedies(selectedSymptoms, database) {
 export function getRemedyById(id, database) {
   // Validation des entrées
   if (id === undefined || id === null || id === "") {
-    console.warn("[remedyMatcher] ID invalide fourni à getRemedyById");
+    logger.warn("ID invalide fourni à getRemedyById");
     return null;
   }
 
   if (!Array.isArray(database) || database.length === 0) {
-    console.error("[remedyMatcher] Base de données invalide ou vide");
+    logger.error("Base de données invalide ou vide");
     return null;
   }
 
@@ -114,7 +115,7 @@ export function getRemedyById(id, database) {
 
   // Vérifier que la conversion a réussi
   if (isNaN(numericId)) {
-    console.warn(`[remedyMatcher] ID "${id}" n'est pas convertible en nombre`);
+    logger.warn(`ID "${id}" n'est pas convertible en nombre`);
     return null;
   }
 
@@ -122,7 +123,7 @@ export function getRemedyById(id, database) {
   const remedy = database.find((item) => item.id === numericId);
 
   if (!remedy) {
-    console.warn(`[remedyMatcher] Aucun remède trouvé avec l'ID ${numericId}`);
+    logger.warn(`Aucun remède trouvé avec l'ID ${numericId}`);
     return null;
   }
 
@@ -142,7 +143,7 @@ export function getRemedyById(id, database) {
  */
 export function generateSlug(name) {
   if (!name || typeof name !== "string") {
-    console.warn("[remedyMatcher] Nom invalide fourni à generateSlug");
+    logger.warn("Nom invalide fourni à generateSlug");
     return "";
   }
 
@@ -172,12 +173,12 @@ export function generateSlug(name) {
 export function getRemedyBySlug(slug, database) {
   // Validation des entrées
   if (!slug || typeof slug !== "string") {
-    console.warn("[remedyMatcher] Slug invalide fourni à getRemedyBySlug");
+    logger.warn("Slug invalide fourni à getRemedyBySlug");
     return null;
   }
 
   if (!Array.isArray(database) || database.length === 0) {
-    console.error("[remedyMatcher] Base de données invalide ou vide");
+    logger.error("Base de données invalide ou vide");
     return null;
   }
 
@@ -186,10 +187,7 @@ export function getRemedyBySlug(slug, database) {
   try {
     decodedSlug = decodeURIComponent(slug);
   } catch (error) {
-    console.warn(
-      `[remedyMatcher] Erreur lors du décodage du slug "${slug}"`,
-      error,
-    );
+    logger.warn(`Erreur lors du décodage du slug "${slug}"`, error);
     // Continue avec le slug original si le décodage échoue
   }
 
@@ -200,9 +198,7 @@ export function getRemedyBySlug(slug, database) {
   });
 
   if (!remedy) {
-    console.warn(
-      `[remedyMatcher] Aucun remède trouvé avec le slug "${decodedSlug}"`,
-    );
+    logger.warn(`Aucun remède trouvé avec le slug "${decodedSlug}"`);
     return null;
   }
 

@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import db from "../data/db.json";
 import { findMatchingRemedies } from "../utils/remedyMatcher";
+import { createLogger } from "../utils/logger";
+
+const logger = createLogger("useSymptomSubmit");
 
 /**
  * Hook personnalisé pour gérer la soumission des symptômes
@@ -31,7 +34,7 @@ export function useSymptomSubmit() {
   const handleSubmit = (selectedSymptoms) => {
     // Validation : empêcher soumission vide
     if (!selectedSymptoms || selectedSymptoms.length === 0) {
-      console.warn("[useSymptomSubmit] Impossible de soumettre sans symptômes");
+      logger.warn("Impossible de soumettre sans symptômes");
       return;
     }
 
@@ -57,12 +60,12 @@ export function useSymptomSubmit() {
         });
 
         // Logging structuré pour debug
-        console.group("🔍 Résultats de recherche");
-        console.log("Symptômes recherchés:", selectedSymptoms);
-        console.log("Remèdes trouvés:", matchingRemedies.length);
+        logger.group("🔍 Résultats de recherche");
+        logger.debug("Symptômes recherchés:", selectedSymptoms);
+        logger.debug("Remèdes trouvés:", matchingRemedies.length);
 
         if (matchingRemedies.length > 0) {
-          console.table(
+          logger.table(
             matchingRemedies.map((r) => ({
               nom: r.remedy.name,
               type: r.remedy.type,
@@ -71,12 +74,12 @@ export function useSymptomSubmit() {
             })),
           );
         } else {
-          console.log("⚠️ Aucun remède trouvé pour ces symptômes");
+          logger.debug("⚠️ Aucun remède trouvé pour ces symptômes");
         }
 
-        console.groupEnd();
+        logger.groupEnd();
       } catch (err) {
-        console.error("[useSymptomSubmit] Erreur lors de la recherche:", err);
+        logger.error("Erreur lors de la recherche:", err);
         setError("Une erreur est survenue lors de la recherche");
       } finally {
         setIsLoading(false);

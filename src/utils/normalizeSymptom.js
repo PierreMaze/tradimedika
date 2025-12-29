@@ -1,4 +1,7 @@
 // src/utils/normalizeSymptom.js
+import { createLogger } from "./logger";
+
+const logger = createLogger("normalizeSymptom");
 
 /**
  * Normalise un symptôme pour l'AFFICHAGE (conserve les accents)
@@ -22,7 +25,7 @@
  */
 export function normalizeSymptom(symptom) {
   if (typeof symptom !== "string") {
-    console.warn(`[normalizeSymptom] Expected string, got ${typeof symptom}`);
+    logger.warn(`Expected string, got ${typeof symptom}`);
     return "";
   }
 
@@ -55,9 +58,7 @@ export function normalizeSymptom(symptom) {
  */
 export function normalizeForMatching(symptom) {
   if (typeof symptom !== "string") {
-    console.warn(
-      `[normalizeForMatching] Expected string, got ${typeof symptom}`,
-    );
+    logger.warn(`Expected string, got ${typeof symptom}`);
     return "";
   }
 

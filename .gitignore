@@ -15,6 +15,8 @@ dist-ssr
 *.local
 
 # Editor directories and files
+docs/ISSUE_TEMPLATE.md
+docs/PR_TEMPLATE.md
 CLAUDE.md
 .claude/
 .vscode/*
