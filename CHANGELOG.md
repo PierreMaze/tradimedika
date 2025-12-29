@@ -2,6 +2,93 @@
 
 ---
 
+## [0.21.0] - 2025-12-29
+
+### <u>update:</u>
+
+- Updated `src/data/symptomList.json` to replace `"hyporexie (perte d'apétit)"` with `"perte d'apétit"` (line 37)
+- Updated `src/data/synonymsSymptomList.json` to replace key `"hyporexie (perte d'apétit)"` with `"perte d'apétit"` (line 67)
+- Updated synonyms mapping to include `"anorexie"` and `"hyporexie"` as synonyms of `"perte d'apétit"`
+- Updated `package.json` version from `0.20.0` to `0.21.0`
+- Updated `README.md` version badge from `0.20.0` to `0.21.0`
+
+### <u>fix:</u>
+
+- Fixed data validation failure caused by parentheses in `"hyporexie (perte d'apétit)"`
+- Fixed regex validation error `/[^a-zàâäéèêëïîôùûüÿçœ'\s]/` rejecting parentheses
+- Fixed `pnpm validate-data` script execution that was failing on invalid characters
+- Fixed data integrity by ensuring all symptom names comply with validation rules
+
+### <u>standardization:</u>
+
+- Standardized symptom naming convention to exclude special characters (parentheses)
+- Established `"perte d'apétit"` as the canonical term with `"anorexie"` and `"hyporexie"` as synonyms
+- Unified symptom list format across symptomList.json and synonymsSymptomList.json
+
+### <u>features:</u>
+
+- **Data Validation**: All symptom names now pass validation without errors
+- **Synonym Mapping**: Users can search using `"anorexie"` or `"hyporexie"` to find remedies for appetite loss
+- **Consistent Data**: symptomList.json and synonymsSymptomList.json are now fully synchronized
+
+### <u>issues resolved:</u>
+
+- GitHub Issue #58: Bug validation - Caractères invalides dans symptomList.json
+- Removed invalid characters (parentheses) from symptom names
+- Validated data integrity with `pnpm validate-data` script (100% pass rate)
+
+---
+
+## [0.20.0] - 2025-12-29
+
+### <u>add:</u>
+
+- Added Husky (v9.1.7) for Git hooks management
+- Added lint-staged (v16.2.7) for linting only staged files
+- Added `.husky/pre-commit` hook to run lint-staged before commit
+- Added `.lintstagedrc.json` configuration file for lint-staged rules
+- Added `prepare` script in package.json to automatically install Husky hooks
+
+### <u>update:</u>
+
+- Updated `package.json` to include husky and lint-staged in devDependencies
+- Updated `package.json` version from `0.19.0` to `0.20.0`
+- Updated `README.md` version badge from `0.19.0` to `0.20.0`
+
+### <u>fix:</u>
+
+- Fixed risk of committing non-formatted code with automatic pre-commit checks
+- Fixed inconsistent code style by enforcing ESLint --fix and Prettier --write
+- Fixed code quality issues by validating code before commit instead of after
+
+### <u>standardization:</u>
+
+- Standardized pre-commit workflow: ESLint --fix → Prettier --write → commit
+- Established automatic code formatting on commit for .js, .jsx, .json, .md, .css files
+- Unified code quality enforcement across all developers
+
+### <u>optimization:</u>
+
+- Optimized pre-commit performance by linting only staged files (not entire codebase)
+- Improved developer experience with automatic code fixing instead of manual corrections
+- Reduced code review time by catching formatting issues before push
+
+### <u>features:</u>
+
+- **Automatic ESLint Fix**: JavaScript/JSX files are auto-fixed on commit
+- **Automatic Prettier Format**: All supported files are auto-formatted on commit
+- **Git Hook Integration**: Husky manages Git hooks seamlessly across the team
+- **Staged Files Only**: lint-staged processes only files in staging area (fast)
+- **Team Enforcement**: All developers get the same hooks after `pnpm install`
+
+### <u>issues resolved:</u>
+
+- GitHub Issue #57: Pre-commit hooks avec Husky et lint-staged
+- Implemented automatic code quality checks before each commit
+- Configured ESLint --fix and Prettier --write for staged files
+
+---
+
 ## [0.19.0] - 2025-12-29
 
 ### <u>add:</u>
@@ -24,7 +111,7 @@
 
 ### <u>fix:</u>
 
-- Fixed console pollution in production with 26 console.* calls across 6 files
+- Fixed console pollution in production with 26 console.\* calls across 6 files
 - Fixed potential security issue with data exposure in browser console
 - Fixed performance overhead from unnecessary logging in production
 
@@ -58,7 +145,7 @@
 ### <u>issues resolved:</u>
 
 - GitHub Issue #55: Console.log en production - Pollution de la console et risques de sécurité
-- Removed 26 console.* occurrences across 6 files
+- Removed 26 console.\* occurrences across 6 files
 - Implemented centralized logging utility with environment detection
 
 ---

@@ -1,7 +1,7 @@
 {
   "name": "tradimedika",
   "private": true,
-  "version": "0.19.0",
+  "version": "0.21.0",
   "type": "module",
   "homepage": "http://pierremaze.github.io/tradimedika",
   "prettier": {
@@ -22,7 +22,8 @@
     "docker:up": "cd docker && docker-compose up -d",
     "docker:down": "cd docker && docker-compose down",
     "docker:logs": "cd docker && docker-compose logs -f n8n",
-    "docker:restart": "cd docker && docker-compose restart n8n"
+    "docker:restart": "cd docker && docker-compose restart n8n",
+    "prepare": "husky"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
@@ -49,6 +50,8 @@
     "eslint-plugin-react-refresh": "^0.4.24",
     "gh-pages": "^6.3.0",
     "globals": "^16.5.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "prettier": "^3.7.4",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "vite": "^7.2.7"
