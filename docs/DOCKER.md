@@ -8,12 +8,14 @@
 ## Installation
 
 1. Configurer les variables d'environnement :
+
    ```bash
    cp docker/.env.example docker/.env
    nano docker/.env  # Modifier N8N_PASSWORD et API keys
    ```
 
 2. Démarrer n8n :
+
    ```bash
    pnpm docker:up
    # ou
@@ -57,7 +59,9 @@ docker run --rm -v tradimedika_n8n_data:/data -v $(pwd)/backup:/backup alpine ta
 ## Troubleshooting
 
 ### Port 5678 déjà utilisé
+
 Modifier le port dans `docker-compose.yml` : `- "5679:5678"`
 
 ### Credentials perdues
+
 Vérifier le volume n8n_data : `docker volume inspect tradimedika_n8n_data`

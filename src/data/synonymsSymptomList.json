@@ -62,7 +62,6 @@
   "allergies": ["réaction allergique", "sensibilité"],
   "éruption cutanée": ["rash", "boutons", "plaques rouges"],
   "démangeaisons": ["prurit", "grattage"],
-  "sécheresse de la peau": ["peau sèche", "xerose"],
   "perte de cheveux": ["alopécie", "chute de cheveux"],
   "perte d'apétit": ["anorexie", "hyporexie"]
 }
