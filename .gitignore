@@ -26,3 +26,15 @@ CLAUDE.md
 *.njsproj
 *.sln
 *.sw?
+
+# Docker
+docker/.env
+.env
+
+# n8n
+n8n/credentials/*
+!n8n/credentials/.gitkeep
+n8n/exports/*
+!n8n/exports/.gitkeep
+n8n/workflows/*
+!n8n/workflows/.gitkeep

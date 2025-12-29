@@ -27,16 +27,6 @@ export default function RemedyCard({ remedy, selectedSymptoms }) {
     verifiedByProfessional,
   } = remedy;
 
-  // Type badges avec couleurs différentes
-  const typeStyles = {
-    aliment:
-      "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200",
-    boisson: "bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200",
-    épice:
-      "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
-    plante: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -71,7 +61,7 @@ export default function RemedyCard({ remedy, selectedSymptoms }) {
                 {name}
               </h3>
               <span
-                className={`shrink-0 rounded-md px-2 py-1 text-xs lg:text-sm font-semibold tracking-wide uppercase text-black bg-neutral-200 dark:text-white dark:bg-neutral-600 `}
+                className={`shrink-0 rounded-md bg-neutral-200 px-2 py-1 text-xs font-semibold tracking-wide text-black uppercase lg:text-sm dark:bg-neutral-600 dark:text-white`}
               >
                 {type}
               </span>
@@ -88,7 +78,7 @@ export default function RemedyCard({ remedy, selectedSymptoms }) {
                 {properties.slice(0, 3).map((prop, index) => (
                   <span
                     key={index}
-                    className="inline-flex lg:text-sm items-center gap-1 rounded-md bg-emerald-100 px-3 py-1 text-xs font-medium text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200"
+                    className="inline-flex items-center gap-1 rounded-md bg-emerald-100 px-3 py-1 text-xs font-medium text-emerald-800 lg:text-sm dark:bg-emerald-900 dark:text-emerald-200"
                   >
                     {capitalizeFirstLetter(prop.name, true)}
                   </span>

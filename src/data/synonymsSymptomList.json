@@ -21,11 +21,15 @@
     "mal au ventre",
     "mal de ventre"
   ],
-  "crampes musculaires": ["crampes"],
+  "crampes musculaires": ["crampes", "spasmes"],
   "diarrhée": ["selles liquides", "gastro"],
   "nausée": ["mal des transports", "envie de vomir", "haut le cœur"],
   "anxiété": ["stress", "angoisse", "nervosité", "tension"],
-  "insomnie": ["troubles du sommeil", "difficulté à dormir"],
+  "insomnie": [
+    "troubles du sommeil",
+    "difficulté à dormir",
+    "sommeil perturbé"
+  ],
   "inflammation": ["gonflement", "douleur inflammatoire", "œdème"],
   "diabète": ["glycémie", "taux de sucre", "hyperglycémie"],
   "rhume": ["froid", "nez qui coule"],
@@ -33,7 +37,32 @@
   "toux": ["toux sèche", "toux grasse"],
   "fatigue": ["épuisement", "asthénie", "manque d'énergie", "épuisement"],
   "constipation": ["transit lent", "difficultés à aller à la selle"],
-  "ballonnements": ["gaz intestinaux", "ventre gonflé", "flatulences"],
+  "ballonnements": [
+    "gaz intestinaux",
+    "ventre gonflé",
+    "flatulences",
+    "pets",
+    "proute"
+  ],
   "concentration": ["attention", "focus", "vigilance"],
-  "vers intestinaux": ["parasites intestinaux", "oxyures"]
+  "vers intestinaux": ["parasites intestinaux", "oxyures"],
+  "vertiges": ["étourdissements", "perte d'équilibre", "vertige positionnel"],
+  "fièvre": ["température élevée", "hyperthermie"],
+  "irritabilité": ["agitation", "énervement"],
+  "dépression": ["tristesse", "mélancolie", "abattement", "colère"],
+  "douleurs articulaires": ["arthralgie", "raideur articulaire"],
+  "douleurs lombaires": [
+    "mal de dos",
+    "lombalgie",
+    "mal au dos",
+    "douleur au dos",
+    "douleur dorsale"
+  ],
+  "tension artérielle": ["hypertension", "hypotension"],
+  "allergies": ["réaction allergique", "sensibilité"],
+  "éruption cutanée": ["rash", "boutons", "plaques rouges"],
+  "démangeaisons": ["prurit", "grattage"],
+  "sécheresse de la peau": ["peau sèche", "xerose"],
+  "perte de cheveux": ["alopécie", "chute de cheveux"],
+  "hyporexie (perte d'apétit)": ["perte d'apétit", "anorexie"]
 }

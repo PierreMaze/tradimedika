@@ -18,7 +18,11 @@
     "validate-data": "node scripts/validateData.js",
     "clean": "rm -rf node_modules pnpm-lock.yaml package-lock.json dist && clear",
     "deploy": "gh-pages -d dist -f",
-    "ccu": "ccusage blocks --live"
+    "ccu": "ccusage blocks --live",
+    "docker:up": "cd docker && docker-compose up -d",
+    "docker:down": "cd docker && docker-compose down",
+    "docker:logs": "cd docker && docker-compose logs -f n8n",
+    "docker:restart": "cd docker && docker-compose restart n8n"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
