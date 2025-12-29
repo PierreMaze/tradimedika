@@ -117,7 +117,7 @@ function RemedyResultDetails() {
           <h1 className="mb-3 text-3xl font-bold lg:text-4xl">{remedy.name}</h1>
 
           {/* Description (courte pour mobile) */}
-          <p className="text-sm 2xl:text-lg leading-relaxed text-neutral-600 lg:text-base dark:text-neutral-400">
+          <p className="text-sm leading-relaxed text-neutral-600 lg:text-base 2xl:text-lg dark:text-neutral-400">
             {remedy.description}
           </p>
         </div>
@@ -141,7 +141,7 @@ function RemedyResultDetails() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.4 + index * 0.05 }}
-                  className="rounded-md bg-emerald-100 px-3 py-1.5 text-sm 2xl:text-base font-medium text-emerald-800 capitalize dark:bg-emerald-900 dark:text-emerald-200"
+                  className="rounded-md bg-emerald-100 px-3 py-1.5 text-sm font-medium text-emerald-800 capitalize 2xl:text-base dark:bg-emerald-900 dark:text-emerald-200"
                 >
                   {prop.name}
                 </motion.span>
@@ -168,7 +168,7 @@ function RemedyResultDetails() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.5 + index * 0.05 }}
-                  className="rounded-md bg-orange-100 px-3 py-2 text-sm 2xl:text-base font-medium text-yellow-800 shadow-md dark:bg-yellow-700 dark:text-yellow-100"
+                  className="rounded-md bg-orange-100 px-3 py-2 text-sm font-medium text-yellow-800 shadow-md 2xl:text-base dark:bg-yellow-700 dark:text-yellow-100"
                 >
                   {capitalizeFirstLetter(symptom, true)}
                 </motion.span>
@@ -197,7 +197,7 @@ function RemedyResultDetails() {
                 transition={{ delay: 0.6 + index * 0.1 }}
                 className="border-l-4 border-emerald-500 pl-4"
               >
-                <div className="mb-1 flex flex-wrap items-center gap-2 text-sm 2xl:text-base font-semibold text-neutral-700 dark:text-neutral-300">
+                <div className="mb-1 flex flex-wrap items-center gap-2 text-sm font-semibold text-neutral-700 2xl:text-base dark:text-neutral-300">
                   {/* Forme */}
                   {use.form && use.form.length > 0 && (
                     <span className="capitalize">{use.form.join(", ")}</span>
@@ -231,7 +231,7 @@ function RemedyResultDetails() {
                   )}
                 </div>
                 {use.description && (
-                  <p className="text-sm 2xl:text-base leading-relaxed text-neutral-600 dark:text-neutral-400">
+                  <p className="text-sm leading-relaxed text-neutral-600 2xl:text-base dark:text-neutral-400">
                     {use.description}
                   </p>
                 )}
@@ -257,7 +257,7 @@ function RemedyResultDetails() {
             {remedy.contraindications.map((contraindication, index) => (
               <li
                 key={index}
-                className="text-sm 2xl:text-base leading-relaxed font-medium text-red-800 capitalize dark:text-red-200"
+                className="text-sm leading-relaxed font-medium text-red-800 capitalize 2xl:text-base dark:text-red-200"
               >
                 {capitalizeFirstLetter(contraindication, true)}
               </li>
@@ -282,7 +282,7 @@ function RemedyResultDetails() {
             {remedy.tips.map((tip, index) => (
               <li
                 key={index}
-                className="text-sm 2xl:text-base leading-relaxed text-sky-800 dark:text-sky-300"
+                className="text-sm leading-relaxed text-sky-800 2xl:text-base dark:text-sky-300"
               >
                 {tip}
               </li>
@@ -307,7 +307,7 @@ function RemedyResultDetails() {
             {remedy.allergens.map((allergen, index) => (
               <span
                 key={index}
-                className="rounded-md bg-yellow-200 px-3 py-1.5 text-sm 2xl:text-base font-medium text-yellow-900 capitalize dark:bg-yellow-800 dark:text-yellow-100"
+                className="rounded-md bg-yellow-200 px-3 py-1.5 text-sm font-medium text-yellow-900 capitalize 2xl:text-base dark:bg-yellow-800 dark:text-yellow-100"
               >
                 {allergen}
               </span>

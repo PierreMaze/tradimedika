@@ -6,7 +6,7 @@ import globals from "globals";
 
 export default [
   {
-    ignores: ["dist"],
+    ignores: ["dist", "coverage"],
   },
   // Configuration pour les fichiers React (src/)
   {

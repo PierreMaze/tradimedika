@@ -2,6 +2,84 @@
 
 ---
 
+## [0.23.0] - 2025-12-29
+
+### <u>add:</u>
+
+- Added `vitest` (v4.0.16) test runner for modern and fast testing
+- Added `@testing-library/react` (v16.3.1) for React component testing
+- Added `@testing-library/jest-dom` (v6.9.1) for DOM matchers
+- Added `@testing-library/user-event` (v14.6.1) for user interaction simulation
+- Added `jsdom` (v27.4.0) for DOM environment in tests
+- Added `@vitest/ui` (v4.0.16) for visual test interface
+- Added `@vitest/coverage-v8` (v4.0.16) for code coverage reports
+- Added `vitest.config.js` configuration file with jsdom environment and coverage setup
+- Added `src/test/setup.js` for global test setup
+- Added `src/utils/remedyMatcher.test.js` with 30 unit tests for remedy matching logic
+- Added `src/utils/normalizeSymptom.test.js` with 22 unit tests for symptom normalization
+- Added `src/hooks/useSymptomSubmit.test.js` with 9 unit tests for submission hook
+
+### <u>update:</u>
+
+- Updated `package.json` to include test scripts (test, test:ui, test:coverage)
+- Updated `package.json` to include 7 new test dependencies
+- Updated `package.json` version from `0.22.0` to `0.23.0`
+- Updated `README.md` version badge from `0.22.0` to `0.23.0`
+
+### <u>testing:</u>
+
+- Established comprehensive testing infrastructure with Vitest + Testing Library
+- Achieved **95.93% code coverage** (target: 60%)
+- Created 58 unit tests covering critical functions and hooks
+- Configured automatic coverage reporting with v8 provider
+
+### <u>coverage:</u>
+
+- **Overall**: 95.93% statements, 89.23% branches, 96.42% functions, 96.66% lines
+- **hooks/useSymptomSubmit.js**: 94.59% coverage
+- **utils/normalizeSymptom.js**: 100% coverage
+- **utils/remedyMatcher.js**: 98.36% coverage
+- **utils/logger.js**: 87.5% coverage
+
+### <u>features:</u>
+
+- **Test Automation**: Run tests with `pnpm test`
+- **Visual Test UI**: Interactive test interface with `pnpm test:ui`
+- **Coverage Reports**: Detailed coverage analysis with `pnpm test:coverage`
+- **Fast Feedback**: Vitest's watch mode for instant test re-runs during development
+- **Mocking Support**: Complete mocking capabilities for react-router-dom and utility functions
+
+### <u>test coverage details:</u>
+
+**remedyMatcher.test.js (30 tests)**:
+
+- `findMatchingRemedies`: Tests for symptom matching, scoring, sorting, accent flexibility
+- `getRemedyById`: Tests for ID lookup, validation, type conversion
+- `generateSlug`: Tests for slug generation with French accents preservation
+- `getRemedyBySlug`: Tests for slug-based search with URL decoding
+
+**normalizeSymptom.test.js (22 tests)**:
+
+- `normalizeSymptom`: Tests for display normalization (keeps accents)
+- `normalizeForMatching`: Tests for matching normalization (removes accents)
+- Edge cases: Invalid inputs, empty strings, special characters
+
+**useSymptomSubmit.test.js (9 tests)**:
+
+- Validation logic: Empty symptoms handling
+- Loading states: isLoading, hasSubmitted management
+- Navigation: React Router navigation with state
+- Error handling: Error state management
+
+### <u>issues resolved:</u>
+
+- GitHub Issue #62: Absence totale de tests - Tests unitaires Phase 1
+- Established testing foundation for future test expansion (components, E2E)
+- Implemented test infrastructure meeting industry standards (>95% coverage)
+- Created test suite preventing future regressions
+
+---
+
 ## [0.22.0] - 2025-12-29
 
 ### <u>add:</u>

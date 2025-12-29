@@ -29,7 +29,7 @@ function ChildrenAgeBadge({
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-md bg-blue-100 px-3 py-1.5 text-xs lg:text-sm font-semibold text-blue-800 transition duration-300 dark:bg-blue-900 dark:text-blue-200 ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-md bg-blue-100 px-3 py-1.5 text-xs font-semibold text-blue-800 transition duration-300 lg:text-sm dark:bg-blue-900 dark:text-blue-200 ${className}`}
       title={`Ce remède est adapté aux enfants à partir de ${age} ans`}
     >
       <MdOutlineChildCare className={sizeClasses[size]} aria-hidden="true" />

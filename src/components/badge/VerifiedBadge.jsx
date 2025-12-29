@@ -23,7 +23,7 @@ function VerifiedBadge({ className = "", size = "sm", showLabel = true }) {
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-md bg-sky-100 px-3 py-1.5 text-xs lg:text-sm font-semibold text-sky-800 transition duration-300 dark:bg-sky-900 dark:text-sky-200 ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-md bg-sky-100 px-3 py-1.5 text-xs font-semibold text-sky-800 transition duration-300 lg:text-sm dark:bg-sky-900 dark:text-sky-200 ${className}`}
       title="Vérifié par un professionnel de santé"
     >
       <HiMiniShieldCheck className={sizeClasses[size]} aria-hidden="true" />

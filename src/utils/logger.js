@@ -40,7 +40,7 @@ export const createLogger = (context) => {
      */
     info: (message, ...args) => {
       if (isDev) {
-        console.info(prefix, message, ...args);
+        console.log(prefix, message, ...args);
       }
     },
 
