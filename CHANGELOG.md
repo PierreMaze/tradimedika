@@ -2,6 +2,55 @@
 
 ---
 
+## [0.24.0] - 2025-12-29
+
+### <u>add:</u>
+
+- Added query params support in symptom navigation for URL persistence
+- Added `symptoms` query parameter to `/remedes` route for shareable URLs
+- Added `encodeURIComponent()` for proper URL encoding of French accents in symptoms
+- Added `decodeURIComponent()` for reading symptoms from URL query params
+- Added shareable URLs feature: users can now bookmark and share symptom search results
+
+### <u>update:</u>
+
+- Updated `src/hooks/useSymptomSubmit.js` to include query params in navigation (line 58-63)
+- Updated navigation to use dual approach: query params (priority) + state (fallback)
+- Updated `src/pages/RemedyResult.jsx` to read symptoms from URL query params first (lines 31-46)
+- Updated symptom retrieval with `useMemo` for optimized query params parsing
+- Updated `package.json` version from `0.23.0` to `0.24.0`
+- Updated `README.md` version badge from `0.23.0` to `0.24.0`
+
+### <u>fix:</u>
+
+- Fixed symptom loss when refreshing `/remedes` page (symptoms now persist in URL)
+- Fixed inability to bookmark search results (URLs now contain search state)
+- Fixed lack of URL shareability (users can now copy/paste URLs with symptoms)
+- Fixed browser history not reflecting search state (back/forward buttons now preserve symptoms)
+
+### <u>ux:</u>
+
+- Improved user experience with persistent search results across page refreshes
+- Enhanced shareability: users can send direct links to specific symptom searches
+- Better browser navigation: back button correctly restores previous search
+- Improved bookmarking: URLs now represent complete search state
+
+### <u>features:</u>
+
+- **Persistent Symptoms**: Search results survive page refresh and remain in browser history
+- **Shareable URLs**: Complete URLs with encoded symptoms (e.g., `/remedes?symptoms=naus%C3%A9e,fatigue`)
+- **URL Encoding**: Proper handling of French accents in URLs with encodeURIComponent/decodeURIComponent
+- **Backward Compatibility**: Fallback to location.state for existing navigation patterns
+- **Browser History**: Full integration with browser back/forward navigation
+
+### <u>issues resolved:</u>
+
+- GitHub Issue #64: Perte des symptômes au rafraîchissement de la page /remedes
+- Implemented URL query params persistence while maintaining backward compatibility with state navigation
+- Users can now refresh, bookmark, and share symptom search results via URLs
+
+---
+
 ## [0.23.0] - 2025-12-29
 
 ### <u>add:</u>

@@ -54,8 +54,11 @@ export function useSymptomSubmit() {
         setResults(matchingRemedies);
         setHasSubmitted(true);
 
-        // Navigation vers la page des résultats avec les symptômes en state
-        navigate("/remedes", {
+        // Navigation vers la page des résultats avec query params ET state
+        // Query params: persistance après refresh + URLs partageables
+        // State: fallback pour backward compatibility
+        const symptomsParam = encodeURIComponent(selectedSymptoms.join(","));
+        navigate(`/remedes?symptoms=${symptomsParam}`, {
           state: { symptoms: selectedSymptoms },
         });
 

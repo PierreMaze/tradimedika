@@ -13,7 +13,7 @@ import { findMatchingRemedies } from "../utils/remedyMatcher";
  * RemedyResult Page - Affiche les remèdes correspondant aux symptômes sélectionnés
  *
  * Fonctionnalités:
- * - Récupère les symptômes depuis Hero via useLocation (React Router state)
+ * - Récupère les symptômes depuis query params (persistance refresh) ou state (fallback)
  * - Calcule les remèdes matchés avec findMatchingRemedies()
  * - Permet le filtrage par tags/symptômes via FilterRemedyResult
  * - Affiche la liste des remèdes via RemedyResultList (grille responsive)
@@ -27,11 +27,23 @@ import { findMatchingRemedies } from "../utils/remedyMatcher";
 function RemedyResult() {
   const location = useLocation();
 
-  // useMemo pour éviter recalcul des symptômes à chaque render
-  const selectedSymptoms = useMemo(
-    () => location.state?.symptoms || [],
-    [location.state?.symptoms],
-  );
+  // Récupérer symptômes depuis query params (priorité) ou state (fallback)
+  const selectedSymptoms = useMemo(() => {
+    // 1. Tenter de lire depuis query params (persistance refresh + URLs partageables)
+    const searchParams = new URLSearchParams(location.search);
+    const symptomsParam = searchParams.get("symptoms");
+
+    if (symptomsParam) {
+      // Décoder et split les symptômes depuis l'URL
+      return symptomsParam
+        .split(",")
+        .map((s) => decodeURIComponent(s.trim()))
+        .filter(Boolean);
+    }
+
+    // 2. Fallback sur location.state (backward compatibility)
+    return location.state?.symptoms || [];
+  }, [location.search, location.state?.symptoms]);
 
   // Calcul des remèdes matchés avec useMemo pour optimisation
   const matchedRemedies = useMemo(
