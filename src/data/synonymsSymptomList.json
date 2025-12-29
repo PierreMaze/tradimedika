@@ -64,5 +64,5 @@
   "démangeaisons": ["prurit", "grattage"],
   "sécheresse de la peau": ["peau sèche", "xerose"],
   "perte de cheveux": ["alopécie", "chute de cheveux"],
-  "hyporexie (perte d'apétit)": ["perte d'apétit", "anorexie"]
+  "perte d'apétit": ["anorexie", "hyporexie"]
 }
