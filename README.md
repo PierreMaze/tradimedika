@@ -15,7 +15,7 @@
 
 [🌐 **Voir le site**](https://pierremaze.github.io/tradimedika/) • [🐛 **Signaler un bug**](https://github.com/PierreMaze/) • [💬 **Discuter**](https://www.linkedin.com/in/pierremazelaygue/)
 
-[![TRADIMEDIKA](<https://img.shields.io/badge/TRADIMEDIKA-Bêta(0.27.0)-1a1a1a?style=for-the-badge&logo=leaflet&logoColor=00bd7e>)](https://pierremaze.github.io/tradimedika/)
+[![TRADIMEDIKA](<https://img.shields.io/badge/TRADIMEDIKA-Bêta(0.28.0)-1a1a1a?style=for-the-badge&logo=leaflet&logoColor=00bd7e>)](https://pierremaze.github.io/tradimedika/)
 
 </div>
 
@@ -38,7 +38,7 @@
 
 ### ⚠️ Disclamer ⚠️
 
-> _Ce site ne remplace pas la médecine traditionnelle, mais plutot une alternative à l'instant "T", prenez rendez-vous avec un médecin ou appelez les d'urgence : ce sont les personnes les plus compétentes pour vous assister._
+> _Ce site ne remplace pas la médecine traditionnelle, mais plutot une alternative à l'instant "T", prenez rendez-vous avec un médecin ou appelez les d'urgence : ce sont les personnes les plus compétentes pour vous assister. Meci de votre compréhension._
 
 ### 🎨 Caractéristiques principales
 

@@ -1,18 +1,33 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { GiFallingLeaf } from "react-icons/gi";
+import { useReducedMotion } from "../hooks/useReducedMotion";
 
 export default function LeafFall() {
   const [show, setShow] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const prefersReducedMotion = useReducedMotion();
 
-  // Détection mobile vs desktop
+  // Détection mobile vs desktop - COUNT réduit pour performance
   const isMobile = window.innerWidth < 768;
-  const COUNT = isMobile ? 5 : 10;
+  const COUNT = isMobile ? 3 : 5; // Réduit de 5/10 à 3/5
   const START_FALL_AFTER = 0;
 
   useEffect(() => {
     const timer = setTimeout(() => setShow(true), START_FALL_AFTER);
     return () => clearTimeout(timer);
+  }, []);
+
+  // Page Visibility API - Pause animations when page is hidden
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      setIsVisible(!document.hidden);
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
   }, []);
 
   // Initialiser les feuilles avec useState pour garantir la pureté
@@ -89,6 +104,10 @@ export default function LeafFall() {
     });
   });
 
+  // Ne pas afficher si l'utilisateur préfère des animations réduites
+  if (prefersReducedMotion) return null;
+
+  // Ne pas afficher avant le délai initial
   if (!show) return null;
 
   return (
@@ -100,7 +119,7 @@ export default function LeafFall() {
           style={{
             left: `${leaf.startX}%`,
             top: `${leaf.startY}%`,
-            willChange: "transform, opacity",
+            // willChange supprimé pour réduire consommation GPU
           }}
           initial={{
             y: 0,
@@ -109,12 +128,16 @@ export default function LeafFall() {
             rotate: leaf.rotateKeyframes[0],
             opacity: 0,
           }}
-          animate={{
-            y: leaf.yKeyframes,
-            x: leaf.xOffsets,
-            rotate: leaf.rotateKeyframes,
-            opacity: leaf.opacityKeyframes,
-          }}
+          animate={
+            isVisible
+              ? {
+                  y: leaf.yKeyframes,
+                  x: leaf.xOffsets,
+                  rotate: leaf.rotateKeyframes,
+                  opacity: leaf.opacityKeyframes,
+                }
+              : {} // Pause animation when page is hidden
+          }
           transition={{
             duration: leaf.duration,
             ease: "linear",

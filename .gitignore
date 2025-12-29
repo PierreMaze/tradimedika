@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Test coverage
+coverage
+
 # Editor directories and files
 docs/ISSUE_TEMPLATE.md
 docs/PR_TEMPLATE.md

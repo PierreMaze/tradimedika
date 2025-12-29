@@ -11,6 +11,26 @@ import { normalizeForMatching } from "../../utils/normalizeSymptom";
 
 const logger = createLogger("SymptomsSelector");
 
+// Constante globale pour éviter recalcul à chaque render
+// Contient tous les synonymes (valeurs de synonymsData)
+const ALL_SYNONYM_VALUES = Object.values(synonymsData).flat();
+
+// Cache pour normalizeForMatching (Map symptôme → normalisé)
+const normalizeCache = new Map();
+
+/**
+ * Version cachée de normalizeForMatching pour optimisation
+ * Évite de normaliser le même symptôme plusieurs fois
+ */
+const getCachedNormalized = (symptom) => {
+  if (normalizeCache.has(symptom)) {
+    return normalizeCache.get(symptom);
+  }
+  const normalized = normalizeForMatching(symptom);
+  normalizeCache.set(symptom, normalized);
+  return normalized;
+};
+
 // Fonction pour capitaliser la première lettre d'un symptôme
 const capitalizeSymptom = (symptom) => {
   return symptom.charAt(0).toUpperCase() + symptom.slice(1);
@@ -53,8 +73,8 @@ export default function SymptomsSelector({
   onSymptomSelect,
   onRemoveSymptom,
   selectedSymptoms = [],
-  placeholder,
-  onSubmit,
+  placeholder = "Entrez vos symptômes...",
+  onSubmit = null,
 }) {
   const [inputValue, setInputValue] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -81,40 +101,41 @@ export default function SymptomsSelector({
   // Dérivé via useMemo pour éviter les setState synchrones dans les effets
   // Exclut les symptômes déjà sélectionnés ET leurs synonymes
   // Propose UNIQUEMENT les symptômes principaux (clés de synonymsData), jamais les synonymes
+  // OPTIMISÉ: Utilise cache pour normalisations et const globale pour synonymes
   const filteredSymptoms = useMemo(() => {
     if (inputValue.trim() === "") {
       return [];
     }
 
-    // Normaliser l'input pour matching flexible (sans accents)
-    const normalizedInput = normalizeForMatching(inputValue);
+    // Normaliser l'input pour matching flexible (sans accents) - avec cache
+    const normalizedInput = getCachedNormalized(inputValue);
 
     // 1. Chercher via synonymes (recherche inverse) - PRIORITÉ
     const mainSymptomsFromSynonym = findMainSymptomsFromSynonym(inputValue);
 
     // 2. Chercher dans symptomList.json (symptômes principaux uniquement)
     // Exclure les symptômes qui sont des synonymes (valeurs de synonymsData)
-    const allSynonymValues = Object.values(synonymsData).flat();
-
+    // OPTIMISÉ: Utilise ALL_SYNONYM_VALUES (const globale)
     const directMatches = symptomsData.filter((symptom) => {
       // Ne pas inclure si c'est un synonyme (valeur dans synonymsData)
+      const normalizedSymptom = getCachedNormalized(symptom);
       if (
-        allSynonymValues.some(
-          (syn) => normalizeForMatching(syn) === normalizeForMatching(symptom),
+        ALL_SYNONYM_VALUES.some(
+          (syn) => getCachedNormalized(syn) === normalizedSymptom,
         )
       ) {
         return false;
       }
       // Inclure si le symptom matche l'input
-      return normalizeForMatching(symptom).includes(normalizedInput);
+      return normalizedSymptom.includes(normalizedInput);
     });
 
     // 3. Séparer exact matches et partial matches (seulement pour directMatches)
     const exactMatches = directMatches.filter(
-      (symptom) => normalizeForMatching(symptom) === normalizedInput,
+      (symptom) => getCachedNormalized(symptom) === normalizedInput,
     );
     const partialMatches = directMatches.filter(
-      (symptom) => normalizeForMatching(symptom) !== normalizedInput,
+      (symptom) => getCachedNormalized(symptom) !== normalizedInput,
     );
 
     // 4. Combiner dans l'ordre : synonymes → exact → partial
@@ -345,10 +366,4 @@ SymptomsSelector.propTypes = {
   selectedSymptoms: PropTypes.arrayOf(PropTypes.string),
   placeholder: PropTypes.string,
   onSubmit: PropTypes.func,
-};
-
-SymptomsSelector.defaultProps = {
-  selectedSymptoms: [],
-  placeholder: "Entrez vos symptômes...",
-  onSubmit: null,
 };

@@ -1,0 +1,31 @@
+# Security Headers for GitHub Pages
+# These headers will be served by GitHub Pages for all paths
+
+/*
+  # Content Security Policy (CSP)
+  # Prevents XSS attacks by controlling which resources can be loaded
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+
+  # X-Frame-Options
+  # Prevents clickjacking attacks by disallowing the page to be displayed in frames
+  X-Frame-Options: DENY
+
+  # X-Content-Type-Options
+  # Prevents MIME sniffing attacks
+  X-Content-Type-Options: nosniff
+
+  # X-XSS-Protection
+  # Enables browser's XSS filter (legacy but still useful for older browsers)
+  X-XSS-Protection: 1; mode=block
+
+  # Referrer-Policy
+  # Controls how much referrer information is sent with requests
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Permissions-Policy (formerly Feature-Policy)
+  # Controls which browser features can be used
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+
+  # Strict-Transport-Security (HSTS)
+  # Forces HTTPS connections (GitHub Pages already serves over HTTPS)
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload

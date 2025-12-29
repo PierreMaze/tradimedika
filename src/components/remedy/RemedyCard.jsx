@@ -1,4 +1,5 @@
 // components/remedy/RemedyCard.jsx
+import { memo } from "react";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
@@ -14,8 +15,9 @@ import ChildrenAgeBadge from "../badge/ChildrenAgeBadge";
  * - Design responsive avec animations Framer Motion
  * - Support mode sombre
  * - Accessible avec aria-label
+ * - Optimisé avec React.memo pour éviter re-renders inutiles
  */
-export default function RemedyCard({ remedy, selectedSymptoms }) {
+function RemedyCard({ remedy, selectedSymptoms }) {
   const {
     name,
     type,
@@ -124,3 +126,37 @@ RemedyCard.propTypes = {
   }).isRequired,
   selectedSymptoms: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
+
+/**
+ * Fonction de comparaison personnalisée pour React.memo
+ * Compare uniquement les props qui affectent réellement le rendu
+ */
+function arePropsEqual(prevProps, nextProps) {
+  // Comparer l'ID du remède (identifiant unique)
+  if (prevProps.remedy.id !== nextProps.remedy.id) {
+    return false;
+  }
+
+  // Comparer les symptômes sélectionnés (affecte le state passé au Link)
+  if (prevProps.selectedSymptoms.length !== nextProps.selectedSymptoms.length) {
+    return false;
+  }
+
+  // Comparaison rapide des symptômes par référence d'abord
+  if (prevProps.selectedSymptoms === nextProps.selectedSymptoms) {
+    return true;
+  }
+
+  // Comparaison profonde des symptômes si les références diffèrent
+  for (let i = 0; i < prevProps.selectedSymptoms.length; i++) {
+    if (prevProps.selectedSymptoms[i] !== nextProps.selectedSymptoms[i]) {
+      return false;
+    }
+  }
+
+  // Props identiques, pas besoin de re-render
+  return true;
+}
+
+// Export du composant memoizé avec fonction de comparaison personnalisée
+export default memo(RemedyCard, arePropsEqual);

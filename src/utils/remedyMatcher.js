@@ -1,6 +1,7 @@
 // src/utils/remedyMatcher.js
 import { createLogger } from "./logger";
 import { normalizeForMatching } from "./normalizeSymptom";
+import { validateSlugFormat } from "./validation";
 
 const logger = createLogger("remedyMatcher");
 
@@ -189,6 +190,14 @@ export function getRemedyBySlug(slug, database) {
   } catch (error) {
     logger.warn(`Erreur lors du décodage du slug "${slug}"`, error);
     // Continue avec le slug original si le décodage échoue
+  }
+
+  // Valider le format du slug décodé (protection contre injections)
+  if (!validateSlugFormat(decodedSlug)) {
+    logger.warn(
+      `Format de slug invalide après décodage: "${decodedSlug}" (original: "${slug}")`,
+    );
+    return null;
   }
 
   // Rechercher le remède dont le slug correspond

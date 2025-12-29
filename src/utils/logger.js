@@ -2,11 +2,13 @@
  * Logger utility for conditional logging based on environment
  *
  * In development mode (import.meta.env.DEV):
- *   - All log levels are active (debug, info, warn, error)
+ *   - All log levels are active with detailed messages (debug, info, warn, error)
+ *   - Full context and error details are logged
  *
  * In production mode (!import.meta.env.DEV):
- *   - Only warn and error are active
+ *   - warn and error log only generic messages (no sensitive details)
  *   - debug and info are no-ops
+ *   - Prevents information disclosure in production console
  *
  * @param {string} context - The context/module name for the logger
  * @returns {Object} Logger instance with debug, info, warn, error methods
@@ -45,21 +47,39 @@ export const createLogger = (context) => {
     },
 
     /**
-     * Warning level - In development and production
+     * Warning level - Conditional output based on environment
+     * Development: Full message with details
+     * Production: Generic warning message only (no sensitive details)
      * @param {string} message - The message to log
      * @param {...any} args - Additional arguments to log
      */
     warn: (message, ...args) => {
-      console.warn(prefix, message, ...args);
+      if (isDev) {
+        // Development: log full details
+        console.warn(prefix, message, ...args);
+      } else {
+        // Production: log only generic message without details
+        console.warn(prefix, "Une erreur non-critique s'est produite");
+      }
     },
 
     /**
-     * Error level - In development and production
+     * Error level - Conditional output based on environment
+     * Development: Full error message with stack trace
+     * Production: Generic error code only (no sensitive details)
      * @param {string} message - The message to log
      * @param {...any} args - Additional arguments to log
      */
     error: (message, ...args) => {
-      console.error(prefix, message, ...args);
+      if (isDev) {
+        // Development: log full error details
+        console.error(prefix, message, ...args);
+      } else {
+        // Production: log only generic error code
+        // Generate a simple error code based on context for tracking
+        const errorCode = `ERR_${context.toUpperCase()}_${Date.now() % 10000}`;
+        console.error(prefix, `Une erreur s'est produite (Code: ${errorCode})`);
+      }
     },
 
     /**
