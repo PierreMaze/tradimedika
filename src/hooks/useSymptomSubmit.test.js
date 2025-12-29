@@ -103,7 +103,7 @@ describe("useSymptomSubmit", () => {
     expect(result.current.results).toHaveLength(1);
     expect(result.current.results[0].remedy.name).toBe("Citron");
 
-    expect(mockNavigate).toHaveBeenCalledWith("/remedes", {
+    expect(mockNavigate).toHaveBeenCalledWith("/remedes?symptoms=naus%C3%A9e", {
       state: { symptoms: ["nausée"] },
     });
   });
@@ -117,9 +117,12 @@ describe("useSymptomSubmit", () => {
       vi.runAllTimers();
     });
 
-    expect(mockNavigate).toHaveBeenCalledWith("/remedes", {
-      state: { symptoms },
-    });
+    expect(mockNavigate).toHaveBeenCalledWith(
+      "/remedes?symptoms=naus%C3%A9e%2Cfatigue",
+      {
+        state: { symptoms },
+      },
+    );
   });
 
   it("doit réinitialiser hasSubmitted après 2 secondes", async () => {
@@ -170,8 +173,11 @@ describe("useSymptomSubmit", () => {
       vi.runAllTimers();
     });
 
-    expect(mockNavigate).toHaveBeenCalledWith("/remedes", {
-      state: { symptoms },
-    });
+    expect(mockNavigate).toHaveBeenCalledWith(
+      "/remedes?symptoms=naus%C3%A9e%2Cfatigue%2Cstress",
+      {
+        state: { symptoms },
+      },
+    );
   });
 });

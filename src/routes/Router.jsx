@@ -3,19 +3,13 @@ import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import LayoutApp from "../layout/LayoutApp";
 import LayoutRemedyResult from "../layout/LayoutRemedyResult";
+import LoadingFallback from "../components/loading/LoadingFallback";
 
 // Lazy-loaded page components for code-splitting
 const Home = lazy(() => import("../pages/Home"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 const RemedyResult = lazy(() => import("../pages/RemedyResult"));
 const RemedyResultDetails = lazy(() => import("../pages/RemedyResultDetails"));
-
-// Loading fallback component
-const LoadingFallback = () => (
-  <div className="flex min-h-screen items-center justify-center">
-    <div className="h-12 w-12 animate-spin rounded-full border-4 border-emerald-600 border-t-transparent"></div>
-  </div>
-);
 
 /**
  * Router Configuration - React Router v6.30.2 with Data Router API
