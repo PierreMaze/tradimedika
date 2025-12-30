@@ -2,6 +2,31 @@
 
 ---
 
+## [0.33.0] - 2025-12-30
+
+### <u>Fixed:</u>
+
+- Correction du format d'affichage des fréquences d'utilisation des remèdes
+  - Avant : "2x/fois par jour", "3x/tasses maximum par jour", "1x/jour"
+  - Après : "2 fois par jour", "3 tasses maximum par jour", "1 fois par jour"
+  - Cas spécial : "3x/heures (espacer)" → "Toutes les 3 heures"
+- Amélioration de la lisibilité des informations de posologie dans RemedyResultDetails
+
+### <u>Added:</u>
+
+- Nouvelle fonction utilitaire `formatFrequency()` dans `src/utils/formatFrequency.js`
+  - Gère dynamiquement les formats de fréquence : "jour", "heures (espacer)", unités composées
+  - Validation stricte des entrées avec retour sûr
+  - Extensible pour futurs formats sans modification
+- Tests unitaires complets : 22 tests pour `formatFrequency.test.js`
+  - Formats standards, cas spéciaux, validation, extensibilité
+
+### <u>Changed:</u>
+
+- `RemedyResultDetails.jsx` utilise maintenant `formatFrequency()` pour afficher les fréquences (ligne 306)
+
+---
+
 ## [0.32.0] - 2025-12-30
 
 ### <u>Added:</u>
