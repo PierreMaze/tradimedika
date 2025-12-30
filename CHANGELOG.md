@@ -2,6 +2,43 @@
 
 ---
 
+## [0.32.0] - 2025-12-30
+
+### <u>Added:</u>
+
+- Scroll automatique mobile pour `SymptomsSelector` au focus de l'input
+- Hook `useScrollOnMobileFocus` pour gérer le scroll intelligent sur mobile
+  - Détection automatique mobile via `useMediaQuery("(max-width: 1023px)")`
+  - Délai de 300ms adapté pour les animations clavier iOS/Android
+  - Respect de `prefers-reduced-motion` pour l'accessibilité
+  - Fallback `window.scrollTo` pour compatibilité navigateurs anciens
+- Tests complets pour le hook (8 scénarios) et le composant SymptomsSelector (2 tests focus)
+
+### <u>Changed:</u>
+
+- `SymptomsSelector.jsx` accepte maintenant un prop `onFocus` optionnel
+  - Ajout de `useCallback` dans les imports React
+  - Création du handler `handleInputFocus` pour propager l'événement focus
+  - Mise à jour des PropTypes avec `onFocus: PropTypes.func`
+- `Hero.jsx` utilise le nouveau hook pour scroller au focus mobile
+  - Import de `useRef`, `useCallback` et `useScrollOnMobileFocus`
+  - Ajout de `containerRef` sur le wrapper de `SymptomsSection`
+  - Passage du callback `handleInputFocus` à `SymptomsSelector`
+
+### <u>Fixed:</u>
+
+- UX mobile : l'input et les tags restent visibles quand le clavier virtuel apparaît
+- Le clavier virtuel ne cache plus le dropdown de suggestions sur mobile
+- Les symptômes déjà sélectionnés restent accessibles pendant la saisie mobile
+
+### <u>Tests:</u>
+
+- 10 nouveaux tests ajoutés
+  - 8 tests pour `useScrollOnMobileFocus.test.js` : détection mobile, délai 300ms, reduced motion, options custom, gestion null, fallback, timeout
+  - 2 tests pour `SymptomsSelector.test.jsx` : callback onFocus appelé, fonctionnement sans onFocus
+
+---
+
 ## [0.31.0] - 2025-12-30
 
 ### <u>Changed:</u>
