@@ -15,6 +15,7 @@ import PregnancyTag from "../components/tag/PregnancyTag";
 import ChildrenAgeTag from "../components/tag/ChildrenAgeTag";
 import db from "../data/db.json";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
+import { formatFrequency } from "../utils/formatFrequency";
 import { getRemedyBySlug } from "../utils/remedyMatcher";
 
 /**
@@ -302,9 +303,7 @@ function RemedyResultDetails() {
                     {use.frequency && use.frequency.value && (
                       <>
                         <span className="text-neutral-400">•</span>
-                        <span>
-                          {use.frequency.value}x/{use.frequency.unit}
-                        </span>
+                        <span>{formatFrequency(use.frequency)}</span>
                       </>
                     )}
                     {/* Durée */}
