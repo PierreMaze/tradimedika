@@ -2,6 +2,67 @@
 
 ---
 
+## [0.30.0] - 2025-12-30
+
+### <u>refactoring:</u>
+
+- Transformed `TagsInfoTooltip` component from inline relative position to fixed bottom-right FAB (Floating Action Button)
+- Changed container from `relative` to `fixed bottom-6 right-6 z-50 lg:bottom-8 lg:right-8 2xl:bottom-12 2xl:bottom-12`
+- Updated tooltip positioning: `lg:top-full lg:left-0 lg:mt-2` → `lg:bottom-full lg:right-0 lg:mb-2` (opens upward on desktop)
+- Enhanced z-index layering architecture: button (z-50), backdrop (z-50), tooltip (z-[60])
+- Improved desktop animation direction: changed from `y: 20` to `y: -20` (opens upward instead of downward)
+- Removed inline `<TagsInfoTooltip />` from `RemedyResult.jsx` and `RemedyResultDetails.jsx` (now renders as fixed position FAB)
+
+### <u>add:</u>
+
+- Added comprehensive unit tests for TagsInfoTooltip component (`src/components/tooltip/TagsInfoTooltip.test.jsx`)
+  - 35 tests organized in 11 describe blocks
+  - Test categories: rendering (5), button sizing (3), click interaction mobile (6), hover interaction desktop (4), keyboard (2), click outside (2), accessibility (5), content (3), positioning (3), z-index layering (3)
+  - Includes responsive behavior testing with `window.innerWidth` mocking
+  - Covers desktop (hover) vs mobile (click) interaction patterns
+  - Tests keyboard events (Escape key), click outside detection, backdrop behavior
+  - Validates positioning classes, z-index layering, ARIA attributes
+  - Async tests with `waitFor` for Framer Motion animations
+- Enhanced responsive sizing: mobile `h-12 w-12` (48px) → desktop `lg:h-16 lg:w-16` (64px)
+- Added progressive spacing across breakpoints: `bottom-6 right-6` → `lg:bottom-8 lg:right-8` → `2xl:bottom-12 2xl:right-12`
+- Improved icon sizing: `h-6 w-6` → `h-7 w-7 lg:h-9 lg:w-9`
+
+### <u>update:</u>
+
+- Updated `package.json` version from `0.29.0` to `0.30.0`
+- Updated `README.md` version badge from `0.29.0` to `0.30.0`
+- Updated `TagsInfoTooltip.jsx` button shadow: `shadow-md` → `shadow-lg hover:shadow-xl`
+- Modified files: `TagsInfoTooltip.jsx`, `RemedyResult.jsx` (line 200), `RemedyResultDetails.jsx` (line 432)
+
+### <u>tests:</u>
+
+- All 341 tests passing (17 test files)
+- Added 35 new comprehensive unit tests for TagsInfoTooltip component
+- Test categories: rendering, responsive sizing, mobile/desktop interactions, keyboard navigation, accessibility, positioning, z-index
+- Uses Vitest + React Testing Library + userEvent following project patterns
+- Includes window.innerWidth mocking for responsive behavior testing
+
+### <u>ux/ui:</u>
+
+- Fixed position FAB in bottom-right corner for persistent accessibility across RemedyResult and RemedyResultDetails pages
+- WCAG-compliant touch target: 48px mobile (h-12 w-12), 64px desktop (lg:h-16 lg:w-16)
+- Enhanced visual hierarchy with increased shadow: `shadow-lg hover:shadow-xl`
+- Progressive spacing for optimal thumb zone on mobile (24px) and visual balance on desktop (32px→48px)
+- Improved tooltip alignment: bottom-right edge of tooltip aligns with right edge of button
+- Better animation UX: desktop tooltip opens upward (y: -20) preventing content overlap
+- Maintained mobile-first responsive breakpoints: mobile (default), lg (1024px+), 2xl (1536px+)
+
+### <u>features:</u>
+
+- **Fixed Positioning**: Persistent FAB button accessible from bottom-right corner on remedy pages
+- **Responsive Sizing**: Progressive button sizing across breakpoints (48px → 64px)
+- **Enhanced Spacing**: Multi-breakpoint spacing system (24px → 32px → 48px)
+- **Proper Z-Index Layering**: Establishes clear stacking context (button z-50, backdrop z-50, tooltip z-[60])
+- **Improved Alignment**: Bottom-right alignment for desktop tooltip opening upward
+- **Maintained Interactions**: Desktop hover, mobile click/tap, keyboard (Escape), click outside all working correctly
+
+---
+
 ## [0.29.0] - 2025-12-30
 
 ### <u>refactoring:</u>

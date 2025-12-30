@@ -1,4 +1,4 @@
-// tradimedika-v1/src/components/btn/BadgeInfoTooltip.jsx
+// tradimedika-v1/src/components/tooltip/TagsInfoTooltip.jsx
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,7 +9,7 @@ import PregnancyTag from "../tag/PregnancyTag";
 import ChildrenAgeTag from "../tag/ChildrenAgeTag";
 
 /**
- * BadgeInfoTooltip Component
+ * TagsInfoTooltip Component
  *
  * Affiche un bouton "?" qui révèle un tooltip explicatif des tags
  * (Vérifié, Grossesse OK, Enfants X+ ans).
@@ -21,7 +21,7 @@ import ChildrenAgeTag from "../tag/ChildrenAgeTag";
  * - Backdrop semi-transparent sur mobile
  */
 
-function BadgeInfoTooltip() {
+function TagsInfoTooltip() {
   const [isOpen, setIsOpen] = useState(false);
   const tooltipRef = useRef(null);
   const buttonRef = useRef(null);
@@ -91,7 +91,7 @@ function BadgeInfoTooltip() {
   }, [isOpen]);
 
   return (
-    <div className="relative">
+    <div className="fixed right-6 bottom-6 z-50 lg:right-8 lg:bottom-8 2xl:right-12 2xl:bottom-12">
       {/* Bouton "?" */}
       <button
         ref={buttonRef}
@@ -100,9 +100,9 @@ function BadgeInfoTooltip() {
         onMouseLeave={handleMouseLeave}
         aria-label="Informations sur les tags"
         aria-expanded={isOpen}
-        className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white text-neutral-800 shadow-md ring-2 ring-neutral-300 transition duration-200 hover:text-emerald-600 hover:ring-emerald-600 focus:ring-2 focus:ring-emerald-300 focus:outline-none dark:bg-neutral-800 dark:text-neutral-100 dark:ring-neutral-600 dark:hover:text-emerald-500 dark:hover:ring-emerald-500"
+        className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-white text-neutral-800 shadow-lg ring-2 ring-neutral-300 transition duration-200 hover:text-emerald-600 hover:shadow-xl hover:ring-emerald-600 focus:ring-2 focus:ring-emerald-300 focus:outline-none lg:h-16 lg:w-16 dark:bg-neutral-800 dark:text-neutral-100 dark:ring-neutral-600 dark:hover:text-emerald-500 dark:hover:ring-emerald-500"
       >
-        <GrCircleQuestion className="h-6 w-6" />
+        <GrCircleQuestion className="h-7 w-7 lg:h-9 lg:w-9" />
       </button>
 
       {/* Backdrop (mobile only) */}
@@ -113,7 +113,7 @@ function BadgeInfoTooltip() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+            className="fixed inset-0 z-50 bg-black/50 lg:hidden"
             onClick={closeTooltip}
           />
         )}
@@ -127,7 +127,7 @@ function BadgeInfoTooltip() {
             role="tooltip"
             initial={{
               opacity: 0,
-              y: 20,
+              y: window.innerWidth >= 1024 ? -20 : 20,
             }}
             animate={{
               opacity: 1,
@@ -135,16 +135,10 @@ function BadgeInfoTooltip() {
             }}
             exit={{
               opacity: 0,
-              y: 20,
+              y: window.innerWidth >= 1024 ? -20 : 20,
             }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed top-1/2 left-1/2 z-50 w-full max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-lg bg-neutral-100 p-5 shadow-xl ring ring-neutral-300 lg:absolute lg:top-full lg:left-0 lg:mx-0 lg:mt-2 lg:w-142 lg:max-w-3xl lg:translate-x-0 lg:translate-y-0 dark:bg-neutral-800 dark:ring-neutral-600"
-            style={{
-              // Desktop: slide from top
-              ...(window.innerWidth >= 1024 && {
-                y: -10,
-              }),
-            }}
+            className="fixed top-1/2 left-1/2 z-[60] w-full max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-lg bg-neutral-100 p-5 shadow-xl ring ring-neutral-300 lg:absolute lg:right-0 lg:bottom-full lg:mb-2 lg:w-142 lg:max-w-3xl lg:translate-x-0 lg:translate-y-0 dark:bg-neutral-800 dark:ring-neutral-600"
           >
             {/* Bouton Fermer (mobile) */}
             <button
@@ -196,4 +190,4 @@ function BadgeInfoTooltip() {
   );
 }
 
-export default BadgeInfoTooltip;
+export default TagsInfoTooltip;

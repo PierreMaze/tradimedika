@@ -9,7 +9,7 @@ import {
   HiInformationCircle,
 } from "react-icons/hi2";
 import RemedyResultNotFound from "../components/remedy/RemedyResultNotFound";
-import BadgeInfoTooltip from "../components/btn/BadgeInfoTooltip";
+import TagsInfoTooltip from "../components/tooltip/TagsInfoTooltip";
 import VerifiedTag from "../components/tag/VerifiedTag";
 import PregnancyTag from "../components/tag/PregnancyTag";
 import ChildrenAgeTag from "../components/tag/ChildrenAgeTag";
@@ -82,7 +82,7 @@ function RemedyResultDetails() {
         transition={{ duration: 0.4 }}
         className="text-dark dark:text-light w-full transition duration-300 ease-in-out"
       >
-        {/* Bouton Retour et Info Badges */}
+        {/* Bouton Retour */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -98,7 +98,6 @@ function RemedyResultDetails() {
             <HiArrowLeft className="h-5 w-5" aria-hidden="true" />
             Retour aux résultats
           </Link>
-          <BadgeInfoTooltip />
         </motion.div>
         {/* Header Hero Section */}
         <motion.div
@@ -430,6 +429,7 @@ function RemedyResultDetails() {
           </Link>
         </motion.div>
       </motion.article>
+      <TagsInfoTooltip />
     </>
   );
 }

@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import FilterRemedyResult from "../components/filter/FilterRemedyResult";
 import RemedyResultList from "../components/remedy/RemedyResultList";
-import BadgeInfoTooltip from "../components/btn/BadgeInfoTooltip";
+import TagsInfoTooltip from "../components/tooltip/TagsInfoTooltip";
 import db from "../data/db.json";
 import { findMatchingRemedies } from "../utils/remedyMatcher";
 import { parseAndValidateSymptoms } from "../utils/validation";
@@ -106,7 +106,7 @@ function RemedyResult() {
         <meta name="twitter:description" content={pageDescription} />
       </Helmet>
 
-      {/* Bouton Retour et Info Badges */}
+      {/* Bouton Retour */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -132,7 +132,6 @@ function RemedyResult() {
             />
           </svg>
         </Link>
-        <BadgeInfoTooltip />
       </motion.div>
       <div className="text-dark dark:text-light flex flex-col items-center text-center transition duration-300 ease-in-out">
         {/* Titre principal */}
@@ -198,6 +197,7 @@ function RemedyResult() {
           Nouvelle recherche
         </Link>
       </motion.div>
+      <TagsInfoTooltip />
     </>
   );
 }
