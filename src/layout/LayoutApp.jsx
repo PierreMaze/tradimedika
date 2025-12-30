@@ -1,9 +1,9 @@
 // tradimedika-v1/src/layout/LayoutApp.jsx
 import { Outlet, ScrollRestoration } from "react-router-dom";
+import Disclaimer from "../components/disclaimer/Disclaimer";
 import LeafFall from "../components/LeafFall";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import Disclaimer from "../components/disclaimer/Disclaimer";
 
 function LayoutApp() {
   return (

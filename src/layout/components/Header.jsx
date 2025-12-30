@@ -28,7 +28,7 @@ export default function Header() {
       initial="hidden"
       animate="visible"
     >
-      <div className="border-out border-dark/80 dark:border-light/60 mx-auto flex h-20 w-full items-center border-b-2 border-dashed transition duration-300 ease-in-out lg:w-3/4 2xl:w-2/3">
+      <div className="border-out border-dark/80 dark:border-light/60 mx-auto flex h-20 w-full items-center border-b-2 border-dashed transition duration-300 ease-in-out lg:w-3/4">
         <div className="mx-4 flex w-full items-center justify-between py-6 lg:mx-8">
           <LogoTradimedika />
           <DarkModeToggle />

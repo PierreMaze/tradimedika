@@ -1,16 +1,16 @@
 // tradimedika-v1/src/components/sections/Hero.jsx
 import { AnimatePresence, motion } from "framer-motion";
-import { Suspense, useRef, useCallback } from "react";
+import { Suspense, useCallback, useRef } from "react";
 import { FaCheck } from "react-icons/fa6";
 import { GiSprout } from "react-icons/gi";
 import { IoMdArrowForward } from "react-icons/io";
+import { BUTTON_PRIMARY_STYLES } from "../../constants/buttonStyles";
+import { useScrollOnMobileFocus } from "../../hooks/useScrollOnMobileFocus";
 import { useSymptomSubmit } from "../../hooks/useSymptomSubmit";
 import { useSymptomTags } from "../../hooks/useSymptomTags";
-import { useScrollOnMobileFocus } from "../../hooks/useScrollOnMobileFocus";
 import LeafFall from "../LeafFall";
 import SymptomsSelector from "../input/SymptomsSelector";
 import ListSymptomTag from "../tag/ListSymptomTag";
-import { BUTTON_PRIMARY_STYLES } from "../../constants/buttonStyles";
 
 /**
  * Composant wrapper pour isoler le state des symptômes
@@ -52,6 +52,10 @@ function SymptomsSection() {
         onFocus={handleInputFocus}
         placeholder="Entrez vos symptômes (ex: fatigue, digestion...)"
       />
+      <p className="text-center text-xs text-neutral-600 dark:text-neutral-400">
+        L&apos;utilisation du champs de saisie des symptômes que contient
+        TRADIMEDIKA vous soumet à nos conditions d&apos;utilisation.
+      </p>
       <ListSymptomTag
         symptoms={selectedSymptoms}
         onRemoveSymptom={removeSymptom}
