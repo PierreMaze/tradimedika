@@ -2,6 +2,46 @@
 
 ---
 
+## [0.34.0] - 2025-12-30
+
+### <u>Added:</u>
+
+- Disclaimer médical visible sur toutes les pages de l'application
+  - Nouveau composant `Disclaimer.jsx` dans `src/components/disclaimer/`
+  - Bandeau d'avertissement avec icône HiExclamationTriangle (react-icons/hi2)
+  - Texte : "Les informations présentées sont fournies à titre informatif et ne remplacent pas un avis médical professionnel"
+  - Design emerald (emerald foncé en light mode, emerald clair en dark mode)
+  - Animation Framer Motion respectant `prefers-reduced-motion`
+  - Attributs d'accessibilité : `role="alert"`, `aria-live="polite"`
+  - Responsive : text-xs (mobile) → text-sm (desktop)
+- Tests unitaires complets pour le composant Disclaimer (17 tests)
+  - Sections : Rendering, Accessibility, Styling, Animation, Multiple instances, Content
+  - Mock de `useReducedMotion` pour tester les deux cas
+
+### <u>Changed:</u>
+
+- `LayoutApp.jsx` : Ajout du composant `<Disclaimer />` entre Header et Outlet (ligne 14)
+  - Garantit l'affichage du disclaimer sur toutes les routes (Home, RemedyResult, RemedyResultDetails, NotFound)
+
+### <u>Documentation:</u>
+
+- README.md : Correction de la faute "Disclamer" → "Disclaimer" (ligne 39)
+- README.md : Amélioration du texte du disclaimer dans la section "À propos"
+- README.md : Ajout d'une nouvelle sous-section "Avertissement Médical" dans les Fonctionnalités
+- Updated version from `0.33.0` to `0.34.0` in package.json
+
+### <u>Tests:</u>
+
+- 17 nouveaux tests ajoutés pour le composant Disclaimer
+  - 5 tests de rendu (message, icône, titre, className, styling)
+  - 3 tests d'accessibilité (role, aria-live, aria-hidden)
+  - 4 tests de styling (couleurs, border, responsive, dark mode)
+  - 2 tests d'animation (avec/sans reduced motion)
+  - 1 test d'instances multiples
+  - 2 tests de contenu (texte complet, mention médecin)
+
+---
+
 ## [0.33.0] - 2025-12-30
 
 ### <u>Fixed:</u>

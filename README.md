@@ -36,9 +36,11 @@
 
 #### Ce site propose un traitement naturel pour soulager les symptômes immédiatement, grâce à des aliments du quotidien, le tout dans une interface élégante et performante.
 
-### ⚠️ Disclamer ⚠️
+### ⚠️ Disclaimer ⚠️
 
-> _Ce site ne remplace pas la médecine traditionnelle, mais plutot une alternative à l'instant "T", prenez rendez-vous avec un médecin ou appelez les d'urgence : ce sont les personnes les plus compétentes pour vous assister. Meci de votre compréhension._
+> _Ce site ne remplace pas la médecine traditionnelle, mais plutôt une alternative à l'instant "T". Prenez rendez-vous avec un médecin ou appelez les urgences : ce sont les personnes les plus compétentes pour vous assister. Merci de votre compréhension._
+
+**Disclaimer visible sur toutes les pages** : Un bandeau d'avertissement médical est affiché en haut de chaque page pour rappeler que les informations sont fournies à titre informatif uniquement.
 
 ### 🎨 Caractéristiques principales
 
@@ -78,6 +80,13 @@
 - **Tags toujours visibles** : Les symptômes déjà sélectionnés restent accessibles pendant la saisie
 - **Détection intelligente** : Fonctionne uniquement sur mobile (< 1024px), pas d'impact sur desktop
 - **Accessibilité** : Respect de la préférence utilisateur `prefers-reduced-motion`
+
+### ⚠️ Avertissement Médical
+
+- **Bandeau d'information** : Disclaimer visible sur toutes les pages rappelant le caractère informatif du contenu
+- **Couleur Emerald** : Design élégant avec emerald foncé (light mode) et emerald clair (dark mode)
+- **Accessibilité** : Role "alert" et aria-live pour les lecteurs d'écran
+- **Dark mode** : Adapté automatiquement au thème de l'utilisateur
 
 ---
 
