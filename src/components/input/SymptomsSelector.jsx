@@ -1,7 +1,7 @@
 // tradimedika/src/components/symptoms/SymptomsSelector.jsx
 import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { IoMdWarning } from "react-icons/io";
 import symptomsData from "../../data/symptomList.json";
@@ -75,6 +75,7 @@ export default function SymptomsSelector({
   selectedSymptoms = [],
   placeholder = "Entrez vos symptômes...",
   onSubmit = null,
+  onFocus = null,
 }) {
   const [inputValue, setInputValue] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -243,6 +244,16 @@ export default function SymptomsSelector({
     }
   };
 
+  // Handler pour le focus de l'input (mobile scroll)
+  const handleInputFocus = useCallback(
+    (e) => {
+      if (onFocus) {
+        onFocus(e);
+      }
+    },
+    [onFocus],
+  );
+
   // Scroll automatique vers l'élément sélectionné
   useEffect(() => {
     if (selectedIndex >= 0 && listRef.current) {
@@ -288,6 +299,7 @@ export default function SymptomsSelector({
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}
+          onFocus={handleInputFocus}
           placeholder={placeholder}
           disabled={selectedSymptoms.length >= 5}
           role="combobox"
@@ -366,4 +378,5 @@ SymptomsSelector.propTypes = {
   selectedSymptoms: PropTypes.arrayOf(PropTypes.string),
   placeholder: PropTypes.string,
   onSubmit: PropTypes.func,
+  onFocus: PropTypes.func,
 };

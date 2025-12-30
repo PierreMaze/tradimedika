@@ -72,6 +72,13 @@
 - **Breakpoints** optimisés pour tous les écrans
 - **Touch-friendly** interface
 
+### 📱 UX Mobile Optimisée
+
+- **Scroll automatique** : Quand vous cliquez sur l'input de saisie des symptômes, l'interface remonte automatiquement pour rester visible malgré le clavier virtuel
+- **Tags toujours visibles** : Les symptômes déjà sélectionnés restent accessibles pendant la saisie
+- **Détection intelligente** : Fonctionne uniquement sur mobile (< 1024px), pas d'impact sur desktop
+- **Accessibilité** : Respect de la préférence utilisateur `prefers-reduced-motion`
+
 ---
 
 ## 🛠️ Stack technique

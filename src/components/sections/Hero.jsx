@@ -1,11 +1,12 @@
 // tradimedika-v1/src/components/sections/Hero.jsx
 import { AnimatePresence, motion } from "framer-motion";
-import { Suspense } from "react";
+import { Suspense, useRef, useCallback } from "react";
 import { FaCheck } from "react-icons/fa6";
 import { GiSprout } from "react-icons/gi";
 import { IoMdArrowForward } from "react-icons/io";
 import { useSymptomSubmit } from "../../hooks/useSymptomSubmit";
 import { useSymptomTags } from "../../hooks/useSymptomTags";
+import { useScrollOnMobileFocus } from "../../hooks/useScrollOnMobileFocus";
 import LeafFall from "../LeafFall";
 import SymptomsSelector from "../input/SymptomsSelector";
 import ListSymptomTag from "../tag/ListSymptomTag";
@@ -22,6 +23,19 @@ function SymptomsSection() {
   const { selectedSymptoms, addSymptom, removeSymptom } = useSymptomTags();
   const { handleSubmit, isLoading, results, hasSubmitted } = useSymptomSubmit();
 
+  // Mobile scroll au focus de l'input
+  const containerRef = useRef(null);
+  const { handleScrollToContainer } = useScrollOnMobileFocus({
+    behavior: "smooth",
+    block: "start",
+  });
+
+  const handleInputFocus = useCallback(() => {
+    if (containerRef.current) {
+      handleScrollToContainer(containerRef.current);
+    }
+  }, [handleScrollToContainer]);
+
   const onSubmit = () => {
     handleSubmit(selectedSymptoms);
   };
@@ -29,12 +43,13 @@ function SymptomsSection() {
   const isDisabled = selectedSymptoms.length === 0;
 
   return (
-    <div className="flex w-full flex-col gap-y-4">
+    <div ref={containerRef} className="flex w-full flex-col gap-y-4">
       <SymptomsSelector
         onSymptomSelect={addSymptom}
         onRemoveSymptom={removeSymptom}
         selectedSymptoms={selectedSymptoms}
         onSubmit={onSubmit}
+        onFocus={handleInputFocus}
         placeholder="Entrez vos symptômes (ex: fatigue, digestion...)"
       />
       <ListSymptomTag

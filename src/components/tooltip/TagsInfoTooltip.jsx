@@ -138,7 +138,7 @@ function TagsInfoTooltip() {
               y: window.innerWidth >= 1024 ? -20 : 20,
             }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed top-1/2 left-1/2 z-[60] w-full max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-lg bg-neutral-100 p-5 shadow-xl ring ring-neutral-300 lg:absolute lg:right-0 lg:bottom-full lg:mb-2 lg:w-142 lg:max-w-3xl lg:translate-x-0 lg:translate-y-0 dark:bg-neutral-800 dark:ring-neutral-600"
+            className="fixed top-1/2 left-1/2 z-[60] w-full max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-lg bg-neutral-100 p-5 shadow-xl ring ring-neutral-300 lg:absolute lg:top-auto lg:right-0 lg:bottom-full lg:left-auto lg:mb-2 lg:w-142 lg:max-w-3xl lg:translate-x-0 lg:translate-y-0 dark:bg-neutral-800 dark:ring-neutral-600"
           >
             {/* Bouton Fermer (mobile) */}
             <button
