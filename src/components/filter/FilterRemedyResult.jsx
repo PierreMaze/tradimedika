@@ -70,8 +70,9 @@ export default function FilterRemedyResult({
     setActiveTag(tag);
   };
 
-  // Afficher seulement si au moins 2 tags (Tous + 1 symptôme minimum)
-  if (availableTags.length <= 1) {
+  // Masquer si un seul symptôme unique ou moins
+  // uniqueSymptoms.length <= 1 → Pas de choix de filtrage utile
+  if (uniqueSymptoms.length <= 1) {
     return null;
   }
 

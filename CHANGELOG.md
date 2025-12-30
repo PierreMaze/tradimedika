@@ -2,6 +2,35 @@
 
 ---
 
+## [0.31.0] - 2025-12-30
+
+### <u>Changed:</u>
+
+- Masquage automatique du filtre de symptômes lorsqu'un seul symptôme unique est présent dans les résultats
+- Amélioration de l'UX : interface épurée pour les recherches mono-symptôme
+- Modified `FilterRemedyResult.jsx` condition from `availableTags.length <= 1` to `uniqueSymptoms.length <= 1`
+
+### <u>Added:</u>
+
+- Tests unitaires complets pour `FilterRemedyResult.jsx` (9 scénarios critiques)
+  - Tests de rendu conditionnel : 1 vs 2+ symptômes uniques
+  - Tests des edge cases : tableau vide, symptômes vides
+  - Tests du callback `onFilterChange` même quand masqué
+  - Tests d'extraction et déduplication des symptômes
+
+### <u>Tests:</u>
+
+- 350 tests passing (18 test files)
+- Added 9 comprehensive unit tests for FilterRemedyResult component
+- Test coverage: conditional rendering, edge cases, callback behavior, symptom extraction
+
+### <u>Documentation:</u>
+
+- Updated version from `0.30.0` to `0.31.0`
+- Added implementation details to CHANGELOG
+
+---
+
 ## [0.30.0] - 2025-12-30
 
 ### <u>refactoring:</u>

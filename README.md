@@ -15,7 +15,7 @@
 
 [🌐 **Voir le site**](https://pierremaze.github.io/tradimedika/) • [🐛 **Signaler un bug**](https://github.com/PierreMaze/) • [💬 **Discuter**](https://www.linkedin.com/in/pierremazelaygue/)
 
-[![TRADIMEDIKA](<https://img.shields.io/badge/TRADIMEDIKA-Bêta(0.30.0)-1a1a1a?style=for-the-badge&logo=leaflet&logoColor=00bd7e>)](https://pierremaze.github.io/tradimedika/)
+[![TRADIMEDIKA](<https://img.shields.io/badge/TRADIMEDIKA-Bêta(0.31.0)-1a1a1a?style=for-the-badge&logo=leaflet&logoColor=00bd7e>)](https://pierremaze.github.io/tradimedika/)
 
 </div>
 
@@ -60,6 +60,11 @@
 ### 🏠 Page d'accueil
 
 - **Hero section** avec champs de texte pour la saisie des symptômes.
+
+### 🔍 Filtrage Intelligent des Résultats
+
+- **Affichage adaptatif** : Lorsque plusieurs symptômes uniques sont trouvés dans les remèdes, un système de filtrage apparaît automatiquement pour affiner les résultats.
+- **Interface épurée** : Si un seul symptôme correspond, le filtre est masqué pour simplifier l'interface.
 
 ### 📱 Responsive Design
 
