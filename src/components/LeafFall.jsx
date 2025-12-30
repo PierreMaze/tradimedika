@@ -8,6 +8,15 @@ export default function LeafFall() {
   const [isVisible, setIsVisible] = useState(true);
   const prefersReducedMotion = useReducedMotion();
 
+  // 🔧 DEV OVERRIDE - Force l'affichage en développement
+  // Pour activer : localStorage.setItem('force-leaffall', 'true')
+  // Pour désactiver : localStorage.removeItem('force-leaffall')
+  const forceLeafFall =
+    typeof window !== "undefined" &&
+    localStorage.getItem("force-leaffall") === "true";
+
+  const shouldHideForReducedMotion = prefersReducedMotion && !forceLeafFall;
+
   // Détection mobile vs desktop - COUNT réduit pour performance
   const isMobile = window.innerWidth < 768;
   const COUNT = isMobile ? 3 : 5; // Réduit de 5/10 à 3/5
@@ -105,10 +114,15 @@ export default function LeafFall() {
   });
 
   // Ne pas afficher si l'utilisateur préfère des animations réduites
-  if (prefersReducedMotion) return null;
+  // (sauf si forceLeafFall est activé via localStorage)
+  if (shouldHideForReducedMotion) {
+    return null;
+  }
 
   // Ne pas afficher avant le délai initial
-  if (!show) return null;
+  if (!show) {
+    return null;
+  }
 
   return (
     <div className="pointer-events-none absolute inset-0 z-0 h-full w-full overflow-hidden">

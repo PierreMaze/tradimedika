@@ -43,10 +43,6 @@ function SymptomsSection() {
 
   return (
     <div ref={containerRef} className="flex w-full flex-col gap-y-4">
-      <p className="text-center text-xs text-neutral-600 italic lg:text-sm 2xl:text-base dark:text-neutral-400">
-        En utilisant ce champs de texte, vous acceptez nos conditions
-        d&apos;utilisation.
-      </p>
       <SymptomsSelector
         onSymptomSelect={addSymptom}
         onRemoveSymptom={removeSymptom}
@@ -176,7 +172,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="z-20 flex flex-col items-center justify-center gap-y-8 md:gap-y-12 lg:gap-y-14 xl:gap-y-16 2xl:gap-y-20"
+        className="z-20 flex flex-col items-center justify-center gap-y-10 md:gap-y-12 lg:gap-y-14 xl:gap-y-16 2xl:gap-y-20"
       >
         <div className="flex flex-col items-center gap-y-4 lg:gap-y-6 2xl:gap-y-8">
           {/* Tag "Medecine douce & naturelle" */}

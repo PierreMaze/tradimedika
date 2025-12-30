@@ -21,9 +21,11 @@ describe("Disclaimer", () => {
       expect(icon).toBeInTheDocument();
     });
 
-    it("should render the title 'Avertissement médical'", () => {
+    it("should render medical disclaimer warning", () => {
       render(<Disclaimer />);
-      expect(screen.getByText(/Avertissement médical/i)).toBeInTheDocument();
+      expect(
+        screen.getByText(/ne remplacent pas un avis médical professionnel/i),
+      ).toBeInTheDocument();
     });
 
     it("should apply custom className", () => {
@@ -36,7 +38,7 @@ describe("Disclaimer", () => {
       const disclaimer = container.firstChild;
       expect(disclaimer).toHaveClass("bg-emerald-50");
       expect(disclaimer).toHaveClass("border-emerald-700/60");
-      expect(disclaimer).toHaveClass("dark:bg-emerald-950/30");
+      expect(disclaimer).toHaveClass("dark:bg-emerald-950");
     });
   });
 
@@ -65,7 +67,7 @@ describe("Disclaimer", () => {
       expect(disclaimer).toHaveClass("bg-emerald-50");
 
       const icon = container.querySelector("svg");
-      expect(icon).toHaveClass("text-emerald-700");
+      expect(icon).toHaveClass("text-emerald-600");
     });
 
     it("should have dashed border style", () => {
@@ -83,7 +85,7 @@ describe("Disclaimer", () => {
     it("should have dark mode classes", () => {
       const { container } = render(<Disclaimer />);
       expect(container.firstChild).toHaveClass(
-        "dark:bg-emerald-950/30",
+        "dark:bg-emerald-950",
         "dark:border-emerald-400/60",
       );
     });
@@ -145,9 +147,8 @@ describe("Disclaimer", () => {
 
     it("should mention consulting a doctor", () => {
       render(<Disclaimer />);
-      expect(
-        screen.getByText(/Consultez toujours un médecin/i),
-      ).toBeInTheDocument();
+      expect(screen.getByText(/Consultez/i)).toBeInTheDocument();
+      expect(screen.getByText(/TOUJOURS/i)).toBeInTheDocument();
     });
   });
 });

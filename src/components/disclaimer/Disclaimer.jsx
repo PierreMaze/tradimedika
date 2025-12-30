@@ -3,15 +3,32 @@ import PropTypes from "prop-types";
 import { HiExclamationTriangle } from "react-icons/hi2";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 
+const disclaimerVariants = {
+  hidden: {
+    y: -30,
+    opacity: 0,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 20,
+      delay: 0.4,
+    },
+  },
+};
+
 function Disclaimer({ className = "" }) {
   const prefersReducedMotion = useReducedMotion();
 
   const animationProps = prefersReducedMotion
     ? {}
     : {
-        initial: { opacity: 0, y: -10 },
-        animate: { opacity: 1, y: 0 },
-        transition: { duration: 0.5, delay: 0.3, ease: "easeOut" },
+        variants: disclaimerVariants,
+        initial: "hidden",
+        animate: "visible",
       };
 
   return (
