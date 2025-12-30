@@ -7,16 +7,14 @@ import Disclaimer from "../components/disclaimer/Disclaimer";
 
 function LayoutApp() {
   return (
-    <div className="bg-light dark:bg-dark relative flex h-screen flex-col items-center justify-between transition duration-300 ease-in-out">
+    <div className="bg-light dark:bg-dark relative flex h-screen flex-col items-center transition duration-300 ease-in-out">
       <LeafFall />
-      <div className="relative z-10 flex h-full w-full flex-col items-center justify-between">
-        <div className="w-full">
-          <Header />
-          <Disclaimer />
-        </div>
+      <div className="relative z-10 flex h-full w-full flex-col items-center">
+        <Header />
+        <Disclaimer />
         <ScrollRestoration />
         <Outlet />
-        <Footer />
+        <Footer className="mt-auto" />
       </div>
     </div>
   );
