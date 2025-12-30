@@ -19,7 +19,7 @@
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
     "validate-data": "node scripts/validateData.js",
-    "clean": "rm -rf node_modules pnpm-lock.yaml package-lock.json dist && clear",
+    "clean": "rm -rf node_modules dist && clear",
     "deploy": "gh-pages -d dist -f",
     "ccu": "ccusage blocks --live",
     "docker:up": "cd docker && docker-compose up -d",
