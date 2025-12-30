@@ -1,12 +1,12 @@
 // tradimedika-v1/src/components/tooltip/TagsInfoTooltip.jsx
 
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { GrCircleQuestion } from "react-icons/gr";
 import { HiXMark } from "react-icons/hi2";
-import VerifiedTag from "../tag/VerifiedTag";
-import PregnancyTag from "../tag/PregnancyTag";
 import ChildrenAgeTag from "../tag/ChildrenAgeTag";
+import PregnancyTag from "../tag/PregnancyTag";
+import VerifiedTag from "../tag/VerifiedTag";
 
 /**
  * TagsInfoTooltip Component
@@ -100,7 +100,7 @@ function TagsInfoTooltip() {
         onMouseLeave={handleMouseLeave}
         aria-label="Informations sur les tags"
         aria-expanded={isOpen}
-        className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-white text-neutral-800 shadow-lg ring-2 ring-neutral-300 transition duration-200 hover:text-emerald-600 hover:shadow-xl hover:ring-emerald-600 focus:ring-2 focus:ring-emerald-300 focus:outline-none lg:h-16 lg:w-16 dark:bg-neutral-800 dark:text-neutral-100 dark:ring-neutral-600 dark:hover:text-emerald-500 dark:hover:ring-emerald-500"
+        className="inline-flex h-12 w-12 cursor-pointer items-center justify-center rounded-lg bg-white text-neutral-800 shadow-lg ring-2 ring-neutral-300 transition duration-200 hover:text-emerald-600 hover:shadow-xl hover:ring-emerald-600 lg:h-16 lg:w-16 dark:bg-neutral-800 dark:text-neutral-100 dark:ring-neutral-600 dark:hover:text-emerald-500 dark:hover:ring-emerald-500"
       >
         <GrCircleQuestion className="h-7 w-7 lg:h-9 lg:w-9" />
       </button>
@@ -138,7 +138,7 @@ function TagsInfoTooltip() {
               y: window.innerWidth >= 1024 ? -20 : 20,
             }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed top-1/2 left-1/2 z-[60] w-full max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-lg bg-neutral-100 p-5 shadow-xl ring ring-neutral-300 lg:absolute lg:top-auto lg:right-0 lg:bottom-full lg:left-auto lg:mb-2 lg:w-142 lg:max-w-3xl lg:translate-x-0 lg:translate-y-0 dark:bg-neutral-800 dark:ring-neutral-600"
+            className="fixed top-1/2 left-1/2 z-50 w-full max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-lg bg-neutral-100 p-5 shadow-xl ring ring-neutral-300 lg:absolute lg:top-auto lg:right-0 lg:bottom-full lg:left-auto lg:mb-2 lg:w-142 lg:max-w-3xl lg:translate-x-0 lg:translate-y-0 dark:bg-neutral-800 dark:ring-neutral-600"
           >
             {/* Bouton Fermer (mobile) */}
             <button
