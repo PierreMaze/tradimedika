@@ -6,20 +6,22 @@ import { useReducedMotion } from "../../../hooks/useReducedMotion";
 export default function LeafFall() {
   const [show, setShow] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const prefersReducedMotion = useReducedMotion();
 
+  // 🎯 Variables gardées pour future feature (bouton toggle UI)
+  // Préfixées avec _ pour indiquer qu'elles sont volontairement inutilisées
+  const _prefersReducedMotion = useReducedMotion();
+
+  // ✅ FIX: Lazy initialization pour localStorage (évite re-lecture à chaque render)
   // 🔧 DEV OVERRIDE - Force l'affichage en développement
   // Pour activer : localStorage.setItem('force-leaffall', 'true')
   // Pour désactiver : localStorage.removeItem('force-leaffall')
-  const forceLeafFall =
-    typeof window !== "undefined" &&
-    localStorage.getItem("force-leaffall") === "true";
+  const [_forceLeafFall] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return localStorage.getItem("force-leaffall") === "true";
+  });
 
-  const shouldHideForReducedMotion = prefersReducedMotion && !forceLeafFall;
+  const _shouldHideForReducedMotion = _prefersReducedMotion && !_forceLeafFall;
 
-  // Détection mobile vs desktop - COUNT réduit pour performance
-  const isMobile = window.innerWidth < 768;
-  const COUNT = isMobile ? 3 : 5; // Réduit de 5/10 à 3/5
   const START_FALL_AFTER = 0;
 
   useEffect(() => {
@@ -42,6 +44,11 @@ export default function LeafFall() {
   // Initialiser les feuilles avec useState pour garantir la pureté
   // La fonction d'initialisation n'est appelée qu'une seule fois au montage
   const [leaves] = useState(() => {
+    // ✅ FIX: Détection mobile et COUNT calculés dans l'initialisation
+    // pour éviter accès window au niveau racine du composant
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    const COUNT = isMobile ? 3 : 5; // Réduit de 5/10 à 3/5 pour performance
+
     return Array.from({ length: COUNT }).map(() => {
       const startX = Math.random() * 100;
       const startY = -10;
@@ -113,11 +120,15 @@ export default function LeafFall() {
     });
   });
 
-  // Ne pas afficher si l'utilisateur préfère des animations réduites
-  // (sauf si forceLeafFall est activé via localStorage)
-  if (shouldHideForReducedMotion) {
-    return null;
-  }
+  // 🎯 FEATURE: Affichage toujours activé par défaut
+  // TODO: Ajouter un bouton toggle UI pour permettre aux utilisateurs de désactiver
+  //       les animations d'arrière-plan selon leurs préférences
+  //       Utiliser _shouldHideForReducedMotion pour implémenter cette feature
+  //
+  // Code original (respectait prefers-reduced-motion) - gardé pour référence future :
+  // if (_shouldHideForReducedMotion) {
+  //   return null;
+  // }
 
   // Ne pas afficher avant le délai initial
   if (!show) {
