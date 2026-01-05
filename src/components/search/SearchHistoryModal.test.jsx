@@ -283,7 +283,7 @@ describe("SearchHistoryModal", () => {
       expect(mockOnClose).not.toHaveBeenCalled();
     });
 
-    it("should call onClearHistory and onClose when clear all is clicked", async () => {
+    it("should show confirmation dialog when clear all is clicked", async () => {
       const user = userEvent.setup();
 
       render(
@@ -302,8 +302,88 @@ describe("SearchHistoryModal", () => {
       });
       await user.click(clearButton);
 
+      // Confirmation dialog should appear
+      expect(screen.getByText(/Confirmer la suppression/i)).toBeInTheDocument();
+      expect(
+        screen.getByText(/Êtes-vous sûr de vouloir effacer/i),
+      ).toBeInTheDocument();
+
+      // Should have Cancel and Delete buttons
+      expect(
+        screen.getByRole("button", { name: /Annuler/i }),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: /Supprimer tout l'historique/i }),
+      ).toBeInTheDocument();
+
+      // Should NOT have called callbacks yet
+      expect(mockOnClearHistory).not.toHaveBeenCalled();
+      expect(mockOnClose).not.toHaveBeenCalled();
+    });
+
+    it("should call onClearHistory and onClose when delete is confirmed", async () => {
+      const user = userEvent.setup();
+
+      render(
+        <SearchHistoryModal
+          isOpen={true}
+          onClose={mockOnClose}
+          history={mockHistory}
+          onSearchSelect={mockOnSearchSelect}
+          onClearHistory={mockOnClearHistory}
+          onRemoveItem={mockOnRemoveItem}
+        />,
+      );
+
+      // Click clear button
+      const clearButton = screen.getByRole("button", {
+        name: /Effacer tout l'historique/i,
+      });
+      await user.click(clearButton);
+
+      // Click Supprimer button in confirmation dialog
+      const deleteButton = screen.getByRole("button", {
+        name: /Supprimer tout l'historique/i,
+      });
+      await user.click(deleteButton);
+
+      // Should have called callbacks
       expect(mockOnClearHistory).toHaveBeenCalledTimes(1);
       expect(mockOnClose).toHaveBeenCalledTimes(1);
+    });
+
+    it("should close confirmation dialog when cancel is clicked", async () => {
+      const user = userEvent.setup();
+
+      render(
+        <SearchHistoryModal
+          isOpen={true}
+          onClose={mockOnClose}
+          history={mockHistory}
+          onSearchSelect={mockOnSearchSelect}
+          onClearHistory={mockOnClearHistory}
+          onRemoveItem={mockOnRemoveItem}
+        />,
+      );
+
+      // Click clear button
+      const clearButton = screen.getByRole("button", {
+        name: /Effacer tout l'historique/i,
+      });
+      await user.click(clearButton);
+
+      // Click Annuler button
+      const cancelButton = screen.getByRole("button", { name: /Annuler/i });
+      await user.click(cancelButton);
+
+      // Dialog should be closed
+      expect(
+        screen.queryByText(/Confirmer la suppression/i),
+      ).not.toBeInTheDocument();
+
+      // Should NOT have called callbacks
+      expect(mockOnClearHistory).not.toHaveBeenCalled();
+      expect(mockOnClose).not.toHaveBeenCalled();
     });
   });
 

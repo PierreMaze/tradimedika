@@ -31,21 +31,24 @@ export function useLocalStorage(key, initialValue) {
   const setValue = useCallback(
     (value) => {
       try {
-        // Permet de passer une fonction comme pour useState
-        const valueToStore =
-          value instanceof Function ? value(storedValue) : value;
+        // Utiliser la forme fonctionnelle de setStoredValue pour éviter les stale closures
+        setStoredValue((currentValue) => {
+          // Permet de passer une fonction comme pour useState
+          const valueToStore =
+            value instanceof Function ? value(currentValue) : value;
 
-        setStoredValue(valueToStore);
+          // Protection SSR
+          if (typeof window !== "undefined") {
+            window.localStorage.setItem(key, JSON.stringify(valueToStore));
+          }
 
-        // Protection SSR
-        if (typeof window !== "undefined") {
-          window.localStorage.setItem(key, JSON.stringify(valueToStore));
-        }
+          return valueToStore;
+        });
       } catch (error) {
         logger.warn(`Error setting localStorage key "${key}":`, error);
       }
     },
-    [key, storedValue],
+    [key],
   );
 
   return [storedValue, setValue];

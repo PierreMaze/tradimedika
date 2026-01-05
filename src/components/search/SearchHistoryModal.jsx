@@ -1,9 +1,9 @@
 // components/search/SearchHistoryModal.jsx
 import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoMdClose } from "react-icons/io";
-import { RiHistoryLine } from "react-icons/ri";
+import { RiDeleteBin2Fill, RiHistoryLine } from "react-icons/ri";
 
 import { ARIA_CLOSE, BUTTON_CLEAR_HISTORY } from "../../constants/buttonLabels";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
@@ -40,6 +40,7 @@ export default function SearchHistoryModal({
   const prefersReducedMotion = useReducedMotion();
   const modalRef = useRef(null);
   const previousFocusRef = useRef(null);
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
   // Focus trap: save previous focus and restore on close
   useEffect(() => {
@@ -80,9 +81,18 @@ export default function SearchHistoryModal({
     };
   }, [isOpen]);
 
-  const handleClearAll = () => {
+  const handleClearAllRequest = () => {
+    setShowConfirmDialog(true);
+  };
+
+  const handleConfirmClear = () => {
     onClearHistory();
+    setShowConfirmDialog(false);
     onClose();
+  };
+
+  const handleCancelClear = () => {
+    setShowConfirmDialog(false);
   };
 
   const handleSearchSelect = (search) => {
@@ -151,30 +161,78 @@ export default function SearchHistoryModal({
                 </p>
               </div>
             ) : (
-              <>
-                {/* History items */}
-                <ul role="list" className="space-y-3">
-                  {history.map((search) => (
-                    <SearchHistoryItem
-                      key={search.id}
-                      search={search}
-                      onClick={handleSearchSelect}
-                      onRemove={onRemoveItem}
-                    />
-                  ))}
-                </ul>
+              /* History items */
+              <ul role="list" className="space-y-3">
+                {history.map((search) => (
+                  <SearchHistoryItem
+                    key={search.id}
+                    search={search}
+                    onClick={handleSearchSelect}
+                    onRemove={onRemoveItem}
+                  />
+                ))}
+              </ul>
+            )}
 
-                {/* Clear all button */}
-                <div className="mt-6 flex justify-end border-t border-neutral-200 pt-4 dark:border-neutral-700">
-                  <button
-                    onClick={handleClearAll}
-                    className="w-fit rounded-lg border-2 border-red-700 px-4 py-2.5 font-medium text-red-700 transition-all duration-200 hover:border-red-800 hover:bg-red-800 hover:text-white dark:border-red-700 dark:text-red-400 dark:hover:bg-red-700 dark:hover:text-white"
-                    aria-label="Effacer tout l'historique"
-                  >
-                    {BUTTON_CLEAR_HISTORY}
-                  </button>
-                </div>
-              </>
+            {/* Clear all button - always rendered, just disabled when no history */}
+            <div className="mt-6 flex justify-end border-t border-neutral-200 pt-4 dark:border-neutral-700">
+              <button
+                onClick={handleClearAllRequest}
+                disabled={history.length === 0}
+                className={`w-fit rounded-lg border-2 px-4 py-2.5 font-medium transition-all duration-200 ${
+                  history.length === 0
+                    ? "cursor-not-allowed border-neutral-300 bg-neutral-100 text-neutral-400 opacity-50 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-500"
+                    : "border-red-700 text-red-700 hover:border-red-800 hover:bg-red-800 hover:text-white dark:border-red-700 dark:text-red-400 dark:hover:bg-red-700 dark:hover:text-white"
+                }`}
+                aria-label="Effacer tout l'historique"
+                aria-disabled={history.length === 0}
+              >
+                {BUTTON_CLEAR_HISTORY}
+              </button>
+            </div>
+
+            {/* Confirmation Dialog */}
+            {showConfirmDialog && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-60 flex items-center justify-center bg-black/70"
+                onClick={handleCancelClear}
+              >
+                <motion.div
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.9, opacity: 0 }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="mx-4 max-w-md rounded-lg bg-white p-6 shadow-2xl dark:bg-neutral-800"
+                >
+                  <h3 className="mb-2 text-lg font-semibold text-neutral-900 dark:text-white">
+                    Confirmer la suppression
+                  </h3>
+                  <p className="mb-6 text-neutral-600 dark:text-neutral-400">
+                    Êtes-vous sûr de vouloir effacer tout l&apos;historique ?
+                    Cette action est irréversible.
+                  </p>
+                  <div className="flex gap-3">
+                    <button
+                      onClick={handleCancelClear}
+                      aria-label="Annuler"
+                      className="flex-1 rounded-lg border-2 border-neutral-300 bg-neutral-100 px-4 py-2.5 font-medium text-neutral-700 transition-colors hover:bg-neutral-200 dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-600"
+                    >
+                      Annuler
+                    </button>
+                    <button
+                      onClick={handleConfirmClear}
+                      aria-label="Supprimer tout l'historique"
+                      className="flex flex-1 items-center justify-center gap-2 rounded-lg border-2 border-red-600 bg-red-600 px-4 py-2.5 font-medium text-white transition-colors hover:border-red-700 hover:bg-red-700 dark:border-red-700 dark:bg-red-700 dark:hover:bg-red-800"
+                    >
+                      <RiDeleteBin2Fill className="text-lg" />
+                      <span>Supprimer</span>
+                    </button>
+                  </div>
+                </motion.div>
+              </motion.div>
             )}
           </motion.div>
         </>
