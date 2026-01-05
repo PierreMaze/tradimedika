@@ -18,4 +18,5 @@ export const BUTTON_PRIMARY_STYLES =
  * External link styles (HTML anchor tags)
  * @type {string}
  */
-export const UTTON_SECONDARY_STYLES = " rounded-md";
+export const BUTTON_SECONDARY_STYLES =
+  "ring-2 ring-emerald-600 text-emerald-600 transition duration-200 hover:bg-emerald-600 hover:text-white dark:text-emerald-600 dark:hover:bg-emerald-600 dark:hover:text-white";

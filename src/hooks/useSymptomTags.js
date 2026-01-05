@@ -58,5 +58,6 @@ export function useSymptomTags() {
     addSymptom,
     removeSymptom,
     isAtLimit,
+    setSelectedSymptoms, // Exposed for search history feature
   };
 }

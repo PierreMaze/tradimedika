@@ -2,6 +2,54 @@
 
 ---
 
+## [0.36.0] - 2026-01-05
+
+### <u>Added:</u>
+
+- **Historique de recherche** : Nouvelle fonctionnalité permettant de sauvegarder et relancer les 5 dernières recherches
+  - Nouveau hook `useSearchHistory.js` avec stockage localStorage
+  - Modal `SearchHistoryModal.jsx` avec backdrop et animations Framer Motion
+  - Composant `SearchHistoryItem.jsx` pour afficher chaque recherche avec pills de symptômes
+  - Bouton "🕒 Historique" dans Hero.jsx (BUTTON_SECONDARY_STYLES) avec badge compteur
+  - Déduplication intelligente : insensible à l'ordre et aux accents
+  - Limite de 5 entrées avec système FIFO (First In First Out)
+  - Suppression individuelle et effacement complet de l'historique
+  - Focus trap, navigation clavier (Tab, Escape), ARIA labels
+  - Support complet du dark mode et responsive design
+- Centralisation des labels dans des fichiers constants
+  - `src/constants/buttonLabels.js` : 25+ labels de boutons (BUTTON_DISCOVER, BUTTON_HISTORY, etc.)
+  - `src/constants/linkLabels.js` : Labels de liens et URLs
+- Tracking automatique des recherches dans `useSymptomSubmit.js`
+  - Enregistrement du nombre de résultats et timestamp
+  - Mise à jour de l'historique après chaque recherche
+- Exposition de `setSelectedSymptoms` dans `useSymptomTags.js` pour la relance depuis l'historique
+
+### <u>Tests:</u>
+
+- 71 nouveaux tests ajoutés pour la fonctionnalité d'historique
+  - `useSearchHistory.test.js` (26 tests) : CRUD, déduplication, FIFO, localStorage, erreurs
+  - `SearchHistoryItem.test.jsx` (21 tests) : Rendering, interactions, accessibilité, edge cases
+  - `SearchHistoryModal.test.jsx` (24 tests) : Modal, backdrop, escape key, focus trap, animations
+- Total : 578 tests (575 passent avec succès)
+
+### <u>Changed:</u>
+
+- `Hero.jsx` : Refonte du layout des boutons
+  - Deux boutons côte à côte : "Découvrir nos solutions" (primary) + "Historique" (secondary)
+  - Layout responsive : flex-col (mobile) → flex-row (desktop)
+- Intégration de la modal d'historique dans le Hero avec gestion du state
+
+### <u>UX/UI:</u>
+
+- Bouton historique désactivé quand aucune recherche (opacity-50)
+- Badge animé affichant le nombre de recherches (1-5)
+- Pills de symptômes capitalisés dans chaque entrée d'historique
+- Badge de compteur de résultats ("3 résultats", "1 résultat")
+- Affichage du temps relatif ("il y a 5min", "il y a 2h", "il y a 3j")
+- Animations smooth avec respect de `prefers-reduced-motion`
+
+---
+
 ## [0.35.0] - 2025-12-30
 
 ### <u>Added:</u>
