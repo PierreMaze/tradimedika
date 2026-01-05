@@ -1,14 +1,20 @@
 // tradimedika-v1/src/components/sections/Hero.jsx
 import { AnimatePresence, motion } from "framer-motion";
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 import { GiSprout } from "react-icons/gi";
 import { IoMdArrowForward } from "react-icons/io";
-import { BUTTON_PRIMARY_STYLES } from "../../constants/buttonStyles";
+import {
+  BUTTON_PRIMARY_STYLES,
+  BUTTON_SECONDARY_STYLES,
+} from "../../constants/buttonStyles";
+import { BUTTON_HISTORY } from "../../constants/buttonLabels";
 import { useScrollOnMobileFocus } from "../../hooks/useScrollOnMobileFocus";
+import { useSearchHistory } from "../../hooks/useSearchHistory";
 import { useSymptomSubmit } from "../../hooks/useSymptomSubmit";
 import { useSymptomTags } from "../../hooks/useSymptomTags";
 import SymptomsSelector from "../input/SymptomsSelector";
+import SearchHistoryModal from "../search/SearchHistoryModal";
 import ListSymptomTag from "../tag/ListSymptomTag";
 
 /**
@@ -19,8 +25,11 @@ import ListSymptomTag from "../tag/ListSymptomTag";
  * Pas besoin de React.memo car c'est un composant racine de composition
  */
 function SymptomsSection() {
-  const { selectedSymptoms, addSymptom, removeSymptom } = useSymptomTags();
+  const { selectedSymptoms, addSymptom, removeSymptom, setSelectedSymptoms } =
+    useSymptomTags();
   const { handleSubmit, isLoading, results, hasSubmitted } = useSymptomSubmit();
+  const { history, removeSearch, clearHistory } = useSearchHistory();
+  const [isHistoryOpen, setIsHistoryOpen] = useState(false);
 
   // Mobile scroll au focus de l'input
   const containerRef = useRef(null);
@@ -37,6 +46,14 @@ function SymptomsSection() {
 
   const onSubmit = () => {
     handleSubmit(selectedSymptoms);
+  };
+
+  // Relancer une recherche depuis l'historique
+  const handleSearchSelect = (search) => {
+    // Remplacer les symptômes actuels par ceux de l'historique
+    setSelectedSymptoms(search.symptoms);
+    // Soumettre automatiquement
+    handleSubmit(search.symptoms);
   };
 
   const isDisabled = selectedSymptoms.length === 0;
@@ -72,47 +89,71 @@ function SymptomsSection() {
         </motion.div>
       )}
 
-      {/* Bouton de soumission */}
-      <motion.button
-        onClick={onSubmit}
-        disabled={isDisabled || isLoading}
-        aria-label={
-          isDisabled
-            ? "Sélectionnez au moins un symptôme"
-            : "Découvrir les remèdes naturels"
-        }
-        aria-busy={isLoading}
-        aria-disabled={isDisabled}
-        whileHover={!isDisabled && !isLoading}
-        whileTap={!isDisabled && !isLoading}
-        transition={{ duration: 0.2 }}
-        className={`mx-auto flex w-full items-center justify-center gap-2 rounded-lg px-7 py-3.5 font-semibold shadow-lg transition duration-300 ease-in-out md:max-w-80 lg:text-base 2xl:text-lg ${
-          isDisabled || isLoading
-            ? "cursor-not-allowed bg-neutral-400 opacity-50 dark:bg-neutral-600"
-            : BUTTON_PRIMARY_STYLES
-        }`}
-      >
-        {isLoading ? (
-          <>
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-              className="h-5 w-5 rounded-full border-2 border-white border-t-transparent"
-            />
-            <span>Recherche en cours...</span>
-          </>
-        ) : hasSubmitted ? (
-          <>
-            <FaCheck className="text-xl" />
-            <span>Recherche effectuée</span>
-          </>
-        ) : (
-          <>
-            <span>Découvrir nos solutions</span>
-            <IoMdArrowForward className="text-xl" />
-          </>
-        )}
-      </motion.button>
+      {/* Boutons de soumission et historique */}
+      <div className="flex w-full flex-col gap-3 sm:flex-row">
+        {/* Bouton principal de recherche */}
+        <motion.button
+          onClick={onSubmit}
+          disabled={isDisabled || isLoading}
+          aria-label={
+            isDisabled
+              ? "Sélectionnez au moins un symptôme"
+              : "Découvrir les remèdes naturels"
+          }
+          aria-busy={isLoading}
+          aria-disabled={isDisabled}
+          whileHover={!isDisabled && !isLoading}
+          whileTap={!isDisabled && !isLoading}
+          transition={{ duration: 0.2 }}
+          className={`flex flex-1 items-center justify-center gap-2 rounded-lg px-7 py-3.5 font-semibold shadow-lg transition duration-300 ease-in-out lg:text-base 2xl:text-lg ${
+            isDisabled || isLoading
+              ? "cursor-not-allowed bg-neutral-400 opacity-50 dark:bg-neutral-600"
+              : BUTTON_PRIMARY_STYLES
+          }`}
+        >
+          {isLoading ? (
+            <>
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                className="h-5 w-5 rounded-full border-2 border-white border-t-transparent"
+              />
+              <span>Recherche en cours...</span>
+            </>
+          ) : hasSubmitted ? (
+            <>
+              <FaCheck className="text-xl" />
+              <span>Recherche effectuée</span>
+            </>
+          ) : (
+            <>
+              <span>Découvrir nos solutions</span>
+              <IoMdArrowForward className="text-xl" />
+            </>
+          )}
+        </motion.button>
+
+        {/* Bouton historique */}
+        <motion.button
+          onClick={() => setIsHistoryOpen(true)}
+          disabled={history.length === 0}
+          aria-label={`${BUTTON_HISTORY} - ${history.length} recherches`}
+          whileHover={history.length > 0}
+          whileTap={history.length > 0}
+          transition={{ duration: 0.2 }}
+          className={`flex items-center justify-center gap-2 rounded-lg px-7 py-3.5 font-semibold shadow-lg transition duration-300 ease-in-out sm:flex-initial lg:text-base 2xl:text-lg ${
+            history.length === 0 ? "cursor-not-allowed opacity-50" : ""
+          } ${BUTTON_SECONDARY_STYLES}`}
+        >
+          <span>🕒</span>
+          <span>{BUTTON_HISTORY}</span>
+          {history.length > 0 && (
+            <span className="rounded-full bg-emerald-600 px-2 py-0.5 text-xs text-white dark:bg-emerald-500">
+              {history.length}
+            </span>
+          )}
+        </motion.button>
+      </div>
 
       {/* Affichage des résultats */}
       <AnimatePresence>
@@ -155,6 +196,16 @@ function SymptomsSection() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Modal historique de recherche */}
+      <SearchHistoryModal
+        isOpen={isHistoryOpen}
+        onClose={() => setIsHistoryOpen(false)}
+        history={history}
+        onSearchSelect={handleSearchSelect}
+        onClearHistory={clearHistory}
+        onRemoveItem={removeSearch}
+      />
     </div>
   );
 }

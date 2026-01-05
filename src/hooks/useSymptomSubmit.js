@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import db from "../data/db.json";
 import { findMatchingRemedies } from "../utils/remedyMatcher";
 import { createLogger } from "../utils/logger";
+import { useSearchHistory } from "./useSearchHistory";
 
 const logger = createLogger("useSymptomSubmit");
 
@@ -22,6 +23,7 @@ const logger = createLogger("useSymptomSubmit");
  */
 export function useSymptomSubmit() {
   const navigate = useNavigate();
+  const { addSearch } = useSearchHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState(null);
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -53,6 +55,9 @@ export function useSymptomSubmit() {
         // Mettre à jour les résultats
         setResults(matchingRemedies);
         setHasSubmitted(true);
+
+        // Ajouter à l'historique de recherche
+        addSearch(selectedSymptoms, matchingRemedies.length);
 
         // Navigation vers la page des résultats avec query params ET state
         // Query params: persistance après refresh + URLs partageables
