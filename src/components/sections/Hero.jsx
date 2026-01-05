@@ -90,7 +90,7 @@ function SymptomsSection() {
       )}
 
       {/* Boutons de soumission et historique */}
-      <div className="flex w-full flex-col gap-3 sm:flex-row">
+      <div className="flex w-full flex-col items-center gap-3 sm:flex-row sm:justify-center">
         {/* Bouton principal de recherche */}
         <motion.button
           onClick={onSubmit}
@@ -105,7 +105,7 @@ function SymptomsSection() {
           whileHover={!isDisabled && !isLoading}
           whileTap={!isDisabled && !isLoading}
           transition={{ duration: 0.2 }}
-          className={`flex flex-1 items-center justify-center gap-2 rounded-lg px-7 py-3.5 font-semibold shadow-lg transition duration-300 ease-in-out lg:text-base 2xl:text-lg ${
+          className={`flex w-full items-center justify-center gap-2 rounded-lg px-7 py-3.5 font-semibold shadow-lg transition duration-300 ease-in-out sm:max-w-xs lg:text-base 2xl:text-lg ${
             isDisabled || isLoading
               ? "cursor-not-allowed bg-neutral-400 opacity-50 dark:bg-neutral-600"
               : BUTTON_PRIMARY_STYLES
@@ -141,7 +141,7 @@ function SymptomsSection() {
           whileHover={history.length > 0}
           whileTap={history.length > 0}
           transition={{ duration: 0.2 }}
-          className={`flex items-center justify-center gap-2 rounded-lg px-7 py-3.5 font-semibold shadow-lg transition duration-300 ease-in-out sm:flex-initial lg:text-base 2xl:text-lg ${
+          className={`flex w-full items-center justify-center gap-2 rounded-lg px-7 py-3.5 font-semibold shadow-lg transition duration-300 ease-in-out sm:w-auto lg:text-base 2xl:text-lg ${
             history.length === 0 ? "cursor-not-allowed opacity-50" : ""
           } ${BUTTON_SECONDARY_STYLES}`}
         >

@@ -165,7 +165,7 @@ export default function SearchHistoryModal({
                 <div className="mt-6 border-t border-neutral-200 pt-4 dark:border-neutral-700">
                   <button
                     onClick={handleClearAll}
-                    className="w-full rounded-lg border-2 border-neutral-300 px-4 py-2.5 font-medium text-neutral-700 transition-colors hover:border-neutral-400 hover:bg-neutral-50 dark:border-neutral-600 dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:bg-neutral-800"
+                    className="w-full rounded-lg border-2 border-red-500 px-4 py-2.5 font-medium text-red-600 transition-all duration-200 hover:bg-red-500 hover:text-white dark:border-red-600 dark:text-red-400 dark:hover:bg-red-600 dark:hover:text-white"
                     aria-label="Effacer tout l'historique"
                   >
                     {BUTTON_CLEAR_HISTORY}
