@@ -120,16 +120,16 @@ describe("SearchHistoryItem", () => {
         />,
       );
 
-      // 5 minutes ago
-      expect(screen.getByText(/il y a 5min/)).toBeInTheDocument();
+      // 5 minutes ago (with space between number and unit)
+      expect(screen.getByText(/il y a 5 min/)).toBeInTheDocument();
     });
 
     it("should format time correctly for different durations", () => {
       const testCases = [
         { offset: 1000, expected: /à l'instant/ }, // 1 second
-        { offset: 2 * 60 * 1000, expected: /il y a 2min/ }, // 2 minutes
-        { offset: 3 * 60 * 60 * 1000, expected: /il y a 3h/ }, // 3 hours
-        { offset: 2 * 24 * 60 * 60 * 1000, expected: /il y a 2j/ }, // 2 days
+        { offset: 2 * 60 * 1000, expected: /il y a 2 min/ }, // 2 minutes (with space)
+        { offset: 3 * 60 * 60 * 1000, expected: /il y a 3h/ }, // 3 hours (no space)
+        { offset: 2 * 24 * 60 * 60 * 1000, expected: /il y a 2j/ }, // 2 days (no space)
       ];
 
       testCases.forEach(({ offset, expected }) => {

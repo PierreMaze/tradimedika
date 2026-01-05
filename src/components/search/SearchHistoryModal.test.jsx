@@ -134,12 +134,14 @@ describe("SearchHistoryModal", () => {
         />,
       );
 
-      expect(
-        screen.getByRole("button", { name: /Effacer tout l'historique/i }),
-      ).toBeInTheDocument();
+      const clearButton = screen.getByRole("button", {
+        name: /Effacer tout l'historique/i,
+      });
+      expect(clearButton).toBeInTheDocument();
+      expect(clearButton).not.toBeDisabled();
     });
 
-    it("should not render clear all button when no history", () => {
+    it("should render clear all button disabled when no history", () => {
       render(
         <SearchHistoryModal
           isOpen={true}
@@ -151,9 +153,12 @@ describe("SearchHistoryModal", () => {
         />,
       );
 
-      expect(
-        screen.queryByRole("button", { name: /Effacer tout l'historique/i }),
-      ).not.toBeInTheDocument();
+      const clearButton = screen.getByRole("button", {
+        name: /Effacer tout l'historique/i,
+      });
+      expect(clearButton).toBeInTheDocument();
+      expect(clearButton).toBeDisabled();
+      expect(clearButton).toHaveClass("cursor-not-allowed", "opacity-50");
     });
 
     it("should render close button", () => {

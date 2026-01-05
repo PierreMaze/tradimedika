@@ -1,7 +1,8 @@
 // components/search/SearchHistoryItem.jsx
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
-import { IoMdClose } from "react-icons/io";
+import { RiDeleteBin2Fill } from "react-icons/ri";
+
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 
 /**
@@ -51,15 +52,15 @@ export default function SearchHistoryItem({ search, onClick, onRemove }) {
       {/* Delete button (top-right, outside main button to avoid nesting) */}
       <button
         onClick={handleRemove}
-        className="absolute top-2 right-2 z-10 rounded-full p-1.5 text-neutral-400 opacity-0 transition-all duration-200 group-hover:opacity-100 hover:bg-neutral-100 hover:text-emerald-600 dark:hover:bg-neutral-800"
+        className="group absolute top-1/3 right-4 z-10 rounded-md bg-red-100 p-1 text-sm text-red-700 transition-all duration-200 group-hover:opacity-100 lg:text-red-700 lg:opacity-0 lg:hover:bg-red-700 lg:hover:text-white dark:bg-red-700/75 dark:text-red-300 dark:text-white dark:hover:bg-red-800/60"
         aria-label="Supprimer cette recherche"
       >
-        <IoMdClose className="text-lg" />
+        <RiDeleteBin2Fill className="font-black lg:text-base 2xl:text-lg" />
       </button>
 
       <button
         onClick={handleClick}
-        className="dark:bg-dark w-full rounded-lg border-2 border-emerald-100 bg-white p-4 text-left shadow-sm transition-all duration-200 hover:scale-[1.02] hover:shadow-md dark:border-neutral-700"
+        className="dark:bg-dark w-full rounded-lg border-2 border-emerald-100 bg-white p-4 text-left shadow-sm transition-all duration-200 group-hover:scale-[1.02] hover:shadow-md dark:border-neutral-700"
         aria-label={`Relancer la recherche : ${search.symptoms.join(", ")}`}
       >
         {/* Symptoms pills */}
@@ -76,13 +77,18 @@ export default function SearchHistoryItem({ search, onClick, onRemove }) {
 
         {/* Result count badge */}
         {search.resultCount !== undefined && (
-          <div className="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400">
-            <span className="rounded-full bg-neutral-100 px-2 py-0.5 font-medium dark:bg-neutral-800">
+          <div className="flex items-center gap-2 text-xs">
+            <span className="rounded-md py-0.5 pl-2 font-semibold text-emerald-700 dark:text-emerald-200">
               {search.resultCount}{" "}
               {search.resultCount > 1 ? "résultats" : "résultat"}
             </span>
-            <span>•</span>
-            <time dateTime={new Date(search.timestamp).toISOString()}>
+            <span className="px-2 text-neutral-400 dark:text-neutral-500">
+              •
+            </span>
+            <time
+              className="text-neutral-700 dark:text-neutral-300"
+              dateTime={new Date(search.timestamp).toISOString()}
+            >
               {formatRelativeTime(search.timestamp)}
             </time>
           </div>
@@ -119,6 +125,6 @@ function formatRelativeTime(timestamp) {
 
   if (days > 0) return `il y a ${days}j`;
   if (hours > 0) return `il y a ${hours}h`;
-  if (minutes > 0) return `il y a ${minutes}min`;
+  if (minutes > 0) return `il y a ${minutes} min`;
   return "à l'instant";
 }

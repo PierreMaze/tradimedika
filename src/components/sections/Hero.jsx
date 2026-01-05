@@ -4,11 +4,13 @@ import { useCallback, useRef, useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 import { GiSprout } from "react-icons/gi";
 import { IoMdArrowForward } from "react-icons/io";
+import { RiHistoryLine } from "react-icons/ri";
+
+import { BUTTON_HISTORY } from "../../constants/buttonLabels";
 import {
   BUTTON_PRIMARY_STYLES,
   BUTTON_SECONDARY_STYLES,
 } from "../../constants/buttonStyles";
-import { BUTTON_HISTORY } from "../../constants/buttonLabels";
 import { useScrollOnMobileFocus } from "../../hooks/useScrollOnMobileFocus";
 import { useSearchHistory } from "../../hooks/useSearchHistory";
 import { useSymptomSubmit } from "../../hooks/useSymptomSubmit";
@@ -145,7 +147,9 @@ function SymptomsSection() {
             history.length === 0 ? "cursor-not-allowed opacity-50" : ""
           } ${BUTTON_SECONDARY_STYLES}`}
         >
-          <span>🕒</span>
+          <span>
+            <RiHistoryLine />
+          </span>
           <span>{BUTTON_HISTORY}</span>
           {history.length > 0 && (
             <span className="rounded-full bg-emerald-600 px-2 py-0.5 text-xs text-white dark:bg-emerald-500">

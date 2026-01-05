@@ -3,8 +3,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { useEffect, useRef } from "react";
 import { IoMdClose } from "react-icons/io";
+import { RiHistoryLine } from "react-icons/ri";
+
+import { ARIA_CLOSE, BUTTON_CLEAR_HISTORY } from "../../constants/buttonLabels";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
-import { BUTTON_CLEAR_HISTORY, ARIA_CLOSE } from "../../constants/buttonLabels";
 import SearchHistoryItem from "./SearchHistoryItem";
 
 /**
@@ -110,7 +112,7 @@ export default function SearchHistoryModal({
             aria-modal="true"
             aria-labelledby="history-modal-title"
             tabIndex={-1}
-            className="dark:bg-dark fixed inset-x-4 top-1/2 z-50 max-h-[80vh] -translate-y-1/2 overflow-auto rounded-lg bg-white p-6 shadow-2xl sm:inset-x-auto sm:w-full sm:max-w-2xl"
+            className="dark:bg-dark fixed inset-x-4 top-2/2 z-50 max-h-[90vh] -translate-y-1/2 overflow-auto rounded-lg bg-white p-6 shadow-2xl lg:top-6/7 lg:mx-auto lg:max-h-full lg:w-4/6 2xl:w-7/20"
             initial={
               prefersReducedMotion ? {} : { opacity: 0, scale: 0.95, y: "-45%" }
             }
@@ -124,14 +126,15 @@ export default function SearchHistoryModal({
             <div className="mb-6 flex items-center justify-between border-b border-neutral-200 pb-4 dark:border-neutral-700">
               <h2
                 id="history-modal-title"
-                className="text-dark dark:text-light text-xl font-semibold"
+                className="text-dark dark:text-light text-lg font-semibold"
               >
-                🕒 Historique de recherche
+                <RiHistoryLine className="inline lg:mr-2" /> Historique de
+                recherche
               </h2>
               <button
                 onClick={onClose}
                 aria-label={ARIA_CLOSE}
-                className="rounded-lg p-2 text-neutral-500 transition-colors hover:bg-neutral-100 hover:text-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
+                className="cursor-pointer rounded-lg bg-neutral-600/90 p-1.5 text-white transition-colors hover:bg-red-700 dark:bg-neutral-500 dark:text-white dark:hover:bg-red-800"
               >
                 <IoMdClose className="text-2xl" />
               </button>
@@ -162,10 +165,10 @@ export default function SearchHistoryModal({
                 </ul>
 
                 {/* Clear all button */}
-                <div className="mt-6 border-t border-neutral-200 pt-4 dark:border-neutral-700">
+                <div className="mt-6 flex justify-end border-t border-neutral-200 pt-4 dark:border-neutral-700">
                   <button
                     onClick={handleClearAll}
-                    className="w-full rounded-lg border-2 border-red-500 px-4 py-2.5 font-medium text-red-600 transition-all duration-200 hover:bg-red-500 hover:text-white dark:border-red-600 dark:text-red-400 dark:hover:bg-red-600 dark:hover:text-white"
+                    className="w-fit rounded-lg border-2 border-red-700 px-4 py-2.5 font-medium text-red-700 transition-all duration-200 hover:border-red-800 hover:bg-red-800 hover:text-white dark:border-red-700 dark:text-red-400 dark:hover:bg-red-700 dark:hover:text-white"
                     aria-label="Effacer tout l'historique"
                   >
                     {BUTTON_CLEAR_HISTORY}
