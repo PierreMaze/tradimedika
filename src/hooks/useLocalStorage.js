@@ -1,5 +1,6 @@
 // hooks/useLocalStorage.js
 import { useCallback, useState } from "react";
+import { flushSync } from "react-dom";
 import { createLogger } from "../utils/logger";
 
 const logger = createLogger("useLocalStorage");
@@ -31,18 +32,35 @@ export function useLocalStorage(key, initialValue) {
   const setValue = useCallback(
     (value) => {
       try {
-        // Utiliser la forme fonctionnelle de setStoredValue pour éviter les stale closures
-        setStoredValue((currentValue) => {
-          // Permet de passer une fonction comme pour useState
-          const valueToStore =
-            value instanceof Function ? value(currentValue) : value;
+        // Utiliser flushSync pour forcer l'exécution synchrone du setState
+        // Cela garantit que localStorage est mis à jour AVANT que le composant
+        // ne se démonte (important quand navigation immédiate après)
+        flushSync(() => {
+          setStoredValue((currentValue) => {
+            logger.debug(`🚀 useLocalStorage[${key}] callback START`, {
+              currentValue,
+              valueIsFunction: value instanceof Function,
+            });
 
-          // Protection SSR
-          if (typeof window !== "undefined") {
-            window.localStorage.setItem(key, JSON.stringify(valueToStore));
-          }
+            // Permet de passer une fonction comme pour useState
+            const valueToStore =
+              value instanceof Function ? value(currentValue) : value;
 
-          return valueToStore;
+            logger.debug(
+              `🚀 useLocalStorage[${key}] valueToStore:`,
+              valueToStore,
+            );
+
+            // Protection SSR - Stocker SYNCHRONEMENT dans localStorage
+            // AVANT que React mette à jour le state, pour éviter la perte
+            // de données si le composant est démonté rapidement
+            if (typeof window !== "undefined") {
+              window.localStorage.setItem(key, JSON.stringify(valueToStore));
+              logger.debug(`🚀 useLocalStorage[${key}] saved to localStorage`);
+            }
+
+            return valueToStore;
+          });
         });
       } catch (error) {
         logger.warn(`Error setting localStorage key "${key}":`, error);

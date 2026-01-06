@@ -52,7 +52,7 @@ export default function SearchHistoryItem({ search, onClick, onRemove }) {
       {/* Delete button (top-right, outside main button to avoid nesting) */}
       <button
         onClick={handleRemove}
-        className="group absolute top-1/3 right-4 z-10 rounded-md bg-red-100 p-1 text-sm text-red-700 transition-all duration-200 group-hover:opacity-100 lg:text-red-700 lg:opacity-0 lg:hover:bg-red-700 lg:hover:text-white dark:bg-red-700/75 dark:text-red-300 dark:text-white dark:hover:bg-red-800/60"
+        className="group absolute top-1/3 right-4 z-10 cursor-pointer rounded-sm bg-red-100 p-1 text-sm text-red-700 transition-all duration-200 group-hover:opacity-100 hover:scale-110 hover:bg-red-700 hover:text-white lg:opacity-0 dark:bg-red-700/75 dark:text-white dark:hover:bg-red-800/60"
         aria-label="Supprimer cette recherche"
       >
         <RiDeleteBin2Fill className="font-black lg:text-base 2xl:text-lg" />
@@ -60,7 +60,7 @@ export default function SearchHistoryItem({ search, onClick, onRemove }) {
 
       <button
         onClick={handleClick}
-        className="dark:bg-dark w-full rounded-lg border-2 border-emerald-100 bg-white p-4 text-left shadow-sm transition-all duration-200 group-hover:scale-[1.02] hover:shadow-md dark:border-neutral-700"
+        className="dark:bg-dark w-full cursor-pointer rounded-lg border-2 border-neutral-200 bg-white p-4 text-left shadow-sm transition-all duration-200 group-hover:scale-[1.02] hover:border-emerald-200 hover:shadow-md dark:border-neutral-700"
         aria-label={`Relancer la recherche : ${search.symptoms.join(", ")}`}
       >
         {/* Symptoms pills */}

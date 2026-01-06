@@ -20,3 +20,11 @@ export const BUTTON_PRIMARY_STYLES =
  */
 export const BUTTON_SECONDARY_STYLES =
   "ring-2 ring-emerald-600 text-emerald-600 transition duration-200 hover:bg-emerald-600 hover:text-white dark:text-emerald-600 dark:hover:bg-emerald-600 dark:hover:text-white";
+
+/**
+ * Disabled button styles
+ * Neutralizes all interactive states (hover, focus, active) when button is disabled
+ * @type {string}
+ */
+export const BUTTON_DISABLED_STYLES =
+  "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 disabled:ring-neutral-300 disabled:text-neutral-400 disabled:bg-neutral-100 dark:disabled:ring-neutral-600 dark:disabled:text-neutral-500 dark:disabled:bg-neutral-800";

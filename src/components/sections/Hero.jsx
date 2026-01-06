@@ -29,8 +29,9 @@ import ListSymptomTag from "../tag/ListSymptomTag";
 function SymptomsSection() {
   const { selectedSymptoms, addSymptom, removeSymptom, setSelectedSymptoms } =
     useSymptomTags();
-  const { handleSubmit, isLoading, results, hasSubmitted } = useSymptomSubmit();
-  const { history, removeSearch, clearHistory } = useSearchHistory();
+  const { history, addSearch, removeSearch, clearHistory } = useSearchHistory();
+  const { handleSubmit, isLoading, results, hasSubmitted } =
+    useSymptomSubmit(addSearch);
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
 
   // Mobile scroll au focus de l'input
@@ -46,17 +47,24 @@ function SymptomsSection() {
     }
   }, [handleScrollToContainer]);
 
-  const onSubmit = () => {
+  const onSubmit = useCallback(() => {
     handleSubmit(selectedSymptoms);
-  };
+  }, [handleSubmit, selectedSymptoms]);
 
   // Relancer une recherche depuis l'historique
-  const handleSearchSelect = (search) => {
-    // Remplacer les symptômes actuels par ceux de l'historique
-    setSelectedSymptoms(search.symptoms);
-    // Soumettre automatiquement
-    handleSubmit(search.symptoms);
-  };
+  const handleSearchSelect = useCallback(
+    (search) => {
+      // Remplacer les symptômes actuels par ceux de l'historique
+      setSelectedSymptoms(search.symptoms);
+      // Soumettre automatiquement avec les symptômes passés explicitement
+      handleSubmit(search.symptoms);
+    },
+    [handleSubmit, setSelectedSymptoms],
+  );
+
+  const handleCloseHistory = useCallback(() => {
+    setIsHistoryOpen(false);
+  }, []);
 
   const isDisabled = selectedSymptoms.length === 0;
 
@@ -92,7 +100,7 @@ function SymptomsSection() {
       )}
 
       {/* Boutons de soumission et historique */}
-      <div className="flex w-full flex-col items-center gap-3 sm:flex-row sm:justify-center">
+      <div className="mt-4 flex w-full flex-col items-center gap-3 sm:flex-row sm:justify-center lg:mt-6 2xl:mt-8">
         {/* Bouton principal de recherche */}
         <motion.button
           onClick={onSubmit}
@@ -138,21 +146,18 @@ function SymptomsSection() {
         {/* Bouton historique */}
         <motion.button
           onClick={() => setIsHistoryOpen(true)}
-          disabled={history.length === 0}
           aria-label={`${BUTTON_HISTORY} - ${history.length} recherches`}
-          whileHover={history.length > 0}
-          whileTap={history.length > 0}
+          whileHover
+          whileTap
           transition={{ duration: 0.2 }}
-          className={`flex w-full items-center justify-center gap-2 rounded-lg px-7 py-3.5 font-semibold shadow-lg transition duration-300 ease-in-out sm:w-auto lg:text-base 2xl:text-lg ${
-            history.length === 0 ? "cursor-not-allowed opacity-50" : ""
-          } ${BUTTON_SECONDARY_STYLES}`}
+          className={`flex w-full items-center justify-center gap-2 rounded-lg px-7 py-3.5 font-semibold shadow-lg transition duration-300 ease-in-out lg:w-fit lg:text-base 2xl:text-lg ${BUTTON_SECONDARY_STYLES}`}
         >
           <span>
             <RiHistoryLine />
           </span>
           <span>{BUTTON_HISTORY}</span>
           {history.length > 0 && (
-            <span className="rounded-full bg-emerald-600 px-2 py-0.5 text-xs text-white dark:bg-emerald-500">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-600 text-xs text-white dark:bg-emerald-500">
               {history.length}
             </span>
           )}
@@ -204,7 +209,7 @@ function SymptomsSection() {
       {/* Modal historique de recherche */}
       <SearchHistoryModal
         isOpen={isHistoryOpen}
-        onClose={() => setIsHistoryOpen(false)}
+        onClose={handleCloseHistory}
         history={history}
         onSearchSelect={handleSearchSelect}
         onClearHistory={clearHistory}

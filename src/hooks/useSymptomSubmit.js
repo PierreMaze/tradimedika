@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import db from "../data/db.json";
 import { findMatchingRemedies } from "../utils/remedyMatcher";
 import { createLogger } from "../utils/logger";
-import { useSearchHistory } from "./useSearchHistory";
 
 const logger = createLogger("useSymptomSubmit");
 
@@ -19,11 +18,11 @@ const logger = createLogger("useSymptomSubmit");
  * - Logging structuré des résultats
  * - État "Recherche effectuée" pendant 2 secondes
  *
+ * @param {Function} addSearch - Fonction pour ajouter une recherche à l'historique
  * @returns {Object} { handleSubmit, isLoading, results, hasSubmitted, error }
  */
-export function useSymptomSubmit() {
+export function useSymptomSubmit(addSearch) {
   const navigate = useNavigate();
-  const { addSearch } = useSearchHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState(null);
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -57,7 +56,16 @@ export function useSymptomSubmit() {
         setHasSubmitted(true);
 
         // Ajouter à l'historique de recherche
-        addSearch(selectedSymptoms, matchingRemedies.length);
+        logger.debug("About to call addSearch with:", {
+          addSearch: typeof addSearch,
+          symptoms: selectedSymptoms,
+          resultCount: matchingRemedies.length,
+        });
+        if (typeof addSearch === "function") {
+          addSearch(selectedSymptoms, matchingRemedies.length);
+        } else {
+          logger.error("addSearch is not a function!", addSearch);
+        }
 
         // Navigation vers la page des résultats avec query params ET state
         // Query params: persistance après refresh + URLs partageables

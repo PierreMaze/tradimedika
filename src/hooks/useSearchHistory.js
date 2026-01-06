@@ -97,14 +97,20 @@ export function useSearchHistory() {
    */
   const addSearch = useCallback(
     (symptoms, resultCount) => {
+      logger.debug("🔥 addSearch START", { symptoms, resultCount });
+
       // Validation
       if (!Array.isArray(symptoms) || symptoms.length === 0) {
         logger.warn("addSearch: symptoms must be a non-empty array");
         return;
       }
 
+      logger.debug("🔥 Validation passed");
+
       try {
+        logger.debug("🔥 About to call setHistory");
         setHistory((prevHistory) => {
+          logger.debug("🔥 Inside setHistory callback", { prevHistory });
           // Filtrer les entrées invalides
           const validHistory = Array.isArray(prevHistory)
             ? prevHistory.filter(isValidEntry)
