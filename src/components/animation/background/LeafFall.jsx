@@ -1,14 +1,15 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { GiFallingLeaf } from "react-icons/gi";
+import { usePerformance } from "../../../context/PerformanceContext";
 import { useReducedMotion } from "../../../hooks/useReducedMotion";
 
 export default function LeafFall() {
   const [show, setShow] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const { isHighPerformance } = usePerformance();
 
-  // 🎯 Variables gardées pour future feature (bouton toggle UI)
-  // Préfixées avec _ pour indiquer qu'elles sont volontairement inutilisées
+  // Variables gardées pour compatibilité future
   const _prefersReducedMotion = useReducedMotion();
 
   // ✅ FIX: Lazy initialization pour localStorage (évite re-lecture à chaque render)
@@ -120,18 +121,8 @@ export default function LeafFall() {
     });
   });
 
-  // 🎯 FEATURE: Affichage toujours activé par défaut
-  // TODO: Ajouter un bouton toggle UI pour permettre aux utilisateurs de désactiver
-  //       les animations d'arrière-plan selon leurs préférences
-  //       Utiliser _shouldHideForReducedMotion pour implémenter cette feature
-  //
-  // Code original (respectait prefers-reduced-motion) - gardé pour référence future :
-  // if (_shouldHideForReducedMotion) {
-  //   return null;
-  // }
-
-  // Ne pas afficher avant le délai initial
-  if (!show) {
+  // Respecte le mode performance: désactive les animations en mode économie
+  if (!show || !isHighPerformance) {
     return null;
   }
 

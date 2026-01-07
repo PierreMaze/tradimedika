@@ -2,6 +2,84 @@
 
 ---
 
+## [1.1.0] - 2026-01-07
+
+### <u>Added:</u>
+
+- **Modal de paramètres** : Nouvelle interface centralisée pour gérer les préférences utilisateur
+  - Bouton engrenage (icône `IoSettings`) remplaçant le toggle dark mode dans le header
+  - Modal `SettingsModal.jsx` accessible avec animations Framer Motion et focus trap
+  - Support keyboard navigation (Tab, Escape) et click outside
+  - Fermeture avec backdrop, bouton close, et touche Escape
+  - Animations respectant `prefers-reduced-motion`
+  - Dark mode adaptatif
+- **Toggle Performance** : Nouveau contrôle pour optimiser les performances
+  - Composant `PerformanceToggle.jsx` avec labels "Économie" / "Élevée"
+  - Icônes speedometer (`IoSpeedometer`, `IoSpeedometerOutline` de react-icons/io5)
+  - Mode Économie : désactive l'animation LeafFall pour économiser les ressources
+  - Mode Élevée : active toutes les animations (par défaut)
+  - Persistence dans localStorage via clé `tradimedika-performance`
+- **Context Performance** : Nouveau context React pour gérer l'état global
+  - `PerformanceContext.jsx` avec Provider et hook `usePerformance()`
+  - Hook retourne : `{ performanceMode, isHighPerformance, togglePerformance }`
+  - Intégré dans la hiérarchie des providers (`main.jsx`)
+  - Default : `"high"` pour rétrocompatibilité
+- **LeafFall optimisé** : Animation d'arrière-plan respecte désormais le mode performance
+  - Désactivée automatiquement en mode Économie
+  - Améliore significativement les performances sur appareils bas de gamme
+  - Conservation de la logique Page Visibility API existante
+- **Constantes de labels** : 7 nouveaux labels dans `buttonLabels.js`
+  - `BUTTON_SETTINGS`, `ARIA_SETTINGS_BUTTON`
+  - `SETTINGS_THEME_LABEL`, `SETTINGS_PERFORMANCE_LABEL`
+  - `PERFORMANCE_LOW`, `PERFORMANCE_HIGH`
+  - `ARIA_PERFORMANCE_TOGGLE`
+
+### <u>Changed:</u>
+
+- **Header** : Remplacement du `DarkModeToggle` standalone par `SettingsButton`
+  - Toggle dark mode déplacé dans la modal de paramètres
+  - Interface plus épurée et scalable pour futures fonctionnalités
+  - Meilleure organisation des paramètres utilisateur
+- **ThemeProvider / PerformanceProvider** : Hiérarchie des contexts mise à jour
+  - `PerformanceProvider` wrappé entre `ThemeProvider` et `RouterProvider`
+  - Ordre : `HelmetProvider` > `ErrorBoundary` > `ThemeProvider` > `PerformanceProvider` > `RouterProvider`
+
+### <u>Tests:</u>
+
+- 5 nouveaux tests pour `PerformanceContext.test.jsx`
+  - Test du Provider par défaut
+  - Test toggle high/low
+  - Test persistence localStorage
+  - Test chargement depuis localStorage
+  - Test erreur si utilisé hors Provider
+- 2 nouveaux tests pour `LeafFall.test.jsx`
+  - Test non-rendu en mode performance low
+  - Test rendu normal en mode performance high
+- Total : **587 tests** (tous passent avec succès)
+
+### <u>Fixed:</u>
+
+- Amélioration des performances pour les appareils bas de gamme via toggle performance
+
+### <u>UX/UI:</u>
+
+- Bouton paramètres avec hover state (border emerald, background emerald-50/950)
+- Modal centrée responsive avec max-width adaptatif (mobile → desktop)
+- Sections séparées visuellement (border-t) pour Thème et Performance
+- Descriptions claires sous chaque toggle ("Activer le mode sombre", "Économie désactive les animations")
+- Glow effect sur PerformanceToggle (vert pour Élevée, orange pour Économie)
+
+### <u>Documentation:</u>
+
+- **README.md** : Nouvelle section "Paramètres Utilisateur" avec détails complets
+- **CLAUDE.md** : Documentation mise à jour
+  - Ajout de `PerformanceContext` dans la section Contextes
+  - Ajout de `usePerformance` dans les Hooks personnalisés
+  - Ajout des nouveaux composants dans la section Components
+  - Documentation des clés localStorage (`tradimedika-performance`)
+
+---
+
 ## [0.36.0] - 2026-01-05
 
 ### <u>Added:</u>

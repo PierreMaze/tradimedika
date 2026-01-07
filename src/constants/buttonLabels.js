@@ -147,3 +147,46 @@ export const ARIA_BACK_HOME = "Revenir à la page d'accueil";
  * @type {string}
  */
 export const ARIA_HISTORY_BUTTON = "Voir l'historique de recherche";
+
+/**
+ * Button label for settings modal
+ * @type {string}
+ */
+export const BUTTON_SETTINGS = "Paramètres";
+
+/**
+ * ARIA label for settings button
+ * @type {string}
+ */
+export const ARIA_SETTINGS_BUTTON = "Ouvrir les paramètres";
+
+/**
+ * Label for theme settings section
+ * @type {string}
+ */
+export const SETTINGS_THEME_LABEL = "Thème";
+
+/**
+ * Label for performance settings section
+ * @type {string}
+ */
+export const SETTINGS_PERFORMANCE_LABEL = "Performance";
+
+/**
+ * Label for low performance mode
+ * @type {string}
+ */
+export const PERFORMANCE_LOW = "Économie";
+
+/**
+ * Label for high performance mode
+ * @type {string}
+ */
+export const PERFORMANCE_HIGH = "Élevée";
+
+/**
+ * ARIA label for performance toggle
+ * @type {string}
+ */
+export const ARIA_PERFORMANCE_TOGGLE =
+  "Basculer entre mode économie et performance élevée";

@@ -6,6 +6,13 @@ vi.mock("../../../hooks/useReducedMotion", () => ({
   useReducedMotion: vi.fn(() => false),
 }));
 
+vi.mock("../../../context/PerformanceContext", () => ({
+  usePerformance: vi.fn(() => ({
+    isHighPerformance: true,
+    performanceMode: "high",
+  })),
+}));
+
 describe("LeafFall", () => {
   beforeEach(() => {
     vi.useFakeTimers();
@@ -154,6 +161,40 @@ describe("LeafFall", () => {
       const leafIcon = container.querySelector("svg");
       expect(leafIcon).toBeInTheDocument();
       expect(leafIcon).toHaveClass("dark:text-emerald-500/75");
+    });
+  });
+
+  describe("Performance Mode", () => {
+    it("should not render when performance mode is low", async () => {
+      const { usePerformance } =
+        await import("../../../context/PerformanceContext");
+      usePerformance.mockReturnValue({
+        isHighPerformance: false,
+        performanceMode: "low",
+      });
+
+      const { container } = render(<LeafFall />);
+      act(() => {
+        vi.runAllTimers();
+      });
+
+      expect(container.firstChild).toBeNull();
+    });
+
+    it("should render when performance mode is high", async () => {
+      const { usePerformance } =
+        await import("../../../context/PerformanceContext");
+      usePerformance.mockReturnValue({
+        isHighPerformance: true,
+        performanceMode: "high",
+      });
+
+      const { container } = render(<LeafFall />);
+      act(() => {
+        vi.runAllTimers();
+      });
+
+      expect(container.firstChild).not.toBeNull();
     });
   });
 });

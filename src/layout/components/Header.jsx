@@ -1,6 +1,6 @@
 // tradimedika-v1/src/layout/Header.jsx
 import { motion } from "framer-motion";
-import DarkModeToggle from "../../components/btn/DarkModeToggle";
+import SettingsButton from "../../components/btn/SettingsButton";
 import LogoTradimedika from "./LogoTradimedika";
 
 const headerVariants = {
@@ -28,10 +28,10 @@ export default function Header() {
       initial="hidden"
       animate="visible"
     >
-      <div className="border-out border-dark/80 dark:border-light/60 mx-auto flex h-20 w-full items-center border-b-2 border-dashed transition duration-300 ease-in-out lg:w-3/4">
+      <div className="mx-auto flex h-20 w-full items-center transition duration-300 ease-in-out lg:w-3/4">
         <div className="mx-4 flex w-full items-center justify-between py-6 lg:mx-8">
           <LogoTradimedika />
-          <DarkModeToggle />
+          <SettingsButton />
         </div>
       </div>
     </motion.header>

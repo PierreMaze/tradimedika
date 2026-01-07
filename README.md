@@ -88,6 +88,16 @@
 - **Accessibilité** : Role "alert" et aria-live pour les lecteurs d'écran
 - **Dark mode** : Adapté automatiquement au thème de l'utilisateur
 
+### ⚙️ Paramètres Utilisateur
+
+- **Modal de configuration** : Bouton engrenage dans le header pour accéder aux paramètres
+- **Mode Sombre** : Toggle pour activer/désactiver le dark mode (persisté dans localStorage)
+- **Mode Performance** : Toggle Économie/Élevée pour contrôler les animations d'arrière-plan
+  - **Économie** : Désactive l'animation LeafFall pour améliorer les performances sur appareils bas de gamme
+  - **Élevée** : Active toutes les animations (par défaut)
+- **Persistence** : Les préférences sont sauvegardées localement et restaurées automatiquement
+- **Accessibilité** : Modal avec focus trap, fermeture par Escape, et respect de `prefers-reduced-motion`
+
 ---
 
 ## 🛠️ Stack technique
