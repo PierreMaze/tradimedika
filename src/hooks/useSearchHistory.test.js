@@ -332,7 +332,7 @@ describe("useSearchHistory", () => {
   });
 
   describe("clearHistory", () => {
-    it("should clear all history", () => {
+    it("should clear all history", async () => {
       const { result } = renderHook(() => useSearchHistory());
 
       act(() => {
@@ -350,6 +350,9 @@ describe("useSearchHistory", () => {
       act(() => {
         result.current.clearHistory();
       });
+
+      // Attendre que la microtask s'exécute
+      await new Promise((resolve) => queueMicrotask(resolve));
 
       expect(result.current.history).toEqual([]);
       expect(window.localStorage.getItem("tradimedika-search-history")).toBe(
@@ -371,12 +374,15 @@ describe("useSearchHistory", () => {
   });
 
   describe("Integration with localStorage", () => {
-    it("should persist history to localStorage on add", () => {
+    it("should persist history to localStorage on add", async () => {
       const { result } = renderHook(() => useSearchHistory());
 
       act(() => {
         result.current.addSearch(["fatigue", "stress"], 5);
       });
+
+      // Attendre que la microtask s'exécute
+      await new Promise((resolve) => queueMicrotask(resolve));
 
       const stored = JSON.parse(
         window.localStorage.getItem("tradimedika-search-history"),
@@ -386,7 +392,7 @@ describe("useSearchHistory", () => {
       expect(stored[0].symptoms).toEqual(["fatigue", "stress"]);
     });
 
-    it("should persist history to localStorage on remove", () => {
+    it("should persist history to localStorage on remove", async () => {
       const { result } = renderHook(() => useSearchHistory());
 
       act(() => {
@@ -401,6 +407,9 @@ describe("useSearchHistory", () => {
       act(() => {
         result.current.removeSearch(idToRemove);
       });
+
+      // Attendre que la microtask s'exécute
+      await new Promise((resolve) => queueMicrotask(resolve));
 
       const stored = JSON.parse(
         window.localStorage.getItem("tradimedika-search-history"),

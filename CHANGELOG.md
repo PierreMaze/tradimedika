@@ -78,6 +78,66 @@
   - Ajout des nouveaux composants dans la section Components
   - Documentation des clés localStorage (`tradimedika-performance`)
 
+### <u>Performance Improvements (Corrections Audit):</u>
+
+- **Cache LRU dans SymptomsSelector** :
+  - Implémentation d'un cache LRU (Least Recently Used) avec limite de 200 entrées
+  - Prévention des fuites mémoire lors de sessions longues
+  - Optimisation du matching de symptômes avec normalisation cachée
+  - Réduction de la consommation mémoire : cache limité à ~6 KB max (au lieu de potentiellement 200+ KB)
+  - Les entrées fréquemment utilisées sont conservées, les anciennes sont automatiquement supprimées
+
+- **Remplacement flushSync par queueMicrotask dans useLocalStorage** :
+  - Élimination des renders bloquants synchrones causés par `flushSync`
+  - Utilisation de `queueMicrotask` pour une écriture asynchrone optimisée dans localStorage
+  - Meilleure compatibilité avec React Concurrent Features
+  - Impact : Amélioration significative de la réactivité de l'interface lors des toggles
+
+- **Validation de Type pour localStorage** :
+  - Ajout de validation de type complète lors de la lecture depuis localStorage
+  - Protection contre les données corrompues ou de type invalide
+  - Validation spéciale pour distinguer arrays et objects (typeof array = "object")
+  - Prévention des crashes au runtime dus à des données inattendues ou modifiées manuellement
+  - Fallback automatique vers initialValue en cas de type invalide
+
+- **Nettoyage LeafFall** :
+  - Suppression de 3 variables inutilisées : `_prefersReducedMotion`, `_forceLeafFall`, `_shouldHideForReducedMotion`
+  - Suppression de l'import `useReducedMotion` non utilisé
+  - Réduction de 12 lignes de code mort
+  - Amélioration de la maintenabilité et réduction de la surface de code
+
+### <u>Tests (Corrections Audit):</u>
+
+- **Adaptation pour Asynchronicité** :
+  - Mise à jour de 8 tests pour gérer les écritures asynchrones dans localStorage
+  - Tests dans `useLocalStorage.test.js` (4 tests adaptés)
+  - Tests dans `PerformanceContext.test.jsx` (1 test adapté)
+  - Tests dans `useSearchHistory.test.js` (3 tests adaptés)
+  - Pattern utilisé : `await new Promise((resolve) => queueMicrotask(resolve))`
+- **Couverture maintenue à 100%** : 587 tests passent
+- **Build et Lint** : Tous les contrôles qualité passent (build 6.53s, ESLint 0 erreurs)
+
+### <u>Technical Notes:</u>
+
+**Pattern queueMicrotask**
+Les tests vérifiant l'état de localStorage doivent maintenant attendre l'exécution de la microtask avant d'asserter l'état de localStorage.
+
+**Cache LRU**
+Le cache maintient un ordre LRU (Least Recently Used) avec :
+
+- Déplacement des entrées accédées à la fin (most recently used)
+- Suppression de la plus ancienne entrée (oldest) quand la limite de 200 est atteinte
+- Limite calculée : 121 symptômes uniques + 79 marge pour typos et variantes
+
+**Fichiers modifiés** :
+
+- `src/components/animation/background/LeafFall.jsx` : Nettoyage code mort (-12 lignes)
+- `src/components/input/SymptomsSelector.jsx` : Implémentation cache LRU (+21, -6 lignes)
+- `src/hooks/useLocalStorage.js` : Remplacement flushSync + validation (+82, -29 lignes)
+- `src/hooks/useLocalStorage.test.js` : Adaptation tests async
+- `src/context/PerformanceContext.test.jsx` : Adaptation test async
+- `src/hooks/useSearchHistory.test.js` : Adaptation tests async
+
 ---
 
 ## [0.36.0] - 2026-01-05

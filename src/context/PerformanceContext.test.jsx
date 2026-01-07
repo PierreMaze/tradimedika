@@ -47,7 +47,7 @@ describe("PerformanceContext", () => {
       expect(result.current.isHighPerformance).toBe(true);
     });
 
-    it("should persist performance mode in localStorage", () => {
+    it("should persist performance mode in localStorage", async () => {
       const wrapper = ({ children }) => (
         <PerformanceProvider>{children}</PerformanceProvider>
       );
@@ -57,6 +57,9 @@ describe("PerformanceContext", () => {
       act(() => {
         result.current.togglePerformance();
       });
+
+      // Attendre que la microtask s'exécute
+      await new Promise((resolve) => queueMicrotask(resolve));
 
       const stored = window.localStorage.getItem("tradimedika-performance");
       expect(JSON.parse(stored)).toBe("low");
