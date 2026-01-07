@@ -2,6 +2,192 @@
 
 ---
 
+## [0.37.0] - 2026-01-07
+
+### <u>Added:</u>
+
+- **Modal de paramètres** : Nouvelle interface centralisée pour gérer les préférences utilisateur
+  - Bouton engrenage (icône `IoSettings`) remplaçant le toggle dark mode dans le header
+  - Modal `SettingsModal.jsx` accessible avec animations Framer Motion et focus trap
+  - Support keyboard navigation (Tab, Escape) et click outside
+  - Fermeture avec backdrop, bouton close, et touche Escape
+  - Animations respectant `prefers-reduced-motion`
+  - Dark mode adaptatif
+- **Toggle Performance** : Nouveau contrôle pour optimiser les performances
+  - Composant `PerformanceToggle.jsx` avec labels "Économie" / "Élevée"
+  - Icônes speedometer (`IoSpeedometer`, `IoSpeedometerOutline` de react-icons/io5)
+  - Mode Économie : désactive l'animation LeafFall pour économiser les ressources
+  - Mode Élevée : active toutes les animations (par défaut)
+  - Persistence dans localStorage via clé `tradimedika-performance`
+- **Context Performance** : Nouveau context React pour gérer l'état global
+  - `PerformanceContext.jsx` avec Provider et hook `usePerformance()`
+  - Hook retourne : `{ performanceMode, isHighPerformance, togglePerformance }`
+  - Intégré dans la hiérarchie des providers (`main.jsx`)
+  - Default : `"high"` pour rétrocompatibilité
+- **LeafFall optimisé** : Animation d'arrière-plan respecte désormais le mode performance
+  - Désactivée automatiquement en mode Économie
+  - Améliore significativement les performances sur appareils bas de gamme
+  - Conservation de la logique Page Visibility API existante
+- **Constantes de labels** : 7 nouveaux labels dans `buttonLabels.js`
+  - `BUTTON_SETTINGS`, `ARIA_SETTINGS_BUTTON`
+  - `SETTINGS_THEME_LABEL`, `SETTINGS_PERFORMANCE_LABEL`
+  - `PERFORMANCE_LOW`, `PERFORMANCE_HIGH`
+  - `ARIA_PERFORMANCE_TOGGLE`
+
+### <u>Changed:</u>
+
+- **Header** : Remplacement du `DarkModeToggle` standalone par `SettingsButton`
+  - Toggle dark mode déplacé dans la modal de paramètres
+  - Interface plus épurée et scalable pour futures fonctionnalités
+  - Meilleure organisation des paramètres utilisateur
+- **ThemeProvider / PerformanceProvider** : Hiérarchie des contexts mise à jour
+  - `PerformanceProvider` wrappé entre `ThemeProvider` et `RouterProvider`
+  - Ordre : `HelmetProvider` > `ErrorBoundary` > `ThemeProvider` > `PerformanceProvider` > `RouterProvider`
+
+### <u>Tests:</u>
+
+- 5 nouveaux tests pour `PerformanceContext.test.jsx`
+  - Test du Provider par défaut
+  - Test toggle high/low
+  - Test persistence localStorage
+  - Test chargement depuis localStorage
+  - Test erreur si utilisé hors Provider
+- 2 nouveaux tests pour `LeafFall.test.jsx`
+  - Test non-rendu en mode performance low
+  - Test rendu normal en mode performance high
+- Total : **587 tests** (tous passent avec succès)
+
+### <u>Fixed:</u>
+
+- Amélioration des performances pour les appareils bas de gamme via toggle performance
+
+### <u>UX/UI:</u>
+
+- Bouton paramètres avec hover state (border emerald, background emerald-50/950)
+- Modal centrée responsive avec max-width adaptatif (mobile → desktop)
+- Sections séparées visuellement (border-t) pour Thème et Performance
+- Descriptions claires sous chaque toggle ("Activer le mode sombre", "Économie désactive les animations")
+- Glow effect sur PerformanceToggle (vert pour Élevée, orange pour Économie)
+
+### <u>Documentation:</u>
+
+- **README.md** : Nouvelle section "Paramètres Utilisateur" avec détails complets
+- **CLAUDE.md** : Documentation mise à jour
+  - Ajout de `PerformanceContext` dans la section Contextes
+  - Ajout de `usePerformance` dans les Hooks personnalisés
+  - Ajout des nouveaux composants dans la section Components
+  - Documentation des clés localStorage (`tradimedika-performance`)
+
+### <u>Performance Improvements (Corrections Audit):</u>
+
+- **Cache LRU dans SymptomsSelector** :
+  - Implémentation d'un cache LRU (Least Recently Used) avec limite de 200 entrées
+  - Prévention des fuites mémoire lors de sessions longues
+  - Optimisation du matching de symptômes avec normalisation cachée
+  - Réduction de la consommation mémoire : cache limité à ~6 KB max (au lieu de potentiellement 200+ KB)
+  - Les entrées fréquemment utilisées sont conservées, les anciennes sont automatiquement supprimées
+
+- **Remplacement flushSync par queueMicrotask dans useLocalStorage** :
+  - Élimination des renders bloquants synchrones causés par `flushSync`
+  - Utilisation de `queueMicrotask` pour une écriture asynchrone optimisée dans localStorage
+  - Meilleure compatibilité avec React Concurrent Features
+  - Impact : Amélioration significative de la réactivité de l'interface lors des toggles
+
+- **Validation de Type pour localStorage** :
+  - Ajout de validation de type complète lors de la lecture depuis localStorage
+  - Protection contre les données corrompues ou de type invalide
+  - Validation spéciale pour distinguer arrays et objects (typeof array = "object")
+  - Prévention des crashes au runtime dus à des données inattendues ou modifiées manuellement
+  - Fallback automatique vers initialValue en cas de type invalide
+
+- **Nettoyage LeafFall** :
+  - Suppression de 3 variables inutilisées : `_prefersReducedMotion`, `_forceLeafFall`, `_shouldHideForReducedMotion`
+  - Suppression de l'import `useReducedMotion` non utilisé
+  - Réduction de 12 lignes de code mort
+  - Amélioration de la maintenabilité et réduction de la surface de code
+
+### <u>Tests (Corrections Audit):</u>
+
+- **Adaptation pour Asynchronicité** :
+  - Mise à jour de 8 tests pour gérer les écritures asynchrones dans localStorage
+  - Tests dans `useLocalStorage.test.js` (4 tests adaptés)
+  - Tests dans `PerformanceContext.test.jsx` (1 test adapté)
+  - Tests dans `useSearchHistory.test.js` (3 tests adaptés)
+  - Pattern utilisé : `await new Promise((resolve) => queueMicrotask(resolve))`
+- **Couverture maintenue à 100%** : 587 tests passent
+- **Build et Lint** : Tous les contrôles qualité passent (build 6.53s, ESLint 0 erreurs)
+
+### <u>Technical Notes:</u>
+
+**Pattern queueMicrotask**
+Les tests vérifiant l'état de localStorage doivent maintenant attendre l'exécution de la microtask avant d'asserter l'état de localStorage.
+
+**Cache LRU**
+Le cache maintient un ordre LRU (Least Recently Used) avec :
+
+- Déplacement des entrées accédées à la fin (most recently used)
+- Suppression de la plus ancienne entrée (oldest) quand la limite de 200 est atteinte
+- Limite calculée : 121 symptômes uniques + 79 marge pour typos et variantes
+
+**Fichiers modifiés** :
+
+- `src/components/animation/background/LeafFall.jsx` : Nettoyage code mort (-12 lignes)
+- `src/components/input/SymptomsSelector.jsx` : Implémentation cache LRU (+21, -6 lignes)
+- `src/hooks/useLocalStorage.js` : Remplacement flushSync + validation (+82, -29 lignes)
+- `src/hooks/useLocalStorage.test.js` : Adaptation tests async
+- `src/context/PerformanceContext.test.jsx` : Adaptation test async
+- `src/hooks/useSearchHistory.test.js` : Adaptation tests async
+
+---
+
+## [0.36.0] - 2026-01-05
+
+### <u>Added:</u>
+
+- **Historique de recherche** : Nouvelle fonctionnalité permettant de sauvegarder et relancer les 5 dernières recherches
+  - Nouveau hook `useSearchHistory.js` avec stockage localStorage
+  - Modal `SearchHistoryModal.jsx` avec backdrop et animations Framer Motion
+  - Composant `SearchHistoryItem.jsx` pour afficher chaque recherche avec pills de symptômes
+  - Bouton "🕒 Historique" dans Hero.jsx (BUTTON_SECONDARY_STYLES) avec badge compteur
+  - Déduplication intelligente : insensible à l'ordre et aux accents
+  - Limite de 5 entrées avec système FIFO (First In First Out)
+  - Suppression individuelle et effacement complet de l'historique
+  - Focus trap, navigation clavier (Tab, Escape), ARIA labels
+  - Support complet du dark mode et responsive design
+- Centralisation des labels dans des fichiers constants
+  - `src/constants/buttonLabels.js` : 25+ labels de boutons (BUTTON_DISCOVER, BUTTON_HISTORY, etc.)
+  - `src/constants/linkLabels.js` : Labels de liens et URLs
+- Tracking automatique des recherches dans `useSymptomSubmit.js`
+  - Enregistrement du nombre de résultats et timestamp
+  - Mise à jour de l'historique après chaque recherche
+- Exposition de `setSelectedSymptoms` dans `useSymptomTags.js` pour la relance depuis l'historique
+
+### <u>Tests:</u>
+
+- 71 nouveaux tests ajoutés pour la fonctionnalité d'historique
+  - `useSearchHistory.test.js` (26 tests) : CRUD, déduplication, FIFO, localStorage, erreurs
+  - `SearchHistoryItem.test.jsx` (21 tests) : Rendering, interactions, accessibilité, edge cases
+  - `SearchHistoryModal.test.jsx` (24 tests) : Modal, backdrop, escape key, focus trap, animations
+- Total : 578 tests (575 passent avec succès)
+
+### <u>Changed:</u>
+
+- `Hero.jsx` : Refonte du layout des boutons
+  - Deux boutons côte à côte : "Découvrir nos solutions" (primary) + "Historique" (secondary)
+  - Layout responsive : flex-col (mobile) → flex-row (desktop)
+- Intégration de la modal d'historique dans le Hero avec gestion du state
+
+### <u>UX/UI:</u>
+
+- Bouton historique désactivé quand aucune recherche (opacity-50)
+- Badge animé affichant le nombre de recherches (1-5)
+- Pills de symptômes capitalisés dans chaque entrée d'historique
+- Badge de compteur de résultats ("3 résultats", "1 résultat")
+- Affichage du temps relatif ("il y a 5min", "il y a 2h", "il y a 3j")
+- Animations smooth avec respect de `prefers-reduced-motion`
+
+---
+
 ## [0.35.0] - 2025-12-30
 
 ### <u>Added:</u>

@@ -1,25 +1,13 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { GiFallingLeaf } from "react-icons/gi";
-import { useReducedMotion } from "../../../hooks/useReducedMotion";
+import { usePerformance } from "../../../context/PerformanceContext";
 
 export default function LeafFall() {
   const [show, setShow] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const prefersReducedMotion = useReducedMotion();
+  const { isHighPerformance } = usePerformance();
 
-  // 🔧 DEV OVERRIDE - Force l'affichage en développement
-  // Pour activer : localStorage.setItem('force-leaffall', 'true')
-  // Pour désactiver : localStorage.removeItem('force-leaffall')
-  const forceLeafFall =
-    typeof window !== "undefined" &&
-    localStorage.getItem("force-leaffall") === "true";
-
-  const shouldHideForReducedMotion = prefersReducedMotion && !forceLeafFall;
-
-  // Détection mobile vs desktop - COUNT réduit pour performance
-  const isMobile = window.innerWidth < 768;
-  const COUNT = isMobile ? 3 : 5; // Réduit de 5/10 à 3/5
   const START_FALL_AFTER = 0;
 
   useEffect(() => {
@@ -42,6 +30,11 @@ export default function LeafFall() {
   // Initialiser les feuilles avec useState pour garantir la pureté
   // La fonction d'initialisation n'est appelée qu'une seule fois au montage
   const [leaves] = useState(() => {
+    // ✅ FIX: Détection mobile et COUNT calculés dans l'initialisation
+    // pour éviter accès window au niveau racine du composant
+    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+    const COUNT = isMobile ? 3 : 5; // Réduit de 5/10 à 3/5 pour performance
+
     return Array.from({ length: COUNT }).map(() => {
       const startX = Math.random() * 100;
       const startY = -10;
@@ -113,14 +106,8 @@ export default function LeafFall() {
     });
   });
 
-  // Ne pas afficher si l'utilisateur préfère des animations réduites
-  // (sauf si forceLeafFall est activé via localStorage)
-  if (shouldHideForReducedMotion) {
-    return null;
-  }
-
-  // Ne pas afficher avant le délai initial
-  if (!show) {
+  // Respecte le mode performance: désactive les animations en mode économie
+  if (!show || !isHighPerformance) {
     return null;
   }
 

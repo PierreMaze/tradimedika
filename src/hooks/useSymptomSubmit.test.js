@@ -37,9 +37,12 @@ vi.mock("../data/db.json", () => ({
 }));
 
 describe("useSymptomSubmit", () => {
+  let mockAddSearch;
+
   beforeEach(() => {
     vi.clearAllMocks();
     vi.useFakeTimers();
+    mockAddSearch = vi.fn();
   });
 
   afterEach(() => {
@@ -48,7 +51,7 @@ describe("useSymptomSubmit", () => {
   });
 
   it("doit initialiser avec les valeurs par défaut", () => {
-    const { result } = renderHook(() => useSymptomSubmit());
+    const { result } = renderHook(() => useSymptomSubmit(mockAddSearch));
 
     expect(result.current.isLoading).toBe(false);
     expect(result.current.results).toBeNull();
@@ -58,7 +61,7 @@ describe("useSymptomSubmit", () => {
   });
 
   it("ne doit pas soumettre si aucun symptôme n'est fourni", () => {
-    const { result } = renderHook(() => useSymptomSubmit());
+    const { result } = renderHook(() => useSymptomSubmit(mockAddSearch));
 
     act(() => {
       result.current.handleSubmit([]);
@@ -69,7 +72,7 @@ describe("useSymptomSubmit", () => {
   });
 
   it("ne doit pas soumettre si selectedSymptoms est null", () => {
-    const { result } = renderHook(() => useSymptomSubmit());
+    const { result } = renderHook(() => useSymptomSubmit(mockAddSearch));
 
     act(() => {
       result.current.handleSubmit(null);
@@ -80,7 +83,7 @@ describe("useSymptomSubmit", () => {
   });
 
   it("doit définir isLoading pendant la soumission", () => {
-    const { result } = renderHook(() => useSymptomSubmit());
+    const { result } = renderHook(() => useSymptomSubmit(mockAddSearch));
 
     act(() => {
       result.current.handleSubmit(["nausée"]);
@@ -90,7 +93,7 @@ describe("useSymptomSubmit", () => {
   });
 
   it("doit rechercher les remèdes et naviguer après soumission", async () => {
-    const { result } = renderHook(() => useSymptomSubmit());
+    const { result } = renderHook(() => useSymptomSubmit(mockAddSearch));
 
     act(() => {
       result.current.handleSubmit(["nausée"]);
@@ -109,7 +112,7 @@ describe("useSymptomSubmit", () => {
   });
 
   it("doit naviguer avec les bons symptômes en state", async () => {
-    const { result } = renderHook(() => useSymptomSubmit());
+    const { result } = renderHook(() => useSymptomSubmit(mockAddSearch));
     const symptoms = ["nausée", "fatigue"];
 
     act(() => {
@@ -126,7 +129,7 @@ describe("useSymptomSubmit", () => {
   });
 
   it("doit réinitialiser hasSubmitted après 2 secondes", async () => {
-    const { result } = renderHook(() => useSymptomSubmit());
+    const { result } = renderHook(() => useSymptomSubmit(mockAddSearch));
 
     act(() => {
       result.current.handleSubmit(["nausée"]);
@@ -145,7 +148,7 @@ describe("useSymptomSubmit", () => {
   });
 
   it("doit réinitialiser l'erreur lors d'une nouvelle soumission", async () => {
-    const { result } = renderHook(() => useSymptomSubmit());
+    const { result } = renderHook(() => useSymptomSubmit(mockAddSearch));
 
     // Simuler une erreur initiale
     act(() => {
@@ -165,7 +168,7 @@ describe("useSymptomSubmit", () => {
   });
 
   it("doit gérer les symptômes multiples", async () => {
-    const { result } = renderHook(() => useSymptomSubmit());
+    const { result } = renderHook(() => useSymptomSubmit(mockAddSearch));
     const symptoms = ["nausée", "fatigue", "stress"];
 
     act(() => {

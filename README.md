@@ -15,7 +15,7 @@
 
 [🌐 **Voir le site**](https://pierremaze.github.io/tradimedika/) • [🐛 **Signaler un bug**](https://github.com/PierreMaze/) • [💬 **Discuter**](https://www.linkedin.com/in/pierremazelaygue/)
 
-[![TRADIMEDIKA](<https://img.shields.io/badge/TRADIMEDIKA-Bêta(0.35.0)-1a1a1a?style=for-the-badge&logo=leaflet&logoColor=00bd7e>)](https://pierremaze.github.io/tradimedika/)
+[![TRADIMEDIKA](<https://img.shields.io/badge/TRADIMEDIKA-Bêta(0.37.0)-1a1a1a?style=for-the-badge&logo=leaflet&logoColor=00bd7e>)](https://pierremaze.github.io/tradimedika/)
 
 </div>
 
@@ -87,6 +87,16 @@
 - **Couleur Emerald** : Design élégant avec emerald foncé (light mode) et emerald clair (dark mode)
 - **Accessibilité** : Role "alert" et aria-live pour les lecteurs d'écran
 - **Dark mode** : Adapté automatiquement au thème de l'utilisateur
+
+### ⚙️ Paramètres Utilisateur
+
+- **Modal de configuration** : Bouton engrenage dans le header pour accéder aux paramètres
+- **Mode Sombre** : Toggle pour activer/désactiver le dark mode (persisté dans localStorage)
+- **Mode Performance** : Toggle Économie/Élevée pour contrôler les animations d'arrière-plan
+  - **Économie** : Désactive l'animation LeafFall pour améliorer les performances sur appareils bas de gamme
+  - **Élevée** : Active toutes les animations (par défaut)
+- **Persistence** : Les préférences sont sauvegardées localement et restaurées automatiquement
+- **Accessibilité** : Modal avec focus trap, fermeture par Escape, et respect de `prefers-reduced-motion`
 
 ---
 

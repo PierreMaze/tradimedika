@@ -6,6 +6,13 @@ vi.mock("../../../hooks/useReducedMotion", () => ({
   useReducedMotion: vi.fn(() => false),
 }));
 
+vi.mock("../../../context/PerformanceContext", () => ({
+  usePerformance: vi.fn(() => ({
+    isHighPerformance: true,
+    performanceMode: "high",
+  })),
+}));
+
 describe("LeafFall", () => {
   beforeEach(() => {
     vi.useFakeTimers();
@@ -53,7 +60,7 @@ describe("LeafFall", () => {
   });
 
   describe("Reduced Motion", () => {
-    it("should not render when prefersReducedMotion is true", async () => {
+    it("should render even when prefersReducedMotion is true (always-on by default)", async () => {
       const { useReducedMotion } =
         await import("../../../hooks/useReducedMotion");
       useReducedMotion.mockReturnValue(true);
@@ -62,7 +69,9 @@ describe("LeafFall", () => {
       act(() => {
         vi.runAllTimers();
       });
-      expect(container.firstChild).toBeNull();
+      // Feature: LeafFall is always displayed by default
+      // TODO: Will be controlled by user toggle button in future
+      expect(container.firstChild).not.toBeNull();
     });
 
     it("should render when prefersReducedMotion is false", async () => {
@@ -93,7 +102,7 @@ describe("LeafFall", () => {
       expect(container.firstChild).not.toBeNull();
     });
 
-    it("should not render when force-leaffall is false and prefersReducedMotion is true", async () => {
+    it("should render even when force-leaffall is false and prefersReducedMotion is true (always-on by default)", async () => {
       const { useReducedMotion } =
         await import("../../../hooks/useReducedMotion");
       useReducedMotion.mockReturnValue(true);
@@ -104,10 +113,12 @@ describe("LeafFall", () => {
       act(() => {
         vi.runAllTimers();
       });
-      expect(container.firstChild).toBeNull();
+      // Feature: LeafFall is always displayed by default
+      // The localStorage override is stored but not currently used
+      expect(container.firstChild).not.toBeNull();
     });
 
-    it("should respect prefersReducedMotion when force-leaffall is not set", async () => {
+    it("should render even with prefersReducedMotion when force-leaffall is not set (always-on by default)", async () => {
       const { useReducedMotion } =
         await import("../../../hooks/useReducedMotion");
       useReducedMotion.mockReturnValue(true);
@@ -116,7 +127,9 @@ describe("LeafFall", () => {
       act(() => {
         vi.runAllTimers();
       });
-      expect(container.firstChild).toBeNull();
+      // Feature: LeafFall is always displayed by default
+      // TODO: Will respect prefersReducedMotion when toggle button is added
+      expect(container.firstChild).not.toBeNull();
     });
   });
 
@@ -148,6 +161,40 @@ describe("LeafFall", () => {
       const leafIcon = container.querySelector("svg");
       expect(leafIcon).toBeInTheDocument();
       expect(leafIcon).toHaveClass("dark:text-emerald-500/75");
+    });
+  });
+
+  describe("Performance Mode", () => {
+    it("should not render when performance mode is low", async () => {
+      const { usePerformance } =
+        await import("../../../context/PerformanceContext");
+      usePerformance.mockReturnValue({
+        isHighPerformance: false,
+        performanceMode: "low",
+      });
+
+      const { container } = render(<LeafFall />);
+      act(() => {
+        vi.runAllTimers();
+      });
+
+      expect(container.firstChild).toBeNull();
+    });
+
+    it("should render when performance mode is high", async () => {
+      const { usePerformance } =
+        await import("../../../context/PerformanceContext");
+      usePerformance.mockReturnValue({
+        isHighPerformance: true,
+        performanceMode: "high",
+      });
+
+      const { container } = render(<LeafFall />);
+      act(() => {
+        vi.runAllTimers();
+      });
+
+      expect(container.firstChild).not.toBeNull();
     });
   });
 });

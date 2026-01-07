@@ -18,9 +18,10 @@ const logger = createLogger("useSymptomSubmit");
  * - Logging structuré des résultats
  * - État "Recherche effectuée" pendant 2 secondes
  *
+ * @param {Function} addSearch - Fonction pour ajouter une recherche à l'historique
  * @returns {Object} { handleSubmit, isLoading, results, hasSubmitted, error }
  */
-export function useSymptomSubmit() {
+export function useSymptomSubmit(addSearch) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState(null);
@@ -53,6 +54,18 @@ export function useSymptomSubmit() {
         // Mettre à jour les résultats
         setResults(matchingRemedies);
         setHasSubmitted(true);
+
+        // Ajouter à l'historique de recherche
+        logger.debug("About to call addSearch with:", {
+          addSearch: typeof addSearch,
+          symptoms: selectedSymptoms,
+          resultCount: matchingRemedies.length,
+        });
+        if (typeof addSearch === "function") {
+          addSearch(selectedSymptoms, matchingRemedies.length);
+        } else {
+          logger.error("addSearch is not a function!", addSearch);
+        }
 
         // Navigation vers la page des résultats avec query params ET state
         // Query params: persistance après refresh + URLs partageables
