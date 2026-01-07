@@ -11,7 +11,7 @@ export default function SettingsButton() {
       <button
         onClick={() => setIsSettingsOpen(true)}
         aria-label={ARIA_SETTINGS_BUTTON}
-        className="border-dark dark:border-light flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg border-2 transition-all duration-200 hover:border-emerald-500 hover:bg-emerald-50 dark:hover:border-emerald-500 dark:hover:bg-emerald-950"
+        className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg transition-all duration-200"
       >
         <IoSettings className="text-dark dark:text-light text-xl transition-colors duration-200" />
       </button>

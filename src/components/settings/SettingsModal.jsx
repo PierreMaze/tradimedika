@@ -138,7 +138,7 @@ export default function SettingsModal({ isOpen, onClose }) {
 
               {/* Performance section */}
               <div className="flex items-center justify-between border-t border-neutral-200 pt-6 dark:border-neutral-700">
-                <div>
+                <div className="flex-1">
                   <h3 className="text-dark dark:text-light text-base font-medium">
                     {SETTINGS_PERFORMANCE_LABEL}
                   </h3>
@@ -159,6 +159,23 @@ export default function SettingsModal({ isOpen, onClose }) {
                       </>
                     )}
                   </p>
+                  <motion.div
+                    key={isHighPerformance ? "high" : "low"}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.2 }}
+                    className="mt-2"
+                  >
+                    <span
+                      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                        isHighPerformance
+                          ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400"
+                          : "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400"
+                      }`}
+                    >
+                      {isHighPerformance ? "⚡ Actif" : "💾 Économie"}
+                    </span>
+                  </motion.div>
                 </div>
                 <PerformanceToggle />
               </div>
