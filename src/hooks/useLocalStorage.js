@@ -1,6 +1,5 @@
 // hooks/useLocalStorage.js
 import { useCallback, useState } from "react";
-import { flushSync } from "react-dom";
 import { createLogger } from "../utils/logger";
 
 const logger = createLogger("useLocalStorage");
@@ -21,7 +20,27 @@ export function useLocalStorage(key, initialValue) {
 
     try {
       const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
+      if (!item) return initialValue;
+
+      const parsed = JSON.parse(item);
+
+      // Validation de type : refuser si différent de initialValue
+      if (typeof parsed !== typeof initialValue) {
+        logger.warn(
+          `Type mismatch in localStorage key "${key}": expected ${typeof initialValue}, got ${typeof parsed}. Using initialValue.`,
+        );
+        return initialValue;
+      }
+
+      // Validation spéciale pour arrays vs objects (typeof array = "object")
+      if (Array.isArray(initialValue) !== Array.isArray(parsed)) {
+        logger.warn(
+          `Type mismatch in localStorage key "${key}": expected ${Array.isArray(initialValue) ? "array" : "object"}, got ${Array.isArray(parsed) ? "array" : "object"}. Using initialValue.`,
+        );
+        return initialValue;
+      }
+
+      return parsed;
     } catch (error) {
       logger.warn(`Error reading localStorage key "${key}":`, error);
       return initialValue;
@@ -32,41 +51,59 @@ export function useLocalStorage(key, initialValue) {
   const setValue = useCallback(
     (value) => {
       try {
-        // Utiliser flushSync pour forcer l'exécution synchrone du setState
-        // Cela garantit que localStorage est mis à jour AVANT que le composant
-        // ne se démonte (important quand navigation immédiate après)
-        flushSync(() => {
-          setStoredValue((currentValue) => {
-            logger.debug(`🚀 useLocalStorage[${key}] callback START`, {
-              currentValue,
-              valueIsFunction: value instanceof Function,
-            });
-
-            // Permet de passer une fonction comme pour useState
-            const valueToStore =
-              value instanceof Function ? value(currentValue) : value;
-
-            logger.debug(
-              `🚀 useLocalStorage[${key}] valueToStore:`,
-              valueToStore,
-            );
-
-            // Protection SSR - Stocker SYNCHRONEMENT dans localStorage
-            // AVANT que React mette à jour le state, pour éviter la perte
-            // de données si le composant est démonté rapidement
-            if (typeof window !== "undefined") {
-              window.localStorage.setItem(key, JSON.stringify(valueToStore));
-              logger.debug(`🚀 useLocalStorage[${key}] saved to localStorage`);
-            }
-
-            return valueToStore;
+        setStoredValue((currentValue) => {
+          logger.debug(`🚀 useLocalStorage[${key}] callback START`, {
+            currentValue,
+            valueIsFunction: value instanceof Function,
           });
+
+          // Permet de passer une fonction comme pour useState
+          const valueToStore =
+            value instanceof Function ? value(currentValue) : value;
+
+          logger.debug(
+            `🚀 useLocalStorage[${key}] valueToStore:`,
+            valueToStore,
+          );
+
+          // Validation de type avant sauvegarde
+          if (typeof valueToStore !== typeof initialValue) {
+            logger.warn(
+              `Type mismatch in setValue for key "${key}": expected ${typeof initialValue}, got ${typeof valueToStore}. Ignoring setValue.`,
+            );
+            return currentValue; // Garde l'état actuel
+          }
+
+          // Validation spéciale pour arrays vs objects
+          if (Array.isArray(initialValue) !== Array.isArray(valueToStore)) {
+            logger.warn(
+              `Type mismatch in setValue for key "${key}": expected ${Array.isArray(initialValue) ? "array" : "object"}, got ${Array.isArray(valueToStore) ? "array" : "object"}. Ignoring setValue.`,
+            );
+            return currentValue;
+          }
+
+          // queueMicrotask garantit l'exécution avant le prochain tick
+          // Tout en restant asynchrone (meilleur pour Concurrent Features)
+          queueMicrotask(() => {
+            if (typeof window !== "undefined") {
+              try {
+                window.localStorage.setItem(key, JSON.stringify(valueToStore));
+                logger.debug(
+                  `🚀 useLocalStorage[${key}] saved to localStorage`,
+                );
+              } catch (error) {
+                logger.warn(`Error writing localStorage key "${key}":`, error);
+              }
+            }
+          });
+
+          return valueToStore;
         });
       } catch (error) {
         logger.warn(`Error setting localStorage key "${key}":`, error);
       }
     },
-    [key],
+    [key, initialValue],
   );
 
   return [storedValue, setValue];
