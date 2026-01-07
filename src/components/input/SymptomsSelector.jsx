@@ -11,22 +11,37 @@ import { normalizeForMatching } from "../../utils/normalizeSymptom";
 
 const logger = createLogger("SymptomsSelector");
 
-// Constante globale pour éviter recalcul à chaque render
-// Contient tous les synonymes (valeurs de synonymsData)
+// Cache de normalisation avec limite LRU (Least Recently Used)
+// Évite fuite mémoire en session longue tout en gardant les entrées fréquentes
+const MAX_CACHE_SIZE = 200; // 121 données uniques + 79 marge pour typos
 const ALL_SYNONYM_VALUES = Object.values(synonymsData).flat();
 
-// Cache pour normalizeForMatching (Map symptôme → normalisé)
+// Cache LRU : Map symptôme → normalisé (oldest first, newest last)
 const normalizeCache = new Map();
 
 /**
- * Version cachée de normalizeForMatching pour optimisation
- * Évite de normaliser le même symptôme plusieurs fois
+ * Version cachée de normalizeForMatching avec cache LRU
+ * - Réutilise les normalisations existantes (O(1) lookup)
+ * - Déplace les entrées réutilisées à la fin (LRU behavior)
+ * - Limite la taille à MAX_CACHE_SIZE pour éviter fuite mémoire
  */
 const getCachedNormalized = (symptom) => {
   if (normalizeCache.has(symptom)) {
-    return normalizeCache.get(symptom);
+    // LRU: Déplacer à la fin (most recently used)
+    const value = normalizeCache.get(symptom);
+    normalizeCache.delete(symptom);
+    normalizeCache.set(symptom, value);
+    return value;
   }
+
   const normalized = normalizeForMatching(symptom);
+
+  // Limiter la taille : supprimer la plus ancienne entrée (FIFO)
+  if (normalizeCache.size >= MAX_CACHE_SIZE) {
+    const firstKey = normalizeCache.keys().next().value;
+    normalizeCache.delete(firstKey);
+  }
+
   normalizeCache.set(symptom, normalized);
   return normalized;
 };
