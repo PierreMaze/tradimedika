@@ -2,26 +2,11 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { GiFallingLeaf } from "react-icons/gi";
 import { usePerformance } from "../../../context/PerformanceContext";
-import { useReducedMotion } from "../../../hooks/useReducedMotion";
 
 export default function LeafFall() {
   const [show, setShow] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const { isHighPerformance } = usePerformance();
-
-  // Variables gardées pour compatibilité future
-  const _prefersReducedMotion = useReducedMotion();
-
-  // ✅ FIX: Lazy initialization pour localStorage (évite re-lecture à chaque render)
-  // 🔧 DEV OVERRIDE - Force l'affichage en développement
-  // Pour activer : localStorage.setItem('force-leaffall', 'true')
-  // Pour désactiver : localStorage.removeItem('force-leaffall')
-  const [_forceLeafFall] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return localStorage.getItem("force-leaffall") === "true";
-  });
-
-  const _shouldHideForReducedMotion = _prefersReducedMotion && !_forceLeafFall;
 
   const START_FALL_AFTER = 0;
 
