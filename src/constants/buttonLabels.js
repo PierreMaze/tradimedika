@@ -170,19 +170,19 @@ export const SETTINGS_THEME_LABEL = "Thème";
  * Label for performance settings section
  * @type {string}
  */
-export const SETTINGS_PERFORMANCE_LABEL = "Performance";
+export const SETTINGS_PERFORMANCE_LABEL = "Animations";
 
 /**
  * Label for low performance mode
  * @type {string}
  */
-export const PERFORMANCE_LOW = "Économie";
+export const PERFORMANCE_LOW = "Désactivées";
 
 /**
  * Label for high performance mode
  * @type {string}
  */
-export const PERFORMANCE_HIGH = "Élevée";
+export const PERFORMANCE_HIGH = "Activées";
 
 /**
  * ARIA label for performance toggle
