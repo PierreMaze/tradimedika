@@ -70,7 +70,7 @@ describe("useLocalStorage", () => {
   });
 
   describe("setValue", () => {
-    it("should update state and localStorage with new value", async () => {
+    it("should update state and localStorage with new value", () => {
       const { result } = renderHook(() =>
         useLocalStorage("test-key", "initial"),
       );
@@ -81,15 +81,13 @@ describe("useLocalStorage", () => {
 
       expect(result.current[0]).toBe("updated");
 
-      // Attendre que la microtask s'exécute
-      await new Promise((resolve) => queueMicrotask(resolve));
-
+      // localStorage est écrit de manière synchrone
       expect(window.localStorage.getItem("test-key")).toBe(
         JSON.stringify("updated"),
       );
     });
 
-    it("should handle function updater (like useState)", async () => {
+    it("should handle function updater (like useState)", () => {
       const { result } = renderHook(() => useLocalStorage("test-key", 0));
 
       act(() => {
@@ -98,13 +96,11 @@ describe("useLocalStorage", () => {
 
       expect(result.current[0]).toBe(1);
 
-      // Attendre que la microtask s'exécute
-      await new Promise((resolve) => queueMicrotask(resolve));
-
+      // localStorage est écrit de manière synchrone
       expect(window.localStorage.getItem("test-key")).toBe(JSON.stringify(1));
     });
 
-    it("should update object value", async () => {
+    it("should update object value", () => {
       const { result } = renderHook(() =>
         useLocalStorage("test-key", { count: 0 }),
       );
@@ -115,15 +111,13 @@ describe("useLocalStorage", () => {
 
       expect(result.current[0]).toEqual({ count: 5 });
 
-      // Attendre que la microtask s'exécute
-      await new Promise((resolve) => queueMicrotask(resolve));
-
+      // localStorage est écrit de manière synchrone
       expect(window.localStorage.getItem("test-key")).toBe(
         JSON.stringify({ count: 5 }),
       );
     });
 
-    it("should update array value", async () => {
+    it("should update array value", () => {
       const { result } = renderHook(() => useLocalStorage("test-key", []));
 
       act(() => {
@@ -132,9 +126,7 @@ describe("useLocalStorage", () => {
 
       expect(result.current[0]).toEqual([1, 2, 3]);
 
-      // Attendre que la microtask s'exécute
-      await new Promise((resolve) => queueMicrotask(resolve));
-
+      // localStorage est écrit de manière synchrone
       expect(window.localStorage.getItem("test-key")).toBe(
         JSON.stringify([1, 2, 3]),
       );

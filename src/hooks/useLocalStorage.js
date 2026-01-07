@@ -1,5 +1,5 @@
 // hooks/useLocalStorage.js
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { createLogger } from "../utils/logger";
 
 const logger = createLogger("useLocalStorage");
@@ -52,66 +52,67 @@ export function useLocalStorage(key, initialValue) {
     }
   });
 
+  // Ref pour garder la valeur actuelle toujours à jour
+  const storedValueRef = useRef(storedValue);
+
+  // Synchroniser le ref avec le state
+  useEffect(() => {
+    storedValueRef.current = storedValue;
+  }, [storedValue]);
+
   // Fonction pour mettre à jour localStorage et le state
   const setValue = useCallback(
     (value) => {
       try {
-        setStoredValue((currentValue) => {
-          logger.debug(`🚀 useLocalStorage[${key}] callback START`, {
-            currentValue,
-            valueIsFunction: value instanceof Function,
-          });
+        // IMPORTANT: Calculer la nouvelle valeur AVANT le setState
+        // en utilisant le ref pour avoir la valeur la plus récente
+        const currentValue = storedValueRef.current;
+        const valueToStore =
+          value instanceof Function ? value(currentValue) : value;
 
-          // Permet de passer une fonction comme pour useState
-          const valueToStore =
-            value instanceof Function ? value(currentValue) : value;
+        logger.debug(`🚀 useLocalStorage[${key}] valueToStore:`, valueToStore);
 
-          logger.debug(
-            `🚀 useLocalStorage[${key}] valueToStore:`,
-            valueToStore,
+        // Validation de type avant sauvegarde
+        // Exception: si initialValue est null, accepter n'importe quel type
+        if (
+          initialValue !== null &&
+          typeof valueToStore !== typeof initialValue
+        ) {
+          logger.warn(
+            `Type mismatch in setValue for key "${key}": expected ${typeof initialValue}, got ${typeof valueToStore}. Ignoring setValue.`,
           );
+          return; // Ne pas mettre à jour
+        }
 
-          // Validation de type avant sauvegarde
-          // Exception: si initialValue est null, accepter n'importe quel type
-          if (
-            initialValue !== null &&
-            typeof valueToStore !== typeof initialValue
-          ) {
-            logger.warn(
-              `Type mismatch in setValue for key "${key}": expected ${typeof initialValue}, got ${typeof valueToStore}. Ignoring setValue.`,
+        // Validation spéciale pour arrays vs objects
+        // Exception: si initialValue est null, accepter n'importe quel type
+        if (
+          initialValue !== null &&
+          Array.isArray(initialValue) !== Array.isArray(valueToStore)
+        ) {
+          logger.warn(
+            `Type mismatch in setValue for key "${key}": expected ${Array.isArray(initialValue) ? "array" : "object"}, got ${Array.isArray(valueToStore) ? "array" : "object"}. Ignoring setValue.`,
+          );
+          return; // Ne pas mettre à jour
+        }
+
+        // CRITICAL: Écrire dans localStorage AVANT setState
+        // Cela garantit la persistance même si React ignore le setState
+        // (ex: démontage immédiat du composant après navigation)
+        if (typeof window !== "undefined") {
+          try {
+            window.localStorage.setItem(key, JSON.stringify(valueToStore));
+            logger.debug(
+              `🚀 useLocalStorage[${key}] saved to localStorage (synchronous)`,
             );
-            return currentValue; // Garde l'état actuel
+          } catch (error) {
+            logger.warn(`Error writing localStorage key "${key}":`, error);
+            return; // Ne pas mettre à jour le state si l'écriture échoue
           }
+        }
 
-          // Validation spéciale pour arrays vs objects
-          // Exception: si initialValue est null, accepter n'importe quel type
-          if (
-            initialValue !== null &&
-            Array.isArray(initialValue) !== Array.isArray(valueToStore)
-          ) {
-            logger.warn(
-              `Type mismatch in setValue for key "${key}": expected ${Array.isArray(initialValue) ? "array" : "object"}, got ${Array.isArray(valueToStore) ? "array" : "object"}. Ignoring setValue.`,
-            );
-            return currentValue;
-          }
-
-          // queueMicrotask garantit l'exécution avant le prochain tick
-          // Tout en restant asynchrone (meilleur pour Concurrent Features)
-          queueMicrotask(() => {
-            if (typeof window !== "undefined") {
-              try {
-                window.localStorage.setItem(key, JSON.stringify(valueToStore));
-                logger.debug(
-                  `🚀 useLocalStorage[${key}] saved to localStorage`,
-                );
-              } catch (error) {
-                logger.warn(`Error writing localStorage key "${key}":`, error);
-              }
-            }
-          });
-
-          return valueToStore;
-        });
+        // Puis mettre à jour le state React (peut être ignoré si démontage)
+        setStoredValue(valueToStore);
       } catch (error) {
         logger.warn(`Error setting localStorage key "${key}":`, error);
       }
