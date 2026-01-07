@@ -25,7 +25,8 @@ export function useLocalStorage(key, initialValue) {
       const parsed = JSON.parse(item);
 
       // Validation de type : refuser si différent de initialValue
-      if (typeof parsed !== typeof initialValue) {
+      // Exception: si initialValue est null, accepter n'importe quel type
+      if (initialValue !== null && typeof parsed !== typeof initialValue) {
         logger.warn(
           `Type mismatch in localStorage key "${key}": expected ${typeof initialValue}, got ${typeof parsed}. Using initialValue.`,
         );
@@ -33,7 +34,11 @@ export function useLocalStorage(key, initialValue) {
       }
 
       // Validation spéciale pour arrays vs objects (typeof array = "object")
-      if (Array.isArray(initialValue) !== Array.isArray(parsed)) {
+      // Exception: si initialValue est null, accepter n'importe quel type
+      if (
+        initialValue !== null &&
+        Array.isArray(initialValue) !== Array.isArray(parsed)
+      ) {
         logger.warn(
           `Type mismatch in localStorage key "${key}": expected ${Array.isArray(initialValue) ? "array" : "object"}, got ${Array.isArray(parsed) ? "array" : "object"}. Using initialValue.`,
         );
@@ -67,7 +72,11 @@ export function useLocalStorage(key, initialValue) {
           );
 
           // Validation de type avant sauvegarde
-          if (typeof valueToStore !== typeof initialValue) {
+          // Exception: si initialValue est null, accepter n'importe quel type
+          if (
+            initialValue !== null &&
+            typeof valueToStore !== typeof initialValue
+          ) {
             logger.warn(
               `Type mismatch in setValue for key "${key}": expected ${typeof initialValue}, got ${typeof valueToStore}. Ignoring setValue.`,
             );
@@ -75,7 +84,11 @@ export function useLocalStorage(key, initialValue) {
           }
 
           // Validation spéciale pour arrays vs objects
-          if (Array.isArray(initialValue) !== Array.isArray(valueToStore)) {
+          // Exception: si initialValue est null, accepter n'importe quel type
+          if (
+            initialValue !== null &&
+            Array.isArray(initialValue) !== Array.isArray(valueToStore)
+          ) {
             logger.warn(
               `Type mismatch in setValue for key "${key}": expected ${Array.isArray(initialValue) ? "array" : "object"}, got ${Array.isArray(valueToStore) ? "array" : "object"}. Ignoring setValue.`,
             );

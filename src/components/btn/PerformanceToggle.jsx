@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { MdOutlineWidgets } from "react-icons/md";
+import { FaWandMagicSparkles } from "react-icons/fa6";
+
 import { usePerformance } from "../../context/PerformanceContext";
 
 export default function PerformanceToggle() {
@@ -32,8 +33,8 @@ export default function PerformanceToggle() {
             : "boder-white bg-dark border dark:bg-white"
         }`}
       >
-        <MdOutlineWidgets
-          className={`text-sm transition-colors duration-300 ${
+        <FaWandMagicSparkles
+          className={`text-xs transition-colors duration-300 ${
             isHighPerformance
               ? "dark:text-dark text-white"
               : "dark:text-dark text-white"
