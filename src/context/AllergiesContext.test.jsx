@@ -23,7 +23,7 @@ describe("AllergiesContext", () => {
 
       expect(result.current.userAllergies).toEqual([]);
       expect(Array.isArray(result.current.userAllergies)).toBe(true);
-      expect(result.current.isFilteringEnabled).toBe(true); // Filtrage activé par défaut
+      expect(result.current.isFilteringEnabled).toBe(false); // Filtrage désactivé par défaut
     });
 
     it("should toggle allergen (add and remove)", () => {
@@ -131,9 +131,10 @@ describe("AllergiesContext", () => {
 
       const { result } = renderHook(() => useAllergies(), { wrapper });
 
-      // Définir allergies utilisateur
+      // Définir allergies utilisateur et activer le filtrage
       act(() => {
         result.current.setAllergies(["citrus", "pollen"]);
+        result.current.enableFiltering();
       });
 
       // Remède sans allergènes = safe
@@ -257,14 +258,14 @@ describe("AllergiesContext", () => {
   });
 
   describe("Filtering enabled/disabled", () => {
-    it("should have filtering enabled by default", () => {
+    it("should have filtering disabled by default", () => {
       const wrapper = ({ children }) => (
         <AllergiesProvider>{children}</AllergiesProvider>
       );
 
       const { result } = renderHook(() => useAllergies(), { wrapper });
 
-      expect(result.current.isFilteringEnabled).toBe(true);
+      expect(result.current.isFilteringEnabled).toBe(false);
     });
 
     it("should disable and enable filtering", () => {
@@ -296,22 +297,22 @@ describe("AllergiesContext", () => {
 
       const { result } = renderHook(() => useAllergies(), { wrapper });
 
-      // Par défaut: enabled (true)
+      // Par défaut: disabled (false)
+      expect(result.current.isFilteringEnabled).toBe(false);
+
+      // Toggle 1: enabled
+      act(() => {
+        result.current.toggleFiltering();
+      });
+
       expect(result.current.isFilteringEnabled).toBe(true);
 
-      // Toggle 1: disabled
+      // Toggle 2: disabled
       act(() => {
         result.current.toggleFiltering();
       });
 
       expect(result.current.isFilteringEnabled).toBe(false);
-
-      // Toggle 2: enabled
-      act(() => {
-        result.current.toggleFiltering();
-      });
-
-      expect(result.current.isFilteringEnabled).toBe(true);
     });
 
     it("should not filter remedies when filtering is disabled", () => {

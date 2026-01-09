@@ -26,10 +26,10 @@ export function AllergiesProvider({ children }) {
   );
 
   // State pour activer/désactiver le filtrage (indépendant des allergies)
-  // Par défaut: true si l'utilisateur a des allergies
+  // Par défaut: false pour éviter confusion sur première visite
   const [isFilteringEnabled, setIsFilteringEnabled] = useLocalStorage(
     "tradimedika-allergies-filtering-enabled",
-    true,
+    false,
   );
 
   // Migration automatique : nettoyer les anciens IDs numériques (breaking change 0.38.0)
