@@ -2,8 +2,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { HiMagnifyingGlass } from "react-icons/hi2";
-import { IoMdWarning } from "react-icons/io";
+import { HiExclamationTriangle, HiMagnifyingGlass } from "react-icons/hi2";
 import symptomsData from "../../data/symptomList.json";
 import synonymsData from "../../data/synonymsSymptomList.json";
 import { createLogger } from "../../utils/logger";
@@ -338,13 +337,21 @@ export default function SymptomsSelector({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="mt-2 flex items-center gap-2 rounded-lg border-2 border-amber-500 bg-amber-200/50 px-4 py-2 dark:border-amber-500/80 dark:bg-amber-900/20"
+            className="mt-2 flex items-center gap-2 rounded-lg border-2 border-dashed border-amber-700/60 bg-amber-50 px-4 py-2 dark:border-amber-400/60 dark:bg-amber-950"
           >
-            <IoMdWarning className="text-lg text-amber-600 dark:text-amber-400" />
-            <p className="text-sm font-medium text-amber-700 dark:text-amber-400">
+            <HiExclamationTriangle className="text-lg text-amber-600 dark:text-amber-400" />
+            <p className="text-sm font-medium tracking-wider text-amber-800 dark:text-amber-100">
               Limite de 5 symptômes atteinte.
-              <span className="font-bold"> Supprimez-en un</span> ou
-              <span className="font-bold"> continuer</span>.
+              <span className="font-semibold text-amber-600 dark:text-amber-400">
+                {" "}
+                Supprimez-en un
+              </span>{" "}
+              ou
+              <span className="font-semibold text-amber-600 dark:text-amber-400">
+                {" "}
+                continuer
+              </span>
+              .
             </p>
           </motion.div>
         )}

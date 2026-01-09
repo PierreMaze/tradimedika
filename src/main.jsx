@@ -4,6 +4,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { HelmetProvider } from "react-helmet-async";
 import { RouterProvider } from "react-router-dom";
 import ErrorFallback from "./components/animation/fallback/ErrorFallback";
+import { AllergiesProvider } from "./context/AllergiesContext";
 import { PerformanceProvider } from "./context/PerformanceContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import "./index.css";
@@ -15,7 +16,9 @@ createRoot(document.getElementById("root")).render(
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <ThemeProvider>
           <PerformanceProvider>
-            <RouterProvider router={router} />
+            <AllergiesProvider>
+              <RouterProvider router={router} />
+            </AllergiesProvider>
           </PerformanceProvider>
         </ThemeProvider>
       </ErrorBoundary>
