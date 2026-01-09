@@ -2,6 +2,62 @@
 
 ---
 
+## [0.40.0] - 2026-01-09
+
+### <u>Added:</u>
+
+- **Affichage des remèdes masqués dans l'historique de recherche**
+  - Nouveau champ `filteredCount` dans la structure de données de l'historique
+  - Affichage en jaune du nombre de remèdes masqués par filtrage d'allergies
+  - Format : "3 résultats • 2 remèdes masqués • il y a 5 min"
+  - Support du singulier/pluriel automatique ("1 remède masqué" vs "2 remèdes masqués")
+
+- **Amélioration du script extractAllergensFromDb.js**
+  - Extraction enrichie : associe chaque allergène à la liste de ses remèdes en français
+  - `allergensList.json` contient maintenant un champ `remedies[]` avec les noms de remèdes
+  - Comparaison intelligente pour éviter les doublons lors de chaque exécution
+  - Tri alphabétique automatique des remèdes par allergène
+  - Mise à jour incrémentale : ne modifie que les nouvelles entrées
+
+### <u>Changed:</u>
+
+- **Structure allergensList.json enrichie**
+  - Avant : `{ "id": "citrus", "name": "Agrumes", "description": "..." }`
+  - Après : `{ "id": "citrus", "name": "Agrumes", "description": "...", "remedies": ["Citron"] }`
+  - Base de données enrichie automatiquement via `node scripts/extractAllergensFromDb.js`
+
+- **useSearchHistory mis à jour**
+  - Nouvelle signature : `addSearch(symptoms, resultCount, allergies, filteredCount)`
+  - Calcul automatique du `filteredCount` dans `useSymptomSubmit`
+  - Rétrocompatibilité assurée avec valeur par défaut `filteredCount = 0`
+
+### <u>Fixed:</u>
+
+- **Tests corrigés (635/635 passent)**
+  - Disclaimer.test.jsx : Mise à jour des couleurs (amber au lieu d'emerald)
+  - AllergySelector.test.jsx : Utilisation de `userEvent` pour interactions asynchrones
+  - useSearchHistory.test.js : Limite d'historique corrigée (10 au lieu de 5)
+  - useSymptomSubmit.test.js : Tests mis à jour avec le 4ème paramètre `filteredCount`
+  - SearchHistoryItem.test.jsx : 5 nouveaux tests pour `filteredCount`
+
+### <u>Tests:</u>
+
+- ✅ **635/635 tests unitaires passés** (100%)
+- ✅ **Validation données** : 7/7 vérifications réussies
+- ✅ **ESLint** : Aucune erreur
+- ✅ **Prettier** : Code formaté automatiquement
+
+### <u>Statistiques:</u>
+
+- 5 allergènes avec remèdes associés :
+  - citrus → 1 remède (Citron)
+  - pollen → 2 remèdes (Banane, Miel)
+  - asteraceae → 1 remède (Camomille)
+  - pollen-olive → 1 remède (Ananas)
+  - bee-venom → 1 remède (Ananas)
+
+---
+
 ## [0.39.0] - 2026-01-09
 
 ### <u>Fixed:</u>
