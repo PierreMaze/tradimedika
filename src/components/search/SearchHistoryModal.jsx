@@ -169,17 +169,19 @@ export default function SearchHistoryModal({
                 </p>
               </div>
             ) : (
-              /* History items */
-              <ul role="list" className="space-y-3">
-                {history.map((search) => (
-                  <SearchHistoryItem
-                    key={search.id}
-                    search={search}
-                    onClick={handleSearchSelect}
-                    onRemove={onRemoveItem}
-                  />
-                ))}
-              </ul>
+              /* History items with scroll */
+              <div className="max-h-96 overflow-y-auto pr-2">
+                <ul role="list" className="space-y-3">
+                  {history.map((search) => (
+                    <SearchHistoryItem
+                      key={search.id}
+                      search={search}
+                      onClick={handleSearchSelect}
+                      onRemove={onRemoveItem}
+                    />
+                  ))}
+                </ul>
+              </div>
             )}
 
             {/* Clear all button - always rendered, just disabled when no history */}
