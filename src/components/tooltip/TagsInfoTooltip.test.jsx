@@ -97,7 +97,7 @@ describe("TagsInfoTooltip", () => {
       const button = screen.getByLabelText("Informations sur les tags");
       expect(button).toHaveClass("inline-flex");
       expect(button).toHaveClass("rounded-lg");
-      expect(button).toHaveClass("bg-white");
+      expect(button).toHaveClass("bg-emerald-600");
       expect(button).toHaveClass("shadow-lg");
     });
   });

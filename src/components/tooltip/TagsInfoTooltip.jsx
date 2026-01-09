@@ -100,7 +100,7 @@ function TagsInfoTooltip() {
         onMouseLeave={handleMouseLeave}
         aria-label="Informations sur les tags"
         aria-expanded={isOpen}
-        className="inline-flex h-12 w-12 cursor-pointer items-center justify-center rounded-lg bg-white text-neutral-800 shadow-lg ring-2 ring-neutral-300 transition duration-200 hover:text-emerald-600 hover:shadow-xl hover:ring-emerald-600 lg:h-16 lg:w-16 dark:bg-neutral-800 dark:text-neutral-100 dark:ring-neutral-600 dark:hover:text-emerald-500 dark:hover:ring-emerald-500"
+        className="inline-flex h-12 w-12 cursor-pointer items-center justify-center rounded-lg bg-emerald-600 text-white shadow-lg ring-2 ring-emerald-700 transition duration-200 hover:bg-emerald-700 hover:shadow-xl hover:ring-emerald-800 lg:h-16 lg:w-16 dark:bg-emerald-500 dark:text-neutral-900 dark:ring-emerald-600 dark:hover:bg-emerald-600 dark:hover:ring-emerald-700"
       >
         <GrCircleQuestion className="h-7 w-7 lg:h-9 lg:w-9" />
       </button>
@@ -138,19 +138,19 @@ function TagsInfoTooltip() {
               y: window.innerWidth >= 1024 ? -20 : 20,
             }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed top-1/2 left-1/2 z-[60] w-full max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-lg bg-neutral-100 p-5 shadow-xl ring ring-neutral-300 lg:absolute lg:top-auto lg:right-0 lg:bottom-full lg:left-auto lg:mb-2 lg:w-142 lg:max-w-3xl lg:translate-x-0 lg:translate-y-0 dark:bg-neutral-800 dark:ring-neutral-600"
+            className="fixed top-1/2 left-1/2 z-[60] w-full max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-5 shadow-xl ring-2 ring-neutral-400 lg:absolute lg:top-auto lg:right-0 lg:bottom-full lg:left-auto lg:mb-2 lg:w-142 lg:max-w-3xl lg:translate-x-0 lg:translate-y-0 dark:bg-neutral-900 dark:ring-neutral-700"
           >
             {/* Bouton Fermer (mobile) */}
             <button
               onClick={closeTooltip}
               aria-label="Fermer"
-              className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full text-neutral-600 transition duration-200 hover:bg-neutral-200 hover:text-neutral-900 lg:hidden dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-100"
+              className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full text-neutral-700 transition duration-200 hover:bg-neutral-200 hover:text-neutral-900 lg:hidden dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-50"
             >
               <HiXMark className="h-5 w-5" aria-hidden="true" />
             </button>
 
             {/* Titre */}
-            <h3 className="mb-4 pr-8 text-lg font-bold text-neutral-800 lg:pr-0 dark:text-neutral-100">
+            <h3 className="mb-4 pr-8 text-lg font-bold text-neutral-900 lg:pr-0 dark:text-neutral-50">
               Signification des tags
             </h3>
 
@@ -159,9 +159,9 @@ function TagsInfoTooltip() {
               {/* Tag Vérifié */}
               <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-4">
                 <VerifiedTag />
-                <p className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+                <p className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-200">
                   Ce remède a été confirmé comme sûr,{" "}
-                  <span className="font-medium text-emerald-600 dark:text-emerald-500">
+                  <span className="font-medium text-emerald-700 dark:text-emerald-400">
                     vérifier les contre-indications.
                   </span>
                 </p>
@@ -170,7 +170,7 @@ function TagsInfoTooltip() {
               {/* Tag Grossesse OK */}
               <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-4">
                 <PregnancyTag variant="default" />
-                <p className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+                <p className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-200">
                   Ce remède peut être utilisé sans danger pendant la grossesse.
                 </p>
               </div>
@@ -178,7 +178,7 @@ function TagsInfoTooltip() {
               {/* Tag Enfants X+ ans */}
               <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-4">
                 <ChildrenAgeTag age={"X"} />
-                <p className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+                <p className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-200">
                   Ce remède est adapté aux enfants de plus de X ans.
                 </p>
               </div>

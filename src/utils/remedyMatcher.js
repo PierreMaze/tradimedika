@@ -6,6 +6,90 @@ import { validateSlugFormat } from "./validation";
 const logger = createLogger("remedyMatcher");
 
 /**
+ * Valide les entrées pour le matching de remèdes
+ *
+ * @param {string[]} selectedSymptoms - Symptômes sélectionnés
+ * @param {Array} database - Base de données des remèdes
+ * @returns {boolean} - true si les entrées sont valides
+ *
+ * @private
+ */
+function validateRemedyMatcherInputs(selectedSymptoms, database) {
+  if (!Array.isArray(selectedSymptoms) || selectedSymptoms.length === 0) {
+    logger.warn("Aucun symptôme sélectionné");
+    return false;
+  }
+
+  if (!Array.isArray(database) || database.length === 0) {
+    logger.error("Base de données invalide ou vide");
+    return false;
+  }
+
+  return true;
+}
+
+/**
+ * Calcule le match entre un remède et les symptômes sélectionnés
+ *
+ * @param {Object} remedy - Le remède à évaluer
+ * @param {string[]} selectedSymptoms - Symptômes sélectionnés
+ * @returns {{remedy: Object, matchCount: number, matchedSymptoms: string[]}|null}
+ *
+ * @private
+ */
+function calculateRemedyMatch(remedy, selectedSymptoms) {
+  // Vérifier que le remède a un champ symptoms valide
+  if (!Array.isArray(remedy.symptoms)) {
+    logger.warn(`Remède "${remedy.name}" sans champ symptoms valide`);
+    return null;
+  }
+
+  // Trouver les symptômes qui matchent (matching flexible, insensible aux accents)
+  const matchedSymptoms = selectedSymptoms.filter((selectedSymptom) =>
+    remedy.symptoms.some(
+      (remedySymptom) =>
+        normalizeForMatching(selectedSymptom) ===
+        normalizeForMatching(remedySymptom),
+    ),
+  );
+
+  // Si aucun match, on exclut ce remède
+  if (matchedSymptoms.length === 0) {
+    return null;
+  }
+
+  // Retourner le remède avec son score
+  return {
+    remedy,
+    matchCount: matchedSymptoms.length,
+    matchedSymptoms,
+  };
+}
+
+/**
+ * Trie les remèdes par pertinence
+ * Critères : score DESC, puis nom alphabétique ASC
+ *
+ * @param {Array<{remedy: Object, matchCount: number, matchedSymptoms: string[]}>} matches
+ * @returns {Array<{remedy: Object, matchCount: number, matchedSymptoms: string[]}>}
+ *
+ * @private
+ */
+function sortRemediesByRelevance(matches) {
+  return matches.sort((a, b) => {
+    // D'abord par score (décroissant)
+    if (b.matchCount !== a.matchCount) {
+      return b.matchCount - a.matchCount;
+    }
+
+    // En cas d'égalité, tri alphabétique
+    return a.remedy.name.localeCompare(b.remedy.name, "fr", {
+      sensitivity: "base",
+    });
+  });
+}
+
+/**
  * Trouve les remèdes correspondant aux symptômes sélectionnés
  *
  * Logique de matching :
@@ -30,62 +114,17 @@ const logger = createLogger("remedyMatcher");
  */
 export function findMatchingRemedies(selectedSymptoms, database) {
   // Validation des entrées
-  if (!Array.isArray(selectedSymptoms) || selectedSymptoms.length === 0) {
-    logger.warn("Aucun symptôme sélectionné");
-    return [];
-  }
-
-  if (!Array.isArray(database) || database.length === 0) {
-    logger.error("Base de données invalide ou vide");
+  if (!validateRemedyMatcherInputs(selectedSymptoms, database)) {
     return [];
   }
 
   // Matching et scoring
   const matches = database
-    .map((remedy) => {
-      // Vérifier que le remède a un champ symptoms valide
-      if (!Array.isArray(remedy.symptoms)) {
-        logger.warn(`Remède "${remedy.name}" sans champ symptoms valide`);
-        return null;
-      }
+    .map((remedy) => calculateRemedyMatch(remedy, selectedSymptoms))
+    .filter((match) => match !== null);
 
-      // Trouver les symptômes qui matchent (matching flexible, insensible aux accents)
-      const matchedSymptoms = selectedSymptoms.filter((selectedSymptom) =>
-        remedy.symptoms.some(
-          (remedySymptom) =>
-            normalizeForMatching(selectedSymptom) ===
-            normalizeForMatching(remedySymptom),
-        ),
-      );
-
-      // Si aucun match, on exclut ce remède
-      if (matchedSymptoms.length === 0) {
-        return null;
-      }
-
-      // Retourner le remède avec son score
-      return {
-        remedy,
-        matchCount: matchedSymptoms.length,
-        matchedSymptoms,
-      };
-    })
-    .filter((match) => match !== null); // Supprimer les null
-
-  // Tri par pertinence (score DESC, puis nom alphabétique ASC)
-  matches.sort((a, b) => {
-    // D'abord par score (décroissant)
-    if (b.matchCount !== a.matchCount) {
-      return b.matchCount - a.matchCount;
-    }
-
-    // En cas d'égalité, tri alphabétique
-    return a.remedy.name.localeCompare(b.remedy.name, "fr", {
-      sensitivity: "base",
-    });
-  });
-
-  return matches;
+  // Tri par pertinence
+  return sortRemediesByRelevance(matches);
 }
 
 /**
