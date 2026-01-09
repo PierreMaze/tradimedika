@@ -46,10 +46,10 @@
 
 - **Design moderne** : Interface épurée avec animations fluides
 - **Responsive** : Compatible mobile, tablette et desktop
-- **Performance** : Score Lighthouse - (92/100)
-- **Bonnes pratiques** : Compatible mobile, tablette et desktop - Score Lighthouse (94/100)
-- **Accessibilité** : Conforme aux standards WCAG 2.1 AA - Score Lighthouse (100/100)
-- **SEO optimisé** : Meta tags et structure sémantique - Score Lighthouse (100/100)
+- **Performance** : Score Lighthouse - ***(92/100)***
+- **Bonnes pratiques** : Compatible mobile, tablette et desktop - Score Lighthouse - ***(94/100)***
+- **Accessibilité** : Conforme aux standards WCAG 2.1 AA - Score Lighthouse - ***(100/100)***
+- **SEO optimisé** : Meta tags et structure sémantique - Score Lighthouse - ***(100/100)***
 
 ### 📚 Documentation
 
