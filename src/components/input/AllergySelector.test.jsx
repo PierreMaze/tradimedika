@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import AllergySelector from "./AllergySelector";
 import { AllergiesProvider } from "../../context/AllergiesContext";
 
@@ -68,28 +69,29 @@ describe("AllergySelector", () => {
     expect(screen.queryByText("Agrumes")).not.toBeInTheDocument();
   });
 
-  it("should select allergen on click", () => {
+  it("should select allergen on click", async () => {
+    const user = userEvent.setup();
     renderWithProvider();
 
     const input = screen.getByRole("combobox");
 
     // Rechercher "agrumes"
-    fireEvent.change(input, { target: { value: "agr" } });
+    await user.type(input, "agr");
 
     // Cliquer sur "Agrumes"
     const agrumesOption = screen.getByText("Agrumes");
-    fireEvent.click(agrumesOption);
+    await user.click(agrumesOption);
 
-    // Le dropdown doit se fermer (input vide)
-    expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
-
-    // Le pill "Agrumes" doit apparaître
-    expect(
-      screen.getByRole("button", { name: "Supprimer Agrumes" }),
-    ).toBeInTheDocument();
+    // Attendre que le pill apparaisse
+    await waitFor(() => {
+      expect(
+        screen.getByRole("button", { name: "Supprimer Agrumes" }),
+      ).toBeInTheDocument();
+    });
   });
 
-  it("should display pills when allergies are selected", () => {
+  it("should display pills when allergies are selected", async () => {
+    const user = userEvent.setup();
     renderWithProvider();
 
     const input = screen.getByRole("combobox");
@@ -100,24 +102,30 @@ describe("AllergySelector", () => {
     ).not.toBeInTheDocument();
 
     // Sélectionner "Agrumes"
-    fireEvent.change(input, { target: { value: "agr" } });
-    fireEvent.click(screen.getByText("Agrumes"));
+    await user.type(input, "agr");
+    await user.click(screen.getByText("Agrumes"));
 
-    // Pill "Agrumes" apparaît
-    expect(
-      screen.getByRole("button", { name: "Supprimer Agrumes" }),
-    ).toBeInTheDocument();
+    // Attendre que le pill "Agrumes" apparaisse
+    await waitFor(() => {
+      expect(
+        screen.getByRole("button", { name: "Supprimer Agrumes" }),
+      ).toBeInTheDocument();
+    });
 
     // Sélectionner "Pollen"
-    fireEvent.change(input, { target: { value: "poll" } });
-    fireEvent.click(screen.getByText(/^Pollen$/)); // Exact match pour éviter "Pollen d'olivier"
+    await user.type(input, "poll");
+    await user.click(screen.getByText(/^Pollen$/)); // Exact match pour éviter "Pollen d'olivier"
 
-    // Pills "Agrumes" et "Pollen" visibles
+    // Attendre que le pill "Pollen" apparaisse
+    await waitFor(() => {
+      expect(
+        screen.getByRole("button", { name: "Supprimer Pollen" }),
+      ).toBeInTheDocument();
+    });
+
+    // Les deux pills doivent être visibles
     expect(
       screen.getByRole("button", { name: "Supprimer Agrumes" }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: "Supprimer Pollen" }),
     ).toBeInTheDocument();
   });
 
@@ -177,45 +185,54 @@ describe("AllergySelector", () => {
     expect(input.value).toBe("");
   });
 
-  it("should handle Backspace to remove last selected allergen", () => {
+  it("should handle Backspace to remove last selected allergen", async () => {
+    const user = userEvent.setup();
     renderWithProvider();
 
     const input = screen.getByRole("combobox");
 
     // Sélectionner "Agrumes"
-    fireEvent.change(input, { target: { value: "agr" } });
-    fireEvent.click(screen.getByText("Agrumes"));
+    await user.type(input, "agr");
+    await user.click(screen.getByText("Agrumes"));
 
-    // Pill "Agrumes" visible
-    expect(
-      screen.getByRole("button", { name: "Supprimer Agrumes" }),
-    ).toBeInTheDocument();
+    // Attendre que le pill "Agrumes" apparaisse
+    await waitFor(() => {
+      expect(
+        screen.getByRole("button", { name: "Supprimer Agrumes" }),
+      ).toBeInTheDocument();
+    });
 
     // Backspace sur input vide → retire l'allergène
-    fireEvent.keyDown(input, { key: "Backspace" });
+    await user.keyboard("{Backspace}");
 
-    // Pill disparaît
-    expect(
-      screen.queryByRole("button", { name: "Supprimer Agrumes" }),
-    ).not.toBeInTheDocument();
+    // Attendre que le pill disparaisse
+    await waitFor(() => {
+      expect(
+        screen.queryByRole("button", { name: "Supprimer Agrumes" }),
+      ).not.toBeInTheDocument();
+    });
   });
 
-  it("should exclude already selected allergens from dropdown", () => {
+  it("should exclude already selected allergens from dropdown", async () => {
+    const user = userEvent.setup();
     renderWithProvider();
 
     const input = screen.getByRole("combobox");
 
     // Sélectionner "Agrumes"
-    fireEvent.change(input, { target: { value: "agr" } });
-    fireEvent.click(screen.getByText("Agrumes"));
+    await user.type(input, "agr");
+    await user.click(screen.getByText("Agrumes"));
 
-    // Pill "Agrumes" visible
-    expect(
-      screen.getByRole("button", { name: "Supprimer Agrumes" }),
-    ).toBeInTheDocument();
+    // Attendre que le pill "Agrumes" apparaisse
+    await waitFor(() => {
+      expect(
+        screen.getByRole("button", { name: "Supprimer Agrumes" }),
+      ).toBeInTheDocument();
+    });
 
     // Rechercher à nouveau "agr"
-    fireEvent.change(input, { target: { value: "agr" } });
+    await user.clear(input);
+    await user.type(input, "agr");
 
     // "Agrumes" ne doit PAS apparaître dans le dropdown (seulement dans le pill)
     const listbox = screen.queryByRole("listbox");

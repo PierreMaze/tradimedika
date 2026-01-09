@@ -112,6 +112,15 @@ export default function SearchHistoryItem({ search, onClick, onRemove }) {
             <span className="px-2 text-neutral-400 dark:text-neutral-500">
               •
             </span>
+            {(search.filteredCount ?? 0) > 0 && (
+              <span className="font-semibold text-yellow-600 dark:text-yellow-400">
+                {search.filteredCount}{" "}
+                {search.filteredCount > 1 ? "remèdes masqués" : "remède masqué"}
+              </span>
+            )}
+            <span className="px-2 text-neutral-400 dark:text-neutral-500">
+              •
+            </span>
             <time
               className="text-neutral-700 dark:text-neutral-300"
               dateTime={new Date(search.timestamp).toISOString()}
@@ -131,6 +140,7 @@ SearchHistoryItem.propTypes = {
     symptoms: PropTypes.arrayOf(PropTypes.string).isRequired,
     timestamp: PropTypes.number.isRequired,
     resultCount: PropTypes.number,
+    filteredCount: PropTypes.number, // Optionnel (remèdes masqués)
     allergies: PropTypes.arrayOf(PropTypes.string), // Optionnel (rétrocompatibilité)
   }).isRequired,
   onClick: PropTypes.func.isRequired,

@@ -65,16 +65,35 @@ export function useSymptomSubmit(addSearch) {
         // Ne prendre en compte les allergies que si le filtrage est activé
         const allergiesToSave = isFilteringEnabled ? userAllergies : [];
 
+        // Calculer le nombre de remèdes filtrés (masqués par allergies)
+        let filteredCount = 0;
+        if (isFilteringEnabled && allergiesToSave.length > 0) {
+          filteredCount = matchingRemedies.filter((item) => {
+            const remedy = item.remedy;
+            if (!remedy || !Array.isArray(remedy.allergens)) return false;
+            if (remedy.allergens.length === 0) return false;
+            return remedy.allergens.some((allergenId) =>
+              allergiesToSave.includes(allergenId),
+            );
+          }).length;
+        }
+
         // Ajouter à l'historique de recherche (avec allergies si filtrage actif)
         logger.debug("About to call addSearch with:", {
           addSearch: typeof addSearch,
           symptoms: selectedSymptoms,
           allergies: allergiesToSave,
           resultCount: matchingRemedies.length,
+          filteredCount,
           isFilteringEnabled,
         });
         if (typeof addSearch === "function") {
-          addSearch(selectedSymptoms, matchingRemedies.length, allergiesToSave);
+          addSearch(
+            selectedSymptoms,
+            matchingRemedies.length,
+            allergiesToSave,
+            filteredCount,
+          );
         } else {
           logger.error("addSearch is not a function!", addSearch);
         }

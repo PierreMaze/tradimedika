@@ -281,6 +281,86 @@ describe("SearchHistoryItem", () => {
     });
   });
 
+  describe("Filtered Count Display", () => {
+    it("should display filtered count when present", () => {
+      const search = { ...mockSearch, resultCount: 5, filteredCount: 2 };
+
+      render(
+        <SearchHistoryItem
+          search={search}
+          onClick={mockOnClick}
+          onRemove={mockOnRemove}
+        />,
+      );
+
+      expect(screen.getByText(/5 résultats/)).toBeInTheDocument();
+      expect(screen.getByText("2 remèdes masqués")).toBeInTheDocument();
+    });
+
+    it("should display singular form for 1 filtered remedy", () => {
+      const search = { ...mockSearch, resultCount: 3, filteredCount: 1 };
+
+      render(
+        <SearchHistoryItem
+          search={search}
+          onClick={mockOnClick}
+          onRemove={mockOnRemove}
+        />,
+      );
+
+      expect(screen.getByText("1 remède masqué")).toBeInTheDocument();
+    });
+
+    it("should not display filtered count when zero", () => {
+      const search = { ...mockSearch, resultCount: 5, filteredCount: 0 };
+
+      render(
+        <SearchHistoryItem
+          search={search}
+          onClick={mockOnClick}
+          onRemove={mockOnRemove}
+        />,
+      );
+
+      expect(screen.queryByText(/remède masqué/)).not.toBeInTheDocument();
+      expect(screen.queryByText(/remèdes masqués/)).not.toBeInTheDocument();
+    });
+
+    it("should not display filtered count when undefined", () => {
+      const search = {
+        ...mockSearch,
+        resultCount: 5,
+        filteredCount: undefined,
+      };
+
+      render(
+        <SearchHistoryItem
+          search={search}
+          onClick={mockOnClick}
+          onRemove={mockOnRemove}
+        />,
+      );
+
+      expect(screen.queryByText(/remède masqué/)).not.toBeInTheDocument();
+      expect(screen.queryByText(/remèdes masqués/)).not.toBeInTheDocument();
+    });
+
+    it("should use yellow color for filtered count", () => {
+      const search = { ...mockSearch, resultCount: 5, filteredCount: 2 };
+
+      render(
+        <SearchHistoryItem
+          search={search}
+          onClick={mockOnClick}
+          onRemove={mockOnRemove}
+        />,
+      );
+
+      const filteredText = screen.getByText("2 remèdes masqués");
+      expect(filteredText).toHaveClass("text-yellow-600");
+    });
+  });
+
   describe("Edge Cases", () => {
     it("should handle empty symptoms array", () => {
       const search = { ...mockSearch, symptoms: [] };

@@ -78,7 +78,9 @@ const isValidEntry = (entry) => {
  *   id: "1735123456789-abc123",      // timestamp-random
  *   symptoms: ["fatigue", "stress"],  // Array normalisés (avec accents)
  *   timestamp: 1735123456789,         // Date.now()
- *   resultCount: 5                    // Nombre de résultats (optionnel)
+ *   resultCount: 5,                   // Nombre de résultats (optionnel)
+ *   filteredCount: 2,                 // Nombre de remèdes masqués (optionnel)
+ *   allergies: ["citrus", "pollen"]   // IDs d'allergènes (optionnel)
  * }
  *
  * @returns {Object} { history, addSearch, removeSearch, clearHistory }
@@ -95,10 +97,16 @@ export function useSearchHistory() {
    * @param {string[]} symptoms - Tableau de symptômes recherchés
    * @param {number} [resultCount] - Nombre de résultats trouvés (optionnel)
    * @param {string[]} [allergies] - Tableau d'IDs d'allergènes (optionnel)
+   * @param {number} [filteredCount] - Nombre de remèdes masqués par filtrage (optionnel)
    */
   const addSearch = useCallback(
-    (symptoms, resultCount, allergies = []) => {
-      logger.debug("🔥 addSearch START", { symptoms, resultCount, allergies });
+    (symptoms, resultCount, allergies = [], filteredCount = 0) => {
+      logger.debug("🔥 addSearch START", {
+        symptoms,
+        resultCount,
+        allergies,
+        filteredCount,
+      });
 
       // Validation
       if (!Array.isArray(symptoms) || symptoms.length === 0) {
@@ -132,6 +140,7 @@ export function useSearchHistory() {
               timestamp: Date.now(),
               resultCount: resultCount ?? existingEntry.resultCount,
               allergies: Array.isArray(allergies) ? allergies : [],
+              filteredCount: filteredCount ?? existingEntry.filteredCount ?? 0,
             };
 
             newHistory = [
@@ -148,6 +157,7 @@ export function useSearchHistory() {
               timestamp: Date.now(),
               resultCount: resultCount ?? 0,
               allergies: Array.isArray(allergies) ? allergies : [],
+              filteredCount: filteredCount ?? 0,
             };
 
             newHistory = [newEntry, ...validHistory];

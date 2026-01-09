@@ -201,7 +201,7 @@ describe("useSymptomSubmit", () => {
       },
     );
 
-    expect(mockAddSearch).toHaveBeenCalledWith(symptoms, 1, allergies);
+    expect(mockAddSearch).toHaveBeenCalledWith(symptoms, 1, allergies, 0);
   });
 
   it("ne doit PAS inclure les allergies dans la navigation quand le filtrage est désactivé", async () => {
@@ -218,6 +218,6 @@ describe("useSymptomSubmit", () => {
       state: { symptoms, allergies: [] },
     });
 
-    expect(mockAddSearch).toHaveBeenCalledWith(symptoms, 1, []);
+    expect(mockAddSearch).toHaveBeenCalledWith(symptoms, 1, [], 0);
   });
 });
