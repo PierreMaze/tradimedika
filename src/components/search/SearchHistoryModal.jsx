@@ -136,21 +136,26 @@ export default function SearchHistoryModal({
             transition={{ duration: 0.2 }}
           >
             {/* Header */}
-            <div className="mb-6 flex items-center justify-between border-b border-neutral-200 pb-4 dark:border-neutral-700">
-              <h2
-                id="history-modal-title"
-                className="text-dark dark:text-light text-lg font-semibold"
-              >
-                <RiHistoryLine className="inline lg:mr-2" /> Historique de
-                recherche
-              </h2>
-              <button
-                onClick={onClose}
-                aria-label={ARIA_CLOSE}
-                className="cursor-pointer rounded-lg bg-neutral-600/90 p-1.5 text-white transition-colors hover:bg-red-700 dark:bg-neutral-500 dark:text-white dark:hover:bg-red-800"
-              >
-                <IoMdClose className="text-2xl" />
-              </button>
+            <div className="mb-6 border-b border-neutral-200 pb-4 dark:border-neutral-700">
+              <div className="flex items-center justify-between">
+                <h2
+                  id="history-modal-title"
+                  className="text-dark dark:text-light text-lg font-semibold"
+                >
+                  <RiHistoryLine className="inline lg:mr-2" /> Historique de
+                  recherche
+                </h2>
+                <button
+                  onClick={onClose}
+                  aria-label={ARIA_CLOSE}
+                  className="cursor-pointer rounded-lg bg-neutral-600/90 p-1.5 text-white transition-colors hover:bg-red-700 dark:bg-neutral-500 dark:text-white dark:hover:bg-red-800"
+                >
+                  <IoMdClose className="text-2xl" />
+                </button>
+              </div>
+              <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+                Les 10 dernières recherches sont conservées automatiquement
+              </p>
             </div>
 
             {/* Content */}

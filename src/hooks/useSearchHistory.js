@@ -8,7 +8,7 @@ const logger = createLogger("useSearchHistory");
 
 // Constantes
 const STORAGE_KEY = "tradimedika-search-history";
-const MAX_HISTORY_ENTRIES = 5;
+const MAX_HISTORY_ENTRIES = 10;
 
 /**
  * Génère un ID unique pour une entrée d'historique
@@ -68,7 +68,7 @@ const isValidEntry = (entry) => {
  *
  * Fonctionnalités :
  * - Stockage dans localStorage avec clé "tradimedika-search-history"
- * - Limite de 5 entrées maximum (FIFO si dépassement)
+ * - Limite de 10 entrées maximum (FIFO si dépassement)
  * - Déduplication intelligente (insensible à l'ordre et aux accents)
  * - Suppression individuelle et effacement complet
  * - Tri chronologique (plus récent en premier)
@@ -94,10 +94,11 @@ export function useSearchHistory() {
    *
    * @param {string[]} symptoms - Tableau de symptômes recherchés
    * @param {number} [resultCount] - Nombre de résultats trouvés (optionnel)
+   * @param {string[]} [allergies] - Tableau d'IDs d'allergènes (optionnel)
    */
   const addSearch = useCallback(
-    (symptoms, resultCount) => {
-      logger.debug("🔥 addSearch START", { symptoms, resultCount });
+    (symptoms, resultCount, allergies = []) => {
+      logger.debug("🔥 addSearch START", { symptoms, resultCount, allergies });
 
       // Validation
       if (!Array.isArray(symptoms) || symptoms.length === 0) {
@@ -130,6 +131,7 @@ export function useSearchHistory() {
               ...existingEntry,
               timestamp: Date.now(),
               resultCount: resultCount ?? existingEntry.resultCount,
+              allergies: Array.isArray(allergies) ? allergies : [],
             };
 
             newHistory = [
@@ -145,6 +147,7 @@ export function useSearchHistory() {
               symptoms: [...symptoms], // Clone pour éviter mutation
               timestamp: Date.now(),
               resultCount: resultCount ?? 0,
+              allergies: Array.isArray(allergies) ? allergies : [],
             };
 
             newHistory = [newEntry, ...validHistory];
