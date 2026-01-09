@@ -6,45 +6,14 @@ import { HiExclamationTriangle, HiMagnifyingGlass } from "react-icons/hi2";
 import symptomsData from "../../data/symptomList.json";
 import synonymsData from "../../data/synonymsSymptomList.json";
 import { useClickOutside } from "../../hooks/useClickOutside";
+import { useLRUCache } from "../../hooks/useLRUCache";
 import { createLogger } from "../../utils/logger";
 import { normalizeForMatching } from "../../utils/normalizeSymptom";
 
 const logger = createLogger("SymptomsSelector");
 
-// Cache de normalisation avec limite LRU (Least Recently Used)
-// Évite fuite mémoire en session longue tout en gardant les entrées fréquentes
-const MAX_CACHE_SIZE = 200; // 121 données uniques + 79 marge pour typos
+// Constants
 const ALL_SYNONYM_VALUES = Object.values(synonymsData).flat();
-
-// Cache LRU : Map symptôme → normalisé (oldest first, newest last)
-const normalizeCache = new Map();
-
-/**
- * Version cachée de normalizeForMatching avec cache LRU
- * - Réutilise les normalisations existantes (O(1) lookup)
- * - Déplace les entrées réutilisées à la fin (LRU behavior)
- * - Limite la taille à MAX_CACHE_SIZE pour éviter fuite mémoire
- */
-const getCachedNormalized = (symptom) => {
-  if (normalizeCache.has(symptom)) {
-    // LRU: Déplacer à la fin (most recently used)
-    const value = normalizeCache.get(symptom);
-    normalizeCache.delete(symptom);
-    normalizeCache.set(symptom, value);
-    return value;
-  }
-
-  const normalized = normalizeForMatching(symptom);
-
-  // Limiter la taille : supprimer la plus ancienne entrée (FIFO)
-  if (normalizeCache.size >= MAX_CACHE_SIZE) {
-    const firstKey = normalizeCache.keys().next().value;
-    normalizeCache.delete(firstKey);
-  }
-
-  normalizeCache.set(symptom, normalized);
-  return normalized;
-};
 
 // Fonction pour capitaliser la première lettre d'un symptôme
 const capitalizeSymptom = (symptom) => {
@@ -99,6 +68,9 @@ export default function SymptomsSelector({
   const inputRef = useRef(null);
   const listRef = useRef(null);
 
+  // LRU cache for normalization (200 entries: 121 unique symptoms + 79 margin for typos)
+  const { get: getCachedNormalized } = useLRUCache(200);
+
   // Validation initiale du JSON (logs de développement)
   useEffect(() => {
     if (!Array.isArray(symptomsData)) {
@@ -124,8 +96,11 @@ export default function SymptomsSelector({
       return [];
     }
 
-    // Normaliser l'input pour matching flexible (sans accents) - avec cache
-    const normalizedInput = getCachedNormalized(inputValue);
+    // Normaliser l'input pour matching flexible (sans accents) - avec cache LRU
+    const normalizedInput = getCachedNormalized(
+      inputValue,
+      normalizeForMatching,
+    );
 
     // 1. Chercher via synonymes (recherche inverse) - PRIORITÉ
     const mainSymptomsFromSynonym = findMainSymptomsFromSynonym(inputValue);
@@ -135,10 +110,15 @@ export default function SymptomsSelector({
     // OPTIMISÉ: Utilise ALL_SYNONYM_VALUES (const globale)
     const directMatches = symptomsData.filter((symptom) => {
       // Ne pas inclure si c'est un synonyme (valeur dans synonymsData)
-      const normalizedSymptom = getCachedNormalized(symptom);
+      const normalizedSymptom = getCachedNormalized(
+        symptom,
+        normalizeForMatching,
+      );
       if (
         ALL_SYNONYM_VALUES.some(
-          (syn) => getCachedNormalized(syn) === normalizedSymptom,
+          (syn) =>
+            getCachedNormalized(syn, normalizeForMatching) ===
+            normalizedSymptom,
         )
       ) {
         return false;
@@ -149,10 +129,12 @@ export default function SymptomsSelector({
 
     // 3. Séparer exact matches et partial matches (seulement pour directMatches)
     const exactMatches = directMatches.filter(
-      (symptom) => getCachedNormalized(symptom) === normalizedInput,
+      (symptom) =>
+        getCachedNormalized(symptom, normalizeForMatching) === normalizedInput,
     );
     const partialMatches = directMatches.filter(
-      (symptom) => getCachedNormalized(symptom) !== normalizedInput,
+      (symptom) =>
+        getCachedNormalized(symptom, normalizeForMatching) !== normalizedInput,
     );
 
     // 4. Combiner dans l'ordre : synonymes → exact → partial
@@ -172,7 +154,7 @@ export default function SymptomsSelector({
       .slice(0, 10); // Limite de 10 appliquée APRÈS combinaison
 
     return filtered;
-  }, [inputValue, selectedSymptoms]);
+  }, [inputValue, selectedSymptoms, getCachedNormalized]);
 
   // Dérive isOpen du nombre de résultats filtrés et de l'état de fermeture forcée
   const isOpen =

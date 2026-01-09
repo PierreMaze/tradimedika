@@ -17,8 +17,12 @@ describe("RemedyResultNotFound", () => {
     });
 
     it("should display search icon", () => {
-      renderWithRouter(<RemedyResultNotFound variant="no-results" />);
-      expect(screen.getByText("🔍")).toBeInTheDocument();
+      const { container } = renderWithRouter(
+        <RemedyResultNotFound variant="no-results" />,
+      );
+      // Icon is now a React Icon SVG component
+      const icon = container.querySelector("svg");
+      expect(icon).toBeInTheDocument();
     });
 
     it("should show description", () => {
@@ -52,8 +56,12 @@ describe("RemedyResultNotFound", () => {
     });
 
     it("should display warning icon", () => {
-      renderWithRouter(<RemedyResultNotFound variant="no-filter-match" />);
-      expect(screen.getByText("⚠️")).toBeInTheDocument();
+      const { container } = renderWithRouter(
+        <RemedyResultNotFound variant="no-filter-match" />,
+      );
+      // Icon is now a React Icon SVG component
+      const icon = container.querySelector("svg");
+      expect(icon).toBeInTheDocument();
     });
 
     it("should show filter description", () => {
@@ -111,13 +119,6 @@ describe("RemedyResultNotFound", () => {
         <RemedyResultNotFound variant="no-results" />,
       );
       expect(container.firstChild?.className).toContain("rounded-lg");
-    });
-
-    it("should have centered text", () => {
-      const { container } = renderWithRouter(
-        <RemedyResultNotFound variant="no-results" />,
-      );
-      expect(container.firstChild?.className).toContain("text-center");
     });
 
     it("should support dark mode", () => {

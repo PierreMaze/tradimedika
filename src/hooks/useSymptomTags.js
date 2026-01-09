@@ -7,12 +7,28 @@ import {
 
 /**
  * Hook personnalisé pour gérer la sélection de symptômes
+ *
+ * Fonctionnalités :
  * - Limite max: 5 symptômes
  * - Anti-doublon flexible (avec/sans accents)
  * - Stockage avec accents pour affichage correct
  * - Ajout/suppression avec validation
+ * - Expose setSelectedSymptoms pour la feature search history
  *
- * @returns {Object} { selectedSymptoms, addSymptom, removeSymptom, isAtLimit }
+ * @returns {{
+ *   selectedSymptoms: string[],
+ *   addSymptom: (symptom: string) => void,
+ *   removeSymptom: (symptom: string) => void,
+ *   isAtLimit: boolean,
+ *   setSelectedSymptoms: (symptoms: string[]) => void
+ * }} Object contenant l'état et les fonctions de gestion
+ *
+ * @example
+ * const { selectedSymptoms, addSymptom, removeSymptom, isAtLimit } = useSymptomTags();
+ *
+ * addSymptom('Fatigue'); // Ajoute avec accents
+ * addSymptom('fatigue'); // Ignoré (doublon)
+ * removeSymptom('Fatigue'); // Supprime
  */
 export function useSymptomTags() {
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
