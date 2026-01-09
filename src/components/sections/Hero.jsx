@@ -194,7 +194,7 @@ function SymptomsSection() {
               transition={{ duration: 0.3 }}
               style={{ transformOrigin: "top" }}
             >
-              <div className="dark:bg-dark rounded-lg border-2 border-emerald-200 bg-neutral-50 p-4 dark:border-emerald-700">
+              <div className="dark:bg-dark rounded-lg border-2 border-dashed border-emerald-600 bg-neutral-50 p-4 dark:border-emerald-500">
                 <AllergySelector />
               </div>
             </motion.div>

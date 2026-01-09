@@ -53,7 +53,7 @@ export default function SearchHistoryItem({ search, onClick, onRemove }) {
       {/* Delete button (top-right, outside main button to avoid nesting) */}
       <button
         onClick={handleRemove}
-        className="group absolute top-1/3 right-4 z-10 cursor-pointer rounded-sm bg-red-100 p-1 text-sm text-red-700 transition-all duration-200 group-hover:opacity-100 hover:scale-110 hover:bg-red-700 hover:text-white lg:opacity-0 dark:bg-red-700/75 dark:text-white dark:hover:bg-red-800/60"
+        className="group absolute top-1/3 right-4 z-10 cursor-pointer rounded-sm bg-red-100 p-1 text-sm text-red-700 transition-all duration-200 group-hover:opacity-100 hover:bg-red-700 hover:text-white lg:opacity-0 dark:bg-red-700/75 dark:text-white dark:hover:bg-red-800/60"
         aria-label="Supprimer cette recherche"
       >
         <RiDeleteBin2Fill className="font-black lg:text-base 2xl:text-lg" />
@@ -61,13 +61,13 @@ export default function SearchHistoryItem({ search, onClick, onRemove }) {
 
       <button
         onClick={handleClick}
-        className="dark:bg-dark w-full cursor-pointer rounded-lg border-2 border-neutral-200 bg-white p-4 text-left shadow-sm transition-all duration-200 group-hover:scale-[1.02] hover:border-emerald-200 hover:shadow-md dark:border-neutral-700"
+        className="dark:bg-dark w-full cursor-pointer rounded-lg border-2 border-neutral-200 bg-white p-4 text-left shadow-sm transition-all duration-200 hover:border-emerald-200 hover:shadow-md dark:border-neutral-700"
         aria-label={`Relancer la recherche : ${search.symptoms.join(", ")}`}
       >
         <div className="mb-3 flex flex-col gap-2">
           {/* Ligne 1 : Symptômes (vert) */}
           <div className="inline-flex flex-wrap items-center gap-2">
-            <p className="text-sm font-medium text-emerald-700 dark:text-emerald-300">
+            <p className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
               Symptômes :
             </p>
             {search.symptoms.map((symptom, index) => (
@@ -83,7 +83,7 @@ export default function SearchHistoryItem({ search, onClick, onRemove }) {
           {/* Ligne 2 : Allergies (rouge) - rétrocompatibilité avec ?? [] */}
           {(search.allergies ?? []).length > 0 && (
             <div className="inline-flex flex-wrap items-center gap-2">
-              <p className="text-sm font-medium text-yellow-700 dark:text-yellow-300">
+              <p className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
                 Allergies :
               </p>
               {(search.allergies ?? []).map((allergenId, index) => {
