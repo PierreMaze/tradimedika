@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 
+import allergensList from "../../data/allergensList.json";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 
 /**
@@ -52,7 +53,7 @@ export default function SearchHistoryItem({ search, onClick, onRemove }) {
       {/* Delete button (top-right, outside main button to avoid nesting) */}
       <button
         onClick={handleRemove}
-        className="group absolute top-1/3 right-4 z-10 cursor-pointer rounded-sm bg-red-100 p-1 text-sm text-red-700 transition-all duration-200 group-hover:opacity-100 hover:scale-110 hover:bg-red-700 hover:text-white lg:opacity-0 dark:bg-red-700/75 dark:text-white dark:hover:bg-red-800/60"
+        className="group absolute top-1/3 right-4 z-10 cursor-pointer rounded-sm bg-red-100 p-1 text-sm text-red-700 transition-all duration-200 group-hover:opacity-100 hover:bg-red-700 hover:text-white lg:opacity-0 dark:bg-red-700/75 dark:text-white dark:hover:bg-red-800/60"
         aria-label="Supprimer cette recherche"
       >
         <RiDeleteBin2Fill className="font-black lg:text-base 2xl:text-lg" />
@@ -60,28 +61,63 @@ export default function SearchHistoryItem({ search, onClick, onRemove }) {
 
       <button
         onClick={handleClick}
-        className="dark:bg-dark w-full cursor-pointer rounded-lg border-2 border-neutral-200 bg-white p-4 text-left shadow-sm transition-all duration-200 group-hover:scale-[1.02] hover:border-emerald-200 hover:shadow-md dark:border-neutral-700"
+        className="dark:bg-dark w-full cursor-pointer rounded-lg border-2 border-neutral-200 bg-white p-4 text-left shadow-sm transition-all duration-200 hover:border-emerald-200 hover:shadow-md dark:border-neutral-700"
         aria-label={`Relancer la recherche : ${search.symptoms.join(", ")}`}
       >
-        {/* Symptoms pills */}
-        <div className="mb-3 flex flex-wrap gap-2">
-          {search.symptoms.map((symptom, index) => (
-            <span
-              key={`${search.id}-${index}`}
-              className="rounded-md bg-emerald-50 px-2.5 py-1 text-sm font-medium text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300"
-            >
-              {capitalizeSymptom(symptom)}
-            </span>
-          ))}
+        <div className="mb-3 flex flex-col gap-2">
+          {/* Ligne 1 : Symptômes (vert) */}
+          <div className="inline-flex flex-wrap items-center gap-2">
+            <p className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+              Symptômes :
+            </p>
+            {search.symptoms.map((symptom, index) => (
+              <span
+                key={`symptom-${search.id}-${index}`}
+                className="rounded-md bg-emerald-50 px-2.5 py-1 text-sm font-medium text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300"
+              >
+                {capitalizeSymptom(symptom)}
+              </span>
+            ))}
+          </div>
+
+          {/* Ligne 2 : Allergies (rouge) - rétrocompatibilité avec ?? [] */}
+          {(search.allergies ?? []).length > 0 && (
+            <div className="inline-flex flex-wrap items-center gap-2">
+              <p className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                Allergies :
+              </p>
+              {(search.allergies ?? []).map((allergenId, index) => {
+                const allergen = allergensList.find((a) => a.id === allergenId);
+                return allergen ? (
+                  <span
+                    key={`allergy-${search.id}-${index}`}
+                    className="rounded-md bg-red-50 px-2.5 py-1 text-sm font-medium text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300"
+                    title={allergen.description}
+                  >
+                    {allergen.name}
+                  </span>
+                ) : null;
+              })}
+            </div>
+          )}
         </div>
 
         {/* Result count badge */}
         {search.resultCount !== undefined && (
           <div className="flex items-center gap-2 text-xs">
-            <span className="rounded-md py-0.5 pl-2 font-semibold text-emerald-700 dark:text-emerald-200">
+            <span className="rounded-md py-0.5 pl-2 font-semibold text-emerald-600 dark:text-emerald-400">
               {search.resultCount}{" "}
               {search.resultCount > 1 ? "résultats" : "résultat"}
             </span>
+            <span className="px-2 text-neutral-400 dark:text-neutral-500">
+              •
+            </span>
+            {(search.filteredCount ?? 0) > 0 && (
+              <span className="font-semibold text-yellow-600 dark:text-yellow-400">
+                {search.filteredCount}{" "}
+                {search.filteredCount > 1 ? "remèdes masqués" : "remède masqué"}
+              </span>
+            )}
             <span className="px-2 text-neutral-400 dark:text-neutral-500">
               •
             </span>
@@ -104,6 +140,8 @@ SearchHistoryItem.propTypes = {
     symptoms: PropTypes.arrayOf(PropTypes.string).isRequired,
     timestamp: PropTypes.number.isRequired,
     resultCount: PropTypes.number,
+    filteredCount: PropTypes.number, // Optionnel (remèdes masqués)
+    allergies: PropTypes.arrayOf(PropTypes.string), // Optionnel (rétrocompatibilité)
   }).isRequired,
   onClick: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,

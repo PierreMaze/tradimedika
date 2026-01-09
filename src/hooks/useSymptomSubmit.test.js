@@ -107,7 +107,7 @@ describe("useSymptomSubmit", () => {
     expect(result.current.results[0].remedy.name).toBe("Citron");
 
     expect(mockNavigate).toHaveBeenCalledWith("/remedes?symptoms=naus%C3%A9e", {
-      state: { symptoms: ["nausée"] },
+      state: { symptoms: ["nausée"], allergies: [] },
     });
   });
 
@@ -123,7 +123,7 @@ describe("useSymptomSubmit", () => {
     expect(mockNavigate).toHaveBeenCalledWith(
       "/remedes?symptoms=naus%C3%A9e%2Cfatigue",
       {
-        state: { symptoms },
+        state: { symptoms, allergies: [] },
       },
     );
   });
@@ -179,8 +179,45 @@ describe("useSymptomSubmit", () => {
     expect(mockNavigate).toHaveBeenCalledWith(
       "/remedes?symptoms=naus%C3%A9e%2Cfatigue%2Cstress",
       {
-        state: { symptoms },
+        state: { symptoms, allergies: [] },
       },
     );
+  });
+
+  it("doit inclure les allergies dans la navigation quand le filtrage est activé", async () => {
+    const { result } = renderHook(() => useSymptomSubmit(mockAddSearch));
+    const symptoms = ["nausée"];
+    const allergies = ["citrus", "pollen"];
+
+    act(() => {
+      result.current.handleSubmit(symptoms, allergies, true);
+      vi.runAllTimers();
+    });
+
+    expect(mockNavigate).toHaveBeenCalledWith(
+      "/remedes?symptoms=naus%C3%A9e&allergies=citrus%2Cpollen",
+      {
+        state: { symptoms, allergies },
+      },
+    );
+
+    expect(mockAddSearch).toHaveBeenCalledWith(symptoms, 1, allergies, 0);
+  });
+
+  it("ne doit PAS inclure les allergies dans la navigation quand le filtrage est désactivé", async () => {
+    const { result } = renderHook(() => useSymptomSubmit(mockAddSearch));
+    const symptoms = ["nausée"];
+    const allergies = ["citrus", "pollen"];
+
+    act(() => {
+      result.current.handleSubmit(symptoms, allergies, false);
+      vi.runAllTimers();
+    });
+
+    expect(mockNavigate).toHaveBeenCalledWith("/remedes?symptoms=naus%C3%A9e", {
+      state: { symptoms, allergies: [] },
+    });
+
+    expect(mockAddSearch).toHaveBeenCalledWith(symptoms, 1, [], 0);
   });
 });

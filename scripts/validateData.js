@@ -26,6 +26,7 @@ const PATHS = {
   symptomList: resolve(__dirname, "../src/data/symptomList.json"),
   synonyms: resolve(__dirname, "../src/data/synonymsSymptomList.json"),
   db: resolve(__dirname, "../src/data/db.json"),
+  allergensList: resolve(__dirname, "../src/data/allergensList.json"),
 };
 
 console.log("\n🔍 Validation des données normalisées...\n");
@@ -35,6 +36,7 @@ console.log("\n🔍 Validation des données normalisées...\n");
 const symptomList = JSON.parse(readFileSync(PATHS.symptomList, "utf-8"));
 const synonyms = JSON.parse(readFileSync(PATHS.synonyms, "utf-8"));
 const db = JSON.parse(readFileSync(PATHS.db, "utf-8"));
+const allergensList = JSON.parse(readFileSync(PATHS.allergensList, "utf-8"));
 
 let errors = 0;
 const warnings = 0;
@@ -235,19 +237,109 @@ if (notNormalized === 0) {
   errors += notNormalized;
 }
 
-// ==================== 6. STATISTIQUES ====================
+// ==================== 6. VÉRIFIER LES ALLERGÈNES ====================
+
+console.log("📝 Vérification 6: Validation des allergènes...");
+
+// Vérifier que allergensList est un tableau
+if (!Array.isArray(allergensList)) {
+  console.error("  ❌ allergensList.json doit être un tableau");
+  errors++;
+} else {
+  // Extraire les IDs valides
+  const validAllergenIds = new Set(allergensList.map((a) => a.id));
+
+  // Vérifier les doublons dans allergensList
+  if (validAllergenIds.size !== allergensList.length) {
+    console.error(
+      `  ❌ Doublons détectés dans allergensList (${allergensList.length} items, ${validAllergenIds.size} uniques)`,
+    );
+    errors++;
+  }
+
+  // Vérifier le format kebab-case des IDs
+  const kebabCasePattern = /^[a-z]+(-[a-z]+)*$/;
+  allergensList.forEach((allergen) => {
+    if (!kebabCasePattern.test(allergen.id)) {
+      console.error(
+        `  ❌ ID allergen invalide (doit être kebab-case): "${allergen.id}"`,
+      );
+      errors++;
+    }
+    // Vérifier que name et description existent
+    if (!allergen.name || typeof allergen.name !== "string") {
+      console.error(`  ❌ Allergen "${allergen.id}" manque un nom valide`);
+      errors++;
+    }
+    if (!allergen.description || typeof allergen.description !== "string") {
+      console.error(
+        `  ❌ Allergen "${allergen.id}" manque une description valide`,
+      );
+      errors++;
+    }
+  });
+
+  // Vérifier que tous les allergènes de db.json existent dans allergensList
+  const dbAllergens = new Set();
+  db.forEach((remedy) => {
+    if (Array.isArray(remedy.allergens)) {
+      remedy.allergens.forEach((allergenId) => {
+        dbAllergens.add(allergenId);
+        if (!validAllergenIds.has(allergenId)) {
+          console.error(
+            `  ❌ Allergen "${allergenId}" dans ${remedy.name} (db.json) n'existe pas dans allergensList`,
+          );
+          errors++;
+        }
+      });
+    }
+  });
+
+  if (errors === 0) {
+    console.log(
+      `  ✅ Tous les allergènes sont valides (${validAllergenIds.size} allergènes, ${dbAllergens.size} utilisés dans db.json)\n`,
+    );
+  }
+}
+
+// ==================== 7. VÉRIFIER STRUCTURE DES SYNONYMES ====================
+
+console.log("📝 Vérification 7: Structure des synonymes...");
+
+let synonymCount = 0;
+let invalidSynonyms = 0;
+
+for (const [key, values] of Object.entries(synonyms)) {
+  if (Array.isArray(values)) {
+    synonymCount += values.length;
+  } else {
+    console.error(`  ❌ Valeur invalide pour "${key}": doit être un array`);
+    invalidSynonyms++;
+  }
+}
+
+if (invalidSynonyms === 0) {
+  console.log(
+    `  ✅ Structure correcte: ${synonymCount} synonymes mappés au total\n`,
+  );
+} else {
+  errors += invalidSynonyms;
+}
+
+// ==================== 8. STATISTIQUES ====================
 
 console.log("📊 Statistiques :");
 console.log(
   `  • symptomList.json     : ${symptomList.length} symptômes uniques`,
 );
 console.log(
-  `  • synonymsSymptomList  : ${Object.keys(synonyms).length} mappings`,
+  `  • synonymsSymptomList  : ${Object.keys(synonyms).length} mappings (${synonymCount} synonymes)`,
 );
 console.log(`  • db.json              : ${db.length} remèdes`);
 console.log(`  • Symptômes uniques (db): ${dbSymptoms.size} symptômes`);
+console.log(`  • allergensList.json   : ${allergensList.length} allergènes`);
 
-// ==================== 7. RÉSULTAT FINAL ====================
+// ==================== 9. RÉSULTAT FINAL ====================
 
 console.log("\n" + "=".repeat(60));
 if (errors === 0 && warnings === 0) {

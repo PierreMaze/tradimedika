@@ -101,23 +101,27 @@ export default function SettingsModal({ isOpen, onClose }) {
             transition={{ duration: 0.2 }}
           >
             {/* Header */}
-            <div className="mb-6 flex items-center justify-between border-b border-neutral-200 pb-4 dark:border-neutral-700">
-              <h2
-                id="settings-modal-title"
-                className="text-dark dark:text-light flex items-center gap-2 text-lg font-semibold"
-              >
-                <IoMdSettings className="text-xl" />
-                {BUTTON_SETTINGS}
-              </h2>
-              <button
-                onClick={onClose}
-                aria-label={ARIA_CLOSE}
-                className="cursor-pointer rounded-lg bg-neutral-600/90 p-1.5 text-white transition-colors hover:bg-red-700 dark:bg-neutral-500 dark:text-white dark:hover:bg-red-800"
-              >
-                <IoMdClose className="text-2xl" />
-              </button>
+            <div className="mb-6 border-b border-neutral-200 pb-4 dark:border-neutral-700">
+              <div className="flex items-center justify-between">
+                <h2
+                  id="settings-modal-title"
+                  className="text-dark dark:text-light flex items-center gap-2 text-lg font-semibold"
+                >
+                  <IoMdSettings className="text-xl" />
+                  {BUTTON_SETTINGS}
+                </h2>
+                <button
+                  onClick={onClose}
+                  aria-label={ARIA_CLOSE}
+                  className="cursor-pointer rounded-lg bg-neutral-600/90 p-1.5 text-white transition-colors hover:bg-red-700 dark:bg-neutral-500 dark:text-white dark:hover:bg-red-800"
+                >
+                  <IoMdClose className="text-2xl" />
+                </button>
+              </div>
+              <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+                Vos préférences sont sauvegardées automatiquement
+              </p>
             </div>
-
             {/* Settings sections */}
             <div className="space-y-6">
               {/* Theme section */}

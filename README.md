@@ -15,7 +15,7 @@
 
 [🌐 **Voir le site**](https://pierremaze.github.io/tradimedika/) • [🐛 **Signaler un bug**](https://github.com/PierreMaze/) • [💬 **Discuter**](https://www.linkedin.com/in/pierremazelaygue/)
 
-[![TRADIMEDIKA](<https://img.shields.io/badge/TRADIMEDIKA-Bêta(0.37.0)-1a1a1a?style=for-the-badge&logo=leaflet&logoColor=00bd7e>)](https://pierremaze.github.io/tradimedika/)
+[![TRADIMEDIKA](<https://img.shields.io/badge/TRADIMEDIKA-Bêta(0.40.0)-1a1a1a?style=for-the-badge&logo=leaflet&logoColor=00bd7e>)](https://pierremaze.github.io/tradimedika/)
 
 </div>
 
@@ -97,6 +97,23 @@
   - **Élevée** : Active toutes les animations (par défaut)
 - **Persistence** : Les préférences sont sauvegardées localement et restaurées automatiquement
 - **Accessibilité** : Modal avec focus trap, fermeture par Escape, et respect de `prefers-reduced-motion`
+
+### 🛡️ Gestion des Allergies
+
+- **Sélecteur d'allergies** : Recherche intelligente avec autocomplétion pour sélectionner vos allergies
+- **Filtrage automatique** : Les remèdes dangereux sont masqués automatiquement selon vos allergies
+- **Base de données enrichie** : 5 allergènes référencés avec leurs remèdes associés
+  - Agrumes, Pollen, Astéracées, Pollen d'olivier, Venin d'abeille
+- **Indicateur visuel** : Message informatif indiquant le nombre de remèdes masqués pour votre sécurité
+
+### 📜 Historique de Recherche
+
+- **Sauvegarde automatique** : Les 10 dernières recherches sont conservées localement
+- **Remèdes masqués affichés** : Le nombre de remèdes filtrés par allergies est affiché en jaune
+  - Format : "3 résultats • 2 remèdes masqués • il y a 5 min"
+- **Réutilisation rapide** : Cliquez sur une recherche pour la relancer instantanément
+- **Déduplication intelligente** : Pas de doublons, insensible à l'ordre des symptômes
+- **Gestion flexible** : Suppression individuelle ou effacement complet de l'historique
 
 ---
 

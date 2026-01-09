@@ -1,12 +1,14 @@
 // tradimedika-v1/src/pages/RemedyResult.jsx
 
-import { useCallback, useMemo, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { Link, useLocation } from "react-router-dom";
 import FilterRemedyResult from "../components/filter/FilterRemedyResult";
+import AllergyFilterInfo from "../components/info/AllergyFilterInfo";
 import RemedyResultList from "../components/remedy/RemedyResultList";
 import TagsInfoTooltip from "../components/tooltip/TagsInfoTooltip";
+import { useAllergies } from "../context/AllergiesContext";
 import db from "../data/db.json";
 import { findMatchingRemedies } from "../utils/remedyMatcher";
 import { parseAndValidateSymptoms } from "../utils/validation";
@@ -28,6 +30,7 @@ import { parseAndValidateSymptoms } from "../utils/validation";
 
 function RemedyResult() {
   const location = useLocation();
+  const { canUseRemedy } = useAllergies();
 
   // Récupérer symptômes depuis query params (priorité) ou state (fallback)
   const selectedSymptoms = useMemo(() => {
@@ -48,14 +51,48 @@ function RemedyResult() {
       : [];
   }, [location.search, location.state?.symptoms]);
 
+  // Récupérer allergies depuis query params (priorité) ou state (fallback)
+  const userAllergies = useMemo(() => {
+    // 1. Tenter de lire depuis query params
+    const searchParams = new URLSearchParams(location.search);
+    const allergiesParam = searchParams.get("allergies");
+
+    if (allergiesParam) {
+      const allergiesArray = allergiesParam.split(",").map((a) => a.trim());
+      return allergiesArray.filter(
+        (a) => typeof a === "string" && a.length > 0,
+      );
+    }
+
+    // 2. Fallback sur location.state
+    const stateAllergies = location.state?.allergies || [];
+    return Array.isArray(stateAllergies)
+      ? stateAllergies.filter((a) => typeof a === "string" && a.trim())
+      : [];
+  }, [location.search, location.state?.allergies]);
+
   // Calcul des remèdes matchés avec useMemo pour optimisation
   const matchedRemedies = useMemo(
     () => findMatchingRemedies(selectedSymptoms, db),
     [selectedSymptoms],
   );
 
+  // Filtrage par allergies (MODE STRICT : masquer les remèdes dangereux)
+  // canUseRemedy() vérifie automatiquement isFilteringEnabled
+  const safeRemedies = useMemo(() => {
+    return matchedRemedies.filter((item) => canUseRemedy(item.remedy));
+  }, [matchedRemedies, canUseRemedy]);
+
+  // Calculer le nombre de remèdes filtrés
+  const filteredCount = matchedRemedies.length - safeRemedies.length;
+
   // État uniquement pour les remèdes filtrés par les tags
-  const [filteredRemedies, setFilteredRemedies] = useState(matchedRemedies);
+  const [filteredRemedies, setFilteredRemedies] = useState(safeRemedies);
+
+  // Synchroniser filteredRemedies avec safeRemedies (quand allergies changent)
+  useEffect(() => {
+    setFilteredRemedies(safeRemedies);
+  }, [safeRemedies]);
 
   // useCallback pour éviter re-renders en cascade dans FilterRemedyResult
   const handleFilterChange = useCallback((remedies) => {
@@ -111,7 +148,7 @@ function RemedyResult() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
-        className="mb-6 flex items-center gap-3"
+        className="flex items-center gap-3"
       >
         <Link
           to="/"
@@ -133,36 +170,42 @@ function RemedyResult() {
           </svg>
         </Link>
       </motion.div>
-      <div className="text-dark dark:text-light flex flex-col items-center text-center transition duration-300 ease-in-out">
+      <div className="text-dark dark:text-light flex flex-col items-center gap-y-4 text-center transition duration-300 ease-in-out">
         {/* Titre principal */}
-        <h1 className="mb-6 text-3xl font-bold lg:text-4xl">
+        <h1 className="text-3xl font-bold lg:text-4xl">
           Résultats des Remèdes
         </h1>
 
         {/* Sous-titre avec symptômes sélectionnés */}
         {selectedSymptoms.length > 0 && (
-          <p className="mb-6 text-center text-base text-neutral-600 lg:text-lg dark:text-neutral-400">
-            Remèdes naturels pour:{" "}
-            <span className="font-semibold text-emerald-600 dark:text-emerald-500">
+          <p className="text-center text-base text-neutral-600 lg:text-lg dark:text-neutral-400">
+            Remèdes naturels pour :{" "}
+            <span className="font-semibold text-emerald-600 dark:text-emerald-400">
               {selectedSymptoms.join(", ")}
             </span>
           </p>
         )}
 
-        {/* Filtres par tags (seulement si des remèdes ont été trouvés) */}
-        {matchedRemedies.length > 0 && (
+        {/* Message d'information si des remèdes sont masqués par filtrage allergies */}
+        <AllergyFilterInfo
+          filteredCount={filteredCount}
+          userAllergies={userAllergies}
+        />
+
+        {/* Filtres par tags (seulement si des remèdes safe ont été trouvés) */}
+        {safeRemedies.length > 0 && (
           <FilterRemedyResult
             key={selectedSymptoms.join("-")}
-            matchedRemedies={matchedRemedies}
+            matchedRemedies={safeRemedies}
             onFilterChange={handleFilterChange}
           />
         )}
 
         {/* Compteur de résultats (seulement si des remèdes sont affichés après filtrage) */}
         {/* aria-live pour annoncer les changements aux lecteurs d'écran */}
-        {filteredRemedies.length > 0 && matchedRemedies.length > 0 && (
+        {filteredRemedies.length > 0 && safeRemedies.length > 0 && (
           <p
-            className="mb-6 text-lg text-neutral-600 dark:text-neutral-400"
+            className="text-lg text-neutral-600 dark:text-neutral-400"
             role="status"
             aria-live="polite"
             aria-atomic="true"
@@ -178,7 +221,7 @@ function RemedyResult() {
         {/* Liste des remèdes ou état vide */}
         <RemedyResultList
           remedies={filteredRemedies}
-          hasMatchingRemedies={matchedRemedies.length > 0}
+          hasMatchingRemedies={safeRemedies.length > 0}
           selectedSymptoms={selectedSymptoms}
         />
       </div>

@@ -1,9 +1,9 @@
 // tradimedika-v1/src/components/sections/Hero.jsx
 import { AnimatePresence, motion } from "framer-motion";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 import { GiSprout } from "react-icons/gi";
-import { IoMdArrowForward } from "react-icons/io";
+import { IoMdArrowDropdown, IoMdArrowForward } from "react-icons/io";
 import { RiHistoryLine } from "react-icons/ri";
 
 import { BUTTON_HISTORY } from "../../constants/buttonLabels";
@@ -11,10 +11,12 @@ import {
   BUTTON_PRIMARY_STYLES,
   BUTTON_SECONDARY_STYLES,
 } from "../../constants/buttonStyles";
+import { useAllergies } from "../../context/AllergiesContext";
 import { useScrollOnMobileFocus } from "../../hooks/useScrollOnMobileFocus";
 import { useSearchHistory } from "../../hooks/useSearchHistory";
 import { useSymptomSubmit } from "../../hooks/useSymptomSubmit";
 import { useSymptomTags } from "../../hooks/useSymptomTags";
+import AllergySelector from "../input/AllergySelector";
 import SymptomsSelector from "../input/SymptomsSelector";
 import SearchHistoryModal from "../search/SearchHistoryModal";
 import ListSymptomTag from "../tag/ListSymptomTag";
@@ -30,9 +32,21 @@ function SymptomsSection() {
   const { selectedSymptoms, addSymptom, removeSymptom, setSelectedSymptoms } =
     useSymptomTags();
   const { history, addSearch, removeSearch, clearHistory } = useSearchHistory();
+  const {
+    userAllergies,
+    setAllergies,
+    isFilteringEnabled,
+    enableFiltering,
+    disableFiltering,
+  } = useAllergies();
   const { handleSubmit, isLoading, results, hasSubmitted } =
     useSymptomSubmit(addSearch);
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
+  const [isAllergySectionExpanded, setIsAllergySectionExpanded] =
+    useState(false);
+
+  // Ref pour la section allergies complète
+  const allergySectionRef = useRef(null);
 
   // Mobile scroll au focus de l'input
   const containerRef = useRef(null);
@@ -48,28 +62,146 @@ function SymptomsSection() {
   }, [handleScrollToContainer]);
 
   const onSubmit = useCallback(() => {
-    handleSubmit(selectedSymptoms);
-  }, [handleSubmit, selectedSymptoms]);
+    handleSubmit(selectedSymptoms, userAllergies, isFilteringEnabled);
+  }, [handleSubmit, selectedSymptoms, userAllergies, isFilteringEnabled]);
 
   // Relancer une recherche depuis l'historique
   const handleSearchSelect = useCallback(
     (search) => {
       // Remplacer les symptômes actuels par ceux de l'historique
       setSelectedSymptoms(search.symptoms);
-      // Soumettre automatiquement avec les symptômes passés explicitement
-      handleSubmit(search.symptoms);
+      // Restaurer les allergies depuis l'historique (rétrocompatibilité avec ??)
+      const historicAllergies = search.allergies ?? [];
+      setAllergies(historicAllergies);
+      // Si l'historique contient des allergies, cela signifie que le filtrage était activé
+      const wasFilteringEnabled = historicAllergies.length > 0;
+      if (wasFilteringEnabled) {
+        enableFiltering();
+      }
+      // Soumettre automatiquement avec les symptômes, allergies et état filtrage
+      handleSubmit(search.symptoms, historicAllergies, wasFilteringEnabled);
     },
-    [handleSubmit, setSelectedSymptoms],
+    [handleSubmit, setSelectedSymptoms, setAllergies, enableFiltering],
   );
 
   const handleCloseHistory = useCallback(() => {
     setIsHistoryOpen(false);
   }, []);
 
+  // Fermer la section allergies au clic extérieur
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isAllergySectionExpanded &&
+        allergySectionRef.current &&
+        !allergySectionRef.current.contains(event.target)
+      ) {
+        setIsAllergySectionExpanded(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isAllergySectionExpanded]);
+
   const isDisabled = selectedSymptoms.length === 0;
 
   return (
     <div ref={containerRef} className="flex w-full flex-col gap-y-4">
+      {/* Section allergies avec checkbox + dropdown */}
+      <div
+        ref={allergySectionRef}
+        className="relative mx-auto w-full max-w-2xl space-y-3"
+      >
+        {/* Checkbox + Badge + Dropdown button */}
+        <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
+          <label className="flex cursor-pointer items-center gap-2">
+            <input
+              type="checkbox"
+              checked={isFilteringEnabled}
+              onChange={() => {
+                if (isFilteringEnabled) {
+                  // Décocher : désactiver le filtrage + fermer le dropdown
+                  disableFiltering();
+                  setIsAllergySectionExpanded(false);
+                } else {
+                  // Cocher : activer le filtrage + ouvrir le dropdown
+                  enableFiltering();
+                  setIsAllergySectionExpanded(true);
+                }
+              }}
+              className="h-4 w-4 cursor-pointer border-neutral-300 text-emerald-600 accent-emerald-700 focus:ring-2 dark:border-neutral-600 dark:accent-emerald-500"
+              aria-label="Activer le filtrage des allergies"
+            />
+            <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+              Vous avez des allergies ?
+            </span>
+          </label>
+          {/* Compteur + Bouton (visible uniquement si checkbox cochée) */}
+          {isFilteringEnabled && (
+            <div className="flex flex-row">
+              {/* Badge compteur (visible quand allergies > 0) */}
+              {userAllergies.length > 0 && (
+                <motion.span
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  exit={{ scale: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="flex items-center gap-1 rounded-md bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-700 lg:text-sm 2xl:text-base dark:bg-emerald-900/40 dark:text-emerald-300"
+                >
+                  {userAllergies.length} allergie
+                  {userAllergies.length > 1 ? "s" : ""}
+                </motion.span>
+              )}
+
+              {/* Bouton dropdown pour expand/collapse */}
+              <button
+                onClick={() =>
+                  setIsAllergySectionExpanded(!isAllergySectionExpanded)
+                }
+                aria-expanded={isAllergySectionExpanded}
+                aria-label={
+                  isAllergySectionExpanded
+                    ? "Masquer les allergies"
+                    : "Afficher les allergies"
+                }
+                className="ml-auto flex cursor-pointer items-center gap-1 rounded-sm px-2 py-1 text-neutral-600 transition-colors hover:text-emerald-700 dark:text-neutral-400 dark:hover:text-emerald-500"
+              >
+                <span className="text-xs font-medium lg:text-sm 2xl:text-base">
+                  {isAllergySectionExpanded ? "Masquer" : "Afficher"}
+                </span>
+                <motion.div
+                  animate={{ rotate: isAllergySectionExpanded ? 180 : 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <IoMdArrowDropdown className="text-lg" />
+                </motion.div>
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Section collapse avec AllergySelector */}
+        <AnimatePresence>
+          {isAllergySectionExpanded && (
+            <motion.div
+              initial={{ opacity: 0, scaleY: 0 }}
+              animate={{ opacity: 1, scaleY: 1 }}
+              exit={{ opacity: 0, scaleY: 0 }}
+              transition={{ duration: 0.3 }}
+              style={{ transformOrigin: "top" }}
+            >
+              <div className="dark:bg-dark rounded-lg border-2 border-dashed border-emerald-600 bg-neutral-50 p-4 dark:border-emerald-500">
+                <AllergySelector />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
       <SymptomsSelector
         onSymptomSelect={addSymptom}
         onRemoveSymptom={removeSymptom}
@@ -83,7 +215,6 @@ function SymptomsSection() {
         symptoms={selectedSymptoms}
         onRemoveSymptom={removeSymptom}
       />
-
       {/* Compteur de symptômes */}
       {selectedSymptoms.length > 0 && (
         <motion.div
@@ -100,7 +231,7 @@ function SymptomsSection() {
       )}
 
       {/* Boutons de soumission et historique */}
-      <div className="mt-4 flex w-full flex-col items-center gap-3 sm:flex-row sm:justify-center lg:mt-6 2xl:mt-8">
+      <div className="flex w-full flex-col items-center justify-center gap-3 sm:flex-row lg:mt-2">
         {/* Bouton principal de recherche */}
         <motion.button
           onClick={onSubmit}
@@ -115,10 +246,10 @@ function SymptomsSection() {
           whileHover={!isDisabled && !isLoading}
           whileTap={!isDisabled && !isLoading}
           transition={{ duration: 0.2 }}
-          className={`flex w-full items-center justify-center gap-2 rounded-lg px-7 py-3.5 font-semibold shadow-lg transition duration-300 ease-in-out sm:max-w-xs lg:text-base 2xl:text-lg ${
+          className={`flex min-w-[280px] items-center justify-center gap-2 rounded-lg px-7 py-3.5 font-semibold shadow-lg transition duration-300 ease-in-out lg:text-base 2xl:text-lg ${
             isDisabled || isLoading
-              ? "cursor-not-allowed bg-neutral-400 opacity-50 dark:bg-neutral-600"
-              : BUTTON_PRIMARY_STYLES
+              ? "bg-neutral-400 opacity-50 dark:bg-neutral-600"
+              : `cursor-pointer ${BUTTON_PRIMARY_STYLES}`
           }`}
         >
           {isLoading ? (
@@ -150,14 +281,14 @@ function SymptomsSection() {
           whileHover
           whileTap
           transition={{ duration: 0.2 }}
-          className={`flex w-full items-center justify-center gap-2 rounded-lg px-7 py-3.5 font-semibold shadow-lg transition duration-300 ease-in-out lg:w-fit lg:text-base 2xl:text-lg ${BUTTON_SECONDARY_STYLES}`}
+          className={`group flex min-w-[280px] cursor-pointer items-center justify-center gap-2 rounded-lg px-7 py-3.5 font-semibold shadow-lg transition duration-300 ease-in-out lg:text-base 2xl:text-lg ${BUTTON_SECONDARY_STYLES}`}
         >
           <span>
             <RiHistoryLine />
           </span>
           <span>{BUTTON_HISTORY}</span>
           {history.length > 0 && (
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-600 text-xs text-white dark:bg-emerald-500">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-600 text-xs text-white transition-colors group-hover:bg-white group-hover:text-emerald-600 dark:bg-emerald-500 dark:group-hover:text-emerald-400">
               {history.length}
             </span>
           )}

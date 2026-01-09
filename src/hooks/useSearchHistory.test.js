@@ -178,10 +178,10 @@ describe("useSearchHistory", () => {
       expect(result.current.history[0].resultCount).toBe(4);
     });
 
-    it("should limit history to 5 entries (FIFO)", () => {
+    it("should limit history to 10 entries (FIFO)", () => {
       const { result } = renderHook(() => useSearchHistory());
 
-      // Ajouter 6 recherches différentes
+      // Ajouter 11 recherches différentes
       act(() => {
         result.current.addSearch(["symptom1"], 1);
       });
@@ -200,10 +200,25 @@ describe("useSearchHistory", () => {
       act(() => {
         result.current.addSearch(["symptom6"], 6);
       });
+      act(() => {
+        result.current.addSearch(["symptom7"], 7);
+      });
+      act(() => {
+        result.current.addSearch(["symptom8"], 8);
+      });
+      act(() => {
+        result.current.addSearch(["symptom9"], 9);
+      });
+      act(() => {
+        result.current.addSearch(["symptom10"], 10);
+      });
+      act(() => {
+        result.current.addSearch(["symptom11"], 11);
+      });
 
-      expect(result.current.history).toHaveLength(5);
-      expect(result.current.history[0].symptoms).toEqual(["symptom6"]);
-      expect(result.current.history[4].symptoms).toEqual(["symptom2"]);
+      expect(result.current.history).toHaveLength(10);
+      expect(result.current.history[0].symptoms).toEqual(["symptom11"]);
+      expect(result.current.history[9].symptoms).toEqual(["symptom2"]);
       // "symptom1" devrait avoir été supprimé (FIFO)
     });
 
