@@ -1,7 +1,7 @@
 {
   "name": "tradimedika",
   "private": true,
-  "version": "0.37.0",
+  "version": "0.39.0",
   "type": "module",
   "homepage": "http://pierremaze.github.io/tradimedika",
   "prettier": {
@@ -19,6 +19,7 @@
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
     "validate-data": "node scripts/validateData.js",
+    "extract-allergens": "node scripts/extractAllergensFromDb.js",
     "clean": "rm -rf node_modules dist && clear",
     "deploy": "gh-pages -d dist -f",
     "ccu": "ccusage blocks --live",
