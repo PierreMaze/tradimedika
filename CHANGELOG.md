@@ -2,6 +2,200 @@
 
 ---
 
+## [0.39.0] - 2026-01-09
+
+### <u>Fixed:</u>
+
+- **Bug critique : Sélection d'allergies impossible** (AllergySelector.jsx)
+  - Race condition entre `onBlur` et `onClick` résolue avec `onMouseDown` + `e.preventDefault()`
+  - Le dropdown se fermait avant que le clic sur l'allergie ne soit traité
+  - Conversion stricte `String()` pour le matching des IDs d'allergènes (lignes 52, 230)
+  - Fix : Dropdown ne se fermait pas au clic extérieur → Listener `mousedown` sur `document`
+
+- **IDs allergensList.json incompatibles**
+  - Changement d'IDs numériques ("0", "1", "2") vers kebab-case ("citrus", "pollen", "asteraceae")
+  - Migration automatique dans `AllergiesContext` pour nettoyer les anciens IDs du localStorage
+  - Guard `isMounted` pour exécuter la migration une seule fois
+
+- **Section allergies (Hero.jsx)**
+  - Fermeture automatique au clic extérieur de la card allergies (useEffect + `allergySectionRef`)
+  - Affichage conditionnel : compteur et bouton "Afficher/Masquer" visibles uniquement si checkbox cochée
+  - Ouverture automatique de la section lors du cochage (déjà implémenté, confirmé)
+
+### <u>Added:</u>
+
+- **Script d'extraction automatique des allergènes**
+  - `scripts/extractAllergensFromDb.js` : Compare `db.json` et `allergensList.json`
+  - Détecte automatiquement les nouveaux allergènes dans le champ `allergens[]`
+  - Évite les doublons et génère la structure JSON automatiquement
+  - Descriptions temporaires "À compléter : description pour {id}"
+  - Script npm : `pnpm extract-allergens`
+
+- **Amélioration historique de recherche**
+  - Limite augmentée de 5 à 10 recherches (`MAX_HISTORY_ENTRIES = 10`)
+  - Texte explicatif dans SearchHistoryModal.jsx : "Les 10 dernières recherches sont conservées automatiquement"
+  - Hover amélioré sur le badge compteur du bouton historique :
+    - Light mode : fond blanc + texte emerald-600
+    - Dark mode : fond neutral-800 + texte emerald-400
+    - Transition fluide avec `transition-colors`
+
+### <u>Changed:</u>
+
+- **Scripts de validation consolidés**
+  - Fusion de `validateData.js` et `validate-symptoms.js` en un seul fichier
+  - Ajout de "Vérification 7: Structure des synonymes" (validation des arrays)
+  - 7 vérifications au total : accents, tirets, doublons, cohérence, normalisation, allergènes, synonymes
+  - Script npm unique : `pnpm validate-data`
+
+- **Documentation du hook useLocalStorage**
+  - Commentaire JSDoc mis à jour : limite de 10 entrées (était 5)
+
+### <u>Tests:</u>
+
+- ✅ **622/630 tests unitaires passés** (8 échecs pré-existants non liés aux modifications)
+- ✅ **Validation données** : 7/7 vérifications réussies, 5 allergènes validés
+- ✅ **ESLint** : Aucune erreur
+- ✅ **Build production** : 461.72 kB (gzippé à 150.89 kB)
+
+### <u>Statistiques:</u>
+
+- 35 symptômes uniques
+- 31 mappings de synonymes (91 synonymes au total)
+- 14 remèdes
+- 5 allergènes validés
+- 10 recherches max dans l'historique
+
+---
+
+## [0.38.0] - 2026-01-09
+
+### <u>Added:</u>
+
+- **Système de gestion des allergies** : Nouvelle fonctionnalité majeure pour filtrer les remèdes dangereux
+  - `allergensList.json` : Liste normalisée de 5 allergènes (IDs kebab-case)
+    - `citrus` (Agrumes), `pollen` (Pollen), `asteraceae` (Astéracées)
+    - `pollen-olive` (Pollen d'olivier), `bee-venom` (Venin d'abeille)
+  - Migration complète de `db.json` : allergènes normalisés de strings vers IDs
+  - Validation étendue dans `validateData.js` pour vérifier la cohérence des allergènes
+- **AllergiesContext** : Nouveau context React pour gérer les allergies utilisateur
+  - Provider `AllergiesProvider` avec double persistence localStorage :
+    - `tradimedika-allergies` : Liste des allergies
+    - `tradimedika-allergies-filtering-enabled` : État du filtrage
+  - Hook `useAllergies()` avec API complète :
+    - `toggleAllergen(id)` : Ajouter/retirer un allergène
+    - `setAllergies(array)` : Définir liste complète
+    - `clearAllergies()` : Effacer toutes les allergies
+    - `hasAllergen(id)` : Vérifier présence d'un allergène
+    - `canUseRemedy(remedy)` : Vérification de sécurité avec contrôle du filtrage
+    - `enableFiltering()` / `disableFiltering()` / `toggleFiltering()` : Contrôle du filtrage
+  - 20 tests unitaires complets (contexte de base + états de filtrage)
+  - Pattern identique à `PerformanceContext` pour cohérence
+- **AllergySelector.jsx** : Composant de sélection avec autocomplétion
+  - Input avec dropdown de suggestions (pattern identique à `SymptomsSelector`)
+  - Recherche avec filtrage en temps réel et normalisation (accents, casse)
+  - Navigation clavier complète (ArrowUp/Down, Enter, Escape, Backspace)
+  - Pills sélectionnées affichées avec style `BUTTON_PRIMARY_STYLES` (vert emerald)
+  - Fermeture automatique du dropdown au clic extérieur ou blur
+  - Nombre d'allergies illimité
+  - 11 tests unitaires (render, search, select, keyboard, blur, exclusion)
+- **AllergyFilterInfo.jsx** : Message d'information pour remèdes filtrés
+  - Affichage bleu avec icône alerte (`IoMdAlert`)
+  - Compteur de remèdes masqués avec liste des allergènes concernés
+  - `role="status"` et `aria-live="polite"` pour lecteurs d'écran
+  - 10 tests unitaires (render, hide, singular/plural, allergen names)
+- **Intégration Home (Hero.jsx)** : Section allergies avec contrôle de filtrage
+  - Checkbox contrôle uniquement `isFilteringEnabled` (ne supprime PAS les allergies)
+  - Badge compteur "X allergies" visible quand `isFilteringEnabled` est true
+  - Dropdown/accordion avec bouton chevron (fermé par défaut)
+  - Section collapse avec `AnimatePresence` (scaleY: 0 → 1, transformOrigin: top)
+  - Restauration automatique des allergies ET du filtrage depuis historique
+  - Boutons de soumission et historique centrés avec largeur minimale de 280px
+- **Historique de recherche étendu** : Support du champ `allergies` avec contrôle de filtrage
+  - `useSearchHistory.js` : Signature modifiée `addSearch(symptoms, resultCount, allergies = [])`
+  - Rétrocompatibilité totale : `entry.allergies ?? []` partout
+  - `SearchHistoryItem.jsx` :
+    - Ligne 1 : "Symptômes :" + pills vertes
+    - Ligne 2 : "Allergies :" + pills jaunes/rouges (si présentes)
+    - Descriptions centrées verticalement avec `items-center`
+  - Les allergies ne sont enregistrées dans l'historique QUE si le filtrage est activé
+- **Filtrage strict des résultats (RemedyResult.jsx)** :
+  - Extraction des allergies depuis URL params (`?allergies=citrus,pollen`) ou location.state
+  - Filtrage en 2 temps : matching symptômes → filtrage allergies via `canUseRemedy()`
+  - Mode strict : masquage complet des remèdes avec allergènes dangereux
+  - Affichage de `AllergyFilterInfo` si remèdes masqués
+  - Compteur précis de remèdes filtrés
+- **Navigation avec allergies conditionnelle** :
+  - `useSymptomSubmit.js` : Paramètres étendus `handleSubmit(symptoms, allergies, isFilteringEnabled)`
+  - Les allergies ne sont ajoutées aux query params QUE si `isFilteringEnabled === true`
+  - Query params conditionnels : `/remedes?symptoms=X&allergies=Y,Z` (si filtrage actif)
+  - Location state avec fallback : `{ symptoms: [], allergies: [] }`
+  - 2 nouveaux tests : filtrage activé vs désactivé
+
+### <u>Changed:</u>
+
+- **db.json** : Migration des allergènes vers IDs normalisés
+  - `"agrumes"` → `"citrus"`
+  - `"asteracees"` → `"asteraceae"`
+  - `"pollen olive"` → `"pollen-olive"`
+  - `"venin abeille"` → `"bee-venom"`
+- **main.jsx** : Hiérarchie des providers étendue
+  - `AllergiesProvider` ajouté entre `PerformanceProvider` et `RouterProvider`
+  - Ordre final : `HelmetProvider` > `ErrorBoundary` > `ThemeProvider` > `PerformanceProvider` > `AllergiesProvider` > `RouterProvider`
+
+### <u>Tests:</u>
+
+- **Total : 365 tests passants** (30+ fichiers de test)
+- Nouveaux tests unitaires :
+  - `AllergiesContext.test.jsx` : 20 tests (Provider, toggle, set, clear, has, canUse, filtering states, persistence)
+  - `AllergySelector.test.jsx` : 11 tests (render, search, select, keyboard navigation, blur, dropdown, exclusion)
+  - `AllergyFilterInfo.test.jsx` : 10 tests (render, hide, messages, singular/plural, allergen names)
+  - `useSymptomSubmit.test.js` : 11 tests (dont 2 nouveaux pour filtrage activé/désactivé)
+  - `useSearchHistory.test.js` : Validation du champ `allergies` dans toutes les entrées
+- Coverage maintenu > 80%
+
+### <u>Data & Validation:</u>
+
+- **allergensList.json** : Structure normalisée
+  ```json
+  {
+    "id": "citrus",
+    "name": "Agrumes",
+    "description": "Citrons, oranges, pamplemousses..."
+  }
+  ```
+- **validateData.js** : Section 6 ajoutée
+  - Vérification du format kebab-case des IDs allergènes
+  - Cross-check : tous les allergènes de `db.json` doivent exister dans `allergensList.json`
+  - Erreurs explicites avec nom du remède concerné
+- **Rétrocompatibilité** : Pattern `?? []` utilisé partout pour gérer les anciennes entrées d'historique sans champ `allergies`
+
+### <u>Accessibility:</u>
+
+- Checkbox allergies : `aria-label`, keyboard navigation
+- Pills allergies : `aria-pressed`, `role="button"`, `title` tooltips
+- Message filtrage : `role="status"`, `aria-live="polite"`
+- Animations : respectent `prefersReducedMotion` via hook `useReducedMotion()`
+- Dark mode : tous les composants allergies supportent le mode sombre
+
+### <u>Design System:</u>
+
+- **Couleurs allergies** : Emerald/Vert (identique aux symptômes)
+  - Pills : `BUTTON_PRIMARY_STYLES` = `bg-emerald-600 text-white hover:bg-emerald-700`
+  - Dark mode : `dark:bg-emerald-700 dark:hover:bg-emerald-600`
+  - Input focus : `ring-emerald-600 dark:ring-emerald-500`
+  - Dropdown selected : `bg-emerald-600 text-white`
+- **Pills allergies dans l'historique** : Jaune/Rouge pour distinction
+  - Pills : `bg-red-50 text-yellow-700`
+  - Dark mode : `dark:bg-yellow-900/30 dark:text-yellow-300`
+- **Message info filtrage** : Bleu
+  - `bg-blue-50 border-blue-500 text-blue-900`
+  - Dark mode : `bg-blue-900/30 border-blue-400 text-blue-300`
+- **Badge compteur** : Emerald
+  - `bg-emerald-600 text-white dark:bg-emerald-500`
+- **Cohérence visuelle** : Alignement complet avec symptômes (TailwindCSS 4.1)
+
+---
+
 ## [0.37.0] - 2026-01-07
 
 ### <u>Added:</u>
