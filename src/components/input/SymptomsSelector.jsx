@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { HiExclamationTriangle, HiMagnifyingGlass } from "react-icons/hi2";
 import symptomsData from "../../data/symptomList.json";
 import synonymsData from "../../data/synonymsSymptomList.json";
+import { useClickOutside } from "../../hooks/useClickOutside";
 import { createLogger } from "../../utils/logger";
 import { normalizeForMatching } from "../../utils/normalizeSymptom";
 
@@ -94,6 +95,7 @@ export default function SymptomsSelector({
   const [inputValue, setInputValue] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [isForcedClosed, setIsForcedClosed] = useState(false); // Pour gérer la fermeture manuelle
+  const containerRef = useRef(null);
   const inputRef = useRef(null);
   const listRef = useRef(null);
 
@@ -281,28 +283,18 @@ export default function SymptomsSelector({
     }
   }, [selectedIndex]);
 
-  // Fermeture au clic extérieur
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        inputRef.current &&
-        !inputRef.current.contains(event.target) &&
-        listRef.current &&
-        !listRef.current.contains(event.target)
-      ) {
-        setIsForcedClosed(true); // Ferme le dropdown manuellement
-        setSelectedIndex(-1);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  // Fermeture au clic extérieur (refactoré avec hook réutilisable)
+  useClickOutside(
+    containerRef,
+    () => {
+      setIsForcedClosed(true); // Ferme le dropdown manuellement
+      setSelectedIndex(-1);
+    },
+    true, // Toujours actif
+  );
 
   return (
-    <div className="relative mx-auto w-full max-w-2xl">
+    <div ref={containerRef} className="relative mx-auto w-full max-w-2xl">
       {/* Input avec icône de recherche */}
       <div className="border-dark/10 relative flex items-center rounded-lg border shadow-sm dark:border-neutral-700">
         <HiMagnifyingGlass className="text-dark/60 dark:text-light absolute left-4 text-xl transition duration-300 ease-in-out" />

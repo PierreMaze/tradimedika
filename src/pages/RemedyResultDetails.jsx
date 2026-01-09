@@ -27,11 +27,26 @@ import { getRemedyBySlug } from "../utils/remedyMatcher";
  * Issue #49: Implementation of detailed remedy page
  */
 
+/**
+ * Validates that an image URL uses HTTPS protocol
+ * @param {string} url - The URL to validate
+ * @returns {boolean} True if URL is valid and uses HTTPS
+ */
+function isValidImageUrl(url) {
+  if (!url || typeof url !== "string") return false;
+  return /^https:\/\/.+/.test(url);
+}
+
 function RemedyResultDetails() {
   const { slug } = useParams();
   const location = useLocation();
   const selectedSymptoms = location.state?.symptoms || [];
   const remedy = getRemedyBySlug(slug, db);
+
+  // Validate and sanitize image URL (use placeholder if invalid)
+  const safeImageUrl = isValidImageUrl(remedy?.image)
+    ? remedy.image
+    : "https://via.placeholder.com/400x400?text=Image+non+disponible";
 
   // Si le remède n'existe pas, afficher composant NotFound
   if (!remedy) {
@@ -67,14 +82,14 @@ function RemedyResultDetails() {
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:title" content={pageTitle} />
         <meta property="og:description" content={pageDescription} />
-        {remedy.image && <meta property="og:image" content={remedy.image} />}
+        <meta property="og:image" content={safeImageUrl} />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content={canonicalUrl} />
         <meta name="twitter:title" content={pageTitle} />
         <meta name="twitter:description" content={pageDescription} />
-        {remedy.image && <meta name="twitter:image" content={remedy.image} />}
+        <meta name="twitter:image" content={safeImageUrl} />
       </Helmet>
 
       <motion.article
@@ -111,7 +126,7 @@ function RemedyResultDetails() {
           <div className="lg:col-span-2 2xl:col-span-1">
             <div className="aspect-square w-full overflow-hidden rounded-lg bg-neutral-300 shadow-md dark:bg-neutral-700">
               <motion.img
-                src={remedy.image}
+                src={safeImageUrl}
                 alt={`Illustration de ${remedy.name}`}
                 className="mx-auto h-full w-2/3 object-scale-down p-6 lg:w-3/4 2xl:w-4/5"
                 loading="lazy"

@@ -7,6 +7,7 @@ import { IoMdClose } from "react-icons/io";
 import { BUTTON_PRIMARY_STYLES } from "../../constants/buttonStyles";
 import { useAllergies } from "../../context/AllergiesContext";
 import allergensList from "../../data/allergensList.json";
+import { useClickOutside } from "../../hooks/useClickOutside";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 import { normalizeForMatching } from "../../utils/normalizeSymptom";
 
@@ -187,26 +188,15 @@ export default function AllergySelector({
     }
   }, [selectedIndex]);
 
-  // FIX: Fermeture au clic extérieur (en dehors de l'input + dropdown)
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        dropdownContainerRef.current &&
-        !dropdownContainerRef.current.contains(event.target)
-      ) {
-        setIsForcedClosed(true);
-        setSelectedIndex(-1);
-      }
-    };
-
-    // Ajouter le listener sur le document
-    document.addEventListener("mousedown", handleClickOutside);
-
-    // Cleanup pour éviter les memory leaks
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []); // Tableau vide = s'exécute une seule fois au montage
+  // FIX: Fermeture au clic extérieur (refactoré avec hook réutilisable)
+  useClickOutside(
+    dropdownContainerRef,
+    () => {
+      setIsForcedClosed(true);
+      setSelectedIndex(-1);
+    },
+    true, // Toujours actif
+  );
 
   return (
     <div ref={containerRef} className="space-y-3">

@@ -1,6 +1,6 @@
 // tradimedika-v1/src/components/sections/Hero.jsx
 import { AnimatePresence, motion } from "framer-motion";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 import { GiSprout } from "react-icons/gi";
 import { IoMdArrowDropdown, IoMdArrowForward } from "react-icons/io";
@@ -12,6 +12,7 @@ import {
   BUTTON_SECONDARY_STYLES,
 } from "../../constants/buttonStyles";
 import { useAllergies } from "../../context/AllergiesContext";
+import { useClickOutside } from "../../hooks/useClickOutside";
 import { useScrollOnMobileFocus } from "../../hooks/useScrollOnMobileFocus";
 import { useSearchHistory } from "../../hooks/useSearchHistory";
 import { useSymptomSubmit } from "../../hooks/useSymptomSubmit";
@@ -88,24 +89,12 @@ function SymptomsSection() {
     setIsHistoryOpen(false);
   }, []);
 
-  // Fermer la section allergies au clic extérieur
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        isAllergySectionExpanded &&
-        allergySectionRef.current &&
-        !allergySectionRef.current.contains(event.target)
-      ) {
-        setIsAllergySectionExpanded(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isAllergySectionExpanded]);
+  // Fermer la section allergies au clic extérieur (refactoré avec hook réutilisable)
+  useClickOutside(
+    allergySectionRef,
+    () => setIsAllergySectionExpanded(false),
+    isAllergySectionExpanded, // Actif seulement quand la section est expanded
+  );
 
   const isDisabled = selectedSymptoms.length === 0;
 
