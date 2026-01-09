@@ -1,0 +1,27 @@
+[
+  {
+    "id": "citrus",
+    "name": "Agrumes",
+    "description": "Citrons, oranges, pamplemousses, clémentines et autres agrumes"
+  },
+  {
+    "id": "pollen",
+    "name": "Pollen",
+    "description": "Pollens de graminées, arbres et plantes diverses"
+  },
+  {
+    "id": "asteraceae",
+    "name": "Astéracées",
+    "description": "Famille botanique incluant camomille, tournesol, pissenlit"
+  },
+  {
+    "id": "pollen-olive",
+    "name": "Pollen d'olivier",
+    "description": "Pollen spécifique à l'olivier"
+  },
+  {
+    "id": "bee-venom",
+    "name": "Venin d'abeille",
+    "description": "Venin d'hyménoptères (abeilles, guêpes) et produits de la ruche"
+  }
+]
