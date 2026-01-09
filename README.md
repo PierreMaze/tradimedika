@@ -45,10 +45,11 @@
 ### 🎨 Caractéristiques principales
 
 - **Design moderne** : Interface épurée avec animations fluides
-- **Performance optimisée** : Score Lighthouse - (à venir)
 - **Responsive** : Compatible mobile, tablette et desktop
-- **Accessibilité** : Conforme aux standards WCAG 2.1 AA (à venir)
-- **SEO optimisé** : Meta tags et structure sémantique (à venir)
+- **Performance** : Score Lighthouse - (92/100)
+- **Bonnes pratiques** : Compatible mobile, tablette et desktop - Score Lighthouse (94/100)
+- **Accessibilité** : Conforme aux standards WCAG 2.1 AA - Score Lighthouse (100/100)
+- **SEO optimisé** : Meta tags et structure sémantique - Score Lighthouse (100/100)
 
 ### 📚 Documentation
 
