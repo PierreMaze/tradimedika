@@ -34,7 +34,7 @@ function Disclaimer({ className = "" }) {
   return (
     <motion.div
       {...animationProps}
-      className={`w-full border-b-2 border-dashed border-amber-700/60 bg-amber-50 px-4 py-3 transition duration-300 ease-in-out lg:w-3/4 dark:border-amber-400/60 dark:bg-amber-950 ${className}`}
+      className={`w-full border-b-2 border-dashed border-amber-700/60 bg-amber-50 px-4 py-3 transition duration-300 ease-in-out lg:w-3/4 dark:border-amber-400/60 dark:bg-amber-950/80 ${className}`}
       role="alert"
       aria-live="polite"
     >
@@ -43,7 +43,7 @@ function Disclaimer({ className = "" }) {
           className="flex h-5 w-5 shrink-0 text-amber-600 transition duration-300 ease-in-out lg:h-6 lg:w-6 dark:text-amber-400"
           aria-hidden="true"
         />
-        <p className="text-xs font-medium tracking-wider text-amber-800 transition duration-300 ease-in-out lg:text-sm dark:text-amber-100">
+        <p className="text-xs font-medium tracking-wider text-amber-900 transition duration-300 ease-in-out lg:text-sm dark:text-amber-50">
           Les informations présentées sont fournies à{" "}
           <span className="font-semibold text-amber-600 dark:text-amber-400">
             titre informatif et ne remplacent pas un avis médical professionnel

@@ -3,6 +3,8 @@ import { memo } from "react";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { IoMdAlert } from "react-icons/io";
+import { HiArrowRight } from "react-icons/hi2";
 import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
 import { generateSlug } from "../../utils/remedyMatcher";
 import VerifiedTag from "../tag/VerifiedTag";
@@ -17,7 +19,7 @@ import ChildrenAgeTag from "../tag/ChildrenAgeTag";
  * - Accessible avec aria-label
  * - Optimisé avec React.memo pour éviter re-renders inutiles
  */
-function RemedyCard({ remedy, selectedSymptoms }) {
+function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
   const {
     name,
     type,
@@ -29,34 +31,52 @@ function RemedyCard({ remedy, selectedSymptoms }) {
     verifiedByProfessional,
   } = remedy;
 
+  const imageClasses = isFiltered ? "grayscale" : "";
+
+  const cardClasses = isFiltered
+    ? "opacity-70 transition-all duration-300"
+    : "";
+
+  const contentClasses = isFiltered
+    ? "grayscale hover:grayscale-0 transition-all duration-300"
+    : "";
+
+  const cardBorderClasses = isFiltered
+    ? "ring-2 ring-amber-500 hover:ring-amber-600 dark:ring-amber-500"
+    : "ring-2 ring-emerald-500 hover:ring-emerald-600 dark:ring-emerald-600";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
+      whileHover={{ scale: 1.05 }}
       transition={{ duration: 0.3 }}
+      className={cardClasses}
     >
       <Link
         to={`/remedes/${generateSlug(name)}`}
         state={{ symptoms: selectedSymptoms }}
-        aria-label={`Voir les détails de ${name}`}
+        aria-label={`Voir les détails de ${name}${isFiltered ? " (contient des allergènes)" : ""}`}
         className="block h-full"
       >
-        <div className="group h-full overflow-hidden rounded-lg bg-white shadow-md ring-2 ring-neutral-300 transition duration-300 ease-in-out hover:shadow-lg hover:ring-emerald-500 dark:bg-neutral-800 dark:ring-neutral-600">
+        <div
+          className={`group h-full overflow-hidden rounded-lg bg-white shadow-md transition duration-300 ease-in-out hover:shadow-lg dark:bg-neutral-800 ${cardBorderClasses}`}
+        >
           {/* Image */}
           {image && (
             <div className="aspect-square w-full overflow-hidden bg-neutral-50 dark:bg-neutral-700">
               <img
                 src={image}
                 alt={`Illustration de ${name}`}
-                className="mx-auto h-full w-2/3 object-scale-down p-4 transition duration-300 lg:w-3/4 2xl:w-4/5"
+                className={`mx-auto h-full w-2/3 object-scale-down p-4 transition duration-300 lg:w-3/4 2xl:w-4/5 ${imageClasses}`}
                 loading="lazy"
               />
             </div>
           )}
 
           {/* Contenu */}
-          <div className="p-6">
+          <div className={`p-6 ${contentClasses}`}>
             {/* En-tête avec nom et type */}
             <div className="mb-3 flex items-start justify-between gap-2">
               <h3 className="text-start text-xl font-bold text-neutral-900 lg:text-2xl dark:text-neutral-100">
@@ -95,9 +115,29 @@ function RemedyCard({ remedy, selectedSymptoms }) {
 
             {/* Tags de sécurité */}
             <div className="flex flex-wrap gap-2">
+              {isFiltered && (
+                <span
+                  className="inline-flex items-center gap-1.5 rounded-md bg-amber-100 px-3 py-1.5 text-xs font-semibold text-amber-800 transition duration-300 lg:text-sm dark:bg-amber-900 dark:text-amber-200"
+                  title="Ce remède contient des allergènes que vous avez déclarés"
+                  role="status"
+                  aria-live="polite"
+                >
+                  <IoMdAlert className="h-4 w-4" aria-hidden="true" />
+                  Allergène
+                </span>
+              )}
               {verifiedByProfessional && <VerifiedTag />}
               {pregnancySafe && <PregnancyTag variant="default" />}
               {childrenAge !== null && <ChildrenAgeTag age={childrenAge} />}
+            </div>
+
+            {/* Indicateur "Voir plus" */}
+            <div className="mt-4 flex items-center justify-end gap-1 text-sm font-semibold text-emerald-600 transition-colors group-hover:text-emerald-700 dark:text-emerald-400 dark:group-hover:text-emerald-300">
+              <span>Voir plus</span>
+              <HiArrowRight
+                className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                aria-hidden="true"
+              />
             </div>
           </div>
         </div>
@@ -125,6 +165,7 @@ RemedyCard.propTypes = {
     verifiedByProfessional: PropTypes.bool,
   }).isRequired,
   selectedSymptoms: PropTypes.arrayOf(PropTypes.string).isRequired,
+  isFiltered: PropTypes.bool,
 };
 
 /**
@@ -134,6 +175,11 @@ RemedyCard.propTypes = {
 function arePropsEqual(prevProps, nextProps) {
   // Comparer l'ID du remède (identifiant unique)
   if (prevProps.remedy.id !== nextProps.remedy.id) {
+    return false;
+  }
+
+  // Comparer isFiltered
+  if (prevProps.isFiltered !== nextProps.isFiltered) {
     return false;
   }
 

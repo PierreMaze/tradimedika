@@ -35,22 +35,22 @@ export default function AllergyFilterInfo({ filteredCount, userAllergies }) {
       transition={{ duration: 0.3 }}
       role="status"
       aria-live="polite"
-      className="mb-6 flex items-start gap-4 rounded-lg border-2 border-dashed border-emerald-500 bg-emerald-50 p-4 dark:border-emerald-400 dark:bg-emerald-900/30"
+      className="flex items-start gap-4 rounded-lg border-2 border-dashed border-amber-700/60 bg-amber-50 p-4 dark:border-amber-400/60 dark:bg-amber-950/80"
     >
       <IoMdAlert
-        className="mt-0.5 flex shrink-0 text-xl text-emerald-600 dark:text-emerald-400"
+        className="mt-0.5 flex shrink-0 text-xl text-amber-600 dark:text-amber-400"
         aria-hidden="true"
       />
 
       <div className="flex-1 text-start">
-        <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-50">
+        <p className="text-sm font-semibold text-amber-600 dark:text-amber-400">
           <span className="font-bold">{filteredCount}</span> remède
           {filteredCount > 1 ? "s" : ""} masqué{filteredCount > 1 ? "s" : ""}
         </p>
-        <p className="mt-1 text-sm text-emerald-800 dark:text-emerald-200">
+        <p className="mt-1 text-sm text-amber-800 dark:text-amber-50">
           {filteredCount > 1 ? "Ils contiennent" : "Il contient"} vos allergènes
           :{" "}
-          <span className="font-semibold text-emerald-600 dark:text-emerald-400">
+          <span className="font-semibold text-amber-600 dark:text-amber-400">
             {allergenNames}
           </span>
         </p>

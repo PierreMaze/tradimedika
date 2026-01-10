@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { HiEye, HiEyeSlash } from "react-icons/hi2";
 import { Link, useLocation } from "react-router-dom";
 import FilterRemedyResult from "../components/filter/FilterRemedyResult";
 import AllergyFilterInfo from "../components/info/AllergyFilterInfo";
@@ -86,13 +87,41 @@ function RemedyResult() {
   // Calculer le nombre de remèdes filtrés
   const filteredCount = matchedRemedies.length - safeRemedies.length;
 
-  // État uniquement pour les remèdes filtrés par les tags
-  const [filteredRemedies, setFilteredRemedies] = useState(safeRemedies);
+  // Extraire les remèdes masqués
+  const filteredByAllergies = useMemo(() => {
+    return matchedRemedies.filter((item) => !canUseRemedy(item.remedy));
+  }, [matchedRemedies, canUseRemedy]);
 
-  // Synchroniser filteredRemedies avec safeRemedies (quand allergies changent)
+  // État pour afficher/masquer les remèdes filtrés par allergies
+  const [showFilteredByAllergies, setShowFilteredByAllergies] = useState(false);
+
+  // Liste combinée avec métadonnée isFiltered
+  const displayRemedies = useMemo(() => {
+    const base = safeRemedies.map((item) => ({ ...item, isFiltered: false }));
+
+    if (showFilteredByAllergies && filteredCount > 0) {
+      const filtered = filteredByAllergies.map((item) => ({
+        ...item,
+        isFiltered: true,
+      }));
+      return [...base, ...filtered];
+    }
+
+    return base;
+  }, [
+    safeRemedies,
+    filteredByAllergies,
+    showFilteredByAllergies,
+    filteredCount,
+  ]);
+
+  // État uniquement pour les remèdes filtrés par les tags
+  const [filteredRemedies, setFilteredRemedies] = useState(displayRemedies);
+
+  // Synchroniser filteredRemedies avec displayRemedies
   useEffect(() => {
-    setFilteredRemedies(safeRemedies);
-  }, [safeRemedies]);
+    setFilteredRemedies(displayRemedies);
+  }, [displayRemedies]);
 
   // useCallback pour éviter re-renders en cascade dans FilterRemedyResult
   const handleFilterChange = useCallback((remedies) => {
@@ -187,16 +216,46 @@ function RemedyResult() {
         )}
 
         {/* Message d'information si des remèdes sont masqués par filtrage allergies */}
-        <AllergyFilterInfo
-          filteredCount={filteredCount}
-          userAllergies={userAllergies}
-        />
+        {filteredCount > 0 && userAllergies.length > 0 && (
+          <div className="mb-6 flex items-center gap-3">
+            <div className="flex-1">
+              <AllergyFilterInfo
+                filteredCount={filteredCount}
+                userAllergies={userAllergies}
+              />
+            </div>
+            <motion.button
+              onClick={() => setShowFilteredByAllergies((prev) => !prev)}
+              aria-label={
+                showFilteredByAllergies
+                  ? "Masquer les remèdes filtrés"
+                  : "Afficher les remèdes filtrés"
+              }
+              aria-pressed={showFilteredByAllergies}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-emerald-600 px-4 py-3 font-semibold text-white shadow-md transition-colors hover:bg-emerald-700 focus:ring-2 focus:ring-emerald-300 focus:outline-none dark:bg-emerald-500 dark:hover:bg-emerald-600"
+            >
+              {showFilteredByAllergies ? (
+                <>
+                  <HiEyeSlash className="h-5 w-5" aria-hidden="true" />
+                  <span>Masquer</span>
+                </>
+              ) : (
+                <>
+                  <HiEye className="h-5 w-5" aria-hidden="true" />
+                  <span>Afficher</span>
+                </>
+              )}
+            </motion.button>
+          </div>
+        )}
 
         {/* Filtres par tags (seulement si des remèdes safe ont été trouvés) */}
         {safeRemedies.length > 0 && (
           <FilterRemedyResult
             key={selectedSymptoms.join("-")}
-            matchedRemedies={safeRemedies}
+            matchedRemedies={displayRemedies}
             onFilterChange={handleFilterChange}
           />
         )}

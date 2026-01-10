@@ -8,15 +8,19 @@ import {
   HiLightBulb,
   HiInformationCircle,
 } from "react-icons/hi2";
+import { IoMdAlert } from "react-icons/io";
 import RemedyResultNotFound from "../components/remedy/RemedyResultNotFound";
 import TagsInfoTooltip from "../components/tooltip/TagsInfoTooltip";
 import VerifiedTag from "../components/tag/VerifiedTag";
 import PregnancyTag from "../components/tag/PregnancyTag";
 import ChildrenAgeTag from "../components/tag/ChildrenAgeTag";
+import { useAllergies } from "../context/AllergiesContext";
 import db from "../data/db.json";
+import allergensList from "../data/allergensList.json";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 import { formatFrequency } from "../utils/formatFrequency";
 import { getRemedyBySlug } from "../utils/remedyMatcher";
+import { useReducedMotion } from "../hooks/useReducedMotion";
 
 /**
  * RemedyResultDetails Page
@@ -42,6 +46,8 @@ function RemedyResultDetails() {
   const location = useLocation();
   const selectedSymptoms = location.state?.symptoms || [];
   const remedy = getRemedyBySlug(slug, db);
+  const { userAllergies, isFilteringEnabled } = useAllergies();
+  const prefersReducedMotion = useReducedMotion();
 
   // Validate and sanitize image URL (use placeholder if invalid)
   const safeImageUrl = isValidImageUrl(remedy?.image)
@@ -52,6 +58,27 @@ function RemedyResultDetails() {
   if (!remedy) {
     return <RemedyResultNotFound variant="remedy-not-found" />;
   }
+
+  // Vérifier si le remède contient des allergènes de l'utilisateur
+  const remedyAllergens = Array.isArray(remedy.allergens)
+    ? remedy.allergens
+    : [];
+  const matchingAllergens = remedyAllergens.filter((allergenId) =>
+    userAllergies.includes(allergenId),
+  );
+  const hasUserAllergens =
+    isFilteringEnabled &&
+    userAllergies.length > 0 &&
+    matchingAllergens.length > 0;
+
+  // Récupérer les noms des allergènes pour affichage
+  const allergenNames = matchingAllergens
+    .map((id) => {
+      const allergen = allergensList.find((a) => a.id === id);
+      return allergen ? allergen.name.toLowerCase() : null;
+    })
+    .filter(Boolean)
+    .join(", ");
 
   // Configuration des couleurs par type
   const typeColors = {
@@ -115,6 +142,39 @@ function RemedyResultDetails() {
             Retour aux résultats
           </Link>
         </motion.div>
+
+        {/* Bannière d'avertissement allergènes */}
+        {hasUserAllergens && (
+          <motion.div
+            initial={prefersReducedMotion ? {} : { opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            role="alert"
+            aria-live="assertive"
+            className="mb-6 flex items-start gap-4 rounded-lg border-2 border-dashed border-amber-700/60 bg-amber-50 p-4 dark:border-amber-400/60 dark:bg-amber-950"
+          >
+            <IoMdAlert
+              className="mt-0.5 flex shrink-0 text-2xl text-amber-600 dark:text-amber-400"
+              aria-hidden="true"
+            />
+
+            <div className="flex-1 text-start">
+              <p className="text-base font-bold text-amber-800 dark:text-amber-50">
+                Attention : Ce remède contient vos allergènes
+              </p>
+              <p className="mt-1 text-sm text-amber-800 dark:text-amber-200">
+                Ce remède contient :{" "}
+                <span className="font-semibold text-amber-600 dark:text-amber-400">
+                  {allergenNames}
+                </span>
+              </p>
+              <p className="mt-2 text-sm text-amber-700 dark:text-amber-300">
+                Consultez un professionnel de santé avant utilisation.
+              </p>
+            </div>
+          </motion.div>
+        )}
+
         {/* Header Hero Section */}
         <motion.div
           initial={{ opacity: 0 }}
