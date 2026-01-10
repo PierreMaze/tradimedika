@@ -1,19 +1,23 @@
 // tradimedika-v1/src/pages/RemedyResultDetails.jsx
 import { motion } from "framer-motion";
-import { Link, useLocation, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import {
   HiArrowLeft,
   HiExclamationTriangle,
-  HiLightBulb,
   HiInformationCircle,
+  HiLightBulb,
 } from "react-icons/hi2";
+import { IoMdAlert } from "react-icons/io";
+import { Link, useLocation, useParams } from "react-router-dom";
 import RemedyResultNotFound from "../components/remedy/RemedyResultNotFound";
-import TagsInfoTooltip from "../components/tooltip/TagsInfoTooltip";
-import VerifiedTag from "../components/tag/VerifiedTag";
-import PregnancyTag from "../components/tag/PregnancyTag";
 import ChildrenAgeTag from "../components/tag/ChildrenAgeTag";
+import PregnancyTag from "../components/tag/PregnancyTag";
+import VerifiedTag from "../components/tag/VerifiedTag";
+import TagsInfoTooltip from "../components/tooltip/TagsInfoTooltip";
+import { useAllergies } from "../context/AllergiesContext";
+import allergensList from "../data/allergensList.json";
 import db from "../data/db.json";
+import { useReducedMotion } from "../hooks/useReducedMotion";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 import { formatFrequency } from "../utils/formatFrequency";
 import { getRemedyBySlug } from "../utils/remedyMatcher";
@@ -42,6 +46,8 @@ function RemedyResultDetails() {
   const location = useLocation();
   const selectedSymptoms = location.state?.symptoms || [];
   const remedy = getRemedyBySlug(slug, db);
+  const { userAllergies, isFilteringEnabled } = useAllergies();
+  const prefersReducedMotion = useReducedMotion();
 
   // Validate and sanitize image URL (use placeholder if invalid)
   const safeImageUrl = isValidImageUrl(remedy?.image)
@@ -52,6 +58,27 @@ function RemedyResultDetails() {
   if (!remedy) {
     return <RemedyResultNotFound variant="remedy-not-found" />;
   }
+
+  // Vérifier si le remède contient des allergènes de l'utilisateur
+  const remedyAllergens = Array.isArray(remedy.allergens)
+    ? remedy.allergens
+    : [];
+  const matchingAllergens = remedyAllergens.filter((allergenId) =>
+    userAllergies.includes(allergenId),
+  );
+  const hasUserAllergens =
+    isFilteringEnabled &&
+    userAllergies.length > 0 &&
+    matchingAllergens.length > 0;
+
+  // Récupérer les noms des allergènes pour affichage
+  const allergenNames = matchingAllergens
+    .map((id) => {
+      const allergen = allergensList.find((a) => a.id === id);
+      return allergen ? allergen.name.toLowerCase() : null;
+    })
+    .filter(Boolean)
+    .join(", ");
 
   // Configuration des couleurs par type
   const typeColors = {
@@ -115,6 +142,39 @@ function RemedyResultDetails() {
             Retour aux résultats
           </Link>
         </motion.div>
+
+        {/* Bannière d'avertissement allergènes */}
+        {hasUserAllergens && (
+          <motion.div
+            initial={prefersReducedMotion ? {} : { opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            role="alert"
+            aria-live="assertive"
+            className="mb-6 flex items-start gap-4 rounded-lg border-2 border-dashed border-emerald-700/60 bg-emerald-50 p-4 dark:border-emerald-400/60 dark:bg-emerald-950"
+          >
+            <IoMdAlert
+              className="mt-0.5 flex shrink-0 text-2xl text-emerald-600 dark:text-emerald-400"
+              aria-hidden="true"
+            />
+
+            <div className="flex-1 text-start">
+              <p className="text-base font-bold text-emerald-600 dark:text-emerald-400">
+                Attention : Ce remède contient vos allergènes
+              </p>
+              <p className="mt-1 text-sm text-emerald-900 dark:text-emerald-50">
+                Ce remède contient :{" "}
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">
+                  {allergenNames}
+                </span>
+              </p>
+              <p className="mt-2 text-sm font-semibold text-emerald-900 dark:text-emerald-100">
+                Consultez un professionnel de santé avant utilisation.
+              </p>
+            </div>
+          </motion.div>
+        )}
+
         {/* Header Hero Section */}
         <motion.div
           initial={{ opacity: 0 }}

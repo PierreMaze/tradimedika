@@ -30,7 +30,7 @@ import { parseAndValidateSymptoms } from "../utils/validation";
 
 function RemedyResult() {
   const location = useLocation();
-  const { canUseRemedy } = useAllergies();
+  const { canUseRemedy, userAllergies: contextAllergies } = useAllergies();
 
   // Récupérer symptômes depuis query params (priorité) ou state (fallback)
   const selectedSymptoms = useMemo(() => {
@@ -51,25 +51,8 @@ function RemedyResult() {
       : [];
   }, [location.search, location.state?.symptoms]);
 
-  // Récupérer allergies depuis query params (priorité) ou state (fallback)
-  const userAllergies = useMemo(() => {
-    // 1. Tenter de lire depuis query params
-    const searchParams = new URLSearchParams(location.search);
-    const allergiesParam = searchParams.get("allergies");
-
-    if (allergiesParam) {
-      const allergiesArray = allergiesParam.split(",").map((a) => a.trim());
-      return allergiesArray.filter(
-        (a) => typeof a === "string" && a.length > 0,
-      );
-    }
-
-    // 2. Fallback sur location.state
-    const stateAllergies = location.state?.allergies || [];
-    return Array.isArray(stateAllergies)
-      ? stateAllergies.filter((a) => typeof a === "string" && a.trim())
-      : [];
-  }, [location.search, location.state?.allergies]);
+  // Utiliser les allergies du contexte (persistées dans localStorage)
+  const userAllergies = contextAllergies;
 
   // Calcul des remèdes matchés avec useMemo pour optimisation
   const matchedRemedies = useMemo(
@@ -86,13 +69,44 @@ function RemedyResult() {
   // Calculer le nombre de remèdes filtrés
   const filteredCount = matchedRemedies.length - safeRemedies.length;
 
-  // État uniquement pour les remèdes filtrés par les tags
-  const [filteredRemedies, setFilteredRemedies] = useState(safeRemedies);
+  // Extraire les remèdes masqués
+  const filteredByAllergies = useMemo(() => {
+    return matchedRemedies.filter((item) => !canUseRemedy(item.remedy));
+  }, [matchedRemedies, canUseRemedy]);
 
-  // Synchroniser filteredRemedies avec safeRemedies (quand allergies changent)
+  // État pour afficher/masquer les remèdes filtrés par allergies
+  // Toujours masqué par défaut au chargement de la page (false)
+  const [showFilteredByAllergies, setShowFilteredByAllergies] = useState(false);
+
+  // Liste combinée avec métadonnée isFiltered
+  // Les remèdes avec allergènes apparaissent EN PREMIER lorsqu'ils sont affichés
+  const displayRemedies = useMemo(() => {
+    const base = safeRemedies.map((item) => ({ ...item, isFiltered: false }));
+
+    if (showFilteredByAllergies && filteredCount > 0) {
+      const filtered = filteredByAllergies.map((item) => ({
+        ...item,
+        isFiltered: true,
+      }));
+      // Allergènes en premier, puis remèdes sûrs
+      return [...filtered, ...base];
+    }
+
+    return base;
+  }, [
+    safeRemedies,
+    filteredByAllergies,
+    showFilteredByAllergies,
+    filteredCount,
+  ]);
+
+  // État uniquement pour les remèdes filtrés par les tags
+  const [filteredRemedies, setFilteredRemedies] = useState(displayRemedies);
+
+  // Synchroniser filteredRemedies avec displayRemedies
   useEffect(() => {
-    setFilteredRemedies(safeRemedies);
-  }, [safeRemedies]);
+    setFilteredRemedies(displayRemedies);
+  }, [displayRemedies]);
 
   // useCallback pour éviter re-renders en cascade dans FilterRemedyResult
   const handleFilterChange = useCallback((remedies) => {
@@ -187,16 +201,24 @@ function RemedyResult() {
         )}
 
         {/* Message d'information si des remèdes sont masqués par filtrage allergies */}
-        <AllergyFilterInfo
-          filteredCount={filteredCount}
-          userAllergies={userAllergies}
-        />
+        {filteredCount > 0 && userAllergies.length > 0 && (
+          <div className="mb-6">
+            <AllergyFilterInfo
+              filteredCount={filteredCount}
+              userAllergies={userAllergies}
+              showFiltered={showFilteredByAllergies}
+              onToggleFiltered={() =>
+                setShowFilteredByAllergies((prev) => !prev)
+              }
+            />
+          </div>
+        )}
 
         {/* Filtres par tags (seulement si des remèdes safe ont été trouvés) */}
         {safeRemedies.length > 0 && (
           <FilterRemedyResult
             key={selectedSymptoms.join("-")}
-            matchedRemedies={safeRemedies}
+            matchedRemedies={displayRemedies}
             onFilterChange={handleFilterChange}
           />
         )}

@@ -2,6 +2,51 @@
 
 ---
 
+## [0.41.0] - 2026-01-10
+
+### <u>Changed:</u>
+
+- **Amélioration UX des cartes contenant des allergènes**
+  - Réduction de l'effet de scale au hover : `1.05` → `1.02` (animation plus subtile)
+  - Tags de propriétés : grayscale par défaut, **colorés uniquement au hover**
+  - Application du grayscale au niveau élément pour un contrôle granulaire
+  - Image reste en grayscale permanent, texte reprend sa couleur au hover
+
+- **Repositionnement du bouton toggle allergènes**
+  - Bouton "Afficher/Masquer" intégré **dans la bannière AllergyFilterInfo**
+  - Position : **en bas à droite**, sous le texte d'information
+  - Icônes HiEye/HiEyeSlash pour meilleure clarté visuelle
+  - Animations Framer Motion (whileHover, whileTap) conservées
+
+- **Ordre d'affichage des remèdes avec allergènes**
+  - Les remèdes contenant des allergènes apparaissent **EN PREMIER** lorsqu'ils sont affichés
+  - Facilite l'identification rapide des remèdes à risque
+
+### <u>Fixed:</u>
+
+- **Persistance de la bannière allergènes après navigation**
+  - Utilisation de `AllergiesContext` au lieu de `location.state`
+  - La bannière reste visible après navigation vers les détails d'un remède et retour
+  - Allergies persistées dans localStorage via le contexte
+
+- **État du toggle allergènes non persisté**
+  - Changement de `useLocalStorage` → `useState(false)`
+  - Les cartes allergènes sont **toujours masquées par défaut** au chargement
+  - Évite la confusion en affichant systématiquement les remèdes sûrs en premier
+
+- **Tests Disclaimer.test.jsx mis à jour**
+  - Expectations corrigées : `dark:bg-amber-950` → `dark:bg-amber-950/80`
+  - Alignement avec le styling actuel du composant
+
+### <u>Tests:</u>
+
+- ✅ **660/662 tests unitaires passés** (99.7%)
+- ✅ **Validation données** : 7/7 vérifications réussies
+- ✅ **ESLint** : Aucune erreur
+- ✅ **Prettier** : Code formaté automatiquement
+
+---
+
 ## [0.40.0] - 2026-01-09
 
 ### <u>Added:</u>

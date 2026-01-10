@@ -15,7 +15,7 @@
 
 [🌐 **Voir le site**](https://pierremaze.github.io/tradimedika/) • [🐛 **Signaler un bug**](https://github.com/PierreMaze/) • [💬 **Discuter**](https://www.linkedin.com/in/pierremazelaygue/)
 
-[![TRADIMEDIKA](<https://img.shields.io/badge/TRADIMEDIKA-Bêta(0.40.0)-1a1a1a?style=for-the-badge&logo=leaflet&logoColor=00bd7e>)](https://pierremaze.github.io/tradimedika/)
+[![TRADIMEDIKA](<https://img.shields.io/badge/TRADIMEDIKA-Bêta(0.41.0)-1a1a1a?style=for-the-badge&logo=leaflet&logoColor=00bd7e>)](https://pierremaze.github.io/tradimedika/)
 
 </div>
 
@@ -46,10 +46,10 @@
 
 - **Design moderne** : Interface épurée avec animations fluides
 - **Responsive** : Compatible mobile, tablette et desktop
-- **Performance** : Score Lighthouse - ***(92/100)***
-- **Bonnes pratiques** : Compatible mobile, tablette et desktop - Score Lighthouse - ***(94/100)***
-- **Accessibilité** : Conforme aux standards WCAG 2.1 AA - Score Lighthouse - ***(100/100)***
-- **SEO optimisé** : Meta tags et structure sémantique - Score Lighthouse - ***(100/100)***
+- **Performance** : Score Lighthouse - **_(92/100)_**
+- **Bonnes pratiques** : Compatible mobile, tablette et desktop - Score Lighthouse - **_(94/100)_**
+- **Accessibilité** : Conforme aux standards WCAG 2.1 AA - Score Lighthouse - **_(100/100)_**
+- **SEO optimisé** : Meta tags et structure sémantique - Score Lighthouse - **_(100/100)_**
 
 ### 📚 Documentation
 
@@ -105,7 +105,10 @@
 - **Filtrage automatique** : Les remèdes dangereux sont masqués automatiquement selon vos allergies
 - **Base de données enrichie** : 5 allergènes référencés avec leurs remèdes associés
   - Agrumes, Pollen, Astéracées, Pollen d'olivier, Venin d'abeille
-- **Indicateur visuel** : Message informatif indiquant le nombre de remèdes masqués pour votre sécurité
+- **Bannière d'information** : Affichage du nombre de remèdes masqués avec bouton toggle intégré
+- **Affichage contrôlé** : Les remèdes avec allergènes peuvent être affichés temporairement en premier (visuellement distincts)
+- **UX optimisée** : Cartes allergènes en grayscale avec tags colorés au hover pour identification rapide
+- **Persistance intelligente** : Allergies sauvegardées, affichage des allergènes toujours masqué par défaut
 
 ### 📜 Historique de Recherche
 

@@ -504,7 +504,7 @@ describe("TagsInfoTooltip", () => {
 
       await waitFor(() => {
         const tooltip = screen.getByRole("tooltip");
-        expect(tooltip).toHaveClass("z-[60]");
+        expect(tooltip).toHaveClass("z-60");
       });
     });
   });

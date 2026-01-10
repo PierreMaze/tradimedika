@@ -357,7 +357,7 @@ describe("SearchHistoryItem", () => {
       );
 
       const filteredText = screen.getByText("2 remèdes masqués");
-      expect(filteredText).toHaveClass("text-yellow-600");
+      expect(filteredText).toHaveClass("text-sky-600");
     });
   });
 

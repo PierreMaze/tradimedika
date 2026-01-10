@@ -39,6 +39,7 @@ export default function RemedyResultList({
               key={result.remedy.id}
               remedy={result.remedy}
               selectedSymptoms={selectedSymptoms}
+              isFiltered={result.isFiltered || false}
             />
           ))}
         </div>
@@ -53,6 +54,7 @@ RemedyResultList.propTypes = {
       remedy: PropTypes.object.isRequired,
       matchCount: PropTypes.number.isRequired,
       matchedSymptoms: PropTypes.arrayOf(PropTypes.string).isRequired,
+      isFiltered: PropTypes.bool,
     }),
   ).isRequired,
   hasMatchingRemedies: PropTypes.bool.isRequired,
