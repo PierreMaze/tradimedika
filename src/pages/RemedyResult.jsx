@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { HiEye, HiEyeSlash } from "react-icons/hi2";
 import { Link, useLocation } from "react-router-dom";
 import FilterRemedyResult from "../components/filter/FilterRemedyResult";
 import AllergyFilterInfo from "../components/info/AllergyFilterInfo";
@@ -31,7 +30,7 @@ import { parseAndValidateSymptoms } from "../utils/validation";
 
 function RemedyResult() {
   const location = useLocation();
-  const { canUseRemedy } = useAllergies();
+  const { canUseRemedy, userAllergies: contextAllergies } = useAllergies();
 
   // Récupérer symptômes depuis query params (priorité) ou state (fallback)
   const selectedSymptoms = useMemo(() => {
@@ -52,25 +51,8 @@ function RemedyResult() {
       : [];
   }, [location.search, location.state?.symptoms]);
 
-  // Récupérer allergies depuis query params (priorité) ou state (fallback)
-  const userAllergies = useMemo(() => {
-    // 1. Tenter de lire depuis query params
-    const searchParams = new URLSearchParams(location.search);
-    const allergiesParam = searchParams.get("allergies");
-
-    if (allergiesParam) {
-      const allergiesArray = allergiesParam.split(",").map((a) => a.trim());
-      return allergiesArray.filter(
-        (a) => typeof a === "string" && a.length > 0,
-      );
-    }
-
-    // 2. Fallback sur location.state
-    const stateAllergies = location.state?.allergies || [];
-    return Array.isArray(stateAllergies)
-      ? stateAllergies.filter((a) => typeof a === "string" && a.trim())
-      : [];
-  }, [location.search, location.state?.allergies]);
+  // Utiliser les allergies du contexte (persistées dans localStorage)
+  const userAllergies = contextAllergies;
 
   // Calcul des remèdes matchés avec useMemo pour optimisation
   const matchedRemedies = useMemo(
@@ -93,9 +75,11 @@ function RemedyResult() {
   }, [matchedRemedies, canUseRemedy]);
 
   // État pour afficher/masquer les remèdes filtrés par allergies
+  // Toujours masqué par défaut au chargement de la page (false)
   const [showFilteredByAllergies, setShowFilteredByAllergies] = useState(false);
 
   // Liste combinée avec métadonnée isFiltered
+  // Les remèdes avec allergènes apparaissent EN PREMIER lorsqu'ils sont affichés
   const displayRemedies = useMemo(() => {
     const base = safeRemedies.map((item) => ({ ...item, isFiltered: false }));
 
@@ -104,7 +88,8 @@ function RemedyResult() {
         ...item,
         isFiltered: true,
       }));
-      return [...base, ...filtered];
+      // Allergènes en premier, puis remèdes sûrs
+      return [...filtered, ...base];
     }
 
     return base;
@@ -217,37 +202,15 @@ function RemedyResult() {
 
         {/* Message d'information si des remèdes sont masqués par filtrage allergies */}
         {filteredCount > 0 && userAllergies.length > 0 && (
-          <div className="mb-6 flex items-center gap-3">
-            <div className="flex-1">
-              <AllergyFilterInfo
-                filteredCount={filteredCount}
-                userAllergies={userAllergies}
-              />
-            </div>
-            <motion.button
-              onClick={() => setShowFilteredByAllergies((prev) => !prev)}
-              aria-label={
-                showFilteredByAllergies
-                  ? "Masquer les remèdes filtrés"
-                  : "Afficher les remèdes filtrés"
+          <div className="mb-6">
+            <AllergyFilterInfo
+              filteredCount={filteredCount}
+              userAllergies={userAllergies}
+              showFiltered={showFilteredByAllergies}
+              onToggleFiltered={() =>
+                setShowFilteredByAllergies((prev) => !prev)
               }
-              aria-pressed={showFilteredByAllergies}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-emerald-600 px-4 py-3 font-semibold text-white shadow-md transition-colors hover:bg-emerald-700 focus:ring-2 focus:ring-emerald-300 focus:outline-none dark:bg-emerald-500 dark:hover:bg-emerald-600"
-            >
-              {showFilteredByAllergies ? (
-                <>
-                  <HiEyeSlash className="h-5 w-5" aria-hidden="true" />
-                  <span>Masquer</span>
-                </>
-              ) : (
-                <>
-                  <HiEye className="h-5 w-5" aria-hidden="true" />
-                  <span>Afficher</span>
-                </>
-              )}
-            </motion.button>
+            />
           </div>
         )}
 

@@ -1,26 +1,26 @@
 // tradimedika-v1/src/pages/RemedyResultDetails.jsx
 import { motion } from "framer-motion";
-import { Link, useLocation, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import {
   HiArrowLeft,
   HiExclamationTriangle,
-  HiLightBulb,
   HiInformationCircle,
+  HiLightBulb,
 } from "react-icons/hi2";
 import { IoMdAlert } from "react-icons/io";
+import { Link, useLocation, useParams } from "react-router-dom";
 import RemedyResultNotFound from "../components/remedy/RemedyResultNotFound";
-import TagsInfoTooltip from "../components/tooltip/TagsInfoTooltip";
-import VerifiedTag from "../components/tag/VerifiedTag";
-import PregnancyTag from "../components/tag/PregnancyTag";
 import ChildrenAgeTag from "../components/tag/ChildrenAgeTag";
+import PregnancyTag from "../components/tag/PregnancyTag";
+import VerifiedTag from "../components/tag/VerifiedTag";
+import TagsInfoTooltip from "../components/tooltip/TagsInfoTooltip";
 import { useAllergies } from "../context/AllergiesContext";
-import db from "../data/db.json";
 import allergensList from "../data/allergensList.json";
+import db from "../data/db.json";
+import { useReducedMotion } from "../hooks/useReducedMotion";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 import { formatFrequency } from "../utils/formatFrequency";
 import { getRemedyBySlug } from "../utils/remedyMatcher";
-import { useReducedMotion } from "../hooks/useReducedMotion";
 
 /**
  * RemedyResultDetails Page
@@ -151,24 +151,24 @@ function RemedyResultDetails() {
             transition={{ duration: 0.3 }}
             role="alert"
             aria-live="assertive"
-            className="mb-6 flex items-start gap-4 rounded-lg border-2 border-dashed border-amber-700/60 bg-amber-50 p-4 dark:border-amber-400/60 dark:bg-amber-950"
+            className="mb-6 flex items-start gap-4 rounded-lg border-2 border-dashed border-emerald-700/60 bg-emerald-50 p-4 dark:border-emerald-400/60 dark:bg-emerald-950"
           >
             <IoMdAlert
-              className="mt-0.5 flex shrink-0 text-2xl text-amber-600 dark:text-amber-400"
+              className="mt-0.5 flex shrink-0 text-2xl text-emerald-600 dark:text-emerald-400"
               aria-hidden="true"
             />
 
             <div className="flex-1 text-start">
-              <p className="text-base font-bold text-amber-800 dark:text-amber-50">
+              <p className="text-base font-bold text-emerald-600 dark:text-emerald-400">
                 Attention : Ce remède contient vos allergènes
               </p>
-              <p className="mt-1 text-sm text-amber-800 dark:text-amber-200">
+              <p className="mt-1 text-sm text-emerald-900 dark:text-emerald-50">
                 Ce remède contient :{" "}
-                <span className="font-semibold text-amber-600 dark:text-amber-400">
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">
                   {allergenNames}
                 </span>
               </p>
-              <p className="mt-2 text-sm text-amber-700 dark:text-amber-300">
+              <p className="mt-2 text-sm font-semibold text-emerald-900 dark:text-emerald-100">
                 Consultez un professionnel de santé avant utilisation.
               </p>
             </div>

@@ -38,7 +38,7 @@ describe("Disclaimer", () => {
       const disclaimer = container.firstChild;
       expect(disclaimer).toHaveClass("bg-amber-50");
       expect(disclaimer).toHaveClass("border-amber-700/60");
-      expect(disclaimer).toHaveClass("dark:bg-amber-950");
+      expect(disclaimer).toHaveClass("dark:bg-amber-950/80");
     });
   });
 
@@ -85,7 +85,7 @@ describe("Disclaimer", () => {
     it("should have dark mode classes", () => {
       const { container } = render(<Disclaimer />);
       expect(container.firstChild).toHaveClass(
-        "dark:bg-amber-950",
+        "dark:bg-amber-950/80",
         "dark:border-amber-400/60",
       );
     });

@@ -91,7 +91,7 @@ export default function SearchHistoryItem({ search, onClick, onRemove }) {
                 return allergen ? (
                   <span
                     key={`allergy-${search.id}-${index}`}
-                    className="rounded-md bg-red-50 px-2.5 py-1 text-sm font-medium text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300"
+                    className="rounded-md bg-sky-50 px-2.5 py-1 text-sm font-medium text-sky-700 dark:bg-sky-900/30 dark:text-sky-300"
                     title={allergen.description}
                   >
                     {allergen.name}
@@ -113,7 +113,7 @@ export default function SearchHistoryItem({ search, onClick, onRemove }) {
               •
             </span>
             {(search.filteredCount ?? 0) > 0 && (
-              <span className="font-semibold text-yellow-600 dark:text-yellow-400">
+              <span className="font-semibold text-sky-600 dark:text-sky-400">
                 {search.filteredCount}{" "}
                 {search.filteredCount > 1 ? "remèdes masqués" : "remède masqué"}
               </span>

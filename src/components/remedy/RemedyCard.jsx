@@ -1,15 +1,15 @@
 // components/remedy/RemedyCard.jsx
-import { memo } from "react";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { IoMdAlert } from "react-icons/io";
+import { memo } from "react";
 import { HiArrowRight } from "react-icons/hi2";
+import { IoMdAlert } from "react-icons/io";
+import { Link } from "react-router-dom";
 import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
 import { generateSlug } from "../../utils/remedyMatcher";
-import VerifiedTag from "../tag/VerifiedTag";
-import PregnancyTag from "../tag/PregnancyTag";
 import ChildrenAgeTag from "../tag/ChildrenAgeTag";
+import PregnancyTag from "../tag/PregnancyTag";
+import VerifiedTag from "../tag/VerifiedTag";
 /**
  * Carte individuelle pour afficher un remède
  * - Entièrement cliquable (wrapper Link vers /remedes/:slug)
@@ -37,12 +37,13 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
     ? "opacity-70 transition-all duration-300"
     : "";
 
-  const contentClasses = isFiltered
-    ? "grayscale hover:grayscale-0 transition-all duration-300"
+  // Classes pour griser le contenu individuellement au lieu du parent
+  const textClasses = isFiltered
+    ? "grayscale group-hover:grayscale-0 transition-all duration-300"
     : "";
 
   const cardBorderClasses = isFiltered
-    ? "ring-2 ring-amber-500 hover:ring-amber-600 dark:ring-amber-500"
+    ? "ring-2 ring-neutral-500 hover:ring-neutral-600 dark:ring-neutral-500"
     : "ring-2 ring-emerald-500 hover:ring-emerald-600 dark:ring-emerald-600";
 
   return (
@@ -50,7 +51,7 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
-      whileHover={{ scale: 1.05 }}
+      whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.3 }}
       className={cardClasses}
     >
@@ -76,21 +77,25 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
           )}
 
           {/* Contenu */}
-          <div className={`p-6 ${contentClasses}`}>
+          <div className="p-6">
             {/* En-tête avec nom et type */}
             <div className="mb-3 flex items-start justify-between gap-2">
-              <h3 className="text-start text-xl font-bold text-neutral-900 lg:text-2xl dark:text-neutral-100">
+              <h3
+                className={`text-start text-xl font-bold text-neutral-900 lg:text-2xl dark:text-neutral-100 ${textClasses}`}
+              >
                 {name}
               </h3>
               <span
-                className={`shrink-0 rounded-md bg-neutral-200 px-2 py-1 text-xs font-semibold tracking-wide text-black uppercase lg:text-sm dark:bg-neutral-600 dark:text-white`}
+                className={`shrink-0 rounded-md bg-neutral-200 px-2 py-1 text-xs font-semibold tracking-wide text-black uppercase lg:text-sm dark:bg-neutral-600 dark:text-white ${textClasses}`}
               >
                 {type}
               </span>
             </div>
 
             {/* Description */}
-            <p className="mb-4 line-clamp-3 text-start text-sm text-neutral-600 lg:text-base dark:text-neutral-400">
+            <p
+              className={`mb-4 line-clamp-3 text-start text-sm text-neutral-600 lg:text-base dark:text-neutral-400 ${textClasses}`}
+            >
               {description}
             </p>
 
@@ -100,13 +105,15 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
                 {properties.slice(0, 3).map((prop, index) => (
                   <span
                     key={index}
-                    className="inline-flex items-center gap-1 rounded-md bg-emerald-100 px-3 py-1 text-xs font-medium text-emerald-800 lg:text-sm dark:bg-emerald-900 dark:text-emerald-200"
+                    className={`inline-flex items-center gap-1 rounded-md bg-emerald-100 px-3 py-1 text-xs font-medium text-emerald-800 transition-all duration-300 lg:text-sm dark:bg-emerald-900 dark:text-emerald-200 ${textClasses}`}
                   >
                     {capitalizeFirstLetter(prop.name, true)}
                   </span>
                 ))}
                 {properties.length > 3 && (
-                  <span className="inline-flex items-center rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-600 dark:bg-neutral-700 dark:text-neutral-400">
+                  <span
+                    className={`inline-flex items-center rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-600 transition-all duration-300 dark:bg-neutral-700 dark:text-neutral-400 ${textClasses}`}
+                  >
                     +{properties.length - 3}
                   </span>
                 )}
@@ -114,7 +121,7 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
             )}
 
             {/* Tags de sécurité */}
-            <div className="flex flex-wrap gap-2">
+            <div className={`flex flex-wrap gap-2 ${textClasses}`}>
               {isFiltered && (
                 <span
                   className="inline-flex items-center gap-1.5 rounded-md bg-amber-100 px-3 py-1.5 text-xs font-semibold text-amber-800 transition duration-300 lg:text-sm dark:bg-amber-900 dark:text-amber-200"
@@ -132,7 +139,9 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
             </div>
 
             {/* Indicateur "Voir plus" */}
-            <div className="mt-4 flex items-center justify-end gap-1 text-sm font-semibold text-emerald-600 transition-colors group-hover:text-emerald-700 dark:text-emerald-400 dark:group-hover:text-emerald-300">
+            <div
+              className={`mt-4 flex items-center justify-end gap-1 text-sm font-semibold text-emerald-600 transition-colors group-hover:text-emerald-700 dark:text-emerald-400 dark:group-hover:text-emerald-300 ${textClasses}`}
+            >
               <span>Voir plus</span>
               <HiArrowRight
                 className="h-4 w-4 transition-transform group-hover:translate-x-1"
