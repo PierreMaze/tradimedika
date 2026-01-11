@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IoMdSettings } from "react-icons/io";
-import { ARIA_SETTINGS_BUTTON } from "../../constants/buttonLabels";
-import SettingsModal from "../settings/SettingsModal";
+import { ARIA_SETTINGS_BUTTON } from "../../../constants/buttonLabels";
+import SettingsModal from "./SettingsModal";
 
 export default function SettingsButton() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);

@@ -7,11 +7,11 @@ import {
   BUTTON_SETTINGS,
   SETTINGS_PERFORMANCE_LABEL,
   SETTINGS_THEME_LABEL,
-} from "../../constants/buttonLabels";
-import { usePerformance } from "../../context/PerformanceContext";
-import { useReducedMotion } from "../../hooks/useReducedMotion";
-import DarkModeToggle from "../btn/DarkModeToggle";
-import PerformanceToggle from "../btn/PerformanceToggle";
+} from "../../../constants/buttonLabels";
+import { usePerformance } from "../context/PerformanceContext";
+import { useReducedMotion } from "../hooks/useReducedMotion";
+import DarkModeToggle from "./DarkModeToggle";
+import PerformanceToggle from "./PerformanceToggle";
 
 /**
  * SettingsModal Component

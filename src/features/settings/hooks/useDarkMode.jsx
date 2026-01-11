@@ -1,7 +1,7 @@
 // hooks/useDarkMode.js
 import { useCallback, useEffect } from "react";
-import { useLocalStorage } from "./useLocalStorage";
-import { useMediaQuery } from "./useMediaQuery";
+import { useLocalStorage } from "../../../hooks/useLocalStorage";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
 
 /**
  * Hook personnalisé pour gérer le dark mode

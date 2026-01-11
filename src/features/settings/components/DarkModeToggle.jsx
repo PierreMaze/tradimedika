@@ -1,7 +1,7 @@
 // tradimedika-v1/src/components/btn/DarkModeToggle.jsx
 import { motion } from "framer-motion";
 import { HiMoon, HiSun } from "react-icons/hi2";
-import { useTheme } from "../../context/ThemeContext";
+import { useTheme } from "../context/ThemeContext";
 
 export default function DarkModeToggle() {
   const { isDarkMode, toggleDarkMode } = useTheme();

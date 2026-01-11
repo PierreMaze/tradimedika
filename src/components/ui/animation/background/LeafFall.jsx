@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { GiFallingLeaf } from "react-icons/gi";
-import { usePerformance } from "../../../../context/PerformanceContext";
+import { usePerformance } from "../../../../features/settings";
 
 export default function LeafFall() {
   const [show, setShow] = useState(false);

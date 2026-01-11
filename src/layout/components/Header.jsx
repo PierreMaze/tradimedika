@@ -1,6 +1,6 @@
 // tradimedika-v1/src/layout/Header.jsx
 import { motion } from "framer-motion";
-import SettingsButton from "../../components/btn/SettingsButton";
+import { SettingsButton } from "../../features/settings";
 import LogoTradimedika from "./LogoTradimedika";
 
 const headerVariants = {

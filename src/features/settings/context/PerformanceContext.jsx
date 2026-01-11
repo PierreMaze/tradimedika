@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { createContext, useCallback, useContext, useMemo } from "react";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useLocalStorage } from "../../../hooks/useLocalStorage";
 
 const PerformanceContext = createContext(undefined);
 

@@ -15,7 +15,7 @@ import TagsInfoTooltip from "../components/tooltip/TagsInfoTooltip";
 import { useAllergies } from "../context/AllergiesContext";
 import allergensList from "../data/allergensList.json";
 import db from "../data/db.json";
-import { useReducedMotion } from "../hooks/useReducedMotion";
+import { useReducedMotion } from "../features/settings";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 import { formatFrequency } from "../utils/formatFrequency";
 import { getRemedyBySlug } from "../utils/remedyMatcher";

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { FaWandMagicSparkles } from "react-icons/fa6";
 
-import { usePerformance } from "../../context/PerformanceContext";
+import { usePerformance } from "../context/PerformanceContext";
 
 export default function PerformanceToggle() {
   const { isHighPerformance, togglePerformance } = usePerformance();
