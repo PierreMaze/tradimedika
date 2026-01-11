@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { HiExclamationTriangle } from "react-icons/hi2";
-import { useReducedMotion } from "../../hooks/useReducedMotion";
+import { useReducedMotion } from "../../features/settings";
 
 const disclaimerVariants = {
   hidden: {
