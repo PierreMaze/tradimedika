@@ -4,12 +4,14 @@ import { motion } from "framer-motion";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useLocation } from "react-router-dom";
-import FilterRemedyResult from "../components/filter/FilterRemedyResult";
-import RemedyResultList from "../components/remedy/RemedyResultList";
 import TagsInfoTooltip from "../components/tooltip/TagsInfoTooltip";
 import { AllergyFilterInfo, useAllergies } from "../features/allergens";
+import {
+  FilterRemedyResult,
+  RemedyResultList,
+  findMatchingRemedies,
+} from "../features/remedy";
 import db from "../data/db.json";
-import { findMatchingRemedies } from "../utils/remedyMatcher";
 import { parseAndValidateSymptoms } from "../utils/validation";
 
 /**

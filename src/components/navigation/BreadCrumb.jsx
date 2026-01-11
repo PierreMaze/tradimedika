@@ -5,7 +5,7 @@ import { NavLink, useLocation, useParams } from "react-router-dom";
 import { LINK_INTERNAL_STYLES } from "../../constants/linkStyles";
 import db from "../../data/db.json";
 import { formatSegmentLabel } from "../../utils/formatSegmentLabel";
-import { getRemedyBySlug } from "../../utils/remedyMatcher";
+import { getRemedyBySlug } from "../../features/remedy";
 
 /**
  * BreadCrumb Component - Navigation breadcrumb trail

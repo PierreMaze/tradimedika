@@ -1,7 +1,7 @@
 // src/utils/remedyMatcher.js
-import { createLogger } from "./logger";
-import { normalizeForMatching } from "./normalizeSymptom";
-import { validateSlugFormat } from "./validation";
+import { createLogger } from "../../../utils/logger";
+import { normalizeForMatching } from "../../../utils/normalizeSymptom";
+import { validateSlugFormat } from "../../../utils/validation";
 
 const logger = createLogger("remedyMatcher");
 

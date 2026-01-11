@@ -1,8 +1,8 @@
 // components/filter/FilterRemedyResult.jsx
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import { normalizeForMatching } from "../../utils/normalizeSymptom";
-import { ListFilterTag } from "../../features/allergens";
+import { normalizeForMatching } from "../../../utils/normalizeSymptom";
+import { ListFilterTag } from "../../allergens";
 
 /**
  * Extrait les symptômes uniques des remèdes matchés et les trie alphabétiquement

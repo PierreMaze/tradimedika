@@ -4,9 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { GrCircleQuestion } from "react-icons/gr";
 import { HiXMark } from "react-icons/hi2";
-import ChildrenAgeTag from "../tag/ChildrenAgeTag";
-import PregnancyTag from "../tag/PregnancyTag";
-import VerifiedTag from "../tag/VerifiedTag";
+import { ChildrenAgeTag, PregnancyTag, VerifiedTag } from "../tags";
 
 /**
  * TagsInfoTooltip Component

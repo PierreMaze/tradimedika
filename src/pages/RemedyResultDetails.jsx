@@ -9,16 +9,15 @@ import {
 } from "react-icons/hi2";
 import { IoMdAlert } from "react-icons/io";
 import { Link, useLocation, useParams } from "react-router-dom";
-import RemedyResultNotFound from "../components/remedy/RemedyResultNotFound";
 import { ChildrenAgeTag, PregnancyTag, VerifiedTag } from "../components/tags";
 import TagsInfoTooltip from "../components/tooltip/TagsInfoTooltip";
 import { useAllergies } from "../features/allergens";
+import { RemedyResultNotFound, getRemedyBySlug } from "../features/remedy";
+import { useReducedMotion } from "../features/settings";
 import allergensList from "../data/allergensList.json";
 import db from "../data/db.json";
-import { useReducedMotion } from "../features/settings";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 import { formatFrequency } from "../utils/formatFrequency";
-import { getRemedyBySlug } from "../utils/remedyMatcher";
 
 /**
  * RemedyResultDetails Page
