@@ -12,14 +12,16 @@ import {
   BUTTON_SECONDARY_STYLES,
 } from "../../constants/buttonStyles";
 import { AllergySelector, useAllergies } from "../../features/allergens";
+import {
+  ListSymptomTag,
+  SearchHistoryModal,
+  SymptomsSelector,
+  useSearchHistory,
+  useSymptomSubmit,
+  useSymptomTags,
+} from "../../features/symptom-search";
 import { useClickOutside } from "../../hooks/useClickOutside";
 import { useScrollOnMobileFocus } from "../../hooks/useScrollOnMobileFocus";
-import { useSearchHistory } from "../../hooks/useSearchHistory";
-import { useSymptomSubmit } from "../../hooks/useSymptomSubmit";
-import { useSymptomTags } from "../../hooks/useSymptomTags";
-import SymptomsSelector from "../input/SymptomsSelector";
-import SearchHistoryModal from "../search/SearchHistoryModal";
-import ListSymptomTag from "../tag/ListSymptomTag";
 
 /**
  * Composant wrapper pour isoler le state des symptômes
