@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { createLogger } from "../../../utils/logger";
+import { createLogger } from "../../../../utils/logger";
 
 const logger = createLogger("ErrorFallback");
 
