@@ -12,7 +12,7 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import RemedyResultNotFound from "../components/remedy/RemedyResultNotFound";
 import { ChildrenAgeTag, PregnancyTag, VerifiedTag } from "../components/tags";
 import TagsInfoTooltip from "../components/tooltip/TagsInfoTooltip";
-import { useAllergies } from "../context/AllergiesContext";
+import { useAllergies } from "../features/allergens";
 import allergensList from "../data/allergensList.json";
 import db from "../data/db.json";
 import { useReducedMotion } from "../features/settings";

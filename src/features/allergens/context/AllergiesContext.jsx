@@ -7,8 +7,8 @@ import {
   useMemo,
   useRef,
 } from "react";
-import { useLocalStorage } from "../hooks/useLocalStorage";
-import { createLogger } from "../utils/logger";
+import { useLocalStorage } from "../../../hooks/useLocalStorage";
+import { createLogger } from "../../../utils/logger";
 
 const logger = createLogger("AllergiesContext");
 

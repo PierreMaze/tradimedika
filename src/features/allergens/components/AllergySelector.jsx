@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { IoMdClose } from "react-icons/io";
-import { BUTTON_PRIMARY_STYLES } from "../../constants/buttonStyles";
-import { useAllergies } from "../../context/AllergiesContext";
-import allergensList from "../../data/allergensList.json";
-import { useClickOutside } from "../../hooks/useClickOutside";
-import { useReducedMotion } from "../../features/settings";
-import { normalizeForMatching } from "../../utils/normalizeSymptom";
+import { BUTTON_PRIMARY_STYLES } from "../../../constants/buttonStyles";
+import { useAllergies } from "../context/AllergiesContext";
+import allergensList from "../../../data/allergensList.json";
+import { useClickOutside } from "../../../hooks/useClickOutside";
+import { useReducedMotion } from "../../settings";
+import { normalizeForMatching } from "../../../utils/normalizeSymptom";
 
 // Fonction pour capitaliser la première lettre
 const capitalizeAllergen = (allergen) => {

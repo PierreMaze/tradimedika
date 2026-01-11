@@ -11,13 +11,12 @@ import {
   BUTTON_PRIMARY_STYLES,
   BUTTON_SECONDARY_STYLES,
 } from "../../constants/buttonStyles";
-import { useAllergies } from "../../context/AllergiesContext";
+import { AllergySelector, useAllergies } from "../../features/allergens";
 import { useClickOutside } from "../../hooks/useClickOutside";
 import { useScrollOnMobileFocus } from "../../hooks/useScrollOnMobileFocus";
 import { useSearchHistory } from "../../hooks/useSearchHistory";
 import { useSymptomSubmit } from "../../hooks/useSymptomSubmit";
 import { useSymptomTags } from "../../hooks/useSymptomTags";
-import AllergySelector from "../input/AllergySelector";
 import SymptomsSelector from "../input/SymptomsSelector";
 import SearchHistoryModal from "../search/SearchHistoryModal";
 import ListSymptomTag from "../tag/ListSymptomTag";

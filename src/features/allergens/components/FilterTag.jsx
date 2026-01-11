@@ -1,7 +1,7 @@
 // components/filter/FilterTag.jsx
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
-import { BUTTON_PRIMARY_STYLES } from "../../constants/buttonStyles";
+import { BUTTON_PRIMARY_STYLES } from "../../../constants/buttonStyles";
 
 /**
  * Composant Tag individuel pour filtrer les remèdes
