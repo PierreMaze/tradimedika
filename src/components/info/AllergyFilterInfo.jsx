@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { HiEye, HiEyeSlash } from "react-icons/hi2";
 import { IoMdAlert } from "react-icons/io";
 import allergensList from "../../data/allergensList.json";
-import { useReducedMotion } from "../../hooks/useReducedMotion";
+import { useReducedMotion } from "../../features/settings";
 
 /**
  * Composant d'information sur le filtrage des remèdes

@@ -8,7 +8,7 @@ import { BUTTON_PRIMARY_STYLES } from "../../constants/buttonStyles";
 import { useAllergies } from "../../context/AllergiesContext";
 import allergensList from "../../data/allergensList.json";
 import { useClickOutside } from "../../hooks/useClickOutside";
-import { useReducedMotion } from "../../hooks/useReducedMotion";
+import { useReducedMotion } from "../../features/settings";
 import { normalizeForMatching } from "../../utils/normalizeSymptom";
 
 // Fonction pour capitaliser la première lettre
