@@ -1,7 +1,7 @@
 // tradimedika-v1/src/routes/Router.jsx
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
-import LoadingFallback from "../components/animation/fallback/LoadingFallback";
+import { LoadingFallback } from "../components/ui/animation";
 import LayoutApp from "../layout/LayoutApp";
 import LayoutRemedyResult from "../layout/LayoutRemedyResult";
 

@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { ErrorBoundary } from "react-error-boundary";
 import { HelmetProvider } from "react-helmet-async";
 import { RouterProvider } from "react-router-dom";
-import ErrorFallback from "./components/animation/fallback/ErrorFallback";
+import { ErrorFallback } from "./components/ui/animation";
 import { AllergiesProvider } from "./context/AllergiesContext";
 import { PerformanceProvider } from "./context/PerformanceContext";
 import { ThemeProvider } from "./context/ThemeContext";

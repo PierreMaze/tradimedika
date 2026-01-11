@@ -7,9 +7,7 @@ import { IoMdAlert } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { capitalizeFirstLetter } from "../../utils/capitalizeFirstLetter";
 import { generateSlug } from "../../utils/remedyMatcher";
-import ChildrenAgeTag from "../tag/ChildrenAgeTag";
-import PregnancyTag from "../tag/PregnancyTag";
-import VerifiedTag from "../tag/VerifiedTag";
+import { ChildrenAgeTag, PregnancyTag, VerifiedTag } from "../tags";
 /**
  * Carte individuelle pour afficher un remède
  * - Entièrement cliquable (wrapper Link vers /remedes/:slug)

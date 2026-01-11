@@ -10,9 +10,7 @@ import {
 import { IoMdAlert } from "react-icons/io";
 import { Link, useLocation, useParams } from "react-router-dom";
 import RemedyResultNotFound from "../components/remedy/RemedyResultNotFound";
-import ChildrenAgeTag from "../components/tag/ChildrenAgeTag";
-import PregnancyTag from "../components/tag/PregnancyTag";
-import VerifiedTag from "../components/tag/VerifiedTag";
+import { ChildrenAgeTag, PregnancyTag, VerifiedTag } from "../components/tags";
 import TagsInfoTooltip from "../components/tooltip/TagsInfoTooltip";
 import { useAllergies } from "../context/AllergiesContext";
 import allergensList from "../data/allergensList.json";
