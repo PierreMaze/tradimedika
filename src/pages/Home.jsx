@@ -1,6 +1,6 @@
 // tradimedika-v1/src/pages/Home.jsx
 import { Helmet } from "react-helmet-async";
-import Hero from "../components/sections/Hero";
+import { Hero } from "../features/home";
 
 function Home() {
   return (

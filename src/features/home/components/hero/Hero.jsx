@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 
-import HeroFeatures from "../../features/symptom-search/components/HeroFeatures";
-import HeroHeader from "../../features/symptom-search/components/HeroHeader";
-import HeroSection from "../../features/symptom-search/components/HeroSection";
+import HeroFeatures from "./HeroFeatures";
+import HeroHeader from "./HeroHeader";
+import HeroSearch from "./HeroSearch";
 
 /**
  * Composant Hero - Page d'accueil principale
@@ -36,7 +36,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="w-full"
         >
-          <HeroSection />
+          <HeroSearch />
         </motion.div>
 
         {/* Liste des fonctionnalités */}

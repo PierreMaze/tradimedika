@@ -1,17 +1,17 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import SymptomsSelector from "./SymptomsSelector";
+import SymptomsForm from "./SymptomsForm";
 
 // Mock scrollIntoView as it's not implemented in jsdom
 Element.prototype.scrollIntoView = vi.fn();
 
-describe("SymptomsSelector", () => {
+describe("SymptomsForm", () => {
   describe("Rendering", () => {
     it("should render input with search icon", () => {
       const onSymptomSelect = vi.fn();
       const { container } = render(
-        <SymptomsSelector onSymptomSelect={onSymptomSelect} />,
+        <SymptomsForm onSymptomSelect={onSymptomSelect} />,
       );
 
       const input = screen.getByRole("combobox");
@@ -25,7 +25,7 @@ describe("SymptomsSelector", () => {
     it("should render with custom placeholder", () => {
       const onSymptomSelect = vi.fn();
       render(
-        <SymptomsSelector
+        <SymptomsForm
           onSymptomSelect={onSymptomSelect}
           placeholder="Tapez un symptôme..."
         />,
@@ -37,7 +37,7 @@ describe("SymptomsSelector", () => {
 
     it("should not display dropdown initially", () => {
       const onSymptomSelect = vi.fn();
-      render(<SymptomsSelector onSymptomSelect={onSymptomSelect} />);
+      render(<SymptomsForm onSymptomSelect={onSymptomSelect} />);
 
       const listbox = screen.queryByRole("listbox");
       expect(listbox).not.toBeInTheDocument();
@@ -49,7 +49,7 @@ describe("SymptomsSelector", () => {
       const onSymptomSelect = vi.fn();
       const user = userEvent.setup();
 
-      render(<SymptomsSelector onSymptomSelect={onSymptomSelect} />);
+      render(<SymptomsForm onSymptomSelect={onSymptomSelect} />);
 
       const input = screen.getByRole("combobox");
       await user.type(input, "fati");
@@ -67,7 +67,7 @@ describe("SymptomsSelector", () => {
       const onSymptomSelect = vi.fn();
       const user = userEvent.setup();
 
-      render(<SymptomsSelector onSymptomSelect={onSymptomSelect} />);
+      render(<SymptomsForm onSymptomSelect={onSymptomSelect} />);
 
       const input = screen.getByRole("combobox");
       await user.type(input, "fat");
@@ -88,7 +88,7 @@ describe("SymptomsSelector", () => {
       const onSymptomSelect = vi.fn();
       const user = userEvent.setup();
 
-      render(<SymptomsSelector onSymptomSelect={onSymptomSelect} />);
+      render(<SymptomsForm onSymptomSelect={onSymptomSelect} />);
 
       const input = screen.getByRole("combobox");
       await user.type(input, "FATI");
@@ -102,7 +102,7 @@ describe("SymptomsSelector", () => {
       const onSymptomSelect = vi.fn();
       const user = userEvent.setup();
 
-      render(<SymptomsSelector onSymptomSelect={onSymptomSelect} />);
+      render(<SymptomsForm onSymptomSelect={onSymptomSelect} />);
 
       const input = screen.getByRole("combobox");
       // Type without accent
@@ -120,7 +120,7 @@ describe("SymptomsSelector", () => {
       const onSymptomSelect = vi.fn();
       const user = userEvent.setup();
 
-      render(<SymptomsSelector onSymptomSelect={onSymptomSelect} />);
+      render(<SymptomsForm onSymptomSelect={onSymptomSelect} />);
 
       const input = screen.getByRole("combobox");
       expect(input).toHaveAttribute("aria-expanded", "false");
@@ -137,7 +137,7 @@ describe("SymptomsSelector", () => {
       const onSymptomSelect = vi.fn();
       const user = userEvent.setup();
 
-      render(<SymptomsSelector onSymptomSelect={onSymptomSelect} />);
+      render(<SymptomsForm onSymptomSelect={onSymptomSelect} />);
 
       const input = screen.getByRole("combobox");
       await user.type(input, "fat");
@@ -157,7 +157,7 @@ describe("SymptomsSelector", () => {
       const onSymptomSelect = vi.fn();
       const user = userEvent.setup();
 
-      render(<SymptomsSelector onSymptomSelect={onSymptomSelect} />);
+      render(<SymptomsForm onSymptomSelect={onSymptomSelect} />);
 
       const input = screen.getByRole("combobox");
       // Search for a common letter to get many results
@@ -177,7 +177,7 @@ describe("SymptomsSelector", () => {
       const onSymptomSelect = vi.fn();
       const user = userEvent.setup();
 
-      render(<SymptomsSelector onSymptomSelect={onSymptomSelect} />);
+      render(<SymptomsForm onSymptomSelect={onSymptomSelect} />);
 
       const input = screen.getByRole("combobox");
       await user.type(input, "fatigue");
@@ -199,7 +199,7 @@ describe("SymptomsSelector", () => {
       const onSymptomSelect = vi.fn();
       const user = userEvent.setup();
 
-      render(<SymptomsSelector onSymptomSelect={onSymptomSelect} />);
+      render(<SymptomsForm onSymptomSelect={onSymptomSelect} />);
 
       const input = screen.getByRole("combobox");
       await user.type(input, "fatigue");
@@ -219,7 +219,7 @@ describe("SymptomsSelector", () => {
       const onSymptomSelect = vi.fn();
       const user = userEvent.setup();
 
-      render(<SymptomsSelector onSymptomSelect={onSymptomSelect} />);
+      render(<SymptomsForm onSymptomSelect={onSymptomSelect} />);
 
       const input = screen.getByRole("combobox");
       await user.type(input, "insomnie");
@@ -239,7 +239,7 @@ describe("SymptomsSelector", () => {
       const user = userEvent.setup();
 
       render(
-        <SymptomsSelector
+        <SymptomsForm
           onSymptomSelect={onSymptomSelect}
           selectedSymptoms={["Fatigue"]}
         />,
@@ -263,7 +263,7 @@ describe("SymptomsSelector", () => {
       const onSymptomSelect = vi.fn();
       const user = userEvent.setup();
 
-      render(<SymptomsSelector onSymptomSelect={onSymptomSelect} />);
+      render(<SymptomsForm onSymptomSelect={onSymptomSelect} />);
 
       const input = screen.getByRole("combobox");
       await user.type(input, "f");
@@ -300,7 +300,7 @@ describe("SymptomsSelector", () => {
       const onSymptomSelect = vi.fn();
       const user = userEvent.setup();
 
-      render(<SymptomsSelector onSymptomSelect={onSymptomSelect} />);
+      render(<SymptomsForm onSymptomSelect={onSymptomSelect} />);
 
       const input = screen.getByRole("combobox");
       await user.type(input, "fatigue");
@@ -323,7 +323,7 @@ describe("SymptomsSelector", () => {
       const user = userEvent.setup();
 
       render(
-        <SymptomsSelector
+        <SymptomsForm
           onSymptomSelect={onSymptomSelect}
           onRemoveSymptom={onRemoveSymptom}
           selectedSymptoms={["Fatigue", "Stress"]}
@@ -345,7 +345,7 @@ describe("SymptomsSelector", () => {
       const user = userEvent.setup();
 
       render(
-        <SymptomsSelector
+        <SymptomsForm
           onSymptomSelect={onSymptomSelect}
           onRemoveSymptom={onRemoveSymptom}
           selectedSymptoms={["Fatigue"]}
@@ -366,7 +366,7 @@ describe("SymptomsSelector", () => {
       const onSymptomSelect = vi.fn();
 
       render(
-        <SymptomsSelector
+        <SymptomsForm
           onSymptomSelect={onSymptomSelect}
           selectedSymptoms={[
             "Fatigue",
@@ -386,7 +386,7 @@ describe("SymptomsSelector", () => {
       const onSymptomSelect = vi.fn();
 
       render(
-        <SymptomsSelector
+        <SymptomsForm
           onSymptomSelect={onSymptomSelect}
           selectedSymptoms={[
             "Fatigue",
@@ -407,7 +407,7 @@ describe("SymptomsSelector", () => {
       const onSymptomSelect = vi.fn();
 
       render(
-        <SymptomsSelector
+        <SymptomsForm
           onSymptomSelect={onSymptomSelect}
           selectedSymptoms={["Fatigue", "Stress"]}
         />,
@@ -426,7 +426,7 @@ describe("SymptomsSelector", () => {
 
       render(
         <div>
-          <SymptomsSelector onSymptomSelect={onSymptomSelect} />
+          <SymptomsForm onSymptomSelect={onSymptomSelect} />
           <div data-testid="outside">Outside element</div>
         </div>,
       );
@@ -450,7 +450,7 @@ describe("SymptomsSelector", () => {
   describe("Accessibility", () => {
     it("should have proper ARIA attributes", () => {
       const onSymptomSelect = vi.fn();
-      render(<SymptomsSelector onSymptomSelect={onSymptomSelect} />);
+      render(<SymptomsForm onSymptomSelect={onSymptomSelect} />);
 
       const input = screen.getByRole("combobox");
       expect(input).toHaveAttribute("aria-expanded", "false");
@@ -462,7 +462,7 @@ describe("SymptomsSelector", () => {
       const onSymptomSelect = vi.fn();
       const user = userEvent.setup();
 
-      render(<SymptomsSelector onSymptomSelect={onSymptomSelect} />);
+      render(<SymptomsForm onSymptomSelect={onSymptomSelect} />);
 
       const input = screen.getByRole("combobox");
       expect(input).toHaveAttribute("aria-expanded", "false");
@@ -478,7 +478,7 @@ describe("SymptomsSelector", () => {
       const onSymptomSelect = vi.fn();
       const user = userEvent.setup();
 
-      render(<SymptomsSelector onSymptomSelect={onSymptomSelect} />);
+      render(<SymptomsForm onSymptomSelect={onSymptomSelect} />);
 
       const input = screen.getByRole("combobox");
       await user.type(input, "fat");
@@ -499,10 +499,7 @@ describe("SymptomsSelector", () => {
       const onSymptomSelect = vi.fn();
 
       render(
-        <SymptomsSelector
-          onSymptomSelect={onSymptomSelect}
-          onFocus={onFocus}
-        />,
+        <SymptomsForm onSymptomSelect={onSymptomSelect} onFocus={onFocus} />,
       );
 
       const input = screen.getByRole("combobox");
@@ -516,7 +513,7 @@ describe("SymptomsSelector", () => {
       const onSymptomSelect = vi.fn();
 
       expect(() => {
-        render(<SymptomsSelector onSymptomSelect={onSymptomSelect} />);
+        render(<SymptomsForm onSymptomSelect={onSymptomSelect} />);
         const input = screen.getByRole("combobox");
         fireEvent.focus(input);
       }).not.toThrow();
@@ -528,7 +525,7 @@ describe("SymptomsSelector", () => {
       const onSymptomSelect = vi.fn();
       const user = userEvent.setup();
 
-      render(<SymptomsSelector onSymptomSelect={onSymptomSelect} />);
+      render(<SymptomsForm onSymptomSelect={onSymptomSelect} />);
 
       const input = screen.getByRole("combobox");
       // "angoisse" est un synonyme de "anxiété"
@@ -550,7 +547,7 @@ describe("SymptomsSelector", () => {
 
       expect(() => {
         render(
-          <SymptomsSelector
+          <SymptomsForm
             onSymptomSelect={onSymptomSelect}
             selectedSymptoms={["Fatigue"]}
           />,
@@ -563,7 +560,7 @@ describe("SymptomsSelector", () => {
 
       expect(() => {
         render(
-          <SymptomsSelector
+          <SymptomsForm
             onSymptomSelect={onSymptomSelect}
             selectedSymptoms={["Fatigue"]}
           />,

@@ -1,21 +1,21 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef } from "react";
 
-import { useScrollOnMobileFocus } from "../../../hooks/useScrollOnMobileFocus";
-import { AllergySectionToggle } from "../../allergens";
-import { useSymptomSearchForm } from "../hooks/useSymptomSearchForm";
-import ListSymptomTag from "./ListSymptomTag";
-import SearchButtons from "./SearchButtons";
-import SearchHistoryModal from "./SearchHistoryModal";
-import SymptomCounter from "./SymptomCounter";
-import SymptomsSelector from "./SymptomsSelector";
+import { useScrollOnMobileFocus } from "../../../../hooks/useScrollOnMobileFocus";
+import { AllergySectionToggle } from "../../../allergens";
+import { useSymptomSearchForm } from "../../../symptom-search/hooks/useSymptomSearchForm";
+import ListSymptomTag from "../../../symptom-search/components/ListSymptomTag";
+import SearchButtons from "../../../symptom-search/components/SearchButtons";
+import SearchHistoryModal from "../../../symptom-search/components/SearchHistoryModal";
+import SymptomCounter from "../../../symptom-search/components/SymptomCounter";
+import SymptomsForm from "../../../symptom-search/components/SymptomsForm";
 
 /**
- * Composant HeroSection - Section formulaire de recherche de symptômes
+ * Composant HeroSearch - Section formulaire de recherche de symptômes
  *
  * Composant wrapper qui orchestre tous les sous-composants du formulaire :
  * - AllergySectionToggle (section allergies avec checkbox/dropdown)
- * - SymptomsSelector (input avec autocomplétion)
+ * - SymptomsForm (input avec autocomplétion)
  * - ListSymptomTag (liste des symptômes sélectionnés)
  * - SymptomCounter (compteur X/5)
  * - SearchButtons (boutons recherche + historique)
@@ -26,7 +26,7 @@ import SymptomsSelector from "./SymptomsSelector";
  *
  * @returns {JSX.Element}
  */
-export default function HeroSection() {
+export default function HeroSearch() {
   const {
     // Symptômes
     selectedSymptoms,
@@ -81,7 +81,7 @@ export default function HeroSection() {
       />
 
       {/* Input de recherche avec autocomplétion */}
-      <SymptomsSelector
+      <SymptomsForm
         onSymptomSelect={addSymptom}
         onRemoveSymptom={removeSymptom}
         selectedSymptoms={selectedSymptoms}

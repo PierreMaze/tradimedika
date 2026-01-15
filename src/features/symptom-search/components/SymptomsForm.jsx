@@ -1,4 +1,4 @@
-// tradimedika/src/components/symptoms/SymptomsSelector.jsx
+// tradimedika/src/features/symptom-search/components/SymptomsForm.jsx
 import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -10,7 +10,7 @@ import { useLRUCache } from "../../../hooks/useLRUCache";
 import { createLogger } from "../../../utils/logger";
 import { normalizeForMatching } from "../../../utils/normalizeSymptom";
 
-const logger = createLogger("SymptomsSelector");
+const logger = createLogger("SymptomsForm");
 
 // Constants
 const ALL_SYNONYM_VALUES = Object.values(synonymsData).flat();
@@ -53,7 +53,7 @@ const isSymptomOrSynonymSelected = (symptom, selectedSymptoms) => {
   );
 };
 
-export default function SymptomsSelector({
+export default function SymptomsForm({
   onSymptomSelect,
   onRemoveSymptom,
   selectedSymptoms = [],
@@ -368,7 +368,7 @@ export default function SymptomsSelector({
   );
 }
 
-SymptomsSelector.propTypes = {
+SymptomsForm.propTypes = {
   onSymptomSelect: PropTypes.func.isRequired,
   onRemoveSymptom: PropTypes.func,
   selectedSymptoms: PropTypes.arrayOf(PropTypes.string),
