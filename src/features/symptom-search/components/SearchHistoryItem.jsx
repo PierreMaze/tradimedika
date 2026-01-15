@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 
-import allergensList from "../../data/allergensList.json";
-import { useReducedMotion } from "../../features/settings";
+import allergensList from "../../../data/allergensList.json";
+import { useReducedMotion } from "../../settings";
 
 /**
  * Helper function to capitalize the first letter of a symptom

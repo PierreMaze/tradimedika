@@ -5,8 +5,11 @@ import { useEffect, useRef, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { RiDeleteBin2Fill, RiHistoryLine } from "react-icons/ri";
 
-import { ARIA_CLOSE, BUTTON_CLEAR_HISTORY } from "../../constants/buttonLabels";
-import { useReducedMotion } from "../../features/settings";
+import {
+  ARIA_CLOSE,
+  BUTTON_CLEAR_HISTORY,
+} from "../../../constants/buttonLabels";
+import { useReducedMotion } from "../../settings";
 import SearchHistoryItem from "./SearchHistoryItem";
 
 /**
