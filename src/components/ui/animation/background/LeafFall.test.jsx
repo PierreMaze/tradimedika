@@ -2,11 +2,11 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, act } from "@testing-library/react";
 import LeafFall from "./LeafFall";
 
-vi.mock("../../../hooks/useReducedMotion", () => ({
+vi.mock("../../../../features/settings/hooks/useReducedMotion", () => ({
   useReducedMotion: vi.fn(() => false),
 }));
 
-vi.mock("../../../context/PerformanceContext", () => ({
+vi.mock("../../../../features/settings/context/PerformanceContext", () => ({
   usePerformance: vi.fn(() => ({
     isHighPerformance: true,
     performanceMode: "high",
@@ -62,7 +62,7 @@ describe("LeafFall", () => {
   describe("Reduced Motion", () => {
     it("should render even when prefersReducedMotion is true (always-on by default)", async () => {
       const { useReducedMotion } =
-        await import("../../../hooks/useReducedMotion");
+        await import("../../../../features/settings/hooks/useReducedMotion");
       useReducedMotion.mockReturnValue(true);
 
       const { container } = render(<LeafFall />);
@@ -76,7 +76,7 @@ describe("LeafFall", () => {
 
     it("should render when prefersReducedMotion is false", async () => {
       const { useReducedMotion } =
-        await import("../../../hooks/useReducedMotion");
+        await import("../../../../features/settings/hooks/useReducedMotion");
       useReducedMotion.mockReturnValue(false);
 
       const { container } = render(<LeafFall />);
@@ -90,7 +90,7 @@ describe("LeafFall", () => {
   describe("LocalStorage Override", () => {
     it("should render when force-leaffall is set to true even with prefersReducedMotion", async () => {
       const { useReducedMotion } =
-        await import("../../../hooks/useReducedMotion");
+        await import("../../../../features/settings/hooks/useReducedMotion");
       useReducedMotion.mockReturnValue(true);
 
       localStorage.setItem("force-leaffall", "true");
@@ -104,7 +104,7 @@ describe("LeafFall", () => {
 
     it("should render even when force-leaffall is false and prefersReducedMotion is true (always-on by default)", async () => {
       const { useReducedMotion } =
-        await import("../../../hooks/useReducedMotion");
+        await import("../../../../features/settings/hooks/useReducedMotion");
       useReducedMotion.mockReturnValue(true);
 
       localStorage.setItem("force-leaffall", "false");
@@ -120,7 +120,7 @@ describe("LeafFall", () => {
 
     it("should render even with prefersReducedMotion when force-leaffall is not set (always-on by default)", async () => {
       const { useReducedMotion } =
-        await import("../../../hooks/useReducedMotion");
+        await import("../../../../features/settings/hooks/useReducedMotion");
       useReducedMotion.mockReturnValue(true);
 
       const { container } = render(<LeafFall />);
@@ -136,7 +136,7 @@ describe("LeafFall", () => {
   describe("Leaf Icons", () => {
     it("should render leaf icons with correct classes", async () => {
       const { useReducedMotion } =
-        await import("../../../hooks/useReducedMotion");
+        await import("../../../../features/settings/hooks/useReducedMotion");
       useReducedMotion.mockReturnValue(false);
 
       const { container } = render(<LeafFall />);
@@ -151,7 +151,7 @@ describe("LeafFall", () => {
 
     it("should have dark mode classes", async () => {
       const { useReducedMotion } =
-        await import("../../../hooks/useReducedMotion");
+        await import("../../../../features/settings/hooks/useReducedMotion");
       useReducedMotion.mockReturnValue(false);
 
       const { container } = render(<LeafFall />);
@@ -167,7 +167,7 @@ describe("LeafFall", () => {
   describe("Performance Mode", () => {
     it("should not render when performance mode is low", async () => {
       const { usePerformance } =
-        await import("../../../context/PerformanceContext");
+        await import("../../../../features/settings/context/PerformanceContext");
       usePerformance.mockReturnValue({
         isHighPerformance: false,
         performanceMode: "low",
@@ -183,7 +183,7 @@ describe("LeafFall", () => {
 
     it("should render when performance mode is high", async () => {
       const { usePerformance } =
-        await import("../../../context/PerformanceContext");
+        await import("../../../../features/settings/context/PerformanceContext");
       usePerformance.mockReturnValue({
         isHighPerformance: true,
         performanceMode: "high",

@@ -31,6 +31,7 @@ function PregnancyTag({
 
   return (
     <span
+      data-testid="pregnancy-tag"
       className={`inline-flex items-center gap-1.5 rounded-md bg-lime-100 px-3 py-1.5 text-xs font-semibold text-lime-800 transition duration-300 lg:text-sm dark:bg-lime-900 dark:text-lime-200 ${className}`}
       title="Ce remède peut être utilisé sans danger pendant la grossesse"
     >

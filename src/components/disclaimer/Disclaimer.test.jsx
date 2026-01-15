@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import Disclaimer from "./Disclaimer";
 
-vi.mock("../../hooks/useReducedMotion", () => ({
+vi.mock("../../features/settings/hooks/useReducedMotion", () => ({
   useReducedMotion: vi.fn(() => false),
 }));
 
@@ -101,7 +101,8 @@ describe("Disclaimer", () => {
     });
 
     it("should render with animation when reduced motion is disabled", async () => {
-      const { useReducedMotion } = await import("../../hooks/useReducedMotion");
+      const { useReducedMotion } =
+        await import("../../features/settings/hooks/useReducedMotion");
       useReducedMotion.mockReturnValue(false);
 
       render(<Disclaimer />);
@@ -110,7 +111,8 @@ describe("Disclaimer", () => {
     });
 
     it("should render without animation when reduced motion is enabled", async () => {
-      const { useReducedMotion } = await import("../../hooks/useReducedMotion");
+      const { useReducedMotion } =
+        await import("../../features/settings/hooks/useReducedMotion");
       useReducedMotion.mockReturnValue(true);
 
       render(<Disclaimer />);

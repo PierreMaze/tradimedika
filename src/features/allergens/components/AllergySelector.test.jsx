@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import AllergySelector from "./AllergySelector";
-import { AllergiesProvider } from "../../context/AllergiesContext";
+import { AllergiesProvider } from "../context/AllergiesContext";
 
 describe("AllergySelector", () => {
   beforeEach(() => {
