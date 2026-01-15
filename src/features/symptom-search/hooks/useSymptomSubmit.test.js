@@ -103,8 +103,8 @@ describe("useSymptomSubmit", () => {
 
     expect(result.current.isLoading).toBe(false);
     expect(result.current.hasSubmitted).toBe(true);
-    expect(result.current.results).toHaveLength(1);
-    expect(result.current.results[0].remedy.name).toBe("Citron");
+    expect(result.current.results).toHaveLength(2);
+    expect(result.current.results[0].remedy.name).toBe("Gingembre frais");
 
     expect(mockNavigate).toHaveBeenCalledWith("/remedes?symptoms=naus%C3%A9e", {
       state: { symptoms: ["nausée"], allergies: [] },
@@ -201,7 +201,7 @@ describe("useSymptomSubmit", () => {
       },
     );
 
-    expect(mockAddSearch).toHaveBeenCalledWith(symptoms, 1, allergies, 0);
+    expect(mockAddSearch).toHaveBeenCalledWith(symptoms, 2, allergies, 0);
   });
 
   it("ne doit PAS inclure les allergies dans la navigation quand le filtrage est désactivé", async () => {
@@ -218,6 +218,6 @@ describe("useSymptomSubmit", () => {
       state: { symptoms, allergies: [] },
     });
 
-    expect(mockAddSearch).toHaveBeenCalledWith(symptoms, 1, [], 0);
+    expect(mockAddSearch).toHaveBeenCalledWith(symptoms, 2, [], 0);
   });
 });

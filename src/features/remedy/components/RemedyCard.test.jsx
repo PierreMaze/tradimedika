@@ -180,7 +180,7 @@ describe("RemedyCard Component", () => {
       );
 
       expect(screen.getByTestId("children-tag")).toBeInTheDocument();
-      expect(screen.getByText("Enfants 12+")).toBeInTheDocument();
+      expect(screen.getByText("Enfants +12 ans")).toBeInTheDocument();
     });
 
     it("should not render children badge when childrenAge is null", () => {
