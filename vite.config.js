@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [
     tailwindcss(),
     react({
@@ -13,7 +13,8 @@ export default defineConfig({
       },
     }),
   ],
-  base: "/tradimedika/",
+  // Use base path only in production build for GitHub Pages
+  base: command === "build" ? "/tradimedika/" : "/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -29,4 +30,4 @@ export default defineConfig({
     port: 3000,
     open: true,
   },
-});
+}));
