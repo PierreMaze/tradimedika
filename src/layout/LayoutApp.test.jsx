@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import LayoutApp from "./LayoutApp";
 
 // Mock child components
@@ -25,7 +25,25 @@ vi.mock("../components/ui/animation", () => ({
 }));
 
 const renderWithRouter = (component) => {
-  return render(<BrowserRouter>{component}</BrowserRouter>);
+  const router = createMemoryRouter(
+    [
+      {
+        path: "/",
+        element: component,
+        children: [
+          {
+            index: true,
+            element: <div>Test Content</div>,
+          },
+        ],
+      },
+    ],
+    {
+      initialEntries: ["/"],
+    },
+  );
+
+  return render(<RouterProvider router={router} />);
 };
 
 describe("LayoutApp", () => {
