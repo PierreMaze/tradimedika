@@ -12,5 +12,5 @@ export {
 } from "./context/PerformanceContext";
 
 // Hooks
-export { useDarkMode } from "./hooks/useDarkMode";
+export { useDarkMode } from "./hooks/useDarkMode.js";
 export { useReducedMotion } from "./hooks/useReducedMotion";

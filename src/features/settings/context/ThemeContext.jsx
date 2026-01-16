@@ -1,7 +1,7 @@
 // context/ThemeContext.jsx
 import PropTypes from "prop-types";
 import { createContext, useContext, useMemo } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
+import { useDarkMode } from "../hooks/useDarkMode.js";
 
 // Contexte privé - utilisé seulement dans ce fichier
 const ThemeContext = createContext(undefined);
