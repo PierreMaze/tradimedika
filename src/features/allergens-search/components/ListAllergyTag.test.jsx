@@ -1,9 +1,9 @@
-import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import ListFilterTag from "./ListFilterTag";
+import { describe, expect, it, vi } from "vitest";
+import ListAllergyTag from "./ListAllergyTag";
 
-describe("ListFilterTag", () => {
+describe("ListAllergyTag", () => {
   const defaultProps = {
     tags: ["all", "nausée", "fatigue"],
     activeTag: "all",
@@ -12,7 +12,7 @@ describe("ListFilterTag", () => {
 
   describe("Rendering", () => {
     it("should render all tags", () => {
-      render(<ListFilterTag {...defaultProps} />);
+      render(<ListAllergyTag {...defaultProps} />);
       expect(screen.getByText("Tous")).toBeInTheDocument();
       expect(screen.getByText("Nausée")).toBeInTheDocument();
       expect(screen.getByText("Fatigue")).toBeInTheDocument();
@@ -20,13 +20,13 @@ describe("ListFilterTag", () => {
 
     it("should render nothing when tags array is empty", () => {
       const { container } = render(
-        <ListFilterTag {...defaultProps} tags={[]} />,
+        <ListAllergyTag {...defaultProps} tags={[]} />,
       );
       expect(container.firstChild).toBeNull();
     });
 
     it("should have role group", () => {
-      render(<ListFilterTag {...defaultProps} />);
+      render(<ListAllergyTag {...defaultProps} />);
       expect(
         screen.getByRole("group", {
           name: "Filtrer les remèdes par symptôme",
@@ -35,20 +35,20 @@ describe("ListFilterTag", () => {
     });
 
     it("should capitalize symptom labels", () => {
-      render(<ListFilterTag {...defaultProps} />);
+      render(<ListAllergyTag {...defaultProps} />);
       expect(screen.getByText("Nausée")).toBeInTheDocument();
       expect(screen.queryByText("nausée")).not.toBeInTheDocument();
     });
 
     it("should display 'Tous' for 'all' tag", () => {
-      render(<ListFilterTag {...defaultProps} />);
+      render(<ListAllergyTag {...defaultProps} />);
       expect(screen.getByText("Tous")).toBeInTheDocument();
     });
   });
 
   describe("Active state", () => {
     it("should mark active tag as pressed", () => {
-      render(<ListFilterTag {...defaultProps} activeTag="nausée" />);
+      render(<ListAllergyTag {...defaultProps} activeTag="nausée" />);
       const buttons = screen.getAllByRole("button");
       const nauseeButton = buttons.find(
         (btn) => btn.getAttribute("aria-label") === "Filtrer par Nausée",
@@ -57,7 +57,7 @@ describe("ListFilterTag", () => {
     });
 
     it("should mark inactive tags as not pressed", () => {
-      render(<ListFilterTag {...defaultProps} activeTag="nausée" />);
+      render(<ListAllergyTag {...defaultProps} activeTag="nausée" />);
       const buttons = screen.getAllByRole("button");
       const allButton = buttons.find(
         (btn) => btn.getAttribute("aria-label") === "Filtrer par Tous",
@@ -70,7 +70,7 @@ describe("ListFilterTag", () => {
     it("should call onTagClick with correct tag when clicked", async () => {
       const user = userEvent.setup();
       const onTagClick = vi.fn();
-      render(<ListFilterTag {...defaultProps} onTagClick={onTagClick} />);
+      render(<ListAllergyTag {...defaultProps} onTagClick={onTagClick} />);
 
       await user.click(screen.getByText("Nausée"));
       expect(onTagClick).toHaveBeenCalledWith("nausée");
@@ -79,7 +79,7 @@ describe("ListFilterTag", () => {
     it("should call onTagClick for 'all' tag", async () => {
       const user = userEvent.setup();
       const onTagClick = vi.fn();
-      render(<ListFilterTag {...defaultProps} onTagClick={onTagClick} />);
+      render(<ListAllergyTag {...defaultProps} onTagClick={onTagClick} />);
 
       await user.click(screen.getByText("Tous"));
       expect(onTagClick).toHaveBeenCalledWith("all");
@@ -88,19 +88,19 @@ describe("ListFilterTag", () => {
 
   describe("Layout", () => {
     it("should have flex wrap layout", () => {
-      const { container } = render(<ListFilterTag {...defaultProps} />);
+      const { container } = render(<ListAllergyTag {...defaultProps} />);
       const wrapper = container.firstChild;
       expect(wrapper?.className).toContain("flex-wrap");
     });
 
     it("should center items", () => {
-      const { container } = render(<ListFilterTag {...defaultProps} />);
+      const { container } = render(<ListAllergyTag {...defaultProps} />);
       const wrapper = container.firstChild;
       expect(wrapper?.className).toContain("justify-center");
     });
 
     it("should have gap between tags", () => {
-      const { container } = render(<ListFilterTag {...defaultProps} />);
+      const { container } = render(<ListAllergyTag {...defaultProps} />);
       const wrapper = container.firstChild;
       expect(wrapper?.className).toContain("gap-2");
     });
@@ -108,13 +108,13 @@ describe("ListFilterTag", () => {
 
   describe("Multiple tags", () => {
     it("should render correct number of buttons", () => {
-      render(<ListFilterTag {...defaultProps} />);
+      render(<ListAllergyTag {...defaultProps} />);
       const buttons = screen.getAllByRole("button");
       expect(buttons).toHaveLength(3);
     });
 
     it("should handle single tag", () => {
-      render(<ListFilterTag {...defaultProps} tags={["all"]} />);
+      render(<ListAllergyTag {...defaultProps} tags={["all"]} />);
       const buttons = screen.getAllByRole("button");
       expect(buttons).toHaveLength(1);
     });

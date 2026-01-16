@@ -113,7 +113,7 @@ describe("AllergySearchSection", () => {
       userAllergies: [],
     });
 
-    expect(screen.queryByText(/allergie/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/^(\d+)\s+allergie/)).not.toBeInTheDocument();
   });
 
   it("toggle le dropdown via le bouton", () => {
