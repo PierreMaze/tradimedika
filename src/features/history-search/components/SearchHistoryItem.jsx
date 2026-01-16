@@ -104,23 +104,24 @@ export default function SearchHistoryItem({ search, onClick, onRemove }) {
 
         {/* Result count badge */}
         {search.resultCount !== undefined && (
-          <div className="flex flex-col items-center gap-2 text-xs lg:flex-row">
+          <div className="flex flex-wrap items-center gap-2 text-xs">
             <span className="rounded-md py-0.5 pl-2 font-semibold text-emerald-600 dark:text-emerald-400">
               {search.resultCount}{" "}
               {search.resultCount > 1 ? "résultats" : "résultat"}
-            </span>
-            <span className="px-2 text-neutral-400 dark:text-neutral-500">
-              •
+              <span className="pl-2 text-neutral-400 dark:text-neutral-500">
+                •
+              </span>
             </span>
             {(search.filteredCount ?? 0) > 0 && (
               <span className="font-semibold text-sky-600 dark:text-sky-400">
                 {search.filteredCount}{" "}
                 {search.filteredCount > 1 ? "remèdes masqués" : "remède masqué"}
+                <span className="pl-2 text-neutral-400 dark:text-neutral-500">
+                  •
+                </span>
               </span>
             )}
-            <span className="px-2 text-neutral-400 dark:text-neutral-500">
-              •
-            </span>
+
             <time
               className="text-neutral-700 dark:text-neutral-300"
               dateTime={new Date(search.timestamp).toISOString()}
