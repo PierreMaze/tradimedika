@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 
 import { useAllergies } from "../../allergens";
-import { useSearchHistory } from "./useSearchHistory";
+import { useSearchHistory } from "../../history-search";
 import { useSymptomSubmit } from "./useSymptomSubmit";
 import { useSymptomTags } from "./useSymptomTags";
 
