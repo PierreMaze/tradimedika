@@ -2,6 +2,85 @@
 
 ---
 
+## [0.42.0] - 2026-01-16
+
+### <u>Refactoring majeur - Architecture hybride:</u>
+
+- **Migration vers architecture features/**
+  - Nouvelle structure : `/features` pour regrouper les fonctionnalités par domaine
+  - Séparation claire : composants, contextes, hooks, tests dans chaque feature
+  - Migration complète de Settings → `features/settings`
+  - Migration complète de Allergens → `features/allergens`
+  - Migration complète de Remedy → `features/remedy`
+  - Migration complète de Symptom Search → `features/symptom-search`
+
+- **Décomposition Hero.jsx en composants atomiques**
+  - Réduction drastique : **443 lignes → 48 lignes**
+  - Extraction de sous-composants : `HeroHeader`, `HeroFeatures`, `HeroButtons`
+  - Organisation en sous-dossier `features/home/components/hero/`
+  - Amélioration de la maintenabilité et de la testabilité
+
+- **Renommage et standardisation des fichiers**
+  - Hooks renommés : `.jsx` → `.js` (useDarkMode, useMediaQuery, useReducedMotion)
+  - Composants renommés : `AllergySelector` → `AllergyForm`
+  - `SearchButtons` → `HeroButtons` (déplacé vers feature hero)
+  - Nettoyage des anciens dossiers et imports obsolètes
+
+### <u>Tests:</u>
+
+- **Nouveaux tests pour composants Settings**
+  - `DarkModeToggle.test.jsx` : 9 tests (toggle, état, localStorage, dark mode)
+  - `PerformanceToggle.test.jsx` : 10 tests (toggle, mode économie/élevée, icônes)
+  - `SettingsModal.test.jsx` : 18 tests (modal, aria, focus, fermeture)
+  - `SettingsButton.test.jsx` : tests pour le bouton d'ouverture
+
+- **Tests contextes**
+  - `ThemeContext.test.jsx` : Tests complets du contexte de thème
+  - Validation de la persistence localStorage
+  - Tests des toggles et états
+
+- **Tests unitaires pour composants prioritaires**
+  - Couverture complète des composants refactorisés
+  - Validation des migrations et renommages
+
+### <u>Fixed:</u>
+
+- **Correction test SettingsModal**
+  - Label "Performance" → "Animations" (alignement avec constantes)
+  - Harmonisation avec `SETTINGS_PERFORMANCE_LABEL`
+
+- **Imports corrigés après migrations**
+  - Mise à jour de tous les chemins après déplacement vers `features/`
+  - Correction des imports `useReducedMotion` dans tous les composants
+  - Fix des imports dans les tests après restructuration
+
+### <u>Architecture:</u>
+
+- **Nouvelle structure du projet**
+
+  ```
+  src/
+  ├── features/              # Features organisées par domaine
+  │   ├── allergens/        # Gestion des allergies
+  │   ├── home/             # Page d'accueil (hero, features)
+  │   ├── remedy/           # Affichage des remèdes
+  │   ├── settings/         # Paramètres (dark mode, performance)
+  │   └── symptom-search/   # Recherche de symptômes
+  ├── components/           # Composants UI partagés
+  │   ├── tag/             # Tags (Verified, Pregnancy, Children, etc.)
+  │   ├── tooltip/         # Tooltips
+  │   └── ui/              # Composants UI génériques
+  └── ...
+  ```
+
+- **Bénéfices de la nouvelle architecture**
+  - Meilleure séparation des responsabilités
+  - Code plus maintenable et testable
+  - Facilite l'ajout de nouvelles features
+  - Réduction de la dette technique
+
+---
+
 ## [0.41.0] - 2026-01-10
 
 ### <u>Changed:</u>
