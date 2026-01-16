@@ -17,7 +17,7 @@ import { useAllergies } from "../features/allergens-search";
 import {
   RemedyResultNotFound,
   getRemedyBySlug,
-} from "../features/remedy-result";
+} from "../features/remedy-result-page";
 import { useReducedMotion } from "../features/settings";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 import { formatFrequency } from "../utils/formatFrequency";

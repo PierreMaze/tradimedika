@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import db from "../../../data/db.json";
 import { createLogger } from "../../../utils/logger";
-import { findMatchingRemedies } from "../../remedy-result";
+import { findMatchingRemedies } from "../../remedy-result-page";
 
 const logger = createLogger("useSymptomSubmit");
 

@@ -1,8 +1,8 @@
-import { describe, it, expect, vi } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
 import FilterRemedyResult from "./FilterRemedyResult";
 
-vi.mock("./ListFilterTag", () => ({
+vi.mock("../../features/allergens-search/ListAllergyTag", () => ({
   default: ({ tags, activeTag, onTagClick }) => (
     <div
       data-testid="list-filter-tag"

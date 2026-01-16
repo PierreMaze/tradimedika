@@ -7,8 +7,6 @@ Object.defineProperty(window, "matchMedia", {
     matches: false,
     media: query,
     onchange: null,
-    addListener: () => {}, // Deprecated
-    removeListener: () => {}, // Deprecated
     addEventListener: () => {},
     removeEventListener: () => {},
     dispatchEvent: () => {},

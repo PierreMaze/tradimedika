@@ -1,7 +1,7 @@
-// components/filter/ListFilterTag.jsx
+// components/filter/ListAllergyTag.jsx
 import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
-import FilterTag from "../../../components/tags/AllergyTag";
+import AllergyTag from "../../../components/tags/AllergyTag";
 
 // Fonction helper pour capitaliser la première lettre
 const capitalizeSymptom = (symptom) => {
@@ -15,7 +15,7 @@ const capitalizeSymptom = (symptom) => {
  * - Animations avec AnimatePresence pour enter/exit smooth
  * - Gère l'affichage du tag "Tous" + tags de symptômes
  */
-export default function ListFilterTag({ tags, activeTag, onTagClick }) {
+export default function ListAllergyTag({ tags, activeTag, onTagClick }) {
   if (tags.length === 0) return null;
 
   return (
@@ -29,7 +29,7 @@ export default function ListFilterTag({ tags, activeTag, onTagClick }) {
     >
       <AnimatePresence mode="popLayout">
         {tags.map((tag) => (
-          <FilterTag
+          <AllergyTag
             key={tag}
             label={tag === "all" ? "Tous" : capitalizeSymptom(tag)}
             isActive={activeTag === tag}
@@ -41,7 +41,7 @@ export default function ListFilterTag({ tags, activeTag, onTagClick }) {
   );
 }
 
-ListFilterTag.propTypes = {
+ListAllergyTag.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   activeTag: PropTypes.string.isRequired,
   onTagClick: PropTypes.func.isRequired,

@@ -1,7 +1,7 @@
-import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import { BrowserRouter } from "react-router-dom";
+import { describe, expect, it, vi } from "vitest";
 import RemedyResultDetails from "./RemedyResultDetails";
 
 // Mock framer-motion
@@ -46,7 +46,7 @@ vi.mock("../features/allergens-search", () => ({
   }),
 }));
 
-vi.mock("../features/remedy-result", () => ({
+vi.mock("../features/remedy-result-page", () => ({
   RemedyResultNotFound: () => (
     <div data-testid="remedy-not-found">remedy-not-found</div>
   ),

@@ -11,7 +11,7 @@ import {
   FilterRemedyResult,
   RemedyResultList,
   findMatchingRemedies,
-} from "../features/remedy-result";
+} from "../features/remedy-result-page";
 import { parseAndValidateSymptoms } from "../utils/validation";
 
 /**

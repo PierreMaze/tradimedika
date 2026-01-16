@@ -2,7 +2,7 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { normalizeForMatching } from "../../../utils/normalizeSymptom";
-import { ListFilterTag } from "../../allergens-search";
+import { ListAllergyTag } from "../../allergens-search";
 
 /**
  * Extrait les symptômes uniques des remèdes matchés et les trie alphabétiquement
@@ -78,7 +78,7 @@ export default function FilterRemedyResult({
 
   return (
     <div className="mb-6 w-full">
-      <ListFilterTag
+      <ListAllergyTag
         tags={availableTags}
         activeTag={activeTag}
         onTagClick={handleTagClick}

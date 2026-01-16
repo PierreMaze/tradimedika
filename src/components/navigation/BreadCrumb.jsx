@@ -4,7 +4,7 @@ import { IoChevronForward } from "react-icons/io5";
 import { NavLink, useLocation, useParams } from "react-router-dom";
 import { LINK_INTERNAL_STYLES } from "../../constants/linkStyles";
 import db from "../../data/db.json";
-import { getRemedyBySlug } from "../../features/remedy-result";
+import { getRemedyBySlug } from "../../features/remedy-result-page";
 import { formatSegmentLabel } from "../../utils/formatSegmentLabel";
 
 /**
