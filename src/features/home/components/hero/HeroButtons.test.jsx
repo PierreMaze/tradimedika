@@ -1,9 +1,9 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import SearchButtons from "./SearchButtons";
+import HeroButtons from "./HeroButtons";
 
-describe("SearchButtons", () => {
+describe("HeroButtons", () => {
   const defaultProps = {
     onSubmit: vi.fn(),
     isDisabled: false,
@@ -15,19 +15,19 @@ describe("SearchButtons", () => {
 
   describe("Rendering", () => {
     it("should render search button with default text", () => {
-      render(<SearchButtons {...defaultProps} />);
+      render(<HeroButtons {...defaultProps} />);
 
       expect(screen.getByText("Découvrir nos solutions")).toBeInTheDocument();
     });
 
     it("should render history button", () => {
-      render(<SearchButtons {...defaultProps} />);
+      render(<HeroButtons {...defaultProps} />);
 
       expect(screen.getByText("Historique")).toBeInTheDocument();
     });
 
     it("should render both buttons in a flex container", () => {
-      const { container } = render(<SearchButtons {...defaultProps} />);
+      const { container } = render(<HeroButtons {...defaultProps} />);
 
       const wrapper = container.firstChild;
       expect(wrapper).toHaveClass("flex");
@@ -36,7 +36,7 @@ describe("SearchButtons", () => {
 
   describe("Search button states", () => {
     it("should display loading state", () => {
-      render(<SearchButtons {...defaultProps} isLoading />);
+      render(<HeroButtons {...defaultProps} isLoading />);
 
       expect(screen.getByText("Recherche en cours...")).toBeInTheDocument();
       expect(
@@ -45,7 +45,7 @@ describe("SearchButtons", () => {
     });
 
     it("should display completed state with checkmark", () => {
-      render(<SearchButtons {...defaultProps} hasSubmitted />);
+      render(<HeroButtons {...defaultProps} hasSubmitted />);
 
       expect(screen.getByText("Recherche effectuée")).toBeInTheDocument();
       expect(
@@ -54,9 +54,7 @@ describe("SearchButtons", () => {
     });
 
     it("should show loading spinner when isLoading is true", () => {
-      const { container } = render(
-        <SearchButtons {...defaultProps} isLoading />,
-      );
+      const { container } = render(<HeroButtons {...defaultProps} isLoading />);
 
       // Spinner is a div with border classes
       const spinner = container.querySelector(".border-t-transparent");
@@ -66,7 +64,7 @@ describe("SearchButtons", () => {
 
   describe("Disabled state", () => {
     it("should disable button when isDisabled is true", () => {
-      render(<SearchButtons {...defaultProps} isDisabled />);
+      render(<HeroButtons {...defaultProps} isDisabled />);
 
       const button = screen.getByRole("button", {
         name: /Sélectionnez au moins un symptôme/i,
@@ -75,7 +73,7 @@ describe("SearchButtons", () => {
     });
 
     it("should disable button when isLoading is true", () => {
-      render(<SearchButtons {...defaultProps} isLoading />);
+      render(<HeroButtons {...defaultProps} isLoading />);
 
       const button = screen.getByRole("button", {
         name: /Découvrir les remèdes naturels/i,
@@ -85,7 +83,7 @@ describe("SearchButtons", () => {
 
     it("should apply disabled styles when disabled", () => {
       const { container } = render(
-        <SearchButtons {...defaultProps} isDisabled />,
+        <HeroButtons {...defaultProps} isDisabled />,
       );
 
       const button = container.querySelector("button");
@@ -93,7 +91,7 @@ describe("SearchButtons", () => {
     });
 
     it("should not be disabled when neither isDisabled nor isLoading", () => {
-      render(<SearchButtons {...defaultProps} />);
+      render(<HeroButtons {...defaultProps} />);
 
       const button = screen.getByRole("button", {
         name: /Découvrir les remèdes/i,
@@ -107,7 +105,7 @@ describe("SearchButtons", () => {
       const onSubmit = vi.fn();
       const user = userEvent.setup();
 
-      render(<SearchButtons {...defaultProps} onSubmit={onSubmit} />);
+      render(<HeroButtons {...defaultProps} onSubmit={onSubmit} />);
 
       const button = screen.getByRole("button", {
         name: /Découvrir les remèdes/i,
@@ -121,9 +119,7 @@ describe("SearchButtons", () => {
       const onSubmit = vi.fn();
       const user = userEvent.setup();
 
-      render(
-        <SearchButtons {...defaultProps} onSubmit={onSubmit} isDisabled />,
-      );
+      render(<HeroButtons {...defaultProps} onSubmit={onSubmit} isDisabled />);
 
       const button = screen.getByRole("button", { name: /Sélectionnez/i });
       await user.click(button);
@@ -135,7 +131,7 @@ describe("SearchButtons", () => {
       const onSubmit = vi.fn();
       const user = userEvent.setup();
 
-      render(<SearchButtons {...defaultProps} onSubmit={onSubmit} isLoading />);
+      render(<HeroButtons {...defaultProps} onSubmit={onSubmit} isLoading />);
 
       const button = screen.getByRole("button", {
         name: /Découvrir les remèdes naturels/i,
@@ -149,7 +145,7 @@ describe("SearchButtons", () => {
       const onHistoryOpen = vi.fn();
       const user = userEvent.setup();
 
-      render(<SearchButtons {...defaultProps} onHistoryOpen={onHistoryOpen} />);
+      render(<HeroButtons {...defaultProps} onHistoryOpen={onHistoryOpen} />);
 
       const button = screen.getByRole("button", { name: /Historique/i });
       await user.click(button);
@@ -160,25 +156,25 @@ describe("SearchButtons", () => {
 
   describe("History counter badge", () => {
     it("should not show badge when historyCount is 0", () => {
-      render(<SearchButtons {...defaultProps} historyCount={0} />);
+      render(<HeroButtons {...defaultProps} historyCount={0} />);
 
       expect(screen.queryByText("0")).not.toBeInTheDocument();
     });
 
     it("should show badge when historyCount > 0", () => {
-      render(<SearchButtons {...defaultProps} historyCount={5} />);
+      render(<HeroButtons {...defaultProps} historyCount={5} />);
 
       expect(screen.getByText("5")).toBeInTheDocument();
     });
 
     it("should display correct count in badge", () => {
-      render(<SearchButtons {...defaultProps} historyCount={12} />);
+      render(<HeroButtons {...defaultProps} historyCount={12} />);
 
       expect(screen.getByText("12")).toBeInTheDocument();
     });
 
     it("should apply badge styles", () => {
-      render(<SearchButtons {...defaultProps} historyCount={3} />);
+      render(<HeroButtons {...defaultProps} historyCount={3} />);
 
       const badge = screen.getByText("3");
       expect(badge).toHaveClass("rounded-full");
@@ -188,7 +184,7 @@ describe("SearchButtons", () => {
 
   describe("Accessibility", () => {
     it("should have proper aria-label when enabled", () => {
-      render(<SearchButtons {...defaultProps} />);
+      render(<HeroButtons {...defaultProps} />);
 
       const button = screen.getByRole("button", {
         name: /Découvrir les remèdes naturels/i,
@@ -197,7 +193,7 @@ describe("SearchButtons", () => {
     });
 
     it("should have proper aria-label when disabled", () => {
-      render(<SearchButtons {...defaultProps} isDisabled />);
+      render(<HeroButtons {...defaultProps} isDisabled />);
 
       const button = screen.getByRole("button", {
         name: /Sélectionnez au moins un symptôme/i,
@@ -206,7 +202,7 @@ describe("SearchButtons", () => {
     });
 
     it("should have aria-busy when loading", () => {
-      render(<SearchButtons {...defaultProps} isLoading />);
+      render(<HeroButtons {...defaultProps} isLoading />);
 
       const button = screen.getByRole("button", {
         name: /Découvrir les remèdes naturels/i,
@@ -215,14 +211,14 @@ describe("SearchButtons", () => {
     });
 
     it("should have aria-disabled when disabled", () => {
-      render(<SearchButtons {...defaultProps} isDisabled />);
+      render(<HeroButtons {...defaultProps} isDisabled />);
 
       const button = screen.getByRole("button", { name: /Sélectionnez/i });
       expect(button).toHaveAttribute("aria-disabled", "true");
     });
 
     it("should include history count in aria-label", () => {
-      render(<SearchButtons {...defaultProps} historyCount={5} />);
+      render(<HeroButtons {...defaultProps} historyCount={5} />);
 
       const button = screen.getByRole("button", {
         name: /Historique - 5 recherches/i,
@@ -233,7 +229,7 @@ describe("SearchButtons", () => {
 
   describe("Icons", () => {
     it("should render arrow icon in default state", () => {
-      const { container } = render(<SearchButtons {...defaultProps} />);
+      const { container } = render(<HeroButtons {...defaultProps} />);
 
       // IoMdArrowForward icon is present
       const icons = container.querySelectorAll("svg");
@@ -242,7 +238,7 @@ describe("SearchButtons", () => {
 
     it("should render checkmark icon in completed state", () => {
       const { container } = render(
-        <SearchButtons {...defaultProps} hasSubmitted />,
+        <HeroButtons {...defaultProps} hasSubmitted />,
       );
 
       // FaCheck icon is present (checkmark)
@@ -251,7 +247,7 @@ describe("SearchButtons", () => {
     });
 
     it("should render history icon in history button", () => {
-      render(<SearchButtons {...defaultProps} />);
+      render(<HeroButtons {...defaultProps} />);
 
       // RiHistoryLine icon is present
       const historyButton = screen.getByRole("button", { name: /Historique/i });
@@ -262,14 +258,14 @@ describe("SearchButtons", () => {
 
   describe("Styling", () => {
     it("should apply primary button styles when enabled", () => {
-      const { container } = render(<SearchButtons {...defaultProps} />);
+      const { container } = render(<HeroButtons {...defaultProps} />);
 
       const button = container.querySelector("button");
       expect(button).toHaveClass("bg-emerald-600");
     });
 
     it("should apply secondary button styles to history button", () => {
-      render(<SearchButtons {...defaultProps} />);
+      render(<HeroButtons {...defaultProps} />);
 
       const button = screen.getByRole("button", { name: /Historique/i });
       expect(button).toHaveClass("ring-2");
@@ -277,7 +273,7 @@ describe("SearchButtons", () => {
     });
 
     it("should have min-width on both buttons", () => {
-      const { container } = render(<SearchButtons {...defaultProps} />);
+      const { container } = render(<HeroButtons {...defaultProps} />);
 
       const buttons = container.querySelectorAll("button");
       buttons.forEach((button) => {
@@ -286,7 +282,7 @@ describe("SearchButtons", () => {
     });
 
     it("should have shadow and rounded corners", () => {
-      const { container } = render(<SearchButtons {...defaultProps} />);
+      const { container } = render(<HeroButtons {...defaultProps} />);
 
       const buttons = container.querySelectorAll("button");
       buttons.forEach((button) => {
@@ -298,11 +294,11 @@ describe("SearchButtons", () => {
 
   describe("State transitions", () => {
     it("should transition from default to loading", () => {
-      const { rerender } = render(<SearchButtons {...defaultProps} />);
+      const { rerender } = render(<HeroButtons {...defaultProps} />);
 
       expect(screen.getByText("Découvrir nos solutions")).toBeInTheDocument();
 
-      rerender(<SearchButtons {...defaultProps} isLoading />);
+      rerender(<HeroButtons {...defaultProps} isLoading />);
 
       expect(screen.getByText("Recherche en cours...")).toBeInTheDocument();
       expect(
@@ -311,13 +307,11 @@ describe("SearchButtons", () => {
     });
 
     it("should transition from loading to completed", () => {
-      const { rerender } = render(
-        <SearchButtons {...defaultProps} isLoading />,
-      );
+      const { rerender } = render(<HeroButtons {...defaultProps} isLoading />);
 
       expect(screen.getByText("Recherche en cours...")).toBeInTheDocument();
 
-      rerender(<SearchButtons {...defaultProps} hasSubmitted />);
+      rerender(<HeroButtons {...defaultProps} hasSubmitted />);
 
       expect(screen.getByText("Recherche effectuée")).toBeInTheDocument();
       expect(
@@ -327,12 +321,12 @@ describe("SearchButtons", () => {
 
     it("should transition from completed back to default", () => {
       const { rerender } = render(
-        <SearchButtons {...defaultProps} hasSubmitted />,
+        <HeroButtons {...defaultProps} hasSubmitted />,
       );
 
       expect(screen.getByText("Recherche effectuée")).toBeInTheDocument();
 
-      rerender(<SearchButtons {...defaultProps} />);
+      rerender(<HeroButtons {...defaultProps} />);
 
       expect(screen.getByText("Découvrir nos solutions")).toBeInTheDocument();
       expect(screen.queryByText("Recherche effectuée")).not.toBeInTheDocument();

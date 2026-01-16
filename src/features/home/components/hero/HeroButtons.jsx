@@ -4,14 +4,14 @@ import { FaCheck } from "react-icons/fa6";
 import { IoMdArrowForward } from "react-icons/io";
 import { RiHistoryLine } from "react-icons/ri";
 
-import { BUTTON_HISTORY } from "../../../constants/buttonLabels";
+import { BUTTON_HISTORY } from "../../../../constants/buttonLabels";
 import {
   BUTTON_PRIMARY_STYLES,
   BUTTON_SECONDARY_STYLES,
-} from "../../../constants/buttonStyles";
+} from "../../../../constants/buttonStyles";
 
 /**
- * Composant SearchButtons - Boutons de recherche et historique
+ * Composant HeroButtons - Boutons de recherche et historique
  *
  * Affiche :
  * - Bouton principal de recherche avec 3 états (normal, loading, completed)
@@ -26,7 +26,7 @@ import {
  * @param {number} props.historyCount - Nombre d'entrées dans l'historique
  * @returns {JSX.Element}
  */
-export default function SearchButtons({
+export default function HeroButtons({
   onSubmit,
   isDisabled,
   isLoading,
@@ -101,7 +101,7 @@ export default function SearchButtons({
   );
 }
 
-SearchButtons.propTypes = {
+HeroButtons.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   isDisabled: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
