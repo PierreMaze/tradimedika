@@ -3,12 +3,10 @@ import { useRef } from "react";
 
 import { useScrollOnMobileFocus } from "../../../../hooks/useScrollOnMobileFocus";
 import { AllergySectionToggle } from "../../../allergens";
+import { SearchHistoryModal } from "../../../history-search";
 import { useSymptomSearchForm } from "../../../symptom-search/hooks/useSymptomSearchForm";
-import ListSymptomTag from "../../../symptom-search/components/ListSymptomTag";
 import SearchButtons from "../../../symptom-search/components/SearchButtons";
-import SearchHistoryModal from "../../../symptom-search/components/SearchHistoryModal";
-import SymptomCounter from "../../../symptom-search/components/SymptomCounter";
-import SymptomsForm from "../../../symptom-search/components/SymptomsForm";
+import SymptomSearchSection from "../../../symptom-search/components/SymptomSearchSection";
 
 /**
  * Composant HeroSearch - Section formulaire de recherche de symptômes
@@ -80,8 +78,8 @@ export default function HeroSearch() {
         onExpandChange={setIsAllergySectionExpanded}
       />
 
-      {/* Input de recherche avec autocomplétion */}
-      <SymptomsForm
+      {/* Section de recherche de symptômes */}
+      <SymptomSearchSection
         onSymptomSelect={addSymptom}
         onRemoveSymptom={removeSymptom}
         selectedSymptoms={selectedSymptoms}
@@ -89,15 +87,6 @@ export default function HeroSearch() {
         onFocus={handleInputFocus}
         placeholder="Entrez vos symptômes (ex: fatigue, digestion...)"
       />
-
-      {/* Liste des symptômes sélectionnés */}
-      <ListSymptomTag
-        symptoms={selectedSymptoms}
-        onRemoveSymptom={removeSymptom}
-      />
-
-      {/* Compteur de symptômes */}
-      <SymptomCounter count={selectedSymptoms.length} />
 
       {/* Boutons de soumission et historique */}
       <SearchButtons
