@@ -7,13 +7,13 @@ import { useClickOutside } from "../../../hooks/useClickOutside";
 import AllergyForm from "./AllergyForm";
 
 /**
- * Composant AllergySectionToggle - Section allergies avec checkbox et dropdown
+ * Composant AllergySearchSection - Section allergies avec checkbox et dropdown
  *
  * Affiche :
  * - Checkbox "Vous avez des allergies ?"
  * - Badge compteur si allergies > 0
  * - Bouton Afficher/Masquer pour le dropdown
- * - Section collapse avec AllergySelector
+ * - Section collapse avec AllergyForm
  *
  * @param {Object} props
  * @param {boolean} props.isFilteringEnabled - État de la checkbox (activé/désactivé)
@@ -23,7 +23,7 @@ import AllergyForm from "./AllergyForm";
  * @param {Function} props.onExpandChange - Callback lors du changement d'état du dropdown
  * @returns {JSX.Element}
  */
-export default function AllergySectionToggle({
+export default function AllergySearchSection({
   isFilteringEnabled,
   onFilteringChange,
   userAllergies,
@@ -104,7 +104,7 @@ export default function AllergySectionToggle({
         )}
       </div>
 
-      {/* Section collapse avec AllergySelector */}
+      {/* Section collapse avec AllergyForm */}
       <AnimatePresence>
         {isExpanded && (
           <motion.div
@@ -124,7 +124,7 @@ export default function AllergySectionToggle({
   );
 }
 
-AllergySectionToggle.propTypes = {
+AllergySearchSection.propTypes = {
   isFilteringEnabled: PropTypes.bool.isRequired,
   onFilteringChange: PropTypes.func.isRequired,
   userAllergies: PropTypes.arrayOf(PropTypes.string).isRequired,

@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { IoMdClose } from "react-icons/io";
-import { BUTTON_PRIMARY_STYLES } from "../../../constants/buttonStyles";
+import { BUTTON_PRIMARY_STYLES } from "../../constants/buttonStyles";
 
 // Fonction helper pour capitaliser la première lettre
 const capitalizeSymptom = (symptom) => {

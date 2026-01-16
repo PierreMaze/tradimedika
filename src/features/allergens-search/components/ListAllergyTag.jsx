@@ -1,7 +1,7 @@
 // components/filter/ListFilterTag.jsx
 import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
-import FilterTag from "./FilterTag";
+import FilterTag from "../../../components/tags/AllergyTag";
 
 // Fonction helper pour capitaliser la première lettre
 const capitalizeSymptom = (symptom) => {
@@ -9,7 +9,7 @@ const capitalizeSymptom = (symptom) => {
 };
 
 /**
- * Composant conteneur pour afficher la liste des tags de filtrage
+ * Composant conteneur pour afficher la liste des tags des allergies
  * - Pure component de présentation
  * - Responsive: centré sur mobile, aligné à gauche sur desktop
  * - Animations avec AnimatePresence pour enter/exit smooth

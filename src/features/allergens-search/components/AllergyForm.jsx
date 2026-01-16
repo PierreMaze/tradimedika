@@ -1,15 +1,15 @@
-// components/input/AllergySelector.jsx
+// components/input/AllergyForm.jsx
 import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { IoMdClose } from "react-icons/io";
 import { BUTTON_PRIMARY_STYLES } from "../../../constants/buttonStyles";
-import { useAllergies } from "../context/AllergiesContext";
 import allergensList from "../../../data/allergensList.json";
 import { useClickOutside } from "../../../hooks/useClickOutside";
-import { useReducedMotion } from "../../settings";
 import { normalizeForMatching } from "../../../utils/normalizeSymptom";
+import { useReducedMotion } from "../../settings";
+import { useAllergies } from "../context/AllergiesContext";
 
 // Fonction pour capitaliser la première lettre
 const capitalizeAllergen = (allergen) => {
@@ -25,7 +25,7 @@ const capitalizeAllergen = (allergen) => {
  *
  * @component
  */
-export default function AllergySelector({
+export default function AllergyForm({
   placeholder = "Rechercher une allergie...",
 }) {
   const { userAllergies, toggleAllergen } = useAllergies();
@@ -327,6 +327,6 @@ export default function AllergySelector({
   );
 }
 
-AllergySelector.propTypes = {
+AllergyForm.propTypes = {
   placeholder: PropTypes.string,
 };

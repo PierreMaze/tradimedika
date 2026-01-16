@@ -1,8 +1,8 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import AllergyForm from "./AllergyForm";
+import { beforeEach, describe, expect, it } from "vitest";
 import { AllergiesProvider } from "../context/AllergiesContext";
+import AllergyForm from "./AllergyForm";
 
 describe("AllergyForm", () => {
   beforeEach(() => {

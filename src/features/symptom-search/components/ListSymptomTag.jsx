@@ -1,7 +1,7 @@
 // components/tag/ListSymptomTag.jsx
 import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
-import SymptomTag from "./SymptomTag";
+import { SymptomTag } from "../../../components/tags";
 
 /**
  * Composant conteneur pour afficher la liste des tags de symptômes

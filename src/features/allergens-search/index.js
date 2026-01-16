@@ -1,11 +1,15 @@
 // Composants
-export { default as AllergyForm } from "./components/AllergyForm";
-export { default as AllergySelector } from "./components/AllergyForm"; // Alias pour rétrocompatibilité
-export { default as FilterTag } from "./components/FilterTag";
-export { default as ListFilterTag } from "./components/ListFilterTag";
+export { default as FilterTag } from "../../components/tags/AllergyTag";
 export { default as AllergyFilterInfo } from "./components/AllergyFilterInfo";
-export { default as AllergySearchSection } from "./components/AllergySearchSection";
-export { default as AllergySectionToggle } from "./components/AllergySearchSection"; // Alias pour rétrocompatibilité
+export {
+  default as AllergyForm,
+  default as AllergySelector,
+} from "./components/AllergyForm";
+export {
+  default as AllergySearchSection,
+  default as AllergySectionToggle,
+} from "./components/AllergySearchSection";
+export { default as ListFilterTag } from "./components/ListAllergyTag";
 
 // Contexte
 export { AllergiesProvider, useAllergies } from "./context/AllergiesContext";
