@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import db from "../../../data/db.json";
-import { findMatchingRemedies } from "../../remedy";
 import { createLogger } from "../../../utils/logger";
+import { findMatchingRemedies } from "../../remedy-result";
 
 const logger = createLogger("useSymptomSubmit");
 

@@ -5,13 +5,13 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useLocation } from "react-router-dom";
 import TagsInfoTooltip from "../components/tooltip/TagsInfoTooltip";
-import { AllergyFilterInfo, useAllergies } from "../features/allergens";
+import db from "../data/db.json";
+import { AllergyFilterInfo, useAllergies } from "../features/allergens-search";
 import {
   FilterRemedyResult,
   RemedyResultList,
   findMatchingRemedies,
-} from "../features/remedy";
-import db from "../data/db.json";
+} from "../features/remedy-result";
 import { parseAndValidateSymptoms } from "../utils/validation";
 
 /**

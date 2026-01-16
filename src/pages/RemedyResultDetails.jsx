@@ -11,11 +11,14 @@ import { IoMdAlert } from "react-icons/io";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { ChildrenAgeTag, PregnancyTag, VerifiedTag } from "../components/tags";
 import TagsInfoTooltip from "../components/tooltip/TagsInfoTooltip";
-import { useAllergies } from "../features/allergens";
-import { RemedyResultNotFound, getRemedyBySlug } from "../features/remedy";
-import { useReducedMotion } from "../features/settings";
 import allergensList from "../data/allergensList.json";
 import db from "../data/db.json";
+import { useAllergies } from "../features/allergens-search";
+import {
+  RemedyResultNotFound,
+  getRemedyBySlug,
+} from "../features/remedy-result";
+import { useReducedMotion } from "../features/settings";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 import { formatFrequency } from "../utils/formatFrequency";
 
