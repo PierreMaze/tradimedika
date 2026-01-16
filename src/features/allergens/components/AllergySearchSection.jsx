@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 
 import { useClickOutside } from "../../../hooks/useClickOutside";
-import AllergySelector from "./AllergySelector";
+import AllergyForm from "./AllergyForm";
 
 /**
  * Composant AllergySectionToggle - Section allergies avec checkbox et dropdown
@@ -115,7 +115,7 @@ export default function AllergySectionToggle({
             style={{ transformOrigin: "top" }}
           >
             <div className="dark:bg-dark rounded-lg border-2 border-dashed border-emerald-600 bg-neutral-50 p-4 dark:border-emerald-500">
-              <AllergySelector />
+              <AllergyForm />
             </div>
           </motion.div>
         )}

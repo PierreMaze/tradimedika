@@ -5,13 +5,13 @@ import { memo } from "react";
 import { HiArrowRight } from "react-icons/hi2";
 import { IoMdAlert } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { capitalizeFirstLetter } from "../../../utils/capitalizeFirstLetter";
-import { generateSlug } from "../utils/remedyMatcher";
 import {
   ChildrenAgeTag,
   PregnancyTag,
   VerifiedTag,
 } from "../../../components/tags";
+import { capitalizeFirstLetter } from "../../../utils/capitalizeFirstLetter";
+import { generateSlug } from "../utils/remedyMatcher";
 /**
  * Carte individuelle pour afficher un remède
  * - Entièrement cliquable (wrapper Link vers /remedes/:slug)
@@ -25,7 +25,6 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
   const {
     name,
     type,
-    description,
     properties,
     image,
     pregnancySafe,
@@ -93,13 +92,6 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
                 {type}
               </span>
             </div>
-
-            {/* Description */}
-            <p
-              className={`mb-4 line-clamp-3 text-start text-sm text-neutral-600 lg:text-base dark:text-neutral-400 ${textClasses}`}
-            >
-              {description}
-            </p>
 
             {/* Propriétés */}
             {properties && properties.length > 0 && (

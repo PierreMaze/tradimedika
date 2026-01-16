@@ -59,9 +59,7 @@ describe("RemedyCard Component", () => {
 
       expect(screen.getByText("Citron")).toBeInTheDocument();
       expect(screen.getByText("Fruit")).toBeInTheDocument();
-      expect(
-        screen.getByText("Le citron est un agrume riche en vitamine C."),
-      ).toBeInTheDocument();
+      // Description removed from RemedyCard component
     });
 
     it("should render with all props", () => {

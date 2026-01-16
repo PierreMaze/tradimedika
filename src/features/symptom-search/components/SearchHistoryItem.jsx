@@ -104,7 +104,7 @@ export default function SearchHistoryItem({ search, onClick, onRemove }) {
 
         {/* Result count badge */}
         {search.resultCount !== undefined && (
-          <div className="flex items-center gap-2 text-xs">
+          <div className="flex flex-col items-center gap-2 text-xs lg:flex-row">
             <span className="rounded-md py-0.5 pl-2 font-semibold text-emerald-600 dark:text-emerald-400">
               {search.resultCount}{" "}
               {search.resultCount > 1 ? "résultats" : "résultat"}
