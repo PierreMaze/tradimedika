@@ -1,10 +1,10 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import AllergySelector from "./AllergyForm";
+import AllergyForm from "./AllergyForm";
 import { AllergiesProvider } from "../context/AllergiesContext";
 
-describe("AllergySelector", () => {
+describe("AllergyForm", () => {
   beforeEach(() => {
     window.localStorage.clear();
   });
@@ -12,7 +12,7 @@ describe("AllergySelector", () => {
   const renderWithProvider = () => {
     return render(
       <AllergiesProvider>
-        <AllergySelector />
+        <AllergyForm />
       </AllergiesProvider>,
     );
   };
