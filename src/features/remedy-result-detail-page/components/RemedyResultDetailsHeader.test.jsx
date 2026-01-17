@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import PropTypes from "prop-types";
 import RemedyResultDetailsHeader from "./RemedyResultDetailsHeader";
 
 vi.mock("framer-motion", () => ({
@@ -10,18 +9,13 @@ vi.mock("framer-motion", () => ({
   },
 }));
 
-const ChildrenAgeTagMock = ({ age }) => {
-  return <span data-testid="children-age-tag">Enfants {age}+</span>;
-};
-
-ChildrenAgeTagMock.propTypes = {
-  age: PropTypes.number.isRequired,
-};
-
 vi.mock("../../../components/tags", () => ({
   VerifiedTag: () => <span data-testid="verified-tag">Vérifié</span>,
   PregnancyTag: () => <span data-testid="pregnancy-tag">Grossesse</span>,
-  ChildrenAgeTag: ChildrenAgeTagMock,
+  // eslint-disable-next-line react/prop-types
+  ChildrenAgeTag: ({ age }) => (
+    <span data-testid="children-age-tag">Enfants {age}+</span>
+  ),
 }));
 
 describe("RemedyResultDetailsHeader", () => {
