@@ -2,6 +2,34 @@
 
 ---
 
+## [0.42.1] - 2026-01-17
+
+### Refactored
+
+- **Extraction de `RemedyResultDetails.jsx` en composants modulaires**
+  - Création du dossier `features/remedy-result-detail-page/`
+  - Réduction drastique : **512 lignes → 122 lignes** (76% de réduction)
+  - Extraction de 9 composants réutilisables :
+    - `RemedyResultDetailsHeader` : Image, badges, titre et description
+    - `RemedyResultDetailsNavigation` : Boutons de navigation (top/bottom)
+    - `RemedyResultDetailsAllergyWarning` : Bannière d'avertissement allergènes
+    - `RemedyResultDetailsPropertiesSection` : Section propriétés avec animations
+    - `RemedyResultDetailsSymptomsSection` : Section symptômes traités
+    - `RemedyResultDetailsUsagesList` : Liste d'utilisations complexe
+    - `RemedyResultDetailsContraindicationsSection` : Section contraindications
+    - `RemedyResultDetailsTipsSection` : Section conseils pratiques
+    - `RemedyResultDetailsAllergensSection` : Section allergènes potentiels
+  - Extraction de 2 hooks personnalisés :
+    - `useRemedyDetails` : Gestion de récupération et validation du remède
+    - `useRemedyAllergyCheck` : Vérification des allergènes utilisateur
+  - Extraction de 2 fichiers utils :
+    - `remedyImageValidator` : Validation HTTPS des URLs d'images
+    - `remedyHelpers` : Mapping couleurs types et génération meta SEO
+  - Tests unitaires complets pour tous les modules (94 tests au total)
+  - Préservation des animations Framer Motion et de l'accessibilité
+
+---
+
 ## [0.42.0] - 2026-01-16
 
 ### <u>Refactoring majeur - Architecture hybride:</u>
