@@ -7,13 +7,13 @@ vi.mock("framer-motion", () => ({
     section: ({ children, ...props }) => (
       <section {...props}>{children}</section>
     ),
+    ul: ({ children, ...props }) => <ul {...props}>{children}</ul>,
+    li: ({ children, ...props }) => <li {...props}>{children}</li>,
   },
 }));
 
-vi.mock("react-icons/hi2", () => ({
-  HiExclamationTriangle: (props) => (
-    <svg data-testid="exclamation-icon" {...props} />
-  ),
+vi.mock("react-icons/ri", () => ({
+  RiAlarmWarningFill: (props) => <svg data-testid="warning-icon" {...props} />,
 }));
 
 vi.mock("../../../utils/capitalizeFirstLetter", () => ({
@@ -39,7 +39,7 @@ describe("RemedyResultDetailsContraindicationsSection", () => {
       expect(
         screen.getByRole("heading", { name: /contraindications/i }),
       ).toBeInTheDocument();
-      expect(screen.getByTestId("exclamation-icon")).toBeInTheDocument();
+      expect(screen.getByTestId("warning-icon")).toBeInTheDocument();
     });
 
     it("should render all contraindications as list items", () => {
@@ -83,8 +83,16 @@ describe("RemedyResultDetailsContraindicationsSection", () => {
       );
 
       const section = container.querySelector("section");
-      expect(section).toHaveClass("border-l-4", "border-red-500", "bg-red-100");
-      expect(section).toHaveClass("dark:bg-red-950");
+      expect(section).toHaveClass(
+        "rounded-lg",
+        "border",
+        "border-neutral-200",
+        "bg-white",
+      );
+      expect(section).toHaveClass(
+        "dark:border-neutral-700",
+        "dark:bg-neutral-800",
+      );
     });
 
     it("should render list items with capitalize class", () => {

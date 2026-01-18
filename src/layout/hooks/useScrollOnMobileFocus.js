@@ -1,6 +1,6 @@
 import { useCallback } from "react";
-import { useMediaQuery } from "./useMediaQuery";
-import { useReducedMotion } from "../features/settings";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { useReducedMotion } from "../../features/settings";
 
 /**
  * Hook personnalisé pour gérer le scroll automatique vers un élément lors du focus sur mobile

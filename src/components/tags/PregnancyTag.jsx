@@ -1,7 +1,7 @@
 // tradimedika-v1/src/components/tag/PregnancyTag.jsx
 
-import { HiCheckBadge } from "react-icons/hi2";
 import PropTypes from "prop-types";
+import { HiCheckBadge } from "react-icons/hi2";
 
 /**
  * PregnancyTag Component
@@ -32,7 +32,7 @@ function PregnancyTag({
   return (
     <span
       data-testid="pregnancy-tag"
-      className={`inline-flex items-center gap-1.5 rounded-md bg-lime-100 px-3 py-1.5 text-xs font-semibold text-lime-800 transition duration-300 lg:text-sm dark:bg-lime-900 dark:text-lime-200 ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-md bg-lime-100 px-3 py-1.5 text-xs font-semibold text-lime-800 transition duration-300 lg:text-sm 2xl:text-base dark:bg-lime-900 dark:text-lime-200 ${className}`}
       title="Ce remède peut être utilisé sans danger pendant la grossesse"
     >
       <HiCheckBadge className={sizeClasses[size]} aria-hidden="true" />

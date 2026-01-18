@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
-import { formatFrequency } from "../../../utils/formatFrequency";
+import { formatUsageFrequency } from "../utils/formatUsageFrequency";
 
 function RemedyResultDetailsUsagesList({ uses }) {
   if (!uses || uses.length === 0) return null;
@@ -12,7 +12,9 @@ function RemedyResultDetailsUsagesList({ uses }) {
       transition={{ delay: 0.3 }}
       className="mb-6 rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition duration-300 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800"
     >
-      <h2 className="mb-4 text-2xl font-semibold lg:text-3xl">Utilisations</h2>
+      <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold lg:text-xl 2xl:text-2xl">
+        Utilisations
+      </h2>
       <motion.ul
         className="space-y-4"
         initial="hidden"
@@ -53,7 +55,7 @@ function RemedyResultDetailsUsagesList({ uses }) {
               {use.frequency && use.frequency.value && (
                 <>
                   <span className="text-neutral-400">•</span>
-                  <span>{formatFrequency(use.frequency)}</span>
+                  <span>{formatUsageFrequency(use.frequency)}</span>
                 </>
               )}
               {use.duration && use.duration.value && (

@@ -7,7 +7,7 @@ import { IoMdClose } from "react-icons/io";
 import { BUTTON_PRIMARY_STYLES } from "../../../constants/buttonStyles";
 import allergensList from "../../../data/allergensList.json";
 import { useClickOutside } from "../../../hooks/useClickOutside";
-import { normalizeForMatching } from "../../../utils/normalizeSymptom";
+import { normalizeForMatching } from "../../symptom-search/utils/normalizeSymptom";
 import { useReducedMotion } from "../../settings";
 import { useAllergies } from "../context/AllergiesContext";
 

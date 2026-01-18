@@ -101,11 +101,12 @@ describe("Header", () => {
       expect(innerContainer).toHaveClass("border-dashed");
     });
 
-    it("should apply dark mode border color", () => {
+    it("should apply border colors", () => {
       const { container } = render(<Header />);
 
-      const innerContainer = container.querySelector(".border-dark\\/80");
-      expect(innerContainer).toHaveClass("dark:border-light/60");
+      const innerContainer = container.querySelector(".border-b-2");
+      expect(innerContainer?.className).toContain("border-dark/80");
+      expect(innerContainer?.className).toContain("dark:border-light/60");
     });
 
     it("should apply responsive padding", () => {

@@ -74,7 +74,7 @@ describe("RemedyResultDetailsHeader", () => {
       expect(image).toHaveAttribute("loading", "lazy");
     });
 
-    it("should render remedy type badge with appropriate color", () => {
+    it("should render remedy type badge with neutral color", () => {
       const remedy = {
         name: "Gingembre",
         type: "épice",
@@ -93,7 +93,8 @@ describe("RemedyResultDetailsHeader", () => {
       );
 
       const badge = screen.getByText("épice");
-      expect(badge).toHaveClass("bg-orange-100", "text-orange-800");
+      expect(badge).toHaveClass("bg-neutral-200", "text-black");
+      expect(badge).toHaveClass("dark:bg-neutral-600", "dark:text-white");
     });
 
     it("should render description", () => {

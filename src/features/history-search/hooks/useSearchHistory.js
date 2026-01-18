@@ -1,7 +1,7 @@
 // hooks/useSearchHistory.js
 import { useCallback } from "react";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
-import { normalizeForMatching } from "../../../utils/normalizeSymptom";
+import { normalizeForMatching } from "../../symptom-search/utils/normalizeSymptom";
 import { createLogger } from "../../../utils/logger";
 
 const logger = createLogger("useSearchHistory");

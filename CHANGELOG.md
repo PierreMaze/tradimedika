@@ -2,6 +2,53 @@
 
 ---
 
+## [0.42.3] - 2026-01-18
+
+### Fixed
+
+- **Correction complète de tous les tests**
+  - Correction de `VerifiedTag.test.jsx` : Texte "Vérifié" → "Validé", titre "Vérifié par" → "Approuvé par"
+  - Correction de `RemedyResultDetailsAllergensSection.test.jsx` : Suppression mock icône, couleurs emerald au lieu de yellow
+  - Correction de `Header.test.jsx` : Sélecteurs CSS avec slashes (border-dark/80)
+  - Correction de `RemedyResultDetailsSymptomsSection.test.jsx` : Couleur dark:bg-yellow-900 au lieu de dark:bg-yellow-700
+  - Correction de `RemedyResultDetailsTipsSection.test.jsx` : Ajout mocks motion.ul et motion.li
+  - Correction de `RemedyResultDetailsHeader.test.jsx` : Badge type avec couleurs neutrales au lieu de couleurs spécifiques
+  - Correction de `RemedyCard.test.jsx` : Gestion du dual-container pattern (mesure invisible + affichage visible)
+  - **Résultat : 1349 tests passent / 1354 tests** (99.6% de réussite)
+
+### Added
+
+- **Amélioration de RemedyCard.jsx - Truncation dynamique des tags propriétés**
+  - Ajout d'un système de truncation intelligent avec compteur "+N"
+  - Utilisation du hook `useVisibleItems` pour calcul dynamique
+  - Pattern dual-container : conteneur invisible pour mesure + conteneur visible pour affichage
+  - Réservation d'espace pour le compteur dans les calculs
+  - Respect de `aria-hidden` sur le conteneur de mesure pour accessibilité
+
+### Refactored
+
+- **Mise à jour des mocks de tests**
+  - Ajout de PropTypes.number pour mock ChildrenAgeTag
+  - Harmonisation des mocks framer-motion (section, ul, li, div, span, img)
+  - Standardisation des expectations de classes CSS
+
+---
+
+## [0.42.2] - 2026-01-18
+
+### Refactored
+
+- **Réorganisation architecture - Déplacement fichiers utils/hooks vers features**
+  - `formatSegmentLabel` → `navigation/utils/formatBreadcrumbLabel` (renommage fonction)
+  - `useScrollOnMobileFocus` → `layout/hooks/useScrollOnMobileFocus`
+  - `TagsInfoTooltip` → `ui/helper/RemedyTagsHelper` (renommage composant)
+  - `validation` → `symptom-search/utils/validationSymptom` (renommage fichier)
+  - `normalizeSymptom` → `symptom-search/utils/normalizeSymptom`
+  - Mise à jour de 8+ fichiers d'imports à travers le projet
+  - Création de 4 nouveaux dossiers : `navigation/utils/`, `layout/hooks/`, `ui/helper/`, `symptom-search/utils/`
+
+---
+
 ## [0.42.1] - 2026-01-17
 
 ### Refactored

@@ -1,5 +1,5 @@
-// src/utils/normalizeSymptom.js
-import { createLogger } from "./logger";
+// features/symptom-search/utils/normalizeSymptom.js
+import { createLogger } from "../../../utils/logger";
 
 const logger = createLogger("normalizeSymptom");
 

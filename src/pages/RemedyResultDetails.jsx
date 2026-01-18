@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { useLocation, useParams } from "react-router-dom";
-import TagsInfoTooltip from "../components/tooltip/TagsInfoTooltip";
-import { RemedyResultNotFound } from "../features/remedy-result-page";
+import RemedyTagsHelper from "../components/ui/helper/RemedyTagsHelper";
 import {
+  generateRemedySEOMeta,
+  getTypeColors,
   RemedyResultDetailsAllergensSection,
   RemedyResultDetailsAllergyWarning,
   RemedyResultDetailsContraindicationsSection,
@@ -15,9 +16,8 @@ import {
   RemedyResultDetailsUsagesList,
   useRemedyAllergyCheck,
   useRemedyDetails,
-  getTypeColors,
-  generateRemedySEOMeta,
 } from "../features/remedy-result-detail-page";
+import { RemedyResultNotFound } from "../features/remedy-result-page";
 import { useReducedMotion } from "../features/settings";
 
 /**
@@ -113,7 +113,7 @@ function RemedyResultDetails() {
           variant="bottom"
         />
       </motion.article>
-      <TagsInfoTooltip />
+      <RemedyTagsHelper />
     </>
   );
 }

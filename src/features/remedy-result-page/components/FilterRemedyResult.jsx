@@ -1,7 +1,7 @@
 // components/filter/FilterRemedyResult.jsx
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import { normalizeForMatching } from "../../../utils/normalizeSymptom";
+import { normalizeForMatching } from "../../symptom-search/utils/normalizeSymptom";
 import { ListAllergyTag } from "../../allergens-search";
 
 /**

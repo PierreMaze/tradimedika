@@ -11,7 +11,9 @@ function RemedyResultDetailsPropertiesSection({ properties }) {
       transition={{ delay: 0.2 }}
       className="mb-6 rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition duration-300 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800"
     >
-      <h2 className="mb-4 text-2xl font-semibold lg:text-3xl">Propriétés</h2>
+      <h2 className="mb-4 text-xl font-semibold lg:text-2xl 2xl:text-3xl">
+        Propriétés
+      </h2>
       <motion.div
         className="flex flex-wrap gap-2"
         initial="hidden"

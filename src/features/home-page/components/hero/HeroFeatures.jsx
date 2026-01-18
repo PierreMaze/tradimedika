@@ -6,10 +6,10 @@ import { FaCheck } from "react-icons/fa6";
  * Liste des features par défaut
  */
 const DEFAULT_FEATURES = [
-  "+100 plantes & aliments",
+  "+100 produits naturels",
   "Santé naturelle",
-  "Gratuit",
-  "Ne stocke pas vos données",
+  "Recherche simplifié",
+  "Respect de vos données",
 ];
 
 /**

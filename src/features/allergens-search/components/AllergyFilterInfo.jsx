@@ -2,7 +2,8 @@
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { HiEye, HiEyeSlash } from "react-icons/hi2";
-import { IoMdAlert } from "react-icons/io";
+import { TbEyeClosed } from "react-icons/tb";
+
 import allergensList from "../../../data/allergensList.json";
 import { useReducedMotion } from "../../settings";
 
@@ -45,8 +46,8 @@ export default function AllergyFilterInfo({
     >
       {/* Contenu principal */}
       <div className="flex items-start gap-4">
-        <IoMdAlert
-          className="mt-0.5 flex shrink-0 text-xl text-emerald-600 dark:text-emerald-400"
+        <TbEyeClosed
+          className="mt-0.5 flex shrink-0 rounded-md bg-emerald-100 p-2 text-4xl text-emerald-600 dark:bg-emerald-900/50 dark:text-emerald-400"
           aria-hidden="true"
         />
 
@@ -77,7 +78,7 @@ export default function AllergyFilterInfo({
           aria-pressed={showFiltered}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-md transition-colors hover:bg-emerald-700 focus:ring-2 focus:ring-emerald-300 focus:outline-none dark:bg-emerald-500 dark:hover:bg-emerald-600"
+          className="inline-flex shrink-0 items-center gap-2 rounded-md bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-md transition-colors hover:bg-emerald-700 focus:ring-2 focus:ring-emerald-300 focus:outline-none dark:bg-emerald-700 dark:hover:bg-emerald-600"
         >
           {showFiltered ? (
             <>

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useLocation } from "react-router-dom";
-import TagsInfoTooltip from "../components/tooltip/TagsInfoTooltip";
+import RemedyTagsHelper from "../components/ui/helper/RemedyTagsHelper";
 import db from "../data/db.json";
 import { AllergyFilterInfo, useAllergies } from "../features/allergens-search";
 import {
@@ -12,7 +12,7 @@ import {
   RemedyResultList,
   findMatchingRemedies,
 } from "../features/remedy-result-page";
-import { parseAndValidateSymptoms } from "../utils/validation";
+import { parseAndValidateSymptoms } from "../features/symptom-search/utils/validationSymptom";
 
 /**
  * RemedyResult Page - Affiche les remèdes correspondant aux symptômes sélectionnés
@@ -78,6 +78,10 @@ function RemedyResult() {
   // État pour afficher/masquer les remèdes filtrés par allergies
   // Toujours masqué par défaut au chargement de la page (false)
   const [showFilteredByAllergies, setShowFilteredByAllergies] = useState(false);
+
+  // État pour forcer le reset du filtre de symptômes (FilterRemedyResult)
+  // Incrémenté à chaque toggle d'affichage des allergènes pour reset à "Tous"
+  const [resetFilterKey, setResetFilterKey] = useState(0);
 
   // Liste combinée avec métadonnée isFiltered
   // Les remèdes avec allergènes apparaissent EN PREMIER lorsqu'ils sont affichés
@@ -168,7 +172,7 @@ function RemedyResult() {
         <Link
           to="/"
           aria-label="Retour à l'accueil"
-          className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition duration-200 hover:bg-emerald-700 hover:shadow-lg focus:ring-2 focus:ring-emerald-300 focus:outline-none"
+          className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition duration-200 hover:bg-emerald-700 hover:shadow-lg focus:ring-2 focus:ring-emerald-300 focus:outline-none dark:bg-emerald-800"
         >
           <svg
             className="h-5 w-5"
@@ -185,7 +189,7 @@ function RemedyResult() {
           </svg>
         </Link>
       </motion.div>
-      <div className="text-dark dark:text-light flex flex-col items-center gap-y-4 text-center transition duration-300 ease-in-out">
+      <div className="text-dark dark:text-light mt-8 flex flex-col items-center gap-y-4 text-center transition duration-300 ease-in-out lg:mt-4">
         {/* Titre principal */}
         <h1 className="text-3xl font-bold lg:text-4xl">
           Résultats des Remèdes
@@ -201,6 +205,15 @@ function RemedyResult() {
           </p>
         )}
 
+        {/* Filtres par tags (seulement si des remèdes safe ont été trouvés) */}
+        {safeRemedies.length > 0 && (
+          <FilterRemedyResult
+            key={`filter-${selectedSymptoms.join("-")}-${resetFilterKey}`}
+            matchedRemedies={displayRemedies}
+            onFilterChange={handleFilterChange}
+          />
+        )}
+
         {/* Message d'information si des remèdes sont masqués par filtrage allergies */}
         {filteredCount > 0 && userAllergies.length > 0 && (
           <div className="mb-6">
@@ -208,20 +221,13 @@ function RemedyResult() {
               filteredCount={filteredCount}
               userAllergies={userAllergies}
               showFiltered={showFilteredByAllergies}
-              onToggleFiltered={() =>
-                setShowFilteredByAllergies((prev) => !prev)
-              }
+              onToggleFiltered={() => {
+                setShowFilteredByAllergies((prev) => !prev);
+                // Reset le filtre de symptômes à "Tous" pour meilleure UX
+                setResetFilterKey((prev) => prev + 1);
+              }}
             />
           </div>
-        )}
-
-        {/* Filtres par tags (seulement si des remèdes safe ont été trouvés) */}
-        {safeRemedies.length > 0 && (
-          <FilterRemedyResult
-            key={selectedSymptoms.join("-")}
-            matchedRemedies={displayRemedies}
-            onFilterChange={handleFilterChange}
-          />
         )}
 
         {/* Compteur de résultats (seulement si des remèdes sont affichés après filtrage) */}
@@ -258,12 +264,12 @@ function RemedyResult() {
         <Link
           to="/"
           aria-label="Retour à l'accueil"
-          className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition duration-200 hover:bg-emerald-700 hover:shadow-lg focus:ring-2 focus:ring-emerald-300 focus:outline-none"
+          className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition duration-200 hover:bg-emerald-700 hover:shadow-lg focus:ring-2 focus:ring-emerald-300 focus:outline-none dark:bg-emerald-800"
         >
           Nouvelle recherche
         </Link>
       </motion.div>
-      <TagsInfoTooltip />
+      <RemedyTagsHelper />
     </>
   );
 }

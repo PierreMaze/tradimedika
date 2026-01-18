@@ -6,9 +6,9 @@ import { HiExclamationTriangle, HiMagnifyingGlass } from "react-icons/hi2";
 import symptomsData from "../../../data/symptomList.json";
 import synonymsData from "../../../data/synonymsSymptomList.json";
 import { useClickOutside } from "../../../hooks/useClickOutside";
-import { useLRUCache } from "../../../hooks/useLRUCache";
+import { useLRUCache } from "../hooks/useLRUCache";
 import { createLogger } from "../../../utils/logger";
-import { normalizeForMatching } from "../../../utils/normalizeSymptom";
+import { normalizeForMatching } from "../utils/normalizeSymptom";
 
 const logger = createLogger("SymptomsForm");
 

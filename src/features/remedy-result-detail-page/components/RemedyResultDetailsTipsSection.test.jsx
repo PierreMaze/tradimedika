@@ -7,11 +7,13 @@ vi.mock("framer-motion", () => ({
     section: ({ children, ...props }) => (
       <section {...props}>{children}</section>
     ),
+    ul: ({ children, ...props }) => <ul {...props}>{children}</ul>,
+    li: ({ children, ...props }) => <li {...props}>{children}</li>,
   },
 }));
 
-vi.mock("react-icons/hi2", () => ({
-  HiLightBulb: (props) => <svg data-testid="lightbulb-icon" {...props} />,
+vi.mock("react-icons/md", () => ({
+  MdTipsAndUpdates: (props) => <svg data-testid="tips-icon" {...props} />,
 }));
 
 describe("RemedyResultDetailsTipsSection", () => {
@@ -27,7 +29,7 @@ describe("RemedyResultDetailsTipsSection", () => {
       expect(
         screen.getByRole("heading", { name: /conseils pratiques/i }),
       ).toBeInTheDocument();
-      expect(screen.getByTestId("lightbulb-icon")).toBeInTheDocument();
+      expect(screen.getByTestId("tips-icon")).toBeInTheDocument();
     });
 
     it("should render all tips as list items", () => {
@@ -52,8 +54,16 @@ describe("RemedyResultDetailsTipsSection", () => {
       );
 
       const section = container.querySelector("section");
-      expect(section).toHaveClass("border-l-4", "border-sky-500", "bg-sky-50");
-      expect(section).toHaveClass("dark:bg-sky-900/20");
+      expect(section).toHaveClass(
+        "rounded-lg",
+        "border",
+        "border-neutral-200",
+        "bg-white",
+      );
+      expect(section).toHaveClass(
+        "dark:border-neutral-700",
+        "dark:bg-neutral-800",
+      );
     });
 
     it("should render tips in sky text color", () => {
@@ -62,8 +72,8 @@ describe("RemedyResultDetailsTipsSection", () => {
       render(<RemedyResultDetailsTipsSection tips={tips} />);
 
       const listItem = screen.getByText("test tip");
-      expect(listItem).toHaveClass("text-sky-800");
-      expect(listItem).toHaveClass("dark:text-sky-300");
+      expect(listItem).toHaveClass("text-dark");
+      expect(listItem).toHaveClass("dark:text-white");
     });
   });
 

@@ -1,4 +1,4 @@
-export const formatFrequency = (frequency) => {
+export const formatUsageFrequency = (frequency) => {
   if (
     !frequency ||
     typeof frequency !== "object" ||

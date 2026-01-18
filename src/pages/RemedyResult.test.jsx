@@ -26,8 +26,8 @@ vi.mock("react-router-dom", async () => {
 });
 
 // Mock components
-vi.mock("../components/tooltip/TagsInfoTooltip", () => ({
-  default: () => <div data-testid="tags-info-tooltip">Tags Info</div>,
+vi.mock("../components/ui/helper/RemedyTagsHelper", () => ({
+  default: () => <div data-testid="remedy-tags-helper">Tags Info</div>,
 }));
 
 vi.mock("../features/allergens-search", () => ({
@@ -83,10 +83,10 @@ describe("RemedyResult", () => {
       expect(screen.getByText(/Remèdes naturels pour :/i)).toBeInTheDocument();
     });
 
-    it("should render TagsInfoTooltip", () => {
+    it("should render RemedyTagsHelper", () => {
       renderWithProviders(<RemedyResult />);
 
-      expect(screen.getByTestId("tags-info-tooltip")).toBeInTheDocument();
+      expect(screen.getByTestId("remedy-tags-helper")).toBeInTheDocument();
     });
 
     it("should render RemedyResultList", () => {

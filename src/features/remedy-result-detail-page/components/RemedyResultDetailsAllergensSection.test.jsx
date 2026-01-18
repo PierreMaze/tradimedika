@@ -10,13 +10,9 @@ vi.mock("framer-motion", () => ({
   },
 }));
 
-vi.mock("react-icons/hi2", () => ({
-  HiInformationCircle: (props) => <svg data-testid="info-icon" {...props} />,
-}));
-
 describe("RemedyResultDetailsAllergensSection", () => {
   describe("Rendering", () => {
-    it("should render allergens section with title and icon", () => {
+    it("should render allergens section with title", () => {
       const allergens = ["arachides", "lactose"];
 
       render(<RemedyResultDetailsAllergensSection allergens={allergens} />);
@@ -24,7 +20,6 @@ describe("RemedyResultDetailsAllergensSection", () => {
       expect(
         screen.getByRole("heading", { name: /allergènes potentiels/i }),
       ).toBeInTheDocument();
-      expect(screen.getByTestId("info-icon")).toBeInTheDocument();
     });
 
     it("should render all allergens as badges", () => {
@@ -37,7 +32,7 @@ describe("RemedyResultDetailsAllergensSection", () => {
       expect(screen.getByText("gluten")).toBeInTheDocument();
     });
 
-    it("should render with yellow warning styling", () => {
+    it("should render with card styling", () => {
       const allergens = ["arachides"];
 
       const { container } = render(
@@ -46,21 +41,25 @@ describe("RemedyResultDetailsAllergensSection", () => {
 
       const section = container.querySelector("section");
       expect(section).toHaveClass(
-        "border-l-4",
-        "border-yellow-500",
-        "bg-yellow-50",
+        "rounded-lg",
+        "border",
+        "border-neutral-200",
+        "bg-white",
       );
-      expect(section).toHaveClass("dark:bg-yellow-900/20");
+      expect(section).toHaveClass(
+        "dark:border-neutral-700",
+        "dark:bg-neutral-800",
+      );
     });
 
-    it("should render allergen badges with yellow styling", () => {
+    it("should render allergen badges with emerald styling", () => {
       const allergens = ["arachides"];
 
       render(<RemedyResultDetailsAllergensSection allergens={allergens} />);
 
       const badge = screen.getByText("arachides");
-      expect(badge).toHaveClass("bg-yellow-200", "text-yellow-900");
-      expect(badge).toHaveClass("dark:bg-yellow-800", "dark:text-yellow-100");
+      expect(badge).toHaveClass("bg-emerald-100", "text-emerald-800");
+      expect(badge).toHaveClass("dark:bg-emerald-900", "dark:text-emerald-200");
     });
 
     it("should capitalize allergen badges", () => {
@@ -147,17 +146,6 @@ describe("RemedyResultDetailsAllergensSection", () => {
         name: /allergènes potentiels/i,
       });
       expect(heading.tagName).toBe("H2");
-    });
-
-    it("should hide icon from screen readers", () => {
-      const allergens = ["arachides"];
-
-      const { container } = render(
-        <RemedyResultDetailsAllergensSection allergens={allergens} />,
-      );
-
-      const icon = container.querySelector('[aria-hidden="true"]');
-      expect(icon).toBeInTheDocument();
     });
 
     it("should use flexbox for responsive badge layout", () => {

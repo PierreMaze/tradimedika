@@ -1,4 +1,4 @@
-// utils/validation.test.js
+// features/symptom-search/utils/validationSymptom.test.js
 import { describe, it, expect } from "vitest";
 import {
   validateSymptom,
@@ -6,9 +6,9 @@ import {
   validateQueryParamLength,
   parseAndValidateSymptoms,
   validateSlugFormat,
-} from "./validation";
+} from "./validationSymptom";
 
-describe("validation.js - Security Tests", () => {
+describe("validationSymptom.js - Security Tests", () => {
   describe("validateSymptom", () => {
     it("should accept valid symptoms from symptomList", () => {
       expect(validateSymptom("fatigue")).toBe(true);

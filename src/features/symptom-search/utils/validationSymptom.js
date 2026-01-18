@@ -1,6 +1,6 @@
-// utils/validation.js
-import symptomList from "../data/symptomList.json";
-import synonymsData from "../data/synonymsSymptomList.json";
+// features/symptom-search/utils/symptomValidation.js
+import symptomList from "../../../data/symptomList.json";
+import synonymsData from "../../../data/synonymsSymptomList.json";
 import { normalizeForMatching } from "./normalizeSymptom";
 
 /**

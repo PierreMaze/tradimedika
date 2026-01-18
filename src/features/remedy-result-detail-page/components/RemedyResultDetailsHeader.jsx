@@ -6,7 +6,7 @@ import {
   VerifiedTag,
 } from "../../../components/tags";
 
-function RemedyResultDetailsHeader({ remedy, safeImageUrl, typeColors }) {
+function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -26,9 +26,15 @@ function RemedyResultDetailsHeader({ remedy, safeImageUrl, typeColors }) {
       </div>
 
       <div className="lg:col-span-3">
-        <div className="mb-3 flex flex-wrap items-center gap-2">
+        <h1 className="mb-3 text-3xl font-bold lg:text-4xl">{remedy.name}</h1>
+
+        <p className="mb-6 text-sm leading-relaxed text-neutral-600 lg:text-base 2xl:text-lg dark:text-neutral-400">
+          {remedy.description}
+        </p>
+
+        <div className="flex flex-wrap items-center gap-4">
           <span
-            className={`rounded-md px-3 py-1.5 text-xs font-semibold tracking-wide uppercase transition duration-300 ${typeColors[remedy.type] || typeColors.aliment}`}
+            className={`shrink-0 rounded-md bg-neutral-200 px-3 py-1.5 text-xs font-semibold tracking-wide text-black uppercase lg:text-sm 2xl:text-base dark:bg-neutral-600 dark:text-white`}
           >
             {remedy.type}
           </span>
@@ -41,12 +47,6 @@ function RemedyResultDetailsHeader({ remedy, safeImageUrl, typeColors }) {
             <ChildrenAgeTag age={remedy.childrenAge} />
           )}
         </div>
-
-        <h1 className="mb-3 text-3xl font-bold lg:text-4xl">{remedy.name}</h1>
-
-        <p className="text-sm leading-relaxed text-neutral-600 lg:text-base 2xl:text-lg dark:text-neutral-400">
-          {remedy.description}
-        </p>
       </div>
     </motion.div>
   );

@@ -1,13 +1,13 @@
-import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 import HeroFeatures from "./HeroFeatures";
 
 describe("HeroFeatures", () => {
   const DEFAULT_FEATURES = [
-    "+100 plantes & aliments",
+    "+100 produits naturels",
     "Santé naturelle",
-    "Gratuit",
-    "Ne stocke pas vos données",
+    "Recherche simplifié",
+    "Respect de vos données",
   ];
 
   describe("Rendering with default features", () => {

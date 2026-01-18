@@ -5,7 +5,7 @@ import { NavLink, useLocation, useParams } from "react-router-dom";
 import { LINK_INTERNAL_STYLES } from "../../constants/linkStyles";
 import db from "../../data/db.json";
 import { getRemedyBySlug } from "../../features/remedy-result-page";
-import { formatSegmentLabel } from "../../utils/formatSegmentLabel";
+import { formatBreadcrumbLabel } from "./utils/formatBreadcrumbLabel";
 
 /**
  * BreadCrumb Component - Navigation breadcrumb trail
@@ -56,7 +56,7 @@ const segmentToLabel = (segment, isSlug = false, remedyName = null) => {
 
   // Priorité 3: Formatage intelligent du segment
   // (décode URI, remplace tirets par espaces, capitalise)
-  return formatSegmentLabel(segment);
+  return formatBreadcrumbLabel(segment);
 };
 
 /**

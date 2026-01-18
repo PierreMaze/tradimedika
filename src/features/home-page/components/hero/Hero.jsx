@@ -19,29 +19,31 @@ import HeroSearch from "./HeroSearch";
  */
 export default function Hero() {
   return (
-    <div className="mx-auto mt-8 mb-4 flex h-screen flex-col items-center justify-center px-4">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="z-20 flex flex-col items-center justify-center gap-y-10 md:gap-y-12 lg:gap-y-14 xl:gap-y-16 2xl:gap-y-20"
-      >
-        {/* En-tête : Badge + Titre + Description */}
-        <HeroHeader />
-
-        {/* Formulaire de recherche de symptômes */}
+    <>
+      <div className="mx-auto mt-8 mb-4 flex h-screen flex-col items-center justify-center px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="w-full"
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="z-20 flex flex-col items-center justify-center gap-y-10 md:gap-y-12 lg:gap-y-14 xl:gap-y-16 2xl:gap-y-20"
         >
-          <HeroSearch />
-        </motion.div>
+          {/* En-tête : Badge + Titre + Description */}
+          <HeroHeader />
 
-        {/* Liste des fonctionnalités */}
-        <HeroFeatures />
-      </motion.div>
-    </div>
+          {/* Formulaire de recherche de symptômes */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="w-full"
+          >
+            <HeroSearch />
+          </motion.div>
+
+          {/* Liste des fonctionnalités */}
+          <HeroFeatures />
+        </motion.div>
+      </div>
+    </>
   );
 }

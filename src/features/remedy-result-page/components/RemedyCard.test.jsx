@@ -2,6 +2,7 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
+import PropTypes from "prop-types";
 import RemedyCard from "./RemedyCard";
 
 // Helper pour wrapper avec Router (nécessaire pour Link)
@@ -9,18 +10,35 @@ const renderWithRouter = (ui) => {
   return render(<BrowserRouter>{ui}</BrowserRouter>);
 };
 
+// Mock du hook useVisibleItems
+vi.mock("../hooks/useTruncatePropertiesItems", () => ({
+  useVisibleItems: vi.fn((items) => ({
+    containerRef: { current: null },
+    itemRefs: { current: [] },
+    counterRef: { current: null },
+    visibleCount: Math.min(items?.length || 0, 3),
+    isMeasured: true,
+  })),
+}));
+
 // Mock des tags pour simplifier les tests
-vi.mock("../tag/VerifiedTag", () => ({
-  default: () => <div data-testid="verified-tag">Vérifié</div>,
-}));
+vi.mock("../../../components/tags", () => {
+  const ChildrenAgeTagMock = ({ age }) => (
+    <div data-testid="children-tag">Enfants {age}+</div>
+  );
+  ChildrenAgeTagMock.propTypes = {
+    age: PropTypes.number,
+  };
 
-vi.mock("../tag/PregnancyTag", () => ({
-  default: () => <div data-testid="pregnancy-tag">Sûr grossesse</div>,
-}));
-
-vi.mock("../tag/ChildrenAgeTag", () => ({
-  default: ({ age }) => <div data-testid="children-tag">Enfants {age}+</div>,
-}));
+  return {
+    VerifiedTag: () => <div data-testid="verified-tag">Vérifié</div>,
+    TraditionnalTag: () => (
+      <div data-testid="traditional-tag">Traditionnel</div>
+    ),
+    PregnancyTag: () => <div data-testid="pregnancy-tag">Sûr grossesse</div>,
+    ChildrenAgeTag: ChildrenAgeTagMock,
+  };
+});
 
 describe("RemedyCard Component", () => {
   const mockRemedyMinimal = {
@@ -59,7 +77,9 @@ describe("RemedyCard Component", () => {
 
       expect(screen.getByText("Citron")).toBeInTheDocument();
       expect(screen.getByText("Fruit")).toBeInTheDocument();
-      // Description removed from RemedyCard component
+      expect(
+        screen.getByText("Le citron est un agrume riche en vitamine C."),
+      ).toBeInTheDocument();
     });
 
     it("should render with all props", () => {
@@ -98,9 +118,10 @@ describe("RemedyCard Component", () => {
         <RemedyCard remedy={mockRemedyComplete} selectedSymptoms={[]} />,
       );
 
-      expect(screen.getByText("Antioxydant")).toBeInTheDocument();
-      expect(screen.getByText("Anti-inflammatoire")).toBeInTheDocument();
-      expect(screen.getByText("Énergisant")).toBeInTheDocument();
+      // Use getAllByText since properties appear in both measurement and visible containers
+      expect(screen.getAllByText("Antioxydant")[0]).toBeInTheDocument();
+      expect(screen.getAllByText("Anti-inflammatoire")[0]).toBeInTheDocument();
+      expect(screen.getAllByText("Énergisant")[0]).toBeInTheDocument();
     });
 
     it("should display +N counter when more than 3 properties", () => {
@@ -122,11 +143,16 @@ describe("RemedyCard Component", () => {
         ],
       };
 
-      renderWithRouter(
+      const { container } = renderWithRouter(
         <RemedyCard remedy={remedyWith3Props} selectedSymptoms={[]} />,
       );
 
-      expect(screen.queryByText(/^\+\d+$/)).not.toBeInTheDocument();
+      // Check only in visible container (not in aria-hidden measurement container)
+      const visibleContainer = container.querySelector(
+        'div[class*="flex gap-2 overflow-hidden"]',
+      );
+      const counterInVisible = visibleContainer?.textContent?.match(/\+\d+/);
+      expect(counterInVisible).toBeNull();
     });
 
     it("should not display properties section when empty", () => {
@@ -178,7 +204,7 @@ describe("RemedyCard Component", () => {
       );
 
       expect(screen.getByTestId("children-tag")).toBeInTheDocument();
-      expect(screen.getByText("Enfants +12 ans")).toBeInTheDocument();
+      expect(screen.getByText("Enfants 12+")).toBeInTheDocument();
     });
 
     it("should not render children badge when childrenAge is null", () => {
@@ -187,6 +213,53 @@ describe("RemedyCard Component", () => {
       );
 
       expect(screen.queryByTestId("children-tag")).not.toBeInTheDocument();
+    });
+  });
+
+  describe("Allergen Badge (isFiltered)", () => {
+    it("should display allergen badge when isFiltered is true", () => {
+      renderWithRouter(
+        <RemedyCard
+          remedy={mockRemedyComplete}
+          selectedSymptoms={[]}
+          isFiltered={true}
+        />,
+      );
+
+      expect(screen.getByText("Allergène")).toBeInTheDocument();
+      expect(
+        screen.getByTitle(
+          "Ce remède contient des allergènes que vous avez déclarés",
+        ),
+      ).toBeInTheDocument();
+    });
+
+    it("should not display allergen badge when isFiltered is false", () => {
+      renderWithRouter(
+        <RemedyCard
+          remedy={mockRemedyMinimal}
+          selectedSymptoms={[]}
+          isFiltered={false}
+        />,
+      );
+
+      expect(screen.queryByText("Allergène")).not.toBeInTheDocument();
+    });
+
+    it("should update aria-label when isFiltered is true", () => {
+      renderWithRouter(
+        <RemedyCard
+          remedy={mockRemedyComplete}
+          selectedSymptoms={[]}
+          isFiltered={true}
+        />,
+      );
+
+      const link = screen.getByRole("link");
+      expect(link).toHaveAttribute(
+        "aria-label",
+        "Voir les détails de Thé vert (contient des allergènes)",
+      );
     });
   });
 

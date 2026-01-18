@@ -1,13 +1,18 @@
-// tradimedika-v1/src/components/tooltip/TagsInfoTooltip.jsx
+// tradimedika/src/components/ui/helper/RemedyTagsHelper.jsx
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { GrCircleQuestion } from "react-icons/gr";
 import { HiXMark } from "react-icons/hi2";
-import { ChildrenAgeTag, PregnancyTag, VerifiedTag } from "../tags";
+import {
+  ChildrenAgeTag,
+  PregnancyTag,
+  TraditionnalTag,
+  VerifiedTag,
+} from "../../tags";
 
 /**
- * TagsInfoTooltip Component
+ * RemedyTagsHelper Component
  *
  * Affiche un bouton "?" qui révèle un tooltip explicatif des tags
  * (Vérifié, Grossesse OK, Enfants X+ ans).
@@ -19,7 +24,7 @@ import { ChildrenAgeTag, PregnancyTag, VerifiedTag } from "../tags";
  * - Backdrop semi-transparent sur mobile
  */
 
-function TagsInfoTooltip() {
+function RemedyTagsHelper() {
   const [isOpen, setIsOpen] = useState(false);
   const tooltipRef = useRef(null);
   const buttonRef = useRef(null);
@@ -158,7 +163,20 @@ function TagsInfoTooltip() {
               <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-4">
                 <VerifiedTag />
                 <p className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-200">
-                  Ce remède a été confirmé comme sûr,{" "}
+                  Ce remède été approué par un professionnel de santé, il est
+                  donc considéré comme un remède validé et sûr,{" "}
+                  <span className="font-medium text-emerald-700 dark:text-emerald-400">
+                    vérifier les contre-indications.
+                  </span>
+                </p>
+              </div>
+
+              {/* Tag Traditionnel */}
+              <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-4">
+                <TraditionnalTag />
+                <p className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-200">
+                  Ce remède n&apos; pas été approué par un professionnel de
+                  santé, il est donc considéré comme un remède traditionnel,{" "}
                   <span className="font-medium text-emerald-700 dark:text-emerald-400">
                     vérifier les contre-indications.
                   </span>
@@ -177,7 +195,7 @@ function TagsInfoTooltip() {
               <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-4">
                 <ChildrenAgeTag age={"X"} />
                 <p className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-200">
-                  Ce remède est adapté aux enfants de plus de X ans.
+                  À utiliser strictement à partir de plus de X ans
                 </p>
               </div>
             </div>
@@ -188,4 +206,4 @@ function TagsInfoTooltip() {
   );
 }
 
-export default TagsInfoTooltip;
+export default RemedyTagsHelper;

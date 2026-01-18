@@ -3,7 +3,7 @@ import { useState } from "react";
 import {
   normalizeSymptom,
   normalizeForMatching,
-} from "../../../utils/normalizeSymptom";
+} from "../utils/normalizeSymptom";
 
 /**
  * Hook personnalisé pour gérer la sélection de symptômes

@@ -1,7 +1,7 @@
-// src/utils/formatSegmentLabel.js
-import { createLogger } from "./logger";
+// src/components/navigation/utils/formatBreadcrumbLabel.js
+import { createLogger } from "../../../utils/logger";
 
-const logger = createLogger("formatSegmentLabel");
+const logger = createLogger("formatBreadcrumbLabel");
 
 /**
  * Formate un segment d'URL en label lisible pour le BreadCrumb
@@ -15,15 +15,15 @@ const logger = createLogger("formatSegmentLabel");
  * @returns {string} Label formaté (ex: "Thé Vert", "Huile De Coco")
  *
  * @example
- * formatSegmentLabel("thé-vert") // "Thé Vert"
- * formatSegmentLabel("th%C3%A9-vert") // "Thé Vert"
- * formatSegmentLabel("huile-de-coco") // "Huile De Coco"
- * formatSegmentLabel("menthe-poivr%C3%A9e") // "Menthe Poivrée"
+ * formatBreadcrumbLabel("thé-vert") // "Thé Vert"
+ * formatBreadcrumbLabel("th%C3%A9-vert") // "Thé Vert"
+ * formatBreadcrumbLabel("huile-de-coco") // "Huile De Coco"
+ * formatBreadcrumbLabel("menthe-poivr%C3%A9e") // "Menthe Poivrée"
  */
-export function formatSegmentLabel(segment) {
+export function formatBreadcrumbLabel(segment) {
   // Validation des entrées
   if (!segment || typeof segment !== "string") {
-    logger.warn("Segment invalide fourni à formatSegmentLabel");
+    logger.warn("Segment invalide fourni à formatBreadcrumbLabel");
     return "";
   }
 

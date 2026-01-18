@@ -72,7 +72,7 @@ describe("RemedyResultDetailsAllergyWarning", () => {
 
       const alert = container.firstChild;
       expect(alert.className).toContain("border-dashed");
-      expect(alert.className).toContain("bg-emerald-50");
+      expect(alert.className).toContain("bg-amber-50");
       expect(alert.className).toContain("rounded-lg");
     });
 
@@ -82,8 +82,8 @@ describe("RemedyResultDetailsAllergyWarning", () => {
       );
 
       const alert = container.firstChild;
-      expect(alert.className).toContain("dark:bg-emerald-950");
-      expect(alert.className).toContain("dark:border-emerald-400/60");
+      expect(alert.className).toContain("dark:bg-amber-950");
+      expect(alert.className).toContain("dark:border-amber-400/60");
     });
   });
 

@@ -2,15 +2,19 @@
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { memo } from "react";
+import { LiaAllergiesSolid } from "react-icons/lia";
+
 import { HiArrowRight } from "react-icons/hi2";
-import { IoMdAlert } from "react-icons/io";
+
 import { Link } from "react-router-dom";
 import {
   ChildrenAgeTag,
   PregnancyTag,
+  TraditionnalTag,
   VerifiedTag,
 } from "../../../components/tags";
 import { capitalizeFirstLetter } from "../../../utils/capitalizeFirstLetter";
+import { useVisibleItems } from "../hooks/useTruncatePropertiesItems";
 import { generateSlug } from "../utils/remedyMatcher";
 /**
  * Carte individuelle pour afficher un remède
@@ -25,12 +29,17 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
   const {
     name,
     type,
+    description,
     properties,
     image,
     pregnancySafe,
     childrenAge,
     verifiedByProfessional,
   } = remedy;
+
+  const { containerRef, itemRefs, counterRef, visibleCount } = useVisibleItems(
+    properties || [],
+  );
 
   const imageClasses = isFiltered ? "grayscale" : "";
 
@@ -67,7 +76,24 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
         >
           {/* Image */}
           {image && (
-            <div className="aspect-square w-full overflow-hidden bg-neutral-50 dark:bg-neutral-700">
+            <div className="relative aspect-square w-full overflow-hidden bg-neutral-200 dark:bg-neutral-600">
+              {/* Tag allergène en overlay (top-right) */}
+              {isFiltered && (
+                <div className="absolute top-4 right-4 z-10">
+                  <span
+                    className="inline-flex items-center gap-1.5 rounded-md bg-emerald-50 px-3 py-1.5 text-sm font-semibold text-emerald-800 shadow-md transition duration-300 lg:text-base dark:bg-emerald-700 dark:text-emerald-50"
+                    title="Ce remède contient des allergènes que vous avez déclarés"
+                    role="status"
+                    aria-live="polite"
+                  >
+                    <LiaAllergiesSolid
+                      className="h-4 w-4 lg:h-5 lg:w-5"
+                      aria-hidden="true"
+                    />
+                    Allergène
+                  </span>
+                </div>
+              )}
               <img
                 src={image}
                 alt={`Illustration de ${name}`}
@@ -87,54 +113,87 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
                 {name}
               </h3>
               <span
-                className={`shrink-0 rounded-md bg-neutral-200 px-2 py-1 text-xs font-semibold tracking-wide text-black uppercase lg:text-sm dark:bg-neutral-600 dark:text-white ${textClasses}`}
+                className={`shrink-0 rounded-md bg-neutral-200 px-3 py-1.5 text-xs font-semibold tracking-wide text-black uppercase lg:text-sm 2xl:text-base dark:bg-neutral-600 dark:text-white ${textClasses}`}
               >
                 {type}
               </span>
             </div>
 
+            {/* Description (truncate sur 3 lignes) */}
+            {description && (
+              <p
+                className={`mb-4 line-clamp-2 text-start text-sm leading-relaxed text-neutral-600 lg:text-base dark:text-neutral-400 ${textClasses}`}
+              >
+                {description}
+              </p>
+            )}
+
             {/* Propriétés */}
             {properties && properties.length > 0 && (
-              <div className="mb-4 flex flex-wrap gap-2">
-                {properties.slice(0, 3).map((prop, index) => (
-                  <span
-                    key={index}
-                    className={`inline-flex items-center gap-1 rounded-md bg-emerald-100 px-3 py-1 text-xs font-medium text-emerald-800 transition-all duration-300 lg:text-sm dark:bg-emerald-900 dark:text-emerald-200 ${textClasses}`}
+              <div className="mb-4 flex flex-col gap-2 text-xs lg:text-sm 2xl:text-base">
+                <h4 className="lg:textbasel text-start text-sm font-bold text-neutral-900/50 dark:text-neutral-300">
+                  Propriétés :
+                </h4>
+                <div className="relative">
+                  <div
+                    className="pointer-events-none invisible absolute top-0 left-0 flex gap-2"
+                    aria-hidden="true"
                   >
-                    {capitalizeFirstLetter(prop.name, true)}
-                  </span>
-                ))}
-                {properties.length > 3 && (
-                  <span
-                    className={`inline-flex items-center rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-600 transition-all duration-300 dark:bg-neutral-700 dark:text-neutral-400 ${textClasses}`}
+                    {properties.map((prop, index) => (
+                      <span
+                        key={`measure-${index}`}
+                        ref={(el) => (itemRefs.current[index] = el)}
+                        className="inline-flex shrink-0 items-center gap-1 rounded-md bg-emerald-100 px-3 py-1.5 font-medium text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200"
+                      >
+                        {capitalizeFirstLetter(prop.name, true)}
+                      </span>
+                    ))}
+                    <span
+                      ref={counterRef}
+                      className="inline-flex shrink-0 items-center rounded-full bg-neutral-100 px-3 py-1.5 font-medium text-neutral-600 dark:bg-neutral-700 dark:text-neutral-400"
+                    >
+                      +99
+                    </span>
+                  </div>
+                  <div
+                    ref={containerRef}
+                    className="flex gap-2 overflow-hidden"
                   >
-                    +{properties.length - 3}
-                  </span>
-                )}
+                    {properties.slice(0, visibleCount).map((prop, index) => (
+                      <span
+                        key={index}
+                        className={`inline-flex shrink-0 items-center gap-1 rounded-md bg-emerald-100 px-3 py-1.5 font-medium text-emerald-800 transition-all duration-300 dark:bg-emerald-900 dark:text-emerald-200 ${textClasses}`}
+                      >
+                        {capitalizeFirstLetter(prop.name, true)}
+                      </span>
+                    ))}
+                    {visibleCount < properties.length && (
+                      <span
+                        className={`inline-flex shrink-0 items-center rounded-full bg-neutral-100 px-3 py-1.5 font-medium text-neutral-600 transition-all duration-300 dark:bg-neutral-700 dark:text-neutral-400 ${textClasses}`}
+                      >
+                        +{properties.length - visibleCount}
+                      </span>
+                    )}
+                  </div>
+                </div>
               </div>
             )}
 
             {/* Tags de sécurité */}
-            <div className={`flex flex-wrap gap-2 ${textClasses}`}>
-              {isFiltered && (
-                <span
-                  className="inline-flex items-center gap-1.5 rounded-md bg-amber-100 px-3 py-1.5 text-xs font-semibold text-amber-800 transition duration-300 lg:text-sm dark:bg-amber-900 dark:text-amber-200"
-                  title="Ce remède contient des allergènes que vous avez déclarés"
-                  role="status"
-                  aria-live="polite"
-                >
-                  <IoMdAlert className="h-4 w-4" aria-hidden="true" />
-                  Allergène
-                </span>
-              )}
-              {verifiedByProfessional && <VerifiedTag />}
-              {pregnancySafe && <PregnancyTag variant="default" />}
-              {childrenAge !== null && <ChildrenAgeTag age={childrenAge} />}
+            <div className={`flex flex-col flex-wrap gap-2 ${textClasses}`}>
+              <h4 className="text-start text-sm font-bold text-neutral-900/50 dark:text-neutral-300">
+                Labels :
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {verifiedByProfessional ? <VerifiedTag /> : <TraditionnalTag />}
+                {pregnancySafe && <PregnancyTag variant="default" />}
+                {childrenAge !== null && <ChildrenAgeTag age={childrenAge} />}
+              </div>
             </div>
 
             {/* Indicateur "Voir plus" */}
             <div
-              className={`mt-4 flex items-center justify-end gap-1 text-sm font-semibold text-emerald-600 transition-colors group-hover:text-emerald-700 dark:text-emerald-400 dark:group-hover:text-emerald-300 ${textClasses}`}
+              className={`mt-4 flex items-center justify-end gap-1 text-xs font-semibold text-emerald-600 transition-colors group-hover:text-emerald-700 lg:text-sm 2xl:text-base dark:text-emerald-400 dark:group-hover:text-emerald-300 ${textClasses}`}
             >
               <span>Voir plus</span>
               <HiArrowRight

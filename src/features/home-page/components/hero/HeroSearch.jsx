@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-import { useScrollOnMobileFocus } from "../../../../hooks/useScrollOnMobileFocus";
+import { useScrollOnMobileFocus } from "../../../../layout/hooks/useScrollOnMobileFocus";
 import { AllergySectionToggle } from "../../../allergens-search";
 import { SearchHistoryModal } from "../../../history-search";
 import SymptomSearchSection from "../../../symptom-search/components/SymptomSearchSection";

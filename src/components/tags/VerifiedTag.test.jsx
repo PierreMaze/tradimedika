@@ -7,7 +7,7 @@ describe("VerifiedTag", () => {
   describe("Rendering", () => {
     it("should render with default props", () => {
       render(<VerifiedTag />);
-      expect(screen.getByText("Vérifié")).toBeInTheDocument();
+      expect(screen.getByText("Validé")).toBeInTheDocument();
     });
 
     it("should render icon", () => {
@@ -19,7 +19,7 @@ describe("VerifiedTag", () => {
     it("should have tooltip title", () => {
       render(<VerifiedTag />);
       expect(
-        screen.getByTitle("Vérifié par un professionnel de santé"),
+        screen.getByTitle("Approuvé par un professionnel de santé"),
       ).toBeInTheDocument();
     });
 
@@ -60,17 +60,17 @@ describe("VerifiedTag", () => {
   describe("showLabel prop", () => {
     it("should show label by default", () => {
       render(<VerifiedTag />);
-      expect(screen.getByText("Vérifié")).toBeInTheDocument();
+      expect(screen.getByText("Validé")).toBeInTheDocument();
     });
 
     it("should hide label when showLabel is false", () => {
       render(<VerifiedTag showLabel={false} />);
-      expect(screen.queryByText("Vérifié")).not.toBeInTheDocument();
+      expect(screen.queryByText("Validé")).not.toBeInTheDocument();
     });
 
     it("should show label when showLabel is true", () => {
       render(<VerifiedTag showLabel={true} />);
-      expect(screen.getByText("Vérifié")).toBeInTheDocument();
+      expect(screen.getByText("Validé")).toBeInTheDocument();
     });
 
     it("should still render icon when label is hidden", () => {
@@ -89,7 +89,7 @@ describe("VerifiedTag", () => {
 
     it("should have tooltip with descriptive text", () => {
       render(<VerifiedTag />);
-      const tag = screen.getByTitle("Vérifié par un professionnel de santé");
+      const tag = screen.getByTitle("Approuvé par un professionnel de santé");
       expect(tag).toBeInTheDocument();
     });
   });
@@ -104,7 +104,7 @@ describe("VerifiedTag", () => {
         </div>,
       );
 
-      const labels = screen.getAllByText("Vérifié");
+      const labels = screen.getAllByText("Validé");
       expect(labels).toHaveLength(2);
 
       const icons = container.querySelectorAll("svg");

@@ -56,7 +56,7 @@ describe("RemedyResultDetailsSymptomsSection", () => {
 
       const badge = screen.getByText("Fièvre");
       expect(badge).toHaveClass("bg-orange-100", "text-yellow-800");
-      expect(badge).toHaveClass("dark:bg-yellow-700", "dark:text-yellow-100");
+      expect(badge).toHaveClass("dark:bg-yellow-900", "dark:text-yellow-100");
     });
   });
 

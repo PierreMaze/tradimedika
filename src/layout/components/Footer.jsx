@@ -1,8 +1,8 @@
 // tradimedika-v1/src/layout/Footer.jsx
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
-import LogoTradimedika from "./LogoTradimedika";
 import { LINK_EXTERNAL_STYLES } from "../../constants/linkStyles";
+import LogoTradimedika from "./LogoTradimedika";
 
 const Footer = ({ className = "" }) => {
   return (

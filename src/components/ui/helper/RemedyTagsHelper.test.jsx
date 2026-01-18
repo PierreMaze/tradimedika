@@ -1,9 +1,9 @@
-// components/tooltip/TagsInfoTooltip.test.jsx
+// components/ui/helper/RemedyTagsHelper.test.jsx
 /* global global */
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import TagsInfoTooltip from "./TagsInfoTooltip";
+import RemedyTagsHelper from "./RemedyTagsHelper";
 
 // Mock the tag components
 vi.mock("../tag/VerifiedTag", () => ({
@@ -18,7 +18,7 @@ vi.mock("../tag/ChildrenAgeTag", () => ({
   default: () => <div data-testid="children-age-tag">Children Age Tag</div>,
 }));
 
-describe("TagsInfoTooltip", () => {
+describe("RemedyTagsHelper", () => {
   beforeEach(() => {
     // Reset window.innerWidth to desktop size
     global.innerWidth = 1024;
@@ -32,20 +32,20 @@ describe("TagsInfoTooltip", () => {
 
   describe("Rendering", () => {
     it("should render the question mark button", () => {
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
       expect(button).toBeInTheDocument();
     });
 
     it("should not display tooltip on initial render", () => {
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       expect(screen.queryByRole("tooltip")).not.toBeInTheDocument();
     });
 
     it("should render all three tag components when tooltip is open", async () => {
       const user = userEvent.setup();
       global.innerWidth = 500;
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       await user.click(button);
@@ -59,7 +59,7 @@ describe("TagsInfoTooltip", () => {
     it("should display tooltip title when open", async () => {
       const user = userEvent.setup();
       global.innerWidth = 500;
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       await user.click(button);
@@ -70,7 +70,7 @@ describe("TagsInfoTooltip", () => {
     });
 
     it("should render fixed position container", () => {
-      const { container } = render(<TagsInfoTooltip />);
+      const { container } = render(<RemedyTagsHelper />);
       const fixedContainer = container.firstChild;
       expect(fixedContainer).toHaveClass("fixed");
       expect(fixedContainer).toHaveClass("z-50");
@@ -80,20 +80,20 @@ describe("TagsInfoTooltip", () => {
   describe("Button sizing", () => {
     it("should have small button size on mobile", () => {
       global.innerWidth = 500;
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
       expect(button).toHaveClass("h-12", "w-12");
     });
 
     it("should have large button size on desktop", () => {
       global.innerWidth = 1024;
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
       expect(button).toHaveClass("lg:h-16", "lg:w-16");
     });
 
     it("should have correct styling classes on button", () => {
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
       expect(button).toHaveClass("inline-flex");
       expect(button).toHaveClass("rounded-lg");
@@ -109,7 +109,7 @@ describe("TagsInfoTooltip", () => {
 
     it("should toggle tooltip on button click on mobile", async () => {
       const user = userEvent.setup();
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       // Initially closed
@@ -130,7 +130,7 @@ describe("TagsInfoTooltip", () => {
 
     it("should set aria-expanded attribute correctly on mobile", async () => {
       const user = userEvent.setup();
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       expect(button).toHaveAttribute("aria-expanded", "false");
@@ -144,7 +144,7 @@ describe("TagsInfoTooltip", () => {
 
     it("should display close button on mobile when tooltip is open", async () => {
       const user = userEvent.setup();
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       await user.click(button);
@@ -156,7 +156,7 @@ describe("TagsInfoTooltip", () => {
 
     it("should close tooltip when close button is clicked on mobile", async () => {
       const user = userEvent.setup();
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       await user.click(button);
@@ -174,7 +174,7 @@ describe("TagsInfoTooltip", () => {
 
     it("should display backdrop overlay on mobile when tooltip is open", async () => {
       const user = userEvent.setup();
-      const { container } = render(<TagsInfoTooltip />);
+      const { container } = render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       await user.click(button);
@@ -192,7 +192,7 @@ describe("TagsInfoTooltip", () => {
     });
 
     it("should open tooltip on mouse enter on desktop", async () => {
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       fireEvent.mouseEnter(button);
@@ -203,7 +203,7 @@ describe("TagsInfoTooltip", () => {
     });
 
     it("should close tooltip on mouse leave on desktop", async () => {
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       fireEvent.mouseEnter(button);
@@ -219,7 +219,7 @@ describe("TagsInfoTooltip", () => {
     });
 
     it("should not show close button on desktop", async () => {
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       fireEvent.mouseEnter(button);
@@ -234,7 +234,7 @@ describe("TagsInfoTooltip", () => {
     });
 
     it("should not show backdrop overlay on desktop", async () => {
-      const { container } = render(<TagsInfoTooltip />);
+      const { container } = render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       fireEvent.mouseEnter(button);
@@ -255,7 +255,7 @@ describe("TagsInfoTooltip", () => {
 
     it("should close tooltip when Escape key is pressed", async () => {
       const user = userEvent.setup();
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       await user.click(button);
@@ -272,7 +272,7 @@ describe("TagsInfoTooltip", () => {
 
     it("should not close tooltip when other keys are pressed", async () => {
       const user = userEvent.setup();
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       await user.click(button);
@@ -297,7 +297,7 @@ describe("TagsInfoTooltip", () => {
       const user = userEvent.setup();
       render(
         <div>
-          <TagsInfoTooltip />
+          <RemedyTagsHelper />
           <div data-testid="outside">Outside element</div>
         </div>,
       );
@@ -318,7 +318,7 @@ describe("TagsInfoTooltip", () => {
 
     it("should close tooltip when clicking on backdrop overlay", async () => {
       const user = userEvent.setup();
-      const { container } = render(<TagsInfoTooltip />);
+      const { container } = render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       await user.click(button);
@@ -339,7 +339,7 @@ describe("TagsInfoTooltip", () => {
 
   describe("Accessibility", () => {
     it("should have proper aria-label on button", () => {
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
       expect(button).toHaveAttribute("aria-label");
     });
@@ -347,7 +347,7 @@ describe("TagsInfoTooltip", () => {
     it("should have proper aria-expanded attribute", async () => {
       const user = userEvent.setup();
       global.innerWidth = 500;
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       expect(button).toHaveAttribute("aria-expanded", "false");
@@ -362,7 +362,7 @@ describe("TagsInfoTooltip", () => {
     it("should have role tooltip on tooltip content", async () => {
       const user = userEvent.setup();
       global.innerWidth = 500;
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       await user.click(button);
@@ -375,7 +375,7 @@ describe("TagsInfoTooltip", () => {
     it("should have aria-hidden on close button icon", async () => {
       const user = userEvent.setup();
       global.innerWidth = 500;
-      const { container } = render(<TagsInfoTooltip />);
+      const { container } = render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       await user.click(button);
@@ -387,7 +387,7 @@ describe("TagsInfoTooltip", () => {
     });
 
     it("should have keyboard focus on button", () => {
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
       expect(button).toBeInTheDocument();
       button.focus();
@@ -399,7 +399,7 @@ describe("TagsInfoTooltip", () => {
     it("should display correct description text for verified tag", async () => {
       const user = userEvent.setup();
       global.innerWidth = 500;
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       await user.click(button);
@@ -412,7 +412,7 @@ describe("TagsInfoTooltip", () => {
     it("should display correct description text for pregnancy tag", async () => {
       const user = userEvent.setup();
       global.innerWidth = 500;
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       await user.click(button);
@@ -425,7 +425,7 @@ describe("TagsInfoTooltip", () => {
     it("should display correct description text for children age tag", async () => {
       const user = userEvent.setup();
       global.innerWidth = 500;
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       await user.click(button);
@@ -440,7 +440,7 @@ describe("TagsInfoTooltip", () => {
     it("should use centered positioning on mobile", async () => {
       global.innerWidth = 500;
       const user = userEvent.setup();
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       await user.click(button);
@@ -453,7 +453,7 @@ describe("TagsInfoTooltip", () => {
 
     it("should use absolute positioning on desktop", async () => {
       global.innerWidth = 1024;
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       fireEvent.mouseEnter(button);
@@ -465,8 +465,8 @@ describe("TagsInfoTooltip", () => {
     });
 
     it("should have correct bottom positioning in fixed container", () => {
-      render(<TagsInfoTooltip />);
-      const { container } = render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
+      const { container } = render(<RemedyTagsHelper />);
       const fixedContainer = container.firstChild;
       expect(fixedContainer).toHaveClass("bottom-6");
       expect(fixedContainer).toHaveClass("right-6");
@@ -475,7 +475,7 @@ describe("TagsInfoTooltip", () => {
 
   describe("Z-index layering", () => {
     it("should have z-50 on button container", () => {
-      const { container } = render(<TagsInfoTooltip />);
+      const { container } = render(<RemedyTagsHelper />);
       const fixedContainer = container.firstChild;
       expect(fixedContainer).toHaveClass("z-50");
     });
@@ -483,7 +483,7 @@ describe("TagsInfoTooltip", () => {
     it("should have z-50 on backdrop overlay on mobile", async () => {
       global.innerWidth = 500;
       const user = userEvent.setup();
-      const { container } = render(<TagsInfoTooltip />);
+      const { container } = render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       await user.click(button);
@@ -497,7 +497,7 @@ describe("TagsInfoTooltip", () => {
     it("should have z-60 on tooltip content to appear above backdrop", async () => {
       global.innerWidth = 500;
       const user = userEvent.setup();
-      render(<TagsInfoTooltip />);
+      render(<RemedyTagsHelper />);
       const button = screen.getByLabelText("Informations sur les tags");
 
       await user.click(button);
