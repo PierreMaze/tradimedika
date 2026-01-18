@@ -12,7 +12,7 @@
     "remedies": ["Ananas"]
   },
   {
-    "id": "Citron",
+    "id": "citrus",
     "name": "Agrumes",
     "description": "Citrons, oranges, pamplemousses, clémentines et autres agrumes",
     "remedies": ["Citron"]
