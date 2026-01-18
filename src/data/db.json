@@ -378,19 +378,17 @@
         "dose": { "value": 2, "unit": "g" },
         "frequency": { "value": 3, "unit": "fois par jour" },
         "duration": { "value": 7, "unit": "jours" },
-        "description": "Infuser 2g de feuilles séchées dans de l'eau chaude pendant 10 minutes. Boire après les repas pour faciliter la digestion. Pour les maux de tête : application locale d'huile essentielle diluée sur les tempes (adultes uniquement)."
+        "description": "Infuser 2g de feuilles séchées dans de l'eau chaude pendant 10 minutes. Boire après les repas pour faciliter la digestion. Pour les maux de tête : application locale d'huile essentielle diluée (avec de l'huile neutre, ex: tournesol), sur les tempes (adultes uniquement)."
       }
     ],
     "contraindications": [
-      "reflux gastro-œsophagien (CRITIQUE - aggrave les symptômes)",
-      "hernie hiatale",
-      "enfants de moins de 6 ans",
-      "grossesse",
-      "calculs biliaires"
+      "Reflux Gastro-Oesophagien (CRITIQUE - aggrave les symptômes en relaxant le sphincter œsophagien)",
+      "Hernie Hiatale",
+      "Enfants de moins de 6 ans",
+      "Grossesse",
+      "Calculs Biliaires"
     ],
     "tips": [
-      "CONTRE-INDICATION MAJEURE : reflux et hernie hiatale",
-      "Peut aggraver le reflux gastro-œsophagien (RGO) en relaxant le sphincter œsophagien",
       "Efficacité prouvée sur les céphalées de tension",
       "Ne pas utiliser huile essentielle chez enfants <6 ans",
       "Excellente pour syndrome intestin irritable (sauf RGO)"
