@@ -65,7 +65,6 @@
     "tips": [
       "Consulter un médecin si les symptômes persistent",
       "Éviter la consommation crue excessive qui peut irriter la gorge",
-      "Efficacité non prouvée scientifiquement",
       "Ne remplace pas un traitement médical"
     ],
     "image": "https://cdn-icons-png.flaticon.com/512/15618/15618168.png",
@@ -96,12 +95,12 @@
       }
     ],
     "contraindications": [
-      "grossesse",
-      "allaitement",
-      "enfants de moins de 12 ans",
-      "antécédents d'épilepsie",
-      "ulcères",
-      "troubles de la coagulation"
+      "Grossesse",
+      "Allaitement",
+      "Enfants de moins de 12 ans",
+      "Antécédents d'épilepsie",
+      "Ulcères",
+      "Troubles de la coagulation"
     ],
     "tips": [
       "Ne JAMAIS appliquer l'huile essentielle pure (risque de brûlure)",
@@ -138,12 +137,11 @@
       }
     ],
     "contraindications": [
-      "nourrissons de moins d'1 an (RISQUE DE BOTULISME)",
-      "diabète",
-      "allergie au pollen"
+      "JAMAIS nourrissons de moins d'1 an (RISQUE MORTEL DE BOTULISME)",
+      "Diabète",
+      "Allergie au pollen"
     ],
     "tips": [
-      "JAMAIS avant 1 an - risque mortel de botulisme infantile",
       "Privilégier le miel de thym ou d'eucalyptus pour la toux",
       "Ne pas chauffer au-delà de 40°C pour préserver les propriétés",
       "Choisir du miel brut et local si possible"
@@ -299,10 +297,8 @@
       "grossesse excessive"
     ],
     "tips": [
-      "CONTRE-INDICATION MAJEURE : calculs biliaires",
       "Augmente la production de bile (effet cholérétique)",
       "Peut interagir avec anticoagulants et médicaments diabète",
-      "Efficacité scientifiquement prouvée",
       "Gingembre frais > poudre pour les propriétés"
     ],
     "image": "https://cdn-icons-png.flaticon.com/512/5281/5281043.png",
@@ -348,10 +344,9 @@
       "intervention chirurgicale (arrêt 2 semaines avant)"
     ],
     "tips": [
-      "CONTRE-INDIQUÉE pendant la grossesse (risque de contractions)",
       "Peut être utilisée pour déclencher un accouchement tardif (plus de 41 semaines) sous avis médical",
       "Boire le soir pour meilleur effet sur le sommeil",
-      "Études validant les effets anti-dépression post-partum"
+      "Réduit le stress"
     ],
     "image": "https://cdn-icons-png.flaticon.com/512/8669/8669890.png",
     "pregnancySafe": false,
@@ -390,7 +385,7 @@
     ],
     "tips": [
       "Efficacité prouvée sur les céphalées de tension",
-      "Ne pas utiliser huile essentielle chez enfants <6 ans",
+      "Ne pas utiliser huile essentielle chez enfants de moins de 6 ans",
       "Excellente pour syndrome intestin irritable (sauf RGO)"
     ],
     "image": "https://cdn-icons-png.flaticon.com/512/6692/6692125.png",
@@ -448,7 +443,7 @@
   {
     "id": 11,
     "name": "Sureau noir",
-    "type": "plante",
+    "type": "Sirop",
     "description": "Plante riche en antioxydants et anthocyanes. Études montrant une réduction de 3 jours des symptômes de grippe. Bloque la réplication virale. CONTRE-INDICATION MAJEURE : maladies auto-immunes (stimule le système immunitaire).",
     "symptoms": ["rhume", "grippe"],
     "properties": [
@@ -471,11 +466,9 @@
       "traitement immunosuppresseur"
     ],
     "tips": [
-      "CONTRE-INDICATION MAJEURE : maladies auto-immunes",
       "Stimule fortement le système immunitaire",
-      "Efficacité prouvée : réduit symptômes grippe de 3 jours",
       "Consulter professionnel santé avant usage si traitement en cours",
-      "Ne pas utiliser baies crues (toxiques)"
+      "Ne pas utiliser baies crues (TOXIQUE)"
     ],
     "image": "https://cdn-icons-png.flaticon.com/512/12924/12924832.png",
     "pregnancySafe": false,
@@ -507,16 +500,13 @@
       "anticoagulants",
       "intervention chirurgicale prévue (arrêt 1 semaines avant)",
       "hémophilie",
-      "allergie (pollen olive, venin abeille)",
       "ulcères",
       "reflux"
     ],
     "tips": [
-      "CONTRE-INDICATION : anticoagulants et chirurgie",
       "Bromélaïne concentrée dans le cœur du fruit",
       "Toujours consommer frais (chaleur détruit enzyme)",
       "Ne pas abuser : aggrave reflux et brûlures estomac",
-      "Risque allergie croisée : pollen olive, venin abeille",
       "Arrêter avant toute intervention chirurgicale"
     ],
     "image": "https://cdn-icons-png.flaticon.com/512/18651/18651070.png",
@@ -563,7 +553,7 @@
     "pregnancySafe": true,
     "childrenAge": null,
     "allergens": [],
-    "alternatives": [62, 63],
+    "alternatives": [],
     "verifiedByProfessional": true,
     "GeneratedByAI": false
   }

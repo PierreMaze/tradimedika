@@ -1,6 +1,6 @@
 // components/tag/PregnancyTag.test.jsx
-import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 import PregnancyTag from "./PregnancyTag";
 
 describe("PregnancyTag", () => {
@@ -20,7 +20,7 @@ describe("PregnancyTag", () => {
       render(<PregnancyTag />);
       expect(
         screen.getByTitle(
-          "Ce remède peut être utilisé sans danger pendant la grossesse",
+          "Il est envisageable d'utiliser ce remède sans danger pendant la grossesse.",
         ),
       ).toBeInTheDocument();
     });

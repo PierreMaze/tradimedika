@@ -38,7 +38,7 @@ function RemedyResultDetailsSymptomsSection({ symptoms }) {
             transition={
               index >= 5 ? { duration: 0 } : { duration: 0.2, ease: "easeOut" }
             }
-            className="rounded-md bg-orange-100 px-3 py-2 text-sm font-medium text-yellow-800 shadow-md 2xl:text-base dark:bg-yellow-900 dark:text-yellow-100"
+            className="rounded-md bg-orange-100 px-3 py-1.5 text-sm font-medium text-yellow-800 shadow-md 2xl:text-base dark:bg-yellow-900 dark:text-yellow-100"
           >
             {capitalizeFirstLetter(symptom, true)}
           </motion.span>

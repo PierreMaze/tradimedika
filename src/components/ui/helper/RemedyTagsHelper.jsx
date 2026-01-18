@@ -163,8 +163,8 @@ function RemedyTagsHelper() {
               <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-4">
                 <VerifiedTag />
                 <p className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-200">
-                  Ce remède été approué par un professionnel de santé, il est
-                  donc considéré comme un remède validé et sûr,{" "}
+                  Ce remède a été approuvé par un professionnel de santé, il est
+                  donc considéré comme un remède prouvé pour son efficacité,{" "}
                   <span className="font-medium text-emerald-700 dark:text-emerald-400">
                     vérifier les contre-indications.
                   </span>
@@ -175,8 +175,9 @@ function RemedyTagsHelper() {
               <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-4">
                 <TraditionnalTag />
                 <p className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-200">
-                  Ce remède n&apos; pas été approué par un professionnel de
-                  santé, il est donc considéré comme un remède traditionnel,{" "}
+                  Ce remède n&apos;a pas été approuvé par un professionnel de
+                  santé, il est donc considéré comme un remède non prouvé pour
+                  son efficacité{" "}
                   <span className="font-medium text-emerald-700 dark:text-emerald-400">
                     vérifier les contre-indications.
                   </span>
@@ -187,7 +188,8 @@ function RemedyTagsHelper() {
               <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-4">
                 <PregnancyTag variant="default" />
                 <p className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-200">
-                  Ce remède peut être utilisé sans danger pendant la grossesse.
+                  Il est envisageable d&apos;utiliser ce remède sans danger
+                  pendant la grossesse.
                 </p>
               </div>
 

@@ -3,4 +3,4 @@ export { default as ChildrenAgeTag } from "./ChildrenAgeTag";
 export { default as PregnancyTag } from "./PregnancyTag";
 export { default as SymptomTag } from "./SymptomTag";
 export { default as TraditionnalTag } from "./TraditionnalTag";
-export { default as VerifiedTag } from "./VerifiedTag";
+export { default as VerifiedTag } from "./ProuvedTag";

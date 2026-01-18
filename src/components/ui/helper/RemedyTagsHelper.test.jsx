@@ -1,13 +1,17 @@
 // components/ui/helper/RemedyTagsHelper.test.jsx
 /* global global */
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import RemedyTagsHelper from "./RemedyTagsHelper";
 
 // Mock the tag components
 vi.mock("../tag/VerifiedTag", () => ({
   default: () => <div data-testid="verified-tag">Verified Tag</div>,
+}));
+
+vi.mock("../tag/TraditionnalTag", () => ({
+  default: () => <div data-testid="traditionnal-tag">Traditionnal Tag</div>,
 }));
 
 vi.mock("../tag/PregnancyTag", () => ({
@@ -397,6 +401,19 @@ describe("RemedyTagsHelper", () => {
 
   describe("Content", () => {
     it("should display correct description text for verified tag", async () => {
+      const user = userEvent.setup();
+      global.innerWidth = 500;
+      render(<RemedyTagsHelper />);
+      const button = screen.getByLabelText("Informations sur les tags");
+
+      await user.click(button);
+
+      await waitFor(() => {
+        expect(button).toHaveAttribute("aria-expanded", "true");
+      });
+    });
+
+    it("should display correct description text for traditionnal tag", async () => {
       const user = userEvent.setup();
       global.innerWidth = 500;
       render(<RemedyTagsHelper />);

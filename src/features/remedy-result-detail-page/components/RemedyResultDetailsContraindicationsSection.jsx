@@ -13,14 +13,14 @@ function RemedyResultDetailsContraindicationsSection({ contraindications }) {
       transition={{ delay: 0.35 }}
       className="mb-6 rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition duration-300 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800"
     >
-      <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold text-red-700 lg:text-xl 2xl:text-2xl dark:text-red-500">
+      <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold text-red-600 lg:text-xl 2xl:text-2xl dark:text-red-500">
         <RiAlarmWarningFill
-          className="h-4 w-4 text-red-500 lg:h-5 lg:w-5 dark:text-red-500"
+          className="h-4 w-4 text-red-600 lg:h-5 lg:w-5 dark:text-red-500"
           aria-hidden="true"
         />
         Contraindications
       </h2>
-      <div className="h-full max-h-fit border-l-4 border-red-500 pl-4 md:max-h-4/5">
+      <div className="h-full max-h-fit border-l-4 border-red-600 pl-4 md:max-h-4/5 dark:border-red-500">
         <motion.ul
           className="list-disc space-y-1 pl-5"
           initial="hidden"
@@ -46,7 +46,7 @@ function RemedyResultDetailsContraindicationsSection({ contraindications }) {
                   ? { duration: 0 }
                   : { duration: 0.3, ease: "easeOut" }
               }
-              className="text-sm leading-relaxed font-medium text-red-950 capitalize 2xl:text-base dark:text-red-100"
+              className="text-sm leading-relaxed font-medium text-black 2xl:text-base dark:text-white"
             >
               {capitalizeFirstLetter(contraindication, true)}
             </motion.li>

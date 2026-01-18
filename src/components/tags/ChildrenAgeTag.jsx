@@ -1,13 +1,13 @@
 // tradimedika-v1/src/components/tag/ChildrenAgeTag.jsx
 
 import PropTypes from "prop-types";
-import { MdOutlineChildCare } from "react-icons/md";
+import { TbMoodKidFilled } from "react-icons/tb";
 
 /**
  * ChildrenAgeTag Component
  *
  * Tag indiquant l'âge minimum recommandé pour les enfants.
- * Utilise MdOutlineChildCare de react-icons/hi2 pour cohérence visuelle.
+ * Utilise BiSolidShieldPlus de react-icons/hi2 pour cohérence visuelle.
  *
  * Props:
  * - age: Âge minimum en années (requis)
@@ -16,24 +16,14 @@ import { MdOutlineChildCare } from "react-icons/md";
  * - showLabel: Afficher le texte "Enfants X+ ans" (défaut: true)
  */
 
-function ChildrenAgeTag({
-  age,
-  className = "",
-  size = "sm",
-  showLabel = true,
-}) {
-  const sizeClasses = {
-    sm: "h-4 w-4",
-    md: "h-5 w-5",
-  };
-
+function ChildrenAgeTag({ age, className = "", showLabel = true }) {
   return (
     <span
       data-testid="children-tag"
-      className={`inline-flex items-center gap-1.5 rounded-md bg-blue-100 px-3 py-1.5 text-xs font-semibold text-blue-800 transition duration-300 lg:text-sm 2xl:text-base dark:bg-blue-900 dark:text-blue-200 ${className}`}
-      title={`Ce remède est adapté aux enfants à partir de ${age} ans`}
+      className={`inline-flex items-center gap-1.5 rounded-md bg-teal-100 px-3 py-1.5 text-xs font-semibold text-teal-800 transition duration-300 lg:text-sm 2xl:text-base dark:bg-teal-900 dark:text-teal-200 ${className}`}
+      title={`Ce remède est strictement adapté aux enfants de plus de ${age} ans`}
     >
-      <MdOutlineChildCare className={sizeClasses[size]} aria-hidden="true" />
+      <TbMoodKidFilled className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
       {showLabel && `Enfants +${age} ans`}
     </span>
   );

@@ -1,8 +1,7 @@
 // tradimedika-v1/src/components/tag/PregnancyTag.jsx
 
 import PropTypes from "prop-types";
-import { HiCheckBadge } from "react-icons/hi2";
-
+import { BiSolidShieldPlus } from "react-icons/bi";
 /**
  * PregnancyTag Component
  *
@@ -19,23 +18,17 @@ import { HiCheckBadge } from "react-icons/hi2";
 function PregnancyTag({
   variant = "default",
   className = "",
-  size = "sm",
   showLabel = true,
 }) {
-  const sizeClasses = {
-    sm: "h-4 w-4",
-    md: "h-5 w-5",
-  };
-
   const label = variant === "ok" ? "Grossesse OK" : "Grossesse";
 
   return (
     <span
       data-testid="pregnancy-tag"
-      className={`inline-flex items-center gap-1.5 rounded-md bg-lime-100 px-3 py-1.5 text-xs font-semibold text-lime-800 transition duration-300 lg:text-sm 2xl:text-base dark:bg-lime-900 dark:text-lime-200 ${className}`}
-      title="Ce remède peut être utilisé sans danger pendant la grossesse"
+      className={`inline-flex items-center gap-1.5 rounded-md bg-green-100 px-3 py-1.5 text-xs font-semibold text-green-800 transition duration-300 lg:text-sm 2xl:text-base dark:bg-green-900 dark:text-green-200 ${className}`}
+      title="Il est envisageable d'utiliser ce remède sans danger pendant la grossesse."
     >
-      <HiCheckBadge className={sizeClasses[size]} aria-hidden="true" />
+      <BiSolidShieldPlus className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
       {showLabel && label}
     </span>
   );
@@ -44,7 +37,6 @@ function PregnancyTag({
 PregnancyTag.propTypes = {
   variant: PropTypes.oneOf(["default", "ok"]),
   className: PropTypes.string,
-  size: PropTypes.oneOf(["sm", "md"]),
   showLabel: PropTypes.bool,
 };
 

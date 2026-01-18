@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { memo } from "react";
-import { LiaAllergiesSolid } from "react-icons/lia";
+import { FaShieldVirus } from "react-icons/fa";
 
 import { HiArrowRight } from "react-icons/hi2";
 
@@ -76,17 +76,17 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
         >
           {/* Image */}
           {image && (
-            <div className="relative aspect-square w-full overflow-hidden bg-neutral-200 dark:bg-neutral-600">
+            <div className="bg-light dark:bg-dark relative aspect-square w-full overflow-hidden">
               {/* Tag allergène en overlay (top-right) */}
               {isFiltered && (
                 <div className="absolute top-4 right-4 z-10">
                   <span
-                    className="inline-flex items-center gap-1.5 rounded-md bg-emerald-50 px-3 py-1.5 text-sm font-semibold text-emerald-800 shadow-md transition duration-300 lg:text-base dark:bg-emerald-700 dark:text-emerald-50"
+                    className="inline-flex shrink-0 items-center gap-1 rounded-md bg-emerald-100 px-3 py-1.5 font-medium text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200"
                     title="Ce remède contient des allergènes que vous avez déclarés"
                     role="status"
                     aria-live="polite"
                   >
-                    <LiaAllergiesSolid
+                    <FaShieldVirus
                       className="h-4 w-4 lg:h-5 lg:w-5"
                       aria-hidden="true"
                     />
@@ -113,7 +113,7 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
                 {name}
               </h3>
               <span
-                className={`shrink-0 rounded-md bg-neutral-200 px-3 py-1.5 text-xs font-semibold tracking-wide text-black uppercase lg:text-sm 2xl:text-base dark:bg-neutral-600 dark:text-white ${textClasses}`}
+                className={`bg-light shrink-0 rounded-md px-3 py-1.5 text-xs font-semibold tracking-wide text-black uppercase lg:text-sm 2xl:text-base dark:bg-neutral-600 dark:text-white ${textClasses}`}
               >
                 {type}
               </span>
@@ -122,7 +122,7 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
             {/* Description (truncate sur 3 lignes) */}
             {description && (
               <p
-                className={`mb-4 line-clamp-2 text-start text-sm leading-relaxed text-neutral-600 lg:text-base dark:text-neutral-400 ${textClasses}`}
+                className={`mb-4 line-clamp-3 text-start text-sm leading-relaxed text-neutral-600 lg:text-base dark:text-neutral-400 ${textClasses}`}
               >
                 {description}
               </p>
@@ -150,7 +150,7 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
                     ))}
                     <span
                       ref={counterRef}
-                      className="inline-flex shrink-0 items-center rounded-full bg-neutral-100 px-3 py-1.5 font-medium text-neutral-600 dark:bg-neutral-700 dark:text-neutral-400"
+                      className="inline-flex shrink-0 items-center gap-1 rounded-md bg-emerald-100 px-3 py-1.5 font-medium text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200"
                     >
                       +99
                     </span>
@@ -169,7 +169,7 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
                     ))}
                     {visibleCount < properties.length && (
                       <span
-                        className={`inline-flex shrink-0 items-center rounded-full bg-neutral-100 px-3 py-1.5 font-medium text-neutral-600 transition-all duration-300 dark:bg-neutral-700 dark:text-neutral-400 ${textClasses}`}
+                        className={`inline-flex shrink-0 items-center gap-1 rounded-md bg-emerald-100 px-3 py-1.5 font-medium text-emerald-800 transition-all duration-300 dark:bg-emerald-900 dark:text-emerald-200${textClasses}`}
                       >
                         +{properties.length - visibleCount}
                       </span>

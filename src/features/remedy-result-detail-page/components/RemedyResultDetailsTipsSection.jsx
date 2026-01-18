@@ -12,14 +12,14 @@ function RemedyResultDetailsTipsSection({ tips }) {
       transition={{ delay: 0.4 }}
       className="mb-6 rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition duration-300 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800"
     >
-      <h2 className="mb-3 flex items-center gap-2 text-xl font-semibold text-sky-800 lg:text-2xl dark:text-sky-300">
+      <h2 className="mb-3 flex items-center gap-2 text-xl font-semibold text-sky-800 lg:text-2xl dark:text-sky-500">
         <MdTipsAndUpdates
-          className="h-4 w-4 text-sky-500 lg:h-5 lg:w-5"
+          className="h-5 w-5 text-sky-600 lg:h-6 lg:w-6 dark:text-sky-500"
           aria-hidden="true"
         />
         Conseils pratiques
       </h2>
-      <div className="border-l-4 border-sky-500 pl-4">
+      <div className="border-l-4 border-sky-600 pl-4 dark:border-sky-500">
         <motion.ul
           className="list-disc space-y-1 pl-5"
           initial="hidden"
@@ -45,7 +45,7 @@ function RemedyResultDetailsTipsSection({ tips }) {
                   ? { duration: 0 }
                   : { duration: 0.3, ease: "easeOut" }
               }
-              className="text-dark text-sm leading-relaxed font-medium 2xl:text-base dark:text-white"
+              className="text-sm leading-relaxed font-medium text-black 2xl:text-base dark:text-white"
             >
               {tip}
             </motion.li>

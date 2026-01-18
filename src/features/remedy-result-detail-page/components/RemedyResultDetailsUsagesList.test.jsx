@@ -12,8 +12,8 @@ vi.mock("framer-motion", () => ({
   },
 }));
 
-vi.mock("../../../utils/formatFrequency", () => ({
-  formatFrequency: vi.fn((frequency) => {
+vi.mock("../utils/formatUsageFrequency", () => ({
+  formatUsageFrequency: vi.fn((frequency) => {
     if (!frequency || !frequency.value) return "";
     return `${frequency.value} fois par ${frequency.unit}`;
   }),
@@ -31,9 +31,24 @@ describe("RemedyResultDetailsUsagesList", () => {
 
       render(<RemedyResultDetailsUsagesList uses={uses} />);
 
-      expect(
-        screen.getByRole("heading", { name: /utilisations/i }),
-      ).toBeInTheDocument();
+      const heading = screen.getByRole("heading", { name: /utilisations/i });
+      expect(heading).toBeInTheDocument();
+      expect(heading.tagName).toBe("H2");
+    });
+
+    it("should render icon in the heading", () => {
+      const uses = [
+        {
+          form: ["infusion"],
+        },
+      ];
+
+      const { container } = render(
+        <RemedyResultDetailsUsagesList uses={uses} />,
+      );
+      const icon = container.querySelector("svg"); // react-icons rend un <svg>
+      expect(icon).toBeInTheDocument();
+      expect(icon).toHaveAttribute("aria-hidden", "true");
     });
 
     it("should render form when provided", () => {
@@ -44,7 +59,6 @@ describe("RemedyResultDetailsUsagesList", () => {
       ];
 
       render(<RemedyResultDetailsUsagesList uses={uses} />);
-
       expect(screen.getByText("infusion, décoction")).toBeInTheDocument();
     });
 
@@ -56,7 +70,6 @@ describe("RemedyResultDetailsUsagesList", () => {
       ];
 
       render(<RemedyResultDetailsUsagesList uses={uses} />);
-
       expect(screen.getByText(/2 cuillères à soupe/)).toBeInTheDocument();
     });
 
@@ -68,7 +81,6 @@ describe("RemedyResultDetailsUsagesList", () => {
       ];
 
       render(<RemedyResultDetailsUsagesList uses={uses} />);
-
       expect(screen.getByText(/3 fois par jour/)).toBeInTheDocument();
     });
 
@@ -80,7 +92,6 @@ describe("RemedyResultDetailsUsagesList", () => {
       ];
 
       render(<RemedyResultDetailsUsagesList uses={uses} />);
-
       expect(screen.getByText(/Pendant 7 jours/)).toBeInTheDocument();
     });
 
@@ -92,7 +103,6 @@ describe("RemedyResultDetailsUsagesList", () => {
       ];
 
       render(<RemedyResultDetailsUsagesList uses={uses} />);
-
       expect(screen.getByText("Boire chaud de préférence")).toBeInTheDocument();
     });
 
@@ -108,7 +118,6 @@ describe("RemedyResultDetailsUsagesList", () => {
       ];
 
       render(<RemedyResultDetailsUsagesList uses={uses} />);
-
       expect(screen.getByText("infusion")).toBeInTheDocument();
       expect(screen.getByText(/1 tasse/)).toBeInTheDocument();
       expect(screen.getByText(/3 fois par jour/)).toBeInTheDocument();
@@ -116,16 +125,7 @@ describe("RemedyResultDetailsUsagesList", () => {
       expect(screen.getByText("Boire chaud")).toBeInTheDocument();
     });
 
-    it("should call formatFrequency utility for frequency formatting", async () => {
-      const formatFrequencyMock = vi.fn((frequency) => {
-        if (!frequency || !frequency.value) return "";
-        return `${frequency.value} fois par ${frequency.unit}`;
-      });
-
-      vi.doMock("../../../utils/formatFrequency", () => ({
-        formatFrequency: formatFrequencyMock,
-      }));
-
+    it("should call formatUsageFrequency utility for frequency formatting", () => {
       const uses = [
         {
           frequency: { value: 2, unit: "jour" },
@@ -133,8 +133,6 @@ describe("RemedyResultDetailsUsagesList", () => {
       ];
 
       render(<RemedyResultDetailsUsagesList uses={uses} />);
-
-      // The function is called during rendering
       expect(screen.getByText(/2 fois par jour/)).toBeInTheDocument();
     });
 
@@ -146,7 +144,6 @@ describe("RemedyResultDetailsUsagesList", () => {
       ];
 
       render(<RemedyResultDetailsUsagesList uses={uses} />);
-
       expect(screen.getByText("Usage 1")).toBeInTheDocument();
       expect(screen.getByText("Usage 2")).toBeInTheDocument();
       expect(screen.getByText("Usage 3")).toBeInTheDocument();
@@ -175,7 +172,6 @@ describe("RemedyResultDetailsUsagesList", () => {
       const { container } = render(
         <RemedyResultDetailsUsagesList uses={null} />,
       );
-
       expect(container.firstChild).toBeNull();
     });
 
@@ -183,13 +179,11 @@ describe("RemedyResultDetailsUsagesList", () => {
       const { container } = render(
         <RemedyResultDetailsUsagesList uses={undefined} />,
       );
-
       expect(container.firstChild).toBeNull();
     });
 
     it("should return null when uses is an empty array", () => {
       const { container } = render(<RemedyResultDetailsUsagesList uses={[]} />);
-
       expect(container.firstChild).toBeNull();
     });
 
@@ -202,7 +196,6 @@ describe("RemedyResultDetailsUsagesList", () => {
       ];
 
       render(<RemedyResultDetailsUsagesList uses={uses} />);
-
       expect(screen.getByText("Test")).toBeInTheDocument();
     });
 
@@ -215,7 +208,6 @@ describe("RemedyResultDetailsUsagesList", () => {
       ];
 
       render(<RemedyResultDetailsUsagesList uses={uses} />);
-
       expect(screen.getByText("Test")).toBeInTheDocument();
     });
 
@@ -228,7 +220,6 @@ describe("RemedyResultDetailsUsagesList", () => {
       ];
 
       render(<RemedyResultDetailsUsagesList uses={uses} />);
-
       expect(screen.getByText("Test")).toBeInTheDocument();
     });
 
@@ -241,7 +232,6 @@ describe("RemedyResultDetailsUsagesList", () => {
       ];
 
       render(<RemedyResultDetailsUsagesList uses={uses} />);
-
       expect(screen.getByText("Test")).toBeInTheDocument();
     });
 
@@ -254,7 +244,6 @@ describe("RemedyResultDetailsUsagesList", () => {
       ];
 
       render(<RemedyResultDetailsUsagesList uses={uses} />);
-
       expect(screen.getByText("Test")).toBeInTheDocument();
     });
 
@@ -267,7 +256,6 @@ describe("RemedyResultDetailsUsagesList", () => {
       ];
 
       render(<RemedyResultDetailsUsagesList uses={uses} />);
-
       expect(screen.getByText("infusion")).toBeInTheDocument();
       expect(screen.getByText(/1 tasse/)).toBeInTheDocument();
     });
@@ -276,39 +264,31 @@ describe("RemedyResultDetailsUsagesList", () => {
   describe("Accessibility", () => {
     it("should use semantic section element", () => {
       const uses = [{ description: "test" }];
-
       const { container } = render(
         <RemedyResultDetailsUsagesList uses={uses} />,
       );
-
       expect(container.querySelector("section")).toBeInTheDocument();
     });
 
     it("should have proper heading hierarchy", () => {
       const uses = [{ description: "test" }];
-
       render(<RemedyResultDetailsUsagesList uses={uses} />);
-
       const heading = screen.getByRole("heading", { name: /utilisations/i });
       expect(heading.tagName).toBe("H2");
     });
 
     it("should use unordered list for usages", () => {
       const uses = [{ description: "test1" }, { description: "test2" }];
-
       render(<RemedyResultDetailsUsagesList uses={uses} />);
-
       const list = screen.getByRole("list");
       expect(list.tagName).toBe("UL");
     });
 
     it("should have emerald border for visual distinction", () => {
       const uses = [{ description: "test" }];
-
       const { container } = render(
         <RemedyResultDetailsUsagesList uses={uses} />,
       );
-
       const listItem = container.querySelector("li");
       expect(listItem).toHaveClass("border-l-4", "border-emerald-500");
     });

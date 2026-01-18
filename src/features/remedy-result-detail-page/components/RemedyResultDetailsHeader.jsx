@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {
   ChildrenAgeTag,
   PregnancyTag,
+  TraditionnalTag,
   VerifiedTag,
 } from "../../../components/tags";
 
@@ -32,14 +33,18 @@ function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
           {remedy.description}
         </p>
 
-        <div className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap items-center gap-2">
           <span
             className={`shrink-0 rounded-md bg-neutral-200 px-3 py-1.5 text-xs font-semibold tracking-wide text-black uppercase lg:text-sm 2xl:text-base dark:bg-neutral-600 dark:text-white`}
           >
             {remedy.type}
           </span>
 
-          {remedy.verifiedByProfessional && <VerifiedTag />}
+          {remedy.verifiedByProfessional ? (
+            <VerifiedTag />
+          ) : (
+            <TraditionnalTag />
+          )}
 
           {remedy.pregnancySafe === true && <PregnancyTag />}
 
@@ -59,7 +64,7 @@ RemedyResultDetailsHeader.propTypes = {
     description: PropTypes.string,
     verifiedByProfessional: PropTypes.bool,
     pregnancySafe: PropTypes.bool,
-    childrenAge: PropTypes.number,
+    childrenAge: PropTypes.number, // <--- validation ajoutée ici
   }).isRequired,
   safeImageUrl: PropTypes.string.isRequired,
   typeColors: PropTypes.object.isRequired,

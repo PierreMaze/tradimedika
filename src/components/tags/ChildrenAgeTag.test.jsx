@@ -1,6 +1,6 @@
 // components/tag/ChildrenAgeTag.test.jsx
-import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 import ChildrenAgeTag from "./ChildrenAgeTag";
 
 describe("ChildrenAgeTag", () => {
@@ -19,7 +19,7 @@ describe("ChildrenAgeTag", () => {
     it("should have tooltip title with age", () => {
       render(<ChildrenAgeTag age={6} />);
       expect(
-        screen.getByTitle("Ce remède est adapté aux enfants à partir de 6 ans"),
+        screen.getByTitle("Ce remède est adapté aux enfants de plusq de 6 ans"),
       ).toBeInTheDocument();
     });
 
@@ -59,13 +59,13 @@ describe("ChildrenAgeTag", () => {
     it("should update tooltip title when age changes", () => {
       const { rerender } = render(<ChildrenAgeTag age={3} />);
       expect(
-        screen.getByTitle("Ce remède est adapté aux enfants à partir de 3 ans"),
+        screen.getByTitle("Ce remède est adapté aux enfants de plusq de 3 ans"),
       ).toBeInTheDocument();
 
       rerender(<ChildrenAgeTag age={10} />);
       expect(
         screen.getByTitle(
-          "Ce remède est adapté aux enfants à partir de 10 ans",
+          "Ce remède est adapté aux enfants de plusq de 10 ans",
         ),
       ).toBeInTheDocument();
     });
@@ -136,7 +136,7 @@ describe("ChildrenAgeTag", () => {
     it("should have tooltip with descriptive text", () => {
       render(<ChildrenAgeTag age={5} />);
       const tag = screen.getByTitle(
-        "Ce remède est adapté aux enfants à partir de 5 ans",
+        "Ce remède est adapté aux enfants de plusq de 5 ans",
       );
       expect(tag).toBeInTheDocument();
     });

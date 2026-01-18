@@ -1,8 +1,8 @@
 // components/remedy/RemedyCard.test.jsx
-import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
 import PropTypes from "prop-types";
+import { BrowserRouter } from "react-router-dom";
+import { describe, expect, it, vi } from "vitest";
 import RemedyCard from "./RemedyCard";
 
 // Helper pour wrapper avec Router (nécessaire pour Link)

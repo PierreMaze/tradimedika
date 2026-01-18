@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
+import { FaPrescriptionBottleMedical } from "react-icons/fa6";
 import { formatUsageFrequency } from "../utils/formatUsageFrequency";
 
 function RemedyResultDetailsUsagesList({ uses }) {
@@ -12,7 +13,11 @@ function RemedyResultDetailsUsagesList({ uses }) {
       transition={{ delay: 0.3 }}
       className="mb-6 rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition duration-300 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800"
     >
-      <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold lg:text-xl 2xl:text-2xl">
+      <h2 className="te mb-4 flex items-center gap-2 text-lg font-semibold text-emerald-600 lg:text-xl 2xl:text-2xl dark:text-emerald-500">
+        <FaPrescriptionBottleMedical
+          className="h-4 w-4 text-emerald-600 lg:h-5 lg:w-5 dark:text-emerald-500"
+          aria-hidden="true"
+        />
         Utilisations
       </h2>
       <motion.ul
@@ -38,9 +43,9 @@ function RemedyResultDetailsUsagesList({ uses }) {
             transition={
               index >= 3 ? { duration: 0 } : { duration: 0.3, ease: "easeOut" }
             }
-            className="border-l-4 border-emerald-500 pl-4"
+            className="border-l-4 border-emerald-600 pl-4 dark:border-emerald-500"
           >
-            <div className="mb-1 flex flex-wrap items-center gap-2 text-sm font-semibold text-neutral-700 2xl:text-base dark:text-neutral-300">
+            <div className="mb-1 flex flex-wrap items-center gap-2 text-sm font-semibold text-black 2xl:text-base dark:text-white">
               {use.form && use.form.length > 0 && (
                 <span className="capitalize">{use.form.join(", ")}</span>
               )}
@@ -68,7 +73,7 @@ function RemedyResultDetailsUsagesList({ uses }) {
               )}
             </div>
             {use.description && (
-              <p className="text-sm leading-relaxed text-neutral-600 2xl:text-base dark:text-neutral-400">
+              <p className="dark:text-light text-sm leading-relaxed text-black 2xl:text-base">
                 {use.description}
               </p>
             )}
