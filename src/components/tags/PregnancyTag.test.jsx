@@ -34,8 +34,8 @@ describe("PregnancyTag", () => {
       const { container } = render(<PregnancyTag />);
       const tag = container.firstChild;
       expect(tag).toHaveClass("inline-flex");
-      expect(tag).toHaveClass("bg-lime-100");
-      expect(tag).toHaveClass("text-lime-800");
+      expect(tag).toHaveClass("bg-green-100");
+      expect(tag).toHaveClass("text-green-800");
     });
   });
 
@@ -61,23 +61,17 @@ describe("PregnancyTag", () => {
     });
   });
 
-  describe("Size prop", () => {
-    it("should render with small size by default", () => {
+  describe("Icon styling", () => {
+    it("should render icon with base size classes", () => {
       const { container } = render(<PregnancyTag />);
       const icon = container.querySelector("svg");
       expect(icon).toHaveClass("h-4", "w-4");
     });
 
-    it("should render with medium size when specified", () => {
-      const { container } = render(<PregnancyTag size="md" />);
+    it("should have responsive icon size classes", () => {
+      const { container } = render(<PregnancyTag />);
       const icon = container.querySelector("svg");
-      expect(icon).toHaveClass("h-5", "w-5");
-    });
-
-    it("should render with small size when explicitly specified", () => {
-      const { container } = render(<PregnancyTag size="sm" />);
-      const icon = container.querySelector("svg");
-      expect(icon).toHaveClass("h-4", "w-4");
+      expect(icon).toHaveClass("lg:h-5", "lg:w-5");
     });
   });
 
@@ -119,35 +113,29 @@ describe("PregnancyTag", () => {
     it("should have tooltip with descriptive text", () => {
       render(<PregnancyTag />);
       const tag = screen.getByTitle(
-        "Ce remède peut être utilisé sans danger pendant la grossesse",
+        "Il est envisageable d'utiliser ce remède sans danger pendant la grossesse.",
       );
       expect(tag).toBeInTheDocument();
     });
   });
 
   describe("Combined props", () => {
-    it("should render medium size with ok variant", () => {
-      const { container } = render(<PregnancyTag variant="ok" size="md" />);
-      const icon = container.querySelector("svg");
-
-      expect(screen.getByText("Grossesse OK")).toBeInTheDocument();
-      expect(icon).toHaveClass("h-5", "w-5");
-    });
-
-    it("should render with all props customized", () => {
+    it("should render with custom className and ok variant", () => {
       const { container } = render(
-        <PregnancyTag
-          variant="ok"
-          size="md"
-          showLabel={true}
-          className="custom"
-        />,
+        <PregnancyTag variant="ok" className="custom" />,
       );
 
       expect(screen.getByText("Grossesse OK")).toBeInTheDocument();
       expect(container.firstChild).toHaveClass("custom");
-      const icon = container.querySelector("svg");
-      expect(icon).toHaveClass("h-5", "w-5");
+    });
+
+    it("should render with all props customized", () => {
+      const { container } = render(
+        <PregnancyTag variant="ok" showLabel={true} className="custom" />,
+      );
+
+      expect(screen.getByText("Grossesse OK")).toBeInTheDocument();
+      expect(container.firstChild).toHaveClass("custom");
     });
   });
 });

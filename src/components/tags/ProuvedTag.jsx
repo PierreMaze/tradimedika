@@ -21,7 +21,7 @@ function ProuvedTag({ className = "", showLabel = true }) {
     <span
       data-testid="verified-tag"
       className={`inline-flex items-center gap-1.5 rounded-md bg-sky-100 px-3 py-1.5 text-xs font-semibold text-sky-800 transition duration-300 lg:text-sm 2xl:text-base dark:bg-sky-900 dark:text-sky-200 ${className}`}
-      title="Ce remède été approué par un professionnel de santé, il est donc considéré comme un remède prouvé pour son efficacité."
+      title="Ce remède été approuvé par un professionnel de santé, il est donc considéré comme un remède prouvé pour son efficacité."
     >
       <BiSolidCheckShield
         className="h-4 w-4 lg:h-5 lg:w-5"

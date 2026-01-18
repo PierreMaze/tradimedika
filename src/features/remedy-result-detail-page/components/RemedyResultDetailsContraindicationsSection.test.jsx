@@ -95,7 +95,7 @@ describe("RemedyResultDetailsContraindicationsSection", () => {
       );
     });
 
-    it("should render list items with capitalize class", () => {
+    it("should render list items with capitalized text", () => {
       const contraindications = ["test"];
 
       render(
@@ -105,7 +105,7 @@ describe("RemedyResultDetailsContraindicationsSection", () => {
       );
 
       const listItem = screen.getByText("Test");
-      expect(listItem).toHaveClass("capitalize");
+      expect(listItem).toBeInTheDocument();
     });
   });
 

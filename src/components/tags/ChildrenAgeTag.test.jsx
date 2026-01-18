@@ -19,7 +19,9 @@ describe("ChildrenAgeTag", () => {
     it("should have tooltip title with age", () => {
       render(<ChildrenAgeTag age={6} />);
       expect(
-        screen.getByTitle("Ce remède est adapté aux enfants de plusq de 6 ans"),
+        screen.getByTitle(
+          "Ce remède est strictement adapté aux enfants de plus de 6 ans",
+        ),
       ).toBeInTheDocument();
     });
 
@@ -34,8 +36,8 @@ describe("ChildrenAgeTag", () => {
       const { container } = render(<ChildrenAgeTag age={3} />);
       const tag = container.firstChild;
       expect(tag).toHaveClass("inline-flex");
-      expect(tag).toHaveClass("bg-blue-100");
-      expect(tag).toHaveClass("text-blue-800");
+      expect(tag).toHaveClass("bg-teal-100");
+      expect(tag).toHaveClass("text-teal-800");
     });
   });
 
@@ -59,13 +61,15 @@ describe("ChildrenAgeTag", () => {
     it("should update tooltip title when age changes", () => {
       const { rerender } = render(<ChildrenAgeTag age={3} />);
       expect(
-        screen.getByTitle("Ce remède est adapté aux enfants de plusq de 3 ans"),
+        screen.getByTitle(
+          "Ce remède est strictement adapté aux enfants de plus de 3 ans",
+        ),
       ).toBeInTheDocument();
 
       rerender(<ChildrenAgeTag age={10} />);
       expect(
         screen.getByTitle(
-          "Ce remède est adapté aux enfants de plusq de 10 ans",
+          "Ce remède est strictement adapté aux enfants de plus de 10 ans",
         ),
       ).toBeInTheDocument();
     });
@@ -81,23 +85,17 @@ describe("ChildrenAgeTag", () => {
     });
   });
 
-  describe("Size prop", () => {
-    it("should render with small size by default", () => {
+  describe("Icon styling", () => {
+    it("should render icon with base size classes", () => {
       const { container } = render(<ChildrenAgeTag age={3} />);
       const icon = container.querySelector("svg");
       expect(icon).toHaveClass("h-4", "w-4");
     });
 
-    it("should render with medium size when specified", () => {
-      const { container } = render(<ChildrenAgeTag age={3} size="md" />);
+    it("should have responsive icon size classes", () => {
+      const { container } = render(<ChildrenAgeTag age={3} />);
       const icon = container.querySelector("svg");
-      expect(icon).toHaveClass("h-5", "w-5");
-    });
-
-    it("should render with small size when explicitly specified", () => {
-      const { container } = render(<ChildrenAgeTag age={3} size="sm" />);
-      const icon = container.querySelector("svg");
-      expect(icon).toHaveClass("h-4", "w-4");
+      expect(icon).toHaveClass("lg:h-5", "lg:w-5");
     });
   });
 
@@ -136,35 +134,29 @@ describe("ChildrenAgeTag", () => {
     it("should have tooltip with descriptive text", () => {
       render(<ChildrenAgeTag age={5} />);
       const tag = screen.getByTitle(
-        "Ce remède est adapté aux enfants de plusq de 5 ans",
+        "Ce remède est strictement adapté aux enfants de plus de 5 ans",
       );
       expect(tag).toBeInTheDocument();
     });
   });
 
   describe("Combined props", () => {
-    it("should render medium size with specific age", () => {
-      const { container } = render(<ChildrenAgeTag age={8} size="md" />);
-      const icon = container.querySelector("svg");
+    it("should render with custom className and specific age", () => {
+      const { container } = render(
+        <ChildrenAgeTag age={8} className="custom" />,
+      );
 
       expect(screen.getByText("Enfants +8 ans")).toBeInTheDocument();
-      expect(icon).toHaveClass("h-5", "w-5");
+      expect(container.firstChild).toHaveClass("custom");
     });
 
     it("should render with all props customized", () => {
       const { container } = render(
-        <ChildrenAgeTag
-          age={12}
-          size="md"
-          showLabel={true}
-          className="custom"
-        />,
+        <ChildrenAgeTag age={12} showLabel={true} className="custom" />,
       );
 
       expect(screen.getByText("Enfants +12 ans")).toBeInTheDocument();
       expect(container.firstChild).toHaveClass("custom");
-      const icon = container.querySelector("svg");
-      expect(icon).toHaveClass("h-5", "w-5");
     });
   });
 

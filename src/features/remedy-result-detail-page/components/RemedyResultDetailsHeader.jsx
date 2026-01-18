@@ -64,10 +64,9 @@ RemedyResultDetailsHeader.propTypes = {
     description: PropTypes.string,
     verifiedByProfessional: PropTypes.bool,
     pregnancySafe: PropTypes.bool,
-    childrenAge: PropTypes.number, // <--- validation ajoutée ici
+    childrenAge: PropTypes.number,
   }).isRequired,
   safeImageUrl: PropTypes.string.isRequired,
-  typeColors: PropTypes.object.isRequired,
 };
 
 export default RemedyResultDetailsHeader;

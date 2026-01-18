@@ -11,6 +11,9 @@ vi.mock("framer-motion", () => ({
 
 vi.mock("../../../components/tags", () => ({
   VerifiedTag: () => <span data-testid="verified-tag">Vérifié</span>,
+  TraditionnalTag: () => (
+    <span data-testid="traditionnal-tag">Traditionnel</span>
+  ),
   PregnancyTag: () => <span data-testid="pregnancy-tag">Grossesse</span>,
   // eslint-disable-next-line react/prop-types
   ChildrenAgeTag: ({ age }) => (
@@ -19,13 +22,6 @@ vi.mock("../../../components/tags", () => ({
 }));
 
 describe("RemedyResultDetailsHeader", () => {
-  const mockTypeColors = {
-    aliment: "bg-yellow-100 text-yellow-800",
-    plante: "bg-green-100 text-green-800",
-    épice: "bg-orange-100 text-orange-800",
-    boisson: "bg-cyan-100 text-cyan-800",
-  };
-
   describe("Rendering", () => {
     it("should render remedy name as heading", () => {
       const remedy = {
@@ -41,7 +37,6 @@ describe("RemedyResultDetailsHeader", () => {
         <RemedyResultDetailsHeader
           remedy={remedy}
           safeImageUrl="https://example.com/image.jpg"
-          typeColors={mockTypeColors}
         />,
       );
 
@@ -64,7 +59,6 @@ describe("RemedyResultDetailsHeader", () => {
         <RemedyResultDetailsHeader
           remedy={remedy}
           safeImageUrl="https://example.com/image.jpg"
-          typeColors={mockTypeColors}
         />,
       );
 
@@ -88,7 +82,6 @@ describe("RemedyResultDetailsHeader", () => {
         <RemedyResultDetailsHeader
           remedy={remedy}
           safeImageUrl="https://example.com/image.jpg"
-          typeColors={mockTypeColors}
         />,
       );
 
@@ -111,7 +104,6 @@ describe("RemedyResultDetailsHeader", () => {
         <RemedyResultDetailsHeader
           remedy={remedy}
           safeImageUrl="https://example.com/image.jpg"
-          typeColors={mockTypeColors}
         />,
       );
 
@@ -134,7 +126,6 @@ describe("RemedyResultDetailsHeader", () => {
         <RemedyResultDetailsHeader
           remedy={remedy}
           safeImageUrl="https://example.com/image.jpg"
-          typeColors={mockTypeColors}
         />,
       );
 
@@ -155,7 +146,6 @@ describe("RemedyResultDetailsHeader", () => {
         <RemedyResultDetailsHeader
           remedy={remedy}
           safeImageUrl="https://example.com/image.jpg"
-          typeColors={mockTypeColors}
         />,
       );
 
@@ -176,7 +166,6 @@ describe("RemedyResultDetailsHeader", () => {
         <RemedyResultDetailsHeader
           remedy={remedy}
           safeImageUrl="https://example.com/image.jpg"
-          typeColors={mockTypeColors}
         />,
       );
 
@@ -197,7 +186,6 @@ describe("RemedyResultDetailsHeader", () => {
         <RemedyResultDetailsHeader
           remedy={remedy}
           safeImageUrl="https://example.com/image.jpg"
-          typeColors={mockTypeColors}
         />,
       );
 
@@ -218,7 +206,6 @@ describe("RemedyResultDetailsHeader", () => {
         <RemedyResultDetailsHeader
           remedy={remedy}
           safeImageUrl="https://example.com/image.jpg"
-          typeColors={mockTypeColors}
         />,
       );
 
@@ -241,7 +228,6 @@ describe("RemedyResultDetailsHeader", () => {
         <RemedyResultDetailsHeader
           remedy={remedy}
           safeImageUrl="https://example.com/image.jpg"
-          typeColors={mockTypeColors}
         />,
       );
 
@@ -262,7 +248,6 @@ describe("RemedyResultDetailsHeader", () => {
         <RemedyResultDetailsHeader
           remedy={remedy}
           safeImageUrl="https://example.com/image.jpg"
-          typeColors={mockTypeColors}
         />,
       );
 
@@ -287,7 +272,6 @@ describe("RemedyResultDetailsHeader", () => {
         <RemedyResultDetailsHeader
           remedy={remedy}
           safeImageUrl="https://example.com/image.jpg"
-          typeColors={mockTypeColors}
         />,
       );
 
@@ -309,7 +293,6 @@ describe("RemedyResultDetailsHeader", () => {
         <RemedyResultDetailsHeader
           remedy={remedy}
           safeImageUrl="https://example.com/image.jpg"
-          typeColors={mockTypeColors}
         />,
       );
 
@@ -330,7 +313,6 @@ describe("RemedyResultDetailsHeader", () => {
         <RemedyResultDetailsHeader
           remedy={remedy}
           safeImageUrl="https://example.com/image.jpg"
-          typeColors={mockTypeColors}
         />,
       );
 
@@ -356,7 +338,6 @@ describe("RemedyResultDetailsHeader", () => {
         <RemedyResultDetailsHeader
           remedy={remedy}
           safeImageUrl="https://example.com/image.jpg"
-          typeColors={mockTypeColors}
         />,
       );
 
@@ -378,7 +359,6 @@ describe("RemedyResultDetailsHeader", () => {
         <RemedyResultDetailsHeader
           remedy={remedy}
           safeImageUrl="https://example.com/image.jpg"
-          typeColors={mockTypeColors}
         />,
       );
 
@@ -400,7 +380,6 @@ describe("RemedyResultDetailsHeader", () => {
         <RemedyResultDetailsHeader
           remedy={remedy}
           safeImageUrl="https://example.com/image.jpg"
-          typeColors={mockTypeColors}
         />,
       );
 

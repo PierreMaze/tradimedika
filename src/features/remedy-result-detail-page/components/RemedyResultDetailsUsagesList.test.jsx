@@ -290,7 +290,7 @@ describe("RemedyResultDetailsUsagesList", () => {
         <RemedyResultDetailsUsagesList uses={uses} />,
       );
       const listItem = container.querySelector("li");
-      expect(listItem).toHaveClass("border-l-4", "border-emerald-500");
+      expect(listItem).toHaveClass("border-l-4", "border-emerald-600");
     });
   });
 });

@@ -72,7 +72,7 @@ describe("RemedyResultDetailsTipsSection", () => {
       render(<RemedyResultDetailsTipsSection tips={tips} />);
 
       const listItem = screen.getByText("test tip");
-      expect(listItem).toHaveClass("text-dark");
+      expect(listItem).toHaveClass("text-black");
       expect(listItem).toHaveClass("dark:text-white");
     });
   });
