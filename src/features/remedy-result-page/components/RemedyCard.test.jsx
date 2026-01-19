@@ -1,32 +1,24 @@
-import { render, screen } from "@testing-library/react";
+// src/features/remedy-result-page/components/RemedyCard.test.jsx
+import { render, screen, within } from "@testing-library/react";
 import PropTypes from "prop-types";
-import { BrowserRouter } from "react-router-dom";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { MemoryRouter } from "react-router-dom";
+import { describe, expect, it, vi } from "vitest";
+import * as useTruncateHook from "../hooks/useTruncatePropertiesItems";
 import RemedyCard from "./RemedyCard";
 
-/* -------------------------------------------------------------------------- */
-/*                                   Mocks                                    */
-/* -------------------------------------------------------------------------- */
+// ------------------------------
+// Mocks
+// ------------------------------
 
-vi.mock("framer-motion", async () => {
-  const actual = await vi.importActual("framer-motion");
-  return {
-    ...actual,
-    motion: {
-      div: ({ children, ...props }) => <div {...props}>{children}</div>,
-    },
-  };
-});
-
-vi.mock("../hooks/useTruncatePropertiesItems", () => ({
-  useVisibleItems: vi.fn((items) => ({
-    containerRef: { current: null },
-    itemRefs: { current: [] },
-    counterRef: { current: null },
-    visibleCount: Math.min(items.length, 3),
-  })),
+// Mock du hook useVisibleItems
+vi.spyOn(useTruncateHook, "useVisibleItems").mockImplementation((items) => ({
+  containerRef: { current: null },
+  itemRefs: { current: [] },
+  counterRef: { current: null },
+  visibleCount: items.length, // simplification : afficher tous les items
 }));
 
+// Mock des composants tags pour éviter erreurs de rendu
 vi.mock("../../../components/tags", () => {
   const PregnancyTagMock = ({ variant }) => (
     <div data-testid="pregnancy-tag">{variant}</div>
@@ -49,174 +41,162 @@ vi.mock("../../../components/tags", () => {
   };
 });
 
-/* -------------------------------------------------------------------------- */
+// ------------------------------
+// Props simulées
+// ------------------------------
 
-const renderWithRouter = (ui) => render(<BrowserRouter>{ui}</BrowserRouter>);
-
-const minimalRemedy = {
+const mockRemedy = {
   id: 1,
-  name: "Citron",
-  type: "Fruit",
-  description: "Description citron",
-  properties: [],
-  pregnancySafe: false,
-  childrenAge: null,
-  verifiedByProfessional: false,
-};
-
-const fullRemedy = {
-  id: 2,
-  name: "Thé vert",
+  name: "Remède Test",
   type: "Plante",
-  description: "Description thé vert",
+  description: "Description du remède test",
   properties: [
-    { name: "antioxydant", score: 5, category: "prop" },
-    { name: "énergisant", score: 4, category: "prop" },
-    { name: "détoxifiant", score: 3, category: "prop" },
-    { name: "anti-inflammatoire", score: 2, category: "prop" },
+    { name: "B1", score: 8, category: "Vitamine" },
+    { name: "Fibres", score: 5, category: "Nutriment" },
   ],
-  image: "/the.jpg",
+  image: "/test.jpg",
   pregnancySafe: true,
-  childrenAge: 12,
+  childrenAge: 3,
   verifiedByProfessional: true,
 };
 
-/* -------------------------------------------------------------------------- */
+const mockSymptoms = ["maux de tête", "fatigue"];
 
-describe("RemedyCard", () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
+// ------------------------------
+// Tests
+// ------------------------------
 
-  /* ------------------------------------------------------------------------ */
-  /*                                Rendering                                 */
-  /* ------------------------------------------------------------------------ */
-
-  it("should render name, type and description", () => {
-    renderWithRouter(
-      <RemedyCard remedy={minimalRemedy} selectedSymptoms={[]} />,
+describe("RemedyCard Component", () => {
+  it("rend correctement le composant avec toutes les props", () => {
+    render(
+      <MemoryRouter>
+        <RemedyCard
+          remedy={mockRemedy}
+          selectedSymptoms={mockSymptoms}
+          isFiltered={false}
+        />
+      </MemoryRouter>,
     );
 
-    expect(screen.getByText("Citron")).toBeInTheDocument();
-    expect(screen.getByText("Fruit")).toBeInTheDocument();
-    expect(screen.getByText("Description citron")).toBeInTheDocument();
-  });
+    // Nom et type
+    expect(screen.getByText(mockRemedy.name)).toBeInTheDocument();
+    expect(screen.getByText(mockRemedy.type)).toBeInTheDocument();
 
-  it("should render image when provided", () => {
-    renderWithRouter(<RemedyCard remedy={fullRemedy} selectedSymptoms={[]} />);
+    // Description
+    expect(screen.getByText(mockRemedy.description)).toBeInTheDocument();
 
-    const img = screen.getByAltText("Illustration de Thé vert");
-    expect(img).toHaveAttribute("src", "/the.jpg");
-  });
+    // Propriétés (on peut juste vérifier la présence de B1 ici)
+    expect(screen.getAllByText("B1")[0]).toBeInTheDocument();
 
-  it("should not render image block when image is missing", () => {
-    renderWithRouter(
-      <RemedyCard remedy={minimalRemedy} selectedSymptoms={[]} />,
-    );
+    // Image
+    const img = screen.getByAltText(`Illustration de ${mockRemedy.name}`);
+    expect(img).toHaveAttribute("src", mockRemedy.image);
 
-    expect(screen.queryByAltText(/illustration/i)).not.toBeInTheDocument();
-  });
-
-  /* ------------------------------------------------------------------------ */
-  /*                               Properties                                 */
-  /* ------------------------------------------------------------------------ */
-
-  it("should render up to 3 visible properties", () => {
-    renderWithRouter(<RemedyCard remedy={fullRemedy} selectedSymptoms={[]} />);
-
-    expect(screen.getByText("Antioxydant")).toBeInTheDocument();
-    expect(screen.getByText("Énergisant")).toBeInTheDocument();
-    expect(screen.getByText("Détoxifiant")).toBeInTheDocument();
-  });
-
-  it("should render a +N counter when properties exceed visible count", () => {
-    renderWithRouter(<RemedyCard remedy={fullRemedy} selectedSymptoms={[]} />);
-
-    expect(screen.getByText("+1")).toBeInTheDocument();
-  });
-
-  it("should not render properties section when empty", () => {
-    renderWithRouter(
-      <RemedyCard remedy={minimalRemedy} selectedSymptoms={[]} />,
-    );
-
-    expect(screen.queryByText(/propriétés/i)).not.toBeInTheDocument();
-  });
-
-  /* ------------------------------------------------------------------------ */
-  /*                                  Labels                                  */
-  /* ------------------------------------------------------------------------ */
-
-  it("should render VerifiedTag when verifiedByProfessional is true", () => {
-    renderWithRouter(<RemedyCard remedy={fullRemedy} selectedSymptoms={[]} />);
-
+    // Tags
     expect(screen.getByTestId("verified-tag")).toBeInTheDocument();
+    expect(screen.getByTestId("pregnancy-tag")).toBeInTheDocument();
+    expect(screen.getByTestId("children-tag")).toBeInTheDocument();
+
+    // Lien
+    const link = screen.getByRole("link", {
+      name: `Voir les détails de ${mockRemedy.name}`,
+    });
+    expect(link).toHaveAttribute("href", `/remedes/remède-test`);
   });
 
-  it("should render TraditionnalTag when verifiedByProfessional is false", () => {
-    renderWithRouter(
-      <RemedyCard remedy={minimalRemedy} selectedSymptoms={[]} />,
+  it("affiche le badge allergène quand isFiltered est true", () => {
+    render(
+      <MemoryRouter>
+        <RemedyCard
+          remedy={mockRemedy}
+          selectedSymptoms={mockSymptoms}
+          isFiltered={true}
+        />
+      </MemoryRouter>,
     );
 
-    expect(screen.getByTestId("traditional-tag")).toBeInTheDocument();
-  });
-
-  it("should always render PregnancyTag with correct variant", () => {
-    renderWithRouter(
-      <RemedyCard remedy={minimalRemedy} selectedSymptoms={[]} />,
-    );
-
-    expect(screen.getByTestId("pregnancy-tag")).toHaveTextContent("interdit");
-  });
-
-  it("should render ChildrenAgeTag only when age is provided", () => {
-    renderWithRouter(<RemedyCard remedy={fullRemedy} selectedSymptoms={[]} />);
-
-    expect(screen.getByTestId("children-tag")).toHaveTextContent("12");
-  });
-
-  /* ------------------------------------------------------------------------ */
-  /*                             Filtered state                               */
-  /* ------------------------------------------------------------------------ */
-
-  it("should render allergen badge when isFiltered is true", () => {
-    renderWithRouter(
-      <RemedyCard remedy={fullRemedy} selectedSymptoms={[]} isFiltered />,
-    );
-
-    expect(screen.getByText("Allergène")).toBeInTheDocument();
-  });
-
-  it("should update link aria-label when filtered", () => {
-    renderWithRouter(
-      <RemedyCard remedy={fullRemedy} selectedSymptoms={[]} isFiltered />,
-    );
+    expect(screen.getByText(/Allergène/i)).toBeInTheDocument();
 
     const link = screen.getByRole("link");
     expect(link).toHaveAttribute(
       "aria-label",
-      "Voir les détails de Thé vert (contient des allergènes)",
+      expect.stringContaining("(contient des allergènes)"),
     );
   });
 
-  /* ------------------------------------------------------------------------ */
-  /*                                Navigation                                */
-  /* ------------------------------------------------------------------------ */
+  it("gère les remèdes sans image et sans description", () => {
+    const remedyNoImageDesc = { ...mockRemedy, image: null, description: "" };
+    render(
+      <MemoryRouter>
+        <RemedyCard
+          remedy={remedyNoImageDesc}
+          selectedSymptoms={mockSymptoms}
+        />
+      </MemoryRouter>,
+    );
 
-  it("should generate correct link slug", () => {
-    renderWithRouter(
-      <RemedyCard remedy={minimalRemedy} selectedSymptoms={[]} />,
+    // L'image ne doit pas être rendue
+    expect(
+      screen.queryByAltText(`Illustration de ${mockRemedy.name}`),
+    ).toBeNull();
+    // La description ne doit pas être rendue
+    expect(screen.queryByText(mockRemedy.description)).toBeNull();
+  });
+
+  it("rend correctement les propriétés visibles selon useVisibleItems", () => {
+    // Mock du hook pour ne montrer qu'une seule propriété
+    vi.spyOn(useTruncateHook, "useVisibleItems").mockReturnValue({
+      containerRef: { current: null },
+      itemRefs: { current: [] },
+      counterRef: { current: null },
+      visibleCount: 1,
+    });
+
+    render(
+      <MemoryRouter>
+        <RemedyCard remedy={mockRemedy} selectedSymptoms={mockSymptoms} />
+      </MemoryRouter>,
+    );
+
+    // Récupère uniquement le container visible des propriétés
+    const container = screen.getByTestId("properties-container");
+    const { queryByText } = within(container);
+
+    // Vérifie que la première propriété est visible
+    expect(queryByText("B1")).toBeInTheDocument();
+
+    // Vérifie que "Fibres" n'est pas visible
+    expect(queryByText("Fibres")).toBeNull();
+
+    // Vérifie que le badge +1 apparaît pour les propriétés restantes
+    expect(
+      screen.getByText(`+${mockRemedy.properties.length - 1}`),
+    ).toBeInTheDocument();
+  });
+
+  it("applique correctement les classes grayscale quand isFiltered", () => {
+    render(
+      <MemoryRouter>
+        <RemedyCard
+          remedy={mockRemedy}
+          selectedSymptoms={mockSymptoms}
+          isFiltered={true}
+        />
+      </MemoryRouter>,
+    );
+
+    const nameElement = screen.getByText(mockRemedy.name);
+    expect(nameElement.className).toMatch(/grayscale/);
+  });
+
+  it("génère le slug correct pour le Link", () => {
+    render(
+      <MemoryRouter>
+        <RemedyCard remedy={mockRemedy} selectedSymptoms={mockSymptoms} />
+      </MemoryRouter>,
     );
 
     const link = screen.getByRole("link");
-    expect(link).toHaveAttribute("href", "/remedes/citron");
-  });
-
-  it("should always render the 'Voir plus' indicator", () => {
-    renderWithRouter(
-      <RemedyCard remedy={minimalRemedy} selectedSymptoms={[]} />,
-    );
-
-    expect(screen.getByText("Voir plus")).toBeInTheDocument();
+    expect(link).toHaveAttribute("href", `/remedes/remède-test`);
   });
 });

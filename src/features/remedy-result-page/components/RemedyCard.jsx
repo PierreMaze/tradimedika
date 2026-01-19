@@ -156,6 +156,7 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
                   <div
                     ref={containerRef}
                     className="flex gap-2 overflow-hidden"
+                    data-testid="properties-container"
                   >
                     {properties.slice(0, visibleCount).map((prop, index) => (
                       <span
