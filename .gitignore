@@ -19,6 +19,7 @@ coverage
 docs/ISSUE_TEMPLATE.md
 docs/PR_TEMPLATE.md
 CLAUDE.md
+.continue/
 .claude/
 .vscode/*
 !.vscode/extensions.json
