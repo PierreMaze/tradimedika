@@ -73,7 +73,7 @@ function FilterAccordion({
                     type="checkbox"
                     checked={activeFilters[option.id] || false}
                     onChange={() => handleCheckboxChange(option.id)}
-                    className="mt-0.5 h-4 w-4 cursor-pointer rounded border-neutral-300 text-emerald-600 focus:ring-emerald-500 dark:border-neutral-600 dark:bg-neutral-700"
+                    className="h-4 w-4 cursor-pointer border-neutral-300 text-emerald-600 accent-emerald-700 dark:border-neutral-600 dark:accent-emerald-500"
                   />
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
@@ -83,12 +83,12 @@ function FilterAccordion({
                       <span
                         className={`h-2 w-2 rounded-full ${
                           option.color === "green"
-                            ? "bg-green-500"
+                            ? "bg-green-600 dark:bg-green-500"
                             : option.color === "amber"
                               ? "bg-amber-500"
                               : option.color === "red"
-                                ? "bg-red-500"
-                                : "bg-teal-500"
+                                ? "bg-red-600 dark:bg-red-500"
+                                : "bg-amber-500"
                         }`}
                         aria-hidden="true"
                       ></span>

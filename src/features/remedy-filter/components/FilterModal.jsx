@@ -144,14 +144,14 @@ function FilterModal({
             <div className="flex items-center justify-between gap-4 border-t border-neutral-200 pt-4 dark:border-neutral-700">
               <button
                 onClick={onResetTempFilters}
-                className="rounded-md px-4 py-2 text-sm font-semibold text-neutral-700 transition-colors hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800"
+                className="cursor-pointer rounded-md border-2 border-red-700 bg-red-100 px-3 py-1.5 text-sm font-semibold text-red-700 transition-all duration-200 hover:border-red-800 hover:bg-red-700 hover:text-white dark:border-red-400 dark:bg-red-900/30 dark:text-white dark:hover:bg-red-800"
               >
                 Réinitialiser
               </button>
 
               <button
                 onClick={onApplyFilters}
-                className="rounded-md bg-emerald-600 px-6 py-2 text-sm font-semibold text-white transition duration-150 ease-in-out hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600"
+                className="cursor-pointer rounded-md bg-emerald-600 px-6 py-2 text-sm font-semibold text-white transition duration-150 ease-in-out hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600"
               >
                 Appliquer
               </button>

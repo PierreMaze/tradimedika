@@ -56,7 +56,7 @@ export default function AllergySearchSection({
               // Si on coche, ouvrir le dropdown. Si on décoche, fermer
               onExpandChange(isChecked);
             }}
-            className="h-4 w-4 cursor-pointer border-neutral-300 text-emerald-600 accent-emerald-700 focus:ring-2 dark:border-neutral-600 dark:accent-emerald-500"
+            className="h-4 w-4 cursor-pointer border-neutral-300 text-emerald-600 accent-emerald-700 dark:border-neutral-600 dark:accent-emerald-500"
             aria-label="Activer le filtrage des allergies"
           />
           <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">

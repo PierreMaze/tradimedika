@@ -118,19 +118,19 @@ export const FILTER_CATEGORIES = [
     options: [
       {
         id: "ok",
-        label: "Grossesse OK",
+        label: "Sans danger",
         description: "Compatible avec la grossesse",
         color: "green",
       },
       {
         id: "variant",
-        label: "Grossesse ?",
+        label: "À vérifier",
         description: "Données insuffisantes ou usage conditionnel",
         color: "amber",
       },
       {
         id: "interdit",
-        label: "Grossesse Interdite",
+        label: "Non recommandé",
         description: "Contre-indiqué pendant la grossesse",
         color: "red",
       },
@@ -138,19 +138,20 @@ export const FILTER_CATEGORIES = [
   },
   {
     id: "verified",
-    label: "Reconnaissance",
+    label: "Usage",
     icon: "verified",
     options: [
       {
         id: "verified",
         label: "Reconnu",
-        description: "Validé scientifiquement ou par des professionnels",
+        description: "Soutenu scientifiquement ou par des professionnels",
         color: "green",
       },
       {
         id: "traditional",
         label: "Traditionnel",
-        description: "Usage traditionnel sans validation scientifique",
+        description:
+          "Usage traditionnel sans soutien scientifique (remède de grand-mère)",
         color: "amber",
       },
     ],
@@ -162,7 +163,7 @@ export const FILTER_CATEGORIES = [
     options: [
       {
         id: "allAges",
-        label: "Tous âges",
+        label: "Tout âge",
         description: "Utilisable chez l'enfant sans limite d'âge",
         color: "green",
       },

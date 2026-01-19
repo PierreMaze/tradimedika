@@ -102,7 +102,7 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
           )}
 
           {/* Contenu */}
-          <div className="p-6">
+          <div className="h-fit p-6">
             {/* En-tête avec nom et type */}
             <div className="mb-3 flex items-start justify-between gap-2">
               <h3
