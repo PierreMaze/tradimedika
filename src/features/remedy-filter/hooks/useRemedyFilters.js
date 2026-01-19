@@ -1,4 +1,5 @@
-import { useState, useCallback } from "react";
+// Hook
+import { useCallback, useState } from "react";
 import { INITIAL_FILTERS } from "../utils/filterRemedies";
 
 /**

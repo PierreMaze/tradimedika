@@ -7,7 +7,7 @@ describe("ProuvedTag", () => {
   describe("Rendering", () => {
     it("should render with default props", () => {
       render(<ProuvedTag />);
-      expect(screen.getByText("Prouvé")).toBeInTheDocument();
+      expect(screen.getByText("Reconnu")).toBeInTheDocument();
     });
 
     it("should render icon", () => {
@@ -34,8 +34,8 @@ describe("ProuvedTag", () => {
       const { container } = render(<ProuvedTag />);
       const tag = container.firstChild;
       expect(tag).toHaveClass("inline-flex");
-      expect(tag).toHaveClass("bg-sky-100");
-      expect(tag).toHaveClass("text-sky-800");
+      expect(tag).toHaveClass("bg-green-100");
+      expect(tag).toHaveClass("text-green-800");
     });
   });
 

@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import PropTypes from "prop-types";
 import { describe, expect, it, vi } from "vitest";
 import RemedyResultDetailsHeader from "./RemedyResultDetailsHeader";
 
@@ -9,17 +10,26 @@ vi.mock("framer-motion", () => ({
   },
 }));
 
-vi.mock("../../../components/tags", () => ({
-  VerifiedTag: () => <span data-testid="verified-tag">Vérifié</span>,
-  TraditionnalTag: () => (
-    <span data-testid="traditionnal-tag">Traditionnel</span>
-  ),
-  PregnancyTag: () => <span data-testid="pregnancy-tag">Grossesse</span>,
-  // eslint-disable-next-line react/prop-types
-  ChildrenAgeTag: ({ age }) => (
-    <span data-testid="children-age-tag">Enfants {age}+</span>
-  ),
-}));
+vi.mock("../../../components/tags", () => {
+  const PregnancyTagMock = ({ variant }) => {
+    if (variant === "interdit") return null; // Ne pas afficher si interdit
+    return <div data-testid="pregnancy-tag">{variant}</div>;
+  };
+  PregnancyTagMock.propTypes = { variant: PropTypes.string.isRequired };
+
+  const ChildrenAgeTagMock = ({ age }) => {
+    if (age === null || age === undefined) return null;
+    return <div data-testid="children-tag">Enfants {age}+</div>;
+  };
+  ChildrenAgeTagMock.propTypes = { age: PropTypes.number };
+
+  return {
+    VerifiedTag: () => <div data-testid="verified-tag" />,
+    TraditionnalTag: () => <div data-testid="traditional-tag" />,
+    PregnancyTag: PregnancyTagMock,
+    ChildrenAgeTag: ChildrenAgeTagMock,
+  };
+});
 
 describe("RemedyResultDetailsHeader", () => {
   describe("Rendering", () => {
@@ -209,7 +219,7 @@ describe("RemedyResultDetailsHeader", () => {
         />,
       );
 
-      const tag = screen.getByTestId("children-age-tag");
+      const tag = screen.getByTestId("children-tag");
       expect(tag).toBeInTheDocument();
       expect(tag).toHaveTextContent("Enfants 3+");
     });
@@ -231,7 +241,7 @@ describe("RemedyResultDetailsHeader", () => {
         />,
       );
 
-      expect(screen.queryByTestId("children-age-tag")).not.toBeInTheDocument();
+      expect(screen.queryByTestId("children-tag")).not.toBeInTheDocument();
     });
 
     it("should render all tags when all conditions are met", () => {
@@ -253,7 +263,7 @@ describe("RemedyResultDetailsHeader", () => {
 
       expect(screen.getByTestId("verified-tag")).toBeInTheDocument();
       expect(screen.getByTestId("pregnancy-tag")).toBeInTheDocument();
-      expect(screen.getByTestId("children-age-tag")).toBeInTheDocument();
+      expect(screen.getByTestId("children-tag")).toBeInTheDocument();
     });
   });
 
@@ -317,7 +327,7 @@ describe("RemedyResultDetailsHeader", () => {
       );
 
       // childrenAge 0 !== null, so tag should be rendered
-      const tag = screen.getByTestId("children-age-tag");
+      const tag = screen.getByTestId("children-tag");
       expect(tag).toBeInTheDocument();
       expect(tag).toHaveTextContent("Enfants 0+");
     });

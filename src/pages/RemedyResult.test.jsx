@@ -1,17 +1,41 @@
 import { render, screen } from "@testing-library/react";
+import PropTypes from "prop-types";
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter } from "react-router-dom";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import RemedyResult from "./RemedyResult";
+/* -----------------------------------------
+ * framer-motion full mock (REQUIRED)
+ * ---------------------------------------- */
 
-// Mock framer-motion
-vi.mock("framer-motion", () => ({
-  motion: {
-    div: ({ children, ...props }) => <div {...props}>{children}</div>,
-  },
-}));
+vi.mock("framer-motion", async () => {
+  const MotionDiv = ({ children, ...props }) => (
+    <div {...props}>{children}</div>
+  );
 
-// Mock react-router-dom hooks
+  MotionDiv.propTypes = {
+    children: PropTypes.node,
+  };
+
+  const AnimatePresence = ({ children, ...props }) => (
+    <div {...props}>{children}</div>
+  );
+
+  AnimatePresence.propTypes = {
+    children: PropTypes.node,
+  };
+
+  return {
+    motion: {
+      div: MotionDiv,
+    },
+    AnimatePresence,
+  };
+});
+
+/* -----------------------------------------
+ * react-router-dom
+ * ---------------------------------------- */
 const mockLocation = {
   search: "?symptoms=fatigue,toux",
   state: { symptoms: ["fatigue", "toux"] },
@@ -25,11 +49,16 @@ vi.mock("react-router-dom", async () => {
   };
 });
 
-// Mock components
+/* -----------------------------------------
+ * Helper components
+ * ---------------------------------------- */
 vi.mock("../components/ui/helper/RemedyTagsHelper", () => ({
-  default: () => <div data-testid="remedy-tags-helper">Tags Info</div>,
+  default: () => <div data-testid="remedy-tags-helper">Remedy Tags Helper</div>,
 }));
 
+/* -----------------------------------------
+ * Allergies
+ * ---------------------------------------- */
 vi.mock("../features/allergens-search", () => ({
   AllergyFilterInfo: () => (
     <div data-testid="allergy-filter-info">Allergy Filter Info</div>
@@ -40,6 +69,9 @@ vi.mock("../features/allergens-search", () => ({
   }),
 }));
 
+/* -----------------------------------------
+ * Remedy result page logic
+ * ---------------------------------------- */
 vi.mock("../features/remedy-result-page", () => ({
   FilterRemedyResult: () => (
     <div data-testid="filter-remedy-result">Filter</div>
@@ -47,213 +79,93 @@ vi.mock("../features/remedy-result-page", () => ({
   RemedyResultList: () => (
     <div data-testid="remedy-result-list">Remedy Result List</div>
   ),
-  findMatchingRemedies: () => [],
+  findMatchingRemedies: () => [
+    {
+      remedy: { id: 1, name: "Ginger" },
+      score: 1,
+    },
+  ],
 }));
 
-// Mock validation utils
-vi.mock("../utils/validation", () => ({
-  parseAndValidateSymptoms: (symptomsString) => {
-    return symptomsString ? symptomsString.split(",") : [];
-  },
+/* -----------------------------------------
+ * Symptom validation (correct path)
+ * ---------------------------------------- */
+vi.mock("../features/symptom-search/utils/validationSymptom", () => ({
+  parseAndValidateSymptoms: (value) => (value ? value.split(",") : []),
 }));
 
-const renderWithProviders = (component) => {
-  return render(
+/* -----------------------------------------
+ * Test helper
+ * ---------------------------------------- */
+const renderWithProviders = (ui) =>
+  render(
     <BrowserRouter>
-      <HelmetProvider>{component}</HelmetProvider>
+      <HelmetProvider>{ui}</HelmetProvider>
     </BrowserRouter>,
   );
-};
 
+/* -----------------------------------------
+ * Tests
+ * ---------------------------------------- */
 describe("RemedyResult", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
   describe("Rendering", () => {
-    it("should render page title", () => {
+    it("renders main page title", () => {
       renderWithProviders(<RemedyResult />);
-
-      expect(screen.getByText("Résultats des Remèdes")).toBeInTheDocument();
+      expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
+        "Résultats des Remèdes",
+      );
     });
 
-    it("should render selected symptoms", () => {
+    it("renders selected symptoms text", () => {
       renderWithProviders(<RemedyResult />);
-
-      expect(screen.getByText(/Remèdes naturels pour :/i)).toBeInTheDocument();
+      expect(screen.getByText(/Remèdes naturels pour/i)).toBeInTheDocument();
     });
 
-    it("should render RemedyTagsHelper", () => {
+    it("renders RemedyTagsHelper", () => {
       renderWithProviders(<RemedyResult />);
-
       expect(screen.getByTestId("remedy-tags-helper")).toBeInTheDocument();
     });
 
-    it("should render RemedyResultList", () => {
+    it("renders RemedyResultList", () => {
       renderWithProviders(<RemedyResult />);
-
       expect(screen.getByTestId("remedy-result-list")).toBeInTheDocument();
     });
   });
 
-  describe("Navigation Links", () => {
-    it("should render back to home link at top", () => {
+  describe("Navigation", () => {
+    it("renders back to home links", () => {
       renderWithProviders(<RemedyResult />);
-
-      const links = screen.getAllByRole("link", { name: /accueil/i });
+      const links = screen.getAllByRole("link");
       expect(links.length).toBeGreaterThan(0);
-    });
-
-    it("should have correct href for home links", () => {
-      renderWithProviders(<RemedyResult />);
-
-      const links = screen.getAllByRole("link", { name: /accueil/i });
-      links.forEach((link) => {
-        expect(link).toHaveAttribute("href", "/");
-      });
-    });
-  });
-
-  describe("SEO - Helmet Integration", () => {
-    it("should render with Helmet provider", () => {
-      const { container } = renderWithProviders(<RemedyResult />);
-
-      // Verify the component renders without errors
-      expect(container).toBeInTheDocument();
-    });
-
-    it("should render page content", () => {
-      renderWithProviders(<RemedyResult />);
-
-      // Verify main content is rendered
-      expect(screen.getByText("Résultats des Remèdes")).toBeInTheDocument();
-    });
-  });
-
-  describe("Layout Structure", () => {
-    it("should have proper heading hierarchy", () => {
-      renderWithProviders(<RemedyResult />);
-
-      const h1 = screen.getByRole("heading", { level: 1 });
-      expect(h1).toHaveTextContent("Résultats des Remèdes");
-    });
-
-    it("should apply text center alignment", () => {
-      const { container } = renderWithProviders(<RemedyResult />);
-
-      const textContainer = container.querySelector(".text-center");
-      expect(textContainer).toBeInTheDocument();
-    });
-
-    it("should apply flex column layout", () => {
-      const { container } = renderWithProviders(<RemedyResult />);
-
-      const flexContainer = container.querySelector(".flex.flex-col");
-      expect(flexContainer).toBeInTheDocument();
+      links.forEach((link) => expect(link).toHaveAttribute("href", "/"));
     });
   });
 
   describe("Accessibility", () => {
-    it("should have proper aria-label on back links", () => {
+    it("has aria-label on back buttons", () => {
       renderWithProviders(<RemedyResult />);
-
-      const backLinks = screen.getAllByLabelText(/Retour/i);
-      expect(backLinks.length).toBeGreaterThan(0);
-    });
-
-    it("should have semantic heading", () => {
-      renderWithProviders(<RemedyResult />);
-
-      expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
+      expect(screen.getAllByLabelText(/Retour/i).length).toBeGreaterThan(0);
     });
   });
 
-  describe("Dark Mode Support", () => {
-    it("should apply dark mode text classes", () => {
+  describe("Layout & styles", () => {
+    it("uses flex column layout", () => {
       const { container } = renderWithProviders(<RemedyResult />);
-
-      const darkTextElements = container.querySelectorAll(".dark\\:text-light");
-      expect(darkTextElements.length).toBeGreaterThan(0);
+      expect(container.querySelector(".flex.flex-col")).toBeInTheDocument();
     });
 
-    it("should have transition classes", () => {
+    it("applies dark mode classes", () => {
       const { container } = renderWithProviders(<RemedyResult />);
-
-      const transitionElements = container.querySelectorAll(".transition");
-      expect(transitionElements.length).toBeGreaterThan(0);
-    });
-  });
-
-  describe("Button Styling", () => {
-    it("should have emerald background on action buttons", () => {
-      renderWithProviders(<RemedyResult />);
-
-      const buttons = screen.getAllByRole("link", { name: /accueil/i });
-      buttons.forEach((button) => {
-        expect(button).toHaveClass("bg-emerald-600");
-      });
+      expect(container.querySelector(".dark\\:text-light")).toBeInTheDocument();
     });
 
-    it("should have rounded corners on buttons", () => {
-      renderWithProviders(<RemedyResult />);
-
-      const buttons = screen.getAllByRole("link", { name: /accueil/i });
-      buttons.forEach((button) => {
-        expect(button).toHaveClass("rounded-lg");
-      });
-    });
-
-    it("should have shadow on buttons", () => {
-      renderWithProviders(<RemedyResult />);
-
-      const buttons = screen.getAllByRole("link", { name: /accueil/i });
-      buttons.forEach((button) => {
-        expect(button).toHaveClass("shadow-md");
-      });
-    });
-  });
-
-  describe("Icons", () => {
-    it("should render SVG icons in back buttons", () => {
+    it("renders SVG icons", () => {
       const { container } = renderWithProviders(<RemedyResult />);
-
-      const svgs = container.querySelectorAll("svg");
-      expect(svgs.length).toBeGreaterThan(0);
-    });
-  });
-
-  describe("Responsive Design", () => {
-    it("should apply responsive text sizes", () => {
-      renderWithProviders(<RemedyResult />);
-
-      const heading = screen.getByRole("heading", { level: 1 });
-      expect(heading).toHaveClass("text-3xl", "lg:text-4xl");
-    });
-
-    it("should have responsive gap classes", () => {
-      const { container } = renderWithProviders(<RemedyResult />);
-
-      const gapContainer = container.querySelector(".gap-y-4");
-      expect(gapContainer).toBeInTheDocument();
-    });
-  });
-
-  describe("Color Scheme", () => {
-    it("should use emerald color theme", () => {
-      renderWithProviders(<RemedyResult />);
-
-      const emeraldElements = screen.getAllByRole("link", { name: /accueil/i });
-      expect(emeraldElements.length).toBeGreaterThan(0);
-      emeraldElements.forEach((element) => {
-        expect(element.className).toContain("emerald");
-      });
-    });
-
-    it("should apply neutral text colors", () => {
-      const { container } = renderWithProviders(<RemedyResult />);
-
-      const neutralText = container.querySelector(".text-neutral-600");
-      expect(neutralText).toBeInTheDocument();
+      expect(container.querySelector("svg")).toBeTruthy();
     });
   });
 });

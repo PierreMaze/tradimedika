@@ -22,7 +22,7 @@ describe("FilterButton", () => {
       render(<FilterButton onClick={vi.fn()} activeFiltersCount={0} />);
 
       expect(
-        screen.getByRole("button", { name: /open filters/i }),
+        screen.getByRole("button", { name: /Ouvrir les filtres/i }),
       ).toBeInTheDocument();
       expect(screen.getByText("Filtres")).toBeInTheDocument();
     });

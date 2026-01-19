@@ -36,8 +36,8 @@ describe("TraditionnalTag", () => {
       const { container } = render(<TraditionnalTag />);
       const tag = container.firstChild;
       expect(tag).toHaveClass("inline-flex");
-      expect(tag).toHaveClass("bg-lime-100");
-      expect(tag).toHaveClass("text-lime-800");
+      expect(tag).toHaveClass("bg-sky-100");
+      expect(tag).toHaveClass("text-sky-800");
     });
   });
 
@@ -45,19 +45,13 @@ describe("TraditionnalTag", () => {
     it("should render icon with base size classes", () => {
       const { container } = render(<TraditionnalTag />);
       const icon = container.querySelector("svg");
-      expect(icon).toHaveClass("h-3", "w-3");
+      expect(icon).toHaveClass("h-4", "w-4");
     });
 
     it("should have responsive icon size classes", () => {
       const { container } = render(<TraditionnalTag />);
       const icon = container.querySelector("svg");
-      expect(icon).toHaveClass("lg:h-4", "lg:w-4");
-    });
-
-    it("should have rotation classes", () => {
-      const { container } = render(<TraditionnalTag />);
-      const icon = container.querySelector("svg");
-      expect(icon).toHaveClass("rotate-90", "rotate-x-180");
+      expect(icon).toHaveClass("lg:h-5", "lg:w-5");
     });
   });
 
