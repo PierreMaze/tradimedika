@@ -33,7 +33,7 @@ export default function RemedyResultList({
     <div className="w-full">
       {/* Grille responsive pour les cartes de remèdes */}
       <AnimatePresence mode="sync">
-        <div className="mx-4 grid grid-cols-1 gap-6 md:grid-cols-2 xl:-mx-4 2xl:grid-cols-3 2xl:gap-12">
+        <div className="mx-4 grid grid-cols-1 gap-6 md:grid-cols-2 lg:mx-12 lg:gap-12 xl:-mx-4 2xl:grid-cols-3 2xl:gap-12">
           {remedies.map((result) => (
             <RemedyCard
               key={result.remedy.id}

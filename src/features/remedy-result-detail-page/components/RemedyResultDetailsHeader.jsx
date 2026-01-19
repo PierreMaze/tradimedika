@@ -46,11 +46,17 @@ function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
             <TraditionnalTag />
           )}
 
-          {remedy.pregnancySafe === true && <PregnancyTag />}
+          <PregnancyTag
+            variant={
+              remedy.pregnancySafe === true
+                ? "ok"
+                : remedy.pregnancySafe === false
+                  ? "interdit"
+                  : "variant"
+            }
+          />
 
-          {remedy.childrenAge !== null && (
-            <ChildrenAgeTag age={remedy.childrenAge} />
-          )}
+          <ChildrenAgeTag age={remedy.childrenAge} />
         </div>
       </div>
     </motion.div>

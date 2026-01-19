@@ -2,6 +2,72 @@
 
 ---
 
+## [0.44.0] - 2026-01-19
+
+### Added
+
+- **Nouveau système de filtrage par propriétés de remèdes**
+  - Création de la feature `remedy-filter/` avec architecture complète
+  - Composants :
+    - `FilterButton` : Bouton avec badge du nombre de filtres actifs, style cohérent avec tags de symptômes
+    - `FilterModal` : Modal accessible avec accordéons par catégorie, design cohérent avec SettingsModal
+    - `FilterAccordion` : Accordéon pour chaque catégorie avec animations Framer Motion
+  - Hook `useRemedyFilters` : Gestion état filtres temporaires (modal) + filtres appliqués (effectifs)
+  - Utils `filterRemedies.js` : Logique de filtrage optimisée (ET entre catégories, OU au sein d'une catégorie)
+  - 3 catégories de filtres :
+    - **Grossesse** : OK / Avec précautions / Interdite
+    - **Reconnaissance** : Vérifié / Traditionnel
+    - **Âge Enfants** : Tous âges / Avec limite d'âge
+  - Intégration dans `RemedyResult.jsx` avec combinaison filtre symptômes + filtre propriétés
+  - Application des filtres uniquement au clic sur "Appliquer" (pas en temps réel)
+  - Séparation visuelle (ligne verticale + espacement) entre bouton Filtres et tags symptômes
+
+- **Système de tags de propriétés dynamiques avec variantes**
+  - **PregnancyTag** : 3 variantes avec icônes et couleurs distinctes
+    - `variant="ok"` : Vert, icône check (IoMdCheckmarkCircleOutline), label "Grossesse"
+    - `variant="variant"` : Ambre, icône cœur (LiaGratipay), label "Grossesse"
+    - `variant="interdit"` : Rouge, icône croix (LiaTimesCircle), label "Grossesse"
+    - Prop `variant` obligatoire (`.isRequired`)
+    - Tooltips différents selon la variante
+  - **ChildrenAgeTag** : 2 variantes avec icônes et couleurs distinctes
+    - `age={null}` : Vert, icône check (IoMdCheckmarkCircleOutline), label "Enfants"
+    - `age={number}` : Teal, icône alerte (IoMdAlert), label "Enfants +X ans"
+    - Labels et tooltips dynamiques selon l'âge
+  - Affichage **toujours visible** des tags sur les cartes de remèdes (plus de condition)
+  - Support complet du dark mode pour toutes les variantes
+
+### Fixed
+
+- **Correction logique de filtrage par propriétés**
+  - Correction du bug : filtres de catégories différentes combinés incorrectement (OU global)
+  - Nouvelle logique optimisée : ET entre catégories, OU au sein d'une catégorie
+  - Exemple corrigé : "Reconnu + Grossesse Interdite" affiche UNIQUEMENT les remèdes reconnus ET interdits pour grossesse
+
+### Refactored
+
+- **Mise à jour des fichiers d'utilisation des tags**
+  - `RemedyCard.jsx` : Tags toujours affichés avec variantes dynamiques
+  - `RemedyResultDetailsHeader.jsx` : Tags toujours affichés avec variantes dynamiques
+  - `RemedyTagsHelper.jsx` : Affichage des 3 exemples PregnancyTag + 2 exemples ChildrenAgeTag
+
+### Tests
+
+- **Mise à jour complète des tests pour les nouveaux tags**
+  - `PregnancyTag.test.jsx` : Couverture 3 variantes (ok, variant, interdit)
+  - `ChildrenAgeTag.test.jsx` : Couverture 2 variantes (null, number)
+  - Tests des couleurs, icônes, labels, tooltips pour chaque variante
+  - Tests d'accessibilité et instances multiples
+
+### Documentation
+
+- **Mise à jour CLAUDE.md**
+  - Nouvelle section "Système de filtrage" dans Architecture du projet
+  - Documentation complète des composants PregnancyTag et ChildrenAgeTag
+  - Documentation de la logique de filtrage (ET/OU)
+  - Ajout du hook `useRemedyFilters` dans la liste des hooks personnalisés
+
+---
+
 ## [0.42.3] - 2026-01-18
 
 ### Fixed

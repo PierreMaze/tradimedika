@@ -2,10 +2,8 @@
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { memo } from "react";
-import { FaShieldVirus } from "react-icons/fa";
-
+import { FiInfo } from "react-icons/fi";
 import { HiArrowRight } from "react-icons/hi2";
-
 import { Link } from "react-router-dom";
 import {
   ChildrenAgeTag,
@@ -81,12 +79,12 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
               {isFiltered && (
                 <div className="absolute top-4 right-4 z-10">
                   <span
-                    className="inline-flex shrink-0 items-center gap-1 rounded-md bg-emerald-100 px-3 py-1.5 font-medium text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200"
+                    className="inline-flex shrink-0 items-center gap-1 rounded-md bg-amber-100 px-3 py-1.5 font-medium text-amber-800 dark:bg-amber-900 dark:text-amber-200"
                     title="Ce remède contient des allergènes que vous avez déclarés"
                     role="status"
                     aria-live="polite"
                   >
-                    <FaShieldVirus
+                    <FiInfo
                       className="h-4 w-4 lg:h-5 lg:w-5"
                       aria-hidden="true"
                     />
@@ -186,8 +184,16 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
               </h4>
               <div className="flex flex-wrap gap-2">
                 {verifiedByProfessional ? <VerifiedTag /> : <TraditionnalTag />}
-                {pregnancySafe && <PregnancyTag variant="default" />}
-                {childrenAge !== null && <ChildrenAgeTag age={childrenAge} />}
+                <PregnancyTag
+                  variant={
+                    pregnancySafe === true
+                      ? "ok"
+                      : pregnancySafe === false
+                        ? "interdit"
+                        : "variant"
+                  }
+                />
+                <ChildrenAgeTag age={childrenAge} />
               </div>
             </div>
 

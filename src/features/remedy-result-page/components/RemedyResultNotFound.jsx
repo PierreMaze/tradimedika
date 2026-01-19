@@ -1,13 +1,13 @@
 // components/remedy/RemedyResultNotFound.jsx
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   HiArrowLeft,
-  HiMagnifyingGlass,
   HiExclamationTriangle,
-  HiQuestionMarkCircle,
   HiLightBulb,
+  HiMagnifyingGlass,
+  HiQuestionMarkCircle,
 } from "react-icons/hi2";
+import { Link } from "react-router-dom";
 
 /**
  * Composant d'état vide pour les résultats de remèdes
@@ -42,8 +42,8 @@ export default function RemedyResultNotFound({
       title: "Aucun remède ne correspond au filtre sélectionné",
       description:
         "Essayez de sélectionner un autre tag pour voir plus de résultats",
-      titleColor: "text-amber-700 dark:text-amber-400",
-      iconColor: "text-amber-600 dark:text-amber-500",
+      titleColor: "text-emerald-700 dark:text-emerald-400",
+      iconColor: "text-emerald-600 dark:text-emerald-500",
       suggestions: [
         "Sélectionnez le tag 'Tous' pour voir tous les remèdes",
         "Choisissez un symptôme différent dans la liste des tags",

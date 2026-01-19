@@ -20,7 +20,7 @@ describe("TraditionnalTag", () => {
       render(<TraditionnalTag />);
       expect(
         screen.getByTitle(
-          "Ce remède n'a pas été approuvé par un professionnel de santé, il est donc considéré comme un remède non prouvé pour son efficacité",
+          "Ce remède repose principalement sur un usage traditionnel. Son efficacité n’est pas validée par des études scientifiques solides.",
         ),
       ).toBeInTheDocument();
     });
@@ -94,7 +94,7 @@ describe("TraditionnalTag", () => {
     it("should have tooltip with descriptive text", () => {
       render(<TraditionnalTag />);
       const tag = screen.getByTitle(
-        "Ce remède n'a pas été approuvé par un professionnel de santé, il est donc considéré comme un remède non prouvé pour son efficacité",
+        "Ce remède repose principalement sur un usage traditionnel. Son efficacité n’est pas validée par des études scientifiques solides.",
       );
       expect(tag).toBeInTheDocument();
     });

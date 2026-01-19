@@ -1,8 +1,8 @@
 // components/filter/FilterRemedyResult.jsx
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import { normalizeForMatching } from "../../symptom-search/utils/normalizeSymptom";
 import { ListAllergyTag } from "../../allergens-search";
+import { normalizeForMatching } from "../../symptom-search/utils/normalizeSymptom";
 
 /**
  * Extrait les symptômes uniques des remèdes matchés et les trie alphabétiquement
@@ -42,6 +42,7 @@ function extractUniqueSymptoms(matchedRemedies) {
 export default function FilterRemedyResult({
   matchedRemedies,
   onFilterChange,
+  filterButton,
 }) {
   const [activeTag, setActiveTag] = useState("all");
 
@@ -77,12 +78,15 @@ export default function FilterRemedyResult({
   }
 
   return (
-    <div className="mb-6 w-full">
-      <ListAllergyTag
-        tags={availableTags}
-        activeTag={activeTag}
-        onTagClick={handleTagClick}
-      />
+    <div className="mb-6 flex w-full items-center">
+      <div className="mx-auto flex flex-row flex-wrap items-center justify-center gap-2">
+        <ListAllergyTag
+          tags={availableTags}
+          activeTag={activeTag}
+          onTagClick={handleTagClick}
+          filterButton={filterButton}
+        />
+      </div>
     </div>
   );
 }
@@ -96,4 +100,5 @@ FilterRemedyResult.propTypes = {
     }),
   ).isRequired,
   onFilterChange: PropTypes.func.isRequired,
+  filterButton: PropTypes.node,
 };

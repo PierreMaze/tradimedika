@@ -1,7 +1,7 @@
 // tradimedika-v1/src/components/tag/TraditionnalTag.jsx
 
 import PropTypes from "prop-types";
-import { GiFallingLeaf } from "react-icons/gi";
+import { GrCircleQuestion } from "react-icons/gr";
 
 /**
  * TraditionnalTag Component
@@ -19,13 +19,10 @@ function TraditionnalTag({ className = "", showLabel = true }) {
   return (
     <span
       data-testid="verified-tag"
-      className={`inline-flex items-center gap-1.5 rounded-md bg-lime-100 px-3 py-1.5 text-xs font-semibold text-lime-800 transition duration-300 lg:text-sm 2xl:text-base dark:bg-lime-900 dark:text-lime-200 ${className}`}
-      title="Ce remède n'a pas été approuvé par un professionnel de santé, il est donc considéré comme un remède non prouvé pour son efficacité"
+      className={`inline-flex items-center gap-1.5 rounded-md bg-sky-100 px-3 py-1.5 text-xs font-semibold text-sky-800 transition duration-300 lg:text-sm 2xl:text-base dark:bg-sky-900 dark:text-sky-200 ${className}`}
+      title="Ce remède repose principalement sur un usage traditionnel. Son efficacité n’est pas validée par des études scientifiques solides."
     >
-      <GiFallingLeaf
-        className="h-3 w-3 rotate-90 rotate-x-180 lg:h-4 lg:w-4"
-        aria-hidden="true"
-      />
+      <GrCircleQuestion className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
       {showLabel && "Traditionnel"}
     </span>
   );

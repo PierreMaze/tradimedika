@@ -20,7 +20,7 @@ describe("ProuvedTag", () => {
       render(<ProuvedTag />);
       expect(
         screen.getByTitle(
-          "Ce remède été approuvé par un professionnel de santé, il est donc considéré comme un remède prouvé pour son efficacité.",
+          "Ce remède est soutenu par des données scientifiques et/ou reconnu par des professionnels de santé dans un cadre d’usage défini.",
         ),
       ).toBeInTheDocument();
     });
@@ -56,17 +56,17 @@ describe("ProuvedTag", () => {
   describe("showLabel prop", () => {
     it("should show label by default", () => {
       render(<ProuvedTag />);
-      expect(screen.getByText("Prouvé")).toBeInTheDocument();
+      expect(screen.getByText("Reconnu")).toBeInTheDocument();
     });
 
     it("should hide label when showLabel is false", () => {
       render(<ProuvedTag showLabel={false} />);
-      expect(screen.queryByText("Prouvé")).not.toBeInTheDocument();
+      expect(screen.queryByText("Reconnu")).not.toBeInTheDocument();
     });
 
     it("should show label when showLabel is true", () => {
       render(<ProuvedTag showLabel={true} />);
-      expect(screen.getByText("Prouvé")).toBeInTheDocument();
+      expect(screen.getByText("Reconnu")).toBeInTheDocument();
     });
 
     it("should still render icon when label is hidden", () => {
@@ -86,7 +86,7 @@ describe("ProuvedTag", () => {
     it("should have tooltip with descriptive text", () => {
       render(<ProuvedTag />);
       const tag = screen.getByTitle(
-        "Ce remède été approuvé par un professionnel de santé, il est donc considéré comme un remède prouvé pour son efficacité.",
+        "Ce remède est soutenu par des données scientifiques et/ou reconnu par des professionnels de santé dans un cadre d’usage défini.",
       );
       expect(tag).toBeInTheDocument();
     });
@@ -102,7 +102,7 @@ describe("ProuvedTag", () => {
         </div>,
       );
 
-      const labels = screen.getAllByText("Prouvé");
+      const labels = screen.getAllByText("Reconnu");
       expect(labels).toHaveLength(2);
 
       const icons = container.querySelectorAll("svg");

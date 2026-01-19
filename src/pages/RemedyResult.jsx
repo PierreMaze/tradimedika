@@ -13,6 +13,12 @@ import {
   findMatchingRemedies,
 } from "../features/remedy-result-page";
 import { parseAndValidateSymptoms } from "../features/symptom-search/utils/validationSymptom";
+import {
+  FilterButton,
+  FilterModal,
+  useRemedyFilters,
+  filterRemediesByTags,
+} from "../features/remedy-filter";
 
 /**
  * RemedyResult Page - Affiche les remèdes correspondant aux symptômes sélectionnés
@@ -32,6 +38,19 @@ import { parseAndValidateSymptoms } from "../features/symptom-search/utils/valid
 function RemedyResult() {
   const location = useLocation();
   const { canUseRemedy, userAllergies: contextAllergies } = useAllergies();
+
+  // Hook pour gérer les filtres par tags (Grossesse, Reconnu, Âge)
+  const {
+    isModalOpen,
+    openModal,
+    closeModal,
+    appliedFilters,
+    tempFilters,
+    toggleTempFilter,
+    resetTempFilters,
+    applyFilters,
+    appliedFiltersCount,
+  } = useRemedyFilters();
 
   // Récupérer symptômes depuis query params (priorité) ou state (fallback)
   const selectedSymptoms = useMemo(() => {
@@ -105,18 +124,24 @@ function RemedyResult() {
     filteredCount,
   ]);
 
-  // État uniquement pour les remèdes filtrés par les tags
-  const [filteredRemedies, setFilteredRemedies] = useState(displayRemedies);
+  // État pour les remèdes filtrés par les symptômes (FilterRemedyResult)
+  const [filteredBySymptoms, setFilteredBySymptoms] = useState(displayRemedies);
 
-  // Synchroniser filteredRemedies avec displayRemedies
+  // Synchroniser filteredBySymptoms avec displayRemedies
   useEffect(() => {
-    setFilteredRemedies(displayRemedies);
+    setFilteredBySymptoms(displayRemedies);
   }, [displayRemedies]);
 
   // useCallback pour éviter re-renders en cascade dans FilterRemedyResult
-  const handleFilterChange = useCallback((remedies) => {
-    setFilteredRemedies(remedies);
+  const handleSymptomFilterChange = useCallback((remedies) => {
+    setFilteredBySymptoms(remedies);
   }, []);
+
+  // Appliquer le filtre par tags de propriétés (Grossesse, Reconnu, Âge)
+  // après le filtre par symptômes
+  const filteredRemedies = useMemo(() => {
+    return filterRemediesByTags(filteredBySymptoms, appliedFilters);
+  }, [filteredBySymptoms, appliedFilters]);
 
   // Generate dynamic meta tags (memoizé pour optimisation)
   const { pageTitle, pageDescription, canonicalUrl } = useMemo(() => {
@@ -205,12 +230,18 @@ function RemedyResult() {
           </p>
         )}
 
-        {/* Filtres par tags (seulement si des remèdes safe ont été trouvés) */}
+        {/* Filtres par symptômes avec bouton de filtres par propriétés à gauche */}
         {safeRemedies.length > 0 && (
           <FilterRemedyResult
             key={`filter-${selectedSymptoms.join("-")}-${resetFilterKey}`}
             matchedRemedies={displayRemedies}
-            onFilterChange={handleFilterChange}
+            onFilterChange={handleSymptomFilterChange}
+            filterButton={
+              <FilterButton
+                onClick={openModal}
+                activeFiltersCount={appliedFiltersCount}
+              />
+            }
           />
         )}
 
@@ -269,6 +300,17 @@ function RemedyResult() {
           Nouvelle recherche
         </Link>
       </motion.div>
+
+      {/* Modal de filtres par propriétés */}
+      <FilterModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        tempFilters={tempFilters}
+        onToggleTempFilter={toggleTempFilter}
+        onResetTempFilters={resetTempFilters}
+        onApplyFilters={applyFilters}
+      />
+
       <RemedyTagsHelper />
     </>
   );

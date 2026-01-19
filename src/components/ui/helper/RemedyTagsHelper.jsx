@@ -175,29 +175,54 @@ function RemedyTagsHelper() {
               <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-4">
                 <TraditionnalTag />
                 <p className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-200">
-                  Ce remède n&apos;a pas été approuvé par un professionnel de
-                  santé, il est donc considéré comme un remède non prouvé pour
-                  son efficacité{" "}
-                  <span className="font-medium text-emerald-700 dark:text-emerald-400">
-                    vérifier les contre-indications.
-                  </span>
+                  Ce remède repose principalement sur un usage traditionnel. Son
+                  efficacité n’est pas validée par des études scientifiques
+                  solides.
                 </p>
               </div>
 
               {/* Tag Grossesse OK */}
               <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-4">
-                <PregnancyTag variant="default" />
+                <PregnancyTag variant="ok" />
                 <p className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-200">
-                  Il est envisageable d&apos;utiliser ce remède sans danger
-                  pendant la grossesse.
+                  L&apos;usage de ce remède est considéré comme compatible avec
+                  la grossesse aux doses indiquées.
                 </p>
               </div>
 
-              {/* Tag Enfants X+ ans */}
+              {/* Tag Grossesse ? */}
               <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-4">
-                <ChildrenAgeTag age={"X"} />
+                <PregnancyTag variant="variant" />
                 <p className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-200">
-                  À utiliser strictement à partir de plus de X ans
+                  Données insuffisantes ou usage conditionnel. Consulter un
+                  professionnel de santé avant utilisation pendant la grossesse.
+                </p>
+              </div>
+
+              {/* Tag Grossesse Interdite */}
+              <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-4">
+                <PregnancyTag variant="interdit" />
+                <p className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-200">
+                  Ce remède est contre-indiqué pendant la grossesse. Ne pas
+                  utiliser.
+                </p>
+              </div>
+
+              {/* Tag Enfants (tous âges) */}
+              <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-4">
+                <ChildrenAgeTag age={null} />
+                <p className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-200">
+                  Ce remède peut être utilisé chez l&apos;enfant sans limite
+                  d&apos;âge, dans le respect des doses recommandées.
+                </p>
+              </div>
+
+              {/* Tag Enfants +X ans */}
+              <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-4">
+                <ChildrenAgeTag age={6} />
+                <p className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-200">
+                  Ce remède peut être utilisé chez l&apos;enfant à partir de 6
+                  ans (exemple), dans le respect des doses recommandées.
                 </p>
               </div>
             </div>

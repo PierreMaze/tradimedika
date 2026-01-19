@@ -1,6 +1,6 @@
 // tradimedika-v1/src/components/tag/ProuvedTag.jsx
 
-import { BiSolidCheckShield } from "react-icons/bi";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 
 import PropTypes from "prop-types";
 
@@ -20,14 +20,14 @@ function ProuvedTag({ className = "", showLabel = true }) {
   return (
     <span
       data-testid="verified-tag"
-      className={`inline-flex items-center gap-1.5 rounded-md bg-sky-100 px-3 py-1.5 text-xs font-semibold text-sky-800 transition duration-300 lg:text-sm 2xl:text-base dark:bg-sky-900 dark:text-sky-200 ${className}`}
-      title="Ce remède été approuvé par un professionnel de santé, il est donc considéré comme un remède prouvé pour son efficacité."
+      className={`inline-flex items-center gap-1.5 rounded-md bg-green-100 px-3 py-1.5 text-xs font-semibold text-green-800 transition duration-300 lg:text-sm 2xl:text-base dark:bg-green-900 dark:text-green-200 ${className}`}
+      title="Ce remède est soutenu par des données scientifiques et/ou reconnu par des professionnels de santé dans un cadre d’usage défini."
     >
-      <BiSolidCheckShield
+      <IoMdCheckmarkCircleOutline
         className="h-4 w-4 lg:h-5 lg:w-5"
         aria-hidden="true"
       />
-      {showLabel && "Prouvé"}
+      {showLabel && "Reconnu"}
     </span>
   );
 }
