@@ -163,11 +163,9 @@ function RemedyTagsHelper() {
               <div className="flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-4">
                 <VerifiedTag />
                 <p className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-200">
-                  Ce remède a été approuvé par un professionnel de santé, il est
-                  donc considéré comme un remède prouvé pour son efficacité,{" "}
-                  <span className="font-medium text-emerald-700 dark:text-emerald-400">
-                    vérifier les contre-indications.
-                  </span>
+                  Ce remède est soutenu par des données scientifiques et/ou
+                  reconnu par des professionnels de santé dans un cadre
+                  d&apos;usage défini.
                 </p>
               </div>
 
@@ -176,7 +174,7 @@ function RemedyTagsHelper() {
                 <TraditionnalTag />
                 <p className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-200">
                   Ce remède repose principalement sur un usage traditionnel. Son
-                  efficacité n’est pas validée par des études scientifiques
+                  efficacité n&apos;est pas validée par des études scientifiques
                   solides.
                 </p>
               </div>
