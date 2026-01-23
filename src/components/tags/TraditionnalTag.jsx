@@ -1,7 +1,7 @@
 // tradimedika-v1/src/components/tag/TraditionnalTag.jsx
 
 import PropTypes from "prop-types";
-import { GrCircleQuestion } from "react-icons/gr";
+import { FiInfo } from "react-icons/fi";
 
 /**
  * TraditionnalTag Component
@@ -19,10 +19,10 @@ function TraditionnalTag({ className = "", showLabel = true }) {
   return (
     <span
       data-testid="verified-tag"
-      className={`inline-flex items-center gap-1.5 rounded-md bg-sky-100 px-3 py-1.5 text-xs font-semibold text-sky-800 transition duration-300 lg:text-sm 2xl:text-base dark:bg-sky-900 dark:text-sky-200 ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-md bg-amber-100 px-3 py-1.5 text-xs font-semibold text-amber-800 transition duration-300 lg:text-sm 2xl:text-base dark:bg-amber-900 dark:text-amber-200 ${className}`}
       title="Ce remède repose principalement sur un usage traditionnel. Son efficacité n’est pas validée par des études scientifiques solides."
     >
-      <GrCircleQuestion className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
+      <FiInfo className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
       {showLabel && "Traditionnel"}
     </span>
   );

@@ -32,7 +32,8 @@ vi.mock("react-router-dom", async () => {
 vi.mock("../components/tags", () => ({
   ChildrenAgeTag: () => <span>ChildrenAgeTag</span>,
   PregnancyTag: () => <span>PregnancyTag</span>,
-  VerifiedTag: () => <span>VerifiedTag</span>,
+  ProuvedTag: () => <span>ProuvedTag</span>,
+  TraditionnalTag: () => <span>TraditionnalTag</span>,
 }));
 
 vi.mock("../components/tooltip/TagsInfoTooltip", () => ({

@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { useEffect, useRef } from "react";
 import { IoMdClose } from "react-icons/io";
 import { TbFilterCog } from "react-icons/tb";
+import { TAG_LABELS_CATEGORIES } from "../../../constants/tagsLabelsHelper";
 import { useReducedMotion } from "../../settings/hooks/useReducedMotion";
-import { FILTER_CATEGORIES } from "../utils/filterRemedies";
 import FilterAccordion from "./FilterAccordion";
 
 /**
@@ -129,7 +129,7 @@ function FilterModal({
 
             {/* Filter categories */}
             <div className="mb-6 space-y-0">
-              {FILTER_CATEGORIES.map((category) => (
+              {TAG_LABELS_CATEGORIES.map((category) => (
                 <FilterAccordion
                   key={category.id}
                   category={category}

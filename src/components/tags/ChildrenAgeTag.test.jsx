@@ -25,7 +25,7 @@ describe("ChildrenAgeTag", () => {
       render(<ChildrenAgeTag age={6} />);
       expect(
         screen.getByTitle(
-          "Ce remède peut être utilisé chez l'enfant à partir de 6 ans, dans le respect des doses recommandées.",
+          "Ce remède peut être utilisé chez l’enfant à partir de 6 ans, dans le respect des doses recommandées.",
         ),
       ).toBeInTheDocument();
     });
@@ -34,7 +34,7 @@ describe("ChildrenAgeTag", () => {
       render(<ChildrenAgeTag age={null} />);
       expect(
         screen.getByTitle(
-          "Ce remède peut être utilisé chez l'enfant sans limite d'âge, dans le respect des doses recommandées.",
+          "Ce remède peut être utilisé chez l’enfant sans limite d’âge, dans le respect des doses recommandées.",
         ),
       ).toBeInTheDocument();
     });
@@ -91,14 +91,14 @@ describe("ChildrenAgeTag", () => {
       const { rerender } = render(<ChildrenAgeTag age={3} />);
       expect(
         screen.getByTitle(
-          "Ce remède peut être utilisé chez l'enfant à partir de 3 ans, dans le respect des doses recommandées.",
+          "Ce remède peut être utilisé chez l’enfant à partir de 3 ans, dans le respect des doses recommandées.",
         ),
       ).toBeInTheDocument();
 
       rerender(<ChildrenAgeTag age={10} />);
       expect(
         screen.getByTitle(
-          "Ce remède peut être utilisé chez l'enfant à partir de 10 ans, dans le respect des doses recommandées.",
+          "Ce remède peut être utilisé chez l’enfant à partir de 10 ans, dans le respect des doses recommandées.",
         ),
       ).toBeInTheDocument();
     });
@@ -221,7 +221,7 @@ describe("ChildrenAgeTag", () => {
     it("should have tooltip with descriptive text (age limit)", () => {
       render(<ChildrenAgeTag age={5} />);
       const tag = screen.getByTitle(
-        "Ce remède peut être utilisé chez l'enfant à partir de 5 ans, dans le respect des doses recommandées.",
+        "Ce remède peut être utilisé chez l’enfant à partir de 5 ans, dans le respect des doses recommandées.",
       );
       expect(tag).toBeInTheDocument();
     });
@@ -229,7 +229,7 @@ describe("ChildrenAgeTag", () => {
     it("should have tooltip with descriptive text (no age limit)", () => {
       render(<ChildrenAgeTag age={null} />);
       const tag = screen.getByTitle(
-        "Ce remède peut être utilisé chez l'enfant sans limite d'âge, dans le respect des doses recommandées.",
+        "Ce remède peut être utilisé chez l’enfant sans limite d’âge, dans le respect des doses recommandées.",
       );
       expect(tag).toBeInTheDocument();
     });

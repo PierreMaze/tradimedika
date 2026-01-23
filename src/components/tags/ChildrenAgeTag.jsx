@@ -3,6 +3,7 @@
 import PropTypes from "prop-types";
 import { FiInfo } from "react-icons/fi";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
 /**
  * ChildrenAgeTag Component
@@ -19,19 +20,38 @@ import { IoMdCheckmarkCircleOutline } from "react-icons/io";
  */
 
 function ChildrenAgeTag({ age, className = "", showLabel = true }) {
-  const isNoLimit = age === null;
+  const isAdultOnly = age >= 18;
+  const isAllAges = age === null || age === 0;
+  const hasLimit = typeof age === "number" && age > 0;
 
-  const colorClasses = isNoLimit
-    ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
-    : "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200";
+  let colorClasses;
+  let label;
+  let tooltip;
+  let Icon;
 
-  const label = isNoLimit ? "Tout public" : `Enfants +${age} ans`;
-
-  const tooltip = isNoLimit
-    ? "Ce remède peut être utilisé chez l'enfant sans limite d'âge, dans le respect des doses recommandées."
-    : `Ce remède peut être utilisé chez l'enfant à partir de ${age} ans, dans le respect des doses recommandées.`;
-
-  const Icon = isNoLimit ? IoMdCheckmarkCircleOutline : FiInfo;
+  if (isAdultOnly) {
+    colorClasses = "bg-red-100 text-red-800 dark:bg-red-900 dark:text-white";
+    label = "Adultes uniquement";
+    tooltip =
+      "Ce remède est réservé à l’adulte et ne doit pas être utilisé chez l’enfant.";
+    Icon = IoCloseCircleOutline;
+  } else if (isAllAges) {
+    colorClasses =
+      "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200";
+    label = "Tout public";
+    tooltip =
+      "Ce remède peut être utilisé chez l’enfant sans limite d’âge, dans le respect des doses recommandées.";
+    Icon = IoMdCheckmarkCircleOutline;
+  } else if (hasLimit) {
+    colorClasses =
+      "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200";
+    label = `Enfants +${age} ans`;
+    tooltip = `Ce remède peut être utilisé chez l’enfant à partir de ${age} ans, dans le respect des doses recommandées.`;
+    Icon = FiInfo;
+  } else {
+    // garde-fou : donnée incohérente
+    return null;
+  }
 
   return (
     <span

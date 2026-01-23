@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 import Disclaimer from "./Disclaimer";
 
 describe("Disclaimer", () => {
@@ -30,7 +30,7 @@ describe("Disclaimer", () => {
       expect(disclaimer).toHaveClass("bg-amber-50");
       expect(disclaimer).toHaveClass("border-amber-700/60");
       expect(disclaimer).toHaveClass("dark:bg-amber-950/80");
-      expect(disclaimer).toHaveClass("disclaimer-sticky");
+      expect(disclaimer).toHaveClass("z-40");
     });
   });
 

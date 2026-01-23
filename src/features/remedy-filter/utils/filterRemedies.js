@@ -21,19 +21,15 @@
  * @param {Object} activeFilters.children - Filtres âge enfants { allAges: bool, withLimit: bool }
  * @returns {Array} - Remèdes filtrés
  */
-export function filterRemediesByTags(remedies, activeFilters) {
-  // Vérifier quelles catégories ont au moins un filtre actif
-  const hasPregnancyFilters = Object.values(activeFilters.pregnancy).some(
-    (value) => value === true,
-  );
-  const hasVerifiedFilters = Object.values(activeFilters.verified).some(
-    (value) => value === true,
-  );
-  const hasChildrenFilters = Object.values(activeFilters.children).some(
-    (value) => value === true,
-  );
+export function filterRemediesByTags(remedies, activeFilters = {}) {
+  const pregnancy = activeFilters.pregnancy ?? {};
+  const verified = activeFilters.verified ?? {};
+  const ageLimit = activeFilters.ageLimit ?? {};
 
-  // Si aucune catégorie n'a de filtres actifs, retourner tous les remèdes
+  const hasPregnancyFilters = Object.values(pregnancy).some(Boolean);
+  const hasVerifiedFilters = Object.values(verified).some(Boolean);
+  const hasChildrenFilters = Object.values(ageLimit).some(Boolean);
+
   if (!hasPregnancyFilters && !hasVerifiedFilters && !hasChildrenFilters) {
     return remedies;
   }
@@ -41,48 +37,32 @@ export function filterRemediesByTags(remedies, activeFilters) {
   return remedies.filter((result) => {
     const remedy = result.remedy;
 
-    // Vérifier chaque catégorie active (ET logique entre catégories)
-
-    // Catégorie Grossesse (OU logique au sein de la catégorie)
     if (hasPregnancyFilters) {
       const matchesPregnancy =
-        (activeFilters.pregnancy.ok && remedy.pregnancySafe === true) ||
-        (activeFilters.pregnancy.variant && remedy.pregnancySafe === null) ||
-        (activeFilters.pregnancy.interdit && remedy.pregnancySafe === false);
+        (pregnancy.ok && remedy.pregnancySafe === true) ||
+        (pregnancy.variant && remedy.pregnancySafe === null) ||
+        (pregnancy.interdit && remedy.pregnancySafe === false);
 
-      // Si aucun filtre de grossesse ne correspond, rejeter le remède
-      if (!matchesPregnancy) {
-        return false;
-      }
+      if (!matchesPregnancy) return false;
     }
 
-    // Catégorie Reconnaissance (OU logique au sein de la catégorie)
     if (hasVerifiedFilters) {
       const matchesVerified =
-        (activeFilters.verified.verified &&
-          remedy.verifiedByProfessional === true) ||
-        (activeFilters.verified.traditional &&
-          remedy.verifiedByProfessional === false);
+        (verified.verified && remedy.verifiedByProfessional === true) ||
+        (verified.traditional && remedy.verifiedByProfessional === false);
 
-      // Si aucun filtre de reconnaissance ne correspond, rejeter le remède
-      if (!matchesVerified) {
-        return false;
-      }
+      if (!matchesVerified) return false;
     }
 
-    // Catégorie Âge Enfants (OU logique au sein de la catégorie)
     if (hasChildrenFilters) {
       const matchesChildren =
-        (activeFilters.children.allAges && remedy.childrenAge === null) ||
-        (activeFilters.children.withLimit && remedy.childrenAge !== null);
+        (ageLimit.adultOnly && remedy.childrenAge === null) ||
+        (ageLimit.withLimit && remedy.childrenAge !== null) ||
+        (ageLimit.allAges && remedy.childrenAge !== null);
 
-      // Si aucun filtre d'âge ne correspond, rejeter le remède
-      if (!matchesChildren) {
-        return false;
-      }
+      if (!matchesChildren) return false;
     }
 
-    // Toutes les catégories actives sont satisfaites
     return true;
   });
 }
@@ -100,79 +80,9 @@ export const INITIAL_FILTERS = {
     verified: false,
     traditional: false,
   },
-  children: {
+  ageLimit: {
     allAges: false,
     withLimit: false,
+    adultOnly: false,
   },
 };
-
-/**
- * Configuration des catégories de filtres pour la modal
- * Utilisé pour générer les accordéons et checkboxes
- */
-export const FILTER_CATEGORIES = [
-  {
-    id: "pregnancy",
-    label: "Grossesse",
-    icon: "pregnancy",
-    options: [
-      {
-        id: "ok",
-        label: "Sans danger",
-        description: "Compatible avec la grossesse",
-        color: "green",
-      },
-      {
-        id: "variant",
-        label: "À vérifier",
-        description: "Données insuffisantes ou usage conditionnel",
-        color: "amber",
-      },
-      {
-        id: "interdit",
-        label: "Non recommandé",
-        description: "Contre-indiqué pendant la grossesse",
-        color: "red",
-      },
-    ],
-  },
-  {
-    id: "verified",
-    label: "Usage",
-    icon: "verified",
-    options: [
-      {
-        id: "verified",
-        label: "Reconnu",
-        description: "Soutenu scientifiquement ou par des professionnels",
-        color: "green",
-      },
-      {
-        id: "traditional",
-        label: "Traditionnel",
-        description:
-          "Usage traditionnel sans soutien scientifique (remède de grand-mère)",
-        color: "amber",
-      },
-    ],
-  },
-  {
-    id: "children",
-    label: "Âge Enfants",
-    icon: "children",
-    options: [
-      {
-        id: "allAges",
-        label: "Tout âge",
-        description: "Utilisable chez l'enfant sans limite d'âge",
-        color: "green",
-      },
-      {
-        id: "withLimit",
-        label: "Avec limite d'âge",
-        description: "Limite d'âge minimum requise",
-        color: "teal",
-      },
-    ],
-  },
-];

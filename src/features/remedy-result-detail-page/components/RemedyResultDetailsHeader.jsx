@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import {
   ChildrenAgeTag,
   PregnancyTag,
+  ProuvedTag,
   TraditionnalTag,
-  VerifiedTag,
 } from "../../../components/tags";
+import TagsInfoButton from "../../../components/ui/helper/TagsInfoButton";
 
 function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
   return (
@@ -27,7 +28,7 @@ function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
       </div>
 
       <div className="lg:col-span-3">
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center justify-start gap-4 lg:gap-8">
           <h1 className="mb-3 text-3xl font-bold lg:text-4xl">{remedy.name}</h1>
           <span
             className={`mb-3 shrink-0 rounded-md bg-neutral-200 px-3 py-1.5 text-xs font-semibold tracking-wide text-black uppercase lg:text-sm 2xl:text-base dark:bg-neutral-600 dark:text-white`}
@@ -39,24 +40,32 @@ function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
           {remedy.description}
         </p>
 
-        <div className="flex flex-wrap items-center gap-2">
-          {remedy.verifiedByProfessional ? (
-            <VerifiedTag />
-          ) : (
-            <TraditionnalTag />
-          )}
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-bold text-neutral-900/70 dark:text-neutral-300">
+              Labels
+            </span>
+            <TagsInfoButton size="sm" variant="inline" />
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            {remedy.verifiedByProfessional ? (
+              <ProuvedTag />
+            ) : (
+              <TraditionnalTag />
+            )}
 
-          <PregnancyTag
-            variant={
-              remedy.pregnancySafe === true
-                ? "ok"
-                : remedy.pregnancySafe === false
-                  ? "interdit"
-                  : "variant"
-            }
-          />
+            <PregnancyTag
+              variant={
+                remedy.pregnancySafe === true
+                  ? "ok"
+                  : remedy.pregnancySafe === false
+                    ? "interdit"
+                    : "variant"
+              }
+            />
 
-          <ChildrenAgeTag age={remedy.childrenAge} />
+            <ChildrenAgeTag age={remedy.childrenAge} />
+          </div>
         </div>
       </div>
     </motion.div>

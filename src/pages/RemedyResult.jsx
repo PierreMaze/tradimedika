@@ -4,21 +4,20 @@ import { motion } from "framer-motion";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useLocation } from "react-router-dom";
-import RemedyTagsHelper from "../components/ui/helper/RemedyTagsHelper";
 import db from "../data/db.json";
 import { AllergyFilterInfo, useAllergies } from "../features/allergens-search";
+import {
+  FilterButton,
+  FilterModal,
+  filterRemediesByTags,
+  useRemedyFilters,
+} from "../features/remedy-filter";
 import {
   FilterRemedyResult,
   RemedyResultList,
   findMatchingRemedies,
 } from "../features/remedy-result-page";
 import { parseAndValidateSymptoms } from "../features/symptom-search/utils/validationSymptom";
-import {
-  FilterButton,
-  FilterModal,
-  useRemedyFilters,
-  filterRemediesByTags,
-} from "../features/remedy-filter";
 
 /**
  * RemedyResult Page - Affiche les remèdes correspondant aux symptômes sélectionnés
@@ -310,8 +309,6 @@ function RemedyResult() {
         onResetTempFilters={resetTempFilters}
         onApplyFilters={applyFilters}
       />
-
-      <RemedyTagsHelper />
     </>
   );
 }

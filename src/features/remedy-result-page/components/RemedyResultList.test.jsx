@@ -1,6 +1,6 @@
-import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import { describe, expect, it } from "vitest";
 import RemedyResultList from "./RemedyResultList";
 
 const renderWithRouter = (ui) => {
@@ -68,7 +68,7 @@ describe("RemedyResultList", () => {
       const grid = container.querySelector(".grid");
       expect(grid?.className).toContain("grid-cols-1");
       expect(grid?.className).toContain("md:grid-cols-2");
-      expect(grid?.className).toContain("2xl:grid-cols-3");
+      expect(grid?.className).toContain("xl:grid-cols-3");
     });
   });
 

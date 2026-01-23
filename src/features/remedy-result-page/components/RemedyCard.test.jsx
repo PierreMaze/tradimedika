@@ -34,7 +34,7 @@ vi.mock("../../../components/tags", () => {
   };
 
   return {
-    VerifiedTag: () => <div data-testid="verified-tag" />,
+    ProuvedTag: () => <div data-testid="verified-tag" />,
     TraditionnalTag: () => <div data-testid="traditional-tag" />,
     PregnancyTag: PregnancyTagMock,
     ChildrenAgeTag: ChildrenAgeTagMock,

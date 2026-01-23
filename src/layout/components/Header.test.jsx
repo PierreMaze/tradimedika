@@ -1,5 +1,5 @@
-import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
 import Header from "./Header";
 
 vi.mock("framer-motion", () => ({
@@ -95,7 +95,9 @@ describe("Header", () => {
       const { container } = render(<Header />);
 
       const header = container.querySelector("header");
-      expect(header).toHaveClass("transition", "duration-300", "ease-in-out");
+      expect(header).toHaveClass(
+        "bg-light dark:bg-dark sticky top-0 right-0 left-0 z-50 h-auto w-full transition-transform duration-300 ease-in-out",
+      );
     });
 
     it("should have border styling", () => {

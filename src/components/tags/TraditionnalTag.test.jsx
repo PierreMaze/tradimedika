@@ -36,8 +36,8 @@ describe("TraditionnalTag", () => {
       const { container } = render(<TraditionnalTag />);
       const tag = container.firstChild;
       expect(tag).toHaveClass("inline-flex");
-      expect(tag).toHaveClass("bg-sky-100");
-      expect(tag).toHaveClass("text-sky-800");
+      expect(tag).toHaveClass("bg-amber-100");
+      expect(tag).toHaveClass("text-amber-800");
     });
   });
 

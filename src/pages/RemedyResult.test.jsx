@@ -50,13 +50,6 @@ vi.mock("react-router-dom", async () => {
 });
 
 /* -----------------------------------------
- * Helper components
- * ---------------------------------------- */
-vi.mock("../components/ui/helper/RemedyTagsHelper", () => ({
-  default: () => <div data-testid="remedy-tags-helper">Remedy Tags Helper</div>,
-}));
-
-/* -----------------------------------------
  * Allergies
  * ---------------------------------------- */
 vi.mock("../features/allergens-search", () => ({
@@ -123,11 +116,6 @@ describe("RemedyResult", () => {
     it("renders selected symptoms text", () => {
       renderWithProviders(<RemedyResult />);
       expect(screen.getByText(/Remèdes naturels pour/i)).toBeInTheDocument();
-    });
-
-    it("renders RemedyTagsHelper", () => {
-      renderWithProviders(<RemedyResult />);
-      expect(screen.getByTestId("remedy-tags-helper")).toBeInTheDocument();
     });
 
     it("renders RemedyResultList", () => {

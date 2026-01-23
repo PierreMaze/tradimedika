@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { useLocation, useParams } from "react-router-dom";
-import RemedyTagsHelper from "../components/ui/helper/RemedyTagsHelper";
 import {
   generateRemedySEOMeta,
   getTypeColors,
@@ -113,7 +112,6 @@ function RemedyResultDetails() {
           variant="bottom"
         />
       </motion.article>
-      <RemedyTagsHelper />
     </>
   );
 }

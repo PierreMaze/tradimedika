@@ -8,9 +8,10 @@ import { Link } from "react-router-dom";
 import {
   ChildrenAgeTag,
   PregnancyTag,
+  ProuvedTag,
   TraditionnalTag,
-  VerifiedTag,
 } from "../../../components/tags";
+import TagsInfoButton from "../../../components/ui/helper/TagsInfoButton";
 import { capitalizeFirstLetter } from "../../../utils/capitalizeFirstLetter";
 import { useVisibleItems } from "../hooks/useTruncatePropertiesItems";
 import { generateSlug } from "../utils/remedyMatcher";
@@ -104,7 +105,7 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
           {/* Contenu */}
           <div className="h-fit p-6">
             {/* En-tête avec nom et type */}
-            <div className="mb-3 flex items-start justify-between gap-2">
+            <div className="mb-3 flex items-start justify-between">
               <h3
                 className={`text-start text-xl font-bold text-neutral-900 lg:text-2xl dark:text-neutral-100 ${textClasses}`}
               >
@@ -130,7 +131,7 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
             {properties && properties.length > 0 && (
               <div className="mb-4 flex flex-col gap-2 text-xs lg:text-sm 2xl:text-base">
                 <h4 className="lg:textbasel text-start text-sm font-bold text-neutral-900/50 dark:text-neutral-300">
-                  Propriétés :
+                  Propriétés
                 </h4>
                 <div className="relative">
                   <div
@@ -180,11 +181,14 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
 
             {/* Tags de sécurité */}
             <div className={`flex flex-col flex-wrap gap-2 ${textClasses}`}>
-              <h4 className="text-start text-sm font-bold text-neutral-900/50 dark:text-neutral-300">
-                Labels :
-              </h4>
+              <div className="flex items-center gap-2">
+                <h4 className="text-start text-sm font-bold text-neutral-900/50 dark:text-neutral-300">
+                  Labels
+                </h4>
+                <TagsInfoButton size="sm" variant="inline" />
+              </div>
               <div className="flex flex-wrap gap-2">
-                {verifiedByProfessional ? <VerifiedTag /> : <TraditionnalTag />}
+                {verifiedByProfessional ? <ProuvedTag /> : <TraditionnalTag />}
                 <PregnancyTag
                   variant={
                     pregnancySafe === true
