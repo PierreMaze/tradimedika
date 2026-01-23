@@ -11,21 +11,25 @@ vi.mock("framer-motion", () => ({
 }));
 
 vi.mock("../../../components/tags", () => {
-  const PregnancyTagMock = ({ variant }) => {
-    if (variant === "interdit") return null; // Ne pas afficher si interdit
-    return <div data-testid="pregnancy-tag">{variant}</div>;
-  };
+  const PregnancyTagMock = ({ variant }) => (
+    <div data-testid="pregnancy-tag" data-variant={variant}>
+      Grossesse {variant}
+    </div>
+  );
   PregnancyTagMock.propTypes = { variant: PropTypes.string.isRequired };
 
-  const ChildrenAgeTagMock = ({ age }) => {
-    if (age === null || age === undefined) return null;
-    return <div data-testid="children-tag">Enfants {age}+</div>;
-  };
+  const ChildrenAgeTagMock = ({ age }) => (
+    <div data-testid="children-tag" data-age={age}>
+      {age === null ? "Enfants" : `Enfants ${age}+`}
+    </div>
+  );
   ChildrenAgeTagMock.propTypes = { age: PropTypes.number };
 
   return {
-    VerifiedTag: () => <div data-testid="verified-tag" />,
-    TraditionnalTag: () => <div data-testid="traditional-tag" />,
+    VerifiedTag: () => <div data-testid="verified-tag">Vérifié</div>,
+    TraditionnalTag: () => (
+      <div data-testid="traditional-tag">Traditionnel</div>
+    ),
     PregnancyTag: PregnancyTagMock,
     ChildrenAgeTag: ChildrenAgeTagMock,
   };
@@ -142,7 +146,7 @@ describe("RemedyResultDetailsHeader", () => {
       expect(screen.getByTestId("verified-tag")).toBeInTheDocument();
     });
 
-    it("should not render VerifiedTag when verifiedByProfessional is false", () => {
+    it("should render TraditionnalTag when verifiedByProfessional is false", () => {
       const remedy = {
         name: "Gingembre",
         type: "épice",
@@ -159,10 +163,10 @@ describe("RemedyResultDetailsHeader", () => {
         />,
       );
 
-      expect(screen.queryByTestId("verified-tag")).not.toBeInTheDocument();
+      expect(screen.getByTestId("traditional-tag")).toBeInTheDocument();
     });
 
-    it("should render PregnancyTag when pregnancySafe is true", () => {
+    it("should render PregnancyTag with 'ok' variant when pregnancySafe is true", () => {
       const remedy = {
         name: "Gingembre",
         type: "épice",
@@ -179,10 +183,12 @@ describe("RemedyResultDetailsHeader", () => {
         />,
       );
 
-      expect(screen.getByTestId("pregnancy-tag")).toBeInTheDocument();
+      const tag = screen.getByTestId("pregnancy-tag");
+      expect(tag).toBeInTheDocument();
+      expect(tag).toHaveAttribute("data-variant", "ok");
     });
 
-    it("should not render PregnancyTag when pregnancySafe is false", () => {
+    it("should render PregnancyTag with 'interdit' variant when pregnancySafe is false", () => {
       const remedy = {
         name: "Gingembre",
         type: "épice",
@@ -199,7 +205,31 @@ describe("RemedyResultDetailsHeader", () => {
         />,
       );
 
-      expect(screen.queryByTestId("pregnancy-tag")).not.toBeInTheDocument();
+      const tag = screen.getByTestId("pregnancy-tag");
+      expect(tag).toBeInTheDocument();
+      expect(tag).toHaveAttribute("data-variant", "interdit");
+    });
+
+    it("should render PregnancyTag with 'variant' when pregnancySafe is string", () => {
+      const remedy = {
+        name: "Gingembre",
+        type: "épice",
+        description: "Test",
+        verifiedByProfessional: false,
+        pregnancySafe: "précaution",
+        childrenAge: null,
+      };
+
+      render(
+        <RemedyResultDetailsHeader
+          remedy={remedy}
+          safeImageUrl="https://example.com/image.jpg"
+        />,
+      );
+
+      const tag = screen.getByTestId("pregnancy-tag");
+      expect(tag).toBeInTheDocument();
+      expect(tag).toHaveAttribute("data-variant", "variant");
     });
 
     it("should render ChildrenAgeTag when childrenAge is provided", () => {
@@ -224,7 +254,7 @@ describe("RemedyResultDetailsHeader", () => {
       expect(tag).toHaveTextContent("Enfants 3+");
     });
 
-    it("should not render ChildrenAgeTag when childrenAge is null", () => {
+    it("should render ChildrenAgeTag without age when childrenAge is null", () => {
       const remedy = {
         name: "Gingembre",
         type: "épice",
@@ -241,7 +271,10 @@ describe("RemedyResultDetailsHeader", () => {
         />,
       );
 
-      expect(screen.queryByTestId("children-tag")).not.toBeInTheDocument();
+      const tag = screen.getByTestId("children-tag");
+      expect(tag).toBeInTheDocument();
+      expect(tag).toHaveTextContent("Enfants");
+      expect(tag).toHaveAttribute("data-age", "null");
     });
 
     it("should render all tags when all conditions are met", () => {
