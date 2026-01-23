@@ -23,3 +23,35 @@ html {
 html.dark body {
   background: var(--color-dark);
 }
+
+.disclaimer-sticky {
+  position: sticky;
+  top: 5rem;
+  z-index: 40;
+}
+
+@media (min-width: 1024px) {
+  .disclaimer-sticky {
+    position: relative;
+    top: auto;
+  }
+}
+
+@media (max-width: 1023px) {
+  header:has(~ .disclaimer-sticky) {
+    position: sticky;
+    top: 0;
+  }
+
+  body:has(.disclaimer-sticky) {
+    scroll-padding-top: 5rem;
+  }
+
+  .disclaimer-sticky {
+    transition: top 0.3s ease-in-out;
+  }
+
+  header[style*="translateY(-100%)"] ~ .disclaimer-sticky {
+    top: 0;
+  }
+}

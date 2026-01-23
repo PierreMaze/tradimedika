@@ -1,40 +1,9 @@
-import { motion } from "framer-motion";
-import PropTypes from "prop-types";
 import { HiExclamationTriangle } from "react-icons/hi2";
-import { useReducedMotion } from "../../features/settings";
 
-const disclaimerVariants = {
-  hidden: {
-    y: -30,
-    opacity: 0,
-  },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 20,
-      delay: 0.4,
-    },
-  },
-};
-
-function Disclaimer({ className = "" }) {
-  const prefersReducedMotion = useReducedMotion();
-
-  const animationProps = prefersReducedMotion
-    ? {}
-    : {
-        variants: disclaimerVariants,
-        initial: "hidden",
-        animate: "visible",
-      };
-
+function Disclaimer() {
   return (
-    <motion.div
-      {...animationProps}
-      className={`w-full border-b-2 border-dashed border-amber-700/60 bg-amber-50 px-4 py-3 transition duration-300 ease-in-out lg:w-3/4 dark:border-amber-400/60 dark:bg-amber-950/80 ${className}`}
+    <div
+      className={`disclaimer-sticky w-full border-b-2 border-dashed border-amber-700/60 bg-amber-50 px-4 py-3 transition-all duration-300 ease-in-out lg:relative lg:w-3/4 dark:border-amber-400/60 dark:bg-amber-950/80`}
       role="alert"
       aria-live="polite"
     >
@@ -55,12 +24,7 @@ function Disclaimer({ className = "" }) {
           un médecin en cas de doute.
         </p>
       </div>
-    </motion.div>
+    </div>
   );
 }
-
-Disclaimer.propTypes = {
-  className: PropTypes.string,
-};
-
 export default Disclaimer;

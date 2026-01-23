@@ -2,7 +2,38 @@
 
 ---
 
-## [0.44.0] - 2026-01-19
+## [0.44.0] - 2026-01-23
+
+### Added
+
+- **Disclaimer sticky sur mobile avec effet suivant le scroll du header**
+  - Le disclaimer reste toujours visible lors du scroll (sticky)
+  - Sur mobile : monte en haut de l'écran (`top: 0`) quand le header disparaît au scroll vers le bas
+  - Sur mobile : redescend sous le header (`top: 5rem`) quand le header réapparaît au scroll vers le haut
+  - Sur desktop : reste en position normale (non sticky)
+  - Implémentation 100% CSS pur sans JavaScript pour les performances
+  - Hook `useScrollDirection` pour détecter la direction du scroll
+  - Composant Disclaimer optimisé sans re-render lors du scroll
+
+### Changed
+
+- **Optimisation du composant Disclaimer**
+  - Suppression des hooks `useReducedMotion`, `useMediaQuery` et `useScrollDirection` du composant
+  - Suppression de Framer Motion et des animations
+  - Composant simplifié en fonction statique sans props
+  - Gestion de l'effet sticky via CSS pur dans `index.css`
+  - Tests mis à jour pour refléter la nouvelle structure statique
+
+- **Header avec gestion du scroll sur mobile**
+  - Ajout des hooks `useMediaQuery` et `useScrollDirection`
+  - Disparaît au scroll vers le bas (uniquement sur mobile < 1024px)
+  - Réapparaît au scroll vers le haut (uniquement sur mobile < 1024px)
+  - Sur desktop : reste toujours visible
+  - Transition CSS fluide avec `transform: translateY()`
+
+---
+
+## [0.43.0] - 2026-01-19
 
 ### Added
 

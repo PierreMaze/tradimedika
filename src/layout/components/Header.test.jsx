@@ -2,21 +2,26 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import Header from "./Header";
 
-// Mock framer-motion
 vi.mock("framer-motion", () => ({
   motion: {
     header: ({ children, ...props }) => <header {...props}>{children}</header>,
   },
 }));
 
-// Mock LogoTradimedika
 vi.mock("./LogoTradimedika", () => ({
   default: () => <div data-testid="logo-tradimedika">Logo</div>,
 }));
 
-// Mock SettingsButton
 vi.mock("../../features/settings", () => ({
   SettingsButton: () => <button data-testid="settings-button">Settings</button>,
+}));
+
+vi.mock("../../hooks/useMediaQuery", () => ({
+  useMediaQuery: vi.fn(() => false),
+}));
+
+vi.mock("../../hooks/useScrollDirection", () => ({
+  useScrollDirection: vi.fn(() => "up"),
 }));
 
 describe("Header", () => {

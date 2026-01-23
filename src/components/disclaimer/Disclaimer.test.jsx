@@ -1,10 +1,6 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import Disclaimer from "./Disclaimer";
-
-vi.mock("../../features/settings/hooks/useReducedMotion", () => ({
-  useReducedMotion: vi.fn(() => false),
-}));
 
 describe("Disclaimer", () => {
   describe("Rendering", () => {
@@ -28,17 +24,13 @@ describe("Disclaimer", () => {
       ).toBeInTheDocument();
     });
 
-    it("should apply custom className", () => {
-      const { container } = render(<Disclaimer className="custom-class" />);
-      expect(container.firstChild).toHaveClass("custom-class");
-    });
-
     it("should have default styling classes", () => {
       const { container } = render(<Disclaimer />);
       const disclaimer = container.firstChild;
       expect(disclaimer).toHaveClass("bg-amber-50");
       expect(disclaimer).toHaveClass("border-amber-700/60");
       expect(disclaimer).toHaveClass("dark:bg-amber-950/80");
+      expect(disclaimer).toHaveClass("disclaimer-sticky");
     });
   });
 
@@ -91,43 +83,13 @@ describe("Disclaimer", () => {
     });
   });
 
-  describe("Animation with useReducedMotion", () => {
-    beforeEach(() => {
-      vi.clearAllMocks();
-    });
-
-    afterEach(() => {
-      vi.restoreAllMocks();
-    });
-
-    it("should render with animation when reduced motion is disabled", async () => {
-      const { useReducedMotion } =
-        await import("../../features/settings/hooks/useReducedMotion");
-      useReducedMotion.mockReturnValue(false);
-
-      render(<Disclaimer />);
-      const disclaimer = screen.getByRole("alert");
-      expect(disclaimer).toBeInTheDocument();
-    });
-
-    it("should render without animation when reduced motion is enabled", async () => {
-      const { useReducedMotion } =
-        await import("../../features/settings/hooks/useReducedMotion");
-      useReducedMotion.mockReturnValue(true);
-
-      render(<Disclaimer />);
-      const disclaimer = screen.getByRole("alert");
-      expect(disclaimer).toBeInTheDocument();
-    });
-  });
-
   describe("Multiple instances", () => {
     it("should render multiple instances independently", () => {
       const { container } = render(
         <div>
           <Disclaimer />
-          <Disclaimer className="custom-1" />
-          <Disclaimer className="custom-2" />
+          <Disclaimer />
+          <Disclaimer />
         </div>,
       );
 
