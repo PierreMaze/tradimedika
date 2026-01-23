@@ -27,19 +27,19 @@ function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
       </div>
 
       <div className="lg:col-span-3">
-        <h1 className="mb-3 text-3xl font-bold lg:text-4xl">{remedy.name}</h1>
-
+        <div className="flex items-center justify-between gap-2">
+          <h1 className="mb-3 text-3xl font-bold lg:text-4xl">{remedy.name}</h1>
+          <span
+            className={`mb-3 shrink-0 rounded-md bg-neutral-200 px-3 py-1.5 text-xs font-semibold tracking-wide text-black uppercase lg:text-sm 2xl:text-base dark:bg-neutral-600 dark:text-white`}
+          >
+            {remedy.type}
+          </span>
+        </div>
         <p className="mb-6 text-sm leading-relaxed text-neutral-600 lg:text-base 2xl:text-lg dark:text-neutral-400">
           {remedy.description}
         </p>
 
         <div className="flex flex-wrap items-center gap-2">
-          <span
-            className={`shrink-0 rounded-md bg-neutral-200 px-3 py-1.5 text-xs font-semibold tracking-wide text-black uppercase lg:text-sm 2xl:text-base dark:bg-neutral-600 dark:text-white`}
-          >
-            {remedy.type}
-          </span>
-
           {remedy.verifiedByProfessional ? (
             <VerifiedTag />
           ) : (
