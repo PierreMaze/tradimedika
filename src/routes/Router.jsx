@@ -1,6 +1,7 @@
 // tradimedika-v1/src/routes/Router.jsx
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
+import GoogleAnalytics from "../components/analytics/GoogleAnalytics";
 import { LoadingFallback } from "../components/ui/animation";
 import LayoutApp from "../layout/LayoutApp";
 import LayoutRemedyResult from "../layout/LayoutRemedyResult";
@@ -38,7 +39,12 @@ const RemedyResultDetails = lazy(() => import("../pages/RemedyResultDetails"));
 const router = createBrowserRouter(
   [
     {
-      element: <LayoutApp />,
+      element: (
+        <>
+          <GoogleAnalytics />
+          <LayoutApp />
+        </>
+      ),
       children: [
         {
           index: true,

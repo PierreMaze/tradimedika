@@ -12,6 +12,7 @@ import {
   TraditionnalTag,
 } from "../../../components/tags";
 import TagsInfoButton from "../../../components/ui/helper/TagsInfoButton";
+import useGAEvent from "../../../hooks/useGAEvent";
 import { capitalizeFirstLetter } from "../../../utils/capitalizeFirstLetter";
 import { useVisibleItems } from "../hooks/useTruncatePropertiesItems";
 import { generateSlug } from "../utils/remedyMatcher";
@@ -25,6 +26,7 @@ import { generateSlug } from "../utils/remedyMatcher";
  * - Optimisé avec React.memo pour éviter re-renders inutiles
  */
 function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
+  const trackEvent = useGAEvent();
   const {
     name,
     type,
@@ -39,6 +41,19 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
   const { containerRef, itemRefs, counterRef, visibleCount } = useVisibleItems(
     properties || [],
   );
+
+  // Handler pour le tracking du clic sur un remède
+  const handleRemedyClick = () => {
+    trackEvent("remedy_click", {
+      remedy_name: name,
+      remedy_type: type,
+      remedy_id: remedy.id,
+      is_verified: verifiedByProfessional,
+      pregnancy_safe: pregnancySafe,
+      has_allergens: isFiltered,
+      from_symptoms: selectedSymptoms.join(", "),
+    });
+  };
 
   const imageClasses = isFiltered ? "grayscale" : "";
 
@@ -69,6 +84,7 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
         state={{ symptoms: selectedSymptoms }}
         aria-label={`Voir les détails de ${name}${isFiltered ? " (contient des allergènes)" : ""}`}
         className="block h-full"
+        onClick={handleRemedyClick}
       >
         <div
           className={`group h-full overflow-hidden rounded-lg bg-white shadow-md transition duration-300 ease-in-out hover:shadow-lg dark:bg-neutral-800 ${cardBorderClasses}`}

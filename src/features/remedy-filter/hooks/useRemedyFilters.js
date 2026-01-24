@@ -1,5 +1,6 @@
 // Hook
 import { useCallback, useState } from "react";
+import useGAEvent from "../../../hooks/useGAEvent";
 import { INITIAL_FILTERS } from "../utils/filterRemedies";
 
 /**
@@ -14,6 +15,7 @@ import { INITIAL_FILTERS } from "../utils/filterRemedies";
  * @returns {Object} - État et fonctions de gestion des filtres
  */
 export function useRemedyFilters() {
+  const trackEvent = useGAEvent();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [appliedFilters, setAppliedFilters] = useState(INITIAL_FILTERS);
   const [tempFilters, setTempFilters] = useState(INITIAL_FILTERS);
@@ -45,7 +47,29 @@ export function useRemedyFilters() {
   const applyFilters = useCallback(() => {
     setAppliedFilters(tempFilters);
     setIsModalOpen(false);
-  }, [tempFilters]);
+
+    // Tracking Google Analytics : application de filtres
+    const activeFilters = {};
+    let totalActiveFilters = 0;
+
+    Object.entries(tempFilters).forEach(([category, filters]) => {
+      const activeInCategory = Object.entries(filters)
+        .filter(([_, isActive]) => isActive)
+        .map(([filterId]) => filterId);
+
+      if (activeInCategory.length > 0) {
+        activeFilters[category] = activeInCategory.join(", ");
+        totalActiveFilters += activeInCategory.length;
+      }
+    });
+
+    if (totalActiveFilters > 0) {
+      trackEvent("remedy_filter_applied", {
+        filter_count: totalActiveFilters,
+        ...activeFilters,
+      });
+    }
+  }, [tempFilters, trackEvent]);
 
   const resetAndApplyFilters = useCallback(() => {
     setTempFilters(INITIAL_FILTERS);

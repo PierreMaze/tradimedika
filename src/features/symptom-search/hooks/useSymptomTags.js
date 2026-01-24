@@ -1,5 +1,6 @@
 // hooks/useSymptomTags.js
 import { useState } from "react";
+import useGAEvent from "../../../hooks/useGAEvent";
 import {
   normalizeSymptom,
   normalizeForMatching,
@@ -31,6 +32,7 @@ import {
  * removeSymptom('Fatigue'); // Supprime
  */
 export function useSymptomTags() {
+  const trackEvent = useGAEvent();
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
 
   /**
@@ -55,6 +57,12 @@ export function useSymptomTags() {
 
     if (!isDuplicate) {
       setSelectedSymptoms([...selectedSymptoms, normalizedDisplay]);
+
+      // Tracking Google Analytics : ajout d'un symptôme
+      trackEvent("symptom_selected", {
+        symptom: normalizedDisplay,
+        total_symptoms: selectedSymptoms.length + 1,
+      });
     }
   };
 

@@ -33,9 +33,11 @@ export default function ListAllergyTag({
       aria-label="Filtrer les remèdes par symptôme"
     >
       <AnimatePresence mode="popLayout">
-        {filterButton}
+        {/* ✅ FIX: Ajouter key pour AnimatePresence */}
+        {filterButton && <div key="filter-button">{filterButton}</div>}
         {filterButton && (
           <span
+            key="separator"
             className="mx-2 h-8 border-1 border-dashed border-emerald-600 dark:border-emerald-500"
             aria-hidden="true"
           ></span>

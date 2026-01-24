@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import db from "../../../data/db.json";
+import useGAEvent from "../../../hooks/useGAEvent";
 import { createLogger } from "../../../utils/logger";
 import { findMatchingRemedies } from "../../remedy-result-page";
 
@@ -24,6 +25,7 @@ const logger = createLogger("useSymptomSubmit");
  */
 export function useSymptomSubmit(addSearch) {
   const navigate = useNavigate();
+  const trackEvent = useGAEvent();
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState(null);
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -97,6 +99,16 @@ export function useSymptomSubmit(addSearch) {
         } else {
           logger.error("addSearch is not a function!", addSearch);
         }
+
+        // Tracking Google Analytics : recherche de symptômes
+        trackEvent("symptom_search", {
+          symptom_count: selectedSymptoms.length,
+          symptoms: selectedSymptoms.join(", "),
+          results_count: matchingRemedies.length,
+          has_allergies: allergiesToSave.length > 0,
+          allergies_count: allergiesToSave.length,
+          filtered_count: filteredCount,
+        });
 
         // Navigation vers la page des résultats avec query params ET state
         // Query params: persistance après refresh + URLs partageables

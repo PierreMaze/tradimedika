@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 
 const STORAGE_KEY = "tradimedika-selected-symptoms";
@@ -12,7 +13,12 @@ export function useSymptomsPersistence() {
     );
   };
 
-  const validatedSymptoms = validateSymptoms(symptoms);
+  // ✅ FIX: useMemo pour éviter de créer un nouveau tableau à chaque render
+  // La référence ne change que si symptoms change réellement
+  const validatedSymptoms = useMemo(
+    () => validateSymptoms(symptoms),
+    [symptoms],
+  );
 
   const setSymptomsAndPersist = (newSymptoms) => {
     const validated = validateSymptoms(newSymptoms);

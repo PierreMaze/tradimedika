@@ -73,11 +73,22 @@ function RemedyResult() {
     return storedSymptoms;
   }, [location.search, location.state?.symptoms, storedSymptoms]);
 
+  // ✅ FIX: Ne mettre à jour que si les symptômes ont réellement changé
+  // Évite la boucle infinie en comparant le contenu (pas la référence)
   useEffect(() => {
-    if (selectedSymptoms.length > 0) {
+    if (selectedSymptoms.length === 0) return;
+
+    // Comparer le contenu pour éviter les mises à jour inutiles
+    const symptomsChanged =
+      storedSymptoms.length !== selectedSymptoms.length ||
+      !selectedSymptoms.every(
+        (symptom, index) => symptom === storedSymptoms[index],
+      );
+
+    if (symptomsChanged) {
       setSymptomsAndPersist(selectedSymptoms);
     }
-  }, [selectedSymptoms, setSymptomsAndPersist]);
+  }, [selectedSymptoms, storedSymptoms, setSymptomsAndPersist]);
 
   const userAllergies = contextAllergies;
 
