@@ -207,7 +207,7 @@ function TagsInfoContent({ variant = "full", className = "" }) {
                     key={option.id}
                     className="flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-3"
                   >
-                    <div className="flex-shrink-0">{option.tag}</div>
+                    <div className="flex shrink-0">{option.tag}</div>
                     <p className="text-xs leading-relaxed text-neutral-700 dark:text-neutral-300">
                       {option.description}
                     </p>
