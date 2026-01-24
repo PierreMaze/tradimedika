@@ -130,7 +130,7 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
             {/* Propriétés */}
             {properties && properties.length > 0 && (
               <div className="mb-4 flex flex-col gap-2 text-xs lg:text-sm 2xl:text-base">
-                <h4 className="lg:textbasel text-start text-sm font-bold text-neutral-900/50 dark:text-neutral-300">
+                <h4 className="text-start text-sm font-bold text-neutral-700 lg:text-base dark:text-neutral-300">
                   Propriétés
                 </h4>
                 <div className="relative">

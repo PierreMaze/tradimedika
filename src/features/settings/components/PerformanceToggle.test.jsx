@@ -20,7 +20,7 @@ describe("PerformanceToggle", () => {
     render(<PerformanceToggle />);
 
     const button = screen.getByRole("button", {
-      name: /basculer entre mode économie et performance élevée/i,
+      name: /passer en mode performance élevée/i,
     });
     expect(button).toBeInTheDocument();
   });
@@ -70,18 +70,37 @@ describe("PerformanceToggle", () => {
   });
 
   it("should have correct aria-label", () => {
+    // Test mode économie → label "Passer en mode performance élevée"
+    const { rerender } = render(<PerformanceToggle />);
+
     vi.spyOn(PerformanceContextModule, "usePerformance").mockReturnValue({
       isHighPerformance: false,
       togglePerformance: mockTogglePerformance,
     });
 
-    render(<PerformanceToggle />);
+    rerender(<PerformanceToggle />);
 
-    const button = screen.getByRole("button");
+    let button = screen.getByRole("button");
     expect(button).toHaveAttribute(
       "aria-label",
-      "Basculer entre mode économie et performance élevée",
+      "Passer en mode performance élevée",
     );
+    expect(button).toHaveAttribute("aria-pressed", "false");
+
+    // Test mode performance → label "Passer en mode économie de performance"
+    vi.spyOn(PerformanceContextModule, "usePerformance").mockReturnValue({
+      isHighPerformance: true,
+      togglePerformance: mockTogglePerformance,
+    });
+
+    rerender(<PerformanceToggle />);
+
+    button = screen.getByRole("button");
+    expect(button).toHaveAttribute(
+      "aria-label",
+      "Passer en mode économie de performance",
+    );
+    expect(button).toHaveAttribute("aria-pressed", "true");
   });
 
   it("should apply hover styles", () => {

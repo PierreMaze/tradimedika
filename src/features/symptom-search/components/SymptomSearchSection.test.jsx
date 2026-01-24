@@ -1,10 +1,23 @@
-import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import PropTypes from "prop-types";
+import { describe, expect, it, vi } from "vitest";
 import SymptomSearchSection from "./SymptomSearchSection";
 
-vi.mock("./SymptomsForm", () => ({
-  default: ({ onSymptomSelect, onSubmit, onFocus, placeholder }) => (
+/**
+ * IMPORTANT
+ * SymptomSearchSection importe :
+ *   import { SymptomsForm } from "./form";
+ * → export nommé
+ * → chemin "./form"
+ */
+vi.mock("./form", () => {
+  const SymptomsForm = ({
+    onSymptomSelect,
+    onSubmit,
+    onFocus,
+    placeholder,
+  }) => (
     <div data-testid="symptoms-form">
       <input
         type="text"
@@ -18,8 +31,17 @@ vi.mock("./SymptomsForm", () => ({
       />
       <button onClick={onSubmit}>Submit</button>
     </div>
-  ),
-}));
+  );
+
+  SymptomsForm.propTypes = {
+    onSymptomSelect: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    onFocus: PropTypes.func,
+    placeholder: PropTypes.string,
+  };
+
+  return { SymptomsForm };
+});
 
 vi.mock("./ListSymptomTag", () => ({
   default: ({ symptoms, onRemoveSymptom }) => (
@@ -90,6 +112,7 @@ describe("SymptomSearchSection", () => {
     const input = screen.getByPlaceholderText(
       "Entrez vos symptômes (ex: fatigue, digestion...)",
     );
+
     await user.type(input, "fatigue");
 
     expect(mockOnSymptomSelect).toHaveBeenCalled();
@@ -112,6 +135,7 @@ describe("SymptomSearchSection", () => {
     const input = screen.getByPlaceholderText(
       "Entrez vos symptômes (ex: fatigue, digestion...)",
     );
+
     await user.click(input);
 
     expect(mockOnFocus).toHaveBeenCalled();
@@ -119,6 +143,7 @@ describe("SymptomSearchSection", () => {
 
   it("should display selected symptoms in ListSymptomTag", () => {
     const selectedSymptoms = ["fatigue", "nausée", "fièvre"];
+
     render(
       <SymptomSearchSection
         {...defaultProps}
@@ -134,6 +159,7 @@ describe("SymptomSearchSection", () => {
   it("should pass onRemoveSymptom callback to ListSymptomTag", async () => {
     const user = userEvent.setup();
     const selectedSymptoms = ["fatigue"];
+
     render(
       <SymptomSearchSection
         {...defaultProps}
@@ -149,6 +175,7 @@ describe("SymptomSearchSection", () => {
 
   it("should display correct symptom count in SymptomCounter", () => {
     const selectedSymptoms = ["fatigue", "nausée"];
+
     render(
       <SymptomSearchSection
         {...defaultProps}
@@ -191,6 +218,7 @@ describe("SymptomSearchSection", () => {
       "toux",
       "maux de tête",
     ];
+
     render(
       <SymptomSearchSection
         {...defaultProps}
@@ -199,6 +227,7 @@ describe("SymptomSearchSection", () => {
     );
 
     expect(screen.getByText("5/5 symptômes")).toBeInTheDocument();
+
     selectedSymptoms.forEach((symptom) => {
       expect(screen.getByText(`${symptom} ×`)).toBeInTheDocument();
     });

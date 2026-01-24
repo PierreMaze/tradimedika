@@ -19,7 +19,9 @@ describe("DarkModeToggle", () => {
 
     render(<DarkModeToggle />);
 
-    const button = screen.getByRole("button", { name: /toggle dark mode/i });
+    const button = screen.getByRole("button", {
+      name: /activer le mode sombre/i,
+    });
     expect(button).toBeInTheDocument();
   });
 
@@ -68,15 +70,29 @@ describe("DarkModeToggle", () => {
   });
 
   it("should have correct aria-label", () => {
+    // Test mode clair → label "Activer le mode sombre"
     vi.spyOn(ThemeContextModule, "useTheme").mockReturnValue({
       isDarkMode: false,
       toggleDarkMode: mockToggleDarkMode,
     });
 
-    render(<DarkModeToggle />);
+    const { rerender } = render(<DarkModeToggle />);
 
-    const button = screen.getByRole("button");
-    expect(button).toHaveAttribute("aria-label", "Toggle dark mode");
+    let button = screen.getByRole("button");
+    expect(button).toHaveAttribute("aria-label", "Activer le mode sombre");
+    expect(button).toHaveAttribute("aria-pressed", "false");
+
+    // Test mode sombre → label "Désactiver le mode sombre"
+    vi.spyOn(ThemeContextModule, "useTheme").mockReturnValue({
+      isDarkMode: true,
+      toggleDarkMode: mockToggleDarkMode,
+    });
+
+    rerender(<DarkModeToggle />);
+
+    button = screen.getByRole("button");
+    expect(button).toHaveAttribute("aria-label", "Désactiver le mode sombre");
+    expect(button).toHaveAttribute("aria-pressed", "true");
   });
 
   it("should apply hover styles", () => {

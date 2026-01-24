@@ -56,7 +56,7 @@ describe("Hero", () => {
       const { container } = render(<Hero />);
 
       const mainContainer = container.querySelector(
-        ".mx-auto.mt-8.mb-4.flex.h-screen",
+        ".mx-auto.mt-8.mb-4.flex.min-h-screen",
       );
       expect(mainContainer).toBeInTheDocument();
     });
@@ -125,7 +125,7 @@ describe("Hero", () => {
     it("should have full height container", () => {
       const { container } = render(<Hero />);
 
-      const mainContainer = container.querySelector(".h-screen");
+      const mainContainer = container.querySelector(".min-h-screen");
       expect(mainContainer).toBeInTheDocument();
     });
   });

@@ -1,5 +1,5 @@
 // Composants
-export { default as SymptomsForm } from "./components/SymptomsForm";
+export { SymptomsForm } from "./components/form";
 export { default as SymptomTag } from "./components/SymptomTag";
 export { default as ListSymptomTag } from "./components/ListSymptomTag";
 export { default as SymptomCounter } from "./components/SymptomCounter";

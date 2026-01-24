@@ -8,7 +8,10 @@ export default function DarkModeToggle() {
 
   return (
     <motion.button
-      aria-label="Toggle dark mode"
+      aria-label={
+        isDarkMode ? "Désactiver le mode sombre" : "Activer le mode sombre"
+      }
+      aria-pressed={isDarkMode}
       onClick={toggleDarkMode}
       className={`group relative flex h-8 w-14 cursor-pointer items-center rounded-md border-2 p-1 transition-all duration-300 ease-out ${
         isDarkMode

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import ListSymptomTag from "./ListSymptomTag";
 import SymptomCounter from "./SymptomCounter";
-import SymptomsForm from "./SymptomsForm";
+import { SymptomsForm } from "./form";
 
 /**
  * Composant SymptomSearchSection - Section de recherche de symptômes

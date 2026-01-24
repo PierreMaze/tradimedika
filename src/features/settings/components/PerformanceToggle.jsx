@@ -8,7 +8,12 @@ export default function PerformanceToggle() {
 
   return (
     <motion.button
-      aria-label="Basculer entre mode économie et performance élevée"
+      aria-label={
+        isHighPerformance
+          ? "Passer en mode économie de performance"
+          : "Passer en mode performance élevée"
+      }
+      aria-pressed={isHighPerformance}
       onClick={togglePerformance}
       className={`group relative flex h-8 w-14 cursor-pointer items-center rounded-md border-2 px-1 py-1.5 transition-all duration-300 ease-out ${
         isHighPerformance
@@ -30,7 +35,7 @@ export default function PerformanceToggle() {
         className={`z-10 flex h-6 w-6 items-center justify-center rounded-md group-hover:scale-105 ${
           isHighPerformance
             ? "bg-dark dark:bg-white"
-            : "boder-white bg-dark border dark:bg-white"
+            : "bg-dark border border-white dark:bg-white"
         }`}
       >
         <FaWandMagicSparkles

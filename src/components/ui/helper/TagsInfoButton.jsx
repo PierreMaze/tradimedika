@@ -232,7 +232,7 @@ function TagsInfoButton({
         className={`group inline-flex cursor-help items-center gap-2 rounded-full bg-transparent font-bold transition-colors duration-200 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-emerald-500 active:scale-95 dark:text-white ${buttonSizeClasses[size]}`}
       >
         {label && (
-          <span className="text-sm font-bold text-neutral-900/50 dark:text-neutral-300">
+          <span className="text-sm font-bold text-neutral-700 dark:text-neutral-300">
             {label}
           </span>
         )}
@@ -299,7 +299,7 @@ function TagsInfoButton({
                 }
                 className={` ${
                   isDesktop
-                    ? "fixed w-[740px]"
+                    ? "fixed w-full max-w-3xl"
                     : "fixed top-1/2 left-1/2 w-full max-w-sm -translate-x-1/2 -translate-y-1/2"
                 } z-60 max-h-[80vh] overflow-auto rounded-xl bg-white p-6 shadow-2xl ring-1 ring-neutral-200 dark:bg-neutral-900 dark:ring-neutral-700`}
               >
@@ -319,8 +319,9 @@ function TagsInfoButton({
 
                 {/* Titre */}
                 <h3
-                  className={`mb-4 text-lg font-bold text-neutral-900 dark:text-neutral-50 ${!isDesktop ? "pr-8" : ""}`}
+                  className={`border-b-2 border-dashed border-emerald-200 pb-4 text-xl font-bold text-neutral-900 lg:text-2xl dark:border-emerald-700 dark:text-neutral-50 ${!isDesktop ? "pr-8" : ""}`}
                 >
+                  <GrCircleQuestion className="mr-2 inline-block h-5 w-5 lg:h-6 lg:w-6" />
                   Signification des labels
                 </h3>
 

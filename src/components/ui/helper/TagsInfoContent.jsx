@@ -106,14 +106,14 @@ function TagsCategoryAccordion({ category, isOpenByDefault = true }) {
   };
 
   return (
-    <div className="border-b border-neutral-200 last:border-b-0 dark:border-neutral-700">
+    <div className="border-b-2 border-dashed border-emerald-200 last:border-b-0 dark:border-emerald-700">
       <button
         onClick={handleHeaderClick}
         className="flex w-full items-center justify-between py-4 text-left transition-colors"
         aria-expanded={isOpen}
         aria-controls={`tags-category-${category.id}`}
       >
-        <span className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
+        <span className="text-lg font-semibold text-neutral-900 lg:text-xl dark:text-neutral-100">
           {category.label}
         </span>
         {isOpen ? (

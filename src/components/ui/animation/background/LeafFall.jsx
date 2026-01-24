@@ -1,14 +1,17 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { GiFallingLeaf } from "react-icons/gi";
+import { useMediaQuery } from "../../../../hooks/useMediaQuery";
 import { usePerformance } from "../../../../features/settings";
 
 export default function LeafFall() {
   const [show, setShow] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const { isHighPerformance } = usePerformance();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const START_FALL_AFTER = 0;
+  const COUNT = isMobile ? 3 : 5; // Dynamique : responsive au resize
 
   useEffect(() => {
     const timer = setTimeout(() => setShow(true), START_FALL_AFTER);
@@ -28,14 +31,11 @@ export default function LeafFall() {
   }, []);
 
   // Initialiser les feuilles avec useState pour garantir la pureté
-  // La fonction d'initialisation n'est appelée qu'une seule fois au montage
+  // Génère plus de feuilles que nécessaire, filtrage au render pour responsivité
   const [leaves] = useState(() => {
-    // ✅ FIX: Détection mobile et COUNT calculés dans l'initialisation
-    // pour éviter accès window au niveau racine du composant
-    const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-    const COUNT = isMobile ? 3 : 5; // Réduit de 5/10 à 3/5 pour performance
+    const MAX_LEAVES = 15; // Générer suffisamment pour tous les cas
 
-    return Array.from({ length: COUNT }).map(() => {
+    return Array.from({ length: MAX_LEAVES }).map(() => {
       const startX = Math.random() * 100;
       const startY = -10;
       const scale = 1;
@@ -113,7 +113,7 @@ export default function LeafFall() {
 
   return (
     <div className="pointer-events-none absolute inset-0 z-0 h-full w-full overflow-hidden">
-      {leaves.map((leaf, i) => (
+      {leaves.slice(0, COUNT).map((leaf, i) => (
         <motion.div
           key={i}
           className="absolute"

@@ -253,9 +253,11 @@ describe("SettingsModal", () => {
       </TestWrapper>,
     );
 
-    // DarkModeToggle doit être présent (vérifier via aria-label)
+    // DarkModeToggle doit être présent (vérifier via aria-label dynamique)
     expect(
-      screen.getByRole("button", { name: /toggle dark mode/i }),
+      screen.getByRole("button", {
+        name: /(activer|désactiver) le mode sombre/i,
+      }),
     ).toBeInTheDocument();
   });
 
@@ -266,10 +268,10 @@ describe("SettingsModal", () => {
       </TestWrapper>,
     );
 
-    // PerformanceToggle doit être présent
+    // PerformanceToggle doit être présent (vérifier via aria-label dynamique)
     expect(
       screen.getByRole("button", {
-        name: /basculer entre mode économie et performance élevée/i,
+        name: /passer en mode (performance élevée|économie de performance)/i,
       }),
     ).toBeInTheDocument();
   });
