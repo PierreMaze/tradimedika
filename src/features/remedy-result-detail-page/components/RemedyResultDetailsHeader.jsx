@@ -41,12 +41,7 @@ function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
         </p>
 
         <div className="flex flex-col gap-3">
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-bold text-neutral-900/70 dark:text-neutral-300">
-              Labels
-            </span>
-            <TagsInfoButton size="sm" variant="inline" />
-          </div>
+          <TagsInfoButton size="sm" variant="inline" label="Labels" />
           <div className="flex flex-wrap items-center gap-2">
             {remedy.verifiedByProfessional ? (
               <ProuvedTag />

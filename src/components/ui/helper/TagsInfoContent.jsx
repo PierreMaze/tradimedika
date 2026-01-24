@@ -100,7 +100,8 @@ const TAGS_CATEGORIES = [
 function TagsCategoryAccordion({ category, isOpenByDefault = true }) {
   const [isOpen, setIsOpen] = useState(isOpenByDefault);
 
-  const handleHeaderClick = () => {
+  const handleHeaderClick = (e) => {
+    e.stopPropagation();
     setIsOpen(!isOpen);
   };
 
@@ -108,7 +109,7 @@ function TagsCategoryAccordion({ category, isOpenByDefault = true }) {
     <div className="border-b border-neutral-200 last:border-b-0 dark:border-neutral-700">
       <button
         onClick={handleHeaderClick}
-        className="flex w-full items-center justify-between py-4 text-left transition-colors hover:bg-neutral-50 dark:hover:bg-neutral-800"
+        className="flex w-full items-center justify-between py-4 text-left transition-colors"
         aria-expanded={isOpen}
         aria-controls={`tags-category-${category.id}`}
       >
@@ -117,12 +118,12 @@ function TagsCategoryAccordion({ category, isOpenByDefault = true }) {
         </span>
         {isOpen ? (
           <HiChevronUp
-            className="h-5 w-5 text-neutral-500"
+            className="mx-2 h-5 w-5 text-neutral-500"
             aria-hidden="true"
           />
         ) : (
           <HiChevronDown
-            className="h-5 w-5 text-neutral-500"
+            className="mx-2 h-5 w-5 text-neutral-500"
             aria-hidden="true"
           />
         )}
@@ -142,10 +143,12 @@ function TagsCategoryAccordion({ category, isOpenByDefault = true }) {
               {category.options.map((option) => (
                 <div
                   key={option.id}
-                  className="flex flex-col items-start gap-2 rounded-md p-2 transition-colors hover:bg-neutral-50 lg:flex-row lg:items-center lg:gap-4 dark:hover:bg-neutral-800"
+                  className="grid grid-cols-1 gap-3 rounded-md p-2 transition-colors lg:grid-cols-3"
                 >
-                  <div className="flex-shrink-0">{option.tag}</div>
-                  <p className="text-sm leading-relaxed text-neutral-800 dark:text-neutral-200">
+                  <div className="flex h-8 shrink-0 lg:col-span-1">
+                    {option.tag}
+                  </div>
+                  <p className="text-sm leading-relaxed text-neutral-800 lg:col-span-2 dark:text-neutral-200">
                     {option.description}
                   </p>
                 </div>

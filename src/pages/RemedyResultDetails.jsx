@@ -96,12 +96,10 @@ function RemedyResultDetails() {
           />
           <RemedyResultDetailsSymptomsSection symptoms={remedy.symptoms} />
         </div>
-
-        <RemedyResultDetailsUsagesList uses={remedy.uses} />
-
         <RemedyResultDetailsContraindicationsSection
           contraindications={remedy.contraindications}
         />
+        <RemedyResultDetailsUsagesList uses={remedy.uses} />
 
         <RemedyResultDetailsTipsSection tips={remedy.tips} />
 

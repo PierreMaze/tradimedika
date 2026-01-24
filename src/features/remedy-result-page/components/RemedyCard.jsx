@@ -181,12 +181,7 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
 
             {/* Tags de sécurité */}
             <div className={`flex flex-col flex-wrap gap-2 ${textClasses}`}>
-              <div className="flex items-center gap-2">
-                <h4 className="text-start text-sm font-bold text-neutral-900/50 dark:text-neutral-300">
-                  Labels
-                </h4>
-                <TagsInfoButton size="sm" variant="inline" />
-              </div>
+              <TagsInfoButton size="sm" variant="inline" label="Labels" />
               <div className="flex flex-wrap gap-2">
                 {verifiedByProfessional ? <ProuvedTag /> : <TraditionnalTag />}
                 <PregnancyTag

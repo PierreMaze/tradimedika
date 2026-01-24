@@ -2,6 +2,52 @@
 
 ---
 
+## [0.45.0] - 2026-01-24
+
+### Fixed
+
+- **TagsInfoButton - Correction des clics propagés**
+  - Ajout de `stopPropagation()` dans `closeTooltip` pour empêcher la propagation vers les cards
+  - Ajout de `handlePopoverClick` pour stopper la propagation des clics dans le popover
+  - Modification du bouton fermer mobile pour stopper la propagation
+  - Fichier : `src/components/ui/helper/TagsInfoButton.jsx`
+
+- **TagsInfoContent - Correction des clics accordéons**
+  - Ajout de `stopPropagation()` dans `handleHeaderClick` pour empêcher l'activation des cards
+  - Fichier : `src/components/ui/helper/TagsInfoContent.jsx`
+
+- **Backdrop - Correction clics bloqués sur desktop**
+  - Ajout de `lg:pointer-events-none` au backdrop pour permettre les clics à travers sur desktop
+  - Les tags de symptômes sont maintenant cliquables même avec le popover ouvert sur desktop
+  - Sur mobile : backdrop reste cliquable pour fermer le popover (comportement préservé)
+  - Fichier : `src/components/ui/helper/TagsInfoButton.jsx` (ligne 253)
+
+### Changed
+
+- **TagsInfoButton - Amélioration de la largeur du popover**
+  - Augmentation de la largeur du popover de 640px à 740px sur desktop
+  - Meilleure lisibilité du contenu avec grid layout 1/3-2/3
+
+- **TagsInfoButton - Amélioration du z-index**
+  - Backdrop : z-index changé de `z-[999]` à `z-50` pour cohérence avec le design system
+  - Popover content : z-index changé de `z-[1000]` à `z-60` pour maintenir la hiérarchie
+
+### Impact
+
+Ces corrections résolvent deux bugs critiques :
+
+1. **Bug 1** : Les clics dans le popover (accordéons, texte) n'activent plus les cards RemedyCard en arrière-plan
+2. **Bug 2** : Les tags de symptômes restent cliquables sur desktop même avec le popover ouvert
+
+Comportements préservés :
+
+- Desktop : hover pour ouvrir, mouseLeave pour fermer
+- Mobile : clic pour toggle, backdrop cliquable pour fermer
+- Blocage du scroll de la page quand le popover est ouvert
+- Animations et accessibilité maintenus
+
+---
+
 ## [0.44.0] - 2026-01-23
 
 ### Added

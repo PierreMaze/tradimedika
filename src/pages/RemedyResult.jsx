@@ -17,6 +17,7 @@ import {
   RemedyResultList,
   findMatchingRemedies,
 } from "../features/remedy-result-page";
+import { useSymptomsPersistence } from "../features/symptom-search/hooks/useSymptomsPersistence";
 import { parseAndValidateSymptoms } from "../features/symptom-search/utils/validationSymptom";
 
 /**
@@ -51,26 +52,33 @@ function RemedyResult() {
     appliedFiltersCount,
   } = useRemedyFilters();
 
-  // Récupérer symptômes depuis query params (priorité) ou state (fallback)
+  const [storedSymptoms, setSymptomsAndPersist] = useSymptomsPersistence();
+
   const selectedSymptoms = useMemo(() => {
-    // 1. Tenter de lire depuis query params (persistance refresh + URLs partageables)
     const searchParams = new URLSearchParams(location.search);
     const symptomsParam = searchParams.get("symptoms");
 
     if (symptomsParam) {
-      // Parser et valider les symptômes (protection contre injections)
       return parseAndValidateSymptoms(symptomsParam);
     }
 
-    // 2. Fallback sur location.state (backward compatibility)
-    // Valider aussi les symptômes du state pour cohérence
     const stateSymptoms = location.state?.symptoms || [];
-    return Array.isArray(stateSymptoms)
-      ? stateSymptoms.filter((s) => typeof s === "string" && s.trim())
-      : [];
-  }, [location.search, location.state?.symptoms]);
+    if (
+      Array.isArray(stateSymptoms) &&
+      stateSymptoms.filter((s) => typeof s === "string" && s.trim()).length > 0
+    ) {
+      return stateSymptoms.filter((s) => typeof s === "string" && s.trim());
+    }
 
-  // Utiliser les allergies du contexte (persistées dans localStorage)
+    return storedSymptoms;
+  }, [location.search, location.state?.symptoms, storedSymptoms]);
+
+  useEffect(() => {
+    if (selectedSymptoms.length > 0) {
+      setSymptomsAndPersist(selectedSymptoms);
+    }
+  }, [selectedSymptoms, setSymptomsAndPersist]);
+
   const userAllergies = contextAllergies;
 
   // Calcul des remèdes matchés avec useMemo pour optimisation
