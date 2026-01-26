@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { useLocation, useParams } from "react-router-dom";
+import FeedbackLink from "../components/ui/feedback/FeedbackLink";
 import {
   generateRemedySEOMeta,
   getTypeColors,
@@ -109,6 +110,9 @@ function RemedyResultDetails() {
           selectedSymptoms={selectedSymptoms}
           variant="bottom"
         />
+
+        {/* Feedback Section */}
+        <FeedbackLink />
       </motion.article>
     </>
   );

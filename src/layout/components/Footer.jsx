@@ -1,7 +1,9 @@
 // tradimedika-v1/src/layout/Footer.jsx
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { LINK_EXTERNAL_STYLES } from "../../constants/linkStyles";
+import CookieSettingsButton from "../../features/cookie-consent/components/CookieSettingsButton";
 import LogoTradimedika from "./LogoTradimedika";
 
 const Footer = ({ className = "" }) => {
@@ -20,20 +22,16 @@ const Footer = ({ className = "" }) => {
 
         {/* Links */}
         <div className="mb-4 flex flex-col gap-2 text-center text-xs decoration-1 lg:flex-row lg:gap-6 lg:text-start">
-          <a
-            href="/mention-legales"
-            rel="noopener noreferrer"
-            className={LINK_EXTERNAL_STYLES}
-          >
+          <Link to="/mentions-legales" className={LINK_EXTERNAL_STYLES}>
             Mentions Légales
-          </a>
-          <a
-            href="/privacy-policy"
-            rel="noopener noreferrer"
+          </Link>
+          <Link
+            to="/politique-confidentialite"
             className={LINK_EXTERNAL_STYLES}
           >
             Politique de Confidentialité
-          </a>
+          </Link>
+          <CookieSettingsButton />
         </div>
 
         {/* Copyright */}

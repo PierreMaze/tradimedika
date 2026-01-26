@@ -15,7 +15,7 @@
 
 [🌐 **Voir le site**](https://pierremaze.github.io/tradimedika/) • [🐛 **Signaler un bug**](https://github.com/PierreMaze/) • [💬 **Discuter**](https://www.linkedin.com/in/pierremazelaygue/)
 
-[![TRADIMEDIKA](<https://img.shields.io/badge/TRADIMEDIKA-Bêta(0.45.0)-1a1a1a?style=for-the-badge&logo=leaflet&logoColor=00bd7e>)](https://pierremaze.github.io/tradimedika/)
+[![TRADIMEDIKA](<https://img.shields.io/badge/TRADIMEDIKA-Bêta(0.46.0)-1a1a1a?style=for-the-badge&logo=leaflet&logoColor=00bd7e>)](https://pierremaze.github.io/tradimedika/)
 
 </div>
 
@@ -118,6 +118,14 @@
 - **Réutilisation rapide** : Cliquez sur une recherche pour la relancer instantanément
 - **Déduplication intelligente** : Pas de doublons, insensible à l'ordre des symptômes
 - **Gestion flexible** : Suppression individuelle ou effacement complet de l'historique
+
+### 💬 Feedback Utilisateur
+
+- **Section dédiée** : Lien de feedback affiché en bas des pages de résultats
+- **Message personnalisé** : Invitation claire à signaler des bugs ou donner son avis
+- **Formulaire Tally** : Intégration d'un formulaire externe pour collecter les retours
+- **Design cohérent** : Boîte émeraude avec bordure pointillée, icône Material Design
+- **Accessibilité complète** : Ouverture sécurisée dans une nouvelle fenêtre
 
 ---
 

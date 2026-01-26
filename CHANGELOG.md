@@ -2,6 +2,34 @@
 
 ---
 
+## [0.46.0] - 2026-01-26
+
+### Added
+
+- **Composant FeedbackLink pour retours utilisateurs**
+  - Nouveau composant `FeedbackLink` dans `src/components/ui/feedback/`
+  - Message personnalisé : "Le projet vous plaît, vous avez trouvé un bug ? Faites-le nous savoir !"
+  - Bouton avec icône `MdFeedback` (Material Design) vers formulaire Tally
+  - Design : boîte émeraude avec bordure pointillée, animations Framer Motion
+  - Support complet du dark mode et accessibilité (aria-label, rel="noopener noreferrer")
+  - Intégré en bas de `RemedyResult.jsx` et `RemedyResultDetails.jsx`
+  - URL Tally : `https://tally.so/r/3x0O8o`
+
+### Removed
+
+- **Retrait du lien de feedback du Footer**
+  - Suppression de l'import `MdFeedback` et du lien de feedback dans `Footer.jsx`
+  - Le feedback est maintenant contextualisé sur les pages de résultats
+
+### Changed
+
+- **Documentation mise à jour**
+  - Version bump : `0.45.0` → `0.46.0` dans `package.json` et `README.md`
+  - Ajout de la section "💬 Feedback Utilisateur" dans le README
+  - CHANGELOG mis à jour avec les changements de cette version
+
+---
+
 ## [0.45.0] - 2026-01-24
 
 ### Fixed

@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useLocation } from "react-router-dom";
 import db from "../data/db.json";
+import FeedbackLink from "../components/ui/feedback/FeedbackLink";
 import { AllergyFilterInfo, useAllergies } from "../features/allergens-search";
 import {
   FilterButton,
@@ -318,6 +319,9 @@ function RemedyResult() {
           Nouvelle recherche
         </Link>
       </motion.div>
+
+      {/* Feedback Section */}
+      <FeedbackLink />
 
       {/* Modal de filtres par propriétés */}
       <FilterModal
