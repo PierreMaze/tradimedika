@@ -6,13 +6,13 @@
 
 ### Fixed
 
-- **Correction des tests LayoutApp.test.jsx**
-  - Ajout du `CookieConsentProvider` dans le helper de test `renderWithRouter`
-  - Mock du composant `CookieBanner` pour simplifier les tests unitaires
-  - Ajout de tests pour vérifier le rendu du composant CookieBanner
-  - Résolution de l'erreur "useCookieConsent must be used within CookieConsentProvider"
-  - 30 tests qui échouaient passent maintenant avec succès
-  - Tous les tests du projet passent : 1403 tests (1371 passed, 2 skipped)
+- **Fixed LayoutApp.test.jsx tests**
+  - Added `CookieConsentProvider` wrapper in test helper `renderWithRouter`
+  - Mocked `CookieBanner` component to simplify unit tests
+  - Added tests to verify rendering of CookieBanner
+  - Fixed error "useCookieConsent must be used within CookieConsentProvider"
+  - 30 failing tests now pass successfully
+  - All project tests pass : 1403 tests (1371 passed, 2 skipped)
 
 ---
 
@@ -20,27 +20,27 @@
 
 ### Added
 
-- **Composant FeedbackLink pour retours utilisateurs**
-  - Nouveau composant `FeedbackLink` dans `src/components/ui/feedback/`
-  - Message personnalisé : "Le projet vous plaît, vous avez trouvé un bug ? Faites-le nous savoir !"
-  - Bouton avec icône `MdFeedback` (Material Design) vers formulaire Tally
-  - Design : boîte émeraude avec bordure pointillée, animations Framer Motion
-  - Support complet du dark mode et accessibilité (aria-label, rel="noopener noreferrer")
-  - Intégré en bas de `RemedyResult.jsx` et `RemedyResultDetails.jsx`
+- **FeedbackLink Component for User Feedback**
+  - New component `FeedbackLink` in `src/components/ui/feedback/`
+  - Custom message : "Do you like the project, found a bug? Land us know!"
+  - Button with icon `MdFeedback` (Material Design) to Tally form
+  - Design : emerald box with dashed border, Framer Motion animations
+  - Full dark mode and accessibility support (aria-label, rel="noopener noreferrer")
+  - Integrated at bottom of `RemedyResult.jsx` and `RemedyResultDetails.jsx`
   - URL Tally : `https://tally.so/r/3x0O8o`
 
 ### Removed
 
-- **Retrait du lien de feedback du Footer**
-  - Suppression de l'import `MdFeedback` et du lien de feedback dans `Footer.jsx`
-  - Le feedback est maintenant contextualisé sur les pages de résultats
+- **Removed feedback link from Footer**
+  - Removed import `MdFeedback` and feedback link in `Footer.jsx`
+  - Feedback is now contextualized on result pages
 
 ### Changed
 
-- **Documentation mise à jour**
-  - Version bump : `0.45.0` → `0.46.0` dans `package.json` et `README.md`
-  - Ajout de la section "💬 Feedback Utilisateur" dans le README
-  - CHANGELOG mis à jour avec les changements de cette version
+- **Documentation updated**
+  - Version bump : `0.45.0` → `0.46.0` in `package.json` and `README.md`
+  - Added section "💬 Feedback Utilisateur" in README
+  - CHANGELOG updated with changes from this version
 
 ---
 
@@ -48,45 +48,45 @@
 
 ### Fixed
 
-- **TagsInfoButton - Correction des clics propagés**
-  - Ajout de `stopPropagation()` dans `closeTooltip` pour empêcher la propagation vers les cards
-  - Ajout de `handlePopoverClick` pour stopper la propagation des clics dans le popover
-  - Modification du bouton fermer mobile pour stopper la propagation
-  - Fichier : `src/components/ui/helper/TagsInfoButton.jsx`
+- **TagsInfoButton - Fixed des clics propagés**
+  - Added of `stopPropagation()` in `closeTooltip` for empêcher la propagation vers les cards
+  - Added of `handlePopoverClick` for stopper la propagation des clics in le popover
+  - Modification du bouton fermer mobile for stopper la propagation
+  - File : `src/components/ui/helper/TagsInfoButton.jsx`
 
-- **TagsInfoContent - Correction des clics accordéons**
-  - Ajout de `stopPropagation()` dans `handleHeaderClick` pour empêcher l'activation des cards
-  - Fichier : `src/components/ui/helper/TagsInfoContent.jsx`
+- **TagsInfoContent - Fixed des clics accordéons**
+  - Added of `stopPropagation()` in `handleHeaderClick` for empêcher l'activation des cards
+  - File : `src/components/ui/helper/TagsInfoContent.jsx`
 
-- **Backdrop - Correction clics bloqués sur desktop**
-  - Ajout de `lg:pointer-events-none` au backdrop pour permettre les clics à travers sur desktop
-  - Les tags de symptômes sont maintenant cliquables même avec le popover ouvert sur desktop
-  - Sur mobile : backdrop reste cliquable pour fermer le popover (comportement préservé)
-  - Fichier : `src/components/ui/helper/TagsInfoButton.jsx` (ligne 253)
+- **Backdrop - Fixed clics bloqués on desktop**
+  - Added of `lg:pointer-events-none` au backdrop for permettre les clics à travers on desktop
+  - Les tags of symptômes sont maintenant cliquables même with le popover ouvert on desktop
+  - Sur mobile : backdrop reste cliquable for fermer le popover (comportement préservé)
+  - File : `src/components/ui/helper/TagsInfoButton.jsx` (ligne 253)
 
 ### Changed
 
-- **TagsInfoButton - Amélioration de la largeur du popover**
-  - Augmentation de la largeur du popover de 640px à 740px sur desktop
-  - Meilleure lisibilité du contenu avec grid layout 1/3-2/3
+- **TagsInfoButton - Amélioration of la largeur du popover**
+  - Augmentation of la largeur du popover of 640px à 740px on desktop
+  - Meilleure lisibilité du contenu with grid layout 1/3-2/3
 
 - **TagsInfoButton - Amélioration du z-index**
-  - Backdrop : z-index changé de `z-[999]` à `z-50` pour cohérence avec le design system
-  - Popover content : z-index changé de `z-[1000]` à `z-60` pour maintenir la hiérarchie
+  - Backdrop : z-index changé of `z-[999]` à `z-50` for cohérence with le design system
+  - Popover content : z-index changé of `z-[1000]` à `z-60` for maintenir la hiérarchie
 
 ### Impact
 
 Ces corrections résolvent deux bugs critiques :
 
-1. **Bug 1** : Les clics dans le popover (accordéons, texte) n'activent plus les cards RemedyCard en arrière-plan
-2. **Bug 2** : Les tags de symptômes restent cliquables sur desktop même avec le popover ouvert
+1. **Bug 1** : Les clics in le popover (accordéons, texte) n'activent plus les cards RemedyCard en arrière-plan
+2. **Bug 2** : Les tags of symptômes restent cliquables on desktop même with le popover ouvert
 
 Comportements préservés :
 
-- Desktop : hover pour ouvrir, mouseLeave pour fermer
-- Mobile : clic pour toggle, backdrop cliquable pour fermer
-- Blocage du scroll de la page quand le popover est ouvert
-- Animations et accessibilité maintenus
+- Desktop : hover for ouvrir, mouseLeave for fermer
+- Mobile : clic for toggle, backdrop cliquable for fermer
+- Blocage du scroll of la page quand le popover est ouvert
+- Animations and accessibilité maintenus
 
 ---
 
@@ -94,30 +94,30 @@ Comportements préservés :
 
 ### Added
 
-- **Disclaimer sticky sur mobile avec effet suivant le scroll du header**
+- **Disclaimer sticky on mobile with effand suivant le scroll du header**
   - Le disclaimer reste toujours visible lors du scroll (sticky)
-  - Sur mobile : monte en haut de l'écran (`top: 0`) quand le header disparaît au scroll vers le bas
+  - Sur mobile : monte en haut of l'écran (`top: 0`) quand le header disparaît au scroll vers le bas
   - Sur mobile : redescend sous le header (`top: 5rem`) quand le header réapparaît au scroll vers le haut
   - Sur desktop : reste en position normale (non sticky)
-  - Implémentation 100% CSS pur sans JavaScript pour les performances
-  - Hook `useScrollDirection` pour détecter la direction du scroll
-  - Composant Disclaimer optimisé sans re-render lors du scroll
+  - Implémentation 100% CSS pur sans JavaScript for les performances
+  - Hook `useScrollDirection` for détecter la direction du scroll
+  - Component Disclaimer optimisé sans re-render lors du scroll
 
 ### Changed
 
 - **Optimisation du composant Disclaimer**
-  - Suppression des hooks `useReducedMotion`, `useMediaQuery` et `useScrollDirection` du composant
-  - Suppression de Framer Motion et des animations
-  - Composant simplifié en fonction statique sans props
-  - Gestion de l'effet sticky via CSS pur dans `index.css`
-  - Tests mis à jour pour refléter la nouvelle structure statique
+  - Removed des hooks `useReducedMotion`, `useMediaQuery` and `useScrollDirection` du composant
+  - Removed of Framer Motion and des animations
+  - Component simplifié en fonction statique sans props
+  - Gestion of l'effand sticky via CSS pur in `index.css`
+  - Tests mis à jour for refléter la nouvelle structure statique
 
-- **Header avec gestion du scroll sur mobile**
-  - Ajout des hooks `useMediaQuery` et `useScrollDirection`
-  - Disparaît au scroll vers le bas (uniquement sur mobile < 1024px)
-  - Réapparaît au scroll vers le haut (uniquement sur mobile < 1024px)
+- **Header with gestion du scroll on mobile**
+  - Added des hooks `useMediaQuery` and `useScrollDirection`
+  - Disparaît au scroll vers le bas (uniquement on mobile < 1024px)
+  - Réapparaît au scroll vers le haut (uniquement on mobile < 1024px)
   - Sur desktop : reste toujours visible
-  - Transition CSS fluide avec `transform: translateY()`
+  - Transition CSS fluide with `transform: translateY()`
 
 ---
 
@@ -125,65 +125,65 @@ Comportements préservés :
 
 ### Added
 
-- **Nouveau système de filtrage par propriétés de remèdes**
-  - Création de la feature `remedy-filter/` avec architecture complète
-  - Composants :
-    - `FilterButton` : Bouton avec badge du nombre de filtres actifs, style cohérent avec tags de symptômes
-    - `FilterModal` : Modal accessible avec accordéons par catégorie, design cohérent avec SettingsModal
-    - `FilterAccordion` : Accordéon pour chaque catégorie avec animations Framer Motion
+- **New système of filtrage par propriétés of remèdes**
+  - Création of la feature `remedy-filter/` with architecture complète
+  - Components :
+    - `FilterButton` : Bouton with badge du nombre of filtres actifs, style cohérent with tags of symptômes
+    - `FilterModal` : Modal accessible with accordéons par catégorie, design cohérent with SettingsModal
+    - `FilterAccordion` : Accordéon for chaque catégorie with animations Framer Motion
   - Hook `useRemedyFilters` : Gestion état filtres temporaires (modal) + filtres appliqués (effectifs)
-  - Utils `filterRemedies.js` : Logique de filtrage optimisée (ET entre catégories, OU au sein d'une catégorie)
-  - 3 catégories de filtres :
+  - Utils `filterRemedies.js` : Logique of filtrage optimisée (ET entre catégories, OU au sein d'une catégorie)
+  - 3 catégories of filtres :
     - **Grossesse** : OK / Avec précautions / Interdite
     - **Reconnaissance** : Vérifié / Traditionnel
     - **Âge Enfants** : Tous âges / Avec limite d'âge
-  - Intégration dans `RemedyResult.jsx` avec combinaison filtre symptômes + filtre propriétés
-  - Application des filtres uniquement au clic sur "Appliquer" (pas en temps réel)
-  - Séparation visuelle (ligne verticale + espacement) entre bouton Filtres et tags symptômes
+  - Intégration in `RemedyResult.jsx` with combinaison filtre symptômes + filtre propriétés
+  - Application des filtres uniquement au clic on "Appliquer" (pas en temps réel)
+  - Séparation visuelle (ligne verticale + espacement) entre bouton Filtres and tags symptômes
 
-- **Système de tags de propriétés dynamiques avec variantes**
-  - **PregnancyTag** : 3 variantes avec icônes et couleurs distinctes
+- **Système of tags of propriétés dynamiques with variantes**
+  - **PregnancyTag** : 3 variantes with icônes and couleurs distinctes
     - `variant="ok"` : Vert, icône check (IoMdCheckmarkCircleOutline), label "Grossesse"
     - `variant="variant"` : Ambre, icône cœur (LiaGratipay), label "Grossesse"
     - `variant="interdit"` : Rouge, icône croix (LiaTimesCircle), label "Grossesse"
     - Prop `variant` obligatoire (`.isRequired`)
     - Tooltips différents selon la variante
-  - **ChildrenAgeTag** : 2 variantes avec icônes et couleurs distinctes
+  - **ChildrenAgeTag** : 2 variantes with icônes and couleurs distinctes
     - `age={null}` : Vert, icône check (IoMdCheckmarkCircleOutline), label "Enfants"
     - `age={number}` : Teal, icône alerte (IoMdAlert), label "Enfants +X ans"
-    - Labels et tooltips dynamiques selon l'âge
-  - Affichage **toujours visible** des tags sur les cartes de remèdes (plus de condition)
-  - Support complet du dark mode pour toutes les variantes
+    - Labels and tooltips dynamiques selon l'âge
+  - Affichage **toujours visible** des tags on les cartes of remèdes (plus of condition)
+  - Support compland du dark mode for toutes les variantes
 
 ### Fixed
 
-- **Correction logique de filtrage par propriétés**
-  - Correction du bug : filtres de catégories différentes combinés incorrectement (OU global)
-  - Nouvelle logique optimisée : ET entre catégories, OU au sein d'une catégorie
-  - Exemple corrigé : "Reconnu + Grossesse Interdite" affiche UNIQUEMENT les remèdes reconnus ET interdits pour grossesse
+- **Fixed logique of filtrage par propriétés**
+  - Fixed du bug : filtres of catégories différentes combinés incorrectement (OU global)
+  - New logique optimisée : ET entre catégories, OU au sein d'une catégorie
+  - Exemple corrigé : "Reconnu + Grossesse Interdite" affiche UNIQUEMENT les remèdes reconnus ET interdits for grossesse
 
 ### Refactored
 
-- **Mise à jour des fichiers d'utilisation des tags**
-  - `RemedyCard.jsx` : Tags toujours affichés avec variantes dynamiques
-  - `RemedyResultDetailsHeader.jsx` : Tags toujours affichés avec variantes dynamiques
+- **Updated des fichiers d'utilisation des tags**
+  - `RemedyCard.jsx` : Tags toujours affichés with variantes dynamiques
+  - `RemedyResultDetailsHeader.jsx` : Tags toujours affichés with variantes dynamiques
   - `RemedyTagsHelper.jsx` : Affichage des 3 exemples PregnancyTag + 2 exemples ChildrenAgeTag
 
 ### Tests
 
-- **Mise à jour complète des tests pour les nouveaux tags**
+- **Updated complète des tests for les nouveaux tags**
   - `PregnancyTag.test.jsx` : Couverture 3 variantes (ok, variant, interdit)
   - `ChildrenAgeTag.test.jsx` : Couverture 2 variantes (null, number)
-  - Tests des couleurs, icônes, labels, tooltips pour chaque variante
-  - Tests d'accessibilité et instances multiples
+  - Tests des couleurs, icônes, labels, tooltips for chaque variante
+  - Tests d'accessibilité and instances multiples
 
 ### Documentation
 
-- **Mise à jour CLAUDE.md**
-  - Nouvelle section "Système de filtrage" dans Architecture du projet
-  - Documentation complète des composants PregnancyTag et ChildrenAgeTag
-  - Documentation de la logique de filtrage (ET/OU)
-  - Ajout du hook `useRemedyFilters` dans la liste des hooks personnalisés
+- **Updated CLAUDE.md**
+  - New section "Système of filtrage" in Architecture du projet
+  - Documentation complète des composants PregnancyTag and ChildrenAgeTag
+  - Documentation of la logique of filtrage (ET/OU)
+  - Added du hook `useRemedyFilters` in la liste des hooks personnalisés
 
 ---
 
@@ -191,31 +191,31 @@ Comportements préservés :
 
 ### Fixed
 
-- **Correction complète de tous les tests**
-  - Correction de `VerifiedTag.test.jsx` : Texte "Vérifié" → "Validé", titre "Vérifié par" → "Approuvé par"
-  - Correction de `RemedyResultDetailsAllergensSection.test.jsx` : Suppression mock icône, couleurs emerald au lieu de yellow
-  - Correction de `Header.test.jsx` : Sélecteurs CSS avec slashes (border-dark/80)
-  - Correction de `RemedyResultDetailsSymptomsSection.test.jsx` : Couleur dark:bg-yellow-900 au lieu de dark:bg-yellow-700
-  - Correction de `RemedyResultDetailsTipsSection.test.jsx` : Ajout mocks motion.ul et motion.li
-  - Correction de `RemedyResultDetailsHeader.test.jsx` : Badge type avec couleurs neutrales au lieu de couleurs spécifiques
-  - Correction de `RemedyCard.test.jsx` : Gestion du dual-container pattern (mesure invisible + affichage visible)
-  - **Résultat : 1349 tests passent / 1354 tests** (99.6% de réussite)
+- **Fixed complète of tous les tests**
+  - Fixed of `VerifiedTag.test.jsx` : Texte "Vérifié" → "Validé", titre "Vérifié par" → "Approuvé par"
+  - Fixed of `RemedyResultDetailsAllergensSection.test.jsx` : Removed mock icône, couleurs emerald au lieu of yellow
+  - Fixed of `Header.test.jsx` : Sélecteurs CSS with slashes (border-dark/80)
+  - Fixed of `RemedyResultDetailsSymptomsSection.test.jsx` : Couleur dark:bg-yellow-900 au lieu of dark:bg-yellow-700
+  - Fixed of `RemedyResultDetailsTipsSection.test.jsx` : Added mocks motion.ul and motion.li
+  - Fixed of `RemedyResultDetailsHeader.test.jsx` : Badge type with couleurs neutrales au lieu of couleurs spécifiques
+  - Fixed of `RemedyCard.test.jsx` : Gestion du dual-container pattern (mesure invisible + affichage visible)
+  - **Résultat : 1349 tests passent / 1354 tests** (99.6% of réussite)
 
 ### Added
 
-- **Amélioration de RemedyCard.jsx - Truncation dynamique des tags propriétés**
-  - Ajout d'un système de truncation intelligent avec compteur "+N"
-  - Utilisation du hook `useVisibleItems` pour calcul dynamique
-  - Pattern dual-container : conteneur invisible pour mesure + conteneur visible pour affichage
-  - Réservation d'espace pour le compteur dans les calculs
-  - Respect de `aria-hidden` sur le conteneur de mesure pour accessibilité
+- **Amélioration of RemedyCard.jsx - Truncation dynamique des tags propriétés**
+  - Added d'un système of truncation intelligent with compteur "+N"
+  - Utilisation du hook `useVisibleItems` for calcul dynamique
+  - Pattern dual-container : conteneur invisible for mesure + conteneur visible for affichage
+  - Réservation d'espace for le compteur in les calculs
+  - Respect of `aria-hidden` on le conteneur of mesure for accessibilité
 
 ### Refactored
 
-- **Mise à jour des mocks de tests**
-  - Ajout de PropTypes.number pour mock ChildrenAgeTag
+- **Updated des mocks of tests**
+  - Added of PropTypes.number for mock ChildrenAgeTag
   - Harmonisation des mocks framer-motion (section, ul, li, div, span, img)
-  - Standardisation des expectations de classes CSS
+  - Standardisation des expectations of classes CSS
 
 ---
 
@@ -229,8 +229,8 @@ Comportements préservés :
   - `TagsInfoTooltip` → `ui/helper/RemedyTagsHelper` (renommage composant)
   - `validation` → `symptom-search/utils/validationSymptom` (renommage fichier)
   - `normalizeSymptom` → `symptom-search/utils/normalizeSymptom`
-  - Mise à jour de 8+ fichiers d'imports à travers le projet
-  - Création de 4 nouveaux dossiers : `navigation/utils/`, `layout/hooks/`, `ui/helper/`, `symptom-search/utils/`
+  - Updated of 8+ fichiers d'imports à travers le projet
+  - Création of 4 nouveaux dossiers : `navigation/utils/`, `layout/hooks/`, `ui/helper/`, `symptom-search/utils/`
 
 ---
 
@@ -238,27 +238,27 @@ Comportements préservés :
 
 ### Refactored
 
-- **Extraction de `RemedyResultDetails.jsx` en composants modulaires**
+- **Extraction of `RemedyResultDetails.jsx` en composants modulaires**
   - Création du dossier `features/remedy-result-detail-page/`
-  - Réduction drastique : **512 lignes → 122 lignes** (76% de réduction)
-  - Extraction de 9 composants réutilisables :
-    - `RemedyResultDetailsHeader` : Image, badges, titre et description
-    - `RemedyResultDetailsNavigation` : Boutons de navigation (top/bottom)
+  - Réduction drastique : **512 lignes → 122 lignes** (76% of réduction)
+  - Extraction of 9 composants réutilisables :
+    - `RemedyResultDetailsHeader` : Image, badges, titre and description
+    - `RemedyResultDetailsNavigation` : Boutons of navigation (top/bottom)
     - `RemedyResultDetailsAllergyWarning` : Bannière d'avertissement allergènes
-    - `RemedyResultDetailsPropertiesSection` : Section propriétés avec animations
+    - `RemedyResultDetailsPropertiesSection` : Section propriétés with animations
     - `RemedyResultDetailsSymptomsSection` : Section symptômes traités
     - `RemedyResultDetailsUsagesList` : Liste d'utilisations complexe
     - `RemedyResultDetailsContraindicationsSection` : Section contraindications
     - `RemedyResultDetailsTipsSection` : Section conseils pratiques
     - `RemedyResultDetailsAllergensSection` : Section allergènes potentiels
-  - Extraction de 2 hooks personnalisés :
-    - `useRemedyDetails` : Gestion de récupération et validation du remède
+  - Extraction of 2 hooks personnalisés :
+    - `useRemedyDetails` : Gestion of récupération and validation du remède
     - `useRemedyAllergyCheck` : Vérification des allergènes utilisateur
-  - Extraction de 2 fichiers utils :
+  - Extraction of 2 fichiers utils :
     - `remedyImageValidator` : Validation HTTPS des URLs d'images
-    - `remedyHelpers` : Mapping couleurs types et génération meta SEO
-  - Tests unitaires complets pour tous les modules (94 tests au total)
-  - Préservation des animations Framer Motion et de l'accessibilité
+    - `remedyHelpers` : Mapping couleurs types and génération meta SEO
+  - Tests unitaires complets for tous les modules (94 tests au total)
+  - Préservation des animations Framer Motion and of l'accessibilité
 
 ---
 
@@ -267,56 +267,56 @@ Comportements préservés :
 ### <u>Refactoring majeur - Architecture hybride:</u>
 
 - **Migration vers architecture features/**
-  - Nouvelle structure : `/features` pour regrouper les fonctionnalités par domaine
-  - Séparation claire : composants, contextes, hooks, tests dans chaque feature
-  - Migration complète de Settings → `features/settings`
-  - Migration complète de Allergens → `features/allergens`
-  - Migration complète de Remedy → `features/remedy`
-  - Migration complète de Symptom Search → `features/symptom-search`
+  - New structure : `/features` for regrouper les fonctionnalités par domaine
+  - Séparation claire : composants, contextes, hooks, tests in chaque feature
+  - Migration complète of Settings → `features/settings`
+  - Migration complète of Allergens → `features/allergens`
+  - Migration complète of Remedy → `features/remedy`
+  - Migration complète of Symptom Search → `features/symptom-search`
 
 - **Décomposition Hero.jsx en composants atomiques**
   - Réduction drastique : **443 lignes → 48 lignes**
-  - Extraction de sous-composants : `HeroHeader`, `HeroFeatures`, `HeroButtons`
+  - Extraction of sous-composants : `HeroHeader`, `HeroFeatures`, `HeroButtons`
   - Organisation en sous-dossier `features/home/components/hero/`
-  - Amélioration de la maintenabilité et de la testabilité
+  - Amélioration of la maintenabilité and of la testabilité
 
-- **Renommage et standardisation des fichiers**
+- **Renommage and standardisation des fichiers**
   - Hooks renommés : `.jsx` → `.js` (useDarkMode, useMediaQuery, useReducedMotion)
-  - Composants renommés : `AllergySelector` → `AllergyForm`
+  - Components renommés : `AllergySelector` → `AllergyForm`
   - `SearchButtons` → `HeroButtons` (déplacé vers feature hero)
-  - Nettoyage des anciens dossiers et imports obsolètes
+  - Nettoyage des anciens dossiers and imports obsolètes
 
 ### <u>Tests:</u>
 
-- **Nouveaux tests pour composants Settings**
+- **Nouveaux tests for composants Settings**
   - `DarkModeToggle.test.jsx` : 9 tests (toggle, état, localStorage, dark mode)
   - `PerformanceToggle.test.jsx` : 10 tests (toggle, mode économie/élevée, icônes)
   - `SettingsModal.test.jsx` : 18 tests (modal, aria, focus, fermeture)
-  - `SettingsButton.test.jsx` : tests pour le bouton d'ouverture
+  - `SettingsButton.test.jsx` : tests for le bouton d'ouverture
 
 - **Tests contextes**
-  - `ThemeContext.test.jsx` : Tests complets du contexte de thème
-  - Validation de la persistence localStorage
-  - Tests des toggles et états
+  - `ThemeContext.test.jsx` : Tests complets du contexte of thème
+  - Validation of la persistence localStorage
+  - Tests des toggles and états
 
-- **Tests unitaires pour composants prioritaires**
+- **Tests unitaires for composants prioritaires**
   - Couverture complète des composants refactorisés
-  - Validation des migrations et renommages
+  - Validation des migrations and renommages
 
 ### <u>Fixed:</u>
 
-- **Correction test SettingsModal**
-  - Label "Performance" → "Animations" (alignement avec constantes)
-  - Harmonisation avec `SETTINGS_PERFORMANCE_LABEL`
+- **Fixed test SettingsModal**
+  - Label "Performance" → "Animations" (alignement with constantes)
+  - Harmonisation with `SETTINGS_PERFORMANCE_LABEL`
 
 - **Imports corrigés après migrations**
-  - Mise à jour de tous les chemins après déplacement vers `features/`
-  - Correction des imports `useReducedMotion` dans tous les composants
-  - Fix des imports dans les tests après restructuration
+  - Updated of tous les chemins après déplacement vers `features/`
+  - Fixed des imports `useReducedMotion` in tous les composants
+  - Fix des imports in les tests après restructuration
 
 ### <u>Architecture:</u>
 
-- **Nouvelle structure du projet**
+- **New structure du projet**
 
   ```
   src/
@@ -325,19 +325,19 @@ Comportements préservés :
   │   ├── home/             # Page d'accueil (hero, features)
   │   ├── remedy/           # Affichage des remèdes
   │   ├── settings/         # Paramètres (dark mode, performance)
-  │   └── symptom-search/   # Recherche de symptômes
-  ├── components/           # Composants UI partagés
+  │   └── symptom-search/   # Recherche of symptômes
+  ├── components/           # Components UI partagés
   │   ├── tag/             # Tags (Verified, Pregnancy, Children, etc.)
   │   ├── tooltip/         # Tooltips
-  │   └── ui/              # Composants UI génériques
+  │   └── ui/              # Components UI génériques
   └── ...
   ```
 
-- **Bénéfices de la nouvelle architecture**
+- **Bénéfices of la nouvelle architecture**
   - Meilleure séparation des responsabilités
-  - Code plus maintenable et testable
-  - Facilite l'ajout de nouvelles features
-  - Réduction de la dette technique
+  - Code plus maintenable and testable
+  - Facilite l'ajout of nouvelles features
+  - Réduction of la dette technique
 
 ---
 
@@ -346,36 +346,36 @@ Comportements préservés :
 ### <u>Changed:</u>
 
 - **Amélioration UX des cartes contenant des allergènes**
-  - Réduction de l'effet de scale au hover : `1.05` → `1.02` (animation plus subtile)
-  - Tags de propriétés : grayscale par défaut, **colorés uniquement au hover**
-  - Application du grayscale au niveau élément pour un contrôle granulaire
+  - Réduction of l'effand of scale au hover : `1.05` → `1.02` (animation plus subtile)
+  - Tags of propriétés : grayscale par défaut, **colorés uniquement au hover**
+  - Application du grayscale au niveau élément for un contrôle granulaire
   - Image reste en grayscale permanent, texte reprend sa couleur au hover
 
 - **Repositionnement du bouton toggle allergènes**
   - Bouton "Afficher/Masquer" intégré **dans la bannière AllergyFilterInfo**
   - Position : **en bas à droite**, sous le texte d'information
-  - Icônes HiEye/HiEyeSlash pour meilleure clarté visuelle
+  - Icônes HiEye/HiEyeSlash for meilleure clarté visuelle
   - Animations Framer Motion (whileHover, whileTap) conservées
 
-- **Ordre d'affichage des remèdes avec allergènes**
+- **Ordre d'affichage des remèdes with allergènes**
   - Les remèdes contenant des allergènes apparaissent **EN PREMIER** lorsqu'ils sont affichés
   - Facilite l'identification rapide des remèdes à risque
 
 ### <u>Fixed:</u>
 
-- **Persistance de la bannière allergènes après navigation**
-  - Utilisation de `AllergiesContext` au lieu de `location.state`
-  - La bannière reste visible après navigation vers les détails d'un remède et retour
-  - Allergies persistées dans localStorage via le contexte
+- **Persistance of la bannière allergènes après navigation**
+  - Utilisation of `AllergiesContext` au lieu of `location.state`
+  - La bannière reste visible après navigation vers les détails d'un remède and retour
+  - Allergies persistées in localStorage via le contexte
 
 - **État du toggle allergènes non persisté**
-  - Changement de `useLocalStorage` → `useState(false)`
+  - Changement of `useLocalStorage` → `useState(false)`
   - Les cartes allergènes sont **toujours masquées par défaut** au chargement
   - Évite la confusion en affichant systématiquement les remèdes sûrs en premier
 
 - **Tests Disclaimer.test.jsx mis à jour**
   - Expectations corrigées : `dark:bg-amber-950` → `dark:bg-amber-950/80`
-  - Alignement avec le styling actuel du composant
+  - Alignement with le styling actuel du composant
 
 ### <u>Tests:</u>
 
@@ -390,39 +390,39 @@ Comportements préservés :
 
 ### <u>Added:</u>
 
-- **Affichage des remèdes masqués dans l'historique de recherche**
-  - Nouveau champ `filteredCount` dans la structure de données de l'historique
-  - Affichage en jaune du nombre de remèdes masqués par filtrage d'allergies
+- **Affichage des remèdes masqués in l'historique of recherche**
+  - New champ `filteredCount` in la structure of données of l'historique
+  - Affichage en jaune du nombre of remèdes masqués par filtrage d'allergies
   - Format : "3 résultats • 2 remèdes masqués • il y a 5 min"
   - Support du singulier/pluriel automatique ("1 remède masqué" vs "2 remèdes masqués")
 
 - **Amélioration du script extractAllergensFromDb.js**
-  - Extraction enrichie : associe chaque allergène à la liste de ses remèdes en français
-  - `allergensList.json` contient maintenant un champ `remedies[]` avec les noms de remèdes
-  - Comparaison intelligente pour éviter les doublons lors de chaque exécution
+  - Extraction enrichie : associe chaque allergène à la liste of ses remèdes en français
+  - `allergensList.json` contient maintenant un champ `remedies[]` with les noms of remèdes
+  - Comparaison intelligente for éviter les doublons lors of chaque exécution
   - Tri alphabétique automatique des remèdes par allergène
-  - Mise à jour incrémentale : ne modifie que les nouvelles entrées
+  - Updated incrémentale : ne modifie que les nouvelles entrées
 
 ### <u>Changed:</u>
 
 - **Structure allergensList.json enrichie**
   - Avant : `{ "id": "citrus", "name": "Agrumes", "description": "..." }`
   - Après : `{ "id": "citrus", "name": "Agrumes", "description": "...", "remedies": ["Citron"] }`
-  - Base de données enrichie automatiquement via `node scripts/extractAllergensFromDb.js`
+  - Base of données enrichie automatiquement via `node scripts/extractAllergensFromDb.js`
 
 - **useSearchHistory mis à jour**
-  - Nouvelle signature : `addSearch(symptoms, resultCount, allergies, filteredCount)`
-  - Calcul automatique du `filteredCount` dans `useSymptomSubmit`
-  - Rétrocompatibilité assurée avec valeur par défaut `filteredCount = 0`
+  - New signature : `addSearch(symptoms, resultCount, allergies, filteredCount)`
+  - Calcul automatique du `filteredCount` in `useSymptomSubmit`
+  - Rétrocompatibilité assurée with valeur par défaut `filteredCount = 0`
 
 ### <u>Fixed:</u>
 
 - **Tests corrigés (635/635 passent)**
-  - Disclaimer.test.jsx : Mise à jour des couleurs (amber au lieu d'emerald)
-  - AllergySelector.test.jsx : Utilisation de `userEvent` pour interactions asynchrones
-  - useSearchHistory.test.js : Limite d'historique corrigée (10 au lieu de 5)
-  - useSymptomSubmit.test.js : Tests mis à jour avec le 4ème paramètre `filteredCount`
-  - SearchHistoryItem.test.jsx : 5 nouveaux tests pour `filteredCount`
+  - Disclaimer.test.jsx : Updated des couleurs (amber au lieu d'emerald)
+  - AllergySelector.test.jsx : Utilisation of `userEvent` for interactions asynchrones
+  - useSearchHistory.test.js : Limite d'historique corrigée (10 au lieu of 5)
+  - useSymptomSubmit.test.js : Tests mis à jour with le 4ème paramètre `filteredCount`
+  - SearchHistoryItem.test.jsx : 5 nouveaux tests for `filteredCount`
 
 ### <u>Tests:</u>
 
@@ -433,7 +433,7 @@ Comportements préservés :
 
 ### <u>Statistiques:</u>
 
-- 5 allergènes avec remèdes associés :
+- 5 allergènes with remèdes associés :
   - citrus → 1 remède (Citron)
   - pollen → 2 remèdes (Banane, Miel)
   - asteraceae → 1 remède (Camomille)
@@ -447,48 +447,48 @@ Comportements préservés :
 ### <u>Fixed:</u>
 
 - **Bug critique : Sélection d'allergies impossible** (AllergySelector.jsx)
-  - Race condition entre `onBlur` et `onClick` résolue avec `onMouseDown` + `e.preventDefault()`
-  - Le dropdown se fermait avant que le clic sur l'allergie ne soit traité
-  - Conversion stricte `String()` pour le matching des IDs d'allergènes (lignes 52, 230)
-  - Fix : Dropdown ne se fermait pas au clic extérieur → Listener `mousedown` sur `document`
+  - Race condition entre `onBlur` and `onClick` résolue with `onMouseDown` + `e.preventDefault()`
+  - Le dropdown se fermait avant que le clic on l'allergie ne soit traité
+  - Conversion stricte `String()` for le matching des IDs d'allergènes (lignes 52, 230)
+  - Fix : Dropdown ne se fermait pas au clic extérieur → Listener `mousedown` on `document`
 
 - **IDs allergensList.json incompatibles**
   - Changement d'IDs numériques ("0", "1", "2") vers kebab-case ("citrus", "pollen", "asteraceae")
-  - Migration automatique dans `AllergiesContext` pour nettoyer les anciens IDs du localStorage
-  - Guard `isMounted` pour exécuter la migration une seule fois
+  - Migration automatique in `AllergiesContext` for nettoyer les anciens IDs du localStorage
+  - Guard `isMounted` for exécuter la migration une seule fois
 
 - **Section allergies (Hero.jsx)**
-  - Fermeture automatique au clic extérieur de la card allergies (useEffect + `allergySectionRef`)
-  - Affichage conditionnel : compteur et bouton "Afficher/Masquer" visibles uniquement si checkbox cochée
-  - Ouverture automatique de la section lors du cochage (déjà implémenté, confirmé)
+  - Fermeture automatique au clic extérieur of la card allergies (useEffect + `allergySectionRef`)
+  - Affichage conditionnel : compteur and bouton "Afficher/Masquer" visibles uniquement si checkbox cochée
+  - Ouverture automatique of la section lors du cochage (déjà implémenté, confirmé)
 
 ### <u>Added:</u>
 
 - **Script d'extraction automatique des allergènes**
-  - `scripts/extractAllergensFromDb.js` : Compare `db.json` et `allergensList.json`
-  - Détecte automatiquement les nouveaux allergènes dans le champ `allergens[]`
-  - Évite les doublons et génère la structure JSON automatiquement
-  - Descriptions temporaires "À compléter : description pour {id}"
+  - `scripts/extractAllergensFromDb.js` : Compare `db.json` and `allergensList.json`
+  - Détecte automatiquement les nouveaux allergènes in le champ `allergens[]`
+  - Évite les doublons and génère la structure JSON automatiquement
+  - Descriptions temporaires "À compléter : description for {id}"
   - Script npm : `pnpm extract-allergens`
 
-- **Amélioration historique de recherche**
-  - Limite augmentée de 5 à 10 recherches (`MAX_HISTORY_ENTRIES = 10`)
-  - Texte explicatif dans SearchHistoryModal.jsx : "Les 10 dernières recherches sont conservées automatiquement"
-  - Hover amélioré sur le badge compteur du bouton historique :
+- **Amélioration historique of recherche**
+  - Limite augmentée of 5 à 10 recherches (`MAX_HISTORY_ENTRIES = 10`)
+  - Texte explicatif in SearchHistoryModal.jsx : "Les 10 dernières recherches sont conservées automatiquement"
+  - Hover amélioré on le badge compteur du bouton historique :
     - Light mode : fond blanc + texte emerald-600
     - Dark mode : fond neutral-800 + texte emerald-400
-    - Transition fluide avec `transition-colors`
+    - Transition fluide with `transition-colors`
 
 ### <u>Changed:</u>
 
-- **Scripts de validation consolidés**
-  - Fusion de `validateData.js` et `validate-symptoms.js` en un seul fichier
-  - Ajout de "Vérification 7: Structure des synonymes" (validation des arrays)
+- **Scripts of validation consolidés**
+  - Fusion of `validateData.js` and `validate-symptoms.js` en un seul fichier
+  - Added of "Vérification 7: Structure des synonymes" (validation des arrays)
   - 7 vérifications au total : accents, tirets, doublons, cohérence, normalisation, allergènes, synonymes
   - Script npm unique : `pnpm validate-data`
 
 - **Documentation du hook useLocalStorage**
-  - Commentaire JSDoc mis à jour : limite de 10 entrées (était 5)
+  - Commentaire JSDoc mis à jour : limite of 10 entrées (était 5)
 
 ### <u>Tests:</u>
 
@@ -500,10 +500,10 @@ Comportements préservés :
 ### <u>Statistiques:</u>
 
 - 35 symptômes uniques
-- 31 mappings de synonymes (91 synonymes au total)
+- 31 mappings of synonymes (91 synonymes au total)
 - 14 remèdes
 - 5 allergènes validés
-- 10 recherches max dans l'historique
+- 10 recherches max in l'historique
 
 ---
 
@@ -511,64 +511,64 @@ Comportements préservés :
 
 ### <u>Added:</u>
 
-- **Système de gestion des allergies** : Nouvelle fonctionnalité majeure pour filtrer les remèdes dangereux
-  - `allergensList.json` : Liste normalisée de 5 allergènes (IDs kebab-case)
+- **Système of gestion des allergies** : New fonctionnalité majeure for filtrer les remèdes dangereux
+  - `allergensList.json` : Liste normalisée of 5 allergènes (IDs kebab-case)
     - `citrus` (Agrumes), `pollen` (Pollen), `asteraceae` (Astéracées)
     - `pollen-olive` (Pollen d'olivier), `bee-venom` (Venin d'abeille)
-  - Migration complète de `db.json` : allergènes normalisés de strings vers IDs
-  - Validation étendue dans `validateData.js` pour vérifier la cohérence des allergènes
-- **AllergiesContext** : Nouveau context React pour gérer les allergies utilisateur
-  - Provider `AllergiesProvider` avec double persistence localStorage :
+  - Migration complète of `db.json` : allergènes normalisés of strings vers IDs
+  - Validation étendue in `validateData.js` for vérifier la cohérence des allergènes
+- **AllergiesContext** : New context React for gérer les allergies utilisateur
+  - Provider `AllergiesProvider` with double persistence localStorage :
     - `tradimedika-allergies` : Liste des allergies
     - `tradimedika-allergies-filtering-enabled` : État du filtrage
-  - Hook `useAllergies()` avec API complète :
-    - `toggleAllergen(id)` : Ajouter/retirer un allergène
+  - Hook `useAllergies()` with API complète :
+    - `toggleAllergen(id)` : Addeder/retirer un allergène
     - `setAllergies(array)` : Définir liste complète
     - `clearAllergies()` : Effacer toutes les allergies
     - `hasAllergen(id)` : Vérifier présence d'un allergène
-    - `canUseRemedy(remedy)` : Vérification de sécurité avec contrôle du filtrage
+    - `canUseRemedy(remedy)` : Vérification of sécurité with contrôle du filtrage
     - `enableFiltering()` / `disableFiltering()` / `toggleFiltering()` : Contrôle du filtrage
-  - 20 tests unitaires complets (contexte de base + états de filtrage)
-  - Pattern identique à `PerformanceContext` pour cohérence
-- **AllergySelector.jsx** : Composant de sélection avec autocomplétion
-  - Input avec dropdown de suggestions (pattern identique à `SymptomsSelector`)
-  - Recherche avec filtrage en temps réel et normalisation (accents, casse)
+  - 20 tests unitaires complets (contexte of base + états of filtrage)
+  - Pattern identique à `PerformanceContext` for cohérence
+- **AllergySelector.jsx** : Component of sélection with autocomplétion
+  - Input with dropdown of suggestions (pattern identique à `SymptomsSelector`)
+  - Recherche with filtrage en temps réel and normalisation (accents, casse)
   - Navigation clavier complète (ArrowUp/Down, Enter, Escape, Backspace)
-  - Pills sélectionnées affichées avec style `BUTTON_PRIMARY_STYLES` (vert emerald)
+  - Pills sélectionnées affichées with style `BUTTON_PRIMARY_STYLES` (vert emerald)
   - Fermeture automatique du dropdown au clic extérieur ou blur
   - Nombre d'allergies illimité
   - 11 tests unitaires (render, search, select, keyboard, blur, exclusion)
-- **AllergyFilterInfo.jsx** : Message d'information pour remèdes filtrés
-  - Affichage bleu avec icône alerte (`IoMdAlert`)
-  - Compteur de remèdes masqués avec liste des allergènes concernés
-  - `role="status"` et `aria-live="polite"` pour lecteurs d'écran
+- **AllergyFilterInfo.jsx** : Message d'information for remèdes filtrés
+  - Affichage bleu with icône alerte (`IoMdAlert`)
+  - Compteur of remèdes masqués with liste des allergènes concernés
+  - `role="status"` and `aria-live="polite"` for lecteurs d'écran
   - 10 tests unitaires (render, hide, singular/plural, allergen names)
-- **Intégration Home (Hero.jsx)** : Section allergies avec contrôle de filtrage
+- **Intégration Home (Hero.jsx)** : Section allergies with contrôle of filtrage
   - Checkbox contrôle uniquement `isFilteringEnabled` (ne supprime PAS les allergies)
   - Badge compteur "X allergies" visible quand `isFilteringEnabled` est true
-  - Dropdown/accordion avec bouton chevron (fermé par défaut)
-  - Section collapse avec `AnimatePresence` (scaleY: 0 → 1, transformOrigin: top)
+  - Dropdown/accordion with bouton chevron (fermé par défaut)
+  - Section collapse with `AnimatePresence` (scaleY: 0 → 1, transformOrigin: top)
   - Restauration automatique des allergies ET du filtrage depuis historique
-  - Boutons de soumission et historique centrés avec largeur minimale de 280px
-- **Historique de recherche étendu** : Support du champ `allergies` avec contrôle de filtrage
+  - Boutons of soumission and historique centrés with largeur minimale of 280px
+- **Historique of recherche étendu** : Support du champ `allergies` with contrôle of filtrage
   - `useSearchHistory.js` : Signature modifiée `addSearch(symptoms, resultCount, allergies = [])`
   - Rétrocompatibilité totale : `entry.allergies ?? []` partout
   - `SearchHistoryItem.jsx` :
     - Ligne 1 : "Symptômes :" + pills vertes
     - Ligne 2 : "Allergies :" + pills jaunes/rouges (si présentes)
-    - Descriptions centrées verticalement avec `items-center`
-  - Les allergies ne sont enregistrées dans l'historique QUE si le filtrage est activé
+    - Descriptions centrées verticalement with `items-center`
+  - Les allergies ne sont enregistrées in l'historique QUE si le filtrage est activé
 - **Filtrage strict des résultats (RemedyResult.jsx)** :
   - Extraction des allergies depuis URL params (`?allergies=citrus,pollen`) ou location.state
   - Filtrage en 2 temps : matching symptômes → filtrage allergies via `canUseRemedy()`
-  - Mode strict : masquage complet des remèdes avec allergènes dangereux
-  - Affichage de `AllergyFilterInfo` si remèdes masqués
-  - Compteur précis de remèdes filtrés
-- **Navigation avec allergies conditionnelle** :
+  - Mode strict : masquage compland des remèdes with allergènes dangereux
+  - Affichage of `AllergyFilterInfo` si remèdes masqués
+  - Compteur précis of remèdes filtrés
+- **Navigation with allergies conditionnelle** :
   - `useSymptomSubmit.js` : Paramètres étendus `handleSubmit(symptoms, allergies, isFilteringEnabled)`
   - Les allergies ne sont ajoutées aux query params QUE si `isFilteringEnabled === true`
   - Query params conditionnels : `/remedes?symptoms=X&allergies=Y,Z` (si filtrage actif)
-  - Location state avec fallback : `{ symptoms: [], allergies: [] }`
+  - Location state with fallback : `{ symptoms: [], allergies: [] }`
   - 2 nouveaux tests : filtrage activé vs désactivé
 
 ### <u>Changed:</u>
@@ -579,18 +579,18 @@ Comportements préservés :
   - `"pollen olive"` → `"pollen-olive"`
   - `"venin abeille"` → `"bee-venom"`
 - **main.jsx** : Hiérarchie des providers étendue
-  - `AllergiesProvider` ajouté entre `PerformanceProvider` et `RouterProvider`
+  - `AllergiesProvider` ajouté entre `PerformanceProvider` and `RouterProvider`
   - Ordre final : `HelmetProvider` > `ErrorBoundary` > `ThemeProvider` > `PerformanceProvider` > `AllergiesProvider` > `RouterProvider`
 
 ### <u>Tests:</u>
 
-- **Total : 365 tests passants** (30+ fichiers de test)
+- **Total : 365 tests passants** (30+ fichiers of test)
 - Nouveaux tests unitaires :
   - `AllergiesContext.test.jsx` : 20 tests (Provider, toggle, set, clear, has, canUse, filtering states, persistence)
   - `AllergySelector.test.jsx` : 11 tests (render, search, select, keyboard navigation, blur, dropdown, exclusion)
   - `AllergyFilterInfo.test.jsx` : 10 tests (render, hide, messages, singular/plural, allergen names)
-  - `useSymptomSubmit.test.js` : 11 tests (dont 2 nouveaux pour filtrage activé/désactivé)
-  - `useSearchHistory.test.js` : Validation du champ `allergies` dans toutes les entrées
+  - `useSymptomSubmit.test.js` : 11 tests (dont 2 nouveaux for filtrage activé/désactivé)
+  - `useSearchHistory.test.js` : Validation du champ `allergies` in toutes les entrées
 - Coverage maintenu > 80%
 
 ### <u>Data & Validation:</u>
@@ -605,9 +605,9 @@ Comportements préservés :
   ```
 - **validateData.js** : Section 6 ajoutée
   - Vérification du format kebab-case des IDs allergènes
-  - Cross-check : tous les allergènes de `db.json` doivent exister dans `allergensList.json`
-  - Erreurs explicites avec nom du remède concerné
-- **Rétrocompatibilité** : Pattern `?? []` utilisé partout pour gérer les anciennes entrées d'historique sans champ `allergies`
+  - Cross-check : tous les allergènes of `db.json` doivent exister in `allergensList.json`
+  - Erreurs explicites with nom du remède concerné
+- **Rétrocompatibilité** : Pattern `?? []` utilisé partout for gérer les anciennes entrées d'historique sans champ `allergies`
 
 ### <u>Accessibility:</u>
 
@@ -624,7 +624,7 @@ Comportements préservés :
   - Dark mode : `dark:bg-emerald-700 dark:hover:bg-emerald-600`
   - Input focus : `ring-emerald-600 dark:ring-emerald-500`
   - Dropdown selected : `bg-emerald-600 text-white`
-- **Pills allergies dans l'historique** : Jaune/Rouge pour distinction
+- **Pills allergies in l'historique** : Jaune/Rouge for distinction
   - Pills : `bg-red-50 text-yellow-700`
   - Dark mode : `dark:bg-yellow-900/30 dark:text-yellow-300`
 - **Message info filtrage** : Bleu
@@ -632,7 +632,7 @@ Comportements préservés :
   - Dark mode : `bg-blue-900/30 border-blue-400 text-blue-300`
 - **Badge compteur** : Emerald
   - `bg-emerald-600 text-white dark:bg-emerald-500`
-- **Cohérence visuelle** : Alignement complet avec symptômes (TailwindCSS 4.1)
+- **Cohérence visuelle** : Alignement compland with symptômes (TailwindCSS 4.1)
 
 ---
 
@@ -640,29 +640,29 @@ Comportements préservés :
 
 ### <u>Added:</u>
 
-- **Modal de paramètres** : Nouvelle interface centralisée pour gérer les préférences utilisateur
-  - Bouton engrenage (icône `IoSettings`) remplaçant le toggle dark mode dans le header
-  - Modal `SettingsModal.jsx` accessible avec animations Framer Motion et focus trap
-  - Support keyboard navigation (Tab, Escape) et click outside
-  - Fermeture avec backdrop, bouton close, et touche Escape
+- **Modal of paramètres** : New interface centralisée for gérer les préférences utilisateur
+  - Bouton engrenage (icône `IoSettings`) remplaçant le toggle dark mode in le header
+  - Modal `SettingsModal.jsx` accessible with animations Framer Motion and focus trap
+  - Support keyboard navigation (Tab, Escape) and click outside
+  - Fermeture with backdrop, bouton close, and touche Escape
   - Animations respectant `prefers-reduced-motion`
   - Dark mode adaptatif
-- **Toggle Performance** : Nouveau contrôle pour optimiser les performances
-  - Composant `PerformanceToggle.jsx` avec labels "Économie" / "Élevée"
-  - Icônes speedometer (`IoSpeedometer`, `IoSpeedometerOutline` de react-icons/io5)
-  - Mode Économie : désactive l'animation LeafFall pour économiser les ressources
+- **Toggle Performance** : New contrôle for optimiser les performances
+  - Component `PerformanceToggle.jsx` with labels "Économie" / "Élevée"
+  - Icônes speedometer (`IoSpeedometer`, `IoSpeedometerOutline` of react-icons/io5)
+  - Mode Économie : désactive l'animation LeafFall for économiser les ressources
   - Mode Élevée : active toutes les animations (par défaut)
-  - Persistence dans localStorage via clé `tradimedika-performance`
-- **Context Performance** : Nouveau context React pour gérer l'état global
-  - `PerformanceContext.jsx` avec Provider et hook `usePerformance()`
+  - Persistence in localStorage via clé `tradimedika-performance`
+- **Context Performance** : New context React for gérer l'état global
+  - `PerformanceContext.jsx` with Provider and hook `usePerformance()`
   - Hook retourne : `{ performanceMode, isHighPerformance, togglePerformance }`
-  - Intégré dans la hiérarchie des providers (`main.jsx`)
-  - Default : `"high"` pour rétrocompatibilité
+  - Intégré in la hiérarchie des providers (`main.jsx`)
+  - Default : `"high"` for rétrocompatibilité
 - **LeafFall optimisé** : Animation d'arrière-plan respecte désormais le mode performance
   - Désactivée automatiquement en mode Économie
-  - Améliore significativement les performances sur appareils bas de gamme
-  - Conservation de la logique Page Visibility API existante
-- **Constantes de labels** : 7 nouveaux labels dans `buttonLabels.js`
+  - Améliore significativement les performances on appareils bas of gamme
+  - Conservation of la logique Page Visibility API existante
+- **Constantes of labels** : 7 nouveaux labels in `buttonLabels.js`
   - `BUTTON_SETTINGS`, `ARIA_SETTINGS_BUTTON`
   - `SETTINGS_THEME_LABEL`, `SETTINGS_PERFORMANCE_LABEL`
   - `PERFORMANCE_LOW`, `PERFORMANCE_HIGH`
@@ -671,99 +671,99 @@ Comportements préservés :
 ### <u>Changed:</u>
 
 - **Header** : Remplacement du `DarkModeToggle` standalone par `SettingsButton`
-  - Toggle dark mode déplacé dans la modal de paramètres
-  - Interface plus épurée et scalable pour futures fonctionnalités
+  - Toggle dark mode déplacé in la modal of paramètres
+  - Interface plus épurée and scalable for futures fonctionnalités
   - Meilleure organisation des paramètres utilisateur
 - **ThemeProvider / PerformanceProvider** : Hiérarchie des contexts mise à jour
-  - `PerformanceProvider` wrappé entre `ThemeProvider` et `RouterProvider`
+  - `PerformanceProvider` wrappé entre `ThemeProvider` and `RouterProvider`
   - Ordre : `HelmetProvider` > `ErrorBoundary` > `ThemeProvider` > `PerformanceProvider` > `RouterProvider`
 
 ### <u>Tests:</u>
 
-- 5 nouveaux tests pour `PerformanceContext.test.jsx`
+- 5 nouveaux tests for `PerformanceContext.test.jsx`
   - Test du Provider par défaut
   - Test toggle high/low
   - Test persistence localStorage
   - Test chargement depuis localStorage
   - Test erreur si utilisé hors Provider
-- 2 nouveaux tests pour `LeafFall.test.jsx`
+- 2 nouveaux tests for `LeafFall.test.jsx`
   - Test non-rendu en mode performance low
   - Test rendu normal en mode performance high
-- Total : **587 tests** (tous passent avec succès)
+- Total : **587 tests** (tous passent with succès)
 
 ### <u>Fixed:</u>
 
-- Amélioration des performances pour les appareils bas de gamme via toggle performance
+- Amélioration des performances for les appareils bas of gamme via toggle performance
 
 ### <u>UX/UI:</u>
 
-- Bouton paramètres avec hover state (border emerald, background emerald-50/950)
-- Modal centrée responsive avec max-width adaptatif (mobile → desktop)
-- Sections séparées visuellement (border-t) pour Thème et Performance
+- Bouton paramètres with hover state (border emerald, background emerald-50/950)
+- Modal centrée responsive with max-width adaptatif (mobile → desktop)
+- Sections séparées visuellement (border-t) for Thème and Performance
 - Descriptions claires sous chaque toggle ("Activer le mode sombre", "Économie désactive les animations")
-- Glow effect sur PerformanceToggle (vert pour Élevée, orange pour Économie)
+- Glow effect on PerformanceToggle (vert for Élevée, orange for Économie)
 
 ### <u>Documentation:</u>
 
-- **README.md** : Nouvelle section "Paramètres Utilisateur" avec détails complets
-- **CLAUDE.md** : Documentation mise à jour
-  - Ajout de `PerformanceContext` dans la section Contextes
-  - Ajout de `usePerformance` dans les Hooks personnalisés
-  - Ajout des nouveaux composants dans la section Components
+- **README.md** : New section "Paramètres Utilisateur" with détails complets
+- **CLAUDE.md** : Documentation updated
+  - Added of `PerformanceContext` in la section Contextes
+  - Added of `usePerformance` in les Hooks personnalisés
+  - Added des nouveaux composants in la section Components
   - Documentation des clés localStorage (`tradimedika-performance`)
 
-### <u>Performance Improvements (Corrections Audit):</u>
+### <u>Performance Improvements (Fixeds Audit):</u>
 
-- **Cache LRU dans SymptomsSelector** :
-  - Implémentation d'un cache LRU (Least Recently Used) avec limite de 200 entrées
-  - Prévention des fuites mémoire lors de sessions longues
-  - Optimisation du matching de symptômes avec normalisation cachée
-  - Réduction de la consommation mémoire : cache limité à ~6 KB max (au lieu de potentiellement 200+ KB)
+- **Cache LRU in SymptomsSelector** :
+  - Implémentation d'un cache LRU (Least Recently Used) with limite of 200 entrées
+  - Prévention des fuites mémoire lors of sessions longues
+  - Optimisation du matching of symptômes with normalisation cachée
+  - Réduction of la consommation mémoire : cache limité à ~6 KB max (au lieu of potentiellement 200+ KB)
   - Les entrées fréquemment utilisées sont conservées, les anciennes sont automatiquement supprimées
 
-- **Remplacement flushSync par queueMicrotask dans useLocalStorage** :
+- **Remplacement flushSync par queueMicrotask in useLocalStorage** :
   - Élimination des renders bloquants synchrones causés par `flushSync`
-  - Utilisation de `queueMicrotask` pour une écriture asynchrone optimisée dans localStorage
-  - Meilleure compatibilité avec React Concurrent Features
-  - Impact : Amélioration significative de la réactivité de l'interface lors des toggles
+  - Utilisation of `queueMicrotask` for une écriture asynchrone optimisée in localStorage
+  - Meilleure compatibilité with React Concurrent Features
+  - Impact : Amélioration significative of la réactivité of l'interface lors des toggles
 
-- **Validation de Type pour localStorage** :
-  - Ajout de validation de type complète lors de la lecture depuis localStorage
-  - Protection contre les données corrompues ou de type invalide
-  - Validation spéciale pour distinguer arrays et objects (typeof array = "object")
+- **Validation of Type for localStorage** :
+  - Added of validation of type complète lors of la lecture depuis localStorage
+  - Protection contre les données corrompues ou of type invalide
+  - Validation spéciale for distinguer arrays and objects (typeof array = "object")
   - Prévention des crashes au runtime dus à des données inattendues ou modifiées manuellement
-  - Fallback automatique vers initialValue en cas de type invalide
+  - Fallback automatique vers initialValue en cas of type invalide
 
 - **Nettoyage LeafFall** :
-  - Suppression de 3 variables inutilisées : `_prefersReducedMotion`, `_forceLeafFall`, `_shouldHideForReducedMotion`
-  - Suppression de l'import `useReducedMotion` non utilisé
-  - Réduction de 12 lignes de code mort
-  - Amélioration de la maintenabilité et réduction de la surface de code
+  - Removed of 3 variables inutilisées : `_prefersReducedMotion`, `_forceLeafFall`, `_shouldHideForReducedMotion`
+  - Removed import `useReducedMotion` non utilisé
+  - Réduction of 12 lignes of code mort
+  - Amélioration of la maintenabilité and réduction of la surface of code
 
-### <u>Tests (Corrections Audit):</u>
+### <u>Tests (Fixeds Audit):</u>
 
-- **Adaptation pour Asynchronicité** :
-  - Mise à jour de 8 tests pour gérer les écritures asynchrones dans localStorage
-  - Tests dans `useLocalStorage.test.js` (4 tests adaptés)
-  - Tests dans `PerformanceContext.test.jsx` (1 test adapté)
-  - Tests dans `useSearchHistory.test.js` (3 tests adaptés)
+- **Adaptation for Asynchronicité** :
+  - Updated of 8 tests for gérer les écritures asynchrones in localStorage
+  - Tests in `useLocalStorage.test.js` (4 tests adaptés)
+  - Tests in `PerformanceContext.test.jsx` (1 test adapté)
+  - Tests in `useSearchHistory.test.js` (3 tests adaptés)
   - Pattern utilisé : `await new Promise((resolve) => queueMicrotask(resolve))`
 - **Couverture maintenue à 100%** : 587 tests passent
-- **Build et Lint** : Tous les contrôles qualité passent (build 6.53s, ESLint 0 erreurs)
+- **Build and Lint** : Tous les contrôles qualité passent (build 6.53s, ESLint 0 erreurs)
 
 ### <u>Technical Notes:</u>
 
 **Pattern queueMicrotask**
-Les tests vérifiant l'état de localStorage doivent maintenant attendre l'exécution de la microtask avant d'asserter l'état de localStorage.
+Les tests vérifiant l'état of localStorage doivent maintenant attendre l'exécution of la microtask avant d'asserter l'état of localStorage.
 
 **Cache LRU**
-Le cache maintient un ordre LRU (Least Recently Used) avec :
+Le cache maintient un ordre LRU (Least Recently Used) with :
 
 - Déplacement des entrées accédées à la fin (most recently used)
-- Suppression de la plus ancienne entrée (oldest) quand la limite de 200 est atteinte
-- Limite calculée : 121 symptômes uniques + 79 marge pour typos et variantes
+- Removed of la plus ancienne entrée (oldest) quand la limite of 200 est atteinte
+- Limite calculée : 121 symptômes uniques + 79 marge for typos and variantes
 
-**Fichiers modifiés** :
+**Files modifiés** :
 
 - `src/components/animation/background/LeafFall.jsx` : Nettoyage code mort (-12 lignes)
 - `src/components/input/SymptomsSelector.jsx` : Implémentation cache LRU (+21, -6 lignes)
@@ -778,47 +778,47 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 
 ### <u>Added:</u>
 
-- **Historique de recherche** : Nouvelle fonctionnalité permettant de sauvegarder et relancer les 5 dernières recherches
-  - Nouveau hook `useSearchHistory.js` avec stockage localStorage
-  - Modal `SearchHistoryModal.jsx` avec backdrop et animations Framer Motion
-  - Composant `SearchHistoryItem.jsx` pour afficher chaque recherche avec pills de symptômes
-  - Bouton "🕒 Historique" dans Hero.jsx (BUTTON_SECONDARY_STYLES) avec badge compteur
-  - Déduplication intelligente : insensible à l'ordre et aux accents
-  - Limite de 5 entrées avec système FIFO (First In First Out)
-  - Suppression individuelle et effacement complet de l'historique
+- **Historique of recherche** : New fonctionnalité permettant of sauvegarder and relancer les 5 dernières recherches
+  - New hook `useSearchHistory.js` with stockage localStorage
+  - Modal `SearchHistoryModal.jsx` with backdrop and animations Framer Motion
+  - Component `SearchHistoryItem.jsx` for afficher chaque recherche with pills of symptômes
+  - Bouton "🕒 Historique" in Hero.jsx (BUTTON_SECONDARY_STYLES) with badge compteur
+  - Déduplication intelligente : insensible à l'ordre and aux accents
+  - Limite of 5 entrées with système FIFO (First In First Out)
+  - Removed individuelle and effacement compland of l'historique
   - Focus trap, navigation clavier (Tab, Escape), ARIA labels
-  - Support complet du dark mode et responsive design
-- Centralisation des labels dans des fichiers constants
-  - `src/constants/buttonLabels.js` : 25+ labels de boutons (BUTTON_DISCOVER, BUTTON_HISTORY, etc.)
-  - `src/constants/linkLabels.js` : Labels de liens et URLs
-- Tracking automatique des recherches dans `useSymptomSubmit.js`
-  - Enregistrement du nombre de résultats et timestamp
-  - Mise à jour de l'historique après chaque recherche
-- Exposition de `setSelectedSymptoms` dans `useSymptomTags.js` pour la relance depuis l'historique
+  - Support compland du dark mode and responsive design
+- Centralisation des labels in des fichiers constants
+  - `src/constants/buttonLabels.js` : 25+ labels of boutons (BUTTON_DISCOVER, BUTTON_HISTORY, etc.)
+  - `src/constants/linkLabels.js` : Labels of liens and URLs
+- Tracking automatique des recherches in `useSymptomSubmit.js`
+  - Enregistrement du nombre of résultats and timestamp
+  - Updated of l'historique après chaque recherche
+- Exposition of `setSelectedSymptoms` in `useSymptomTags.js` for la relance depuis l'historique
 
 ### <u>Tests:</u>
 
-- 71 nouveaux tests ajoutés pour la fonctionnalité d'historique
+- 71 nouveaux tests ajoutés for la fonctionnalité d'historique
   - `useSearchHistory.test.js` (26 tests) : CRUD, déduplication, FIFO, localStorage, erreurs
   - `SearchHistoryItem.test.jsx` (21 tests) : Rendering, interactions, accessibilité, edge cases
   - `SearchHistoryModal.test.jsx` (24 tests) : Modal, backdrop, escape key, focus trap, animations
-- Total : 578 tests (575 passent avec succès)
+- Total : 578 tests (575 passent with succès)
 
 ### <u>Changed:</u>
 
 - `Hero.jsx` : Refonte du layout des boutons
   - Deux boutons côte à côte : "Découvrir nos solutions" (primary) + "Historique" (secondary)
   - Layout responsive : flex-col (mobile) → flex-row (desktop)
-- Intégration de la modal d'historique dans le Hero avec gestion du state
+- Intégration of la modal d'historique in le Hero with gestion du state
 
 ### <u>UX/UI:</u>
 
 - Bouton historique désactivé quand aucune recherche (opacity-50)
-- Badge animé affichant le nombre de recherches (1-5)
-- Pills de symptômes capitalisés dans chaque entrée d'historique
-- Badge de compteur de résultats ("3 résultats", "1 résultat")
+- Badge animé affichant le nombre of recherches (1-5)
+- Pills of symptômes capitalisés in chaque entrée d'historique
+- Badge of compteur of résultats ("3 résultats", "1 résultat")
 - Affichage du temps relatif ("il y a 5min", "il y a 2h", "il y a 3j")
-- Animations smooth avec respect de `prefers-reduced-motion`
+- Animations smooth with respect of `prefers-reduced-motion`
 
 ---
 
@@ -826,38 +826,38 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 
 ### <u>Added:</u>
 
-- Tests unitaires pour 7 composants additionnels
-  - `FilterTag.test.jsx` (12 tests) - Tests du composant de tag de filtre individuel
-  - `ListFilterTag.test.jsx` (14 tests) - Tests du conteneur de liste de tags de filtre
-  - `BreadCrumb.test.jsx` (14 tests) - Tests de la navigation breadcrumb avec MemoryRouter
-  - `RemedyResultNotFound.test.jsx` (18 tests) - Tests des états vides (no-results et no-filter-match)
-  - `RemedyResultList.test.jsx` (13 tests) - Tests de la grille de résultats de remèdes
-  - `ErrorFallback.test.jsx` (16 tests) - Tests du fallback d'erreur boundary avec dev mode
-  - `LoadingFallback.test.jsx` (11 tests) - Tests du spinner de chargement
-- Couverture de tests étendue : 507 tests passent avec succès
+- Tests unitaires for 7 composants additionnels
+  - `FilterTag.test.jsx` (12 tests) - Tests du composant of tag of filtre individuel
+  - `ListFilterTag.test.jsx` (14 tests) - Tests du conteneur of liste of tags of filtre
+  - `BreadCrumb.test.jsx` (14 tests) - Tests of la navigation breadcrumb with MemoryRouter
+  - `RemedyResultNotFound.test.jsx` (18 tests) - Tests des états vides (no-results and no-filter-match)
+  - `RemedyResultList.test.jsx` (13 tests) - Tests of la grille of résultats of remèdes
+  - `ErrorFallback.test.jsx` (16 tests) - Tests du fallback d'erreur boundary with dev mode
+  - `LoadingFallback.test.jsx` (11 tests) - Tests du spinner of chargement
+- Couverture of tests étendue : 507 tests passent with succès
 
 ### <u>Fixed:</u>
 
-- Correction des tests LeafFall.test.jsx (7 tests échouaient)
-  - Ajout de la gestion des faux timers avec `vi.useFakeTimers()`
-  - Utilisation de `act()` pour entourer `vi.runAllTimers()`
-  - Réinitialisation correcte du mock `useReducedMotion` dans les tests "Leaf Icons"
+- Fixed des tests LeafFall.test.jsx (7 tests échouaient)
+  - Added of la gestion des faux timers with `vi.useFakeTimers()`
+  - Utilisation of `act()` for entourer `vi.runAllTimers()`
+  - Réinitialisation correcte du mock `useReducedMotion` in les tests "Leaf Icons"
 
 ### <u>Changed:</u>
 
 - Restructuration du composant LeafFall
-  - Déplacé de `src/components/LeafFall.jsx` vers `src/components/animation/background/LeafFall.jsx`
-  - Mise à jour des imports dans `LayoutApp.jsx`
-  - Organisation améliorée de l'arborescence des fichiers d'animation
+  - Déplacé of `src/components/LeafFall.jsx` vers `src/components/animation/background/LeafFall.jsx`
+  - Updated des imports in `LayoutApp.jsx`
+  - Organisation améliorée of l'arborescence des fichiers d'animation
 
 ### <u>Tests:</u>
 
-- 98 nouveaux tests ajoutés pour les composants de filtrage, navigation et états vides
+- 98 nouveaux tests ajoutés for les composants of filtrage, navigation and états vides
 - Tous les tests utilisent les bonnes pratiques :
-  - MemoryRouter pour les tests de routage
-  - vi.fn() pour les mocks de fonctions
-  - vi.stubEnv() pour les variables d'environnement
-  - Gestion appropriée des timers avec act()
+  - MemoryRouter for les tests of routage
+  - vi.fn() for les mocks of fonctions
+  - vi.stubEnv() for les variables d'environnement
+  - Gestion appropriée des timers with act()
 
 ---
 
@@ -865,39 +865,39 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 
 ### <u>Added:</u>
 
-- Disclaimer médical visible sur toutes les pages de l'application
-  - Nouveau composant `Disclaimer.jsx` dans `src/components/disclaimer/`
-  - Bandeau d'avertissement avec icône HiExclamationTriangle (react-icons/hi2)
-  - Texte : "Les informations présentées sont fournies à titre informatif et ne remplacent pas un avis médical professionnel"
+- Disclaimer médical visible on toutes les pages of l'application
+  - New component `Disclaimer.jsx` in `src/components/disclaimer/`
+  - Bandeau d'avertissement with icône HiExclamationTriangle (react-icons/hi2)
+  - Texte : "Les informations présentées sont fournies à titre informatif and ne remplacent pas un avis médical professionnel"
   - Design emerald (emerald foncé en light mode, emerald clair en dark mode)
   - Animation Framer Motion respectant `prefers-reduced-motion`
   - Attributs d'accessibilité : `role="alert"`, `aria-live="polite"`
   - Responsive : text-xs (mobile) → text-sm (desktop)
-- Tests unitaires complets pour le composant Disclaimer (17 tests)
+- Tests unitaires complets for le composant Disclaimer (17 tests)
   - Sections : Rendering, Accessibility, Styling, Animation, Multiple instances, Content
-  - Mock de `useReducedMotion` pour tester les deux cas
+  - Mock of `useReducedMotion` for tester les deux cas
 
 ### <u>Changed:</u>
 
-- `LayoutApp.jsx` : Ajout du composant `<Disclaimer />` entre Header et Outlet (ligne 14)
-  - Garantit l'affichage du disclaimer sur toutes les routes (Home, RemedyResult, RemedyResultDetails, NotFound)
+- `LayoutApp.jsx` : Added du composant `<Disclaimer />` entre Header and Outland (ligne 14)
+  - Garantit l'affichage du disclaimer on toutes les routes (Home, RemedyResult, RemedyResultDetails, NotFound)
 
 ### <u>Documentation:</u>
 
-- README.md : Correction de la faute "Disclamer" → "Disclaimer" (ligne 39)
-- README.md : Amélioration du texte du disclaimer dans la section "À propos"
-- README.md : Ajout d'une nouvelle sous-section "Avertissement Médical" dans les Fonctionnalités
+- README.md : Fixed of la faute "Disclamer" → "Disclaimer" (ligne 39)
+- README.md : Amélioration du texte du disclaimer in la section "À propos"
+- README.md : Added d'une nouvelle sous-section "Avertissement Médical" in les Fonctionnalités
 - Updated version from `0.33.0` to `0.34.0` in package.json
 
 ### <u>Tests:</u>
 
-- 17 nouveaux tests ajoutés pour le composant Disclaimer
-  - 5 tests de rendu (message, icône, titre, className, styling)
+- 17 nouveaux tests ajoutés for le composant Disclaimer
+  - 5 tests of rendu (message, icône, titre, className, styling)
   - 3 tests d'accessibilité (role, aria-live, aria-hidden)
-  - 4 tests de styling (couleurs, border, responsive, dark mode)
+  - 4 tests of styling (couleurs, border, responsive, dark mode)
   - 2 tests d'animation (avec/sans reduced motion)
   - 1 test d'instances multiples
-  - 2 tests de contenu (texte complet, mention médecin)
+  - 2 tests of contenu (texte complet, mention médecin)
 
 ---
 
@@ -905,24 +905,24 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 
 ### <u>Fixed:</u>
 
-- Correction du format d'affichage des fréquences d'utilisation des remèdes
+- Fixed du format d'affichage des fréquences d'utilisation des remèdes
   - Avant : "2x/fois par jour", "3x/tasses maximum par jour", "1x/jour"
   - Après : "2 fois par jour", "3 tasses maximum par jour", "1 fois par jour"
   - Cas spécial : "3x/heures (espacer)" → "Toutes les 3 heures"
-- Amélioration de la lisibilité des informations de posologie dans RemedyResultDetails
+- Amélioration of la lisibilité des informations of posologie in RemedyResultDetails
 
 ### <u>Added:</u>
 
-- Nouvelle fonction utilitaire `formatFrequency()` dans `src/utils/formatFrequency.js`
-  - Gère dynamiquement les formats de fréquence : "jour", "heures (espacer)", unités composées
-  - Validation stricte des entrées avec retour sûr
-  - Extensible pour futurs formats sans modification
-- Tests unitaires complets : 22 tests pour `formatFrequency.test.js`
+- New fonction utilitaire `formatFrequency()` in `src/utils/formatFrequency.js`
+  - Gère dynamiquement les formats of fréquence : "jour", "heures (espacer)", unités composées
+  - Validation stricte des entrées with retour sûr
+  - Extensible for futurs formats sans modification
+- Tests unitaires complets : 22 tests for `formatFrequency.test.js`
   - Formats standards, cas spéciaux, validation, extensibilité
 
 ### <u>Changed:</u>
 
-- `RemedyResultDetails.jsx` utilise maintenant `formatFrequency()` pour afficher les fréquences (ligne 306)
+- `RemedyResultDetails.jsx` utilise maintenant `formatFrequency()` for afficher les fréquences (ligne 306)
 
 ---
 
@@ -930,36 +930,36 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 
 ### <u>Added:</u>
 
-- Scroll automatique mobile pour `SymptomsSelector` au focus de l'input
-- Hook `useScrollOnMobileFocus` pour gérer le scroll intelligent sur mobile
+- Scroll automatique mobile for `SymptomsSelector` au focus of l'input
+- Hook `useScrollOnMobileFocus` for gérer le scroll intelligent on mobile
   - Détection automatique mobile via `useMediaQuery("(max-width: 1023px)")`
-  - Délai de 300ms adapté pour les animations clavier iOS/Android
-  - Respect de `prefers-reduced-motion` pour l'accessibilité
-  - Fallback `window.scrollTo` pour compatibilité navigateurs anciens
-- Tests complets pour le hook (8 scénarios) et le composant SymptomsSelector (2 tests focus)
+  - Délai of 300ms adapté for les animations clavier iOS/Android
+  - Respect of `prefers-reduced-motion` for l'accessibilité
+  - Fallback `window.scrollTo` for compatibilité navigateurs anciens
+- Tests complets for le hook (8 scénarios) and le composant SymptomsSelector (2 tests focus)
 
 ### <u>Changed:</u>
 
 - `SymptomsSelector.jsx` accepte maintenant un prop `onFocus` optionnel
-  - Ajout de `useCallback` dans les imports React
-  - Création du handler `handleInputFocus` pour propager l'événement focus
-  - Mise à jour des PropTypes avec `onFocus: PropTypes.func`
-- `Hero.jsx` utilise le nouveau hook pour scroller au focus mobile
-  - Import de `useRef`, `useCallback` et `useScrollOnMobileFocus`
-  - Ajout de `containerRef` sur le wrapper de `SymptomsSection`
+  - Added of `useCallback` in les imports React
+  - Création du handler `handleInputFocus` for propager l'événement focus
+  - Updated des PropTypes with `onFocus: PropTypes.func`
+- `Hero.jsx` utilise le nouveau hook for scroller au focus mobile
+  - Import of `useRef`, `useCallback` and `useScrollOnMobileFocus`
+  - Added of `containerRef` on le wrapper of `SymptomsSection`
   - Passage du callback `handleInputFocus` à `SymptomsSelector`
 
 ### <u>Fixed:</u>
 
-- UX mobile : l'input et les tags restent visibles quand le clavier virtuel apparaît
-- Le clavier virtuel ne cache plus le dropdown de suggestions sur mobile
+- UX mobile : l'input and les tags restent visibles quand le clavier virtuel apparaît
+- Le clavier virtuel ne cache plus le dropdown of suggestions on mobile
 - Les symptômes déjà sélectionnés restent accessibles pendant la saisie mobile
 
 ### <u>Tests:</u>
 
 - 10 nouveaux tests ajoutés
-  - 8 tests pour `useScrollOnMobileFocus.test.js` : détection mobile, délai 300ms, reduced motion, options custom, gestion null, fallback, timeout
-  - 2 tests pour `SymptomsSelector.test.jsx` : callback onFocus appelé, fonctionnement sans onFocus
+  - 8 tests for `useScrollOnMobileFocus.test.js` : détection mobile, délai 300ms, reduced motion, options custom, gestion null, fallback, timeout
+  - 2 tests for `SymptomsSelector.test.jsx` : callback onFocus appelé, fonctionnement sans onFocus
 
 ---
 
@@ -967,17 +967,17 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 
 ### <u>Changed:</u>
 
-- Masquage automatique du filtre de symptômes lorsqu'un seul symptôme unique est présent dans les résultats
-- Amélioration de l'UX : interface épurée pour les recherches mono-symptôme
+- Masquage automatique du filtre of symptômes lorsqu'un seul symptôme unique est présent in les résultats
+- Amélioration of l'UX : interface épurée for les recherches mono-symptôme
 - Modified `FilterRemedyResult.jsx` condition from `availableTags.length <= 1` to `uniqueSymptoms.length <= 1`
 
 ### <u>Added:</u>
 
-- Tests unitaires complets pour `FilterRemedyResult.jsx` (9 scénarios critiques)
-  - Tests de rendu conditionnel : 1 vs 2+ symptômes uniques
+- Tests unitaires complets for `FilterRemedyResult.jsx` (9 scénarios critiques)
+  - Tests of rendu conditionnel : 1 vs 2+ symptômes uniques
   - Tests des edge cases : tableau vide, symptômes vides
   - Tests du callback `onFilterChange` même quand masqué
-  - Tests d'extraction et déduplication des symptômes
+  - Tests d'extraction and déduplication des symptômes
 
 ### <u>Tests:</u>
 
@@ -1260,7 +1260,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 ### <u>refactoring:</u>
 
 - Created reusable SEO component (`src/components/seo/SEO.jsx`)
-  - Centralized Helmet meta tag management
+  - Centralized Helmand meta tag management
   - Standardized props: title, description, canonical, image, type, siteName
   - Support for Open Graph and Twitter Cards
   - Automatic baseUrl construction with env variable support
@@ -1328,7 +1328,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 - Configured automatic linting, testing, and building on every commit
 - Configured code coverage upload to Codecov
 - Configured automatic deployment to GitHub Pages on main branch push
-- Set up pnpm caching for faster CI builds
+- Sand up pnpm caching for faster CI builds
 - Established frozen lockfile installation for reproducible builds
 
 ### <u>automation:</u>
@@ -1370,7 +1370,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 
 ### <u>issues resolved:</u>
 
-- GitHub Issue #68: CI/CD avec GitHub Actions
+- GitHub Issue #68: CI/CD with GitHub Actions
 - Implemented continuous integration with automated testing and linting
 - Implemented continuous deployment to GitHub Pages
 - Eliminated manual deployment process
@@ -1442,7 +1442,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 ### <u>add:</u>
 
 - Added `react-helmet-async` (v2.0.5) dependency for dynamic SEO meta tags management
-- Added `<HelmetProvider>` wrapper in `src/main.jsx` to enable Helmet functionality app-wide
+- Added `<HelmetProvider>` wrapper in `src/main.jsx` to enable Helmand functionality app-wide
 - Added `<Helmet>` component in `src/pages/Home.jsx` with static SEO meta tags
 - Added `<Helmet>` component in `src/pages/RemedyResult.jsx` with dynamic meta tags based on symptoms
 - Added `<Helmet>` component in `src/pages/RemedyResultDetails.jsx` with dynamic meta tags based on remedy
@@ -1479,7 +1479,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 - Established comprehensive SEO foundation with meta tags on all pages
 - Implemented dynamic meta tags adapting to user search context (symptoms, remedy)
 - Configured Open Graph protocol for rich social media previews
-- Set up Twitter Card metadata for enhanced Twitter sharing
+- Sand up Twitter Card metadata for enhanced Twitter sharing
 - Added canonical URLs to prevent search engine duplicate content penalties
 - Optimized page titles for search engine discoverability and user context
 - Enhanced mobile browser experience with theme color matching app design
@@ -1549,7 +1549,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 
 ### <u>issues resolved:</u>
 
-- GitHub Issue #64: Perte des symptômes au rafraîchissement de la page /remedes
+- GitHub Issue #64: Perte des symptômes au rafraîchissement of la page /remedes
 - Implemented URL query params persistence while maintaining backward compatibility with state navigation
 - Users can now refresh, bookmark, and share symptom search results via URLs
 
@@ -1626,7 +1626,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 
 ### <u>issues resolved:</u>
 
-- GitHub Issue #62: Absence totale de tests - Tests unitaires Phase 1
+- GitHub Issue #62: Absence totale of tests - Tests unitaires Phase 1
 - Established testing foundation for future test expansion (components, E2E)
 - Implemented test infrastructure meeting industry standards (>95% coverage)
 - Created test suite preventing future regressions
@@ -1640,7 +1640,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 - Added `react-error-boundary` (v6.0.1) dependency for modern error handling
 - Added `src/components/errors/ErrorFallback.jsx` functional fallback component
 - Added error fallback UI with user-friendly error message and recovery options
-- Added "Recharger la page" button to reset error boundary
+- Added "Recharger la page" button to resand error boundary
 - Added "Retour à l'accueil" button to navigate home on error
 - Added error logging with `logger.error()` for debugging
 - Added detailed error stack trace display in development mode (dev-only)
@@ -1663,7 +1663,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 
 ### <u>reliability:</u>
 
-- Established Error Boundary as safety net for React component errors
+- Established Error Boundary as safety nand for React component errors
 - Improved error recovery with reload and home navigation options
 - Enhanced user experience with friendly error messages instead of blank screens
 - Prevented full application crashes from propagating to root
@@ -1717,7 +1717,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 
 ### <u>issues resolved:</u>
 
-- GitHub Issue #58: Bug validation - Caractères invalides dans symptomList.json
+- GitHub Issue #58: Bug validation - Caractères invalides in symptomList.json
 - Removed invalid characters (parentheses) from symptom names
 - Validated data integrity with `pnpm validate-data` script (100% pass rate)
 
@@ -1763,11 +1763,11 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 - **Automatic Prettier Format**: All supported files are auto-formatted on commit
 - **Git Hook Integration**: Husky manages Git hooks seamlessly across the team
 - **Staged Files Only**: lint-staged processes only files in staging area (fast)
-- **Team Enforcement**: All developers get the same hooks after `pnpm install`
+- **Team Enforcement**: All developers gand the same hooks after `pnpm install`
 
 ### <u>issues resolved:</u>
 
-- GitHub Issue #57: Pre-commit hooks avec Husky et lint-staged
+- GitHub Issue #57: Pre-commit hooks with Husky and lint-staged
 - Implemented automatic code quality checks before each commit
 - Configured ESLint --fix and Prettier --write for staged files
 
@@ -1828,7 +1828,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 
 ### <u>issues resolved:</u>
 
-- GitHub Issue #55: Console.log en production - Pollution de la console et risques de sécurité
+- GitHub Issue #55: Console.log en production - Pollution of la console and risques of sécurité
 - Removed 26 console.\* occurrences across 6 files
 - Implemented centralized logging utility with environment detection
 
@@ -1884,7 +1884,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 
 ### <u>issues resolved:</u>
 
-- GitHub Issue #53: Correction of unusual characters in BreadCrumb (accents, hyphens, slugs)
+- GitHub Issue #53: Fixed of unusual characters in BreadCrumb (accents, hyphens, slugs)
 - User request: Fix corrupted accent display in navigation breadcrumb
 - Fixed BreadCrumb showing `th%C3%A9-vert` instead of "Thé Vert"
 - Fixed BreadCrumb showing `menthe-poivree` instead of "Menthe Poivrée"
@@ -2153,7 +2153,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 - **Dynamic Connection Complete**: Tag filters dynamically update remedy list without page reload
 - **State Flow**: FilterRemedyResult → onFilterChange callback → RemedyResult state → RemedyResultList props
 - **Empty State Handling**: Distinct messages for "no results" vs "no filter match"
-- **Filter Behavior**: Radio-button style single-selection with "Tous" reset option
+- **Filter Behavior**: Radio-button style single-selection with "Tous" resand option
 - **Performance**: React Compiler handles automatic optimization, no manual memoization needed
 
 ### <u>implementation notes:</u>
@@ -2205,7 +2205,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 ### <u>remove:</u>
 
 - Removed placeholder card markup from `RemedyResult.jsx` (lines 82-103)
-- Removed placeholder message "🚧 RemedyCard et RemedyList seront implémentés dans Issue #41"
+- Removed placeholder message "🚧 RemedyCard and RemedyList seront implémentés in Issue #41"
 - Removed inline empty state markup (now handled by RemedyResultNotFound component)
 - Removed duplicate conditional rendering logic (consolidated in RemedyResultList)
 
@@ -2272,7 +2272,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 - Added Framer Motion animations for filter tag enter/exit transitions
 - Added ARIA accessibility attributes (`aria-pressed`, `aria-label`) to filter tags
 - Added `useMemo` optimization in `RemedyResult.jsx` for symptoms and matched remedies calculation
-- Added component remounting strategy using `key` prop to reset filter state on symptom change
+- Added component remounting strategy using `key` prop to resand filter state on symptom change
 
 ### <u>update:</u>
 
@@ -2344,7 +2344,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 
 ### <u>update:</u>
 
-- Updated `src/layout/LayoutRemedyResult.jsx` to integrate `<BreadCrumb />` component above `<Outlet />`
+- Updated `src/layout/LayoutRemedyResult.jsx` to integrate `<BreadCrumb />` component above `<Outland />`
 - Updated `ARCHITECTURE.md` to include `navigation/` folder in components structure
 - Updated `README.md` version badge from `0.9.0` to `0.10.0`
 - Updated `package.json` version from `0.9.0` to `0.10.0`
@@ -2390,13 +2390,13 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 - Added `src/pages/RemedyResult.jsx` placeholder page for remedy search results (Issue #41)
 - Added `src/pages/RemedyResultDetails.jsx` placeholder page for individual remedy details (Issue #41)
 - Added `src/pages/NotFound.jsx` custom 404 error page with navigation and helpful suggestions
-- Added `src/layout/LayoutApp.jsx` global layout component with `<Header />`, `<Outlet />`, `<Footer />` structure
+- Added `src/layout/LayoutApp.jsx` global layout component with `<Header />`, `<Outland />`, `<Footer />` structure
 - Added `src/layout/LayoutRemedyResult.jsx` specific layout for remedy pages with breadcrumb placeholder (Issue #38)
 - Added `<BrowserRouter>` wrapper in `src/main.jsx` for React Router v6 client-side routing
 - Added nested route structure: `/remedies` and `/remedies/:id` under `LayoutRemedyResult`
 - Added 404 catch-all route (`*`) redirecting to `NotFound.jsx` page
 - Added Framer Motion animations in `NotFound.jsx` for smooth page transitions
-- Added back navigation buttons in `RemedyResultDetails.jsx` ("Retour aux résultats" and "Nouvelle recherche")
+- Added back navigation buttons in `RemedyResultDetails.jsx` ("Retour aux résultats" and "New recherche")
 
 ### <u>update:</u>
 
@@ -2449,7 +2449,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 
 ### <u>add:</u>
 
-- Added "mal de ventre" synonym to `src/data/synonymsSymptomList.json` for "troubles digestifs"
+- Added "mal of ventre" synonym to `src/data/synonymsSymptomList.json` for "troubles digestifs"
 
 ### <u>update:</u>
 
@@ -2460,7 +2460,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 - Fixed autocomplete displaying synonyms (values) instead of only main symptoms (keys)
 - Fixed duplicate entries when typing synonyms that exist in both `symptomList.json` and `synonymsSymptomList.json`
 - Fixed "stress" showing both "Stress" and "Anxiété" - now shows only "Anxiété"
-- Fixed "rage de dents" showing duplicate - now shows only "Mal de dents"
+- Fixed "rage of dents" showing duplicate - now shows only "Mal of dents"
 - Fixed "digestion" showing duplicate - now shows only "Troubles digestifs"
 
 ### <u>refactor:</u>
@@ -2486,9 +2486,9 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 ### <u>update:</u>
 
 - Updated `src/data/synonymsSymptomList.json` with enriched synonym mappings:
-  - "mal de dents" : added "carie" and "maux de dents"
-  - "mal de gorge" : added "maux de gorge", "gorge irritée", "gorge douloureuse"
-  - "troubles digestifs" : added "maux d'estomac", "maux de ventre", "mal au ventre"
+  - "mal of dents" : added "carie" and "maux of dents"
+  - "mal of gorge" : added "maux of gorge", "gorge irritée", "gorge douloureuse"
+  - "troubles digestifs" : added "maux d'estomac", "maux of ventre", "mal au ventre"
 - Updated autocomplete filtering logic in `SymptomsSelector.jsx` to support multiple main symptoms from single synonym
 
 ### <u>refactor:</u>
@@ -2499,7 +2499,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 ### <u>fix:</u>
 
 - Fixed autocomplete showing only one symptom when typing synonym that matches multiple entries
-- Fixed "maux" query now correctly returns "Mal de tête", "Mal de dents", "Mal de gorge" (all matching symptoms)
+- Fixed "maux" query now correctly returns "Mal of tête", "Mal of dents", "Mal of gorge" (all matching symptoms)
 
 ### <u>features:</u>
 
@@ -2563,7 +2563,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 - **Flexible Accent Matching**: Users can search "diarrhee" or "diarrhée" - both work perfectly
 - **Proper French Display**: All symptoms display with correct French spelling and accents
 - **Enhanced Validation**: Comprehensive validation scripts ensuring data consistency
-- **Streamlined Database**: Focused, high-quality dataset with verified natural remedies
+- **Streamlined Database**: Focused, high-quality datasand with verified natural remedies
 
 ---
 
@@ -2626,7 +2626,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 
 ### <u>delete:</u>
 
-- Deleted duplicate symptom "maux de tête" (merged with "mal de tête" → normalized as "mal de tete")
+- Deleted duplicate symptom "maux of tête" (merged with "mal of tête" → normalized as "mal of tete")
 - Removed old placeholder `handleSearch()` function from Hero component
 - Removed standalone CTA button (replaced by integrated submission button in SymptomsSection)
 
@@ -2759,7 +2759,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 ### <u>add:</u>
 
 - Added `src/data/symptoms.json` containing 32 standardized symptom entries for autocomplete functionality
-- Added `src/data/synonyms.json` with bidirectional synonym mapping (e.g., "mal de tête" ↔ "maux de tête")
+- Added `src/data/synonyms.json` with bidirectional synonym mapping (e.g., "mal of tête" ↔ "maux of tête")
 - Added `SymptomsSelector` component with intelligent autocomplete and keyboard navigation
 - Added anti-duplicate filtering: selected symptoms automatically hidden from dropdown
 - Added synonym detection: selecting one variant hides all synonyms from suggestions
@@ -2777,7 +2777,7 @@ Le cache maintient un ordre LRU (Least Recently Used) avec :
 
 ### <u>standardization:</u>
 
-- Standardized symptom format: all entries use spaces (e.g., "mal de tête") instead of underscores
+- Standardized symptom format: all entries use spaces (e.g., "mal of tête") instead of underscores
 - Established consistent data structure for future symptom additions
 - Unified display format with automatic capitalization (e.g., "Anémie", "Rhume")
 
