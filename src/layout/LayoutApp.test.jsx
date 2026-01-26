@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import LayoutApp from "./LayoutApp";
+import { CookieConsentProvider } from "../features/cookie-consent/context/CookieConsentContext";
 
 // Mock child components
 vi.mock("./components/Header", () => ({
@@ -24,6 +25,11 @@ vi.mock("../components/ui/animation", () => ({
   LeafFall: () => <div data-testid="leaf-fall">LeafFall Animation</div>,
 }));
 
+// Mock CookieBanner to avoid needing full provider setup in every test
+vi.mock("../features/cookie-consent/components/CookieBanner", () => ({
+  default: () => <div data-testid="cookie-banner">CookieBanner</div>,
+}));
+
 const renderWithRouter = (component) => {
   const router = createMemoryRouter(
     [
@@ -43,7 +49,12 @@ const renderWithRouter = (component) => {
     },
   );
 
-  return render(<RouterProvider router={router} />);
+  // Wrap with CookieConsentProvider to provide context for CookieBanner
+  return render(
+    <CookieConsentProvider>
+      <RouterProvider router={router} />
+    </CookieConsentProvider>,
+  );
 };
 
 describe("LayoutApp", () => {
@@ -55,6 +66,7 @@ describe("LayoutApp", () => {
       expect(screen.getByTestId("disclaimer")).toBeInTheDocument();
       expect(screen.getByTestId("footer")).toBeInTheDocument();
       expect(screen.getByTestId("leaf-fall")).toBeInTheDocument();
+      expect(screen.getByTestId("cookie-banner")).toBeInTheDocument();
     });
 
     it("should render Header component", () => {
@@ -79,6 +91,12 @@ describe("LayoutApp", () => {
       renderWithRouter(<LayoutApp />);
 
       expect(screen.getByText("LeafFall Animation")).toBeInTheDocument();
+    });
+
+    it("should render CookieBanner component", () => {
+      renderWithRouter(<LayoutApp />);
+
+      expect(screen.getByTestId("cookie-banner")).toBeInTheDocument();
     });
   });
 
