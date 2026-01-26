@@ -1,6 +1,7 @@
 // tradimedika-v1/src/layout/LayoutApp.jsx
 import { Outlet, ScrollRestoration } from "react-router-dom";
 import Disclaimer from "../components/disclaimer/Disclaimer";
+import CookieBanner from "../features/cookie-consent/components/CookieBanner";
 import { LeafFall } from "../components/ui/animation";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -17,6 +18,7 @@ function LayoutApp() {
         <ScrollRestoration />
         <Outlet />
         <Footer className="mt-auto" />
+        <CookieBanner />
       </div>
     </div>
   );

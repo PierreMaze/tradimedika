@@ -3,6 +3,7 @@ import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import GoogleAnalytics from "../components/analytics/GoogleAnalytics";
 import { LoadingFallback } from "../components/ui/animation";
+import { CookieConsentProvider } from "../features/cookie-consent/context/CookieConsentContext";
 import LayoutApp from "../layout/LayoutApp";
 import LayoutRemedyResult from "../layout/LayoutRemedyResult";
 
@@ -11,6 +12,11 @@ const Home = lazy(() => import("../pages/Home"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 const RemedyResult = lazy(() => import("../pages/RemedyResult"));
 const RemedyResultDetails = lazy(() => import("../pages/RemedyResultDetails"));
+const MentionsLegales = lazy(() => import("../pages/MentionsLegales"));
+const PolitiqueConfidentialite = lazy(
+  () => import("../pages/PolitiqueConfidentialite"),
+);
+const GestionCookies = lazy(() => import("../pages/GestionCookies"));
 
 /**
  * Router Configuration - React Router v6.30.2 with Data Router API
@@ -40,10 +46,10 @@ const router = createBrowserRouter(
   [
     {
       element: (
-        <>
+        <CookieConsentProvider>
           <GoogleAnalytics />
           <LayoutApp />
-        </>
+        </CookieConsentProvider>
       ),
       children: [
         {
@@ -75,6 +81,30 @@ const router = createBrowserRouter(
               ),
             },
           ],
+        },
+        {
+          path: "mentions-legales",
+          element: (
+            <Suspense fallback={<LoadingFallback />}>
+              <MentionsLegales />
+            </Suspense>
+          ),
+        },
+        {
+          path: "politique-confidentialite",
+          element: (
+            <Suspense fallback={<LoadingFallback />}>
+              <PolitiqueConfidentialite />
+            </Suspense>
+          ),
+        },
+        {
+          path: "gestion-cookies",
+          element: (
+            <Suspense fallback={<LoadingFallback />}>
+              <GestionCookies />
+            </Suspense>
+          ),
         },
         {
           path: "*",

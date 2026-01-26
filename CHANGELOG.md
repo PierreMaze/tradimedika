@@ -778,10 +778,10 @@ Le cache maintient un ordre LRU (Least Recently Used) with :
 
 ### <u>Added:</u>
 
-- **Historique of recherche** : New fonctionnalité permettant of sauvegarder and relancer les 5 dernières recherches
+- **Historique of recherche** : New fonctionnalité permettant of sauvegarder and reload 5 last search
   - New hook `useSearchHistory.js` with stockage localStorage
   - Modal `SearchHistoryModal.jsx` with backdrop and animations Framer Motion
-  - Component `SearchHistoryItem.jsx` for afficher chaque recherche with pills of symptômes
+  - Component `SearchHistoryItem.jsx` for display result search with pills of symptômes
   - Bouton "🕒 Historique" in Hero.jsx (BUTTON_SECONDARY_STYLES) with badge compteur
   - Déduplication intelligente : insensible à l'ordre and aux accents
   - Limite of 5 entrées with système FIFO (First In First Out)
