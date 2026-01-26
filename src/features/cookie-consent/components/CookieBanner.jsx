@@ -4,7 +4,7 @@ import { FaCookieBite } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useReducedMotion } from "../../settings/hooks/useReducedMotion";
-import { useCookieConsent } from "../context/CookieConsentContext";
+import { useCookieConsent } from "../hooks/useCookieConsent";
 
 const SESSION_DISMISS_KEY = "tradimedika-banner-dismissed";
 

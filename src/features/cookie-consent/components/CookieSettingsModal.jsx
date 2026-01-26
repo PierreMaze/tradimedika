@@ -5,7 +5,7 @@ import { FaCookieBite } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { useReducedMotion } from "../../settings/hooks/useReducedMotion";
 import { COOKIE_CATEGORIES } from "../constants/cookieConfig";
-import { useCookieConsent } from "../context/CookieConsentContext";
+import { useCookieConsent } from "../hooks/useCookieConsent";
 
 export default function CookieSettingsModal({ isOpen, onClose }) {
   const prefersReducedMotion = useReducedMotion();

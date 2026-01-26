@@ -1,11 +1,4 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { createLogger } from "../../../utils/logger";
@@ -16,9 +9,9 @@ import {
   updateConsentMode,
   deleteGACookies,
 } from "../constants/cookieConfig";
+import { CookieConsentContext } from "./createCookieConsentContext";
 
 const logger = createLogger("CookieConsent");
-const CookieConsentContext = createContext(undefined);
 
 function isConsentValid(data) {
   if (!data) return false;
@@ -133,13 +126,3 @@ export function CookieConsentProvider({ children }) {
 CookieConsentProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
-
-export function useCookieConsent() {
-  const context = useContext(CookieConsentContext);
-  if (context === undefined) {
-    throw new Error(
-      "useCookieConsent must be used within CookieConsentProvider",
-    );
-  }
-  return context;
-}
