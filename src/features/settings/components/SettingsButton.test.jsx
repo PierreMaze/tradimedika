@@ -1,16 +1,20 @@
-import { describe, it, expect } from "vitest";
+// src/features/settings/components/SettingsButton.test.jsx
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import PropTypes from "prop-types";
-import SettingsButton from "./SettingsButton";
-import { ThemeProvider } from "../context/ThemeContext";
+import { describe, expect, it } from "vitest";
 import { PerformanceProvider } from "../context/PerformanceContext";
+import { SettingsModalProvider } from "../context/SettingsModalContext"; // ajouté
+import { ThemeProvider } from "../context/ThemeContext";
+import SettingsButton from "./SettingsButton";
 
 // Wrapper avec tous les providers nécessaires
 function TestWrapper({ children }) {
   return (
     <ThemeProvider>
-      <PerformanceProvider>{children}</PerformanceProvider>
+      <PerformanceProvider>
+        <SettingsModalProvider>{children}</SettingsModalProvider>
+      </PerformanceProvider>
     </ThemeProvider>
   );
 }
@@ -49,7 +53,6 @@ describe("SettingsButton", () => {
       </TestWrapper>,
     );
 
-    // Modal ne doit pas être visible initialement
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 
@@ -65,7 +68,6 @@ describe("SettingsButton", () => {
     const button = screen.getByRole("button", { name: /paramètres/i });
     await user.click(button);
 
-    // Modal doit être visible après le clic
     expect(screen.getByRole("dialog")).toBeInTheDocument();
   });
 
@@ -78,18 +80,14 @@ describe("SettingsButton", () => {
       </TestWrapper>,
     );
 
-    // Ouvrir la modal
     const settingsButton = screen.getByRole("button", { name: /paramètres/i });
     await user.click(settingsButton);
 
-    // Vérifier que la modal est ouverte
     expect(screen.getByRole("dialog")).toBeInTheDocument();
 
-    // Cliquer sur le bouton de fermeture
     const closeButton = screen.getByRole("button", { name: /fermer/i });
     await user.click(closeButton);
 
-    // Attendre que la modal soit fermée (animation Framer Motion)
     await waitFor(
       () => {
         expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
@@ -107,17 +105,13 @@ describe("SettingsButton", () => {
       </TestWrapper>,
     );
 
-    // Ouvrir la modal
     const settingsButton = screen.getByRole("button", { name: /paramètres/i });
     await user.click(settingsButton);
 
-    // Vérifier que la modal est ouverte
     expect(screen.getByRole("dialog")).toBeInTheDocument();
 
-    // Presser Escape
     await user.keyboard("{Escape}");
 
-    // Attendre que la modal soit fermée (animation Framer Motion)
     await waitFor(
       () => {
         expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
