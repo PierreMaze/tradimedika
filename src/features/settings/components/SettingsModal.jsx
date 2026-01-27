@@ -13,7 +13,6 @@ import {
   SETTINGS_THEME_LABEL,
 } from "../../../constants/buttonLabels";
 import { COOKIE_CATEGORIES } from "../../cookie-consent/constants/cookieConfig";
-import { useCookieConsent } from "../../cookie-consent/hooks/useCookieConsent";
 import { usePerformance } from "../context/PerformanceContext";
 import { useSettingsModal } from "../context/SettingsModalContext";
 import { useReducedMotion } from "../hooks/useReducedMotion";
@@ -48,10 +47,16 @@ export default function SettingsModal() {
   const [isCookieSectionOpen, setIsCookieSectionOpen] = useState(false);
 
   // Auto-open cookie section when requested from CookieBanner
+  // Auto-open cookie section when requested from CookieBanner
   useEffect(() => {
     if (shouldOpenCookieSection && isOpen) {
-      setIsCookieSectionOpen(true);
-      resetCookieSectionFlag();
+      // Eviter le setState synchrone en le mettant dans un RAF
+      const rafId = requestAnimationFrame(() => {
+        setIsCookieSectionOpen(true);
+        resetCookieSectionFlag();
+      });
+
+      return () => cancelAnimationFrame(rafId);
     }
   }, [shouldOpenCookieSection, isOpen, resetCookieSectionFlag]);
 

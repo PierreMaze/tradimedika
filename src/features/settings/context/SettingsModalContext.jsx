@@ -1,5 +1,11 @@
-import { createContext, useContext, useState, useCallback, useMemo } from "react";
 import PropTypes from "prop-types";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 
 const SettingsModalContext = createContext(undefined);
 
@@ -31,7 +37,13 @@ export function SettingsModalProvider({ children }) {
       closeSettings,
       resetCookieSectionFlag: () => setShouldOpenCookieSection(false),
     }),
-    [isOpen, shouldOpenCookieSection, openSettings, openSettingsWithCookies, closeSettings],
+    [
+      isOpen,
+      shouldOpenCookieSection,
+      openSettings,
+      openSettingsWithCookies,
+      closeSettings,
+    ],
   );
 
   return (
@@ -48,7 +60,9 @@ SettingsModalProvider.propTypes = {
 export function useSettingsModal() {
   const context = useContext(SettingsModalContext);
   if (context === undefined) {
-    throw new Error("useSettingsModal must be used within SettingsModalProvider");
+    throw new Error(
+      "useSettingsModal must be used within SettingsModalProvider",
+    );
   }
   return context;
 }
