@@ -1,15 +1,25 @@
 // hooks/useSearchHistory.test.js
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { renderHook, act } from "@testing-library/react";
+import { act, renderHook } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import * as CookieConsentHook from "../../cookie-consent/hooks/useCookieConsent";
 import { useSearchHistory } from "./useSearchHistory";
 
 describe("useSearchHistory", () => {
+  // On conserve le localStorage natif (fourni par JSDOM)
   beforeEach(() => {
+    // Vider le localStorage entre chaque test
     window.localStorage.clear();
+    // Réinitialiser les spies/mocks
     vi.clearAllMocks();
+
+    // Mock stable du hook de consentement pour tous les tests
+    vi.spyOn(CookieConsentHook, "useCookieConsent").mockReturnValue({
+      isHistoryAccepted: true,
+    });
   });
 
   afterEach(() => {
+    // Restaurer tous les mocks/spies
     vi.restoreAllMocks();
   });
 
@@ -92,11 +102,17 @@ describe("useSearchHistory", () => {
       const firstTimestamp = result.current.history[0].timestamp;
 
       // Simuler un délai minimal pour garantir un timestamp différent
-      vi.useFakeTimers();
+      vi.useFakeTimers({ now: Date.now() });
       act(() => {
-        vi.advanceTimersByTime(1);
+        result.current.addSearch(["fatigue"], 3);
+      });
+
+      vi.advanceTimersByTime(1);
+
+      act(() => {
         result.current.addSearch(["stress"], 2);
       });
+
       vi.useRealTimers();
 
       expect(result.current.history).toHaveLength(2);
@@ -362,13 +378,14 @@ describe("useSearchHistory", () => {
 
       expect(result.current.history).toHaveLength(3);
 
-      act(() => {
+      await act(async () => {
         result.current.clearHistory();
       });
 
-      // Attendre que la microtask s'exécute
-      await new Promise((resolve) => queueMicrotask(resolve));
-
+      const stored = JSON.parse(
+        window.localStorage.getItem("tradimedika-search-history"),
+      );
+      expect(stored).toHaveLength(0);
       expect(result.current.history).toEqual([]);
       expect(window.localStorage.getItem("tradimedika-search-history")).toBe(
         JSON.stringify([]),
@@ -396,9 +413,6 @@ describe("useSearchHistory", () => {
         result.current.addSearch(["fatigue", "stress"], 5);
       });
 
-      // Attendre que la microtask s'exécute
-      await new Promise((resolve) => queueMicrotask(resolve));
-
       const stored = JSON.parse(
         window.localStorage.getItem("tradimedika-search-history"),
       );
@@ -423,14 +437,12 @@ describe("useSearchHistory", () => {
         result.current.removeSearch(idToRemove);
       });
 
-      // Attendre que la microtask s'exécute
-      await new Promise((resolve) => queueMicrotask(resolve));
-
       const stored = JSON.parse(
         window.localStorage.getItem("tradimedika-search-history"),
       );
 
       expect(stored).toHaveLength(1);
+      expect(stored[0].symptoms).toEqual(["stress"]);
     });
 
     it("should sync across multiple hook instances", () => {
@@ -456,8 +468,24 @@ describe("useSearchHistory", () => {
 
   describe("Error handling", () => {
     it("should handle localStorage errors gracefully", () => {
-      vi.spyOn(window.localStorage, "setItem").mockImplementation(() => {
-        throw new Error("QuotaExceededError");
+      // Simuler erreur localStorage uniquement pour ce test
+      vi.spyOn(window.localStorage.__proto__, "setItem").mockImplementation(
+        () => {
+          throw new Error("QuotaExceededError");
+        },
+      );
+
+      const { result } = renderHook(() => useSearchHistory());
+
+      act(() => {
+        result.current.addSearch(["fatigue"], 3);
+      });
+    });
+
+    it("should not add search if history consent not given", () => {
+      // Override du mock pour ce test
+      CookieConsentHook.useCookieConsent.mockReturnValue({
+        isHistoryAccepted: false,
       });
 
       const { result } = renderHook(() => useSearchHistory());
@@ -466,8 +494,7 @@ describe("useSearchHistory", () => {
         result.current.addSearch(["fatigue"], 3);
       });
 
-      // L'historique en mémoire devrait être mis à jour même si localStorage échoue
-      expect(result.current.history).toHaveLength(1);
+      expect(result.current.history).toHaveLength(0);
     });
 
     it("should recover from corrupted localStorage data", () => {
