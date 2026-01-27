@@ -29,7 +29,7 @@ export default function GestionCookies() {
       </h1>
 
       <p className="mb-6 text-sm text-neutral-600 italic dark:text-neutral-400">
-        Dernière mise à jour : 25 janvier 2026
+        Dernière mise à jour : 27 janvier 2026
       </p>
 
       <nav
@@ -39,56 +39,58 @@ export default function GestionCookies() {
         <h2 className="mb-3 text-xl font-semibold text-neutral-900 dark:text-neutral-100">
           Sommaire
         </h2>
-        <ul className="space-y-2 text-sm">
-          <li>
-            <a
-              href="#definition"
-              className="text-emerald-600 transition hover:underline dark:text-emerald-500"
-            >
-              1. Qu&apos;est-ce qu&apos;un cookie ?
-            </a>
-          </li>
-          <li>
-            <a
-              href="#liste"
-              className="text-emerald-600 transition hover:underline dark:text-emerald-500"
-            >
-              2. Liste des cookies utilisés
-            </a>
-          </li>
-          <li>
-            <a
-              href="#localstorage"
-              className="text-emerald-600 transition hover:underline dark:text-emerald-500"
-            >
-              3. Distinction cookies / localStorage
-            </a>
-          </li>
-          <li>
-            <a
-              href="#choix"
-              className="text-emerald-600 transition hover:underline dark:text-emerald-500"
-            >
-              4. Vos choix concernant les cookies
-            </a>
-          </li>
-          <li>
-            <a
-              href="#durees"
-              className="text-emerald-600 transition hover:underline dark:text-emerald-500"
-            >
-              5. Durées de conservation
-            </a>
-          </li>
-          <li>
-            <a
-              href="#liens"
-              className="text-emerald-600 transition hover:underline dark:text-emerald-500"
-            >
-              6. Pour en savoir plus
-            </a>
-          </li>
-        </ul>
+        <div className="h-full max-h-fit border-l-4 border-emerald-600 pl-4 dark:border-emerald-500">
+          <ul className="space-y-2 text-sm">
+            <li>
+              <a
+                href="#definition"
+                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+              >
+                1. Qu&apos;est-ce qu&apos;un cookie ?
+              </a>
+            </li>
+            <li>
+              <a
+                href="#liste"
+                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+              >
+                2. Liste des cookies utilisés
+              </a>
+            </li>
+            <li>
+              <a
+                href="#localstorage"
+                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+              >
+                3. Distinction cookies / localStorage
+              </a>
+            </li>
+            <li>
+              <a
+                href="#choix"
+                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+              >
+                4. Vos choix concernant les cookies
+              </a>
+            </li>
+            <li>
+              <a
+                href="#durees"
+                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+              >
+                5. Durées de conservation
+              </a>
+            </li>
+            <li>
+              <a
+                href="#liens"
+                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+              >
+                6. Pour en savoir plus
+              </a>
+            </li>
+          </ul>
+        </div>
       </nav>
 
       <section id="definition" className="mb-8">
@@ -116,14 +118,15 @@ export default function GestionCookies() {
         <h3 className="mb-3 text-lg font-medium text-neutral-900 dark:text-neutral-100">
           2.1. Cookies strictement nécessaires
         </h3>
-        <div className="mb-6 rounded-lg border-l-4 border-blue-600 bg-blue-50 p-4 dark:bg-blue-900/20">
-          <p className="text-sm font-semibold text-blue-900 dark:text-blue-100">
+        <div className="mb-6 rounded-lg border-2 border-dashed border-sky-600 bg-sky-50 p-4 dark:bg-sky-900/20">
+          <p className="text-sm font-semibold text-sky-900 dark:text-sky-100">
             ℹ️ Information importante
           </p>
-          <p className="mt-2 text-sm text-blue-800 dark:text-blue-200">
-            Ce site n&apos;utilise AUCUN cookie strictement nécessaire. Toutes
-            les préférences utilisateur sont stockées localement sur votre
-            appareil (localStorage) et ne sont jamais transmises à nos serveurs.
+          <p className="mt-2 text-sm text-sky-800 dark:text-sky-200">
+            Ce site n&apos;utilise <strong>AUCUN</strong> cookie strictement
+            nécessaire. Toutes les préférences utilisateur sont stockées
+            localement sur votre appareil (localStorage) et ne sont jamais
+            transmises à nos serveurs.
           </p>
         </div>
 
@@ -143,25 +146,25 @@ export default function GestionCookies() {
               <tr className="bg-neutral-200 dark:bg-neutral-700">
                 <th
                   scope="col"
-                  className="border border-neutral-300 p-3 text-left dark:border-neutral-600"
+                  className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100"
                 >
                   Nom du cookie
                 </th>
                 <th
                   scope="col"
-                  className="border border-neutral-300 p-3 text-left dark:border-neutral-600"
+                  className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100"
                 >
                   Durée
                 </th>
                 <th
                   scope="col"
-                  className="border border-neutral-300 p-3 text-left dark:border-neutral-600"
+                  className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100"
                 >
                   Finalité
                 </th>
                 <th
                   scope="col"
-                  className="border border-neutral-300 p-3 text-left dark:border-neutral-600"
+                  className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100"
                 >
                   Éditeur
                 </th>
@@ -172,17 +175,17 @@ export default function GestionCookies() {
                 <tr key={cookie.name}>
                   <th
                     scope="row"
-                    className="border border-neutral-300 p-3 font-mono dark:border-neutral-600"
+                    className="border border-neutral-300 p-3 text-left font-mono text-neutral-900 dark:border-neutral-600 dark:text-neutral-100"
                   >
                     {cookie.name}
                   </th>
-                  <td className="border border-neutral-300 p-3 dark:border-neutral-600">
+                  <td className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100">
                     2 ans
                   </td>
-                  <td className="border border-neutral-300 p-3 dark:border-neutral-600">
+                  <td className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100">
                     {cookie.purpose}
                   </td>
-                  <td className="border border-neutral-300 p-3 dark:border-neutral-600">
+                  <td className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100">
                     Google Analytics 4 (Google LLC, États-Unis)
                   </td>
                 </tr>
@@ -197,6 +200,85 @@ export default function GestionCookies() {
         </p>
       </section>
 
+      <section id="historique" className="mb-8">
+        <h2 className="mb-4 text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+          2.3. Historique de recherche (optionnel - localStorage)
+        </h2>
+        <div className="mb-4 rounded-lg border-2 border-dashed border-amber-600 bg-amber-50 px-4 py-3 dark:border-amber-400/60 dark:bg-amber-950/80">
+          <p className="text-sm font-semibold text-amber-800 dark:text-amber-200">
+            ⚠️ Fonctionnalité désactivée par défaut
+          </p>
+          <p className="mt-1 text-sm text-amber-700 dark:text-amber-300">
+            L&apos;historique de recherche nécessite votre{" "}
+            <strong>consentement explicite</strong> et peut être activé dans
+            Paramètres &gt; Gestion des cookies.
+          </p>
+        </div>
+        <p className="mb-4 text-neutral-700 dark:text-neutral-300">
+          Cette fonctionnalité facultative sauvegarde vos 10 dernières
+          recherches localement sur votre appareil pour faciliter votre
+          navigation. Aucune donnée n&apos;est transmise à nos serveurs.
+        </p>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse text-sm">
+            <caption className="sr-only">
+              Liste des données d&apos;historique optionnel
+            </caption>
+            <thead>
+              <tr className="bg-neutral-200 dark:bg-neutral-700">
+                <th
+                  scope="col"
+                  className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100"
+                >
+                  Clé
+                </th>
+                <th
+                  scope="col"
+                  className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100"
+                >
+                  Finalité
+                </th>
+                <th
+                  scope="col"
+                  className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100"
+                >
+                  Éditeur
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {COOKIE_CATEGORIES.history.cookies.map((cookie) => (
+                <tr key={cookie.name}>
+                  <th
+                    scope="row"
+                    className="border border-neutral-300 p-3 text-left font-mono text-neutral-900 dark:border-neutral-600 dark:text-neutral-100"
+                  >
+                    {cookie.name}
+                  </th>
+                  <td className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100">
+                    {cookie.purpose}
+                  </td>
+                  <td className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100">
+                    TRADIMEDIKA (stockage local)
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-4 text-sm text-neutral-600 dark:text-neutral-400">
+          En activant cette fonctionnalité, vous acceptez explicitement que vos
+          recherches soient sauvegardées conformément à notre{" "}
+          <Link
+            to="/politique-confidentialite"
+            className="text-emerald-600 underline transition hover:text-emerald-700 dark:text-emerald-500 dark:hover:text-emerald-400"
+          >
+            Politique de Confidentialité
+          </Link>
+          .
+        </p>
+      </section>
+
       <section id="localstorage" className="mb-8">
         <h2 className="mb-4 text-2xl font-semibold text-neutral-900 dark:text-neutral-100">
           3. Distinction cookies / localStorage
@@ -208,7 +290,7 @@ export default function GestionCookies() {
         </p>
 
         <div className="mb-6 grid gap-4 md:grid-cols-2">
-          <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+          <div className="rounded-lg border-2 border-dashed border-neutral-200 p-4 dark:border-neutral-700">
             <h3 className="mb-2 font-semibold text-neutral-900 dark:text-neutral-100">
               Cookies
             </h3>
@@ -219,7 +301,7 @@ export default function GestionCookies() {
               <li>✓ Peuvent être tiers (Google Analytics)</li>
             </ul>
           </div>
-          <div className="rounded-lg border border-emerald-600 bg-emerald-50 p-4 dark:bg-emerald-900/20">
+          <div className="rounded-lg border-2 border-dashed border-emerald-600 bg-emerald-50 p-4 dark:bg-emerald-900/20">
             <h3 className="mb-2 font-semibold text-emerald-900 dark:text-emerald-100">
               localStorage (utilisé sur ce site)
             </h3>
@@ -244,19 +326,19 @@ export default function GestionCookies() {
               <tr className="bg-neutral-200 dark:bg-neutral-700">
                 <th
                   scope="col"
-                  className="border border-neutral-300 p-3 text-left dark:border-neutral-600"
+                  className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100"
                 >
                   Clé
                 </th>
                 <th
                   scope="col"
-                  className="border border-neutral-300 p-3 text-left dark:border-neutral-600"
+                  className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100"
                 >
                   Finalité
                 </th>
                 <th
                   scope="col"
-                  className="border border-neutral-300 p-3 text-left dark:border-neutral-600"
+                  className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100"
                 >
                   Éditeur
                 </th>
@@ -267,14 +349,14 @@ export default function GestionCookies() {
                 <tr key={cookie.name}>
                   <th
                     scope="row"
-                    className="border border-neutral-300 p-3 font-mono dark:border-neutral-600"
+                    className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100"
                   >
                     {cookie.name}
                   </th>
-                  <td className="border border-neutral-300 p-3 dark:border-neutral-600">
+                  <td className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100">
                     {cookie.purpose}
                   </td>
-                  <td className="border border-neutral-300 p-3 dark:border-neutral-600">
+                  <td className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100">
                     TRADIMEDIKA (stockage local)
                   </td>
                 </tr>
@@ -335,7 +417,7 @@ export default function GestionCookies() {
         </ul>
 
         <div className="space-y-3">
-          <details className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+          <details className="rounded-lg border-2 border-dashed border-neutral-200 p-4 dark:border-neutral-700">
             <summary className="cursor-pointer font-semibold text-neutral-900 dark:text-neutral-100">
               Google Chrome
             </summary>
@@ -345,7 +427,7 @@ export default function GestionCookies() {
             </p>
           </details>
 
-          <details className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+          <details className="rounded-lg border-2 border-dashed border-neutral-200 p-4 dark:border-neutral-700">
             <summary className="cursor-pointer font-semibold text-neutral-900 dark:text-neutral-100">
               Mozilla Firefox
             </summary>
@@ -354,7 +436,7 @@ export default function GestionCookies() {
             </p>
           </details>
 
-          <details className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+          <details className="rounded-lg border-2 border-dashed border-neutral-200 p-4 dark:border-neutral-700">
             <summary className="cursor-pointer font-semibold text-neutral-900 dark:text-neutral-100">
               Safari
             </summary>
@@ -363,7 +445,7 @@ export default function GestionCookies() {
             </p>
           </details>
 
-          <details className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+          <details className="rounded-lg border-2 border-dashed border-neutral-200 p-4 dark:border-neutral-700">
             <summary className="cursor-pointer font-semibold text-neutral-900 dark:text-neutral-100">
               Microsoft Edge
             </summary>
@@ -405,13 +487,13 @@ export default function GestionCookies() {
               <tr className="bg-neutral-200 dark:bg-neutral-700">
                 <th
                   scope="col"
-                  className="border border-neutral-300 p-3 text-left dark:border-neutral-600"
+                  className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100"
                 >
                   Type de donnée
                 </th>
                 <th
                   scope="col"
-                  className="border border-neutral-300 p-3 text-left dark:border-neutral-600"
+                  className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100"
                 >
                   Durée de conservation
                 </th>
@@ -421,44 +503,44 @@ export default function GestionCookies() {
               <tr>
                 <th
                   scope="row"
-                  className="border border-neutral-300 p-3 dark:border-neutral-600"
+                  className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100"
                 >
                   Cookies Google Analytics
                 </th>
-                <td className="border border-neutral-300 p-3 dark:border-neutral-600">
+                <td className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100">
                   2 ans maximum (durée par défaut)
                 </td>
               </tr>
               <tr>
                 <th
                   scope="row"
-                  className="border border-neutral-300 p-3 dark:border-neutral-600"
+                  className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100"
                 >
                   Données collectées via GA4
                 </th>
-                <td className="border border-neutral-300 p-3 dark:border-neutral-600">
+                <td className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100">
                   14 mois maximum (paramétré dans notre propriété)
                 </td>
               </tr>
               <tr>
                 <th
                   scope="row"
-                  className="border border-neutral-300 p-3 dark:border-neutral-600"
+                  className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100"
                 >
                   Consentement cookies
                 </th>
-                <td className="border border-neutral-300 p-3 dark:border-neutral-600">
+                <td className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100">
                   12 mois (puis redemande)
                 </td>
               </tr>
               <tr>
                 <th
                   scope="row"
-                  className="border border-neutral-300 p-3 dark:border-neutral-600"
+                  className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100"
                 >
                   localStorage
                 </th>
-                <td className="border border-neutral-300 p-3 dark:border-neutral-600">
+                <td className="border border-neutral-300 p-3 text-left text-neutral-900 dark:border-neutral-600 dark:text-neutral-100">
                   Jusqu&apos;à suppression manuelle par l&apos;utilisateur
                 </td>
               </tr>
@@ -474,9 +556,9 @@ export default function GestionCookies() {
 
       <section
         id="liens"
-        className="mb-8 rounded-lg bg-neutral-100 p-6 dark:bg-neutral-800"
+        className="rounded-lg border-2 border-dashed border-sky-700/60 bg-sky-50 px-4 py-3 transition-all duration-300 ease-in-out dark:border-sky-400/60 dark:bg-sky-950/80"
       >
-        <h2 className="mb-4 text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+        <h2 className="mb-4 text-xl font-semibold text-sky-900 dark:text-sky-100">
           6. Pour en savoir plus
         </h2>
         <ul className="space-y-2 text-sm">
@@ -485,7 +567,7 @@ export default function GestionCookies() {
               href="https://www.cnil.fr/fr/cookies-et-autres-traceurs/regles/cookies"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+              className="text-sky-600 transition hover:underline dark:text-sky-500"
             >
               Recommandations CNIL sur les cookies
             </a>
@@ -495,7 +577,7 @@ export default function GestionCookies() {
               href="https://support.google.com/analytics/answer/11397207?hl=fr"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+              className="text-sky-600 transition hover:underline dark:text-sky-500"
             >
               Documentation Google Analytics 4 sur les cookies
             </a>
@@ -505,7 +587,7 @@ export default function GestionCookies() {
               href="https://support.google.com/analytics/answer/6004245?hl=fr"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+              className="text-sky-600 transition hover:underline dark:text-sky-500"
             >
               Protection des données Google Analytics
             </a>
@@ -522,8 +604,10 @@ export default function GestionCookies() {
           notre site, vous pouvez nous contacter :
         </p>
         <a
-          href="mailto:[votre@email.com]"
+          href="https://tally.so/r/q4RN95"
+          target="_blank"
           className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-medium text-white transition hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600"
+          rel="noopener noreferrer"
         >
           Nous contacter
         </a>

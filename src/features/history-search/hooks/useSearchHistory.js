@@ -1,6 +1,7 @@
 // hooks/useSearchHistory.js
 import { useCallback } from "react";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
+import { useCookieConsent } from "../../cookie-consent";
 import { normalizeForMatching } from "../../symptom-search/utils/normalizeSymptom";
 import { createLogger } from "../../../utils/logger";
 
@@ -87,6 +88,7 @@ const isValidEntry = (entry) => {
  */
 export function useSearchHistory() {
   const [history, setHistory] = useLocalStorage(STORAGE_KEY, []);
+  const { isHistoryAccepted } = useCookieConsent();
 
   /**
    * Ajoute une nouvelle recherche à l'historique
@@ -101,6 +103,12 @@ export function useSearchHistory() {
    */
   const addSearch = useCallback(
     (symptoms, resultCount, allergies = [], filteredCount = 0) => {
+      // Bloquer si pas de consentement
+      if (!isHistoryAccepted) {
+        logger.debug("History disabled - consent not given");
+        return;
+      }
+
       logger.debug("🔥 addSearch START", {
         symptoms,
         resultCount,
@@ -177,7 +185,7 @@ export function useSearchHistory() {
         logger.error("Error adding search to history:", error);
       }
     },
-    [setHistory],
+    [setHistory, isHistoryAccepted],
   );
 
   /**

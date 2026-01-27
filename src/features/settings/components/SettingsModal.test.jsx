@@ -6,11 +6,15 @@ import SettingsModal from "./SettingsModal";
 import { ThemeProvider } from "../context/ThemeContext";
 import { PerformanceProvider } from "../context/PerformanceContext";
 
+import { CookieConsentProvider } from "../../cookie-consent";
+
 // Wrapper avec tous les providers nécessaires
 function TestWrapper({ children }) {
   return (
     <ThemeProvider>
-      <PerformanceProvider>{children}</PerformanceProvider>
+      <PerformanceProvider>
+        <CookieConsentProvider>{children}</CookieConsentProvider>
+      </PerformanceProvider>
     </ThemeProvider>
   );
 }

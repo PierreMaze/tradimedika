@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
+import { useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 import { IoMdArrowForward } from "react-icons/io";
 import { RiHistoryLine } from "react-icons/ri";
@@ -9,6 +10,7 @@ import {
   BUTTON_PRIMARY_STYLES,
   BUTTON_SECONDARY_STYLES,
 } from "../../../../constants/buttonStyles";
+import { useCookieConsent } from "../../../cookie-consent";
 
 /**
  * Composant HeroButtons - Boutons de recherche et historique
@@ -34,6 +36,9 @@ export default function HeroButtons({
   onHistoryOpen,
   historyCount,
 }) {
+  const { isHistoryAccepted } = useCookieConsent();
+  const [showTooltip, setShowTooltip] = useState(false);
+
   return (
     <div className="flex w-full flex-col items-center justify-center gap-3 sm:flex-row lg:mt-2">
       {/* Bouton principal de recherche */}
@@ -52,7 +57,7 @@ export default function HeroButtons({
         transition={{ duration: 0.2 }}
         className={`flex min-w-[280px] items-center justify-center gap-2 rounded-lg px-7 py-3.5 font-semibold shadow-lg transition duration-300 ease-in-out lg:text-base 2xl:text-lg ${
           isDisabled || isLoading
-            ? "bg-neutral-400 opacity-50 dark:bg-neutral-600"
+            ? "bg-neutral-400 text-neutral-950 opacity-50 dark:bg-neutral-600 dark:text-neutral-100"
             : `cursor-pointer ${BUTTON_PRIMARY_STYLES}`
         }`}
       >
@@ -79,24 +84,53 @@ export default function HeroButtons({
       </motion.button>
 
       {/* Bouton historique */}
-      <motion.button
-        onClick={onHistoryOpen}
-        aria-label={`${BUTTON_HISTORY} - ${historyCount} recherches`}
-        whileHover
-        whileTap
-        transition={{ duration: 0.2 }}
-        className={`group flex min-w-[280px] cursor-pointer items-center justify-center gap-2 rounded-lg px-7 py-3.5 font-semibold shadow-lg transition duration-300 ease-in-out lg:text-base 2xl:text-lg ${BUTTON_SECONDARY_STYLES}`}
+      <div
+        className="relative"
+        onMouseEnter={() => !isHistoryAccepted && setShowTooltip(true)}
+        onMouseLeave={() => setShowTooltip(false)}
       >
-        <span>
-          <RiHistoryLine />
-        </span>
-        <span>{BUTTON_HISTORY}</span>
-        {historyCount > 0 && (
-          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-600 text-xs text-white transition-colors group-hover:bg-white group-hover:text-emerald-600 dark:bg-emerald-500 dark:group-hover:text-emerald-400">
-            {historyCount}
+        <motion.button
+          onClick={isHistoryAccepted ? onHistoryOpen : undefined}
+          aria-label={
+            isHistoryAccepted
+              ? `${BUTTON_HISTORY} - ${historyCount} recherches`
+              : "Historique désactivé - Activez-le dans les paramètres"
+          }
+          aria-disabled={!isHistoryAccepted}
+          whileHover={isHistoryAccepted}
+          whileTap={isHistoryAccepted}
+          transition={{ duration: 0.2 }}
+          className={`group flex min-w-[280px] items-center justify-center gap-2 rounded-lg px-7 py-3.5 font-semibold shadow-lg transition duration-300 ease-in-out lg:text-base 2xl:text-lg ${
+            isHistoryAccepted
+              ? `cursor-pointer ${BUTTON_SECONDARY_STYLES}`
+              : "cursor-not-allowed bg-neutral-400 text-neutral-950 opacity-50 dark:bg-neutral-600 dark:text-neutral-100"
+          }`}
+        >
+          <span>
+            <RiHistoryLine />
           </span>
+          <span>{BUTTON_HISTORY}</span>
+          {isHistoryAccepted && historyCount > 0 && (
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-600 text-xs text-white transition-colors group-hover:bg-white group-hover:text-emerald-600 dark:bg-emerald-500 dark:group-hover:text-emerald-400">
+              {historyCount}
+            </span>
+          )}
+        </motion.button>
+
+        {/* Tooltip */}
+        {!isHistoryAccepted && showTooltip && (
+          <div className="absolute -top-30 left-1/2 z-50 w-72 -translate-x-1/2 rounded-lg bg-neutral-900 px-4 py-3 text-center shadow-2xl dark:bg-neutral-100">
+            <p className="font-semibold text-white dark:text-neutral-900">
+              Historique désactivé
+            </p>
+            <p className="mt-1 text-xs text-neutral-200 dark:text-neutral-700">
+              Activez-le dans Paramètres &gt; Gestion des cookies, il est
+              nécessaire pour des raisons de confidentialité (RGPD)
+            </p>
+            <div className="absolute -bottom-2 left-1/2 h-0 w-0 -translate-x-1/2 border-t-8 border-r-8 border-l-8 border-t-neutral-900 border-r-transparent border-l-transparent dark:border-t-neutral-100"></div>
+          </div>
         )}
-      </motion.button>
+      </div>
     </div>
   );
 }

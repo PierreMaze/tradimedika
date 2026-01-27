@@ -2,8 +2,8 @@
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { LINK_COOKIES_PAGE } from "../../constants/buttonLabels";
 import { LINK_EXTERNAL_STYLES } from "../../constants/linkStyles";
-import CookieSettingsButton from "../../features/cookie-consent/components/CookieSettingsButton";
 import LogoTradimedika from "./LogoTradimedika";
 
 const Footer = ({ className = "" }) => {
@@ -31,7 +31,9 @@ const Footer = ({ className = "" }) => {
           >
             Politique de Confidentialité
           </Link>
-          <CookieSettingsButton />
+          <Link to="/gestion-cookies" className={LINK_EXTERNAL_STYLES}>
+            {LINK_COOKIES_PAGE}
+          </Link>
         </div>
 
         {/* Copyright */}

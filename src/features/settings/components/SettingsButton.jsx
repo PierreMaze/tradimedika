@@ -1,15 +1,15 @@
-import { useState } from "react";
 import { IoMdSettings } from "react-icons/io";
 import { ARIA_SETTINGS_BUTTON } from "../../../constants/buttonLabels";
+import { useSettingsModal } from "../context/SettingsModalContext";
 import SettingsModal from "./SettingsModal";
 
 export default function SettingsButton() {
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const { openSettings } = useSettingsModal();
 
   return (
     <>
       <button
-        onClick={() => setIsSettingsOpen(true)}
+        onClick={openSettings}
         aria-label={ARIA_SETTINGS_BUTTON}
         className="group mr-2 flex h-10 w-10 cursor-pointer items-center justify-center p-2"
       >
@@ -18,10 +18,7 @@ export default function SettingsButton() {
         </div>
       </button>
 
-      <SettingsModal
-        isOpen={isSettingsOpen}
-        onClose={() => setIsSettingsOpen(false)}
-      />
+      <SettingsModal />
     </>
   );
 }

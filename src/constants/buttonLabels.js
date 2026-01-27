@@ -190,3 +190,34 @@ export const PERFORMANCE_HIGH = "Activées";
  */
 export const ARIA_PERFORMANCE_TOGGLE =
   "Basculer entre mode économie et performance élevée";
+
+/**
+ * Label for cookie management settings section
+ * @type {string}
+ */
+export const SETTINGS_COOKIES_LABEL = "Gestion des cookies";
+
+/**
+ * Label for reset storage settings section
+ * @type {string}
+ */
+export const SETTINGS_RESET_LABEL = "Réinitialisation des cookies";
+
+/**
+ * Button label to reset localStorage
+ * @type {string}
+ */
+export const BUTTON_RESET_STORAGE = "Réinitialiser le localStorage";
+
+/**
+ * ARIA label for reset storage button
+ * @type {string}
+ */
+export const ARIA_RESET_STORAGE =
+  "Réinitialiser toutes les données du localStorage";
+
+/**
+ * Label for cookies page link in footer
+ * @type {string}
+ */
+export const LINK_COOKIES_PAGE = "Gestion des Cookies";

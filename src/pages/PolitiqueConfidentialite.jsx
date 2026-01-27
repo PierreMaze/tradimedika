@@ -29,7 +29,7 @@ export default function PolitiqueConfidentialite() {
       </h1>
 
       <p className="mb-6 text-sm text-neutral-600 italic dark:text-neutral-400">
-        Dernière mise à jour : 25 janvier 2026
+        Dernière mise à jour : 27 janvier 2026
       </p>
 
       <div className="mb-8 rounded-lg border-2 border-dashed border-emerald-700/60 bg-emerald-50 px-4 py-3 transition-all duration-300 ease-in-out dark:border-emerald-400/60 dark:bg-emerald-950/80">
@@ -277,16 +277,16 @@ export default function PolitiqueConfidentialite() {
                   scope="row"
                   className="border border-neutral-300 p-3 font-mono text-neutral-800 dark:border-neutral-600 dark:text-neutral-200"
                 >
-                  Symptômes recherchés
+                  Historique de recherche (optionnel)
                 </th>
                 <td className="border border-neutral-300 p-3 text-neutral-800 dark:border-neutral-600 dark:text-neutral-200">
-                  Historique recherche personnalisé
+                  Sauvegarde vos 10 dernières recherches
                 </td>
                 <td className="border border-neutral-300 p-3 text-neutral-800 dark:border-neutral-600 dark:text-neutral-200">
-                  Stockage local uniquement
+                  Consentement explicite (désactivé par défaut)
                 </td>
                 <td className="border border-neutral-300 p-3 text-neutral-800 dark:border-neutral-600 dark:text-neutral-200">
-                  Illimitée (local)
+                  Jusqu&apos;à suppression par l&apos;utilisateur
                 </td>
               </tr>
             </tbody>
@@ -318,7 +318,37 @@ export default function PolitiqueConfidentialite() {
         </p>
 
         <h4 className="mt-6 mb-2 font-semibold text-neutral-900 dark:text-neutral-100">
-          Données stockées localement (localStorage)
+          Historique de recherche (optionnel - désactivé par défaut)
+        </h4>
+        <p className="mb-4 text-neutral-700 dark:text-neutral-300">
+          L&apos;historique de vos recherches peut être sauvegardé localement sur votre appareil
+          pour faciliter votre navigation. <strong>Cette fonctionnalité est optionnelle</strong> et
+          désactivée par défaut pour respecter votre vie privée.
+        </p>
+        <p className="mb-4 text-neutral-700 dark:text-neutral-300">
+          <strong>Données collectées :</strong>
+        </p>
+        <ul className="mb-4 ml-6 list-disc space-y-1 text-neutral-700 dark:text-neutral-300">
+          <li>Vos symptômes recherchés (10 dernières recherches maximum)</li>
+          <li>Date et heure de chaque recherche</li>
+          <li>Nombre de résultats trouvés</li>
+        </ul>
+        <p className="mb-4 text-neutral-700 dark:text-neutral-300">
+          <strong>Stockage et conservation :</strong> Ces données sont stockées <strong>uniquement sur votre appareil</strong>
+          (localStorage) et ne sont jamais transmises à nos serveurs. Vous pouvez les supprimer à tout moment depuis
+          les Paramètres &gt; Gestion des cookies &gt; Réinitialisation des cookies.
+        </p>
+        <p className="mb-4 text-neutral-700 dark:text-neutral-300">
+          <strong>Activation et désactivation :</strong> Vous pouvez activer ou désactiver cette fonctionnalité à tout moment
+          dans Paramètres &gt; Gestion des cookies &gt; Historique de recherche.
+        </p>
+        <p className="mb-4 text-neutral-700 dark:text-neutral-300">
+          <strong>Base légale :</strong> Votre consentement explicite. En activant l&apos;historique, vous acceptez que vos recherches
+          soient sauvegardées conformément à cette politique de confidentialité.
+        </p>
+
+        <h4 className="mt-6 mb-2 font-semibold text-neutral-900 dark:text-neutral-100">
+          Données stockées localement (localStorage - essentielles)
         </h4>
         <p className="mb-4 text-neutral-700 dark:text-neutral-300">
           Les données suivantes restent sur votre appareil et ne sont jamais

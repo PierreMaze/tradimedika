@@ -76,7 +76,7 @@ export function CookieConsentProvider({ children }) {
       accepted: true,
       timestamp: Date.now(),
       expiresAt: Date.now() + CONSENT_DURATION_MS,
-      categories: { analytics: true, functional: true },
+      categories: { analytics: true, functional: true, history: true },
     };
 
     setStoredConsent(newConsent);
@@ -90,7 +90,7 @@ export function CookieConsentProvider({ children }) {
       accepted: false,
       timestamp: Date.now(),
       expiresAt: Date.now() + CONSENT_DURATION_MS,
-      categories: { analytics: false, functional: false },
+      categories: { analytics: false, functional: false, history: false },
     };
 
     setStoredConsent(newConsent);
@@ -104,16 +104,56 @@ export function CookieConsentProvider({ children }) {
     logger.debug("Cookies rejected", newConsent);
   }, [setStoredConsent]);
 
+  const toggleHistory = useCallback(
+    (enabled) => {
+      if (!consentData) return;
+
+      const newConsent = {
+        ...consentData,
+        categories: {
+          ...consentData.categories,
+          history: enabled,
+        },
+        timestamp: Date.now(),
+      };
+
+      setStoredConsent(newConsent);
+      logger.debug(`History ${enabled ? "enabled" : "disabled"}`, newConsent);
+    },
+    [consentData, setStoredConsent],
+  );
+
+  const toggleAnalytics = useCallback(
+    (enabled) => {
+      if (enabled) {
+        acceptCookies();
+      } else {
+        rejectCookies();
+      }
+    },
+    [acceptCookies, rejectCookies],
+  );
+
   const value = useMemo(
     () => ({
       consentData,
       hasConsent: consentData !== null,
       isAccepted: consentData?.accepted ?? false,
+      isHistoryAccepted: consentData?.categories?.history ?? false,
       acceptCookies,
       rejectCookies,
+      toggleHistory,
+      toggleAnalytics,
       storageAvailable,
     }),
-    [consentData, acceptCookies, rejectCookies, storageAvailable],
+    [
+      consentData,
+      acceptCookies,
+      rejectCookies,
+      toggleHistory,
+      toggleAnalytics,
+      storageAvailable,
+    ],
   );
 
   return (

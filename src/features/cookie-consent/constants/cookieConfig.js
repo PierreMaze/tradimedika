@@ -3,7 +3,7 @@ export const COOKIE_CATEGORIES = {
     id: "necessary",
     label: "Cookies nécessaires",
     description:
-      "Ces cookies sont essentiels au fonctionnement du site. Ils permettent de mémoriser vos préférences (thème, performance) et votre historique de recherche. Ces données restent uniquement sur votre appareil (localStorage) et ne sont jamais transmises à nos serveurs.",
+      "Ces cookies sont essentiels au fonctionnement du site. Ils permettent de mémoriser vos préférences (thème, performance). Ces données restent uniquement sur votre appareil (localStorage) et ne sont jamais transmises à nos serveurs.",
     required: true,
     cookies: [
       {
@@ -16,12 +16,21 @@ export const COOKIE_CATEGORIES = {
           "Mémorise vos préférences de performance (niveau d'animations)",
       },
       {
-        name: "tradimedika-symptom-history",
-        purpose: "Stocke votre historique de recherche de symptômes",
-      },
-      {
         name: "tradimedika-cookie-consent",
         purpose: "Enregistre vos choix concernant les cookies",
+      },
+    ],
+  },
+  history: {
+    id: "history",
+    label: "Historique de recherche",
+    description:
+      "Stocke vos 10 dernières recherches pour faciliter votre navigation. En activant cette option, vous acceptez que vos recherches soient sauvegardées localement sur votre appareil conformément à notre Politique de Confidentialité.",
+    required: false,
+    cookies: [
+      {
+        name: "tradimedika-search-history",
+        purpose: "Sauvegarde vos 10 dernières recherches de symptômes localement",
       },
     ],
   },

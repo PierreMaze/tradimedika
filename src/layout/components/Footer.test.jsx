@@ -15,14 +15,6 @@ vi.mock("./LogoTradimedika", () => ({
   default: () => <div data-testid="logo-tradimedika">Logo</div>,
 }));
 
-// Mock CookieSettingsButton
-vi.mock(
-  "../../features/cookie-consent/components/CookieSettingsButton",
-  () => ({
-    default: () => <button>Paramètres des cookies</button>,
-  }),
-);
-
 const renderWithRouter = (component) => {
   return render(<MemoryRouter>{component}</MemoryRouter>);
 };
@@ -51,12 +43,9 @@ describe("Footer", () => {
       expect(
         screen.getByRole("link", { name: /Politique de Confidentialité/i }),
       ).toBeInTheDocument();
-    });
-
-    it("should render cookie settings button", () => {
-      renderWithRouter(<Footer />);
-
-      expect(screen.getByText(/Paramètres des cookies/i)).toBeInTheDocument();
+      expect(
+        screen.getByRole("link", { name: /Gestion des Cookies/i }),
+      ).toBeInTheDocument();
     });
 
     it("should render copyright text", () => {
@@ -85,6 +74,15 @@ describe("Footer", () => {
       expect(link).toHaveAttribute("href", "/politique-confidentialite");
     });
 
+    it("should have correct href for cookie management", () => {
+      renderWithRouter(<Footer />);
+
+      const link = screen.getByRole("link", {
+        name: /Gestion des Cookies/i,
+      });
+      expect(link).toHaveAttribute("href", "/gestion-cookies");
+    });
+
     it("should apply link styles from constants", () => {
       renderWithRouter(<Footer />);
 
@@ -92,10 +90,11 @@ describe("Footer", () => {
       const footerLinks = links.filter(
         (link) =>
           link.textContent === "Mentions Légales" ||
-          link.textContent === "Politique de Confidentialité",
+          link.textContent === "Politique de Confidentialité" ||
+          link.textContent === "Gestion des Cookies",
       );
 
-      expect(footerLinks.length).toBe(2);
+      expect(footerLinks.length).toBe(3);
       footerLinks.forEach((link) => {
         expect(link).toBeInTheDocument();
       });

@@ -323,6 +323,8 @@ export default function MentionsLegales() {
         </p>
         <a
           href="https://tally.so/r/q4RN95"
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-medium text-white transition hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600"
         >
           Nous contacter

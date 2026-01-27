@@ -4,12 +4,14 @@ import { FaCookieBite } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useReducedMotion } from "../../settings/hooks/useReducedMotion";
+import { useSettingsModal } from "../../settings/context/SettingsModalContext";
 import { useCookieConsent } from "../hooks/useCookieConsent";
 
 const SESSION_DISMISS_KEY = "tradimedika-banner-dismissed";
 
 export default function CookieBanner() {
   const { hasConsent, acceptCookies, rejectCookies } = useCookieConsent();
+  const { openSettingsWithCookies } = useSettingsModal();
   const prefersReducedMotion = useReducedMotion();
 
   const [isDismissedForSession, setIsDismissedForSession] = useState(() => {
@@ -92,12 +94,12 @@ export default function CookieBanner() {
           </div>
 
           <div className="mt-3 text-center">
-            <Link
-              to="/gestion-cookies"
-              className="text-xs text-neutral-500 underline transition hover:text-neutral-700 dark:hover:text-neutral-300"
+            <button
+              onClick={openSettingsWithCookies}
+              className="cursor-pointer text-xs text-neutral-500 underline transition hover:text-neutral-700 dark:hover:text-neutral-300"
             >
               Personnaliser mes préférences
-            </Link>
+            </button>
           </div>
         </motion.div>
       )}
