@@ -57,6 +57,14 @@ SettingsModalProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
+/**
+ * Hook pour accéder aux paramètres de la modal
+ * Doit être utilisé à l'intérieur d'un SettingsModalProvider
+ *
+ * @returns {Object} { isOpen, shouldOpenCookieSection, openSettings, openSettingsWithCookies, closeSettings, resetCookieSectionFlag }
+ * @throws {Error} Si utilisé en dehors d'un SettingsModalProvider
+ */
+// eslint-disable-next-line react-refresh/only-export-components -- Structure recommandée par React: hook avec son Provider
 export function useSettingsModal() {
   const context = useContext(SettingsModalContext);
   if (context === undefined) {

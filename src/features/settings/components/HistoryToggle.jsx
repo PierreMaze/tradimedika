@@ -31,9 +31,7 @@ export default function HistoryToggle() {
         layout
         transition={{ type: "spring", bounce: 0.25, duration: 0.25 }}
         className={`z-10 flex h-6 w-6 items-center justify-center rounded-md text-current group-hover:scale-105 ${
-          isHistoryAccepted
-            ? "bg-white"
-            : "bg-neutral-400 dark:bg-neutral-600"
+          isHistoryAccepted ? "bg-white" : "bg-neutral-400 dark:bg-neutral-600"
         }`}
       >
         <RiHistoryLine

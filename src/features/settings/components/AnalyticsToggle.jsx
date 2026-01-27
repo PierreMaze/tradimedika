@@ -36,9 +36,7 @@ export default function AnalyticsToggle() {
       >
         <HiChartBar
           className={`text-base transition-colors duration-300 ${
-            isAccepted
-              ? "text-emerald-600"
-              : "text-white dark:text-neutral-300"
+            isAccepted ? "text-emerald-600" : "text-white dark:text-neutral-300"
           }`}
         />
       </motion.div>

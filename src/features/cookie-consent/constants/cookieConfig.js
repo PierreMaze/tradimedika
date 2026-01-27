@@ -30,7 +30,8 @@ export const COOKIE_CATEGORIES = {
     cookies: [
       {
         name: "tradimedika-search-history",
-        purpose: "Sauvegarde vos 10 dernières recherches de symptômes localement",
+        purpose:
+          "Sauvegarde vos 10 dernières recherches de symptômes localement",
       },
     ],
   },

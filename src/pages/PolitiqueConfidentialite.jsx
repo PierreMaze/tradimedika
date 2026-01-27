@@ -321,9 +321,10 @@ export default function PolitiqueConfidentialite() {
           Historique de recherche (optionnel - désactivé par défaut)
         </h4>
         <p className="mb-4 text-neutral-700 dark:text-neutral-300">
-          L&apos;historique de vos recherches peut être sauvegardé localement sur votre appareil
-          pour faciliter votre navigation. <strong>Cette fonctionnalité est optionnelle</strong> et
-          désactivée par défaut pour respecter votre vie privée.
+          L&apos;historique de vos recherches peut être sauvegardé localement
+          sur votre appareil pour faciliter votre navigation.{" "}
+          <strong>Cette fonctionnalité est optionnelle</strong> et désactivée
+          par défaut pour respecter votre vie privée.
         </p>
         <p className="mb-4 text-neutral-700 dark:text-neutral-300">
           <strong>Données collectées :</strong>
@@ -334,17 +335,21 @@ export default function PolitiqueConfidentialite() {
           <li>Nombre de résultats trouvés</li>
         </ul>
         <p className="mb-4 text-neutral-700 dark:text-neutral-300">
-          <strong>Stockage et conservation :</strong> Ces données sont stockées <strong>uniquement sur votre appareil</strong>
-          (localStorage) et ne sont jamais transmises à nos serveurs. Vous pouvez les supprimer à tout moment depuis
-          les Paramètres &gt; Gestion des cookies &gt; Réinitialisation des cookies.
+          <strong>Stockage et conservation :</strong> Ces données sont stockées{" "}
+          <strong>uniquement sur votre appareil</strong>
+          (localStorage) et ne sont jamais transmises à nos serveurs. Vous
+          pouvez les supprimer à tout moment depuis les Paramètres &gt; Gestion
+          des cookies &gt; Réinitialisation des cookies.
         </p>
         <p className="mb-4 text-neutral-700 dark:text-neutral-300">
-          <strong>Activation et désactivation :</strong> Vous pouvez activer ou désactiver cette fonctionnalité à tout moment
-          dans Paramètres &gt; Gestion des cookies &gt; Historique de recherche.
+          <strong>Activation et désactivation :</strong> Vous pouvez activer ou
+          désactiver cette fonctionnalité à tout moment dans Paramètres &gt;
+          Gestion des cookies &gt; Historique de recherche.
         </p>
         <p className="mb-4 text-neutral-700 dark:text-neutral-300">
-          <strong>Base légale :</strong> Votre consentement explicite. En activant l&apos;historique, vous acceptez que vos recherches
-          soient sauvegardées conformément à cette politique de confidentialité.
+          <strong>Base légale :</strong> Votre consentement explicite. En
+          activant l&apos;historique, vous acceptez que vos recherches soient
+          sauvegardées conformément à cette politique de confidentialité.
         </p>
 
         <h4 className="mt-6 mb-2 font-semibold text-neutral-900 dark:text-neutral-100">
