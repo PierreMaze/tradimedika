@@ -223,7 +223,7 @@ export default function MentionsLegales() {
         <div className="rounded-lg border-2 border-dashed border-amber-700/60 bg-amber-50 px-4 py-3 transition-all duration-300 ease-in-out dark:border-amber-400/60 dark:bg-amber-950/80">
           <p className="font-semibold text-amber-900 dark:text-amber-100">
             <LiaBalanceScaleSolid
-              className="flex h-5 w-5 shrink-0 text-amber-600 transition duration-300 ease-in-out lg:h-6 lg:w-6 dark:text-amber-400"
+              className="inline-flex h-5 w-5 shrink-0 text-amber-600 transition duration-300 ease-in-out lg:h-6 lg:w-6 dark:text-amber-400"
               aria-hidden="true"
             />
             Important
