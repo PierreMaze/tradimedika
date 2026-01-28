@@ -21,7 +21,7 @@ export default function HeroHeader({
   badgeText = "Version Bêta · v0.47.0",
   title = "Prenez soin de vous",
   titleHighlight = "naturellement",
-  description = "Solutions préventives et remèdes pour le quotidien, faciles à mettre en place.",
+  description = "Solutions préventives et remèdes pour le quotidien, à votre portée.",
 }) {
   return (
     <div className="flex flex-col items-center gap-y-4 lg:gap-y-6 2xl:gap-y-8">

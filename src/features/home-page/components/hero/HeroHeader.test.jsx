@@ -12,7 +12,7 @@ describe("HeroHeader", () => {
       expect(screen.getByText("naturellement")).toBeInTheDocument();
       expect(
         screen.getByText(
-          "Solutions préventives et remèdes pour le quotidien, faciles à mettre en place.",
+          "Solutions préventives et remèdes pour le quotidien, à votre portée.",
         ),
       ).toBeInTheDocument();
     });
@@ -40,7 +40,7 @@ describe("HeroHeader", () => {
       render(<HeroHeader />);
 
       const description = screen.getByText(
-        "Solutions préventives et remèdes pour le quotidien, faciles à mettre en place.",
+        "Solutions préventives et remèdes pour le quotidien, à votre portée.",
       );
       expect(description.tagName).toBe("P");
     });
@@ -76,7 +76,7 @@ describe("HeroHeader", () => {
       expect(screen.getByText("Custom description text")).toBeInTheDocument();
       expect(
         screen.queryByText(
-          /Solutions préventives et remèdes pour le quotidien, faciles à mettre en place./,
+          /Solutions préventives et remèdes pour le quotidien, à votre portée./,
         ),
       ).not.toBeInTheDocument();
     });
@@ -159,7 +159,7 @@ describe("HeroHeader", () => {
       render(<HeroHeader />);
 
       const description = screen.getByText(
-        /Solutions préventives et remèdes pour le quotidien, faciles à mettre en place./,
+        /Solutions préventives et remèdes pour le quotidien, à votre portée./,
       );
       expect(description).toHaveClass("text-center");
       expect(description).toHaveClass("text-neutral-600");
@@ -178,7 +178,7 @@ describe("HeroHeader", () => {
       expect(heading).toHaveClass("lg:text-6xl");
 
       const description = screen.getByText(
-        /Solutions préventives et remèdes pour le quotidien, faciles à mettre en place./,
+        /Solutions préventives et remèdes pour le quotidien, à votre portée./,
       );
       expect(description).toHaveClass("text-base");
       expect(description).toHaveClass("lg:text-lg");
@@ -276,7 +276,7 @@ describe("HeroHeader", () => {
       render(<HeroHeader />);
 
       const description = screen.getByText(
-        /Solutions préventives et remèdes pour le quotidien, faciles à mettre en place./,
+        /Solutions préventives et remèdes pour le quotidien, à votre portée./,
       );
       expect(description).toHaveClass("max-w-3xl");
     });
