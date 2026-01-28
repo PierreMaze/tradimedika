@@ -1,6 +1,7 @@
+import { FiInfo } from "react-icons/fi";
+import { HiExclamationTriangle } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import { COOKIE_CATEGORIES } from "../features/cookie-consent/constants/cookieConfig";
-
 export default function GestionCookies() {
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-8">
@@ -120,7 +121,11 @@ export default function GestionCookies() {
         </h3>
         <div className="mb-6 rounded-lg border-2 border-dashed border-sky-600 bg-sky-50 p-4 dark:bg-sky-900/20">
           <p className="text-sm font-semibold text-sky-900 dark:text-sky-100">
-            ℹ️ Information importante
+            <FiInfo
+              className="flex h-5 w-5 shrink-0 text-sky-600 transition duration-300 ease-in-out lg:h-6 lg:w-6 dark:text-sky-400"
+              aria-hidden="true"
+            />
+            Information importante
           </p>
           <p className="mt-2 text-sm text-sky-800 dark:text-sky-200">
             Ce site n&apos;utilise <strong>AUCUN</strong> cookie strictement
@@ -206,7 +211,11 @@ export default function GestionCookies() {
         </h2>
         <div className="mb-4 rounded-lg border-2 border-dashed border-amber-600 bg-amber-50 px-4 py-3 dark:border-amber-400/60 dark:bg-amber-950/80">
           <p className="text-sm font-semibold text-amber-800 dark:text-amber-200">
-            ⚠️ Fonctionnalité désactivée par défaut
+            <HiExclamationTriangle
+              className="flex h-5 w-5 shrink-0 text-amber-600 transition duration-300 ease-in-out lg:h-6 lg:w-6 dark:text-amber-400"
+              aria-hidden="true"
+            />{" "}
+            Fonctionnalité désactivée par défaut
           </p>
           <p className="mt-1 text-sm text-amber-700 dark:text-amber-300">
             L&apos;historique de recherche nécessite votre{" "}
