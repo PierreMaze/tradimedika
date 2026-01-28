@@ -18,7 +18,7 @@ import { GiSprout } from "react-icons/gi";
  * @returns {JSX.Element}
  */
 export default function HeroHeader({
-  badgeText = "Méthode Douce & Naturelle",
+  badgeText = "Version Bêta · v0.47.0",
   title = "Soulagez vos symptômes",
   titleHighlight = "naturellement",
   description = "Les bienfaits de la méthode douce pour traiter vos maux du quotidien.",
