@@ -2,6 +2,32 @@
 
 ---
 
+## [0.47.0] - 2026-01-28
+
+### Added
+
+- **Hero Buttons hover effects**
+  - Added "pop" hover animation on first hero button using Framer Motion
+  - Smooth scale transition (1.0 → 1.05) with spring physics
+  - Enhanced user interaction feedback on homepage CTA
+  - Respects `prefers-reduced-motion` for accessibility
+
+### Fixed
+
+- **Fixed SettingsModalContext react-refresh warning**
+  - Removed circular dependency between `SettingsModalContext.jsx` and `SettingsModal.jsx`
+  - Moved modal logic directly to context provider component
+  - Simplified component structure and improved maintainability
+  - No more ESLint warnings about react-refresh
+
+### Changed
+
+- **Documentation updated**
+  - Version bump: `0.46.1` → `0.47.0` in `package.json` and `README.md`
+  - CHANGELOG updated with changes from this version
+
+---
+
 ## [0.46.1] - 2026-01-26
 
 ### Fixed
