@@ -212,7 +212,7 @@ export default function GestionCookies() {
         <div className="mb-4 rounded-lg border-2 border-dashed border-amber-600 bg-amber-50 px-4 py-3 dark:border-amber-400/60 dark:bg-amber-950/80">
           <p className="text-sm font-semibold text-amber-800 dark:text-amber-200">
             <HiExclamationTriangle
-              className="inline-flex h-5 w-5 shrink-0 text-amber-600 transition duration-300 ease-in-out lg:h-6 lg:w-6 dark:text-amber-400"
+              className="mr-2 inline-flex h-4 w-4 shrink-0 text-amber-600 transition duration-300 ease-in-out lg:h-6 lg:w-6 dark:text-amber-400"
               aria-hidden="true"
             />{" "}
             Fonctionnalité désactivée par défaut
