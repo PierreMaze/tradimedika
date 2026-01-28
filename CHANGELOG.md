@@ -2,6 +2,16 @@
 
 ---
 
+## [0.48.0] - 2026-01-28
+
+### Added
+
+- **Card component**: Added `tag symptom` feature on `OverlayCard`.
+
+### Changed
+
+- Update Test files
+
 ## [0.47.0] - 2026-01-28
 
 ### Added

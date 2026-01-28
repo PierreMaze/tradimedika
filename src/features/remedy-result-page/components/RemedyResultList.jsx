@@ -39,6 +39,7 @@ export default function RemedyResultList({
               key={result.remedy.id}
               remedy={result.remedy}
               selectedSymptoms={selectedSymptoms}
+              matchedSymptoms={result.matchedSymptoms}
               isFiltered={result.isFiltered || false}
             />
           ))}

@@ -177,5 +177,11 @@ describe("RemedyResultList", () => {
       );
       expect(screen.getByText("Citron")).toBeInTheDocument();
     });
+
+    it("should pass matchedSymptoms to remedy cards", () => {
+      renderWithRouter(<RemedyResultList {...defaultProps} />);
+      expect(screen.getByText("Citron")).toBeInTheDocument();
+      expect(screen.getByText("Gingembre")).toBeInTheDocument();
+    });
   });
 });

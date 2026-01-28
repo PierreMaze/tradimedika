@@ -25,7 +25,12 @@ import { generateSlug } from "../utils/remedyMatcher";
  * - Accessible avec aria-label
  * - Optimisé avec React.memo pour éviter re-renders inutiles
  */
-function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
+function RemedyCard({
+  remedy,
+  selectedSymptoms,
+  matchedSymptoms = [],
+  isFiltered = false,
+}) {
   const trackEvent = useGAEvent();
   const {
     name,
@@ -92,6 +97,19 @@ function RemedyCard({ remedy, selectedSymptoms, isFiltered = false }) {
           {/* Image */}
           {image && (
             <div className="bg-light dark:bg-dark relative aspect-square w-full overflow-hidden">
+              {/* Badges de symptômes en overlay (top-left) */}
+              {matchedSymptoms.length > 0 && (
+                <div className="absolute top-4 left-4 z-10 flex max-w-[60%] flex-wrap gap-2">
+                  {matchedSymptoms.map((symptom, index) => (
+                    <span
+                      key={index}
+                      className="inline-flex shrink-0 items-center gap-1 rounded-md bg-emerald-600 px-3 py-1.5 font-medium text-white shadow-md dark:bg-emerald-700"
+                    >
+                      {capitalizeFirstLetter(symptom, true)}
+                    </span>
+                  ))}
+                </div>
+              )}
               {/* Tag allergène en overlay (top-right) */}
               {isFiltered && (
                 <div className="absolute top-4 right-4 z-10">
@@ -249,6 +267,7 @@ RemedyCard.propTypes = {
     verifiedByProfessional: PropTypes.bool,
   }).isRequired,
   selectedSymptoms: PropTypes.arrayOf(PropTypes.string).isRequired,
+  matchedSymptoms: PropTypes.arrayOf(PropTypes.string),
   isFiltered: PropTypes.bool,
 };
 
@@ -274,12 +293,37 @@ function arePropsEqual(prevProps, nextProps) {
 
   // Comparaison rapide des symptômes par référence d'abord
   if (prevProps.selectedSymptoms === nextProps.selectedSymptoms) {
+    // Vérifier aussi matchedSymptoms
+    if (
+      prevProps.matchedSymptoms?.length !== nextProps.matchedSymptoms?.length
+    ) {
+      return false;
+    }
+    if (prevProps.matchedSymptoms === nextProps.matchedSymptoms) {
+      return true;
+    }
+    // Comparaison profonde des matchedSymptoms
+    for (let i = 0; i < (prevProps.matchedSymptoms?.length || 0); i++) {
+      if (prevProps.matchedSymptoms[i] !== nextProps.matchedSymptoms[i]) {
+        return false;
+      }
+    }
     return true;
   }
 
   // Comparaison profonde des symptômes si les références diffèrent
   for (let i = 0; i < prevProps.selectedSymptoms.length; i++) {
     if (prevProps.selectedSymptoms[i] !== nextProps.selectedSymptoms[i]) {
+      return false;
+    }
+  }
+
+  // Vérifier matchedSymptoms
+  if (prevProps.matchedSymptoms?.length !== nextProps.matchedSymptoms?.length) {
+    return false;
+  }
+  for (let i = 0; i < (prevProps.matchedSymptoms?.length || 0); i++) {
+    if (prevProps.matchedSymptoms[i] !== nextProps.matchedSymptoms[i]) {
       return false;
     }
   }

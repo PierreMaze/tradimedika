@@ -61,6 +61,7 @@ const mockRemedy = {
 };
 
 const mockSymptoms = ["maux de tête", "fatigue"];
+const mockMatchedSymptoms = ["maux de tête"];
 
 // ------------------------------
 // Tests
@@ -198,5 +199,60 @@ describe("RemedyCard Component", () => {
 
     const link = screen.getByRole("link");
     expect(link).toHaveAttribute("href", `/remedes/remède-test`);
+  });
+
+  it("affiche les badges de symptômes matchés en overlay", () => {
+    render(
+      <MemoryRouter>
+        <RemedyCard
+          remedy={mockRemedy}
+          selectedSymptoms={mockSymptoms}
+          matchedSymptoms={mockMatchedSymptoms}
+        />
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByText("Maux de tête")).toBeInTheDocument();
+  });
+
+  it("n'affiche pas de badges quand matchedSymptoms est vide", () => {
+    render(
+      <MemoryRouter>
+        <RemedyCard
+          remedy={mockRemedy}
+          selectedSymptoms={mockSymptoms}
+          matchedSymptoms={[]}
+        />
+      </MemoryRouter>,
+    );
+
+    expect(screen.queryByText("Maux de tête")).toBeNull();
+  });
+
+  it("affiche plusieurs badges de symptômes matchés", () => {
+    const multipleMatched = ["maux de tête", "fatigue", "nausée"];
+    render(
+      <MemoryRouter>
+        <RemedyCard
+          remedy={mockRemedy}
+          selectedSymptoms={mockSymptoms}
+          matchedSymptoms={multipleMatched}
+        />
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByText("Maux de tête")).toBeInTheDocument();
+    expect(screen.getByText("Fatigue")).toBeInTheDocument();
+    expect(screen.getByText("Nausée")).toBeInTheDocument();
+  });
+
+  it("fonctionne sans prop matchedSymptoms (par défaut)", () => {
+    render(
+      <MemoryRouter>
+        <RemedyCard remedy={mockRemedy} selectedSymptoms={mockSymptoms} />
+      </MemoryRouter>,
+    );
+
+    expect(screen.queryByText("Maux de tête")).toBeNull();
   });
 });
