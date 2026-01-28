@@ -20,7 +20,7 @@ import HeroSearch from "./HeroSearch";
 export default function Hero() {
   return (
     <>
-      <div className="mx-auto mt-8 mb-4 flex h-screen flex-col items-center justify-center px-4">
+      <div className="mx-auto mt-8 mb-4 flex h-full flex-col items-center justify-center px-4 2xl:h-screen">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

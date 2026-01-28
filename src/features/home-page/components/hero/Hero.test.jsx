@@ -1,5 +1,5 @@
-import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
 import Hero from "./Hero";
 
 // Mock framer-motion to avoid animation complexities in tests
@@ -56,7 +56,7 @@ describe("Hero", () => {
       const { container } = render(<Hero />);
 
       const mainContainer = container.querySelector(
-        ".mx-auto.mt-8.mb-4.flex.h-screen",
+        ".mx-auto.mt-8.mb-4.flex.h-full",
       );
       expect(mainContainer).toBeInTheDocument();
     });
@@ -125,7 +125,7 @@ describe("Hero", () => {
     it("should have full height container", () => {
       const { container } = render(<Hero />);
 
-      const mainContainer = container.querySelector(".h-screen");
+      const mainContainer = container.querySelector(".h-full");
       expect(mainContainer).toBeInTheDocument();
     });
   });
