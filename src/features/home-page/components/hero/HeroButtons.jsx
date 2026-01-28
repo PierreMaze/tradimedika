@@ -182,7 +182,7 @@ export default function HeroButtons({
             </>
           ) : (
             <>
-              <span>Découvrir nos solutions</span>
+              <span>Voir les remèdes</span>
               <IoMdArrowForward className="text-xl" />
             </>
           )}

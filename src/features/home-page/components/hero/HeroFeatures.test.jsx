@@ -5,7 +5,7 @@ import HeroFeatures from "./HeroFeatures";
 describe("HeroFeatures", () => {
   const DEFAULT_FEATURES = [
     "+100 produits naturels",
-    "Santé naturelle",
+    "Source référencée",
     "Recherche simplifié",
     "Respect de vos données",
   ];

@@ -7,7 +7,7 @@ import { FaCheck } from "react-icons/fa6";
  */
 const DEFAULT_FEATURES = [
   "+100 produits naturels",
-  "Santé naturelle",
+  "Source référencée",
   "Recherche simplifié",
   "Respect de vos données",
 ];

@@ -53,7 +53,7 @@ describe("HeroButtons", () => {
   describe("Rendering", () => {
     it("renders search button with default text", () => {
       render(<HeroButtons {...defaultProps} />);
-      expect(screen.getByText("Découvrir nos solutions")).toBeInTheDocument();
+      expect(screen.getByText("Voir les remèdes")).toBeInTheDocument();
     });
 
     it("renders history button", () => {

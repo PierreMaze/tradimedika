@@ -8,11 +8,11 @@ describe("HeroHeader", () => {
       render(<HeroHeader />);
 
       expect(screen.getByText("Version Bêta · v0.47.0")).toBeInTheDocument();
-      expect(screen.getByText("Soulagez vos symptômes")).toBeInTheDocument();
+      expect(screen.getByText("Prenez soin de vous")).toBeInTheDocument();
       expect(screen.getByText("naturellement")).toBeInTheDocument();
       expect(
         screen.getByText(
-          "Les bienfaits de la méthode douce pour traiter vos maux du quotidien.",
+          "Solutions préventives et remèdes pour le quotidien, faciles à mettre en place.",
         ),
       ).toBeInTheDocument();
     });
@@ -33,14 +33,14 @@ describe("HeroHeader", () => {
 
       const heading = screen.getByRole("heading", { level: 1 });
       expect(heading).toBeInTheDocument();
-      expect(heading).toHaveTextContent("Soulagez vos symptômesnaturellement");
+      expect(heading).toHaveTextContent("Prenez soin de vousnaturellement");
     });
 
     it("should render description", () => {
       render(<HeroHeader />);
 
       const description = screen.getByText(
-        "Les bienfaits de la méthode douce pour traiter vos maux du quotidien.",
+        "Solutions préventives et remèdes pour le quotidien, faciles à mettre en place.",
       );
       expect(description.tagName).toBe("P");
     });
@@ -60,9 +60,7 @@ describe("HeroHeader", () => {
       render(<HeroHeader title="Custom Title" />);
 
       expect(screen.getByText("Custom Title")).toBeInTheDocument();
-      expect(
-        screen.queryByText("Soulagez vos symptômes"),
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText("Prenez soin de vous")).not.toBeInTheDocument();
     });
 
     it("should render custom titleHighlight", () => {
@@ -77,7 +75,9 @@ describe("HeroHeader", () => {
 
       expect(screen.getByText("Custom description text")).toBeInTheDocument();
       expect(
-        screen.queryByText(/bienfaits de la méthode douce/),
+        screen.queryByText(
+          /Solutions préventives et remèdes pour le quotidien, faciles à mettre en place./,
+        ),
       ).not.toBeInTheDocument();
     });
 
@@ -158,7 +158,9 @@ describe("HeroHeader", () => {
     it("should apply description styles", () => {
       render(<HeroHeader />);
 
-      const description = screen.getByText(/bienfaits de la méthode douce/);
+      const description = screen.getByText(
+        /Solutions préventives et remèdes pour le quotidien, faciles à mettre en place./,
+      );
       expect(description).toHaveClass("text-center");
       expect(description).toHaveClass("text-neutral-600");
       expect(description).toHaveClass("dark:text-neutral-400");
@@ -175,7 +177,9 @@ describe("HeroHeader", () => {
       expect(heading).toHaveClass("text-5xl");
       expect(heading).toHaveClass("lg:text-6xl");
 
-      const description = screen.getByText(/bienfaits/);
+      const description = screen.getByText(
+        /Solutions préventives et remèdes pour le quotidien, faciles à mettre en place./,
+      );
       expect(description).toHaveClass("text-base");
       expect(description).toHaveClass("lg:text-lg");
     });
@@ -216,7 +220,7 @@ describe("HeroHeader", () => {
       render(<HeroHeader />);
 
       expect(screen.getByText("Version Bêta · v0.47.0")).toBeInTheDocument();
-      expect(screen.getByText("Soulagez vos symptômes")).toBeInTheDocument();
+      expect(screen.getByText("Prenez soin de vous")).toBeInTheDocument();
       expect(screen.getByText("naturellement")).toBeInTheDocument();
     });
 
@@ -236,7 +240,7 @@ describe("HeroHeader", () => {
       render(<HeroHeader />);
 
       const heading = screen.getByRole("heading", { level: 1 });
-      expect(heading.textContent).toContain("Soulagez vos symptômes");
+      expect(heading.textContent).toContain("Prenez soin de vous");
       expect(heading.textContent).toContain("naturellement");
     });
 
@@ -271,8 +275,10 @@ describe("HeroHeader", () => {
     it("should have max-width on description", () => {
       render(<HeroHeader />);
 
-      const description = screen.getByText(/bienfaits/);
-      expect(description).toHaveClass("max-w-2xl");
+      const description = screen.getByText(
+        /Solutions préventives et remèdes pour le quotidien, faciles à mettre en place./,
+      );
+      expect(description).toHaveClass("max-w-3xl");
     });
   });
 });
