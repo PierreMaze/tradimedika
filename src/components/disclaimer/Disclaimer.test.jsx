@@ -59,7 +59,7 @@ describe("Disclaimer", () => {
       expect(disclaimer).toHaveClass("bg-amber-50");
 
       const icon = container.querySelector("svg");
-      expect(icon).toHaveClass("text-amber-600");
+      expect(icon).toHaveClass("text-amber-700");
     });
 
     it("should have dashed border style", () => {

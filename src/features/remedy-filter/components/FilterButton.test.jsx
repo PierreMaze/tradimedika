@@ -63,8 +63,10 @@ describe("FilterButton", () => {
     it("should render the badge with the correct count", () => {
       render(<FilterButton onClick={vi.fn()} activeFiltersCount={3} />);
 
-      const badge = screen.getByLabelText("3 filtres actifs");
+      // Le badge a un role="status" avec aria-live="polite"
+      const badge = screen.getByRole("status");
       expect(badge).toBeInTheDocument();
+      expect(badge).toHaveTextContent("3 filtres actifs");
       expect(badge).toHaveTextContent("3");
     });
 

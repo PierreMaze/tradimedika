@@ -1,8 +1,8 @@
-import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
-import LayoutApp from "./LayoutApp";
+import { describe, expect, it, vi } from "vitest";
 import { CookieConsentProvider } from "../features/cookie-consent/context/CookieConsentContext";
+import LayoutApp from "./LayoutApp";
 
 // Mock child components
 vi.mock("./components/Header", () => ({

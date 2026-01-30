@@ -90,7 +90,9 @@ describe("RemedyCard Component", () => {
     expect(screen.getAllByText("B1")[0]).toBeInTheDocument();
 
     // Image
-    const img = screen.getByAltText(`Illustration de ${mockRemedy.name}`);
+    const img = screen.getByAltText(
+      `${mockRemedy.name} - remède naturel traditionnel de type ${mockRemedy.type}`,
+    );
     expect(img).toHaveAttribute("src", mockRemedy.image);
 
     // Tags

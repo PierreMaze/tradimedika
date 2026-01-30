@@ -1,10 +1,15 @@
-import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { HelmetProvider } from "react-helmet-async";
 import { MemoryRouter } from "react-router-dom";
+import { describe, expect, it } from "vitest";
 import BreadCrumb from "./BreadCrumb";
 
 const renderWithRouter = (ui, { route = "/" } = {}) => {
-  return render(<MemoryRouter initialEntries={[route]}>{ui}</MemoryRouter>);
+  return render(
+    <HelmetProvider>
+      <MemoryRouter initialEntries={[route]}>{ui}</MemoryRouter>
+    </HelmetProvider>,
+  );
 };
 
 describe("BreadCrumb", () => {

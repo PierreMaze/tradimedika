@@ -31,7 +31,10 @@ describe("RemedyResultDetailsHeader", () => {
     it("renders image with descriptive alt", () => {
       renderComponent();
       const img = screen.getByRole("img");
-      expect(img).toHaveAttribute("alt", "Illustration de Camomille");
+      expect(img).toHaveAttribute(
+        "alt",
+        "Camomille - remède naturel traditionnel de type plante",
+      );
     });
 
     it("renders description when provided", () => {
