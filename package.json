@@ -20,6 +20,7 @@
     "test:coverage": "vitest --coverage",
     "validate-data": "node scripts/validateData.js",
     "extract-allergens": "node scripts/extractAllergensFromDb.js",
+    "generate-sitemap": "node scripts/generateSitemap.js",
     "clean": "rm -rf node_modules dist && clear",
     "deploy": "gh-pages -d dist -f",
     "ccu": "ccusage blocks --live",
