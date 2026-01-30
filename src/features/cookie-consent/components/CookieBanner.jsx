@@ -3,8 +3,8 @@ import { useCallback, useState } from "react";
 import { FaCookieBite } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { useReducedMotion } from "../../settings/hooks/useReducedMotion";
 import { useSettingsModal } from "../../settings/context/SettingsModalContext";
+import { useReducedMotion } from "../../settings/hooks/useReducedMotion";
 import { useCookieConsent } from "../hooks/useCookieConsent";
 
 const SESSION_DISMISS_KEY = "tradimedika-banner-dismissed";
@@ -81,7 +81,7 @@ export default function CookieBanner() {
           <div className="flex flex-col gap-2 sm:flex-row">
             <button
               onClick={handleAccept}
-              className="flex-1 cursor-pointer rounded-md bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition duration-150 ease-in-out hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600"
+              className="flex-1 cursor-pointer rounded-md bg-emerald-700 px-4 py-2 text-sm font-semibold text-white transition duration-150 ease-in-out hover:bg-emerald-800 dark:bg-emerald-700 dark:hover:bg-emerald-600"
             >
               Accepter
             </button>
