@@ -129,7 +129,9 @@ function RemedyCard({
               )}
               <img
                 src={image}
-                alt={`Illustration de ${name}`}
+                alt={`${name} - remède naturel traditionnel de type ${type}`}
+                width="300"
+                height="300"
                 className={`mx-auto h-full w-2/3 object-scale-down p-4 transition duration-300 lg:w-3/4 2xl:w-4/5 ${imageClasses}`}
                 loading="lazy"
               />

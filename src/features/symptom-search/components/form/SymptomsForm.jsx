@@ -252,6 +252,11 @@ export default function SymptomsForm({
     [onFocus],
   );
 
+  // Handler pour le changement de valeur de l'input
+  const handleInputChange = useCallback((e) => {
+    setInputValue(e.target.value);
+  }, []);
+
   // Scroll automatique vers l'élément sélectionné
   useEffect(() => {
     if (selectedIndex >= 0 && listRef.current) {
@@ -285,7 +290,7 @@ export default function SymptomsForm({
           type="text"
           name="symptoms"
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           onFocus={handleInputFocus}
           placeholder={placeholder}

@@ -109,6 +109,6 @@ export function deleteGACookies(measurementId) {
   ];
 
   cookies.forEach((name) => {
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; secure; samesite=strict`;
   });
 }

@@ -20,7 +20,9 @@ function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
         <div className="aspect-square w-full overflow-hidden rounded-lg bg-neutral-300 shadow-md dark:bg-neutral-700">
           <motion.img
             src={safeImageUrl}
-            alt={`Illustration de ${remedy.name}`}
+            alt={`${remedy.name} - remède naturel traditionnel de type ${remedy.type}`}
+            width="400"
+            height="400"
             className="mx-auto h-full w-2/3 object-scale-down p-6 lg:w-3/4 2xl:w-4/5"
             loading="lazy"
           />

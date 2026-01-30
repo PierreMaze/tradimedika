@@ -210,8 +210,8 @@ function TagsInfoButton({
   };
 
   const buttonSizeClasses = {
-    sm: "h-fit w-fit text-sm",
-    md: "h-fit w-fit text-base",
+    sm: "min-h-[44px] min-w-[44px] h-fit w-fit text-sm",
+    md: "min-h-[44px] min-w-[44px] h-fit w-fit text-base",
   };
 
   return (

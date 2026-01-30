@@ -1,5 +1,7 @@
 // tradimedika-v1/src/components/navigation/BreadCrumb.jsx
 import PropTypes from "prop-types";
+import { useMemo } from "react";
+import { Helmet } from "react-helmet-async";
 import { IoChevronForward } from "react-icons/io5";
 import { NavLink, useLocation, useParams } from "react-router-dom";
 import { LINK_INTERNAL_STYLES } from "../../constants/linkStyles";
@@ -151,24 +153,49 @@ function BreadCrumb() {
     remedy?.name,
   );
 
+  // Générer structured data JSON-LD pour le breadcrumb
+  const breadcrumbSchema = useMemo(() => {
+    const baseUrl =
+      import.meta.env.VITE_BASE_URL ||
+      "https://pierremaze.github.io/tradimedika";
+
+    return {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: pathSegments.map((segment, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: segment.label,
+        item: `${baseUrl}${segment.path}`,
+      })),
+    };
+  }, [pathSegments]);
+
   // Don't show breadcrumb on home page (only one segment)
   if (pathSegments.length <= 1) {
     return null;
   }
 
   return (
-    <nav aria-label="Fil d'Ariane" className="mb-6 w-full">
-      <ol className="flex items-center gap-2 text-xs sm:text-sm">
-        {pathSegments.map((item, index) => (
-          <BreadcrumbItem
-            key={item.path}
-            item={item}
-            isLast={index === pathSegments.length - 1}
-            selectedSymptoms={selectedSymptoms}
-          />
-        ))}
-      </ol>
-    </nav>
+    <>
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbSchema)}
+        </script>
+      </Helmet>
+      <nav aria-label="Fil d'Ariane" className="mb-6 w-full">
+        <ol className="flex items-center gap-2 text-xs sm:text-sm">
+          {pathSegments.map((item, index) => (
+            <BreadcrumbItem
+              key={item.path}
+              item={item}
+              isLast={index === pathSegments.length - 1}
+              selectedSymptoms={selectedSymptoms}
+            />
+          ))}
+        </ol>
+      </nav>
+    </>
   );
 }
 

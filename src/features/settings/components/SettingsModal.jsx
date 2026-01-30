@@ -166,7 +166,7 @@ export default function SettingsModal() {
                 <button
                   onClick={closeSettings}
                   aria-label={ARIA_CLOSE}
-                  className="cursor-pointer rounded-lg bg-neutral-600/90 p-1.5 text-white transition-colors hover:bg-red-700 dark:bg-neutral-500 dark:text-white dark:hover:bg-red-800"
+                  className="flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-lg bg-neutral-600/90 p-1.5 text-white transition-colors hover:bg-red-700 dark:bg-neutral-500 dark:text-white dark:hover:bg-red-800"
                 >
                   <IoMdClose className="text-2xl" />
                 </button>
@@ -379,7 +379,7 @@ export default function SettingsModal() {
                           <button
                             onClick={handleResetRequest}
                             aria-label={ARIA_RESET_STORAGE}
-                            className="cursor-pointer rounded-lg border-2 border-red-700 bg-red-100 px-3 py-2 text-sm font-semibold text-red-700 transition-all duration-200 hover:border-red-800 hover:bg-red-700 hover:text-white dark:border-red-400 dark:bg-red-900/30 dark:text-white dark:hover:bg-red-800"
+                            className="min-h-[44px] min-w-[44px] cursor-pointer rounded-lg border-2 border-red-700 bg-red-100 px-3 py-2 text-sm font-semibold text-red-700 transition-all duration-200 hover:border-red-800 hover:bg-red-700 hover:text-white dark:border-red-400 dark:bg-red-900/30 dark:text-white dark:hover:bg-red-800"
                           >
                             <RiDeleteBin2Fill className="text-lg" />
                           </button>

@@ -38,8 +38,11 @@ function FilterButton({ onClick, activeFiltersCount }) {
       {hasActiveFilters && (
         <span
           className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white dark:bg-red-500"
-          aria-label={`${activeFiltersCount} filtres actifs`}
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
         >
+          <span className="sr-only">{activeFiltersCount} filtres actifs</span>
           {activeFiltersCount}
         </span>
       )}
