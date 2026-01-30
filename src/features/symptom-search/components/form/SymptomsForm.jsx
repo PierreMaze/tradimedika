@@ -318,15 +318,15 @@ export default function SymptomsForm({
             transition={{ duration: 0.3 }}
             className="mt-2 flex items-center gap-2 rounded-lg border-2 border-dashed border-amber-700/60 bg-amber-50 px-4 py-2 dark:border-amber-400/60 dark:bg-amber-950"
           >
-            <HiExclamationTriangle className="text-lg text-amber-600 dark:text-amber-400" />
+            <HiExclamationTriangle className="text-lg text-amber-700 dark:text-amber-400" />
             <p className="text-sm font-medium tracking-wider text-amber-800 dark:text-amber-100">
               Limite de 5 symptômes atteinte.
-              <span className="font-semibold text-amber-600 dark:text-amber-400">
+              <span className="font-semibold text-amber-700 dark:text-amber-400">
                 {" "}
                 Supprimez-en un
               </span>{" "}
               ou
-              <span className="font-semibold text-amber-600 dark:text-amber-400">
+              <span className="font-semibold text-amber-700 dark:text-amber-400">
                 {" "}
                 continuer
               </span>

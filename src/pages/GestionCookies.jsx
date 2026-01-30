@@ -45,7 +45,7 @@ export default function GestionCookies() {
             <li>
               <a
                 href="#definition"
-                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+                className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 1. Qu&apos;est-ce qu&apos;un cookie ?
               </a>
@@ -53,7 +53,7 @@ export default function GestionCookies() {
             <li>
               <a
                 href="#liste"
-                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+                className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 2. Liste des cookies utilisés
               </a>
@@ -61,7 +61,7 @@ export default function GestionCookies() {
             <li>
               <a
                 href="#localstorage"
-                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+                className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 3. Distinction cookies / localStorage
               </a>
@@ -69,7 +69,7 @@ export default function GestionCookies() {
             <li>
               <a
                 href="#choix"
-                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+                className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 4. Vos choix concernant les cookies
               </a>
@@ -77,7 +77,7 @@ export default function GestionCookies() {
             <li>
               <a
                 href="#durees"
-                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+                className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 5. Durées de conservation
               </a>
@@ -85,7 +85,7 @@ export default function GestionCookies() {
             <li>
               <a
                 href="#liens"
-                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+                className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 6. Pour en savoir plus
               </a>
@@ -212,7 +212,7 @@ export default function GestionCookies() {
         <div className="mb-4 rounded-lg border-2 border-dashed border-amber-600 bg-amber-50 px-4 py-3 dark:border-amber-400/60 dark:bg-amber-950/80">
           <p className="text-sm font-semibold text-amber-800 dark:text-amber-200">
             <HiExclamationTriangle
-              className="mr-2 inline-flex h-4 w-4 shrink-0 text-amber-600 transition duration-300 ease-in-out lg:h-6 lg:w-6 dark:text-amber-400"
+              className="mr-2 inline-flex h-4 w-4 shrink-0 text-amber-700 transition duration-300 ease-in-out lg:h-6 lg:w-6 dark:text-amber-400"
               aria-hidden="true"
             />{" "}
             Fonctionnalité désactivée par défaut
@@ -280,7 +280,7 @@ export default function GestionCookies() {
           recherches soient sauvegardées conformément à notre{" "}
           <Link
             to="/politique-confidentialite"
-            className="text-emerald-600 underline transition hover:text-emerald-700 dark:text-emerald-500 dark:hover:text-emerald-400"
+            className="text-emerald-700 underline transition hover:text-emerald-800 dark:text-emerald-500 dark:hover:text-emerald-400"
           >
             Politique de Confidentialité
           </Link>
@@ -406,7 +406,7 @@ export default function GestionCookies() {
           bouton{" "}
           <Link
             to="/gestion-cookies"
-            className="font-medium text-emerald-600 underline dark:text-emerald-500"
+            className="font-medium text-emerald-700 underline dark:text-emerald-500"
           >
             &quot;Paramètres des cookies&quot;
           </Link>{" "}

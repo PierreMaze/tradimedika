@@ -63,7 +63,7 @@ export default function MentionsLegales() {
             >
               <a
                 href="#editeur"
-                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+                className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 1. Éditeur du site
               </a>
@@ -77,7 +77,7 @@ export default function MentionsLegales() {
             >
               <a
                 href="#hebergeur"
-                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+                className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 2. Hébergement
               </a>
@@ -91,7 +91,7 @@ export default function MentionsLegales() {
             >
               <a
                 href="#directeur"
-                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+                className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 3. Directeur de publication
               </a>
@@ -105,7 +105,7 @@ export default function MentionsLegales() {
             >
               <a
                 href="#propriete"
-                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+                className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 4. Propriété intellectuelle
               </a>
@@ -119,7 +119,7 @@ export default function MentionsLegales() {
             >
               <a
                 href="#responsabilite"
-                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+                className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 5. Limitation de responsabilité
               </a>
@@ -223,7 +223,7 @@ export default function MentionsLegales() {
         <div className="rounded-lg border-2 border-dashed border-amber-700/60 bg-amber-50 px-4 py-3 transition-all duration-300 ease-in-out dark:border-amber-400/60 dark:bg-amber-950/80">
           <p className="font-semibold text-amber-900 dark:text-amber-100">
             <LiaBalanceScaleSolid
-              className="mr-2 inline-flex h-5 w-5 shrink-0 text-amber-600 transition duration-300 ease-in-out lg:h-6 lg:w-6 dark:text-amber-400"
+              className="mr-2 inline-flex h-5 w-5 shrink-0 text-amber-700 transition duration-300 ease-in-out lg:h-6 lg:w-6 dark:text-amber-400"
               aria-hidden="true"
             />
             Important

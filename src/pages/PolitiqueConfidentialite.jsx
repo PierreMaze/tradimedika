@@ -72,7 +72,7 @@ export default function PolitiqueConfidentialite() {
             >
               <a
                 href="#responsable"
-                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+                className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 1. Responsable du traitement
               </a>
@@ -86,7 +86,7 @@ export default function PolitiqueConfidentialite() {
             >
               <a
                 href="#donnees"
-                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+                className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 2. Données collectées et finalités
               </a>
@@ -100,7 +100,7 @@ export default function PolitiqueConfidentialite() {
             >
               <a
                 href="#ga4"
-                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+                className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 3. Google Analytics 4 et transfert de données
               </a>
@@ -114,7 +114,7 @@ export default function PolitiqueConfidentialite() {
             >
               <a
                 href="#securite"
-                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+                className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 4. Sécurité des données
               </a>
@@ -128,7 +128,7 @@ export default function PolitiqueConfidentialite() {
             >
               <a
                 href="#modifications"
-                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+                className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 5. Modifications
               </a>
@@ -142,7 +142,7 @@ export default function PolitiqueConfidentialite() {
             >
               <a
                 href="#contact"
-                className="text-emerald-600 transition hover:underline dark:text-emerald-500"
+                className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 6. Contact
               </a>
@@ -377,7 +377,7 @@ export default function PolitiqueConfidentialite() {
         <div className="mt-6 rounded-lg border-2 border-dashed border-emerald-700/60 bg-emerald-50 px-4 py-3 transition-all duration-300 ease-in-out dark:border-emerald-400/60 dark:bg-emerald-950/80">
           <p className="font-semibold text-emerald-900 dark:text-emerald-100">
             <FiInfo
-              className="mr-2 inline-flex h-4 w-4 shrink-0 text-emerald-600 transition duration-300 ease-in-out lg:h-6 lg:w-6 dark:text-emerald-400"
+              className="mr-2 inline-flex h-4 w-4 shrink-0 text-emerald-700 transition duration-300 ease-in-out lg:h-6 lg:w-6 dark:text-emerald-400"
               aria-hidden="true"
             />
             Aucune donnée sensible
@@ -409,7 +409,7 @@ export default function PolitiqueConfidentialite() {
         <div className="mb-4 rounded-lg border-2 border-dashed border-amber-600 bg-amber-50 p-4 dark:bg-amber-900/20">
           <p className="font-semibold text-amber-900 dark:text-amber-100">
             <HiExclamationTriangle
-              className="mr-2 inline-flex h-4 w-4 shrink-0 text-amber-600 transition duration-300 ease-in-out lg:h-6 lg:w-6 dark:text-amber-400"
+              className="mr-2 inline-flex h-4 w-4 shrink-0 text-amber-700 transition duration-300 ease-in-out lg:h-6 lg:w-6 dark:text-amber-400"
               aria-hidden="true"
             />
             Important
@@ -502,7 +502,7 @@ export default function PolitiqueConfidentialite() {
             Email :{" "}
             <a
               href="mailto:promazelaygue@gmail.com"
-              className="font-medium text-emerald-600 transition hover:underline dark:text-emerald-500"
+              className="font-medium text-emerald-700 transition hover:underline dark:text-emerald-500"
             >
               promazelaygue@gmail.com
             </a>

@@ -18,7 +18,9 @@ function LayoutApp() {
           <Header />
           <Disclaimer />
           <ScrollRestoration />
-          <Outlet />
+          <main className="w-full">
+            <Outlet />
+          </main>
           <Footer className="mt-auto" />
           <CookieBanner />
         </div>

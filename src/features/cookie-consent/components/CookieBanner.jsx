@@ -58,7 +58,7 @@ export default function CookieBanner() {
 
           <div className="mb-3 flex items-center gap-2">
             <FaCookieBite
-              className="text-2xl text-emerald-600"
+              className="text-2xl text-emerald-700"
               aria-hidden="true"
             />
             <h2 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
@@ -71,7 +71,7 @@ export default function CookieBanner() {
             analyser le trafic. Consultez notre{" "}
             <Link
               to="/politique-confidentialite"
-              className="font-medium text-emerald-600 underline transition hover:text-emerald-700 dark:text-emerald-500 dark:hover:text-emerald-400"
+              className="font-medium text-emerald-700 underline transition hover:text-emerald-800 dark:text-emerald-500 dark:hover:text-emerald-400"
             >
               politique de confidentialité
             </Link>{" "}
