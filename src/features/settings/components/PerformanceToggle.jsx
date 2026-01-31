@@ -18,7 +18,7 @@ export default function PerformanceToggle() {
       className={`group relative flex h-8 w-14 cursor-pointer items-center rounded-md border-2 px-1 py-1.5 transition-all duration-300 ease-out ${
         isHighPerformance
           ? "justify-end border-emerald-500/80 bg-emerald-500"
-          : "border-dark dark:bg-dark justify-start bg-white dark:border-white"
+          : "justify-start border-neutral-400 bg-neutral-200 dark:border-neutral-600 dark:bg-neutral-700"
       }`}
     >
       {/* Glow / halo UX */}
@@ -33,16 +33,14 @@ export default function PerformanceToggle() {
         layout
         transition={{ type: "spring", bounce: 0.25, duration: 0.25 }}
         className={`z-10 flex h-6 w-6 items-center justify-center rounded-md group-hover:scale-105 ${
-          isHighPerformance
-            ? "bg-dark dark:bg-white"
-            : "bg-dark border border-white dark:bg-white"
+          isHighPerformance ? "bg-white" : "bg-neutral-400 dark:bg-neutral-600"
         }`}
       >
         <FaWandMagicSparkles
           className={`text-xs transition-colors duration-300 ${
             isHighPerformance
-              ? "dark:text-dark text-white"
-              : "dark:text-dark text-white"
+              ? " text-emerald-600"
+              : "text-white dark:text-neutral-300"
           }`}
         />
       </motion.div>

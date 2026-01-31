@@ -18,7 +18,7 @@ function RemedyResultDetailsTipsSection({ tips }) {
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="mb-3 flex w-full items-center justify-between text-left"
+        className="mb-3 flex w-full cursor-pointer items-center justify-between text-left"
         aria-expanded={isOpen}
       >
         <h2 className="flex items-center gap-2 text-xl font-semibold text-sky-600 lg:text-2xl dark:text-sky-500">

@@ -217,7 +217,11 @@ function RemedyCard({
 
             {/* Tags de sécurité */}
             <div className={`-mt-2 flex flex-col ${textClasses}`}>
-              <TagsInfoButton size="sm" variant="inline" label="Labels" />
+              <TagsInfoButton
+                size="sm"
+                variant="inline"
+                label="Indications d'usage"
+              />
               <div className="flex flex-wrap gap-2">
                 {verifiedByProfessional ? <ProuvedTag /> : <TraditionnalTag />}
                 <PregnancyTag

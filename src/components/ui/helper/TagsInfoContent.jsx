@@ -109,7 +109,7 @@ function TagsCategoryAccordion({ category, isOpenByDefault = true }) {
     <div className="border-b-2 border-dashed border-emerald-200 last:border-b-0 dark:border-emerald-700">
       <button
         onClick={handleHeaderClick}
-        className="flex w-full items-center justify-between py-4 text-left transition-colors"
+        className="flex w-full cursor-pointer items-center justify-between py-4 text-left transition-colors"
         aria-expanded={isOpen}
         aria-controls={`tags-category-${category.id}`}
       >

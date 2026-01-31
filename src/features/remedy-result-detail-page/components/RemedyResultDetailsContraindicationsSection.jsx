@@ -19,7 +19,7 @@ function RemedyResultDetailsContraindicationsSection({ contraindications }) {
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="mb-3 flex w-full items-center justify-between text-left"
+        className="mb-3 flex w-full cursor-pointer items-center justify-between text-left"
         aria-expanded={isOpen}
       >
         <h2 className="flex items-center gap-2 text-lg font-semibold text-red-600 lg:text-xl 2xl:text-2xl dark:text-red-500">
@@ -27,7 +27,7 @@ function RemedyResultDetailsContraindicationsSection({ contraindications }) {
             className="h-4 w-4 text-red-600 lg:h-5 lg:w-5 dark:text-red-500"
             aria-hidden="true"
           />
-          Contraindications
+          Contre-indication
         </h2>
         {isOpen ? (
           <HiChevronUp

@@ -322,7 +322,7 @@ function TagsInfoButton({
                   className={`border-b-2 border-dashed border-emerald-200 pb-4 text-xl font-bold text-neutral-900 lg:text-2xl dark:border-emerald-700 dark:text-neutral-50 ${!isDesktop ? "pr-8" : ""}`}
                 >
                   <GrCircleQuestion className="mr-2 inline-block h-5 w-5 lg:h-6 lg:w-6" />
-                  Signification des labels
+                  Lexique des indications d&apos;usage
                 </h3>
 
                 {/* Contenu partagé */}

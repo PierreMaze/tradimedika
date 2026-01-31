@@ -16,7 +16,7 @@ export default function DarkModeToggle() {
       className={`group relative flex h-8 w-14 cursor-pointer items-center rounded-md border-2 p-1 transition-all duration-300 ease-out ${
         isDarkMode
           ? "justify-end border-emerald-500/80 bg-emerald-500"
-          : "border-dark justify-start bg-white"
+          : "justify-start border-neutral-400 bg-neutral-200 dark:border-neutral-600 dark:bg-neutral-700"
       }`}
     >
       {/* Glow / halo UX */}
@@ -31,12 +31,12 @@ export default function DarkModeToggle() {
         layout
         transition={{ type: "spring", bounce: 0.25, duration: 0.25 }}
         className={`z-10 flex h-6 w-6 items-center justify-center rounded-md text-current group-hover:scale-105 ${
-          isDarkMode ? "bg-white " : "bg-dark "
+          isDarkMode ? "bg-white" : "bg-neutral-400 dark:bg-neutral-600"
         }`}
       >
         {isDarkMode ? (
           <HiSun
-            className={`text-dark text-base transition-colors duration-300`}
+            className={`text-base text-emerald-600 transition-colors duration-300`}
           />
         ) : (
           <HiMoon

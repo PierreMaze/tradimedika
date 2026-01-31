@@ -228,7 +228,7 @@ export default function SettingsModal() {
               <div className="border-t border-neutral-200 pt-6 dark:border-neutral-700">
                 <button
                   onClick={toggleCookieSection}
-                  className="mb-4 flex w-full items-center justify-between text-left transition-colors hover:opacity-80"
+                  className="mb-4 flex w-full cursor-pointer items-center justify-between text-left transition-colors hover:opacity-80"
                   aria-expanded={isCookieSectionOpen}
                   aria-controls="cookie-section-content"
                 >

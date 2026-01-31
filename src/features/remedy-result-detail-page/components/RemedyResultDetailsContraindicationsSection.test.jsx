@@ -39,7 +39,7 @@ describe("RemedyResultDetailsContraindicationsSection", () => {
       );
 
       expect(
-        screen.getByRole("heading", { name: /contraindications/i }),
+        screen.getByRole("heading", { name: /Contre-indication/i }),
       ).toBeInTheDocument();
       expect(screen.getByTestId("warning-icon")).toBeInTheDocument();
     });
@@ -195,7 +195,7 @@ describe("RemedyResultDetailsContraindicationsSection", () => {
       );
 
       const heading = screen.getByRole("heading", {
-        name: /contraindications/i,
+        name: /Contre-indication/i,
       });
       expect(heading.tagName).toBe("H2");
     });

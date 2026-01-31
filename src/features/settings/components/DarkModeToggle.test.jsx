@@ -1,8 +1,8 @@
-import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import DarkModeToggle from "./DarkModeToggle";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import * as ThemeContextModule from "../context/ThemeContext";
+import DarkModeToggle from "./DarkModeToggle";
 
 describe("DarkModeToggle", () => {
   let mockToggleDarkMode;
@@ -36,7 +36,9 @@ describe("DarkModeToggle", () => {
     const button = screen.getByRole("button");
     // Le bouton doit avoir les classes correspondant au mode clair
     expect(button).toHaveClass("justify-start");
-    expect(button).toHaveClass("bg-white");
+    expect(button).toHaveClass(
+      "bg-neutral-200 dark:border-neutral-600 dark:bg-neutral-700",
+    );
   });
 
   it("should display sun icon when in dark mode", () => {

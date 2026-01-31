@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import SourceTag from "../tags/SourceTag";
+import SourceTag from "../../../components/tags/SourceTag";
 
 /**
  * SourcesSection Component

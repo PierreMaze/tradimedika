@@ -1,8 +1,8 @@
-import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import PerformanceToggle from "./PerformanceToggle";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import * as PerformanceContextModule from "../context/PerformanceContext";
+import PerformanceToggle from "./PerformanceToggle";
 
 describe("PerformanceToggle", () => {
   let mockTogglePerformance;
@@ -36,7 +36,9 @@ describe("PerformanceToggle", () => {
     const button = screen.getByRole("button");
     // Le bouton doit avoir les classes correspondant au mode économie
     expect(button).toHaveClass("justify-start");
-    expect(button).toHaveClass("bg-white");
+    expect(button).toHaveClass(
+      "bg-neutral-200 dark:border-neutral-600 dark:bg-neutral-700",
+    );
   });
 
   it("should display correct styles when in high performance mode", () => {

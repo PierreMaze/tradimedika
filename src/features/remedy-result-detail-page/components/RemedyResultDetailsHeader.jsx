@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
-import SourcesSection from "../../../components/sections/SourcesSection";
 import {
   ChildrenAgeTag,
   PregnancyTag,
@@ -8,6 +7,7 @@ import {
   TraditionnalTag,
 } from "../../../components/tags";
 import TagsInfoButton from "../../../components/ui/helper/TagsInfoButton";
+import SourcesSection from "./RemedyResultDetailsSourcesSection";
 
 function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
   return (
@@ -44,7 +44,11 @@ function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
         </p>
 
         <div className="flex flex-col">
-          <TagsInfoButton size="sm" variant="inline" label="Labels" />
+          <TagsInfoButton
+            size="sm"
+            variant="inline"
+            label="Indications d'usage"
+          />
           <div className="mb-2 flex flex-wrap items-center gap-2">
             {remedy.verifiedByProfessional ? (
               <ProuvedTag />
