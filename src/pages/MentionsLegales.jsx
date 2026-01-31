@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { LiaBalanceScaleSolid } from "react-icons/lia";
 import { Link } from "react-router-dom";
+import ExternalLink from "../components/ui/links/ExternalLink";
 
 export default function MentionsLegales() {
   return (
@@ -174,14 +175,13 @@ export default function MentionsLegales() {
           </p>
           <p className="text-neutral-700 dark:text-neutral-300">
             Site web :{" "}
-            <a
+            <ExternalLink
               href="https://www.github.com"
-              target="_blank"
-              rel="noopener noreferrer"
+              siteName="GitHub"
               className="text-emerald-600 transition hover:underline dark:text-emerald-500"
             >
               https://www.github.com
-            </a>
+            </ExternalLink>
           </p>
         </div>
       </section>
@@ -237,14 +237,13 @@ export default function MentionsLegales() {
         </div>
         <p className="mt-4 text-sm text-neutral-600 dark:text-neutral-400">
           Référence :{" "}
-          <a
+          <ExternalLink
             href="https://www.legifrance.gouv.fr/codes/id/LEGITEXT000006069414"
-            target="_blank"
-            rel="noopener noreferrer"
+            siteName="Légifrance"
             className="text-emerald-600 transition hover:underline dark:text-emerald-500"
           >
             Code de la propriété intellectuelle
-          </a>
+          </ExternalLink>
         </p>
       </section>
 
@@ -295,25 +294,23 @@ export default function MentionsLegales() {
         </h2>
         <ul className="space-y-2 text-sm">
           <li>
-            <a
+            <ExternalLink
               href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000801164"
-              target="_blank"
-              rel="noopener noreferrer"
+              siteName="Légifrance"
               className="text-sky-600 transition hover:underline dark:text-sky-500"
             >
               Loi n° 2004-575 du 21 juin 2004 pour la confiance dans
               l&apos;économie numérique (LCEN)
-            </a>
+            </ExternalLink>
           </li>
           <li>
-            <a
+            <ExternalLink
               href="https://www.legifrance.gouv.fr/codes/id/LEGITEXT000006069414"
-              target="_blank"
-              rel="noopener noreferrer"
+              siteName="Légifrance"
               className="text-sky-600 transition hover:underline dark:text-sky-500"
             >
               Code de la propriété intellectuelle
-            </a>
+            </ExternalLink>
           </li>
         </ul>
       </section>
@@ -326,14 +323,13 @@ export default function MentionsLegales() {
           Pour toute question concernant ces mentions légales, vous pouvez nous
           contacter :
         </p>
-        <a
+        <ExternalLink
           href="https://tally.so/r/q4RN95"
-          target="_blank"
-          rel="noopener noreferrer"
+          siteName="Tally"
           className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-medium text-white transition hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600"
         >
           Nous contacter
-        </a>
+        </ExternalLink>
       </div>
     </div>
   );

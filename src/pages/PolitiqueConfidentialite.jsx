@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { FiInfo } from "react-icons/fi";
 import { HiExclamationTriangle } from "react-icons/hi2";
 import { Link } from "react-router-dom";
+import ExternalLink from "../components/ui/links/ExternalLink";
 export default function PolitiqueConfidentialite() {
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-8">
@@ -442,14 +443,13 @@ export default function PolitiqueConfidentialite() {
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
           Pour plus d&apos;informations sur la protection des données par Google
           :{" "}
-          <a
+          <ExternalLink
             href="https://support.google.com/analytics/answer/6004245?hl=fr"
-            target="_blank"
-            rel="noopener noreferrer"
+            siteName="Google Analytics"
             className="text-emerald-600 transition hover:underline dark:text-emerald-500"
           >
             Google Analytics Privacy
-          </a>
+          </ExternalLink>
         </p>
       </section>
 
@@ -516,34 +516,31 @@ export default function PolitiqueConfidentialite() {
         </h2>
         <ul className="space-y-2 text-sm">
           <li>
-            <a
+            <ExternalLink
               href="https://eur-lex.europa.eu/eli/reg/2016/679/oj?locale=fr"
-              target="_blank"
-              rel="noopener noreferrer"
+              siteName="EUR-Lex"
               className="text-sky-600 transition hover:underline dark:text-sky-500"
             >
               Règlement (UE) 2016/679 (RGPD)
-            </a>
+            </ExternalLink>
           </li>
           <li>
-            <a
+            <ExternalLink
               href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000886460"
-              target="_blank"
-              rel="noopener noreferrer"
+              siteName="Légifrance"
               className="text-sky-600 transition hover:underline dark:text-sky-500"
             >
               Loi Informatique et Libertés
-            </a>
+            </ExternalLink>
           </li>
           <li>
-            <a
+            <ExternalLink
               href="https://www.cnil.fr"
-              target="_blank"
-              rel="noopener noreferrer"
+              siteName="CNIL"
               className="text-sky-600 transition hover:underline dark:text-sky-500"
             >
               Commission Nationale de l&pos;Informatique et des Libertés (CNIL)
-            </a>
+            </ExternalLink>
           </li>
         </ul>
       </section>

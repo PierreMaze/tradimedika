@@ -1,7 +1,7 @@
 {
   "name": "tradimedika",
   "private": true,
-  "version": "0.49.0",
+  "version": "0.50.0",
   "type": "module",
   "homepage": "http://pierremaze.github.io/tradimedika",
   "prettier": {
@@ -19,6 +19,7 @@
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
     "validate-data": "node scripts/validateData.js",
+    "validate-sources": "node scripts/validateSources.js",
     "extract-allergens": "node scripts/extractAllergensFromDb.js",
     "generate-sitemap": "node scripts/generateSitemap.js",
     "clean": "rm -rf node_modules dist && clear",

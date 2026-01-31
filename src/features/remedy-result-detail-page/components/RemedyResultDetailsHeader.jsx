@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
+import SourcesSection from "../../../components/sections/SourcesSection";
 import {
   ChildrenAgeTag,
   PregnancyTag,
@@ -38,13 +39,13 @@ function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
             {remedy.type}
           </span>
         </div>
-        <p className="mb-6 text-sm leading-relaxed text-neutral-600 lg:text-base 2xl:text-lg dark:text-neutral-400">
+        <p className="-mb-2 text-sm leading-relaxed text-neutral-600 lg:text-base 2xl:text-lg dark:text-neutral-400">
           {remedy.description}
         </p>
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col">
           <TagsInfoButton size="sm" variant="inline" label="Labels" />
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="mb-2 flex flex-wrap items-center gap-2">
             {remedy.verifiedByProfessional ? (
               <ProuvedTag />
             ) : (
@@ -63,6 +64,8 @@ function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
 
             <ChildrenAgeTag age={remedy.childrenAge} />
           </div>
+
+          <SourcesSection sources={remedy.sources} />
         </div>
       </div>
     </motion.div>
@@ -77,6 +80,10 @@ RemedyResultDetailsHeader.propTypes = {
     verifiedByProfessional: PropTypes.bool,
     pregnancySafe: PropTypes.bool,
     childrenAge: PropTypes.number,
+    sources: PropTypes.shape({
+      scientific: PropTypes.array,
+      traditional: PropTypes.array,
+    }),
   }).isRequired,
   safeImageUrl: PropTypes.string.isRequired,
 };

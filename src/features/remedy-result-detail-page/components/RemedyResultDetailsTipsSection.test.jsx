@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import RemedyResultDetailsTipsSection from "./RemedyResultDetailsTipsSection";
 
@@ -7,9 +8,11 @@ vi.mock("framer-motion", () => ({
     section: ({ children, ...props }) => (
       <section {...props}>{children}</section>
     ),
+    div: ({ children, ...props }) => <div {...props}>{children}</div>,
     ul: ({ children, ...props }) => <ul {...props}>{children}</ul>,
     li: ({ children, ...props }) => <li {...props}>{children}</li>,
   },
+  AnimatePresence: ({ children }) => children,
 }));
 
 vi.mock("react-icons/md", () => ({
@@ -32,14 +35,20 @@ describe("RemedyResultDetailsTipsSection", () => {
       expect(screen.getByTestId("tips-icon")).toBeInTheDocument();
     });
 
-    it("should render all tips as list items", () => {
+    it("should render all tips as list items", async () => {
       const tips = [
         "Consommer avec du miel",
         "À prendre le matin",
         "Conserver au frais",
       ];
 
+      const user = userEvent.setup();
       render(<RemedyResultDetailsTipsSection tips={tips} />);
+
+      // Click to expand accordion
+      await user.click(
+        screen.getByRole("button", { name: /conseils pratiques/i }),
+      );
 
       expect(screen.getByText("Consommer avec du miel")).toBeInTheDocument();
       expect(screen.getByText("À prendre le matin")).toBeInTheDocument();
@@ -66,10 +75,16 @@ describe("RemedyResultDetailsTipsSection", () => {
       );
     });
 
-    it("should render tips in sky text color", () => {
+    it("should render tips in sky text color", async () => {
       const tips = ["test tip"];
 
+      const user = userEvent.setup();
       render(<RemedyResultDetailsTipsSection tips={tips} />);
+
+      // Click to expand accordion
+      await user.click(
+        screen.getByRole("button", { name: /conseils pratiques/i }),
+      );
 
       const listItem = screen.getByText("test tip");
       expect(listItem).toHaveClass("text-black");
@@ -102,30 +117,48 @@ describe("RemedyResultDetailsTipsSection", () => {
       expect(container.firstChild).toBeNull();
     });
 
-    it("should handle single tip", () => {
+    it("should handle single tip", async () => {
       const tips = ["Consommer avec du miel"];
 
+      const user = userEvent.setup();
       render(<RemedyResultDetailsTipsSection tips={tips} />);
+
+      // Click to expand accordion
+      await user.click(
+        screen.getByRole("button", { name: /conseils pratiques/i }),
+      );
 
       expect(screen.getByText("Consommer avec du miel")).toBeInTheDocument();
     });
 
-    it("should handle many tips", () => {
+    it("should handle many tips", async () => {
       const tips = Array.from({ length: 10 }, (_, i) => `tip ${i}`);
 
+      const user = userEvent.setup();
       render(<RemedyResultDetailsTipsSection tips={tips} />);
+
+      // Click to expand accordion
+      await user.click(
+        screen.getByRole("button", { name: /conseils pratiques/i }),
+      );
 
       tips.forEach((tip) => {
         expect(screen.getByText(tip)).toBeInTheDocument();
       });
     });
 
-    it("should handle long tip text", () => {
+    it("should handle long tip text", async () => {
       const tips = [
         "Ceci est un conseil très long qui contient beaucoup de détails et d'informations utiles pour l'utilisateur",
       ];
 
+      const user = userEvent.setup();
       render(<RemedyResultDetailsTipsSection tips={tips} />);
+
+      // Click to expand accordion
+      await user.click(
+        screen.getByRole("button", { name: /conseils pratiques/i }),
+      );
 
       expect(screen.getByText(tips[0])).toBeInTheDocument();
     });
@@ -153,10 +186,16 @@ describe("RemedyResultDetailsTipsSection", () => {
       expect(heading.tagName).toBe("H2");
     });
 
-    it("should use unordered list for tips", () => {
+    it("should use unordered list for tips", async () => {
       const tips = ["tip1", "tip2"];
 
+      const user = userEvent.setup();
       render(<RemedyResultDetailsTipsSection tips={tips} />);
+
+      // Click to expand accordion
+      await user.click(
+        screen.getByRole("button", { name: /conseils pratiques/i }),
+      );
 
       const list = screen.getByRole("list");
       expect(list.tagName).toBe("UL");

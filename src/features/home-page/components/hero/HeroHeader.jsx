@@ -18,7 +18,7 @@ import { GiSprout } from "react-icons/gi";
  * @returns {JSX.Element}
  */
 export default function HeroHeader({
-  badgeText = "Version Bêta · v0.49.0",
+  badgeText = "Version Bêta · v0.50.0",
   title = "Prenez soin de vous",
   titleHighlight = "naturellement",
   description = "Solutions préventives et remèdes pour le quotidien, à votre portée.",
@@ -47,7 +47,7 @@ export default function HeroHeader({
         transition={{ duration: 0.6, delay: 0.2 }}
         className="text-center"
       >
-        <h1 className="text-5xl font-semibold lg:text-6xl 2xl:text-8xl">
+        <h1 className="text-5xl font-semibold lg:text-7xl 2xl:text-8xl">
           <span className="text-dark dark:text-light transition duration-300 ease-in-out">
             {title}
           </span>
@@ -63,7 +63,7 @@ export default function HeroHeader({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className="max-w-3xl text-center text-base text-neutral-600 transition duration-300 ease-in-out lg:text-lg 2xl:max-w-5xl 2xl:text-2xl dark:text-neutral-400"
+        className="max-w-3xl text-center text-base text-neutral-600 transition duration-300 ease-in-out lg:text-xl 2xl:max-w-5xl 2xl:text-2xl dark:text-neutral-400"
       >
         {description}
       </motion.p>

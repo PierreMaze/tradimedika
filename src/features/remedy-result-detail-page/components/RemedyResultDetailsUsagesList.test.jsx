@@ -1,15 +1,26 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import RemedyResultDetailsUsagesList from "./RemedyResultDetailsUsagesList";
+
+// Helper function to render and open accordion
+async function renderAndOpenAccordion(uses) {
+  const user = userEvent.setup();
+  const result = render(<RemedyResultDetailsUsagesList uses={uses} />);
+  await user.click(screen.getByRole("button", { name: /utilisations/i }));
+  return result;
+}
 
 vi.mock("framer-motion", () => ({
   motion: {
     section: ({ children, ...props }) => (
       <section {...props}>{children}</section>
     ),
+    div: ({ children, ...props }) => <div {...props}>{children}</div>,
     ul: ({ children, ...props }) => <ul {...props}>{children}</ul>,
     li: ({ children, ...props }) => <li {...props}>{children}</li>,
   },
+  AnimatePresence: ({ children }) => children,
 }));
 
 vi.mock("../utils/formatUsageFrequency", () => ({
@@ -51,62 +62,62 @@ describe("RemedyResultDetailsUsagesList", () => {
       expect(icon).toHaveAttribute("aria-hidden", "true");
     });
 
-    it("should render form when provided", () => {
+    it("should render form when provided", async () => {
       const uses = [
         {
           form: ["infusion", "décoction"],
         },
       ];
 
-      render(<RemedyResultDetailsUsagesList uses={uses} />);
+      await renderAndOpenAccordion(uses);
       expect(screen.getByText("infusion, décoction")).toBeInTheDocument();
     });
 
-    it("should render dose when provided", () => {
+    it("should render dose when provided", async () => {
       const uses = [
         {
           dose: { value: 2, unit: "cuillères à soupe" },
         },
       ];
 
-      render(<RemedyResultDetailsUsagesList uses={uses} />);
+      await renderAndOpenAccordion(uses);
       expect(screen.getByText(/2 cuillères à soupe/)).toBeInTheDocument();
     });
 
-    it("should render frequency when provided", () => {
+    it("should render frequency when provided", async () => {
       const uses = [
         {
           frequency: { value: 3, unit: "jour" },
         },
       ];
 
-      render(<RemedyResultDetailsUsagesList uses={uses} />);
+      await renderAndOpenAccordion(uses);
       expect(screen.getByText(/3 fois par jour/)).toBeInTheDocument();
     });
 
-    it("should render duration when provided", () => {
+    it("should render duration when provided", async () => {
       const uses = [
         {
           duration: { value: 7, unit: "jours" },
         },
       ];
 
-      render(<RemedyResultDetailsUsagesList uses={uses} />);
+      await renderAndOpenAccordion(uses);
       expect(screen.getByText(/Pendant 7 jours/)).toBeInTheDocument();
     });
 
-    it("should render description when provided", () => {
+    it("should render description when provided", async () => {
       const uses = [
         {
           description: "Boire chaud de préférence",
         },
       ];
 
-      render(<RemedyResultDetailsUsagesList uses={uses} />);
+      await renderAndOpenAccordion(uses);
       expect(screen.getByText("Boire chaud de préférence")).toBeInTheDocument();
     });
 
-    it("should render complete usage with all fields", () => {
+    it("should render complete usage with all fields", async () => {
       const uses = [
         {
           form: ["infusion"],
@@ -117,7 +128,7 @@ describe("RemedyResultDetailsUsagesList", () => {
         },
       ];
 
-      render(<RemedyResultDetailsUsagesList uses={uses} />);
+      await renderAndOpenAccordion(uses);
       expect(screen.getByText("infusion")).toBeInTheDocument();
       expect(screen.getByText(/1 tasse/)).toBeInTheDocument();
       expect(screen.getByText(/3 fois par jour/)).toBeInTheDocument();
@@ -125,31 +136,31 @@ describe("RemedyResultDetailsUsagesList", () => {
       expect(screen.getByText("Boire chaud")).toBeInTheDocument();
     });
 
-    it("should call formatUsageFrequency utility for frequency formatting", () => {
+    it("should call formatUsageFrequency utility for frequency formatting", async () => {
       const uses = [
         {
           frequency: { value: 2, unit: "jour" },
         },
       ];
 
-      render(<RemedyResultDetailsUsagesList uses={uses} />);
+      await renderAndOpenAccordion(uses);
       expect(screen.getByText(/2 fois par jour/)).toBeInTheDocument();
     });
 
-    it("should render multiple usages", () => {
+    it("should render multiple usages", async () => {
       const uses = [
         { form: ["infusion"], description: "Usage 1" },
         { form: ["décoction"], description: "Usage 2" },
         { form: ["cataplasme"], description: "Usage 3" },
       ];
 
-      render(<RemedyResultDetailsUsagesList uses={uses} />);
+      await renderAndOpenAccordion(uses);
       expect(screen.getByText("Usage 1")).toBeInTheDocument();
       expect(screen.getByText("Usage 2")).toBeInTheDocument();
       expect(screen.getByText("Usage 3")).toBeInTheDocument();
     });
 
-    it("should render separators between fields", () => {
+    it("should render separators between fields", async () => {
       const uses = [
         {
           form: ["infusion"],
@@ -158,9 +169,7 @@ describe("RemedyResultDetailsUsagesList", () => {
         },
       ];
 
-      const { container } = render(
-        <RemedyResultDetailsUsagesList uses={uses} />,
-      );
+      const { container } = await renderAndOpenAccordion(uses);
 
       const separators = container.querySelectorAll(".text-neutral-400");
       expect(separators.length).toBeGreaterThan(0);
@@ -187,7 +196,7 @@ describe("RemedyResultDetailsUsagesList", () => {
       expect(container.firstChild).toBeNull();
     });
 
-    it("should handle usage without form", () => {
+    it("should handle usage without form", async () => {
       const uses = [
         {
           dose: { value: 1, unit: "tasse" },
@@ -195,11 +204,11 @@ describe("RemedyResultDetailsUsagesList", () => {
         },
       ];
 
-      render(<RemedyResultDetailsUsagesList uses={uses} />);
+      await renderAndOpenAccordion(uses);
       expect(screen.getByText("Test")).toBeInTheDocument();
     });
 
-    it("should handle usage with empty form array", () => {
+    it("should handle usage with empty form array", async () => {
       const uses = [
         {
           form: [],
@@ -207,11 +216,11 @@ describe("RemedyResultDetailsUsagesList", () => {
         },
       ];
 
-      render(<RemedyResultDetailsUsagesList uses={uses} />);
+      await renderAndOpenAccordion(uses);
       expect(screen.getByText("Test")).toBeInTheDocument();
     });
 
-    it("should handle usage without dose value", () => {
+    it("should handle usage without dose value", async () => {
       const uses = [
         {
           dose: { unit: "tasse" },
@@ -219,11 +228,11 @@ describe("RemedyResultDetailsUsagesList", () => {
         },
       ];
 
-      render(<RemedyResultDetailsUsagesList uses={uses} />);
+      await renderAndOpenAccordion(uses);
       expect(screen.getByText("Test")).toBeInTheDocument();
     });
 
-    it("should handle usage without frequency value", () => {
+    it("should handle usage without frequency value", async () => {
       const uses = [
         {
           frequency: { unit: "jour" },
@@ -231,11 +240,11 @@ describe("RemedyResultDetailsUsagesList", () => {
         },
       ];
 
-      render(<RemedyResultDetailsUsagesList uses={uses} />);
+      await renderAndOpenAccordion(uses);
       expect(screen.getByText("Test")).toBeInTheDocument();
     });
 
-    it("should handle usage without duration value", () => {
+    it("should handle usage without duration value", async () => {
       const uses = [
         {
           duration: { unit: "jours" },
@@ -243,11 +252,11 @@ describe("RemedyResultDetailsUsagesList", () => {
         },
       ];
 
-      render(<RemedyResultDetailsUsagesList uses={uses} />);
+      await renderAndOpenAccordion(uses);
       expect(screen.getByText("Test")).toBeInTheDocument();
     });
 
-    it("should handle usage without description", () => {
+    it("should handle usage without description", async () => {
       const uses = [
         {
           form: ["infusion"],
@@ -255,7 +264,7 @@ describe("RemedyResultDetailsUsagesList", () => {
         },
       ];
 
-      render(<RemedyResultDetailsUsagesList uses={uses} />);
+      await renderAndOpenAccordion(uses);
       expect(screen.getByText("infusion")).toBeInTheDocument();
       expect(screen.getByText(/1 tasse/)).toBeInTheDocument();
     });
@@ -277,18 +286,16 @@ describe("RemedyResultDetailsUsagesList", () => {
       expect(heading.tagName).toBe("H2");
     });
 
-    it("should use unordered list for usages", () => {
+    it("should use unordered list for usages", async () => {
       const uses = [{ description: "test1" }, { description: "test2" }];
-      render(<RemedyResultDetailsUsagesList uses={uses} />);
+      await renderAndOpenAccordion(uses);
       const list = screen.getByRole("list");
       expect(list.tagName).toBe("UL");
     });
 
-    it("should have emerald border for visual distinction", () => {
+    it("should have emerald border for visual distinction", async () => {
       const uses = [{ description: "test" }];
-      const { container } = render(
-        <RemedyResultDetailsUsagesList uses={uses} />,
-      );
+      const { container } = await renderAndOpenAccordion(uses);
       const listItem = container.querySelector("li");
       expect(listItem).toHaveClass("border-l-4", "border-emerald-600");
     });

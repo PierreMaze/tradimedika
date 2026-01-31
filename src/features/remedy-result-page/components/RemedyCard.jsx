@@ -97,13 +97,13 @@ function RemedyCard({
           {/* Image */}
           {image && (
             <div className="bg-light dark:bg-dark relative aspect-square w-full overflow-hidden">
-              {/* Badges de symptômes en overlay (top-left) */}
+              {/* tags de symptômes en overlay (top-left) */}
               {matchedSymptoms.length > 0 && (
                 <div className="absolute top-4 left-4 z-10 flex max-w-[60%] flex-wrap gap-2">
                   {matchedSymptoms.map((symptom, index) => (
                     <span
                       key={index}
-                      className="inline-flex shrink-0 items-center gap-1 rounded-md bg-emerald-600 px-3 py-1.5 font-medium text-white shadow-md dark:bg-emerald-700"
+                      className="inline-flex shrink-0 items-center gap-1 rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-medium text-white shadow-md lg:text-base 2xl:text-lg dark:bg-emerald-700"
                     >
                       {capitalizeFirstLetter(symptom, true)}
                     </span>
@@ -114,7 +114,7 @@ function RemedyCard({
               {isFiltered && (
                 <div className="absolute top-4 right-4 z-10">
                   <span
-                    className="inline-flex shrink-0 items-center gap-1 rounded-md bg-amber-100 px-3 py-1.5 font-medium text-amber-800 dark:bg-amber-900 dark:text-amber-200"
+                    className="inline-flex shrink-0 items-center gap-1 rounded-md bg-amber-100 px-3 py-1.5 text-sm font-medium text-amber-800 shadow-md lg:text-base 2xl:text-lg dark:bg-amber-900 dark:text-amber-200"
                     title="Ce remède contient des allergènes que vous avez déclarés"
                     role="status"
                     aria-live="polite"
@@ -141,7 +141,7 @@ function RemedyCard({
           {/* Contenu */}
           <div className="h-fit p-6">
             {/* En-tête avec nom et type */}
-            <div className="mb-3 flex items-start justify-between">
+            <div className="mb-3 flex items-start justify-start gap-4">
               <h3
                 className={`text-start text-xl font-bold text-neutral-900 lg:text-2xl dark:text-neutral-100 ${textClasses}`}
               >
@@ -165,8 +165,8 @@ function RemedyCard({
 
             {/* Propriétés */}
             {properties && properties.length > 0 && (
-              <div className="mb-4 flex flex-col gap-2 text-xs lg:text-sm 2xl:text-base">
-                <h4 className="text-start text-sm font-bold text-neutral-700 lg:text-base dark:text-neutral-300">
+              <div className="mt-4 flex flex-col gap-2 text-xs lg:text-sm 2xl:text-base">
+                <h4 className="text-start text-xs font-bold text-neutral-700 lg:text-sm 2xl:text-base dark:text-neutral-300">
                   Propriétés
                 </h4>
                 <div className="relative">
@@ -216,7 +216,7 @@ function RemedyCard({
             )}
 
             {/* Tags de sécurité */}
-            <div className={`flex flex-col flex-wrap gap-2 ${textClasses}`}>
+            <div className={`-mt-2 flex flex-col ${textClasses}`}>
               <TagsInfoButton size="sm" variant="inline" label="Labels" />
               <div className="flex flex-wrap gap-2">
                 {verifiedByProfessional ? <ProuvedTag /> : <TraditionnalTag />}

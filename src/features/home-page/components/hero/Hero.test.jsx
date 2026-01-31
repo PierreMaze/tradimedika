@@ -55,9 +55,7 @@ describe("Hero", () => {
     it("should have correct container classes", () => {
       const { container } = render(<Hero />);
 
-      const mainContainer = container.querySelector(
-        ".mx-auto.mt-8.mb-4.flex.h-full",
-      );
+      const mainContainer = container.querySelector(".mx-auto.flex.flex-1");
       expect(mainContainer).toBeInTheDocument();
     });
 
@@ -125,7 +123,7 @@ describe("Hero", () => {
     it("should have full height container", () => {
       const { container } = render(<Hero />);
 
-      const mainContainer = container.querySelector(".h-full");
+      const mainContainer = container.querySelector(".flex-1");
       expect(mainContainer).toBeInTheDocument();
     });
   });

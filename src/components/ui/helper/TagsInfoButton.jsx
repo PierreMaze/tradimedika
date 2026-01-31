@@ -43,7 +43,7 @@ function TagsInfoButton({
   label,
   size = "md",
   variant = "inline",
-  className = "",
+  className = "mt-4 -mb-2",
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
@@ -232,7 +232,7 @@ function TagsInfoButton({
         className={`group inline-flex cursor-help items-center gap-2 rounded-full bg-transparent font-bold transition-colors duration-200 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-emerald-500 active:scale-95 dark:text-white ${buttonSizeClasses[size]}`}
       >
         {label && (
-          <span className="text-sm font-bold text-neutral-700 dark:text-neutral-300">
+          <span className="text-xs font-bold text-neutral-700 lg:text-sm 2xl:text-base dark:text-neutral-300">
             {label}
           </span>
         )}
@@ -250,7 +250,7 @@ function TagsInfoButton({
                 animate={{ opacity: 1 }}
                 exit={prefersReducedMotion ? {} : { opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="fixed inset-0 z-50 bg-black/50 lg:pointer-events-none lg:bg-transparent"
+                className="fixed inset-0 z-50 bg-black/50 disabled:hidden lg:pointer-events-none lg:bg-transparent"
                 onClick={closeTooltip}
                 aria-hidden="true"
               />

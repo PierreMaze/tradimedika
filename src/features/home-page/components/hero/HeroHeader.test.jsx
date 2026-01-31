@@ -7,7 +7,7 @@ describe("HeroHeader", () => {
     it("should render with default props", () => {
       render(<HeroHeader />);
 
-      expect(screen.getByText("Version Bêta · v0.49.0")).toBeInTheDocument();
+      expect(screen.getByText("Version Bêta · v0.50.0")).toBeInTheDocument();
       expect(screen.getByText("Prenez soin de vous")).toBeInTheDocument();
       expect(screen.getByText("naturellement")).toBeInTheDocument();
       expect(
@@ -21,7 +21,7 @@ describe("HeroHeader", () => {
       const { container } = render(<HeroHeader />);
 
       // Badge text
-      expect(screen.getByText("Version Bêta · v0.49.0")).toBeInTheDocument();
+      expect(screen.getByText("Version Bêta · v0.50.0")).toBeInTheDocument();
 
       // GiSprout icon is present
       const icons = container.querySelectorAll("svg");
@@ -52,7 +52,7 @@ describe("HeroHeader", () => {
 
       expect(screen.getByText("Custom Badge")).toBeInTheDocument();
       expect(
-        screen.queryByText("Version Bêta · v0.49.0"),
+        screen.queryByText("Version Bêta · v0.50.0"),
       ).not.toBeInTheDocument();
     });
 
@@ -111,7 +111,7 @@ describe("HeroHeader", () => {
     it("should render badge in separate container", () => {
       render(<HeroHeader />);
 
-      const badge = screen.getByText("Version Bêta · v0.49.0");
+      const badge = screen.getByText("Version Bêta · v0.50.0");
       expect(badge.closest("div")).toHaveClass("border-2");
       expect(badge.closest("div")).toHaveClass("rounded-lg");
     });
@@ -129,7 +129,7 @@ describe("HeroHeader", () => {
     it("should apply badge styles", () => {
       render(<HeroHeader />);
 
-      const badge = screen.getByText("Version Bêta · v0.49.0");
+      const badge = screen.getByText("Version Bêta · v0.50.0");
       const badgeContainer = badge.closest("div");
 
       expect(badgeContainer).toHaveClass("border-2");
@@ -140,7 +140,7 @@ describe("HeroHeader", () => {
     it("should apply dark mode classes to badge", () => {
       render(<HeroHeader />);
 
-      const badge = screen.getByText("Version Bêta · v0.49.0");
+      const badge = screen.getByText("Version Bêta · v0.50.0");
       const badgeContainer = badge.closest("div");
 
       expect(badgeContainer).toHaveClass("dark:bg-emerald-950");
@@ -169,19 +169,19 @@ describe("HeroHeader", () => {
     it("should have responsive text sizes", () => {
       render(<HeroHeader />);
 
-      const badge = screen.getByText("Version Bêta · v0.49.0");
+      const badge = screen.getByText("Version Bêta · v0.50.0");
       expect(badge).toHaveClass("text-sm");
       expect(badge).toHaveClass("lg:text-base");
 
       const heading = screen.getByRole("heading", { level: 1 });
       expect(heading).toHaveClass("text-5xl");
-      expect(heading).toHaveClass("lg:text-6xl");
+      expect(heading).toHaveClass("lg:text-7xl");
 
       const description = screen.getByText(
         /Solutions préventives et remèdes pour le quotidien, à votre portée./,
       );
       expect(description).toHaveClass("text-base");
-      expect(description).toHaveClass("lg:text-lg");
+      expect(description).toHaveClass("lg:text-xl");
     });
   });
 
@@ -189,7 +189,7 @@ describe("HeroHeader", () => {
     it("should render sprout icon in badge", () => {
       render(<HeroHeader />);
 
-      const badge = screen.getByText("Version Bêta · v0.49.0");
+      const badge = screen.getByText("Version Bêta · v0.50.0");
       const badgeContainer = badge.closest("div");
       const icon = badgeContainer.querySelector("svg");
 
@@ -199,7 +199,7 @@ describe("HeroHeader", () => {
     it("should apply icon styles", () => {
       render(<HeroHeader />);
 
-      const badge = screen.getByText("Version Bêta · v0.49.0");
+      const badge = screen.getByText("Version Bêta · v0.50.0");
       const badgeContainer = badge.closest("div");
       const icon = badgeContainer.querySelector("svg");
 
@@ -219,7 +219,7 @@ describe("HeroHeader", () => {
     it("should have readable text content", () => {
       render(<HeroHeader />);
 
-      expect(screen.getByText("Version Bêta · v0.49.0")).toBeInTheDocument();
+      expect(screen.getByText("Version Bêta · v0.50.0")).toBeInTheDocument();
       expect(screen.getByText("Prenez soin de vous")).toBeInTheDocument();
       expect(screen.getByText("naturellement")).toBeInTheDocument();
     });

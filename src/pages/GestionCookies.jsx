@@ -1,6 +1,7 @@
 import { FiInfo } from "react-icons/fi";
 import { HiExclamationTriangle } from "react-icons/hi2";
 import { Link } from "react-router-dom";
+import ExternalLink from "../components/ui/links/ExternalLink";
 import { COOKIE_CATEGORIES } from "../features/cookie-consent/constants/cookieConfig";
 export default function GestionCookies() {
   return (
@@ -572,34 +573,31 @@ export default function GestionCookies() {
         </h2>
         <ul className="space-y-2 text-sm">
           <li>
-            <a
+            <ExternalLink
               href="https://www.cnil.fr/fr/cookies-et-autres-traceurs/regles/cookies"
-              target="_blank"
-              rel="noopener noreferrer"
+              siteName="CNIL"
               className="text-sky-600 transition hover:underline dark:text-sky-500"
             >
               Recommandations CNIL sur les cookies
-            </a>
+            </ExternalLink>
           </li>
           <li>
-            <a
+            <ExternalLink
               href="https://support.google.com/analytics/answer/11397207?hl=fr"
-              target="_blank"
-              rel="noopener noreferrer"
+              siteName="Google Analytics"
               className="text-sky-600 transition hover:underline dark:text-sky-500"
             >
               Documentation Google Analytics 4 sur les cookies
-            </a>
+            </ExternalLink>
           </li>
           <li>
-            <a
+            <ExternalLink
               href="https://support.google.com/analytics/answer/6004245?hl=fr"
-              target="_blank"
-              rel="noopener noreferrer"
+              siteName="Google Analytics"
               className="text-sky-600 transition hover:underline dark:text-sky-500"
             >
               Protection des données Google Analytics
-            </a>
+            </ExternalLink>
           </li>
         </ul>
       </section>
@@ -612,14 +610,13 @@ export default function GestionCookies() {
           Pour toute question concernant l&apos;utilisation des cookies sur
           notre site, vous pouvez nous contacter :
         </p>
-        <a
+        <ExternalLink
           href="https://tally.so/r/q4RN95"
-          target="_blank"
+          siteName="Tally"
           className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-medium text-white transition hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600"
-          rel="noopener noreferrer"
         >
           Nous contacter
-        </a>
+        </ExternalLink>
       </div>
     </div>
   );

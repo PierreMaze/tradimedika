@@ -30,6 +30,14 @@ vi.mock("../features/cookie-consent/components/CookieBanner", () => ({
   default: () => <div data-testid="cookie-banner">CookieBanner</div>,
 }));
 
+// Mock ExternalLinkConfirmationModal to avoid needing provider setup
+vi.mock(
+  "../features/external-link/components/ExternalLinkConfirmationModal",
+  () => ({
+    default: () => null,
+  }),
+);
+
 const renderWithRouter = (component) => {
   const router = createMemoryRouter(
     [
@@ -104,7 +112,7 @@ describe("LayoutApp", () => {
     it("should have full height screen layout", () => {
       const { container } = renderWithRouter(<LayoutApp />);
 
-      const mainContainer = container.querySelector(".h-screen");
+      const mainContainer = container.querySelector(".min-h-screen");
       expect(mainContainer).toBeInTheDocument();
     });
 
@@ -195,7 +203,7 @@ describe("LayoutApp", () => {
     it("should have full height content container", () => {
       const { container } = renderWithRouter(<LayoutApp />);
 
-      const contentContainer = container.querySelector(".h-full");
+      const contentContainer = container.querySelector(".min-h-screen");
       expect(contentContainer).toBeInTheDocument();
     });
 
@@ -294,7 +302,7 @@ describe("LayoutApp", () => {
     it("should maintain full height on all screen sizes", () => {
       const { container } = renderWithRouter(<LayoutApp />);
 
-      const mainContainer = container.querySelector(".h-screen");
+      const mainContainer = container.querySelector(".min-h-screen");
       expect(mainContainer).toBeInTheDocument();
     });
 

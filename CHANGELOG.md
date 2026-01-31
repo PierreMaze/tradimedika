@@ -2,6 +2,67 @@
 
 ---
 
+## [0.50.0] - 2026-01-31
+
+### Added
+
+- **Système de liens externes avec modal de confirmation**
+  - Nouveau composant `ExternalLinkConfirmationModal` avec animations Framer Motion
+  - Context `ExternalLinkProvider` pour gérer l'état de la modal globalement
+  - Hook personnalisé `useExternalLink` pour consommer le context
+  - Composant wrapper `ExternalLink` interceptant tous les liens externes
+  - Modal accessible : focus trap, fermeture par Escape, ARIA attributes complets
+  - Respect de `prefers-reduced-motion` pour les animations
+  - Blocage du scroll du body pendant l'ouverture de la modal
+  - Message clair informant l'utilisateur qu'un nouvel onglet sera ouvert
+
+- **Système de sources pour les remèdes**
+  - Nouveau composant `SourceTag` avec affichage d'icônes et favicons
+  - Nouveau composant `SourcesSection` pour regrouper sources scientifiques et traditionnelles
+  - Support de 13 domaines reconnus (VIDAL, WHO, PubMed, Passeport Santé, Doctissimo, etc.)
+  - Fallback sur react-icons si le favicon Google n'est pas disponible
+  - Script de validation `validateSources.js` pour vérifier la cohérence des données
+  - Nouvelle commande : `pnpm validate-sources`
+  - Ajout de 40 sources dans db.json (25 scientifiques, 15 traditionnelles)
+
+- **Intégration dans l'application**
+  - Tous les liens externes du site utilisent maintenant le système de confirmation
+  - Pages légales mises à jour : `GestionCookies.jsx`, `MentionsLegales.jsx`, `PolitiqueConfidentialite.jsx`
+  - Composant `FeedbackLink` mis à jour pour utiliser `ExternalLink`
+  - `LayoutApp` intègre la modal de confirmation globale
+
+- **Tests complets de la feature External Link**
+  - Tests pour `ExternalLinkContext` avec 6 scénarios
+  - Tests pour `ExternalLinkConfirmationModal` avec 12 scénarios d'accessibilité
+  - Tests pour `ExternalLink` avec validation du comportement
+  - Tests pour `SourceTag` et `SourcesSection`
+  - Correction des tests cassés (`FeedbackLink.test.jsx`, `LayoutApp.test.jsx`)
+
+### Changed
+
+- **Architecture de l'application**
+  - Ajout de `ExternalLinkProvider` dans la hiérarchie des providers (`main.jsx`)
+  - Ordre des providers : ThemeProvider → PerformanceProvider → ExternalLinkProvider → AllergiesProvider
+
+- **Version du projet**
+  - Version bump : `0.49.0` → `0.50.0`
+  - Mise à jour dans : package.json, README.md, HeroHeader.jsx, HeroHeader.test.jsx
+
+### Fixed
+
+- **Compatibilité React Compiler**
+  - Correction de `SourceTag.jsx` pour éviter la création de composants pendant le render
+  - Utilisation de `useMemo` pour stabiliser les icônes dynamiques
+  - Correction des dépendances `useMemo` dans `ExternalLinkContext`
+  - Utilisation de `useCallback` pour stabiliser les fonctions du context
+
+- **Linting et formatage**
+  - Correction de la variable non utilisée dans `validateSources.js`
+  - Tous les fichiers passent ESLint sans erreur ni warning
+  - Formatage Prettier appliqué à tous les nouveaux fichiers
+
+---
+
 ## [0.49.0] - 2026-01-30
 
 ### Fixed

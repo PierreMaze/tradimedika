@@ -7,9 +7,11 @@ vi.mock("framer-motion", () => ({
     section: ({ children, ...props }) => (
       <section {...props}>{children}</section>
     ),
+    div: ({ children, ...props }) => <div {...props}>{children}</div>,
     ul: ({ children, ...props }) => <ul {...props}>{children}</ul>,
     li: ({ children, ...props }) => <li {...props}>{children}</li>,
   },
+  AnimatePresence: ({ children }) => children,
 }));
 
 vi.mock("react-icons/ri", () => ({

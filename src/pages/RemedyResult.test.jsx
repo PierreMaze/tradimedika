@@ -17,6 +17,11 @@ vi.mock("framer-motion", () => ({
   },
 }));
 
+// Mock FeedbackLink to avoid ExternalLinkProvider dependency
+vi.mock("../components/ui/feedback/FeedbackLink", () => ({
+  default: () => <div data-testid="feedback-link">Feedback</div>,
+}));
+
 // Mock FilterRemedyResult and related components
 vi.mock("../features/remedy-result-page", () => ({
   RemedyCard: ({ remedy }) => (
