@@ -23,31 +23,38 @@ function SourcesSection({ sources, className = "" }) {
     return null;
   }
 
-  const hasSources =
-    (sources.traditional && sources.traditional.length > 0) ||
-    (sources.scientific && sources.scientific.length > 0);
+  // Extraction sécurisée des tableaux avec valeur par défaut
+  const scientificSources = sources.scientific || [];
+  const traditionalSources = sources.traditional || [];
+
+  // Vérification explicite de l'existence des sources
+  const hasScientificSources = scientificSources.length > 0;
+  const hasTraditionalSources = traditionalSources.length > 0;
+
   return (
     <section className={`space-y-3 ${className}`} data-testid="sources-section">
-      {/* Sources scientifiques */}
-      {hasSources && (
-        <div className="space-y-2">
-          <h4 className="mt-3 text-xs font-bold text-gray-700 lg:text-sm 2xl:text-base dark:text-gray-300">
-            Sources
-          </h4>
-          <div className="flex flex-wrap gap-2">
-            <span>
-              {/* Sources reconnue */}
-              {sources.scientific.map((source, index) => (
+      <div className="space-y-2">
+        <h4 className="mt-3 text-xs font-bold text-gray-700 lg:text-sm 2xl:text-base dark:text-gray-300">
+          Sources
+        </h4>
+        <div className="flex flex-wrap gap-2">
+          {/* Rendu conditionnel AVANT le map() pour éviter undefined.map() */}
+          {hasScientificSources && (
+            <>
+              {scientificSources.map((source, index) => (
                 <SourceTag
                   key={`scientific-${index}`}
                   title={source.title}
                   url={source.url}
                 />
               ))}
-            </span>
-            <span>
-              {/* Sources traditionnelles */}
-              {sources.traditional.map((source, index) => (
+            </>
+          )}
+
+          {/* Rendu conditionnel AVANT le map() pour éviter undefined.map() */}
+          {hasTraditionalSources && (
+            <>
+              {traditionalSources.map((source, index) => (
                 <SourceTag
                   key={`traditional-${index}`}
                   title={source.title}
@@ -55,10 +62,10 @@ function SourcesSection({ sources, className = "" }) {
                   type="traditional"
                 />
               ))}
-            </span>
-          </div>
+            </>
+          )}
         </div>
-      )}
+      </div>
     </section>
   );
 }
