@@ -35,24 +35,27 @@ function SourcesSection({ sources, className = "" }) {
             Sources
           </h4>
           <div className="flex flex-wrap gap-2">
-            {/* Sources reconnue */}
-            {sources.scientific.map((source, index) => (
-              <SourceTag
-                key={`scientific-${index}`}
-                title={source.title}
-                url={source.url}
-              />
-            ))}
-
-            {/* Sources traditionnelles */}
-            {sources.traditional.map((source, index) => (
-              <SourceTag
-                key={`traditional-${index}`}
-                title={source.title}
-                url={source.url}
-                type="traditional"
-              />
-            ))}
+            <span>
+              {/* Sources reconnue */}
+              {sources.scientific.map((source, index) => (
+                <SourceTag
+                  key={`scientific-${index}`}
+                  title={source.title}
+                  url={source.url}
+                />
+              ))}
+            </span>
+            <span>
+              {/* Sources traditionnelles */}
+              {sources.traditional.map((source, index) => (
+                <SourceTag
+                  key={`traditional-${index}`}
+                  title={source.title}
+                  url={source.url}
+                  type="traditional"
+                />
+              ))}
+            </span>
           </div>
         </div>
       )}
