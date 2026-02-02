@@ -2,6 +2,37 @@
 
 ---
 
+## [0.50.1] - 2026-02-02
+
+### Fixed
+
+- **Tests unitaires - Corrections critiques**
+  - Correction du bug TypeError dans `RemedyResult.jsx:169` : ajout de validation `matchedSymptoms` avec vérification de `Array.isArray()`
+  - Correction des mocks dans `RemedyResult.test.jsx` : ajout de la propriété `matchedSymptoms` aux objets de test
+  - Correction des sélecteurs CSS dans `SearchHistoryModal.test.jsx` : `.bg-black/50` → `.bg-black/60` pour correspondre à `ModalLayout`
+  - Correction des attributs ARIA dans `SearchHistoryModal.test.jsx` : `history-modal-title` → `modal-title`
+  - Correction du test de bouton disabled : utilisation de `className.toContain()` au lieu de `toHaveClass()` pour gérer les classes multiples
+  - Correction des sélecteurs de boutons dans la confirmation dialog : utilisation de `getAllByRole()` et `find()` pour éviter les conflits
+  - Correction du test `NotFound.test.jsx` : remplacement du test d'emoji 🌿 par test de l'icône SVG `GiFallingLeaf`
+
+- **Robustesse du code**
+  - Protection contre les données incomplètes dans le calcul du séparateur de symptômes
+  - Amélioration de la gestion des edge cases dans les tests
+
+### Changed
+
+- **Version du projet**
+  - Version bump : `0.50.0` → `0.50.1`
+  - Mise à jour dans : package.json, README.md, HeroHeader.jsx
+
+### Tests
+
+- **Résultats avant corrections** : 15 tests échoués sur 1425 tests
+- **Résultats après corrections** : 1423 tests réussis, 2 skipped (100% de réussite)
+- **Amélioration** : +15 tests corrigés, passage de 98.9% à 100% de tests valides
+
+---
+
 ## [0.50.0] - 2026-01-31
 
 ### Added
