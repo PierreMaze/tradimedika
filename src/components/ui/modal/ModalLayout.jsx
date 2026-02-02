@@ -1,0 +1,169 @@
+import { AnimatePresence, motion } from "framer-motion";
+import PropTypes from "prop-types";
+import { useEffect, useRef } from "react";
+import { IoMdClose } from "react-icons/io";
+import { useReducedMotion } from "../../../features/settings/hooks/useReducedMotion";
+
+/**
+ * ModalLayout Component
+ *
+ * Layout standard pour toutes les modales de l'application
+ * Structure : Backdrop + Modal (Header + Content + Footer optionnel)
+ *
+ * Props:
+ * - isOpen: Modal ouverte ou fermée
+ * - onClose: Fonction pour fermer la modal
+ * - title: Titre de la modal
+ * - icon: Icône du titre (optionnel)
+ * - subtitle: Sous-titre/description (optionnel)
+ * - children: Contenu de la modal
+ * - footer: Contenu du footer (optionnel)
+ * - maxWidth: Largeur max de la modal (défaut: "lg")
+ * - closeLabel: Label du bouton fermer (défaut: "Fermer")
+ */
+function ModalLayout({
+  isOpen,
+  onClose,
+  title,
+  icon: Icon,
+  subtitle,
+  children,
+  footer,
+  maxWidth = "lg",
+  closeLabel = "Fermer",
+}) {
+  const prefersReducedMotion = useReducedMotion();
+  const modalRef = useRef(null);
+  const previousFocusRef = useRef(null);
+
+  const maxWidthClasses = {
+    sm: "md:max-w-sm",
+    md: "md:max-w-md",
+    lg: "md:max-w-lg",
+    xl: "md:max-w-xl",
+    "2xl": "md:max-w-2xl",
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      previousFocusRef.current = document.activeElement;
+      const rafId = requestAnimationFrame(() => {
+        modalRef.current?.focus();
+      });
+
+      return () => cancelAnimationFrame(rafId);
+    } else {
+      if (
+        previousFocusRef.current &&
+        document.contains(previousFocusRef.current)
+      ) {
+        previousFocusRef.current.focus();
+      }
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === "Escape" && isOpen) {
+        onClose();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [isOpen, onClose]);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            className="fixed inset-0 z-40 bg-black/60"
+            onClick={onClose}
+            initial={prefersReducedMotion ? {} : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={prefersReducedMotion ? {} : { opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            aria-hidden="true"
+          />
+
+          {/* Modal */}
+          <motion.div
+            ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+            tabIndex={-1}
+            className={`fixed inset-x-4 top-1/2 z-50 max-h-[90vh] -translate-y-1/2 overflow-auto rounded-lg bg-[var(--color-light)] p-6 shadow-2xl md:inset-x-auto md:left-1/2 md:w-full md:-translate-x-1/2 ${maxWidthClasses[maxWidth]} dark:bg-[var(--color-dark)]`}
+            initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={prefersReducedMotion ? {} : { opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+          >
+            {/* Header */}
+            <div className="mb-6 border-b border-neutral-200 pb-4 dark:border-neutral-700">
+              <div className="flex items-center justify-between">
+                <h2
+                  id="modal-title"
+                  className="flex items-center gap-2 text-lg font-semibold text-neutral-900 dark:text-neutral-100"
+                >
+                  {Icon && <Icon className="text-xl" aria-hidden="true" />}
+                  {title}
+                </h2>
+                <button
+                  onClick={onClose}
+                  aria-label={closeLabel}
+                  className="flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-lg bg-neutral-600/90 p-1.5 text-white transition-colors hover:bg-red-700 dark:bg-neutral-500 dark:text-white dark:hover:bg-red-800"
+                >
+                  <IoMdClose className="text-2xl" />
+                </button>
+              </div>
+              {subtitle && (
+                <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+                  {subtitle}
+                </p>
+              )}
+            </div>
+
+            {/* Content */}
+            <div className="mb-6">{children}</div>
+
+            {/* Footer (optionnel) */}
+            {footer && (
+              <div className="flex items-center justify-between gap-4 border-t border-neutral-200 pt-4 dark:border-neutral-700">
+                {footer}
+              </div>
+            )}
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
+
+ModalLayout.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  icon: PropTypes.elementType,
+  subtitle: PropTypes.string,
+  children: PropTypes.node.isRequired,
+  footer: PropTypes.node,
+  maxWidth: PropTypes.oneOf(["sm", "md", "lg", "xl", "2xl"]),
+  closeLabel: PropTypes.string,
+};
+
+export default ModalLayout;

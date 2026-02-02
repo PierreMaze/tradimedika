@@ -71,7 +71,7 @@ function RemedyResultDetailsTipsSection({ tips }) {
                       visible: { opacity: 1, x: 0 },
                     }}
                     transition={
-                      index >= 3
+                      index >= 10
                         ? { duration: 0 }
                         : { duration: 0.3, ease: "easeOut" }
                     }

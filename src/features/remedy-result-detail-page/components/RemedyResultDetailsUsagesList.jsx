@@ -50,68 +50,71 @@ function RemedyResultDetailsUsagesList({ uses }) {
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <motion.ul
-              className="space-y-4"
-              initial="hidden"
-              animate="visible"
-              variants={{
-                visible: {
-                  transition: {
-                    staggerChildren: 0.05,
-                    delayChildren: 0.3,
+            <div className="border-l-4 border-emerald-600 pl-4 dark:border-emerald-500">
+              <motion.ul
+                className="space-y-4"
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  visible: {
+                    transition: {
+                      staggerChildren: 0.05,
+                      delayChildren: 0.3,
+                    },
                   },
-                },
-              }}
-            >
-              {uses.map((use, index) => (
-                <motion.li
-                  key={index}
-                  variants={{
-                    hidden: { opacity: 0, x: -20 },
-                    visible: { opacity: 1, x: 0 },
-                  }}
-                  transition={
-                    index >= 3
-                      ? { duration: 0 }
-                      : { duration: 0.3, ease: "easeOut" }
-                  }
-                  className="border-l-4 border-emerald-600 pl-4 dark:border-emerald-500"
-                >
-                  <div className="mb-1 flex flex-wrap items-center gap-2 text-sm font-semibold text-black 2xl:text-base dark:text-white">
-                    {use.form && use.form.length > 0 && (
-                      <span className="capitalize">{use.form.join(", ")}</span>
-                    )}
-                    {use.dose && use.dose.value && (
-                      <>
-                        <span className="text-neutral-400">•</span>
-                        <span>
-                          {use.dose.value} {use.dose.unit}
+                }}
+              >
+                {uses.map((use, index) => (
+                  <motion.li
+                    key={index}
+                    variants={{
+                      hidden: { opacity: 0, x: -20 },
+                      visible: { opacity: 1, x: 0 },
+                    }}
+                    transition={
+                      index >= 4
+                        ? { duration: 0 }
+                        : { duration: 0.3, ease: "easeOut" }
+                    }
+                  >
+                    <div className="mb-1 flex flex-wrap items-center gap-2 text-sm font-semibold text-black 2xl:text-base dark:text-white">
+                      {use.form && use.form.length > 0 && (
+                        <span className="capitalize">
+                          {use.form.join(", ")}
                         </span>
-                      </>
+                      )}
+                      {use.dose && use.dose.value && (
+                        <>
+                          <span className="text-neutral-400">•</span>
+                          <span>
+                            {use.dose.value} {use.dose.unit}
+                          </span>
+                        </>
+                      )}
+                      {use.frequency && use.frequency.value && (
+                        <>
+                          <span className="text-neutral-400">•</span>
+                          <span>{formatUsageFrequency(use.frequency)}</span>
+                        </>
+                      )}
+                      {use.duration && use.duration.value && (
+                        <>
+                          <span className="text-neutral-400">•</span>
+                          <span>
+                            Pendant {use.duration.value} {use.duration.unit}
+                          </span>
+                        </>
+                      )}
+                    </div>
+                    {use.description && (
+                      <p className="dark:text-light text-sm leading-relaxed text-black 2xl:text-base">
+                        {use.description}
+                      </p>
                     )}
-                    {use.frequency && use.frequency.value && (
-                      <>
-                        <span className="text-neutral-400">•</span>
-                        <span>{formatUsageFrequency(use.frequency)}</span>
-                      </>
-                    )}
-                    {use.duration && use.duration.value && (
-                      <>
-                        <span className="text-neutral-400">•</span>
-                        <span>
-                          Pendant {use.duration.value} {use.duration.unit}
-                        </span>
-                      </>
-                    )}
-                  </div>
-                  {use.description && (
-                    <p className="dark:text-light text-sm leading-relaxed text-black 2xl:text-base">
-                      {use.description}
-                    </p>
-                  )}
-                </motion.li>
-              ))}
-            </motion.ul>
+                  </motion.li>
+                ))}
+              </motion.ul>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

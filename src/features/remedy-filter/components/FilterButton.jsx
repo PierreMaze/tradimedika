@@ -24,11 +24,7 @@ function FilterButton({ onClick, activeFiltersCount }) {
       onClick={onClick}
       aria-label="Ouvrir les filtres"
       type="button"
-      className={`relative cursor-pointer rounded-md px-3 py-2 text-sm font-medium tracking-wider shadow-md transition duration-150 ease-in-out lg:text-base ${
-        hasActiveFilters
-          ? "bg-emerald-600 text-white hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600"
-          : "bg-neutral-200 text-neutral-900 hover:bg-emerald-600 hover:text-white dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-600"
-      }`}
+      className="relative cursor-pointer rounded-md bg-emerald-600 px-3 py-2 text-sm font-medium tracking-wider text-white shadow-md transition duration-150 ease-in-out hover:bg-emerald-700 lg:text-base dark:bg-emerald-700 dark:hover:bg-emerald-600"
     >
       <span className="flex items-center gap-2">
         <TbFilterCog className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />

@@ -42,7 +42,6 @@ function extractUniqueSymptoms(matchedRemedies) {
 export default function FilterRemedyResult({
   matchedRemedies,
   onFilterChange,
-  filterButton,
 }) {
   const [activeTag, setActiveTag] = useState("all");
 
@@ -78,16 +77,11 @@ export default function FilterRemedyResult({
   }
 
   return (
-    <div className="mb-6 flex w-full items-center">
-      <div className="mx-auto flex flex-row flex-wrap items-center justify-center gap-2">
-        <ListAllergyTag
-          tags={availableTags}
-          activeTag={activeTag}
-          onTagClick={handleTagClick}
-          filterButton={filterButton}
-        />
-      </div>
-    </div>
+    <ListAllergyTag
+      tags={availableTags}
+      activeTag={activeTag}
+      onTagClick={handleTagClick}
+    />
   );
 }
 
@@ -100,5 +94,4 @@ FilterRemedyResult.propTypes = {
     }),
   ).isRequired,
   onFilterChange: PropTypes.func.isRequired,
-  filterButton: PropTypes.node,
 };

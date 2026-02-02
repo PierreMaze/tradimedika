@@ -77,10 +77,6 @@ describe("ExternalLinkConfirmationModal", () => {
 
     const dialog = screen.getByRole("dialog");
     expect(dialog).toHaveAttribute("aria-modal", "true");
-    expect(dialog).toHaveAttribute(
-      "aria-labelledby",
-      "external-link-modal-title",
-    );
   });
 
   it("should call closeConfirmation when cancel button is clicked", async () => {

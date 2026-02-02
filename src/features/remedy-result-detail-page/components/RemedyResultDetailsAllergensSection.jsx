@@ -11,7 +11,7 @@ function RemedyResultDetailsAllergensSection({ allergens }) {
       transition={{ delay: 0.35 }}
       className="mb-6 rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition duration-300 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800"
     >
-      <h2 className="text-dark mb-3 flex items-center gap-2 text-lg font-semibold lg:text-xl 2xl:text-2xl dark:text-white">
+      <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold text-black lg:text-xl 2xl:text-2xl dark:text-white">
         Allergènes potentiels
       </h2>
       <div className="flex flex-wrap gap-2">

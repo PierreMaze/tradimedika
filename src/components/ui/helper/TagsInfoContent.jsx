@@ -113,7 +113,7 @@ function TagsCategoryAccordion({ category, isOpenByDefault = true }) {
         aria-expanded={isOpen}
         aria-controls={`tags-category-${category.id}`}
       >
-        <span className="text-lg font-semibold text-neutral-900 lg:text-xl dark:text-neutral-100">
+        <span className="text-lg font-semibold text-black lg:text-xl dark:text-white">
           {category.label}
         </span>
         {isOpen ? (
@@ -148,7 +148,7 @@ function TagsCategoryAccordion({ category, isOpenByDefault = true }) {
                   <div className="flex h-8 shrink-0 lg:col-span-1">
                     {option.tag}
                   </div>
-                  <p className="text-sm leading-relaxed text-neutral-800 lg:col-span-2 dark:text-neutral-200">
+                  <p className="text-sm leading-relaxed text-neutral-900 lg:col-span-2 dark:text-neutral-100">
                     {option.description}
                   </p>
                 </div>
@@ -198,7 +198,7 @@ function TagsInfoContent({ variant = "full", className = "" }) {
         <div className="space-y-4">
           {TAGS_CATEGORIES.map((category) => (
             <div key={category.id} className="space-y-2">
-              <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+              <h4 className="text-sm font-semibold text-black dark:text-white">
                 {category.label}
               </h4>
               <div className="space-y-3">
@@ -208,7 +208,7 @@ function TagsInfoContent({ variant = "full", className = "" }) {
                     className="flex flex-col items-start gap-2 lg:flex-row lg:items-center lg:gap-3"
                   >
                     <div className="flex shrink-0">{option.tag}</div>
-                    <p className="text-xs leading-relaxed text-neutral-700 dark:text-neutral-300">
+                    <p className="text-xs leading-relaxed text-neutral-800 dark:text-neutral-200">
                       {option.description}
                     </p>
                   </div>

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { FiInfo } from "react-icons/fi";
 import { HiExclamationTriangle } from "react-icons/hi2";
+import { IoMdSettings } from "react-icons/io";
 import { Link } from "react-router-dom";
 import ExternalLink from "../components/ui/links/ExternalLink";
 export default function PolitiqueConfidentialite() {
@@ -312,8 +313,8 @@ export default function PolitiqueConfidentialite() {
           <li>Localisation géographique approximative</li>
         </ul>
         <p className="mb-4 text-neutral-700 dark:text-neutral-300">
-          <strong>Finalité :</strong> Mesurer l&pos;audience du site, comprendre
-          le comportement des visiteurs et améliorer notre contenu.
+          <strong>Finalité :</strong> Mesurer l&apos;audience du site,
+          comprendre le comportement des visiteurs et améliorer notre contenu.
           <br />
           <strong>Base légale :</strong> Votre consentement explicite via le
           bandeau cookies.
@@ -340,13 +341,15 @@ export default function PolitiqueConfidentialite() {
           <strong>Stockage et conservation :</strong> Ces données sont stockées{" "}
           <strong>uniquement sur votre appareil</strong>
           (localStorage) et ne sont jamais transmises à nos serveurs. Vous
-          pouvez les supprimer à tout moment depuis les Paramètres &gt; Gestion
-          des cookies &gt; Réinitialisation des cookies.
+          pouvez les supprimer à tout moment depuis le bouton{" "}
+          <IoMdSettings className="inline h-5 w-5 rounded-full bg-white p-0.5" />{" "}
+          &gt; Gestion des cookies &gt; Réinitialisation des cookies.
         </p>
         <p className="mb-4 text-neutral-700 dark:text-neutral-300">
           <strong>Activation et désactivation :</strong> Vous pouvez activer ou
-          désactiver cette fonctionnalité à tout moment dans Paramètres &gt;
-          Gestion des cookies &gt; Historique de recherche.
+          désactiver cette fonctionnalité à tout moment depuis le bouton{" "}
+          <IoMdSettings className="inline h-5 w-5 rounded-full bg-white p-0.5" />{" "}
+          &gt; Gestion des cookies &gt; Historique de recherche.
         </p>
         <p className="mb-4 text-neutral-700 dark:text-neutral-300">
           <strong>Base légale :</strong> Votre consentement explicite. En

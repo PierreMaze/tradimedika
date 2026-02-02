@@ -34,7 +34,7 @@ function SourcesSection({ sources, className = "" }) {
   return (
     <section className={`space-y-3 ${className}`} data-testid="sources-section">
       <div className="space-y-2">
-        <h4 className="mt-3 text-xs font-bold text-gray-700 lg:text-sm 2xl:text-base dark:text-gray-300">
+        <h4 className="mt-3 text-xs font-semibold text-neutral-700 lg:text-sm 2xl:text-base dark:text-neutral-200">
           Sources
         </h4>
         <div className="flex flex-wrap gap-2">

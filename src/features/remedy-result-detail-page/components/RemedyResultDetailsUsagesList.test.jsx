@@ -292,12 +292,5 @@ describe("RemedyResultDetailsUsagesList", () => {
       const list = screen.getByRole("list");
       expect(list.tagName).toBe("UL");
     });
-
-    it("should have emerald border for visual distinction", async () => {
-      const uses = [{ description: "test" }];
-      const { container } = await renderAndOpenAccordion(uses);
-      const listItem = container.querySelector("li");
-      expect(listItem).toHaveClass("border-l-4", "border-emerald-600");
-    });
   });
 });

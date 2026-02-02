@@ -15,12 +15,7 @@ const capitalizeSymptom = (symptom) => {
  * - Animations avec AnimatePresence pour enter/exit smooth
  * - Gère l'affichage du tag "Tous" + tags de symptômes
  */
-export default function ListAllergyTag({
-  tags,
-  activeTag,
-  onTagClick,
-  filterButton,
-}) {
+export default function ListAllergyTag({ tags, activeTag, onTagClick }) {
   if (tags.length === 0) return null;
 
   return (
@@ -28,20 +23,11 @@ export default function ListAllergyTag({
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="mx-auto flex flex-wrap items-center justify-center gap-2"
+      className="flex flex-wrap items-center justify-center gap-2"
       role="group"
       aria-label="Filtrer les remèdes par symptôme"
     >
       <AnimatePresence mode="popLayout">
-        {/* ✅ FIX: Ajouter key pour AnimatePresence */}
-        {filterButton && <div key="filter-button">{filterButton}</div>}
-        {filterButton && (
-          <span
-            key="separator"
-            className="mx-2 h-8 border-1 border-dashed border-emerald-600 dark:border-emerald-500"
-            aria-hidden="true"
-          ></span>
-        )}
         {tags.map((tag) => (
           <AllergyTag
             key={tag}
@@ -59,5 +45,4 @@ ListAllergyTag.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   activeTag: PropTypes.string.isRequired,
   onTagClick: PropTypes.func.isRequired,
-  filterButton: PropTypes.node,
 };

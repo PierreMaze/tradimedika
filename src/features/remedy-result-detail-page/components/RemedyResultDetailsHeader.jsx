@@ -15,10 +15,10 @@ function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.2 }}
-      className="mb-6 grid gap-6 lg:mb-8 lg:grid-cols-5 lg:gap-8"
+      className="mb-6 grid gap-6 lg:mb-8 lg:grid-cols-5 lg:gap-8 2xl:grid-cols-4"
     >
       <div className="lg:col-span-2 2xl:col-span-1">
-        <div className="aspect-square w-full overflow-hidden rounded-lg bg-neutral-300 shadow-md dark:bg-neutral-700">
+        <div className="aspect-square w-full overflow-hidden rounded-lg bg-neutral-50 shadow-md dark:bg-neutral-700/50">
           <motion.img
             src={safeImageUrl}
             alt={`${remedy.name} - remède naturel traditionnel de type ${remedy.type}`}
@@ -32,14 +32,16 @@ function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
 
       <div className="lg:col-span-3">
         <div className="flex items-center justify-start gap-4 lg:gap-8">
-          <h1 className="mb-3 text-3xl font-bold lg:text-4xl">{remedy.name}</h1>
+          <h1 className="mb-3 text-3xl font-bold text-black lg:text-4xl dark:text-white">
+            {remedy.name}
+          </h1>
           <span
             className={`mb-3 shrink-0 rounded-md bg-neutral-200 px-3 py-1.5 text-xs font-semibold tracking-wide text-black uppercase lg:text-sm 2xl:text-base dark:bg-neutral-600 dark:text-white`}
           >
             {remedy.type}
           </span>
         </div>
-        <p className="-mb-2 text-sm leading-relaxed text-neutral-600 lg:text-base 2xl:text-lg dark:text-neutral-400">
+        <p className="-mb-2 text-sm leading-relaxed text-neutral-800 lg:text-base 2xl:text-lg dark:text-neutral-300">
           {remedy.description}
         </p>
 
@@ -49,7 +51,7 @@ function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
             variant="inline"
             label="Indications d'usage"
           />
-          <div className="mb-2 flex flex-wrap items-center gap-2">
+          <div className="my-1 flex flex-wrap items-center gap-2">
             {remedy.verifiedByProfessional ? (
               <ProuvedTag />
             ) : (

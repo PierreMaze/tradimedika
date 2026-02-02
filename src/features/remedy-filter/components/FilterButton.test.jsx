@@ -90,7 +90,7 @@ describe("FilterButton", () => {
       render(<FilterButton onClick={vi.fn()} activeFiltersCount={0} />);
 
       const button = screen.getByRole("button");
-      expect(button).toHaveClass("bg-neutral-200", "text-neutral-900");
+      expect(button).toHaveClass("bg-emerald-600", "text-white");
     });
 
     it("should apply active styles when filters are active", () => {

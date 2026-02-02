@@ -96,7 +96,7 @@ function RemedyCard({
         >
           {/* Image */}
           {image && (
-            <div className="bg-light dark:bg-dark relative aspect-square w-full overflow-hidden">
+            <div className="relative aspect-square w-full overflow-hidden bg-neutral-50 dark:bg-neutral-700/50">
               {/* tags de symptômes en overlay (top-left) */}
               {matchedSymptoms.length > 0 && (
                 <div className="absolute top-4 left-4 z-10 flex max-w-[60%] flex-wrap gap-2">
@@ -166,7 +166,7 @@ function RemedyCard({
             {/* Propriétés */}
             {properties && properties.length > 0 && (
               <div className="mt-4 flex flex-col gap-2 text-xs lg:text-sm 2xl:text-base">
-                <h4 className="text-start text-xs font-bold text-neutral-700 lg:text-sm 2xl:text-base dark:text-neutral-300">
+                <h4 className="text-start text-xs font-semibold text-neutral-700 lg:text-sm 2xl:text-base dark:text-neutral-300">
                   Propriétés
                 </h4>
                 <div className="relative">

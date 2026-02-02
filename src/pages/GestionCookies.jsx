@@ -1,5 +1,6 @@
 import { FiInfo } from "react-icons/fi";
 import { HiExclamationTriangle } from "react-icons/hi2";
+import { IoMdSettings } from "react-icons/io";
 import { Link } from "react-router-dom";
 import ExternalLink from "../components/ui/links/ExternalLink";
 import { COOKIE_CATEGORIES } from "../features/cookie-consent/constants/cookieConfig";
@@ -123,7 +124,7 @@ export default function GestionCookies() {
         <div className="mb-6 rounded-lg border-2 border-dashed border-sky-600 bg-sky-50 p-4 dark:bg-sky-900/20">
           <p className="text-sm font-semibold text-sky-900 dark:text-sky-100">
             <FiInfo
-              className="inline-flex h-5 w-5 shrink-0 text-sky-600 transition duration-300 ease-in-out lg:h-6 lg:w-6 dark:text-sky-400"
+              className="mr-2 inline-flex h-4 w-4 shrink-0 text-sky-600 transition duration-300 ease-in-out lg:h-5 lg:w-5 dark:text-sky-400"
               aria-hidden="true"
             />
             Information importante
@@ -218,7 +219,7 @@ export default function GestionCookies() {
             />{" "}
             Fonctionnalité désactivée par défaut
           </p>
-          <p className="mt-1 text-sm text-amber-700 dark:text-amber-300">
+          <p className="mt-1 text-sm text-amber-800 dark:text-amber-300">
             L&apos;historique de recherche nécessite votre{" "}
             <strong>consentement explicite</strong> et peut être activé dans
             Paramètres &gt; Gestion des cookies.
@@ -300,26 +301,30 @@ export default function GestionCookies() {
         </p>
 
         <div className="mb-6 grid gap-4 md:grid-cols-2">
-          <div className="rounded-lg border-2 border-dashed border-neutral-200 p-4 dark:border-neutral-700">
+          <div className="rounded-lg border-2 border-dashed border-neutral-300 bg-neutral-50 p-4 dark:border-neutral-700">
             <h3 className="mb-2 font-semibold text-neutral-900 dark:text-neutral-100">
               Cookies
             </h3>
             <ul className="space-y-1 text-sm text-neutral-700 dark:text-neutral-300">
+              <li>✓ Utilisés pour l&apos;authentification</li>
               <li>✓ Envoyés au serveur à chaque requête</li>
-              <li>✓ Ont une date d&apos;expiration</li>
-              <li>✓ Soumis à la réglementation RGPD</li>
               <li>✓ Peuvent être tiers (Google Analytics)</li>
+              <li>✓ Ont une date d&apos;expiration</li>
             </ul>
           </div>
           <div className="rounded-lg border-2 border-dashed border-emerald-600 bg-emerald-50 p-4 dark:bg-emerald-900/20">
             <h3 className="mb-2 font-semibold text-emerald-900 dark:text-emerald-100">
-              localStorage (utilisé sur ce site)
+              localStorage
             </h3>
             <ul className="space-y-1 text-sm text-emerald-800 dark:text-emerald-200">
+              <li>✓ Ne gère pas l&apos;authentification</li>
               <li>✓ Restent UNIQUEMENT sur votre appareil</li>
               <li>✓ Jamais envoyés au serveur</li>
-              <li>✓ Pas de date d&apos;expiration automatique</li>
-              <li>✓ Exempts de consentement RGPD</li>
+              <li>
+                ✓ Peuvent être supprimer ({" "}
+                <IoMdSettings className="inline h-5 w-5 rounded-full bg-white p-0.5" />{" "}
+                &gt; Gestion des cookies)
+              </li>
             </ul>
           </div>
         </div>
@@ -376,9 +381,9 @@ export default function GestionCookies() {
         </div>
         <p className="mt-4 text-sm text-neutral-600 dark:text-neutral-400">
           Note : Ces données restent uniquement sur votre appareil et ne sont
-          jamais transmises à nos serveurs. Elles ne sont pas considérées comme
-          des cookies au sens de la directive ePrivacy et ne nécessitent pas de
-          consentement explicite.
+          <strong>JAMAIS</strong> transmises à nos serveurs. Elles ne sont pas
+          considérées comme des cookies au sens de la directive ePrivacy et ne
+          nécessitent pas de consentement explicite.
         </p>
       </section>
 
@@ -407,11 +412,12 @@ export default function GestionCookies() {
           bouton{" "}
           <Link
             to="/gestion-cookies"
-            className="font-medium text-emerald-700 underline dark:text-emerald-500"
+            className="font-medium text-neutral-700 dark:text-neutral-500"
           >
-            &quot;Paramètres des cookies&quot;
+            <IoMdSettings className="inline h-5 w-5 rounded-full bg-white p-0.5" />{" "}
+            &gt; Gestion des cookies
           </Link>{" "}
-          disponible en bas de chaque page.
+          disponible en haut à droite de chaque page.
         </p>
 
         <h3 className="mb-3 text-lg font-medium text-neutral-900 dark:text-neutral-100">
@@ -429,9 +435,19 @@ export default function GestionCookies() {
         <div className="space-y-3">
           <details className="rounded-lg border-2 border-dashed border-neutral-200 p-4 dark:border-neutral-700">
             <summary className="cursor-pointer font-semibold text-neutral-900 dark:text-neutral-100">
+              Sur le site directement
+            </summary>
+            <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">
+              <IoMdSettings className="inline h-5 w-5 rounded-full bg-white p-0.5" />{" "}
+              → Gestion des cookies (Bouton → Réinitialisation des cookies)
+            </p>
+          </details>
+          <details className="rounded-lg border-2 border-dashed border-neutral-200 p-4 dark:border-neutral-700">
+            <summary className="cursor-pointer font-semibold text-neutral-900 dark:text-neutral-100">
               Google Chrome
             </summary>
             <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">
+              <IoMdSettings className="inline h-5 w-5 rounded-full bg-white p-0.5" />{" "}
               Paramètres → Confidentialité et sécurité → Cookies et autres
               données de sites
             </p>
@@ -442,6 +458,7 @@ export default function GestionCookies() {
               Mozilla Firefox
             </summary>
             <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">
+              <IoMdSettings className="inline h-5 w-5 rounded-full bg-white p-0.5" />{" "}
               Paramètres → Vie privée et sécurité → Cookies et données de sites
             </p>
           </details>
@@ -451,6 +468,7 @@ export default function GestionCookies() {
               Safari
             </summary>
             <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">
+              <IoMdSettings className="inline h-5 w-5 rounded-full bg-white p-0.5" />{" "}
               Préférences → Confidentialité → Cookies et données de sites web
             </p>
           </details>
@@ -460,6 +478,7 @@ export default function GestionCookies() {
               Microsoft Edge
             </summary>
             <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">
+              <IoMdSettings className="inline h-5 w-5 rounded-full bg-white p-0.5" />{" "}
               Paramètres → Cookies et autorisations de site → Gérer et supprimer
               les cookies
             </p>
@@ -477,7 +496,8 @@ export default function GestionCookies() {
         </p>
         <p className="text-neutral-700 dark:text-neutral-300">
           Le blocage du localStorage peut affecter la mémorisation de vos
-          préférences (thème sombre, niveau de performance des animations).
+          préférences (thème sombre, niveau de performance des animations,
+          historique, allergies, ...).
         </p>
       </section>
 

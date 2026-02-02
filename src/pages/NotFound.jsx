@@ -1,5 +1,6 @@
 // tradimedika-v1/src/pages/NotFound.jsx
 import { motion } from "framer-motion";
+import { GiFallingLeaf } from "react-icons/gi";
 import { Link } from "react-router-dom";
 
 /**
@@ -34,7 +35,9 @@ function NotFound() {
 
         {/* Decorative Element */}
         <div className="mb-8">
-          <span className="text-6xl">🌿</span>
+          <span className="text-6xl">
+            <GiFallingLeaf className="mx-auto rotate-90 rotate-x-180 text-emerald-600 transition duration-300 ease-in-out dark:text-emerald-500" />
+          </span>
         </div>
 
         {/* Action Buttons */}
