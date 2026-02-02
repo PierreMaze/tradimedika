@@ -44,7 +44,12 @@
           "url": "https://www.passeportsante.net/fr/Actualites/Dossiers/DossierComplexe.aspx?doc=8-vertus-citron"
         }
       ],
-      "traditional": []
+      "traditional": [
+        {
+          "title": "Wikipédia",
+          "url": "https://fr.wikipedia.org/wiki/Citron"
+        }
+      ]
     }
   },
   {
@@ -92,6 +97,10 @@
         {
           "title": "Doctissimo",
           "url": "https://www.doctissimo.fr/nutrition/encyclopedie-des-aliments/oignon"
+        },
+        {
+          "title": "Wikipédia",
+          "url": "https://fr.wikipedia.org/wiki/Oignon"
         }
       ]
     }
@@ -148,6 +157,10 @@
         {
           "title": "Doctissimo",
           "url": "https://www.doctissimo.fr/nutrition/alimentation-et-sante/herbes-aromatiques-et-epices/le-clou-de-girofle-ses-bienfaits-et-utilisations/366680_ar.html"
+        },
+        {
+          "title": "Wikipédia",
+          "url": "https://fr.wikipedia.org/wiki/Clou_de_girofle"
         }
       ]
     }
@@ -199,6 +212,10 @@
         {
           "title": "Passeport Santé",
           "url": "https://www.passeportsante.net/fr/Nutrition/EncyclopedieAliments/Fiche.aspx?doc=miel_nu"
+        },
+        {
+          "title": "Wikipédia",
+          "url": "https://fr.wikipedia.org/wiki/Miel"
         }
       ]
     }
@@ -254,7 +271,12 @@
           "url": "https://www.passeportsante.net/fr/Solutions/PlantesSupplements/Fiche.aspx?doc=ail_ps"
         }
       ],
-      "traditional": []
+      "traditional": [
+        {
+          "title": "Wikipédia",
+          "url": "https://fr.wikipedia.org/wiki/Ail_cultiv%C3%A9"
+        }
+      ]
     }
   },
   {
@@ -301,7 +323,12 @@
           "url": "https://www.passeportsante.net/fr/Nutrition/EncyclopedieAliments/Fiche.aspx?doc=riz_nu"
         }
       ],
-      "traditional": []
+      "traditional": [
+        {
+          "title": "Wikipédia",
+          "url": "https://fr.wikipedia.org/wiki/Riz"
+        }
+      ]
     }
   },
   {
@@ -348,7 +375,12 @@
           "url": "https://www.passeportsante.net/fr/Nutrition/EncyclopedieAliments/Fiche.aspx?doc=banane_nu"
         }
       ],
-      "traditional": []
+      "traditional": [
+        {
+          "title": "Wikipédia",
+          "url": "https://fr.wikipedia.org/wiki/Banane"
+        }
+      ]
     }
   },
   {
@@ -403,7 +435,12 @@
           "url": "https://www.ema.europa.eu/en/medicines/herbal/zingiberis-rhizoma"
         }
       ],
-      "traditional": []
+      "traditional": [
+        {
+          "title": "Wikipédia",
+          "url": "https://fr.wikipedia.org/wiki/Gingembre"
+        }
+      ]
     }
   },
   {
@@ -463,6 +500,10 @@
         {
           "title": "Doctissimo",
           "url": "https://www.doctissimo.fr/medecines-douces/la-phytotherapie/plantes-medicinales/camomille-ses-bienfaits-ses-bons-usages-et-ses-precautions/2a1d13_ar.html"
+        },
+        {
+          "title": "Wikipédia",
+          "url": "https://fr.wikipedia.org/wiki/Camomille"
         }
       ]
     }
@@ -521,6 +562,10 @@
         {
           "title": "Doctissimo",
           "url": "https://www.doctissimo.fr/sante/aromatherapie/guide-huiles-essentielles/huile-essentielle-de-menthe-poivree"
+        },
+        {
+          "title": "Wikipédia",
+          "url": "https://fr.wikipedia.org/wiki/Menthe_poivr%C3%A9e"
         }
       ]
     }
@@ -574,6 +619,10 @@
         {
           "title": "Doctissimo",
           "url": "https://www.doctissimo.fr/html/dossiers/maladies_cardiovasculaires/articles/9430-cafe-infarctus-coeur.htm"
+        },
+        {
+          "title": "Wikipédia",
+          "url": "https://fr.wikipedia.org/wiki/Caf%C3%A9"
         }
       ]
     }
@@ -630,6 +679,10 @@
         {
           "title": "Doctissimo",
           "url": "https://www.doctissimo.fr/html/sante/phytotherapie/plante-medicinale/sureau.htm"
+        },
+        {
+          "title": "Wikipédia",
+          "url": "https://fr.wikipedia.org/wiki/Sureau_noir"
         }
       ]
     }
@@ -683,6 +736,10 @@
         {
           "title": "Doctissimo",
           "url": "https://www.doctissimo.fr/html/sante/phytotherapie/plante-medicinale/ananas.htm"
+        },
+        {
+          "title": "Wikipédia",
+          "url": "https://fr.wikipedia.org/wiki/Ananas"
         }
       ]
     }
@@ -737,6 +794,10 @@
         {
           "title": "Doctissimo",
           "url": "https://www.doctissimo.fr/html/nutrition/aliments/fruits-legumes/articles/13330-pruneau-agen-equilibre-alimentaire.htm"
+        },
+        {
+          "title": "Wikipédia",
+          "url": "https://fr.wikipedia.org/wiki/Pruneau"
         }
       ]
     }
