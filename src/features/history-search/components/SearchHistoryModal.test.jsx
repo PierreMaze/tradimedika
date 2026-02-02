@@ -158,7 +158,9 @@ describe("SearchHistoryModal", () => {
       });
       expect(clearButton).toBeInTheDocument();
       expect(clearButton).toBeDisabled();
-      expect(clearButton).toHaveClass("cursor-not-allowed", "opacity-50");
+      // Le bouton disabled a le curseur not-allowed et une opacité réduite (styles via ModalButton)
+      expect(clearButton.className).toContain("opacity-50");
+      expect(clearButton.className).toContain("cursor-not-allowed");
     });
 
     it("should render close button", () => {
@@ -188,8 +190,8 @@ describe("SearchHistoryModal", () => {
         />,
       );
 
-      // Backdrop has bg-black/50 class and is not the dialog
-      const backdrop = container.querySelector(".bg-black\\/50");
+      // Backdrop has bg-black/60 class (ModalLayout standard)
+      const backdrop = container.querySelector(".bg-black\\/60");
       expect(backdrop).toBeInTheDocument();
     });
   });
@@ -229,7 +231,7 @@ describe("SearchHistoryModal", () => {
         />,
       );
 
-      const backdrop = container.querySelector(".bg-black\\/50");
+      const backdrop = container.querySelector(".bg-black\\/60");
       await user.click(backdrop);
 
       expect(mockOnClose).toHaveBeenCalledTimes(1);
@@ -308,13 +310,17 @@ describe("SearchHistoryModal", () => {
         screen.getByText(/Êtes-vous sûr de vouloir effacer/i),
       ).toBeInTheDocument();
 
-      // Should have Cancel and Delete buttons
+      // Should have Cancel button
       expect(
         screen.getByRole("button", { name: /Annuler/i }),
       ).toBeInTheDocument();
-      expect(
-        screen.getByRole("button", { name: /Supprimer tout l'historique/i }),
-      ).toBeInTheDocument();
+
+      // Le bouton de suppression affiche "Supprimer" - vérifier qu'il existe
+      const buttons = screen.getAllByRole("button");
+      const deleteButton = buttons.find(
+        (btn) => btn.textContent.trim() === "Supprimer",
+      );
+      expect(deleteButton).toBeDefined();
 
       // Should NOT have called callbacks yet
       expect(mockOnClearHistory).not.toHaveBeenCalled();
@@ -341,10 +347,12 @@ describe("SearchHistoryModal", () => {
       });
       await user.click(clearButton);
 
-      // Click Supprimer button in confirmation dialog
-      const deleteButton = screen.getByRole("button", {
-        name: /Supprimer tout l'historique/i,
-      });
+      // Click Supprimer button in confirmation dialog (texte exacte = "Supprimer")
+      const buttons = screen.getAllByRole("button");
+      const deleteButton = buttons.find(
+        (btn) => btn.textContent.trim() === "Supprimer",
+      );
+      expect(deleteButton).toBeDefined();
       await user.click(deleteButton);
 
       // Should have called callbacks
@@ -402,7 +410,8 @@ describe("SearchHistoryModal", () => {
 
       const dialog = screen.getByRole("dialog");
       expect(dialog).toHaveAttribute("aria-modal", "true");
-      expect(dialog).toHaveAttribute("aria-labelledby", "history-modal-title");
+      // ModalLayout utilise "modal-title" comme id standard
+      expect(dialog).toHaveAttribute("aria-labelledby", "modal-title");
     });
 
     it("should close on Escape key press", async () => {

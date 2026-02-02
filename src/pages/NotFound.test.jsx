@@ -36,10 +36,12 @@ describe("NotFound", () => {
       ).toBeInTheDocument();
     });
 
-    it("should render decorative emoji", () => {
+    it("should render decorative icon", () => {
       renderWithRouter(<NotFound />);
 
-      expect(screen.getByText("🌿")).toBeInTheDocument();
+      // Le composant utilise GiFallingLeaf, vérifions qu'un élément décoratif existe
+      const decorativeElement = screen.getByRole("main").querySelector("svg");
+      expect(decorativeElement).toBeInTheDocument();
     });
   });
 

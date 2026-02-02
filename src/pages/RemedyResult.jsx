@@ -162,6 +162,20 @@ function RemedyResult() {
     return filterRemediesByTags(filteredBySymptoms, appliedFilters);
   }, [filteredBySymptoms, appliedFilters]);
 
+  // Calculer si on doit afficher le séparateur (uniquement si plusieurs symptômes)
+  const shouldShowSeparator = useMemo(() => {
+    const uniqueSymptoms = new Set();
+    displayRemedies.forEach((result) => {
+      // Protection contre les remèdes sans matchedSymptoms (cas des tests ou données incomplètes)
+      if (result.matchedSymptoms && Array.isArray(result.matchedSymptoms)) {
+        result.matchedSymptoms.forEach((symptom) => {
+          uniqueSymptoms.add(symptom);
+        });
+      }
+    });
+    return uniqueSymptoms.size > 1;
+  }, [displayRemedies]);
+
   // Generate dynamic meta tags (memoizé pour optimisation)
   const { pageTitle, pageDescription, canonicalUrl } = useMemo(() => {
     const title =
@@ -249,19 +263,27 @@ function RemedyResult() {
           </p>
         )}
 
-        {/* Filtres par symptômes avec bouton de filtres par propriétés à gauche */}
+        {/* Section de filtrage divisée en deux parties */}
         {safeRemedies.length > 0 && (
-          <FilterRemedyResult
-            key={`filter-${selectedSymptoms.join("-")}-${resetFilterKey}`}
-            matchedRemedies={displayRemedies}
-            onFilterChange={handleSymptomFilterChange}
-            filterButton={
+          <div className="mb-6 flex w-full justify-center">
+            <div className="flex flex-col items-center gap-4 md:flex-row md:items-center">
               <FilterButton
                 onClick={openModal}
                 activeFiltersCount={appliedFiltersCount}
               />
-            }
-          />
+              {shouldShowSeparator && (
+                <span
+                  className="h-8 border-1 border-dashed border-emerald-600 dark:border-emerald-500"
+                  aria-hidden="true"
+                ></span>
+              )}
+              <FilterRemedyResult
+                key={`filter-${selectedSymptoms.join("-")}-${resetFilterKey}`}
+                matchedRemedies={displayRemedies}
+                onFilterChange={handleSymptomFilterChange}
+              />
+            </div>
+          </div>
         )}
 
         {/* Message d'information si des remèdes sont masqués par filtrage allergies */}

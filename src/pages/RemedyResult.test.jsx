@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import RemedyResult from "./RemedyResult";
 
 // Mock Helmet - render children to make SEO content testable
@@ -154,7 +154,11 @@ describe("RemedyResult", () => {
   describe("With Symptoms from URL", () => {
     it("should display symptoms from query params", () => {
       vi.mocked(findMatchingRemedies).mockReturnValue([
-        { remedy: { id: 1, name: "Remedy 1" }, score: 100 },
+        {
+          remedy: { id: 1, name: "Remedy 1" },
+          score: 100,
+          matchedSymptoms: ["fatigue", "stress"],
+        },
       ]);
 
       renderWithRouter(["/remedes?symptoms=fatigue,stress"]);
@@ -164,7 +168,11 @@ describe("RemedyResult", () => {
 
     it("should render remedy result list when remedies are found", () => {
       vi.mocked(findMatchingRemedies).mockReturnValue([
-        { remedy: { id: 1, name: "Remedy 1" }, score: 100 },
+        {
+          remedy: { id: 1, name: "Remedy 1" },
+          score: 100,
+          matchedSymptoms: ["fatigue"],
+        },
       ]);
 
       renderWithRouter(["/remedes?symptoms=fatigue"]);
@@ -174,8 +182,16 @@ describe("RemedyResult", () => {
 
     it("should show results count when remedies are found", () => {
       vi.mocked(findMatchingRemedies).mockReturnValue([
-        { remedy: { id: 1, name: "Remedy 1" }, score: 100 },
-        { remedy: { id: 2, name: "Remedy 2" }, score: 90 },
+        {
+          remedy: { id: 1, name: "Remedy 1" },
+          score: 100,
+          matchedSymptoms: ["fatigue"],
+        },
+        {
+          remedy: { id: 2, name: "Remedy 2" },
+          score: 90,
+          matchedSymptoms: ["fatigue"],
+        },
       ]);
 
       renderWithRouter(["/remedes?symptoms=fatigue"]);
@@ -190,7 +206,11 @@ describe("RemedyResult", () => {
   describe("Filter Components", () => {
     it("should render filter button when remedies exist", () => {
       vi.mocked(findMatchingRemedies).mockReturnValue([
-        { remedy: { id: 1, name: "Remedy 1" }, score: 100 },
+        {
+          remedy: { id: 1, name: "Remedy 1" },
+          score: 100,
+          matchedSymptoms: ["fatigue"],
+        },
       ]);
 
       renderWithRouter(["/remedes?symptoms=fatigue"]);
@@ -206,7 +226,11 @@ describe("RemedyResult", () => {
 
     it("should render filter remedy result when remedies exist", () => {
       vi.mocked(findMatchingRemedies).mockReturnValue([
-        { remedy: { id: 1, name: "Remedy 1" }, score: 100 },
+        {
+          remedy: { id: 1, name: "Remedy 1" },
+          score: 100,
+          matchedSymptoms: ["fatigue"],
+        },
       ]);
 
       renderWithRouter(["/remedes?symptoms=fatigue"]);
