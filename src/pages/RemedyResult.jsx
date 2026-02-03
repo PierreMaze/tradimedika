@@ -162,6 +162,21 @@ function RemedyResult() {
     return filterRemediesByTags(filteredBySymptoms, appliedFilters);
   }, [filteredBySymptoms, appliedFilters]);
 
+  // Recalculer isRecommended sur la liste finale filtrée :
+  // le premier remède non-allergène de la liste actuelle devient "Recommandé"
+  const remediesWithRecommendation = useMemo(() => {
+    const recommendedIndex = filteredRemedies.findIndex(
+      (item) => !item.isFiltered,
+    );
+    return filteredRemedies.map((item, index) => {
+      const shouldBeRecommended = index === recommendedIndex;
+      if (item.isRecommended === shouldBeRecommended) {
+        return item;
+      }
+      return { ...item, isRecommended: shouldBeRecommended };
+    });
+  }, [filteredRemedies]);
+
   // Calculer si on doit afficher le séparateur (uniquement si plusieurs symptômes)
   const shouldShowSeparator = useMemo(() => {
     const uniqueSymptoms = new Set();
@@ -304,7 +319,7 @@ function RemedyResult() {
 
         {/* Compteur de résultats (seulement si des remèdes sont affichés après filtrage) */}
         {/* aria-live pour annoncer les changements aux lecteurs d'écran */}
-        {filteredRemedies.length > 0 && safeRemedies.length > 0 && (
+        {remediesWithRecommendation.length > 0 && safeRemedies.length > 0 && (
           <p
             className="text-lg text-neutral-600 dark:text-neutral-400"
             role="status"
@@ -312,16 +327,16 @@ function RemedyResult() {
             aria-atomic="true"
           >
             <span className="font-bold text-emerald-600 dark:text-emerald-500">
-              {filteredRemedies.length}
+              {remediesWithRecommendation.length}
             </span>{" "}
-            remède{filteredRemedies.length > 1 ? "s" : ""} trouvé
-            {filteredRemedies.length > 1 ? "s" : ""}
+            remède{remediesWithRecommendation.length > 1 ? "s" : ""} trouvé
+            {remediesWithRecommendation.length > 1 ? "s" : ""}
           </p>
         )}
 
         {/* Liste des remèdes ou état vide */}
         <RemedyResultList
-          remedies={filteredRemedies}
+          remedies={remediesWithRecommendation}
           hasMatchingRemedies={safeRemedies.length > 0}
           selectedSymptoms={selectedSymptoms}
         />

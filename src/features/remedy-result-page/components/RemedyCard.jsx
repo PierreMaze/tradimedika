@@ -10,6 +10,7 @@ import {
   ClickableTag,
   PregnancyTag,
   ProuvedTag,
+  RecommendedTag,
   TraditionnalTag,
 } from "../../../components/tags";
 import {
@@ -34,6 +35,7 @@ function RemedyCard({
   selectedSymptoms,
   matchedSymptoms = [],
   isFiltered = false,
+  isRecommended = false,
 }) {
   const popoverRef = useRef(null);
   const trackEvent = useGAEvent();
@@ -91,8 +93,8 @@ function RemedyCard({
     >
       <Link
         to={`/remedes/${generateSlug(name)}`}
-        state={{ symptoms: selectedSymptoms }}
-        aria-label={`Voir les détails de ${name}${isFiltered ? " (contient des allergènes)" : ""}`}
+        state={{ symptoms: selectedSymptoms, isRecommended }}
+        aria-label={`Voir les détails de ${name}${isFiltered ? " (contient des allergènes)" : ""}${isRecommended ? " (recommandé)" : ""}`}
         className="block h-full"
         onClick={handleRemedyClick}
       >
@@ -115,21 +117,24 @@ function RemedyCard({
                   ))}
                 </div>
               )}
-              {/* Tag allergène en overlay (top-right) */}
-              {isFiltered && (
-                <div className="absolute top-4 right-4 z-10">
-                  <span
-                    className="inline-flex shrink-0 items-center gap-1 rounded-md bg-amber-100 px-3 py-1.5 text-sm font-medium text-amber-800 shadow-md lg:text-base 2xl:text-lg dark:bg-amber-900 dark:text-amber-200"
-                    title="Ce remède contient des allergènes que vous avez déclarés"
-                    role="status"
-                    aria-live="polite"
-                  >
-                    <FiInfo
-                      className="h-4 w-4 lg:h-5 lg:w-5"
-                      aria-hidden="true"
-                    />
-                    Allergène
-                  </span>
+              {/* Tags en overlay (top-right) : Recommandé et/ou Allergène */}
+              {(isRecommended || isFiltered) && (
+                <div className="absolute top-4 right-4 z-10 flex flex-col gap-2">
+                  {isRecommended && <RecommendedTag className="shadow-md" />}
+                  {isFiltered && (
+                    <span
+                      className="inline-flex shrink-0 items-center gap-1 rounded-md bg-amber-100 px-3 py-1.5 text-sm font-medium text-amber-800 shadow-md lg:text-base 2xl:text-lg dark:bg-amber-900 dark:text-amber-200"
+                      title="Ce remède contient des allergènes que vous avez déclarés"
+                      role="status"
+                      aria-live="polite"
+                    >
+                      <FiInfo
+                        className="h-4 w-4 lg:h-5 lg:w-5"
+                        aria-hidden="true"
+                      />
+                      Allergène
+                    </span>
+                  )}
                 </div>
               )}
               <img
@@ -294,6 +299,7 @@ RemedyCard.propTypes = {
   selectedSymptoms: PropTypes.arrayOf(PropTypes.string).isRequired,
   matchedSymptoms: PropTypes.arrayOf(PropTypes.string),
   isFiltered: PropTypes.bool,
+  isRecommended: PropTypes.bool,
 };
 
 /**
@@ -308,6 +314,11 @@ function arePropsEqual(prevProps, nextProps) {
 
   // Comparer isFiltered
   if (prevProps.isFiltered !== nextProps.isFiltered) {
+    return false;
+  }
+
+  // Comparer isRecommended
+  if (prevProps.isRecommended !== nextProps.isRecommended) {
     return false;
   }
 

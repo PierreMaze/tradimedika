@@ -57,15 +57,19 @@ export function useSymptomSubmit(addSearch) {
 
     setTimeout(() => {
       try {
-        // Rechercher les remèdes correspondants
-        const matchingRemedies = findMatchingRemedies(selectedSymptoms, db);
+        // Ne prendre en compte les allergies que si le filtrage est activé
+        const allergiesToSave = isFilteringEnabled ? userAllergies : [];
+
+        // Rechercher les remèdes correspondants (avec allergies pour isRecommended)
+        const matchingRemedies = findMatchingRemedies(
+          selectedSymptoms,
+          db,
+          allergiesToSave,
+        );
 
         // Mettre à jour les résultats
         setResults(matchingRemedies);
         setHasSubmitted(true);
-
-        // Ne prendre en compte les allergies que si le filtrage est activé
-        const allergiesToSave = isFilteringEnabled ? userAllergies : [];
 
         // Calculer le nombre de remèdes filtrés (masqués par allergies)
         let filteredCount = 0;

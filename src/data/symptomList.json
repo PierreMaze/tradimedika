@@ -5,6 +5,8 @@
   "constipation",
   "ballonnements",
   "nausée",
+  "reflux",
+  "brûlures d'estomac",
   "rhume",
   "grippe",
   "toux",
@@ -13,6 +15,7 @@
   "insomnie",
   "stress",
   "anxiété",
+  "palpitations",
   "trouble de la concentration",
   "spasmophilie",
   "crampes musculaires",
@@ -33,5 +36,6 @@
   "éruption cutanée",
   "démangeaisons",
   "perte de cheveux",
-  "perte d'apétit"
+  "perte d'apétit",
+  "baisse d'énergie"
 ]

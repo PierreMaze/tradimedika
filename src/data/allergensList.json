@@ -28,5 +28,11 @@
     "name": "Pollen d'olivier",
     "description": "Pollen spécifique à l'olivier",
     "remedies": ["Ananas"]
+  },
+  {
+    "id": "latex",
+    "name": "Latex",
+    "description": "Substance présente sous la peau de certaines plantes",
+    "remedies": ["Aloe vera"]
   }
 ]

@@ -4,6 +4,7 @@
 export { default as RemedyResultDetailsHeader } from "./components/RemedyResultDetailsHeader";
 export { default as RemedyResultDetailsNavigation } from "./components/RemedyResultDetailsNavigation";
 export { default as RemedyResultDetailsAllergyWarning } from "./components/RemedyResultDetailsAllergyWarning";
+export { default as RemedyResultDetailsRecommendedBanner } from "./components/RemedyResultDetailsRecommendedBanner";
 export { default as RemedyResultDetailsPropertiesSection } from "./components/RemedyResultDetailsPropertiesSection";
 export { default as RemedyResultDetailsSymptomsSection } from "./components/RemedyResultDetailsSymptomsSection";
 export { default as RemedyResultDetailsUsagesList } from "./components/RemedyResultDetailsUsagesList";

@@ -11,6 +11,7 @@ import {
   RemedyResultDetailsHeader,
   RemedyResultDetailsNavigation,
   RemedyResultDetailsPropertiesSection,
+  RemedyResultDetailsRecommendedBanner,
   RemedyResultDetailsSymptomsSection,
   RemedyResultDetailsTipsSection,
   RemedyResultDetailsUsagesList,
@@ -32,6 +33,7 @@ function RemedyResultDetails() {
   const { slug } = useParams();
   const location = useLocation();
   const selectedSymptoms = location.state?.symptoms || [];
+  const isRecommended = location.state?.isRecommended || false;
   const prefersReducedMotion = useReducedMotion();
 
   const { remedy, safeImageUrl, notFound } = useRemedyDetails(slug);
@@ -77,6 +79,12 @@ function RemedyResultDetails() {
           selectedSymptoms={selectedSymptoms}
           variant="top"
         />
+
+        {isRecommended && (
+          <RemedyResultDetailsRecommendedBanner
+            prefersReducedMotion={prefersReducedMotion}
+          />
+        )}
 
         {hasUserAllergens && (
           <RemedyResultDetailsAllergyWarning

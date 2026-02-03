@@ -5,6 +5,7 @@
     "type": "aliment",
     "description": "Fruit riche en vitamine C (53 mg/100g) et antioxydants, le citron est reconnu pour ses propriétés stimulantes de la bile et ses effets sur la glycémie. Bien que ses vertus détox soient largement exagérées, il possède des bienfaits scientifiquement prouvés sur la digestion des graisses.",
     "symptoms": ["troubles digestifs", "glycémie"],
+    "badForSymptoms": ["reflux", "brûlures d'estomac"],
     "properties": [
       { "name": "antioxydant", "score": 7, "category": "digestion" },
       { "name": "vitamine C", "score": 8, "category": "immunite" }
@@ -58,6 +59,12 @@
     "type": "aliment",
     "description": "Légume contenant des composés soufrés et de la quercétine (antioxydant). Utilisé traditionnellement contre le rhume, bien qu'il n'existe actuellement aucune étude scientifique de qualité validant son efficacité contre la toux et le rhume.",
     "symptoms": ["rhume", "toux"],
+    "badForSymptoms": [
+      "ballonnements",
+      "troubles digestifs",
+      "diarrhée",
+      "brûlures d'estomac"
+    ],
     "properties": [
       { "name": "antimicrobien", "score": 7, "category": "désinfectant" },
       { "name": "atténue", "score": 7, "category": "calment" }
@@ -111,6 +118,7 @@
     "type": "épice",
     "description": "Épice contenant de l'eugénol, molécule aux propriétés anesthésiques et antiseptiques reconnues. Utilisé depuis des siècles pour soulager temporairement les douleurs dentaires. IMPORTANT : Ne remplace PAS une consultation chez le dentiste.",
     "symptoms": ["mal de dents", "rage de dents"],
+    "badForSymptoms": [],
     "properties": [
       { "name": "anesthesique", "score": 8, "category": "calment" },
       { "name": "antiseptique", "score": 7, "category": "désinfectant" }
@@ -171,6 +179,7 @@
     "type": "aliment",
     "description": "Substance naturelle aux propriétés antibactériennes, antifongiques et antiseptiques reconnues. Études scientifiques confirmant son efficacité contre la toux, parfois aussi efficace que certains sirops. ATTENTION CRITIQUE : INTERDIT aux nourrissons de moins d'1 an (risque de botulisme infantile).",
     "symptoms": ["toux", "mal de gorge"],
+    "badForSymptoms": [],
     "properties": [
       { "name": "atténue", "score": 8, "category": "calment" },
       { "name": "antiseptique", "score": 9, "category": "désinfectant" }
@@ -226,6 +235,7 @@
     "type": "aliment",
     "description": "Aliment riche en allicine aux propriétés antibactériennes, antivirales et antifongiques. Renforce le système immunitaire et possède une activité anticoagulante légère. L'usage contre les vers intestinaux repose sur la tradition sans études cliniques validées.",
     "symptoms": ["troubles digestifs", "vers intestinaux"],
+    "badForSymptoms": ["reflux", "brûlures d'estomac", "diarrhée"],
     "properties": [
       { "name": "antimicrobien", "score": 8, "category": "digestion" },
       { "name": "immunostimulant", "score": 7, "category": "immunité" }
@@ -285,6 +295,7 @@
     "type": "aliment",
     "description": "Aliment sans résidu, pauvre en fibres et très digeste. L'amidon qu'il contient aide à épaissir les selles. Bien qu'il ne traite pas directement la diarrhée, il permet au système digestif de se reposer et facilite la récupération.",
     "symptoms": ["diarrhée"],
+    "badForSymptoms": ["constipation"],
     "properties": [
       { "name": "digestion facile", "score": 9, "category": "digestion" }
     ],
@@ -337,6 +348,7 @@
     "type": "aliment",
     "description": "Fruit riche en pectine (fibre soluble) et potassium. Effet sur le transit dépend de la maturité : banane verte = constipante (riche en amidon résistant), banane jaune à taches brunes = laxative. Efficace contre la diarrhée grâce à la pectine et l'amidon.",
     "symptoms": ["diarrhée", "constipation", "crampes musculaires"],
+    "badForSymptoms": [],
     "properties": [
       { "name": "potassium", "score": 9, "category": "digestion" }
     ],
@@ -388,7 +400,8 @@
     "name": "Gingembre frais",
     "type": "épice",
     "description": "Racine contenant des gingérols et shogaols, reconnus pour leurs propriétés anti-nausée par action directe sur l'estomac. Approuvé par la coopération scientifique européenne en phytothérapie. Effet stimulant et anti-inflammatoire puissant.",
-    "symptoms": ["nausée", "digestion", "fatigue"],
+    "symptoms": ["nausée", "digestion", "baisse d'énergie"],
+    "badForSymptoms": ["reflux", "brûlures d'estomac", "insomnie"],
     "properties": [
       { "name": "anti nausée", "score": 9, "category": "calment" },
       { "name": "anti inflammatoire", "score": 8, "category": "digestion" },
@@ -456,6 +469,7 @@
       "ballonnements",
       "spasmophilie"
     ],
+    "badForSymptoms": [],
     "properties": [
       { "name": "antispasmodique", "score": 8, "category": "calment" },
       { "name": "améliore la digestion", "score": 7, "category": "digestion" },
@@ -514,6 +528,7 @@
     "type": "plante",
     "description": "Plante contenant du menthol aux propriétés antispasmodiques et digestives. Étude de 1996 montrant une efficacité équivalente au paracétamol contre les céphalées de tension. ATTENTION CRITIQUE : CONTRE-INDIQUÉE en cas de reflux gastro-œsophagien (aggrave les symptômes).",
     "symptoms": ["digestion", "ballonnements", "nausée", "mal de tête"],
+    "badForSymptoms": ["reflux", "brûlures d'estomac", "toux"],
     "properties": [
       { "name": "antispasmodique", "score": 9, "category": "calment" },
       { "name": "améliore la digestion", "score": 8, "category": "digestion" },
@@ -575,7 +590,27 @@
     "name": "Café noir",
     "type": "boisson",
     "description": "Boisson contenant de la caféine (stimulant du système nerveux central) qui bloque les récepteurs d'adénosine. Améliore vigilance, concentration et performances cognitives. Double rôle sur les maux de tête : peut les soulager ET les déclencher. Risque d'anxiété à haute dose.",
-    "symptoms": ["fatigue", "mal de tête", "trouble de la concentration"],
+    "symptoms": [
+      "baisse d'énergie",
+      "mal de tête",
+      "trouble de la concentration"
+    ],
+    "badForSymptoms": [
+      "insomnie",
+      "anxiété",
+      "stress",
+      "palpitations",
+      "irritabilité",
+      "insomnie",
+      "troubles digestifs",
+      "diarrhée",
+      "digestion",
+      "anxiété",
+      "brûlures d'estomac",
+      "reflux",
+      "dépression",
+      "perte d'apétit"
+    ],
     "properties": [
       { "name": "stimulant", "score": 9, "category": "energie" },
       { "name": "analgesique", "score": 6, "category": "calment" }
@@ -629,70 +664,70 @@
   },
   {
     "id": 11,
-    "name": "Sureau noir",
-    "type": "Sirop",
-    "description": "Plante riche en antioxydants et anthocyanes. Études montrant une réduction de 3 jours des symptômes de grippe. Bloque la réplication virale. CONTRE-INDICATION MAJEURE : maladies auto-immunes (stimule le système immunitaire).",
-    "symptoms": ["rhume", "grippe"],
+    "name": "Yaourt nature",
+    "type": "aliment",
+    "description": "Produit laitier fermenté contenant des probiotiques et des protéines. Effet tampon léger sur l’acidité gastrique et soutien de la flore digestive. Peut apaiser temporairement les brûlures d’estomac chez certaines personnes.",
+    "symptoms": ["brûlures d'estomac", "troubles digestifs"],
+    "badForSymptoms": [
+      "intolérance au lactose",
+      "ballonnements",
+      "diarrhée",
+      "reflux"
+    ],
     "properties": [
-      { "name": "immunostimulant", "score": 8, "category": "immunité" }
+      { "name": "apaisant", "score": 6, "category": "digestif" },
+      { "name": "probiotique", "score": 7, "category": "flore" }
     ],
     "uses": [
       {
-        "form": ["sirop"],
-        "dose": { "value": 10, "unit": "ml (1-2 cuillères à café)" },
-        "frequency": { "value": 1, "unit": "fois par jour" },
-        "duration": { "value": 7, "unit": "jours" },
-        "description": "Adultes : 1 à 2 cuillères à café de sirop de sureau par jour dès les premiers signes de rhume. Enfants +3 ans : dose pédiatrique selon recommandations. Peut être pris en prévention pendant la saison hivernale."
+        "form": ["aliment"],
+        "dose": { "value": 125, "unit": "g (1 pot)" },
+        "frequency": { "value": 2, "unit": "fois par jour" },
+        "duration": { "value": null, "unit": "" },
+        "description": "Consommer 1 yaourt nature après un repas ou en collation pour aider à calmer l’acidité gastrique. Privilégier les yaourts nature sans sucre ajouté."
       }
     ],
     "contraindications": [
-      "maladies auto-immunes (CRITIQUE)",
-      "grossesse",
-      "allaitement",
-      "enfants de moins de 2 ans",
-      "traitement immunosuppresseur"
+      "intolérance au lactose",
+      "allergie aux protéines de lait",
+      "reflux aggravé par les produits laitiers"
     ],
     "tips": [
-      "Stimule fortement le système immunitaire",
-      "Consulter professionnel santé avant usage si traitement en cours",
-      "Ne pas utiliser baies crues (TOXIQUE)"
+      "Choisir un yaourt nature sans sucre",
+      "Éviter les yaourts aromatisés ou sucrés",
+      "Tester la tolérance individuelle",
+      "Préférer les yaourts au lait de chèvre ou sans lactose si sensible",
+      "Effet variable selon les personnes"
     ],
-    "image": "https://cdn-icons-png.flaticon.com/512/12924/12924832.png",
-    "pregnancySafe": false,
-    "childrenAge": 18,
-    "allergens": [],
+    "image": "https://cdn-icons-png.flaticon.com/512/5771/5771679.png",
+    "pregnancySafe": true,
+    "childrenAge": 3,
+    "allergens": ["lait", "lactose"],
     "alternatives": [],
-    "verifiedByProfessional": true,
+    "verifiedByProfessional": false,
     "autoGenerated": false,
     "sources": {
-      "scientific": [
-        {
-          "title": "VIDAL",
-          "url": "https://www.vidal.fr/parapharmacie/phytotherapie-plantes/sureau-noir-sambucus-nigra.html"
-        },
-        {
-          "title": "Passeport Santé",
-          "url": "https://www.passeportsante.net/fr/Solutions/PlantesSupplements/Fiche.aspx?doc=sureau_noir_ps"
-        }
-      ],
+      "scientific": [],
       "traditional": [
         {
-          "title": "Doctissimo",
-          "url": "https://www.doctissimo.fr/html/sante/phytotherapie/plante-medicinale/sureau.htm"
+          "title": "PasseportSanté",
+          "url": "https://www.passeportsante.net/fr/Solutions/PlantesSupplements/Fiche.aspx?doc=probiotiques"
         },
         {
           "title": "Wikipédia",
-          "url": "https://fr.wikipedia.org/wiki/Sureau_noir"
+          "url": "https://fr.wikipedia.org/wiki/Yaourt"
         }
       ]
     }
   },
+
   {
     "id": 12,
     "name": "Ananas",
     "type": "aliment",
     "description": "Fruit contenant de la bromélaïne, enzyme aux propriétés anti-inflammatoires et mucolytiques. Action décongestionnante sur les voies respiratoires. Usage traditionnel au Brésil, Mexique et Venezuela. CONTRE-INDICATION : anticoagulants (effet fluidifiant sanguin).",
     "symptoms": ["rhume", "inflammation"],
+    "badForSymptoms": ["diarrhée", "nausée", "reflux", "brûlures d'estomac"],
     "properties": [
       { "name": "anti inflammatoire", "score": 8, "category": "calment" }
     ],
@@ -750,6 +785,7 @@
     "type": "aliment",
     "description": "Fruit séché riche en fibres (7g/100g) et sorbitol. Reconnu scientifiquement pour son efficacité contre la constipation. Action laxative douce par stimulation du transit et hydratation des selles.",
     "symptoms": ["constipation"],
+    "badForSymptoms": ["diarrhée", "ballonnements"],
     "properties": [
       { "name": "laxatif", "score": 9, "category": "digestion" },
       { "name": "fibres", "score": 8, "category": "digestion" }
@@ -798,6 +834,130 @@
         {
           "title": "Wikipédia",
           "url": "https://fr.wikipedia.org/wiki/Pruneau"
+        }
+      ]
+    }
+  },
+  {
+    "id": 14,
+    "name": "Aloe vera",
+    "type": "plante",
+    "description": "Plante succulente dont le gel interne possède des propriétés apaisantes et protectrices des muqueuses. Utilisée traditionnellement pour calmer les irritations gastriques et œsophagiennes. Peut réduire la sensation de brûlure en formant un film protecteur sur la muqueuse.",
+    "symptoms": ["brûlures d'estomac", "reflux"],
+    "badForSymptoms": [
+      "diarrhée",
+      "douleurs abdominales",
+      "troubles digestifs"
+    ],
+    "properties": [
+      { "name": "apaisant", "score": 8, "category": "digestif" },
+      { "name": "protecteur", "score": 7, "category": "muqueuse" }
+    ],
+    "uses": [
+      {
+        "form": ["gel buvable"],
+        "dose": { "value": 30, "unit": "ml" },
+        "frequency": { "value": 2, "unit": "fois par jour" },
+        "duration": { "value": null, "unit": "" },
+        "description": "Prendre 20 à 30 ml de gel d’aloe vera pur avant les repas pour apaiser les brûlures d’estomac. Choisir un produit décoloré et sans aloïne."
+      }
+    ],
+    "contraindications": [
+      "Vérifier que le produit est à usage oral",
+      "grossesse",
+      "allaitement",
+      "diarrhée chronique",
+      "maladies inflammatoires intestinales",
+      "allergie au latex"
+    ],
+    "tips": [
+      "Utiliser uniquement le gel interne, sans latex",
+      "Préfère des produits bio, sans aloin (composé irritant), et certifiés pour usage oral (voir dans une pharmacie)",
+      "Commencer par de petites doses",
+      "Éviter les produits non purifiés",
+      "Peut être pris avant les repas",
+      "Arrêter en cas de troubles intestinaux"
+    ],
+    "image": "https://cdn-icons-png.flaticon.com/512/5389/5389056.png",
+    "pregnancySafe": false,
+    "childrenAge": 12,
+    "allergens": ["latex"],
+    "alternatives": [],
+    "verifiedByProfessional": false,
+    "autoGenerated": false,
+    "sources": {
+      "scientific": [],
+      "traditional": [
+        {
+          "title": "PasseportSanté",
+          "url": "https://www.passeportsante.net/fr/Solutions/PlantesSupplements/Fiche.aspx?doc=aloes_ps"
+        },
+        {
+          "title": "Doctissimo",
+          "url": "https://www.doctissimo.fr/html/sante/phytotherapie/plante-medicinale/aloe-vera-aloes.htm"
+        },
+        {
+          "title": "Wikipédia",
+          "url": "https://fr.wikipedia.org/wiki/Aloe_vera"
+        }
+      ]
+    }
+  },
+  {
+    "id": 13,
+    "name": "Fenouil",
+    "type": "plante",
+    "description": "Plante aromatique aux propriétés carminatives et digestives. Aide à soulager les ballonnements, les gaz et les crampes digestives. Utilisé traditionnellement sous forme de tisane ou graines mastiquées après les repas.",
+    "symptoms": ["ballonnements", "gaz", "troubles digestifs"],
+    "badForSymptoms": ["apiacées", "reflux", "brûlures d'estomac"],
+    "properties": [
+      { "name": "digestif", "score": 8, "category": "digestif" },
+      { "name": "carminatif", "score": 7, "category": "digestif" },
+      { "name": "apaisant", "score": 6, "category": "bien-être" }
+    ],
+    "uses": [
+      {
+        "form": ["tisane", "graines"],
+        "dose": { "value": 1, "unit": "cuillère à café de graines" },
+        "frequency": { "value": 2, "unit": "fois par jour" },
+        "duration": { "value": null, "unit": "" },
+        "description": "Infuser 1 cuillère à café de graines de fenouil dans 200 ml d'eau chaude pendant 5 à 10 minutes. Boire après les repas pour faciliter la digestion et réduire les ballonnements."
+      }
+    ],
+    "contraindications": [
+      "allergie aux apiacées (carotte, céleri, anis)",
+      "grossesse (en grande quantité)",
+      "allaitement (consommer modérément)",
+      "reflux (déconseillé)",
+      "brulures d'estomac (déconseillé)"
+    ],
+    "tips": [
+      "Peut être consommé en tisane, graines ou aromate dans les plats",
+      "Ne pas dépasser les doses traditionnelles",
+      "Éviter en cas de reflux",
+      "Tester la tolérance individuelle"
+    ],
+    "image": "https://cdn-icons-png.flaticon.com/512/5281/5281082.png",
+    "pregnancySafe": null,
+    "childrenAge": 3,
+    "allergens": ["apiacées"],
+    "alternatives": [],
+    "verifiedByProfessional": false,
+    "autoGenerated": false,
+    "sources": {
+      "scientific": [],
+      "traditional": [
+        {
+          "title": "PasseportSanté",
+          "url": "https://www.passeportsante.net/fr/Solutions/PlantesSupplements/Fiche.aspx?doc=fenouil_ps"
+        },
+        {
+          "title": "Doctissimo",
+          "url": "https://www.doctissimo.fr/html/sante/phytotherapie/plante-medicinale/fenouil.htm"
+        },
+        {
+          "title": "Wikipédia",
+          "url": "https://fr.wikipedia.org/wiki/Fenouil"
         }
       ]
     }

@@ -29,7 +29,40 @@ function validateRemedyMatcherInputs(selectedSymptoms, database) {
 }
 
 /**
+ * Vérifie si un remède est contre-indiqué pour les symptômes sélectionnés
+ *
+ * @param {Object} remedy - Le remède à évaluer
+ * @param {string[]} selectedSymptoms - Symptômes sélectionnés
+ * @returns {string[]} - Liste des symptômes pour lesquels le remède est mauvais
+ *
+ * @private
+ */
+function findBadSymptomMatches(remedy, selectedSymptoms) {
+  // Si pas de badForSymptoms, pas de contre-indication
+  if (
+    !Array.isArray(remedy.badForSymptoms) ||
+    remedy.badForSymptoms.length === 0
+  ) {
+    return [];
+  }
+
+  // Trouver les symptômes sélectionnés qui sont dans badForSymptoms
+  return selectedSymptoms.filter((selectedSymptom) =>
+    remedy.badForSymptoms.some(
+      (badSymptom) =>
+        normalizeForMatching(selectedSymptom) ===
+        normalizeForMatching(badSymptom),
+    ),
+  );
+}
+
+/**
  * Calcule le match entre un remède et les symptômes sélectionnés
+ *
+ * Logique de filtrage :
+ * 1. Trouve les symptômes qui matchent positivement (remedy.symptoms)
+ * 2. Vérifie si le remède est contre-indiqué pour certains symptômes (remedy.badForSymptoms)
+ * 3. Si contre-indiqué → exclut le remède
  *
  * @param {Object} remedy - Le remède à évaluer
  * @param {string[]} selectedSymptoms - Symptômes sélectionnés
@@ -58,6 +91,15 @@ function calculateRemedyMatch(remedy, selectedSymptoms) {
     return null;
   }
 
+  // Vérifier les contre-indications (badForSymptoms)
+  const badMatches = findBadSymptomMatches(remedy, selectedSymptoms);
+  if (badMatches.length > 0) {
+    logger.info(
+      `Remède "${remedy.name}" exclu : mauvais pour ${badMatches.join(", ")}`,
+    );
+    return null;
+  }
+
   // Retourner le remède avec son score
   return {
     remedy,
@@ -68,7 +110,10 @@ function calculateRemedyMatch(remedy, selectedSymptoms) {
 
 /**
  * Trie les remèdes par pertinence
- * Critères : score DESC, puis nom alphabétique ASC
+ * Critères de tri (dans l'ordre) :
+ * 1. matchCount DESC (nombre de symptômes matchés)
+ * 2. verifiedByProfessional DESC (remèdes vérifiés en priorité)
+ * 3. nom alphabétique ASC
  *
  * @param {Array<{remedy: Object, matchCount: number, matchedSymptoms: string[]}>} matches
  * @returns {Array<{remedy: Object, matchCount: number, matchedSymptoms: string[]}>}
@@ -77,16 +122,48 @@ function calculateRemedyMatch(remedy, selectedSymptoms) {
  */
 function sortRemediesByRelevance(matches) {
   return matches.sort((a, b) => {
-    // D'abord par score (décroissant)
+    // 1. D'abord par matchCount (décroissant)
     if (b.matchCount !== a.matchCount) {
       return b.matchCount - a.matchCount;
     }
 
-    // En cas d'égalité, tri alphabétique
+    // 2. En cas d'égalité, prioriser les remèdes vérifiés par un professionnel
+    const aVerified = a.remedy.verifiedByProfessional === true ? 1 : 0;
+    const bVerified = b.remedy.verifiedByProfessional === true ? 1 : 0;
+    if (bVerified !== aVerified) {
+      return bVerified - aVerified;
+    }
+
+    // 3. En cas d'égalité, tri alphabétique
     return a.remedy.name.localeCompare(b.remedy.name, "fr", {
       sensitivity: "base",
     });
   });
+}
+
+/**
+ * Vérifie si un remède contient des allergènes de l'utilisateur
+ *
+ * @param {Object} remedy - Le remède à vérifier
+ * @param {string[]} userAllergies - IDs des allergènes de l'utilisateur
+ * @returns {boolean} - true si le remède contient un allergène de l'utilisateur
+ *
+ * @private
+ */
+function hasUserAllergens(remedy, userAllergies) {
+  if (!userAllergies || userAllergies.length === 0) {
+    return false;
+  }
+  if (
+    !remedy ||
+    !Array.isArray(remedy.allergens) ||
+    remedy.allergens.length === 0
+  ) {
+    return false;
+  }
+  return remedy.allergens.some((allergenId) =>
+    userAllergies.includes(allergenId),
+  );
 }
 
 /**
@@ -95,24 +172,29 @@ function sortRemediesByRelevance(matches) {
  * Logique de matching :
  * 1. Matching flexible (insensible aux accents) entre symptômes sélectionnés et DB
  * 2. Filtre les remèdes qui ont au moins 1 symptôme en commun
- * 3. Calcule le score de pertinence (nombre de symptômes matchés)
- * 4. Trie par score décroissant, puis alphabétiquement
+ * 3. Exclut les remèdes contre-indiqués (badForSymptoms)
+ * 4. Calcule le score de pertinence (nombre de symptômes matchés)
+ * 5. Trie par : matchCount DESC, verifiedByProfessional DESC, alphabétique ASC
+ * 6. Marque comme "isRecommended" le premier résultat sans allergène utilisateur
  *
  * @param {string[]} selectedSymptoms - Symptômes sélectionnés (avec ou sans accents)
  * @param {Array} database - Base de données des remèdes (db.json)
- * @returns {Array<{remedy: Object, matchCount: number, matchedSymptoms: string[]}>}
+ * @param {string[]} [userAllergies=[]] - IDs des allergènes de l'utilisateur (optionnel)
+ * @returns {Array<{remedy: Object, matchCount: number, matchedSymptoms: string[], isRecommended: boolean}>}
  *
  * @example
  * const results = findMatchingRemedies(
  *   ["fatigue", "diarrhée"],  // Accepte avec/sans accents
- *   db
+ *   db,
+ *   ["citrus"]  // Allergies de l'utilisateur
  * );
- * // [
- * //   { remedy: {...}, matchCount: 2, matchedSymptoms: ["fatigue", "diarrhée"] },
- * //   { remedy: {...}, matchCount: 1, matchedSymptoms: ["fatigue"] }
- * // ]
+ * // Le premier remède sans allergène "citrus" sera isRecommended: true
  */
-export function findMatchingRemedies(selectedSymptoms, database) {
+export function findMatchingRemedies(
+  selectedSymptoms,
+  database,
+  userAllergies = [],
+) {
   // Validation des entrées
   if (!validateRemedyMatcherInputs(selectedSymptoms, database)) {
     return [];
@@ -124,7 +206,23 @@ export function findMatchingRemedies(selectedSymptoms, database) {
     .filter((match) => match !== null);
 
   // Tri par pertinence
-  return sortRemediesByRelevance(matches);
+  const sortedMatches = sortRemediesByRelevance(matches);
+
+  // Marquer comme "Recommandé" le premier résultat sans allergène utilisateur
+  let recommendedAssigned = false;
+  return sortedMatches.map((match) => {
+    const containsUserAllergen = hasUserAllergens(match.remedy, userAllergies);
+    const isRecommended = !recommendedAssigned && !containsUserAllergen;
+
+    if (isRecommended) {
+      recommendedAssigned = true;
+    }
+
+    return {
+      ...match,
+      isRecommended,
+    };
+  });
 }
 
 /**
