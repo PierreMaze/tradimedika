@@ -5,7 +5,7 @@ const LogoTradimedika = () => {
   return (
     <>
       <a
-        href="/tradimedika/"
+        href="/"
         alt="Logo Tradimedika"
         title="Logo Tradimedika"
         aria-label="Logo Tradimedika"
