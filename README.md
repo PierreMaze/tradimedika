@@ -13,7 +13,7 @@
 
 **Un Site web moderne et performant développé avec React, TailwindCSS et Framer Motion**
 
-[🌐 **Voir le site**](https://tradimedika.com/) • [🐛 **Signaler un bug**](https://github.com/PierreMaze/) • [💬 **Discuter**](https://www.linkedin.com/in/pierremazelaygue/)
+[🌐 **Voir le site**](https://tradimedika.com/) • [🐛 **Signaler un bug**](https://tally.so/r/3x0O8o) • [💬 **Discuter**](https://www.linkedin.com/in/pierremazelaygue/)
 
 [![TRADIMEDIKA](<https://img.shields.io/badge/TRADIMEDIKA-Bêta(0.50.3)-1a1a1a?style=for-the-badge&logo=leaflet&logoColor=00bd7e>)](https://tradimedika.com/)
 
