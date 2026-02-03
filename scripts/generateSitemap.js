@@ -14,7 +14,7 @@ import { fileURLToPath } from "url";
 // Configuration
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const BASE_URL = "https://pierremaze.github.io/tradimedika";
+const BASE_URL = "https://tradimedika.com";
 const OUTPUT_PATH = join(__dirname, "../public/sitemap.xml");
 
 // Charger la base de données

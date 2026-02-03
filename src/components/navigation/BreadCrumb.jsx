@@ -155,9 +155,7 @@ function BreadCrumb() {
 
   // Générer structured data JSON-LD pour le breadcrumb
   const breadcrumbSchema = useMemo(() => {
-    const baseUrl =
-      import.meta.env.VITE_BASE_URL ||
-      "https://pierremaze.github.io/tradimedika";
+    const baseUrl = import.meta.env.VITE_BASE_URL || "https://tradimedika.com";
 
     return {
       "@context": "https://schema.org",

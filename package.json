@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.50.3",
   "type": "module",
-  "homepage": "http://pierremaze.github.io/tradimedika",
+  "homepage": "https://tradimedika.com",
   "prettier": {
     "plugins": [
       "prettier-plugin-tailwindcss"

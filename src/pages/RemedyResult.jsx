@@ -205,8 +205,8 @@ function RemedyResult() {
 
     const canonical =
       selectedSymptoms.length > 0
-        ? `https://pierremaze.github.io/tradimedika/remedes?symptoms=${encodeURIComponent(selectedSymptoms.join(","))}`
-        : "https://pierremaze.github.io/tradimedika/remedes";
+        ? `https://tradimedika.com/remedes?symptoms=${encodeURIComponent(selectedSymptoms.join(","))}`
+        : "https://tradimedika.com/remedes";
 
     return {
       pageTitle: title,

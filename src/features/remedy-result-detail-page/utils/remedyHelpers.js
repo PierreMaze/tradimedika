@@ -24,7 +24,7 @@ export function generateRemedySEOMeta(remedy, slug) {
   const pageDescription =
     remedy.description ||
     `Découvrez ${remedy.name}, un remède naturel de type ${remedy.type}`;
-  const canonicalUrl = `https://pierremaze.github.io/tradimedika/remedes/${slug}`;
+  const canonicalUrl = `https://tradimedika.com/remedes/${slug}`;
 
   return { pageTitle, pageDescription, canonicalUrl };
 }

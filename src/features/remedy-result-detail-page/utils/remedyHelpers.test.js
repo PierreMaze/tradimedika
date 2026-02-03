@@ -41,9 +41,7 @@ describe("remedyHelpers", () => {
 
       expect(meta.pageTitle).toBe("Citron - Remède naturel | TRADIMEDIKA");
       expect(meta.pageDescription).toBe("Un agrume riche en vitamine C");
-      expect(meta.canonicalUrl).toBe(
-        "https://pierremaze.github.io/tradimedika/remedes/citron",
-      );
+      expect(meta.canonicalUrl).toBe("https://tradimedika.com/remedes/citron");
     });
 
     it("should generate default description if none provided", () => {
@@ -68,7 +66,7 @@ describe("remedyHelpers", () => {
       const meta = generateRemedySEOMeta(remedy, "the-a-la-menthe");
 
       expect(meta.canonicalUrl).toBe(
-        "https://pierremaze.github.io/tradimedika/remedes/the-a-la-menthe",
+        "https://tradimedika.com/remedes/the-a-la-menthe",
       );
     });
   });

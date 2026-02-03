@@ -1,12 +1,12 @@
 # robots.txt pour Tradimedika
-# https://pierremaze.github.io/tradimedika
+# https://tradimedika.com
 
 # Permettre tous les robots d'explorer le site
 User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://pierremaze.github.io/tradimedika/sitemap.xml
+Sitemap: https://tradimedika.com/sitemap.xml
 
 # Règles spécifiques pour les pages dynamiques
 Allow: /remedes

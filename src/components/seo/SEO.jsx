@@ -38,8 +38,7 @@ export default function SEO({
   structuredData = null,
 }) {
   // URL de base (peut être configurée via env variable)
-  const baseUrl =
-    import.meta.env.VITE_BASE_URL || "https://pierremaze.github.io/tradimedika";
+  const baseUrl = import.meta.env.VITE_BASE_URL || "https://tradimedika.com";
 
   // Construire l'URL canonique complète si relative
   const fullCanonical = canonical

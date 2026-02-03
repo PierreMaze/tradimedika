@@ -15,17 +15,11 @@ function Home() {
           name="keywords"
           content="remèdes naturels, plantes, symptômes, santé, médecine traditionnelle, traitement naturel"
         />
-        <link
-          rel="canonical"
-          href="https://pierremaze.github.io/tradimedika/"
-        />
+        <link rel="canonical" href="https://tradimedika.com/" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta
-          property="og:url"
-          content="https://pierremaze.github.io/tradimedika/"
-        />
+        <meta property="og:url" content="https://tradimedika.com/" />
         <meta
           property="og:title"
           content="TRADIMEDIKA - Remèdes naturels pour vos symptômes"
@@ -37,10 +31,7 @@ function Home() {
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:url"
-          content="https://pierremaze.github.io/tradimedika/"
-        />
+        <meta name="twitter:url" content="https://tradimedika.com/" />
         <meta name="twitter:title" content="TRADIMEDIKA - Remèdes naturels" />
         <meta
           name="twitter:description"
