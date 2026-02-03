@@ -322,7 +322,7 @@ export default function GestionCookies() {
               <li>✓ Jamais envoyés au serveur</li>
               <li>
                 ✓ Peuvent être supprimer ({" "}
-                <IoMdSettings className="inline h-5 w-5 rounded-full bg-white p-0.5" />{" "}
+                <IoMdSettings className="inline h-5 w-5 rounded-full bg-white p-0.5 text-neutral-600" />{" "}
                 &gt; Gestion des cookies)
               </li>
             </ul>
