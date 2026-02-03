@@ -47,6 +47,7 @@ vi.mock("../../../components/tags", () => {
     TraditionnalTag: () => <div data-testid="traditional-tag" />,
     PregnancyTag: PregnancyTagMock,
     ChildrenAgeTag: ChildrenAgeTagMock,
+    RecommendedTag: () => <div data-testid="recommended-tag" />,
   };
 });
 
@@ -255,5 +256,45 @@ describe("RemedyCard Component", () => {
     );
 
     expect(screen.queryByText("Maux de tête")).toBeNull();
+  });
+
+  describe("isRecommended", () => {
+    it("affiche le tag Recommandé quand isRecommended est true", () => {
+      render(
+        <MemoryRouter>
+          <RemedyCard
+            remedy={mockRemedy}
+            selectedSymptoms={mockSymptoms}
+            isRecommended={true}
+          />
+        </MemoryRouter>,
+      );
+
+      expect(screen.getByTestId("recommended-tag")).toBeInTheDocument();
+    });
+
+    it("n'affiche pas le tag Recommandé quand isRecommended est false", () => {
+      render(
+        <MemoryRouter>
+          <RemedyCard
+            remedy={mockRemedy}
+            selectedSymptoms={mockSymptoms}
+            isRecommended={false}
+          />
+        </MemoryRouter>,
+      );
+
+      expect(screen.queryByTestId("recommended-tag")).toBeNull();
+    });
+
+    it("n'affiche pas le tag Recommandé par défaut (sans prop)", () => {
+      render(
+        <MemoryRouter>
+          <RemedyCard remedy={mockRemedy} selectedSymptoms={mockSymptoms} />
+        </MemoryRouter>,
+      );
+
+      expect(screen.queryByTestId("recommended-tag")).toBeNull();
+    });
   });
 });

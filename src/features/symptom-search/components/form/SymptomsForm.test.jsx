@@ -59,8 +59,8 @@ describe("SymptomsForm", () => {
         expect(listbox).toBeInTheDocument();
       });
 
-      // Should show "Fatigue" in dropdown
-      expect(screen.getByText("Fatigue")).toBeInTheDocument();
+      // "fatigue" est un synonyme de "baisse d'énergie" → le symptôme principal s'affiche
+      expect(screen.getByText("Baisse d'énergie")).toBeInTheDocument();
     });
 
     it("should handle empty input", async () => {
@@ -94,7 +94,7 @@ describe("SymptomsForm", () => {
       await user.type(input, "FATI");
 
       await waitFor(() => {
-        expect(screen.getByText("Fatigue")).toBeInTheDocument();
+        expect(screen.getByText("Baisse d'énergie")).toBeInTheDocument();
       });
     });
 
@@ -183,14 +183,14 @@ describe("SymptomsForm", () => {
       await user.type(input, "fatigue");
 
       await waitFor(() => {
-        expect(screen.getByText("Fatigue")).toBeInTheDocument();
+        expect(screen.getByText("Baisse d'énergie")).toBeInTheDocument();
       });
 
-      const option = screen.getByText("Fatigue");
+      const option = screen.getByText("Baisse d'énergie");
       await user.click(option);
 
-      // Component returns lowercase symptom (as stored in DB)
-      expect(onSymptomSelect).toHaveBeenCalledWith("fatigue");
+      // "fatigue" est un synonyme → le symptôme principal "baisse d'énergie" est retourné
+      expect(onSymptomSelect).toHaveBeenCalledWith("baisse d'énergie");
       // Input should be cleared after selection
       expect(input).toHaveValue("");
     });
@@ -205,14 +205,14 @@ describe("SymptomsForm", () => {
       await user.type(input, "fatigue");
 
       await waitFor(() => {
-        expect(screen.getByText("Fatigue")).toBeInTheDocument();
+        expect(screen.getByText("Baisse d'énergie")).toBeInTheDocument();
       });
 
       await user.keyboard("{ArrowDown}");
       await user.keyboard("{Enter}");
 
-      // Component returns lowercase symptom (as stored in DB)
-      expect(onSymptomSelect).toHaveBeenCalledWith("fatigue");
+      // "fatigue" est un synonyme → le symptôme principal "baisse d'énergie" est retourné
+      expect(onSymptomSelect).toHaveBeenCalledWith("baisse d'énergie");
     });
 
     it("should auto-select single result on Enter", async () => {
