@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 import LogoTradimedika from "./LogoTradimedika";
 
 describe("LogoTradimedika", () => {
@@ -30,7 +30,7 @@ describe("LogoTradimedika", () => {
       render(<LogoTradimedika />);
 
       const link = screen.getByRole("link", { name: /Logo Tradimedika/i });
-      expect(link).toHaveAttribute("href", "/tradimedika/");
+      expect(link).toHaveAttribute("href", "/");
     });
 
     it("should have alt attribute", () => {
