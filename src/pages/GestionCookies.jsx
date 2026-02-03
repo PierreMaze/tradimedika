@@ -301,11 +301,11 @@ export default function GestionCookies() {
         </p>
 
         <div className="mb-6 grid gap-4 md:grid-cols-2">
-          <div className="rounded-lg border-2 border-dashed border-neutral-300 bg-neutral-50 p-4 dark:border-neutral-700">
+          <div className="rounded-lg border-2 border-dashed border-neutral-300 bg-neutral-50 p-4 dark:border-neutral-700 dark:bg-neutral-800">
             <h3 className="mb-2 font-semibold text-neutral-900 dark:text-neutral-100">
               Cookies
             </h3>
-            <ul className="space-y-1 text-sm text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300">
+            <ul className="space-y-1 text-sm text-neutral-700 dark:text-neutral-300">
               <li>✓ Utilisés pour l&apos;authentification</li>
               <li>✓ Envoyés au serveur à chaque requête</li>
               <li>✓ Peuvent être tiers (Google Analytics)</li>
