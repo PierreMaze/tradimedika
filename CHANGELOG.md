@@ -2,6 +2,40 @@
 
 ---
 
+## [0.50.3] - 2026-02-03
+
+### Added
+
+- **Tag "Recommandé" sur la page résultats**
+  - Nouveau composant `RecommendedTag` : badge visuel (sky) avec icône thumbUp affiché sur la carte du remède le plus pertinent
+  - Nouveau composant `RemedyResultDetailsRecommendedBanner` : bannière en haut de la page détails confirmant le statut recommandé
+  - `findMatchingRemedies()` marque désormais le premier résultat non-allergène comme `isRecommended`
+
+### Changed
+
+- **Recalcul dynamique du tag "Recommandé"**
+  - Le tag se met à jour automatiquement lorsque l'utilisateur filtre par symptôme individuel via `FilterRemedyResult`
+  - Le tag se met à jour lorsque des filtres de propriétés sont appliqués (grossesse, reconnaissance, âge)
+  - Clicking "Tous" restaure le tag sur le remède le plus pertinent globalement
+  - Implémenté via un `useMemo` post-filtrage dans `RemedyResult.jsx` : identifie le premier remède non-allergène (`isFiltered: false`) de la liste actuelle
+  - Optimisé pour `React.memo` : les items dont `isRecommended` n'a pas changé conservent la même référence objet
+
+- **Données symptômes — reclassification**
+  - "fatigue" reclassifié comme synonyme de "baisse d'énergie" dans `synonymsSymptomList.json`
+  - Ajout du symptôme "baisse d'énergie" dans `symptomList.json`
+
+### Fixed
+
+- **Tests unitaires**
+  - `SymptomsForm.test.jsx` : 4 tests mis à jour pour refléter le nouveau mapping synonyme "fatigue" → "baisse d'énergie"
+  - `HeroHeader.test.jsx` : badge version aligné avec la version du composant
+
+- **Version du projet**
+  - Version bump : `0.50.2` → `0.50.3`
+  - Mise à jour dans : package.json, README.md, HeroHeader.jsx
+
+---
+
 ## [0.50.2] - 2026-02-03
 
 ### Added
