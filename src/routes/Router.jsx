@@ -3,6 +3,7 @@ import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import GoogleAnalytics from "../components/analytics/GoogleAnalytics";
 import { LoadingFallback } from "../components/ui/animation";
+import { AllergiesProvider } from "../features/allergens-search";
 import { CookieConsentProvider } from "../features/cookie-consent/context/CookieConsentContext";
 import LayoutApp from "../layout/LayoutApp";
 import LayoutRemedyResult from "../layout/LayoutRemedyResult";
@@ -47,8 +48,10 @@ const router = createBrowserRouter(
     {
       element: (
         <CookieConsentProvider>
-          <GoogleAnalytics />
-          <LayoutApp />
+          <AllergiesProvider>
+            <GoogleAnalytics />
+            <LayoutApp />
+          </AllergiesProvider>
         </CookieConsentProvider>
       ),
       children: [

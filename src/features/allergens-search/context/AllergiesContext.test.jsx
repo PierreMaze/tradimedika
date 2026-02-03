@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { renderHook, act } from "@testing-library/react";
+import { CookieConsentProvider } from "../../cookie-consent";
 import { AllergiesProvider, useAllergies } from "./AllergiesContext";
 
 describe("AllergiesContext", () => {
@@ -16,7 +17,9 @@ describe("AllergiesContext", () => {
 
     it("should provide empty array as default", () => {
       const wrapper = ({ children }) => (
-        <AllergiesProvider>{children}</AllergiesProvider>
+        <CookieConsentProvider>
+          <AllergiesProvider>{children}</AllergiesProvider>
+        </CookieConsentProvider>
       );
 
       const { result } = renderHook(() => useAllergies(), { wrapper });
@@ -28,7 +31,9 @@ describe("AllergiesContext", () => {
 
     it("should toggle allergen (add and remove)", () => {
       const wrapper = ({ children }) => (
-        <AllergiesProvider>{children}</AllergiesProvider>
+        <CookieConsentProvider>
+          <AllergiesProvider>{children}</AllergiesProvider>
+        </CookieConsentProvider>
       );
 
       const { result } = renderHook(() => useAllergies(), { wrapper });
@@ -61,7 +66,9 @@ describe("AllergiesContext", () => {
 
     it("should set allergies with validation", () => {
       const wrapper = ({ children }) => (
-        <AllergiesProvider>{children}</AllergiesProvider>
+        <CookieConsentProvider>
+          <AllergiesProvider>{children}</AllergiesProvider>
+        </CookieConsentProvider>
       );
 
       const { result } = renderHook(() => useAllergies(), { wrapper });
@@ -87,7 +94,9 @@ describe("AllergiesContext", () => {
 
     it("should clear all allergies", () => {
       const wrapper = ({ children }) => (
-        <AllergiesProvider>{children}</AllergiesProvider>
+        <CookieConsentProvider>
+          <AllergiesProvider>{children}</AllergiesProvider>
+        </CookieConsentProvider>
       );
 
       const { result } = renderHook(() => useAllergies(), { wrapper });
@@ -109,7 +118,9 @@ describe("AllergiesContext", () => {
 
     it("should check if allergen is active with hasAllergen", () => {
       const wrapper = ({ children }) => (
-        <AllergiesProvider>{children}</AllergiesProvider>
+        <CookieConsentProvider>
+          <AllergiesProvider>{children}</AllergiesProvider>
+        </CookieConsentProvider>
       );
 
       const { result } = renderHook(() => useAllergies(), { wrapper });
@@ -126,7 +137,9 @@ describe("AllergiesContext", () => {
 
     it("should correctly determine if remedy is safe with canUseRemedy", () => {
       const wrapper = ({ children }) => (
-        <AllergiesProvider>{children}</AllergiesProvider>
+        <CookieConsentProvider>
+          <AllergiesProvider>{children}</AllergiesProvider>
+        </CookieConsentProvider>
       );
 
       const { result } = renderHook(() => useAllergies(), { wrapper });
@@ -166,7 +179,9 @@ describe("AllergiesContext", () => {
 
     it("should return true for all remedies when no allergies set", () => {
       const wrapper = ({ children }) => (
-        <AllergiesProvider>{children}</AllergiesProvider>
+        <CookieConsentProvider>
+          <AllergiesProvider>{children}</AllergiesProvider>
+        </CookieConsentProvider>
       );
 
       const { result } = renderHook(() => useAllergies(), { wrapper });
@@ -183,7 +198,9 @@ describe("AllergiesContext", () => {
 
     it("should persist allergies in localStorage", async () => {
       const wrapper = ({ children }) => (
-        <AllergiesProvider>{children}</AllergiesProvider>
+        <CookieConsentProvider>
+          <AllergiesProvider>{children}</AllergiesProvider>
+        </CookieConsentProvider>
       );
 
       const { result } = renderHook(() => useAllergies(), { wrapper });
@@ -201,12 +218,29 @@ describe("AllergiesContext", () => {
 
     it("should load allergies from localStorage", () => {
       window.localStorage.setItem(
+        "tradimedika-cookie-consent",
+        JSON.stringify({
+          version: 1,
+          accepted: true,
+          timestamp: Date.now(),
+          expiresAt: Date.now() + 365 * 24 * 60 * 60 * 1000,
+          categories: {
+            analytics: true,
+            functional: true,
+            history: true,
+            allergies: true,
+          },
+        }),
+      );
+      window.localStorage.setItem(
         "tradimedika-allergies",
         JSON.stringify(["asteraceae", "bee-venom"]),
       );
 
       const wrapper = ({ children }) => (
-        <AllergiesProvider>{children}</AllergiesProvider>
+        <CookieConsentProvider>
+          <AllergiesProvider>{children}</AllergiesProvider>
+        </CookieConsentProvider>
       );
 
       const { result } = renderHook(() => useAllergies(), { wrapper });
@@ -218,7 +252,9 @@ describe("AllergiesContext", () => {
 
     it("should handle invalid input gracefully", () => {
       const wrapper = ({ children }) => (
-        <AllergiesProvider>{children}</AllergiesProvider>
+        <CookieConsentProvider>
+          <AllergiesProvider>{children}</AllergiesProvider>
+        </CookieConsentProvider>
       );
 
       const { result } = renderHook(() => useAllergies(), { wrapper });
@@ -247,7 +283,9 @@ describe("AllergiesContext", () => {
       window.localStorage.setItem("tradimedika-allergies", "not-valid-json");
 
       const wrapper = ({ children }) => (
-        <AllergiesProvider>{children}</AllergiesProvider>
+        <CookieConsentProvider>
+          <AllergiesProvider>{children}</AllergiesProvider>
+        </CookieConsentProvider>
       );
 
       const { result } = renderHook(() => useAllergies(), { wrapper });
@@ -260,7 +298,9 @@ describe("AllergiesContext", () => {
   describe("Filtering enabled/disabled", () => {
     it("should have filtering disabled by default", () => {
       const wrapper = ({ children }) => (
-        <AllergiesProvider>{children}</AllergiesProvider>
+        <CookieConsentProvider>
+          <AllergiesProvider>{children}</AllergiesProvider>
+        </CookieConsentProvider>
       );
 
       const { result } = renderHook(() => useAllergies(), { wrapper });
@@ -270,7 +310,9 @@ describe("AllergiesContext", () => {
 
     it("should disable and enable filtering", () => {
       const wrapper = ({ children }) => (
-        <AllergiesProvider>{children}</AllergiesProvider>
+        <CookieConsentProvider>
+          <AllergiesProvider>{children}</AllergiesProvider>
+        </CookieConsentProvider>
       );
 
       const { result } = renderHook(() => useAllergies(), { wrapper });
@@ -292,7 +334,9 @@ describe("AllergiesContext", () => {
 
     it("should toggle filtering", () => {
       const wrapper = ({ children }) => (
-        <AllergiesProvider>{children}</AllergiesProvider>
+        <CookieConsentProvider>
+          <AllergiesProvider>{children}</AllergiesProvider>
+        </CookieConsentProvider>
       );
 
       const { result } = renderHook(() => useAllergies(), { wrapper });
@@ -317,7 +361,9 @@ describe("AllergiesContext", () => {
 
     it("should not filter remedies when filtering is disabled", () => {
       const wrapper = ({ children }) => (
-        <AllergiesProvider>{children}</AllergiesProvider>
+        <CookieConsentProvider>
+          <AllergiesProvider>{children}</AllergiesProvider>
+        </CookieConsentProvider>
       );
 
       const { result } = renderHook(() => useAllergies(), { wrapper });
@@ -342,7 +388,9 @@ describe("AllergiesContext", () => {
 
     it("should filter remedies when filtering is enabled", () => {
       const wrapper = ({ children }) => (
-        <AllergiesProvider>{children}</AllergiesProvider>
+        <CookieConsentProvider>
+          <AllergiesProvider>{children}</AllergiesProvider>
+        </CookieConsentProvider>
       );
 
       const { result } = renderHook(() => useAllergies(), { wrapper });
@@ -369,7 +417,9 @@ describe("AllergiesContext", () => {
 
     it("should persist filtering state in localStorage", async () => {
       const wrapper = ({ children }) => (
-        <AllergiesProvider>{children}</AllergiesProvider>
+        <CookieConsentProvider>
+          <AllergiesProvider>{children}</AllergiesProvider>
+        </CookieConsentProvider>
       );
 
       const { result } = renderHook(() => useAllergies(), { wrapper });
@@ -395,7 +445,9 @@ describe("AllergiesContext", () => {
       );
 
       const wrapper = ({ children }) => (
-        <AllergiesProvider>{children}</AllergiesProvider>
+        <CookieConsentProvider>
+          <AllergiesProvider>{children}</AllergiesProvider>
+        </CookieConsentProvider>
       );
 
       const { result } = renderHook(() => useAllergies(), { wrapper });
@@ -405,7 +457,9 @@ describe("AllergiesContext", () => {
 
     it("should keep allergies in memory when filtering is disabled", () => {
       const wrapper = ({ children }) => (
-        <AllergiesProvider>{children}</AllergiesProvider>
+        <CookieConsentProvider>
+          <AllergiesProvider>{children}</AllergiesProvider>
+        </CookieConsentProvider>
       );
 
       const { result } = renderHook(() => useAllergies(), { wrapper });

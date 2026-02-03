@@ -8,6 +8,7 @@ import {
   useRef,
 } from "react";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
+import { useCookieConsent } from "../../cookie-consent";
 import { createLogger } from "../../../utils/logger";
 
 const logger = createLogger("AllergiesContext");
@@ -32,6 +33,8 @@ export function AllergiesProvider({ children }) {
     false,
   );
 
+  const { isAllergiesAccepted } = useCookieConsent();
+
   // Migration automatique : nettoyer les anciens IDs numériques (breaking change 0.38.0)
   // Exécuté une seule fois au montage du Provider
   const isMounted = useRef(false);
@@ -55,6 +58,14 @@ export function AllergiesProvider({ children }) {
       }
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Vider les allergies sauvegardées quand la sauvegarde est désactivée
+  useEffect(() => {
+    if (!isAllergiesAccepted && userAllergies.length > 0) {
+      setUserAllergies([]);
+      logger.debug("Allergies cleared - consent revoked");
+    }
+  }, [isAllergiesAccepted]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Ajoute ou retire un allergène (toggle)

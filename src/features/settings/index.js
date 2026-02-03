@@ -5,6 +5,7 @@ export { default as DarkModeToggle } from "./components/DarkModeToggle";
 export { default as PerformanceToggle } from "./components/PerformanceToggle";
 export { default as HistoryToggle } from "./components/HistoryToggle";
 export { default as AnalyticsToggle } from "./components/AnalyticsToggle";
+export { default as AllergiesToggle } from "./components/AllergiesToggle";
 
 // Contextes
 export { ThemeProvider, useTheme } from "./context/ThemeContext";

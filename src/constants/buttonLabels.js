@@ -192,6 +192,12 @@ export const ARIA_PERFORMANCE_TOGGLE =
   "Basculer entre mode économie et performance élevée";
 
 /**
+ * Label for history settings section
+ * @type {string}
+ */
+export const SETTINGS_HISTORY_LABEL = "Historique";
+
+/**
  * Label for cookie management settings section
  * @type {string}
  */

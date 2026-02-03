@@ -2,6 +2,43 @@
 
 ---
 
+## [0.51.0] - 2026-02-03
+
+### Added
+
+- **Section "Historique" dans SettingsModal**
+  - Nouvelle section accordéon "Historique" avec deux toggles indépendants : Historique des recherches et Allergènes
+  - Nouveau composant `AllergiesToggle` : contrôle la persistence des allergies via le consentement cookie (`isAllergiesAccepted`)
+  - Chaque toggle possède un détail expansible ("Voir les détails") décrivant les données concernées
+  - Catégorie `allergies` ajoutée à `cookieConfig.js` (`COOKIE_CATEGORIES`) avec le cookie `tradimedika-allergies`
+
+- **Consentement cookie pour les allergies**
+  - `CookieConsentContext` expose `isAllergiesAccepted` et `toggleAllergies` (même pattern que `history`)
+  - `acceptCookies` / `rejectCookies` incluent désormais la catégorie `allergies`
+
+### Changed
+
+- **Hiérarchie des Providers corrigée**
+  - `AllergiesProvider` déplacé de `main.jsx` vers `Router.jsx`, à l'intérieur de `CookieConsentProvider`
+  - Permet à `AllergiesContext` d'appeler `useCookieConsent()` sans erreur
+
+- **Nettoyage automatique des allergies**
+  - `AllergiesContext` efface les allergies sauvegardées dès que `isAllergiesAccepted` devient `false` (consentement révoqué ou cookies refusés)
+  - Les clés `tradimedika-allergies` et `tradimedika-allergies-filtering-enabled` sont réinitialisées avec le reset global dans SettingsModal
+
+### Fixed
+
+- **Tests unitaires — adaptation au nouveau Provider**
+  - `AllergyForm.test.jsx` : wrapper avec `CookieConsentProvider`
+  - `AllergiesContext.test.jsx` : tous les wrappers entourrent `AllergiesProvider` avec `CookieConsentProvider` ; tests de persistance localStorage ajoutent un consentement valide avec `allergies: true`
+  - `useRemedyAllergyCheck.test.jsx` : même correction de wrapper + consentement dans les tests qui pré-remplissent les allergies
+
+- **Version du projet**
+  - Version bump : `0.50.3` → `0.51.0`
+  - Mise à jour dans : package.json, README.md, HeroHeader.jsx
+
+---
+
 ## [0.50.3] - 2026-02-03
 
 ### Added

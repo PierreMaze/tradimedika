@@ -8,6 +8,7 @@ import {
   ARIA_RESET_STORAGE,
   BUTTON_SETTINGS,
   SETTINGS_COOKIES_LABEL,
+  SETTINGS_HISTORY_LABEL,
   SETTINGS_PERFORMANCE_LABEL,
   SETTINGS_RESET_LABEL,
   SETTINGS_THEME_LABEL,
@@ -16,6 +17,7 @@ import { COOKIE_CATEGORIES } from "../../cookie-consent/constants/cookieConfig";
 import { usePerformance } from "../context/PerformanceContext";
 import { useSettingsModal } from "../context/SettingsModalContext";
 import { useReducedMotion } from "../hooks/useReducedMotion";
+import AllergiesToggle from "./AllergiesToggle";
 import AnalyticsToggle from "./AnalyticsToggle";
 import DarkModeToggle from "./DarkModeToggle";
 import HistoryToggle from "./HistoryToggle";
@@ -32,6 +34,7 @@ export default function SettingsModal() {
   const { isHighPerformance } = usePerformance();
 
   const [showResetConfirm, setShowResetConfirm] = useState(false);
+  const [isHistorySectionOpen, setIsHistorySectionOpen] = useState(false);
   const [isCookieSectionOpen, setIsCookieSectionOpen] = useState(false);
 
   useEffect(() => {
@@ -54,6 +57,8 @@ export default function SettingsModal() {
       "tradimedika-performance",
       "tradimedika-search-history",
       "tradimedika-cookie-consent",
+      "tradimedika-allergies",
+      "tradimedika-allergies-filtering-enabled",
     ];
     keysToRemove.forEach((key) => localStorage.removeItem(key));
     window.location.reload();
@@ -61,6 +66,10 @@ export default function SettingsModal() {
 
   const handleCancelReset = () => {
     setShowResetConfirm(false);
+  };
+
+  const toggleHistorySection = () => {
+    setIsHistorySectionOpen(!isHistorySectionOpen);
   };
 
   const toggleCookieSection = () => {
@@ -118,6 +127,111 @@ export default function SettingsModal() {
             <PerformanceToggle />
           </div>
 
+          {/* History section */}
+          <div className="border-t border-neutral-200 pt-6 dark:border-neutral-700">
+            <button
+              onClick={toggleHistorySection}
+              className="mb-4 flex w-full cursor-pointer items-center justify-between text-left transition-colors hover:opacity-80"
+              aria-expanded={isHistorySectionOpen}
+              aria-controls="history-section-content"
+            >
+              <div>
+                <h3 className="flex items-center gap-2 text-base font-medium text-neutral-900 dark:text-neutral-100">
+                  {SETTINGS_HISTORY_LABEL}
+                </h3>
+                <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+                  Gérer la sauvegarde de vos données
+                </p>
+              </div>
+              <IoChevronDown
+                className={`text-xl text-neutral-600 transition-transform dark:text-neutral-400 ${
+                  isHistorySectionOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+
+            <AnimatePresence>
+              {isHistorySectionOpen && (
+                <motion.div
+                  id="history-section-content"
+                  initial={
+                    prefersReducedMotion ? {} : { height: 0, opacity: 0 }
+                  }
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={prefersReducedMotion ? {} : { height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div className="space-y-4">
+                    {/* Historique de recherche */}
+                    <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+                      <div className="mb-3 flex items-center justify-between">
+                        <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                          {COOKIE_CATEGORIES.history.label}
+                        </h4>
+                        <HistoryToggle />
+                      </div>
+                      <p className="mb-2 text-xs text-neutral-600 dark:text-neutral-400">
+                        {COOKIE_CATEGORIES.history.description}
+                      </p>
+                      <details className="cursor-pointer">
+                        <summary className="text-xs font-medium text-emerald-600 hover:text-emerald-700 dark:text-emerald-500 dark:hover:text-emerald-400">
+                          Voir les détails
+                        </summary>
+                        <ul className="mt-2 space-y-1 pl-3">
+                          {COOKIE_CATEGORIES.history.cookies.map((cookie) => (
+                            <li
+                              key={cookie.name}
+                              className="text-xs text-neutral-600 dark:text-neutral-400"
+                            >
+                              <span className="font-mono font-semibold text-neutral-900 dark:text-neutral-100">
+                                {cookie.name}
+                              </span>
+                              <br />
+                              {cookie.purpose}
+                            </li>
+                          ))}
+                        </ul>
+                      </details>
+                    </div>
+
+                    {/* Allergies sauvegardées */}
+                    <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+                      <div className="mb-3 flex items-center justify-between">
+                        <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                          {COOKIE_CATEGORIES.allergies.label}
+                        </h4>
+                        <AllergiesToggle />
+                      </div>
+                      <p className="mb-2 text-xs text-neutral-600 dark:text-neutral-400">
+                        {COOKIE_CATEGORIES.allergies.description}
+                      </p>
+                      <details className="cursor-pointer">
+                        <summary className="text-xs font-medium text-emerald-600 hover:text-emerald-700 dark:text-emerald-500 dark:hover:text-emerald-400">
+                          Voir les détails
+                        </summary>
+                        <ul className="mt-2 space-y-1 pl-3">
+                          {COOKIE_CATEGORIES.allergies.cookies.map((cookie) => (
+                            <li
+                              key={cookie.name}
+                              className="text-xs text-neutral-600 dark:text-neutral-400"
+                            >
+                              <span className="font-mono font-semibold text-neutral-900 dark:text-neutral-100">
+                                {cookie.name}
+                              </span>
+                              <br />
+                              {cookie.purpose}
+                            </li>
+                          ))}
+                        </ul>
+                      </details>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
           {/* Cookie management section */}
           <div className="border-t border-neutral-200 pt-6 dark:border-neutral-700">
             <button
@@ -173,38 +287,6 @@ export default function SettingsModal() {
                         </summary>
                         <ul className="mt-2 space-y-1 pl-3">
                           {COOKIE_CATEGORIES.necessary.cookies.map((cookie) => (
-                            <li
-                              key={cookie.name}
-                              className="text-xs text-neutral-600 dark:text-neutral-400"
-                            >
-                              <span className="font-mono font-semibold text-neutral-900 dark:text-neutral-100">
-                                {cookie.name}
-                              </span>
-                              <br />
-                              {cookie.purpose}
-                            </li>
-                          ))}
-                        </ul>
-                      </details>
-                    </div>
-
-                    {/* Historique de recherche */}
-                    <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
-                      <div className="mb-3 flex items-center justify-between">
-                        <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
-                          {COOKIE_CATEGORIES.history.label}
-                        </h4>
-                        <HistoryToggle />
-                      </div>
-                      <p className="mb-2 text-xs text-neutral-600 dark:text-neutral-400">
-                        {COOKIE_CATEGORIES.history.description}
-                      </p>
-                      <details className="cursor-pointer">
-                        <summary className="text-xs font-medium text-emerald-600 hover:text-emerald-700 dark:text-emerald-500 dark:hover:text-emerald-400">
-                          Voir les détails
-                        </summary>
-                        <ul className="mt-2 space-y-1 pl-3">
-                          {COOKIE_CATEGORIES.history.cookies.map((cookie) => (
                             <li
                               key={cookie.name}
                               className="text-xs text-neutral-600 dark:text-neutral-400"
@@ -311,6 +393,7 @@ export default function SettingsModal() {
             <li>Thème (mode sombre/clair)</li>
             <li>Préférences d&apos;animations</li>
             <li>Historique de recherche</li>
+            <li>Allergènes et filtrage</li>
             <li>Préférences de cookies</li>
           </ul>
         </div>

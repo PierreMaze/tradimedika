@@ -1,6 +1,7 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it } from "vitest";
+import { CookieConsentProvider } from "../../cookie-consent";
 import { AllergiesProvider } from "../context/AllergiesContext";
 import AllergyForm from "./AllergyForm";
 
@@ -11,9 +12,11 @@ describe("AllergyForm", () => {
 
   const renderWithProvider = () => {
     return render(
-      <AllergiesProvider>
-        <AllergyForm />
-      </AllergiesProvider>,
+      <CookieConsentProvider>
+        <AllergiesProvider>
+          <AllergyForm />
+        </AllergiesProvider>
+      </CookieConsentProvider>,
     );
   };
 

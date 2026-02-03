@@ -35,6 +35,20 @@ export const COOKIE_CATEGORIES = {
       },
     ],
   },
+  allergies: {
+    id: "allergies",
+    label: "Allergies sauvegardées",
+    description:
+      "Sauvegarde vos allergies sélectionnées pour les pré-remplir automatiquement lors de vos prochaines recherches. Les données restent uniquement sur votre appareil (localStorage).",
+    required: false,
+    cookies: [
+      {
+        name: "tradimedika-allergies",
+        purpose:
+          "Sauvegarde vos allergènes sélectionnés pour les pré-remplir automatiquement",
+      },
+    ],
+  },
   analytics: {
     id: "analytics",
     label: "Cookies analytiques",

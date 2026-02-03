@@ -76,7 +76,12 @@ export function CookieConsentProvider({ children }) {
       accepted: true,
       timestamp: Date.now(),
       expiresAt: Date.now() + CONSENT_DURATION_MS,
-      categories: { analytics: true, functional: true, history: true },
+      categories: {
+        analytics: true,
+        functional: true,
+        history: true,
+        allergies: true,
+      },
     };
 
     setStoredConsent(newConsent);
@@ -90,7 +95,12 @@ export function CookieConsentProvider({ children }) {
       accepted: false,
       timestamp: Date.now(),
       expiresAt: Date.now() + CONSENT_DURATION_MS,
-      categories: { analytics: false, functional: false, history: false },
+      categories: {
+        analytics: false,
+        functional: false,
+        history: false,
+        allergies: false,
+      },
     };
 
     setStoredConsent(newConsent);
@@ -123,6 +133,25 @@ export function CookieConsentProvider({ children }) {
     [consentData, setStoredConsent],
   );
 
+  const toggleAllergies = useCallback(
+    (enabled) => {
+      if (!consentData) return;
+
+      const newConsent = {
+        ...consentData,
+        categories: {
+          ...consentData.categories,
+          allergies: enabled,
+        },
+        timestamp: Date.now(),
+      };
+
+      setStoredConsent(newConsent);
+      logger.debug(`Allergies ${enabled ? "enabled" : "disabled"}`, newConsent);
+    },
+    [consentData, setStoredConsent],
+  );
+
   const toggleAnalytics = useCallback(
     (enabled) => {
       if (enabled) {
@@ -140,9 +169,11 @@ export function CookieConsentProvider({ children }) {
       hasConsent: consentData !== null,
       isAccepted: consentData?.accepted ?? false,
       isHistoryAccepted: consentData?.categories?.history ?? false,
+      isAllergiesAccepted: consentData?.categories?.allergies ?? false,
       acceptCookies,
       rejectCookies,
       toggleHistory,
+      toggleAllergies,
       toggleAnalytics,
       storageAvailable,
     }),
@@ -151,6 +182,7 @@ export function CookieConsentProvider({ children }) {
       acceptCookies,
       rejectCookies,
       toggleHistory,
+      toggleAllergies,
       toggleAnalytics,
       storageAvailable,
     ],

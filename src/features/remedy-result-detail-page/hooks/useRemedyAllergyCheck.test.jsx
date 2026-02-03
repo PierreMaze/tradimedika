@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { renderHook } from "@testing-library/react";
 import { AllergiesProvider } from "../../allergens-search";
+import { CookieConsentProvider } from "../../cookie-consent";
 import { useRemedyAllergyCheck } from "./useRemedyAllergyCheck";
 
 vi.mock("../../../data/allergensList.json", () => ({
@@ -17,7 +18,9 @@ describe("useRemedyAllergyCheck", () => {
   });
 
   const wrapper = ({ children }) => (
-    <AllergiesProvider>{children}</AllergiesProvider>
+    <CookieConsentProvider>
+      <AllergiesProvider>{children}</AllergiesProvider>
+    </CookieConsentProvider>
   );
 
   it("should return false when no allergens match", () => {
@@ -33,6 +36,21 @@ describe("useRemedyAllergyCheck", () => {
   });
 
   it("should return true when allergens match and filtering enabled", () => {
+    localStorage.setItem(
+      "tradimedika-cookie-consent",
+      JSON.stringify({
+        version: 1,
+        accepted: true,
+        timestamp: Date.now(),
+        expiresAt: Date.now() + 365 * 24 * 60 * 60 * 1000,
+        categories: {
+          analytics: true,
+          functional: true,
+          history: true,
+          allergies: true,
+        },
+      }),
+    );
     localStorage.setItem("tradimedika-allergies", JSON.stringify(["citrus"]));
     localStorage.setItem(
       "tradimedika-allergies-filtering-enabled",
@@ -67,6 +85,21 @@ describe("useRemedyAllergyCheck", () => {
   });
 
   it("should handle multiple matching allergens", () => {
+    localStorage.setItem(
+      "tradimedika-cookie-consent",
+      JSON.stringify({
+        version: 1,
+        accepted: true,
+        timestamp: Date.now(),
+        expiresAt: Date.now() + 365 * 24 * 60 * 60 * 1000,
+        categories: {
+          analytics: true,
+          functional: true,
+          history: true,
+          allergies: true,
+        },
+      }),
+    );
     localStorage.setItem(
       "tradimedika-allergies",
       JSON.stringify(["citrus", "pollen"]),
@@ -108,6 +141,21 @@ describe("useRemedyAllergyCheck", () => {
   });
 
   it("should handle allergen not found in allergensList", () => {
+    localStorage.setItem(
+      "tradimedika-cookie-consent",
+      JSON.stringify({
+        version: 1,
+        accepted: true,
+        timestamp: Date.now(),
+        expiresAt: Date.now() + 365 * 24 * 60 * 60 * 1000,
+        categories: {
+          analytics: true,
+          functional: true,
+          history: true,
+          allergies: true,
+        },
+      }),
+    );
     localStorage.setItem(
       "tradimedika-allergies",
       JSON.stringify(["unknown-allergen"]),
