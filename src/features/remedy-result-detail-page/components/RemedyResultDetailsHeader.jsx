@@ -1,15 +1,21 @@
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
+import { useRef } from "react";
 import {
   ChildrenAgeTag,
+  ClickableTag,
   PregnancyTag,
   ProuvedTag,
   TraditionnalTag,
 } from "../../../components/tags";
-import TagsInfoButton from "../../../components/ui/helper/TagsInfoButton";
+import {
+  TagsAccordionPopover,
+  TagsInfoButton,
+} from "../../../components/ui/helper";
 import SourcesSection from "./RemedyResultDetailsSourcesSection";
 
 function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
+  const popoverRef = useRef(null);
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -53,27 +59,37 @@ function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
           />
           <div className="my-1 flex flex-wrap items-center gap-2">
             {remedy.verifiedByProfessional ? (
-              <ProuvedTag />
+              <ClickableTag categoryId="usages" popoverRef={popoverRef}>
+                <ProuvedTag />
+              </ClickableTag>
             ) : (
-              <TraditionnalTag />
+              <ClickableTag categoryId="usages" popoverRef={popoverRef}>
+                <TraditionnalTag />
+              </ClickableTag>
             )}
 
-            <PregnancyTag
-              variant={
-                remedy.pregnancySafe === true
-                  ? "ok"
-                  : remedy.pregnancySafe === false
-                    ? "interdit"
-                    : "variant"
-              }
-            />
+            <ClickableTag categoryId="grossesse" popoverRef={popoverRef}>
+              <PregnancyTag
+                variant={
+                  remedy.pregnancySafe === true
+                    ? "ok"
+                    : remedy.pregnancySafe === false
+                      ? "interdit"
+                      : "variant"
+                }
+              />
+            </ClickableTag>
 
-            <ChildrenAgeTag age={remedy.childrenAge} />
+            <ClickableTag categoryId="enfants" popoverRef={popoverRef}>
+              <ChildrenAgeTag age={remedy.childrenAge} />
+            </ClickableTag>
           </div>
 
           <SourcesSection sources={remedy.sources} />
         </div>
       </div>
+
+      <TagsAccordionPopover ref={popoverRef} />
     </motion.div>
   );
 }

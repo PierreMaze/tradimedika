@@ -95,23 +95,31 @@ const TAGS_CATEGORIES = [
 /**
  * TagsCategoryAccordion Component
  *
- * Accordéon pour une catégorie de tags
+ * Accordéon pour une catégorie de tags (mode contrôlé)
  */
-function TagsCategoryAccordion({ category, isOpenByDefault = true }) {
-  const [isOpen, setIsOpen] = useState(isOpenByDefault);
-
+function TagsCategoryAccordion({ category, isOpen, onToggle }) {
   const handleHeaderClick = (e) => {
     e.stopPropagation();
-    setIsOpen(!isOpen);
+    onToggle?.(category.id);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      e.stopPropagation();
+      onToggle?.(category.id);
+    }
   };
 
   return (
     <div className="border-b-2 border-dashed border-emerald-200 last:border-b-0 dark:border-emerald-700">
       <button
         onClick={handleHeaderClick}
-        className="flex w-full cursor-pointer items-center justify-between py-4 text-left transition-colors"
+        onKeyDown={handleKeyDown}
+        className="flex w-full cursor-pointer items-center justify-between py-4 text-left transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
         aria-expanded={isOpen}
         aria-controls={`tags-category-${category.id}`}
+        tabIndex={0}
       >
         <span className="text-lg font-semibold text-black lg:text-xl dark:text-white">
           {category.label}
@@ -173,13 +181,41 @@ TagsCategoryAccordion.propTypes = {
       }),
     ).isRequired,
   }).isRequired,
-  isOpenByDefault: PropTypes.bool,
+  isOpen: PropTypes.bool.isRequired,
+  onToggle: PropTypes.func,
 };
 
 /**
  * TagsInfoContent Component (Main)
  */
-function TagsInfoContent({ variant = "full", className = "" }) {
+function TagsInfoContent({
+  variant = "full",
+  className = "",
+  openAccordionIds = undefined,
+  onAccordionToggle = null,
+  defaultOpenFirst = true,
+}) {
+  const isControlled =
+    openAccordionIds !== undefined && onAccordionToggle !== null;
+
+  const [internalOpenIds, setInternalOpenIds] = useState(() =>
+    defaultOpenFirst ? [TAGS_CATEGORIES[0].id] : [],
+  );
+
+  const handleToggle = (categoryId) => {
+    if (isControlled) {
+      onAccordionToggle?.(categoryId);
+    } else {
+      setInternalOpenIds((prev) => {
+        return prev.includes(categoryId)
+          ? prev.filter((id) => id !== categoryId)
+          : [...prev, categoryId];
+      });
+    }
+  };
+
+  const activeOpenIds = isControlled ? openAccordionIds : internalOpenIds;
+
   return (
     <div className={`${className}`}>
       {variant === "full" && (
@@ -188,7 +224,8 @@ function TagsInfoContent({ variant = "full", className = "" }) {
             <TagsCategoryAccordion
               key={category.id}
               category={category}
-              isOpenByDefault={true}
+              isOpen={activeOpenIds.includes(category.id)}
+              onToggle={handleToggle}
             />
           ))}
         </div>
@@ -225,6 +262,9 @@ function TagsInfoContent({ variant = "full", className = "" }) {
 TagsInfoContent.propTypes = {
   variant: PropTypes.oneOf(["compact", "full"]),
   className: PropTypes.string,
+  openAccordionIds: PropTypes.arrayOf(PropTypes.string),
+  onAccordionToggle: PropTypes.func,
+  defaultOpenFirst: PropTypes.bool,
 };
 
 export default TagsInfoContent;

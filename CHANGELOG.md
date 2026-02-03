@@ -2,6 +2,88 @@
 
 ---
 
+## [0.50.2] - 2026-02-03
+
+### Added
+
+- **Système de tags cliquables avec popover d'explications**
+  - Nouveau composant `ClickableTag` : wrapper HOC pour rendre n'importe quel tag cliquable
+  - Nouveau composant `TagsAccordionPopover` : popover avec accordéons contrôlés ouvert par les tags
+  - Support clavier complet (Enter, Space, Tab, Escape) sur tous les éléments interactifs
+  - Focus management automatique : focus vers popover à l'ouverture, retour au tag à la fermeture
+  - Multi-ouverture d'accordéons autorisée dans le popover
+  - Premier accordéon ouvert par défaut (mode non contrôlé)
+  - Architecture controlled/uncontrolled components pour `TagsInfoContent`
+
+- **Simplification du bouton "Indications d'usage ?"**
+  - Transformation en tooltip simple inspiré du pattern `HeroButtons.jsx`
+  - Texte explicatif : "Les badges résument le niveau de fiabilité et les conditions d'usage. Cliquez sur un badge pour en savoir plus."
+  - Réduction de ~347 lignes à ~128 lignes de code
+  - Suppression de la logique de popover complexe
+
+- **Amélioration UX des modals**
+  - Refactoring de `ModalLayout` : header et footer fixes, contenu scrollable uniquement
+  - Architecture flexbox : header (flex-shrink-0), content (flex-1 overflow-y-auto), footer (flex-shrink-0)
+  - Meilleure responsivité mobile avec zones de scroll optimisées
+  - Application du comportement d'accordéons dans `FilterModal` (premier ouvert par défaut)
+
+### Changed
+
+- **Architecture des composants tags**
+  - `TagsInfoContent` : support mode contrôlé et non contrôlé via props `openAccordionIds`, `onAccordionToggle`, `defaultOpenFirst`
+  - `TagsCategoryAccordion` : transformation en composant contrôlé
+  - `RemedyResultDetailsHeader` et `RemedyCard` : intégration des tags cliquables avec `ClickableTag` et `TagsAccordionPopover`
+  - Nouveau fichier d'exports centralisé : `src/components/ui/helper/index.js`
+
+- **Gestion de l'état**
+  - Pattern controlled components pour les accordéons
+  - État centralisé dans `TagsAccordionPopover` avec API via `useImperativeHandle`
+  - Méthodes exposées : `open(categoryId, triggerElement)`, `close()`
+
+- **Version du projet**
+  - Version bump : `0.50.1` → `0.50.2`
+  - Mise à jour dans : package.json, README.md, HeroHeader.jsx
+
+### Fixed
+
+- **Tests unitaires - Corrections des mocks manquants**
+  - Ajout du mock `TagsAccordionPopover` dans `RemedyCard.test.jsx`
+  - Ajout du mock `TagsInfoButton` dans `RemedyCard.test.jsx` et `RemedyResultDetailsHeader.test.jsx`
+  - Ajout du mock `ClickableTag` dans `RemedyResultDetailsHeader.test.jsx` avec importation partielle pour préserver les vrais tags
+  - Correction de 10 tests échoués dans `RemedyCard.test.jsx`
+
+- **Qualité de code et linting**
+  - Correction ESLint : suppression de l'import `PropTypes` non utilisé dans `TagsAccordionPopover.jsx`
+  - Correction ESLint : ajout de `closePopover` dans les dépendances `useEffect` via `useCallback`
+  - Tous les fichiers passent `pnpm lint` et `pnpm fix` sans erreur
+
+### Accessibilité (WCAG 2.2 AA)
+
+- **Tags cliquables**
+  - Attributs ARIA : `aria-haspopup="dialog"`, `aria-label` avec description de catégorie
+  - Focus visible avec outline personnalisé
+  - Navigation clavier : Enter/Space pour ouvrir, Tab pour naviguer
+  - Animation hover avec `scale-105` et `active:scale-95`
+
+- **Popover avec accordéons**
+  - Attributs ARIA : `role="dialog"`, `aria-modal="true"`, `aria-label`
+  - Focus trap : focus se déplace vers premier accordéon à l'ouverture
+  - Escape pour fermer avec retour de focus au tag déclencheur
+  - Support clavier sur tous les boutons d'accordéon : Enter/Space pour toggle
+
+- **Accordéons**
+  - Attributs ARIA : `aria-expanded`, `aria-controls`, `tabIndex={0}`
+  - Focus visible sur tous les boutons interactifs
+  - Support complet du clavier (Enter, Space)
+
+### Tests
+
+- **Résultats avant corrections** : 10 tests échoués dans `RemedyCard.test.jsx`
+- **Résultats après corrections** : 1423 tests réussis, 2 skipped (100% de réussite sur 86 fichiers)
+- **Amélioration** : +10 tests corrigés grâce aux mocks appropriés
+
+---
+
 ## [0.50.1] - 2026-02-02
 
 ### Fixed

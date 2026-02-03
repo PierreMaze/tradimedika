@@ -38,13 +38,13 @@ function FilterModal({
       }
     >
       <div className="space-y-0">
-        {TAG_LABELS_CATEGORIES.map((category) => (
+        {TAG_LABELS_CATEGORIES.map((category, index) => (
           <FilterAccordion
             key={category.id}
             category={category}
             activeFilters={tempFilters[category.id]}
             onToggle={onToggleTempFilter}
-            isOpenByDefault={true}
+            isOpenByDefault={index === 0}
           />
         ))}
       </div>

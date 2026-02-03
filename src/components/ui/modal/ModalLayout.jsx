@@ -8,7 +8,17 @@ import { useReducedMotion } from "../../../features/settings/hooks/useReducedMot
  * ModalLayout Component
  *
  * Layout standard pour toutes les modales de l'application
- * Structure : Backdrop + Modal (Header + Content + Footer optionnel)
+ * Structure : Backdrop + Modal avec Header fixe, Content scrollable, Footer fixe
+ *
+ * Architecture :
+ * - Header : Fixe en haut (flex-shrink-0)
+ * - Content : Zone scrollable au milieu (flex-1 overflow-y-auto)
+ * - Footer : Fixe en bas (flex-shrink-0, optionnel)
+ *
+ * Avantages :
+ * - Meilleure UX : Header et footer toujours visibles
+ * - Meilleure responsivité mobile
+ * - Scroll uniquement sur le contenu
  *
  * Props:
  * - isOpen: Modal ouverte ou fermée
@@ -16,8 +26,8 @@ import { useReducedMotion } from "../../../features/settings/hooks/useReducedMot
  * - title: Titre de la modal
  * - icon: Icône du titre (optionnel)
  * - subtitle: Sous-titre/description (optionnel)
- * - children: Contenu de la modal
- * - footer: Contenu du footer (optionnel)
+ * - children: Contenu de la modal (scrollable)
+ * - footer: Contenu du footer (optionnel, fixe)
  * - maxWidth: Largeur max de la modal (défaut: "lg")
  * - closeLabel: Label du bouton fermer (défaut: "Fermer")
  */
@@ -107,14 +117,14 @@ function ModalLayout({
             aria-modal="true"
             aria-labelledby="modal-title"
             tabIndex={-1}
-            className={`fixed inset-x-4 top-1/2 z-50 max-h-[90vh] -translate-y-1/2 overflow-auto rounded-lg bg-[var(--color-light)] p-6 shadow-2xl md:inset-x-auto md:left-1/2 md:w-full md:-translate-x-1/2 ${maxWidthClasses[maxWidth]} dark:bg-[var(--color-dark)]`}
+            className={`fixed inset-x-4 top-1/2 z-50 flex max-h-[90vh] -translate-y-1/2 flex-col overflow-hidden rounded-lg bg-[var(--color-light)] shadow-2xl md:inset-x-auto md:left-1/2 md:w-full md:-translate-x-1/2 ${maxWidthClasses[maxWidth]} dark:bg-[var(--color-dark)]`}
             initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={prefersReducedMotion ? {} : { opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.2 }}
           >
-            {/* Header */}
-            <div className="mb-6 border-b border-neutral-200 pb-4 dark:border-neutral-700">
+            {/* Header (fixe) */}
+            <div className="flex-shrink-0 border-b border-neutral-200 p-6 pb-4 dark:border-neutral-700">
               <div className="flex items-center justify-between">
                 <h2
                   id="modal-title"
@@ -138,12 +148,12 @@ function ModalLayout({
               )}
             </div>
 
-            {/* Content */}
-            <div className="mb-6">{children}</div>
+            {/* Content (scrollable) */}
+            <div className="flex-1 overflow-y-auto px-6 py-6">{children}</div>
 
-            {/* Footer (optionnel) */}
+            {/* Footer (fixe, optionnel) */}
             {footer && (
-              <div className="flex items-center justify-between gap-4 border-t border-neutral-200 pt-4 dark:border-neutral-700">
+              <div className="flex flex-shrink-0 items-center justify-between gap-4 border-t border-neutral-200 p-6 pt-4 dark:border-neutral-700">
                 {footer}
               </div>
             )}
