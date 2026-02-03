@@ -34,5 +34,23 @@
     "name": "Latex",
     "description": "Substance présente sous la peau de certaines plantes",
     "remedies": ["Aloe vera"]
+  },
+  {
+    "id": "lait",
+    "name": "Lait",
+    "description": "Protéines et sucres présents dans le lait de vache et ses dérivés",
+    "remedies": ["Yaourt nature"]
+  },
+  {
+    "id": "lactose",
+    "name": "Lactose",
+    "description": "Sucre du lait pouvant provoquer une intolérance digestive",
+    "remedies": ["Yaourt nature"]
+  },
+  {
+    "id": "apiacees",
+    "name": "Apiacées",
+    "description": "Famille botanique incluant fenouil, carotte, céleri, anis et persil",
+    "remedies": ["Fenouil"]
   }
 ]

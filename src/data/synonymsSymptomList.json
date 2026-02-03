@@ -35,7 +35,7 @@
   "rhume": ["froid", "nez qui coule"],
   "grippe": ["influenza", "état grippal"],
   "toux": ["toux sèche", "toux grasse"],
-  "baisse d'énergie": ["fatigue", "asthénie", "épuisement, manque d'énérgie"],
+  "baisse d'énergie": ["fatigue", "asthénie", "épuisement", "manque d'énérgie"],
   "constipation": ["transit lent", "difficultés à aller à la selle"],
   "ballonnements": [
     "gaz intestinaux",
