@@ -305,7 +305,7 @@ export default function GestionCookies() {
             <h3 className="mb-2 font-semibold text-neutral-900 dark:text-neutral-100">
               Cookies
             </h3>
-            <ul className="space-y-1 text-sm text-neutral-700 dark:text-neutral-300">
+            <ul className="space-y-1 text-sm text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300">
               <li>✓ Utilisés pour l&apos;authentification</li>
               <li>✓ Envoyés au serveur à chaque requête</li>
               <li>✓ Peuvent être tiers (Google Analytics)</li>
