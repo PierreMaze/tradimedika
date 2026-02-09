@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import * as AccessibilityContextModule from "../context/AccessibilityContext";
 import * as ThemeContextModule from "../context/ThemeContext";
 import DarkModeToggle from "./DarkModeToggle";
 
@@ -9,6 +10,14 @@ describe("DarkModeToggle", () => {
 
   beforeEach(() => {
     mockToggleDarkMode = vi.fn();
+
+    // Mock useAccessibility pour tous les tests
+    vi.spyOn(AccessibilityContextModule, "useAccessibility").mockReturnValue({
+      isHighContrast: false,
+      toggleHighContrast: vi.fn(),
+      isExternalLinkConfirmEnabled: true,
+      toggleExternalLinkConfirm: vi.fn(),
+    });
   });
 
   it("should render toggle button", () => {

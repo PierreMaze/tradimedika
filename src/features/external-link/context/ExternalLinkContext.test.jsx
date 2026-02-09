@@ -1,13 +1,16 @@
-import { render, renderHook, screen } from "@testing-library/react";
+import { renderHook, screen } from "@testing-library/react";
 import { act } from "react";
 import { describe, expect, it, vi } from "vitest";
+import { renderWithProviders } from "../../../test/test-utils";
+import { AccessibilityProvider } from "../../settings/context/AccessibilityContext";
+import { ThemeProvider } from "../../settings/context/ThemeContext";
 import { ExternalLinkProvider } from "./ExternalLinkContext";
 import { useExternalLink } from "../hooks/useExternalLink";
 
 describe("ExternalLinkContext", () => {
   describe("Provider", () => {
     it("should render children correctly", () => {
-      render(
+      renderWithProviders(
         <ExternalLinkProvider>
           <div>Test</div>
         </ExternalLinkProvider>,
@@ -30,7 +33,11 @@ describe("ExternalLinkContext", () => {
 
     it("should provide context values when used inside Provider", () => {
       const wrapper = ({ children }) => (
-        <ExternalLinkProvider>{children}</ExternalLinkProvider>
+        <ThemeProvider>
+          <AccessibilityProvider>
+            <ExternalLinkProvider>{children}</ExternalLinkProvider>
+          </AccessibilityProvider>
+        </ThemeProvider>
       );
 
       const { result } = renderHook(() => useExternalLink(), { wrapper });
@@ -45,7 +52,11 @@ describe("ExternalLinkContext", () => {
 
     it("should have correct initial state", () => {
       const wrapper = ({ children }) => (
-        <ExternalLinkProvider>{children}</ExternalLinkProvider>
+        <ThemeProvider>
+          <AccessibilityProvider>
+            <ExternalLinkProvider>{children}</ExternalLinkProvider>
+          </AccessibilityProvider>
+        </ThemeProvider>
       );
 
       const { result } = renderHook(() => useExternalLink(), { wrapper });
@@ -57,7 +68,11 @@ describe("ExternalLinkContext", () => {
 
     it("should open confirmation with correct values", () => {
       const wrapper = ({ children }) => (
-        <ExternalLinkProvider>{children}</ExternalLinkProvider>
+        <ThemeProvider>
+          <AccessibilityProvider>
+            <ExternalLinkProvider>{children}</ExternalLinkProvider>
+          </AccessibilityProvider>
+        </ThemeProvider>
       );
 
       const { result } = renderHook(() => useExternalLink(), { wrapper });
@@ -73,7 +88,11 @@ describe("ExternalLinkContext", () => {
 
     it("should close confirmation and reset state", () => {
       const wrapper = ({ children }) => (
-        <ExternalLinkProvider>{children}</ExternalLinkProvider>
+        <ThemeProvider>
+          <AccessibilityProvider>
+            <ExternalLinkProvider>{children}</ExternalLinkProvider>
+          </AccessibilityProvider>
+        </ThemeProvider>
       );
 
       const { result } = renderHook(() => useExternalLink(), { wrapper });
@@ -97,7 +116,11 @@ describe("ExternalLinkContext", () => {
         .mockImplementation(() => null);
 
       const wrapper = ({ children }) => (
-        <ExternalLinkProvider>{children}</ExternalLinkProvider>
+        <ThemeProvider>
+          <AccessibilityProvider>
+            <ExternalLinkProvider>{children}</ExternalLinkProvider>
+          </AccessibilityProvider>
+        </ThemeProvider>
       );
 
       const { result } = renderHook(() => useExternalLink(), { wrapper });

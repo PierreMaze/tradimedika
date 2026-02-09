@@ -5,8 +5,13 @@ import { IoChevronDown, IoWarning } from "react-icons/io5";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 import { ModalButton, ModalLayout } from "../../../components/ui/modal";
 import {
+  ACCESSIBILITY_EXTERNAL_LINK_DESC,
+  ACCESSIBILITY_EXTERNAL_LINK_LABEL,
+  ACCESSIBILITY_HIGH_CONTRAST_DESC,
+  ACCESSIBILITY_HIGH_CONTRAST_LABEL,
   ARIA_RESET_STORAGE,
   BUTTON_SETTINGS,
+  SETTINGS_ACCESSIBILITY_LABEL,
   SETTINGS_COOKIES_LABEL,
   SETTINGS_HISTORY_LABEL,
   SETTINGS_PERFORMANCE_LABEL,
@@ -20,6 +25,8 @@ import { useReducedMotion } from "../hooks/useReducedMotion";
 import AllergiesToggle from "./AllergiesToggle";
 import AnalyticsToggle from "./AnalyticsToggle";
 import DarkModeToggle from "./DarkModeToggle";
+import ExternalLinkConfirmToggle from "./ExternalLinkConfirmToggle";
+import HighContrastToggle from "./HighContrastToggle";
 import HistoryToggle from "./HistoryToggle";
 import PerformanceToggle from "./PerformanceToggle";
 
@@ -34,6 +41,8 @@ export default function SettingsModal() {
   const { isHighPerformance } = usePerformance();
 
   const [showResetConfirm, setShowResetConfirm] = useState(false);
+  const [isAccessibilitySectionOpen, setIsAccessibilitySectionOpen] =
+    useState(false);
   const [isHistorySectionOpen, setIsHistorySectionOpen] = useState(false);
   const [isCookieSectionOpen, setIsCookieSectionOpen] = useState(false);
 
@@ -55,6 +64,8 @@ export default function SettingsModal() {
     const keysToRemove = [
       "tradimedika-theme",
       "tradimedika-performance",
+      "tradimedika-high-contrast",
+      "tradimedika-external-link-confirm",
       "tradimedika-search-history",
       "tradimedika-cookie-consent",
       "tradimedika-allergies",
@@ -66,6 +77,10 @@ export default function SettingsModal() {
 
   const handleCancelReset = () => {
     setShowResetConfirm(false);
+  };
+
+  const toggleAccessibilitySection = () => {
+    setIsAccessibilitySectionOpen(!isAccessibilitySectionOpen);
   };
 
   const toggleHistorySection = () => {
@@ -125,6 +140,73 @@ export default function SettingsModal() {
               </p>
             </div>
             <PerformanceToggle />
+          </div>
+
+          {/* Accessibility section */}
+          <div className="border-t border-neutral-200 pt-6 dark:border-neutral-700">
+            <button
+              onClick={toggleAccessibilitySection}
+              className="mb-4 flex w-full cursor-pointer items-center justify-between text-left transition-colors hover:opacity-80"
+              aria-expanded={isAccessibilitySectionOpen}
+              aria-controls="accessibility-section-content"
+            >
+              <div>
+                <h3 className="flex items-center gap-2 text-base font-medium text-neutral-900 dark:text-neutral-100">
+                  {SETTINGS_ACCESSIBILITY_LABEL}
+                </h3>
+                <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+                  Adapter l&apos;interface à vos besoins
+                </p>
+              </div>
+              <IoChevronDown
+                className={`text-xl text-neutral-600 transition-transform dark:text-neutral-400 ${
+                  isAccessibilitySectionOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+
+            <AnimatePresence>
+              {isAccessibilitySectionOpen && (
+                <motion.div
+                  id="accessibility-section-content"
+                  initial={
+                    prefersReducedMotion ? {} : { height: 0, opacity: 0 }
+                  }
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={prefersReducedMotion ? {} : { height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div className="space-y-4">
+                    {/* Contraste élevé */}
+                    <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+                      <div className="mb-3 flex items-center justify-between">
+                        <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                          {ACCESSIBILITY_HIGH_CONTRAST_LABEL}
+                        </h4>
+                        <HighContrastToggle />
+                      </div>
+                      <p className="text-xs text-neutral-600 dark:text-neutral-400">
+                        {ACCESSIBILITY_HIGH_CONTRAST_DESC}
+                      </p>
+                    </div>
+
+                    {/* Confirmation liens externes */}
+                    <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+                      <div className="mb-3 flex items-center justify-between">
+                        <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                          {ACCESSIBILITY_EXTERNAL_LINK_LABEL}
+                        </h4>
+                        <ExternalLinkConfirmToggle />
+                      </div>
+                      <p className="text-xs text-neutral-600 dark:text-neutral-400">
+                        {ACCESSIBILITY_EXTERNAL_LINK_DESC}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* History section */}
@@ -392,6 +474,7 @@ export default function SettingsModal() {
           <ul className="mt-2 list-inside list-disc space-y-1 text-sm font-medium text-amber-800 dark:text-amber-200">
             <li>Thème (mode sombre/clair)</li>
             <li>Préférences d&apos;animations</li>
+            <li>Préférences d&apos;accessibilité</li>
             <li>Historique de recherche</li>
             <li>Allergènes et filtrage</li>
             <li>Préférences de cookies</li>

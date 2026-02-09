@@ -24,6 +24,86 @@ html.dark body {
   background: var(--color-dark);
 }
 
+/* === Accessibility: High Contrast Mode === */
+/* Force Light mode + renforce les contrastes WCAG AAA */
+
+html.high-contrast {
+  /* Variables de base */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f5f5f5;
+  --color-text-primary: #000000;
+  --color-text-secondary: #1a1a1a;
+  --color-link: #0000cc;
+  --color-border: #333333;
+}
+
+/* Forcer background et text sur body */
+html.high-contrast body {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Désactiver dark mode même si classe présente */
+html.high-contrast.dark body {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Override des composants neutres - backgrounds */
+html.high-contrast .bg-neutral-100,
+html.high-contrast .bg-neutral-200,
+html.high-contrast .dark\:bg-neutral-700,
+html.high-contrast .dark\:bg-neutral-800,
+html.high-contrast .dark\:bg-neutral-900 {
+  background-color: #ffffff !important;
+}
+
+/* Override des composants neutres - textes */
+html.high-contrast .text-neutral-500,
+html.high-contrast .text-neutral-600,
+html.high-contrast .text-neutral-700,
+html.high-contrast .text-neutral-800,
+html.high-contrast .text-neutral-900,
+html.high-contrast .dark\:text-neutral-100,
+html.high-contrast .dark\:text-neutral-200,
+html.high-contrast .dark\:text-neutral-300,
+html.high-contrast .dark\:text-neutral-400 {
+  color: #000000 !important;
+}
+
+/* Bordures visibles */
+html.high-contrast .border-neutral-200,
+html.high-contrast .dark\:border-neutral-700 {
+  border-color: #333333 !important;
+}
+
+/* Liens en bleu foncé WCAG AAA */
+html.high-contrast a {
+  color: #0000cc !important;
+}
+
+html.high-contrast a:hover {
+  color: #000099 !important;
+}
+
+/* Boutons avec contraste élevé */
+html.high-contrast button {
+  border-color: #000000 !important;
+}
+
+/* Tags avec bordure noire */
+html.high-contrast .tag-base {
+  border: 2px solid #000000 !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Focus renforcé pour navigation clavier */
+html.high-contrast *:focus-visible {
+  outline: 3px solid #000000 !important;
+  outline-offset: 2px;
+}
+
 /* Utility classes for tags */
 @utility tag-base {
   display: inline-flex;

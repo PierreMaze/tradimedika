@@ -1,4 +1,5 @@
 import "@testing-library/jest-dom";
+import { vi } from "vitest";
 
 // Mock window.matchMedia
 Object.defineProperty(window, "matchMedia", {
@@ -12,3 +13,20 @@ Object.defineProperty(window, "matchMedia", {
     dispatchEvent: () => {},
   }),
 });
+
+// Mock global pour useAccessibility
+vi.mock(
+  "../features/settings/context/AccessibilityContext",
+  async (importOriginal) => {
+    const actual = await importOriginal();
+    return {
+      ...actual,
+      useAccessibility: vi.fn(() => ({
+        isHighContrast: false,
+        toggleHighContrast: vi.fn(),
+        isExternalLinkConfirmEnabled: true,
+        toggleExternalLinkConfirm: vi.fn(),
+      })),
+    };
+  },
+);

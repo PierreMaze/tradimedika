@@ -1,5 +1,6 @@
 import { createContext, useCallback, useMemo, useState } from "react";
 import PropTypes from "prop-types";
+import { useAccessibility } from "../../settings/context/AccessibilityContext";
 
 const ExternalLinkContext = createContext(undefined);
 
@@ -8,11 +9,23 @@ export function ExternalLinkProvider({ children }) {
   const [targetUrl, setTargetUrl] = useState("");
   const [siteName, setSiteName] = useState("");
 
-  const openConfirmation = useCallback((url, name) => {
-    setTargetUrl(url);
-    setSiteName(name);
-    setIsOpen(true);
-  }, []);
+  const { isExternalLinkConfirmEnabled } = useAccessibility();
+
+  const openConfirmation = useCallback(
+    (url, name) => {
+      // Si confirmation désactivée, ouvrir directement sans modal
+      if (!isExternalLinkConfirmEnabled) {
+        window.open(url, "_blank", "noopener,noreferrer");
+        return;
+      }
+
+      // Sinon, afficher la modal de confirmation (comportement actuel)
+      setTargetUrl(url);
+      setSiteName(name);
+      setIsOpen(true);
+    },
+    [isExternalLinkConfirmEnabled],
+  );
 
   const closeConfirmation = useCallback(() => {
     setIsOpen(false);

@@ -2,6 +2,60 @@
 
 ---
 
+## [0.53.0] - 2026-02-10
+
+### Added
+
+- **Section "Accessibilité" dans SettingsModal**
+  - Nouvelle section accordéon "Accessibilité" avec deux toggles : Contraste élevé et Confirmation liens externes
+  - Nouveau composant `HighContrastToggle` : force le mode clair avec contraste renforcé (WCAG AAA)
+  - Nouveau composant `ExternalLinkConfirmToggle` : contrôle l'affichage de la modal de confirmation avant ouverture de liens externes
+  - Préférences persistées dans localStorage (`tradimedika-high-contrast`, `tradimedika-external-link-confirm`)
+
+- **Contexte d'accessibilité**
+  - `AccessibilityContext` : gestion des préférences d'accessibilité avec hooks `useAccessibility`
+  - `AccessibilityProvider` : wrapper global ajouté dans `main.jsx` entre `PerformanceProvider` et `ExternalLinkProvider`
+  - Export centralisé via `src/features/settings/index.js`
+
+- **Mode Contraste élevé**
+  - Classe CSS `high-contrast` appliquée sur `<html>` pour overrides visuels avec `!important`
+  - Force le fond blanc (`#ffffff`) et texte noir (`#000000`) sur tous les composants
+  - Bordures renforcées en noir (`#333333`) pour améliorer la lisibilité
+  - Liens en bleu foncé (`#0000cc`) conforme WCAG AAA
+  - Focus visible renforcé (3px solid black) pour navigation clavier
+
+### Changed
+
+- **DarkModeToggle désactivé en mode contraste élevé**
+  - Toggle du dark mode devient grisé et non-cliquable quand `isHighContrast` est actif
+  - Force le mode clair via `disableDark()` du ThemeContext
+  - ARIA label mis à jour : "Mode sombre désactivé en mode contraste élevé"
+
+- **ExternalLinkContext respecte le consentement utilisateur**
+  - `openConfirmation()` vérifie `isExternalLinkConfirmEnabled` avant d'afficher la modal
+  - Si désactivé, ouvre directement le lien avec `window.open()` sans confirmation
+  - Comportement par défaut : confirmation activée (`true`)
+
+- **Réinitialisation localStorage dans SettingsModal**
+  - Ajout des clés `tradimedika-high-contrast` et `tradimedika-external-link-confirm` au reset global
+
+- **Labels constants centralisés**
+  - Ajout dans `buttonLabels.js` :
+    - `SETTINGS_ACCESSIBILITY_LABEL` : "Accessibilité"
+    - `ACCESSIBILITY_HIGH_CONTRAST_LABEL` / `ACCESSIBILITY_HIGH_CONTRAST_DESC`
+    - `ACCESSIBILITY_EXTERNAL_LINK_LABEL` / `ACCESSIBILITY_EXTERNAL_LINK_DESC`
+
+### Fixed
+
+- **Tests unitaires — adaptation aux nouveaux Providers**
+  - Création de `test-utils.jsx` avec `AllTheProviders` wrapper incluant `ThemeProvider` et `AccessibilityProvider`
+  - `test/setup.js` : mock global pour `useAccessibility` hook pour éviter les erreurs "must be used within AccessibilityProvider"
+  - `DarkModeToggle.test.jsx` : mock `useAccessibility` dans `beforeEach`
+  - `ExternalLinkContext.test.jsx` : wrapper avec ThemeProvider > AccessibilityProvider > ExternalLinkProvider
+  - Tous les tests passent (55 suites, 551 tests)
+
+---
+
 ## [0.52.0] - 2026-02-09
 
 ### Added

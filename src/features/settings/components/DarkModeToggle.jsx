@@ -1,19 +1,32 @@
 // tradimedika-v1/src/components/btn/DarkModeToggle.jsx
 import { motion } from "framer-motion";
 import { HiMoon, HiSun } from "react-icons/hi2";
+import { useAccessibility } from "../context/AccessibilityContext";
 import { useTheme } from "../context/ThemeContext";
 
 export default function DarkModeToggle() {
   const { isDarkMode, toggleDarkMode } = useTheme();
+  const { isHighContrast } = useAccessibility();
+
+  const isDisabled = isHighContrast;
 
   return (
     <motion.button
       aria-label={
-        isDarkMode ? "Désactiver le mode sombre" : "Activer le mode sombre"
+        isDisabled
+          ? "Mode sombre désactivé en mode contraste élevé"
+          : isDarkMode
+            ? "Désactiver le mode sombre"
+            : "Activer le mode sombre"
       }
       aria-pressed={isDarkMode}
-      onClick={toggleDarkMode}
-      className={`group relative flex h-8 w-14 cursor-pointer items-center rounded-md border-2 p-1 transition-all duration-300 ease-out ${
+      onClick={isDisabled ? undefined : toggleDarkMode}
+      disabled={isDisabled}
+      className={`group relative flex h-8 w-14 items-center rounded-md border-2 p-1 transition-all duration-300 ease-out ${
+        isDisabled
+          ? "cursor-not-allowed opacity-50 grayscale"
+          : "cursor-pointer"
+      } ${
         isDarkMode
           ? "justify-end border-emerald-500/80 bg-emerald-500"
           : "justify-start border-neutral-400 bg-neutral-200 dark:border-neutral-600 dark:bg-neutral-700"

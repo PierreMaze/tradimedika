@@ -14,6 +14,10 @@ export {
   usePerformance,
 } from "./context/PerformanceContext";
 export {
+  AccessibilityProvider,
+  useAccessibility,
+} from "./context/AccessibilityContext";
+export {
   SettingsModalProvider,
   useSettingsModal,
 } from "./context/SettingsModalContext";

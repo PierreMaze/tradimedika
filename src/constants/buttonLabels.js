@@ -227,3 +227,25 @@ export const ARIA_RESET_STORAGE =
  * @type {string}
  */
 export const LINK_COOKIES_PAGE = "Gestion des Cookies";
+
+/**
+ * Label for accessibility settings section
+ * @type {string}
+ */
+export const SETTINGS_ACCESSIBILITY_LABEL = "Accessibilité";
+
+/**
+ * Label for high contrast accessibility setting
+ * @type {string}
+ */
+export const ACCESSIBILITY_HIGH_CONTRAST_LABEL = "Contraste élevé";
+export const ACCESSIBILITY_HIGH_CONTRAST_DESC =
+  "Force le mode clair avec un contraste renforcé (WCAG AAA)";
+
+/**
+ * Label for external link confirmation accessibility setting
+ * @type {string}
+ */
+export const ACCESSIBILITY_EXTERNAL_LINK_LABEL = "Confirmation liens externes";
+export const ACCESSIBILITY_EXTERNAL_LINK_DESC =
+  "Afficher une confirmation avant d'ouvrir un site externe";
