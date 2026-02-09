@@ -12,6 +12,7 @@ import {
   TagsAccordionPopover,
   TagsInfoButton,
 } from "../../../components/ui/helper";
+import ImageCredit from "./ImageCredit";
 import SourcesSection from "./RemedyResultDetailsSourcesSection";
 
 function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
@@ -34,6 +35,7 @@ function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
             loading="lazy"
           />
         </div>
+        <ImageCredit imageCredit={remedy.imageCredit} />
       </div>
 
       <div className="lg:col-span-3">
@@ -102,6 +104,11 @@ RemedyResultDetailsHeader.propTypes = {
     verifiedByProfessional: PropTypes.bool,
     pregnancySafe: PropTypes.bool,
     childrenAge: PropTypes.number,
+    imageCredit: PropTypes.shape({
+      author: PropTypes.string,
+      source: PropTypes.string,
+      url: PropTypes.string,
+    }),
     sources: PropTypes.shape({
       scientific: PropTypes.array,
       traditional: PropTypes.array,

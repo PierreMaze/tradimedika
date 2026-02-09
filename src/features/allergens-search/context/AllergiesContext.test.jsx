@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { renderHook, act } from "@testing-library/react";
+import { act, renderHook } from "@testing-library/react";
+import { beforeEach, describe, expect, it } from "vitest";
 import { CookieConsentProvider } from "../../cookie-consent";
 import { AllergiesProvider, useAllergies } from "./AllergiesContext";
 
@@ -40,28 +40,28 @@ describe("AllergiesContext", () => {
 
       // Ajouter un allergène
       act(() => {
-        result.current.toggleAllergen("citrus");
+        result.current.toggleAllergen("citron");
       });
 
-      expect(result.current.userAllergies).toEqual(["citrus"]);
-      expect(result.current.hasAllergen("citrus")).toBe(true);
+      expect(result.current.userAllergies).toEqual(["citron"]);
+      expect(result.current.hasAllergen("citron")).toBe(true);
 
       // Ajouter un deuxième allergène
       act(() => {
-        result.current.toggleAllergen("pollen");
+        result.current.toggleAllergen("miel");
       });
 
-      expect(result.current.userAllergies).toEqual(["citrus", "pollen"]);
-      expect(result.current.hasAllergen("pollen")).toBe(true);
+      expect(result.current.userAllergies).toEqual(["citron", "miel"]);
+      expect(result.current.hasAllergen("miel")).toBe(true);
 
       // Retirer le premier allergène
       act(() => {
-        result.current.toggleAllergen("citrus");
+        result.current.toggleAllergen("citron");
       });
 
-      expect(result.current.userAllergies).toEqual(["pollen"]);
-      expect(result.current.hasAllergen("citrus")).toBe(false);
-      expect(result.current.hasAllergen("pollen")).toBe(true);
+      expect(result.current.userAllergies).toEqual(["miel"]);
+      expect(result.current.hasAllergen("citron")).toBe(false);
+      expect(result.current.hasAllergen("miel")).toBe(true);
     });
 
     it("should set allergies with validation", () => {
@@ -75,21 +75,21 @@ describe("AllergiesContext", () => {
 
       // Remplacer avec un nouveau tableau
       act(() => {
-        result.current.setAllergies(["citrus", "asteraceae", "pollen"]);
+        result.current.setAllergies(["citron", "asteraceae", "miel"]);
       });
 
       expect(result.current.userAllergies).toEqual([
-        "citrus",
+        "citron",
         "asteraceae",
-        "pollen",
+        "miel",
       ]);
 
       // Filtrer les valeurs invalides
       act(() => {
-        result.current.setAllergies(["citrus", "", null, "pollen", 123]);
+        result.current.setAllergies(["citron", "", null, "miel", 123]);
       });
 
-      expect(result.current.userAllergies).toEqual(["citrus", "pollen"]);
+      expect(result.current.userAllergies).toEqual(["citron", "miel"]);
     });
 
     it("should clear all allergies", () => {
@@ -103,10 +103,10 @@ describe("AllergiesContext", () => {
 
       // Ajouter des allergènes
       act(() => {
-        result.current.setAllergies(["citrus", "pollen"]);
+        result.current.setAllergies(["citron", "miel"]);
       });
 
-      expect(result.current.userAllergies).toEqual(["citrus", "pollen"]);
+      expect(result.current.userAllergies).toEqual(["citron", "miel"]);
 
       // Effacer tout
       act(() => {
@@ -126,11 +126,11 @@ describe("AllergiesContext", () => {
       const { result } = renderHook(() => useAllergies(), { wrapper });
 
       act(() => {
-        result.current.setAllergies(["citrus", "pollen"]);
+        result.current.setAllergies(["citron", "miel"]);
       });
 
-      expect(result.current.hasAllergen("citrus")).toBe(true);
-      expect(result.current.hasAllergen("pollen")).toBe(true);
+      expect(result.current.hasAllergen("citron")).toBe(true);
+      expect(result.current.hasAllergen("miel")).toBe(true);
       expect(result.current.hasAllergen("asteraceae")).toBe(false);
       expect(result.current.hasAllergen("bee-venom")).toBe(false);
     });
@@ -146,7 +146,7 @@ describe("AllergiesContext", () => {
 
       // Définir allergies utilisateur et activer le filtrage
       act(() => {
-        result.current.setAllergies(["citrus", "pollen"]);
+        result.current.setAllergies(["citron", "miel"]);
         result.current.enableFiltering();
       });
 
@@ -159,20 +159,20 @@ describe("AllergiesContext", () => {
       expect(result.current.canUseRemedy(safeRemedy2)).toBe(true);
 
       // Remède avec un allergène commun = dangereux
-      const dangerousRemedy1 = { name: "Citron", allergens: ["citrus"] };
+      const dangerousRemedy1 = { name: "Citron", allergens: ["citron"] };
       expect(result.current.canUseRemedy(dangerousRemedy1)).toBe(false);
 
       // Remède avec plusieurs allergènes dont un commun = dangereux
       const dangerousRemedy2 = {
         name: "Ananas",
-        allergens: ["pollen-olive", "bee-venom", "pollen"],
+        allergens: ["miel-olive", "bee-venom", "miel"],
       };
       expect(result.current.canUseRemedy(dangerousRemedy2)).toBe(false);
 
       // Remède avec tous les allergènes communs = dangereux
       const dangerousRemedy3 = {
         name: "Test",
-        allergens: ["citrus", "pollen"],
+        allergens: ["citron", "miel"],
       };
       expect(result.current.canUseRemedy(dangerousRemedy3)).toBe(false);
     });
@@ -187,9 +187,9 @@ describe("AllergiesContext", () => {
       const { result } = renderHook(() => useAllergies(), { wrapper });
 
       // Pas d'allergies = tout est safe
-      const remedy1 = { name: "Citron", allergens: ["citrus"] };
-      const remedy2 = { name: "Miel", allergens: ["pollen"] };
-      const remedy3 = { name: "Riz", allergens: [] };
+      const remedy1 = { name: "Citron", allergens: ["citron"] };
+      const remedy2 = { name: "Miel", allergens: ["miel"] };
+      const remedy3 = { name: "Riz", allergens: ["riz"] };
 
       expect(result.current.canUseRemedy(remedy1)).toBe(true);
       expect(result.current.canUseRemedy(remedy2)).toBe(true);
@@ -206,14 +206,14 @@ describe("AllergiesContext", () => {
       const { result } = renderHook(() => useAllergies(), { wrapper });
 
       act(() => {
-        result.current.setAllergies(["citrus", "pollen"]);
+        result.current.setAllergies(["citron", "miel"]);
       });
 
       // Attendre que la microtask s'exécute
       await new Promise((resolve) => queueMicrotask(resolve));
 
       const stored = window.localStorage.getItem("tradimedika-allergies");
-      expect(JSON.parse(stored)).toEqual(["citrus", "pollen"]);
+      expect(JSON.parse(stored)).toEqual(["citron", "miel"]);
     });
 
     it("should load allergies from localStorage", () => {
@@ -234,7 +234,7 @@ describe("AllergiesContext", () => {
       );
       window.localStorage.setItem(
         "tradimedika-allergies",
-        JSON.stringify(["asteraceae", "bee-venom"]),
+        JSON.stringify(["citron", "miel"]),
       );
 
       const wrapper = ({ children }) => (
@@ -245,9 +245,9 @@ describe("AllergiesContext", () => {
 
       const { result } = renderHook(() => useAllergies(), { wrapper });
 
-      expect(result.current.userAllergies).toEqual(["asteraceae", "bee-venom"]);
-      expect(result.current.hasAllergen("asteraceae")).toBe(true);
-      expect(result.current.hasAllergen("bee-venom")).toBe(true);
+      expect(result.current.userAllergies).toEqual(["citron", "miel"]);
+      expect(result.current.hasAllergen("citron")).toBe(true);
+      expect(result.current.hasAllergen("miel")).toBe(true);
     });
 
     it("should handle invalid input gracefully", () => {
@@ -370,7 +370,7 @@ describe("AllergiesContext", () => {
 
       // Définir allergies
       act(() => {
-        result.current.setAllergies(["citrus", "pollen"]);
+        result.current.setAllergies(["citron", "miel"]);
       });
 
       // Désactiver le filtrage
@@ -379,8 +379,8 @@ describe("AllergiesContext", () => {
       });
 
       // Tous les remèdes devraient être safe (même avec allergènes)
-      const remedyWithCitrus = { name: "Citron", allergens: ["citrus"] };
-      const remedyWithPollen = { name: "Miel", allergens: ["pollen"] };
+      const remedyWithCitrus = { name: "Citron", allergens: ["citron"] };
+      const remedyWithPollen = { name: "Miel", allergens: ["miel"] };
 
       expect(result.current.canUseRemedy(remedyWithCitrus)).toBe(true);
       expect(result.current.canUseRemedy(remedyWithPollen)).toBe(true);
@@ -397,7 +397,7 @@ describe("AllergiesContext", () => {
 
       // Définir allergies
       act(() => {
-        result.current.setAllergies(["citrus", "pollen"]);
+        result.current.setAllergies(["citron", "miel"]);
       });
 
       // Activer le filtrage (déjà activé par défaut mais on le fait explicitement)
@@ -406,8 +406,8 @@ describe("AllergiesContext", () => {
       });
 
       // Les remèdes avec allergènes devraient être dangereux
-      const remedyWithCitrus = { name: "Citron", allergens: ["citrus"] };
-      const remedyWithPollen = { name: "Miel", allergens: ["pollen"] };
+      const remedyWithCitrus = { name: "Citron", allergens: ["citron"] };
+      const remedyWithPollen = { name: "Miel", allergens: ["miel"] };
       const safeRemedy = { name: "Riz", allergens: [] };
 
       expect(result.current.canUseRemedy(remedyWithCitrus)).toBe(false);
@@ -466,10 +466,10 @@ describe("AllergiesContext", () => {
 
       // Ajouter des allergies
       act(() => {
-        result.current.setAllergies(["citrus", "pollen"]);
+        result.current.setAllergies(["citron", "miel"]);
       });
 
-      expect(result.current.userAllergies).toEqual(["citrus", "pollen"]);
+      expect(result.current.userAllergies).toEqual(["citron", "miel"]);
 
       // Désactiver le filtrage
       act(() => {
@@ -477,7 +477,7 @@ describe("AllergiesContext", () => {
       });
 
       // Les allergies doivent toujours être là
-      expect(result.current.userAllergies).toEqual(["citrus", "pollen"]);
+      expect(result.current.userAllergies).toEqual(["citron", "miel"]);
       expect(result.current.isFilteringEnabled).toBe(false);
 
       // Réactiver le filtrage
@@ -486,7 +486,7 @@ describe("AllergiesContext", () => {
       });
 
       // Les allergies doivent toujours être là
-      expect(result.current.userAllergies).toEqual(["citrus", "pollen"]);
+      expect(result.current.userAllergies).toEqual(["citron", "miel"]);
       expect(result.current.isFilteringEnabled).toBe(true);
     });
   });

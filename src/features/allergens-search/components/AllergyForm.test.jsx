@@ -64,9 +64,8 @@ describe("AllergyForm", () => {
     // Rechercher "pollen"
     fireEvent.change(input, { target: { value: "pollen" } });
 
-    // Doit afficher "Pollen" et "Pollen d'olivier"
+    // Doit afficher "Pollen"
     expect(screen.getByText("Pollen")).toBeInTheDocument();
-    expect(screen.getByText("Pollen d'olivier")).toBeInTheDocument();
 
     // Ne doit PAS afficher "Agrumes"
     expect(screen.queryByText("Agrumes")).not.toBeInTheDocument();

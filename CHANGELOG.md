@@ -2,6 +2,49 @@
 
 ---
 
+## [0.52.0] - 2026-02-09
+
+### Added
+
+- **Enrichissement des allergènes : de 9 à 40 allergènes**
+  - Ajout de 15 nouveaux allergènes de familles/composés : allium, fodmap, sulfites, bromelaine, latex-fruit, cafeine, zingiberacees, eugenol, rosacees, sorbitol, gluten-trace, propolis, lamiacees, menthol, aloine
+  - Ajout de 16 allergènes individuels (un par remède) : ail, aloe-vera, ananas, banane, cafe, camomille, citron, clou-de-girofle, fenouil, gingembre, miel, menthe, oignon, pruneau, riz, yaourt
+  - Permet un filtrage granulaire : ex. allergique à la prune mais pas à l'abricot
+  - Tous les remèdes dans db.json ont maintenant leurs allergènes multiples référencés
+
+- **Francisation complète des IDs d'allergènes**
+  - `citrus` → `agrumes`
+  - `asteraceae` → `asteracees`
+  - `bee-venom` → `venin-abeille`
+  - `pollen-olive` → `pollen-olivier`
+  - Tous les IDs maintenant en français avec format kebab-case
+
+- **Migration automatique localStorage (v0.52.0)**
+  - `AllergiesContext` : détection et conversion automatique des anciens IDs anglais vers IDs français au démarrage
+  - `SearchHistoryItem` : migration lazy des IDs dans l'historique de recherche lors de l'affichage
+  - Migration silencieuse avec logs en mode développement
+  - Constante `ALLERGEN_MIGRATION_MAP` partagée entre les composants
+
+### Changed
+
+- **allergensList.json : restructuration complète**
+  - Passage de 9 à 40 allergènes
+  - Ordre alphabétique par ID (français)
+  - Descriptions génériques pour les allergènes individuels de remèdes
+  - Script `extractAllergensFromDb.js` synchronise automatiquement les remèdes associés
+
+- **db.json : mise à jour de tous les remèdes**
+  - Chaque remède a maintenant un tableau `allergens` enrichi avec les nouveaux IDs
+  - Exemples : Miel [`pollen`, `fodmap`, `propolis`, `miel`], Oignon [`allium`, `fodmap`, `sulfites`, `oignon`]
+
+### Fixed
+
+- **Validation des données**
+  - Script `validateData.js` : validation réussie avec 40 allergènes (39 utilisés dans db.json)
+  - Cohérence totale entre allergensList.json et db.json
+
+---
+
 ## [0.51.0] - 2026-02-03
 
 ### Added

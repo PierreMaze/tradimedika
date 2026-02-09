@@ -6,6 +6,14 @@ import { RiDeleteBin2Fill } from "react-icons/ri";
 import allergensList from "../../../data/allergensList.json";
 import { useReducedMotion } from "../../settings";
 
+// Migration v0.52.0 : IDs anglais → français
+const ALLERGEN_MIGRATION_MAP = {
+  citrus: "agrumes",
+  asteraceae: "asteracees",
+  "bee-venom": "venin-abeille",
+  "pollen-olive": "pollen-olivier",
+};
+
 /**
  * Helper function to capitalize the first letter of a symptom
  * @param {string} symptom - Symptom to capitalize
@@ -14,6 +22,13 @@ import { useReducedMotion } from "../../settings";
 const capitalizeSymptom = (symptom) => {
   return symptom.charAt(0).toUpperCase() + symptom.slice(1);
 };
+
+/**
+ * Helper function to migrate old English allergen IDs to French
+ * @param {string} id - Allergen ID to migrate
+ * @returns {string} - Migrated ID or original if no migration needed
+ */
+const migrateAllergenId = (id) => ALLERGEN_MIGRATION_MAP[id] || id;
 
 /**
  * SearchHistoryItem Component
@@ -87,7 +102,8 @@ export default function SearchHistoryItem({ search, onClick, onRemove }) {
                 Allergies :
               </p>
               {(search.allergies ?? []).map((allergenId, index) => {
-                const allergen = allergensList.find((a) => a.id === allergenId);
+                const migratedId = migrateAllergenId(allergenId);
+                const allergen = allergensList.find((a) => a.id === migratedId);
                 return allergen ? (
                   <span
                     key={`allergy-${search.id}-${index}`}

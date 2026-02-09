@@ -302,9 +302,60 @@ if (!Array.isArray(allergensList)) {
   }
 }
 
-// ==================== 7. VÉRIFIER STRUCTURE DES SYNONYMES ====================
+// ==================== 7. VÉRIFIER LES CRÉDITS D'IMAGES ====================
 
-console.log("📝 Vérification 7: Structure des synonymes...");
+console.log("📝 Vérification 7: Validation des crédits d'images...");
+
+let invalidImageCredits = 0;
+
+db.forEach((remedy) => {
+  if (remedy.imageCredit) {
+    const { author, source, url } = remedy.imageCredit;
+
+    if (!author || typeof author !== "string") {
+      console.error(
+        `  ❌ ${remedy.name} (id:${remedy.id}) : imageCredit.author manquant ou invalide`,
+      );
+      invalidImageCredits++;
+    }
+
+    if (!url || typeof url !== "string") {
+      console.error(
+        `  ❌ ${remedy.name} (id:${remedy.id}) : imageCredit.url manquant ou invalide`,
+      );
+      invalidImageCredits++;
+    } else {
+      try {
+        new URL(url);
+      } catch {
+        console.error(
+          `  ❌ ${remedy.name} (id:${remedy.id}) : imageCredit.url invalide "${url}"`,
+        );
+        invalidImageCredits++;
+      }
+    }
+
+    if (source !== undefined && typeof source !== "string") {
+      console.error(
+        `  ❌ ${remedy.name} (id:${remedy.id}) : imageCredit.source doit être une string`,
+      );
+      invalidImageCredits++;
+    }
+  }
+});
+
+if (invalidImageCredits === 0) {
+  const remediesWithCredit = db.filter((r) => r.imageCredit).length;
+  console.log(
+    `  ✅ Crédits d'images valides (${remediesWithCredit}/${db.length} remèdes avec crédit)\n`,
+  );
+} else {
+  errors += invalidImageCredits;
+}
+
+// ==================== 8. VÉRIFIER STRUCTURE DES SYNONYMES ====================
+
+console.log("📝 Vérification 8: Structure des synonymes...");
 
 let synonymCount = 0;
 let invalidSynonyms = 0;
@@ -338,6 +389,10 @@ console.log(
 console.log(`  • db.json              : ${db.length} remèdes`);
 console.log(`  • Symptômes uniques (db): ${dbSymptoms.size} symptômes`);
 console.log(`  • allergensList.json   : ${allergensList.length} allergènes`);
+const remediesWithImageCredit = db.filter((r) => r.imageCredit).length;
+console.log(
+  `  • Crédits d'images      : ${remediesWithImageCredit}/${db.length} remèdes avec crédit`,
+);
 
 // ==================== 9. RÉSULTAT FINAL ====================
 

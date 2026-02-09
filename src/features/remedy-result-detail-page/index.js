@@ -11,6 +11,7 @@ export { default as RemedyResultDetailsUsagesList } from "./components/RemedyRes
 export { default as RemedyResultDetailsContraindicationsSection } from "./components/RemedyResultDetailsContraindicationsSection";
 export { default as RemedyResultDetailsTipsSection } from "./components/RemedyResultDetailsTipsSection";
 export { default as RemedyResultDetailsAllergensSection } from "./components/RemedyResultDetailsAllergensSection";
+export { default as ImageCredit } from "./components/ImageCredit";
 
 // Hooks
 export { useRemedyDetails } from "./hooks/useRemedyDetails";

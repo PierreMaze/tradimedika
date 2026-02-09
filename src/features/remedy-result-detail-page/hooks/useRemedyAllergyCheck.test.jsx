@@ -1,12 +1,12 @@
-import { describe, it, expect, beforeEach, vi } from "vitest";
 import { renderHook } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { AllergiesProvider } from "../../allergens-search";
 import { CookieConsentProvider } from "../../cookie-consent";
 import { useRemedyAllergyCheck } from "./useRemedyAllergyCheck";
 
 vi.mock("../../../data/allergensList.json", () => ({
   default: [
-    { id: "citrus", name: "Agrumes", description: "", remedies: [] },
+    { id: "citron", name: "Citron", description: "", remedies: [] },
     { id: "pollen", name: "Pollen", description: "", remedies: [] },
     { id: "asteraceae", name: "Astéracées", description: "", remedies: [] },
   ],
@@ -24,7 +24,7 @@ describe("useRemedyAllergyCheck", () => {
   );
 
   it("should return false when no allergens match", () => {
-    const remedy = { allergens: ["citrus"] };
+    const remedy = { allergens: ["citron"] };
 
     const { result } = renderHook(() => useRemedyAllergyCheck(remedy), {
       wrapper,
@@ -51,31 +51,31 @@ describe("useRemedyAllergyCheck", () => {
         },
       }),
     );
-    localStorage.setItem("tradimedika-allergies", JSON.stringify(["citrus"]));
+    localStorage.setItem("tradimedika-allergies", JSON.stringify(["citron"]));
     localStorage.setItem(
       "tradimedika-allergies-filtering-enabled",
       JSON.stringify(true),
     );
 
-    const remedy = { allergens: ["citrus", "pollen"] };
+    const remedy = { allergens: ["citron", "pollen"] };
 
     const { result } = renderHook(() => useRemedyAllergyCheck(remedy), {
       wrapper,
     });
 
     expect(result.current.hasUserAllergens).toBe(true);
-    expect(result.current.matchingAllergens).toEqual(["citrus"]);
-    expect(result.current.allergenNames).toBe("agrumes");
+    expect(result.current.matchingAllergens).toEqual(["citron"]);
+    expect(result.current.allergenNames).toBe("citron");
   });
 
   it("should return false when filtering is disabled", () => {
-    localStorage.setItem("tradimedika-allergies", JSON.stringify(["citrus"]));
+    localStorage.setItem("tradimedika-allergies", JSON.stringify(["citron"]));
     localStorage.setItem(
       "tradimedika-allergies-filtering-enabled",
       JSON.stringify(false),
     );
 
-    const remedy = { allergens: ["citrus"] };
+    const remedy = { allergens: ["citron"] };
 
     const { result } = renderHook(() => useRemedyAllergyCheck(remedy), {
       wrapper,
@@ -102,22 +102,22 @@ describe("useRemedyAllergyCheck", () => {
     );
     localStorage.setItem(
       "tradimedika-allergies",
-      JSON.stringify(["citrus", "pollen"]),
+      JSON.stringify(["citron", "pollen"]),
     );
     localStorage.setItem(
       "tradimedika-allergies-filtering-enabled",
       JSON.stringify(true),
     );
 
-    const remedy = { allergens: ["citrus", "pollen", "asteraceae"] };
+    const remedy = { allergens: ["citron", "pollen", "asteraceae"] };
 
     const { result } = renderHook(() => useRemedyAllergyCheck(remedy), {
       wrapper,
     });
 
     expect(result.current.hasUserAllergens).toBe(true);
-    expect(result.current.matchingAllergens).toEqual(["citrus", "pollen"]);
-    expect(result.current.allergenNames).toBe("agrumes, pollen");
+    expect(result.current.matchingAllergens).toEqual(["citron", "pollen"]);
+    expect(result.current.allergenNames).toBe("citron, pollen");
   });
 
   it("should handle remedy without allergens field", () => {

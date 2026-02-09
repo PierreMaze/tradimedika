@@ -8,10 +8,18 @@ import {
   useRef,
 } from "react";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
-import { useCookieConsent } from "../../cookie-consent";
 import { createLogger } from "../../../utils/logger";
+import { useCookieConsent } from "../../cookie-consent";
 
 const logger = createLogger("AllergiesContext");
+
+// Migration : IDs anglais → français
+const ALLERGEN_MIGRATION_MAP = {
+  citrus: "agrumes",
+  asteraceae: "asteracees",
+  "bee-venom": "venin-abeille",
+  "pollen-olive": "pollen-olivier",
+};
 
 const AllergiesContext = createContext(undefined);
 
@@ -35,26 +43,42 @@ export function AllergiesProvider({ children }) {
 
   const { isAllergiesAccepted } = useCookieConsent();
 
-  // Migration automatique : nettoyer les anciens IDs numériques (breaking change 0.38.0)
+  // Migration automatique : nettoyer les anciens IDs numériques
+  // + Migration : franciser les IDs anglais
   // Exécuté une seule fois au montage du Provider
   const isMounted = useRef(false);
   useEffect(() => {
     if (!isMounted.current) {
       isMounted.current = true;
 
-      // Vérifier si userAllergies contient des anciens IDs numériques ("0", "1", "2"...)
-      const hasOldIds =
+      // Migration : Vérifier si userAllergies contient des anciens IDs numériques ("0", "1", "2"...)
+      const hasOldNumericIds =
         Array.isArray(userAllergies) &&
         userAllergies.some((id) => /^\d+$/.test(id));
 
-      if (hasOldIds) {
+      if (hasOldNumericIds) {
         logger.warn(
-          "Migration: Anciens IDs numériques détectés, nettoyage du localStorage...",
+          "Migration : Anciens IDs numériques détectés, nettoyage du localStorage...",
         );
         setUserAllergies([]); // Réinitialiser les allergies
         logger.info(
           "Migration terminée: utilisateur devra resélectionner ses allergies",
         );
+        return; // Sortir pour ne pas exécuter la migration
+      }
+
+      // Migration : Franciser les IDs anglais
+      const hasOldEnglishIds =
+        Array.isArray(userAllergies) &&
+        userAllergies.some((id) => ALLERGEN_MIGRATION_MAP[id]);
+
+      if (hasOldEnglishIds) {
+        logger.warn("🔄 Migration : Francisation des allergènes...");
+        const migratedAllergies = userAllergies.map(
+          (id) => ALLERGEN_MIGRATION_MAP[id] || id,
+        );
+        setUserAllergies(migratedAllergies);
+        logger.info("✅ Migration réussie :", migratedAllergies);
       }
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
