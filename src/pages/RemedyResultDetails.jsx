@@ -99,20 +99,33 @@ function RemedyResultDetails() {
           typeColors={typeColors}
         />
 
-        <div className="grid grid-cols-1 gap-0 lg:grid-cols-2 lg:gap-6">
-          <RemedyResultDetailsPropertiesSection
-            properties={remedy.properties}
-          />
-          <RemedyResultDetailsSymptomsSection symptoms={remedy.symptoms} />
+        <div className="mb-6 grid grid-cols-1 gap-4 lg:grid-cols-6 lg:gap-6">
+          <div className="lg:col-span-2">
+            <RemedyResultDetailsPropertiesSection
+              properties={remedy.properties}
+            />
+          </div>
+          <div className="lg:col-span-2">
+            <RemedyResultDetailsSymptomsSection symptoms={remedy.symptoms} />
+          </div>
+          <div className="lg:col-span-2">
+            <RemedyResultDetailsAllergensSection allergens={remedy.allergens} />
+          </div>
+
+          <div className="lg:col-span-3">
+            <RemedyResultDetailsContraindicationsSection
+              contraindications={remedy.contraindications}
+            />
+          </div>
+
+          <div className="lg:col-span-3">
+            <RemedyResultDetailsTipsSection tips={remedy.tips} />
+          </div>
+
+          <div className="lg:col-span-6">
+            <RemedyResultDetailsUsagesList uses={remedy.uses} />
+          </div>
         </div>
-        <RemedyResultDetailsContraindicationsSection
-          contraindications={remedy.contraindications}
-        />
-        <RemedyResultDetailsUsagesList uses={remedy.uses} />
-
-        <RemedyResultDetailsTipsSection tips={remedy.tips} />
-
-        <RemedyResultDetailsAllergensSection allergens={remedy.allergens} />
 
         <RemedyResultDetailsNavigation
           selectedSymptoms={selectedSymptoms}

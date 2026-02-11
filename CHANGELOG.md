@@ -2,6 +2,25 @@
 
 ---
 
+## [0.53.1] - 2026-02-11
+
+### Changed
+
+- **Refactored animation system for better maintainability**
+  - Extracted animation variants into reusable `useAnimationVariants` hook
+  - Supports four animation types: `section`, `tag`, `list`, and `collapse`
+  - Centralized reduced motion handling across all animation types
+  - Reduced code duplication in detail page sections (AllergensSection, ContraindicationsSection, PropertiesSection, SymptomsSection, TipsSection, UsagesList)
+
+- **Improved remedy details page layout**
+  - Reorganized sections into a responsive grid system (6-column layout on large screens)
+  - Better visual hierarchy with grouped related sections
+  - Properties, Symptoms, and Allergens now displayed side by side on desktop
+  - Contraindications and Tips sections each span 3 columns for balanced layout
+  - Usages section spans full width for optimal readability
+
+---
+
 ## [0.53.0] - 2026-02-10
 
 ### Added

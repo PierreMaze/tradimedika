@@ -3,19 +3,21 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { FaPrescriptionBottleMedical } from "react-icons/fa6";
 import { HiChevronDown, HiChevronUp } from "react-icons/hi2";
+import { useAnimationVariants } from "../../../hooks/useAnimationVariants";
 import { formatUsageFrequency } from "../utils/formatUsageFrequency";
 
 function RemedyResultDetailsUsagesList({ uses }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
+  const sectionAnimation = useAnimationVariants(0.55, "section");
+  const listAnimation = useAnimationVariants(0, "list");
+  const collapseAnimation = useAnimationVariants(0, "collapse");
 
   if (!uses || uses.length === 0) return null;
 
   return (
     <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.3 }}
-      className="mb-6 rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition duration-300 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800"
+      {...sectionAnimation}
+      className="rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition duration-300 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800"
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -27,7 +29,7 @@ function RemedyResultDetailsUsagesList({ uses }) {
             className="h-4 w-4 text-emerald-600 lg:h-5 lg:w-5 dark:text-emerald-500"
             aria-hidden="true"
           />
-          Utilisations
+          Utilisations / Préparations
         </h2>
         {isOpen ? (
           <HiChevronUp
@@ -43,39 +45,19 @@ function RemedyResultDetailsUsagesList({ uses }) {
       </button>
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="overflow-hidden"
-          >
+          <motion.div {...collapseAnimation} className="overflow-hidden">
             <div className="border-l-4 border-emerald-600 pl-4 dark:border-emerald-500">
               <motion.ul
                 className="space-y-4"
                 initial="hidden"
                 animate="visible"
-                variants={{
-                  visible: {
-                    transition: {
-                      staggerChildren: 0.05,
-                      delayChildren: 0.3,
-                    },
-                  },
-                }}
+                variants={listAnimation.containerVariants}
               >
                 {uses.map((use, index) => (
                   <motion.li
                     key={index}
-                    variants={{
-                      hidden: { opacity: 0, x: -20 },
-                      visible: { opacity: 1, x: 0 },
-                    }}
-                    transition={
-                      index >= 4
-                        ? { duration: 0 }
-                        : { duration: 0.3, ease: "easeOut" }
-                    }
+                    variants={listAnimation.itemVariants}
+                    transition={listAnimation.itemTransition(index, 4)}
                   >
                     <div className="mb-1 flex flex-wrap items-center gap-2 text-sm font-semibold text-black 2xl:text-base dark:text-white">
                       {use.form && use.form.length > 0 && (
