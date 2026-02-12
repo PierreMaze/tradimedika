@@ -7,7 +7,7 @@ import { useAnimationVariants } from "../../../hooks/useAnimationVariants";
 import { formatUsageFrequency } from "../utils/formatUsageFrequency";
 
 function RemedyResultDetailsUsagesList({ uses }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const sectionAnimation = useAnimationVariants(0.55, "section");
   const listAnimation = useAnimationVariants(0, "list");
   const collapseAnimation = useAnimationVariants(0, "collapse");

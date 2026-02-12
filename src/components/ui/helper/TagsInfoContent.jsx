@@ -116,7 +116,7 @@ function TagsCategoryAccordion({ category, isOpen, onToggle }) {
       <button
         onClick={handleHeaderClick}
         onKeyDown={handleKeyDown}
-        className="flex w-full cursor-pointer items-center justify-between py-4 text-left transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
+        className="flex w-full cursor-pointer items-center justify-between py-4 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500"
         aria-expanded={isOpen}
         aria-controls={`tags-category-${category.id}`}
         tabIndex={0}

@@ -84,6 +84,18 @@
     "remedies": ["Citron"]
   },
   {
+    "id": "Café",
+    "name": "Citron",
+    "description": "Allergie spécifique au citron. Sélectionnez cet allergène si vous êtes allergique uniquement au citron et non aux autres agrumes.",
+    "remedies": ["Citron"]
+  },
+  {
+    "id": "citron",
+    "name": "Citron",
+    "description": "Allergie spécifique au citron. Sélectionnez cet allergène si vous êtes allergique uniquement au citron et non aux autres agrumes.",
+    "remedies": ["Citron"]
+  },
+  {
     "id": "agrumes",
     "name": "Agrumes",
     "description": "Citrons, oranges, pamplemousses, clémentines et autres agrumes",

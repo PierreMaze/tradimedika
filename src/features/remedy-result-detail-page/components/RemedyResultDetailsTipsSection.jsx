@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { HiChevronDown, HiChevronUp } from "react-icons/hi2";
 import { MdTipsAndUpdates } from "react-icons/md";
+import SectionHelpButton from "../../../components/ui/helper/SectionHelpButton";
 import { useAnimationVariants } from "../../../hooks/useAnimationVariants";
 
 function RemedyResultDetailsTipsSection({ tips }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const sectionAnimation = useAnimationVariants(0.65, "section");
   const listAnimation = useAnimationVariants(0, "list");
   const collapseAnimation = useAnimationVariants(0, "collapse");
@@ -23,13 +24,19 @@ function RemedyResultDetailsTipsSection({ tips }) {
         className="mb-3 flex w-full cursor-pointer items-center justify-between text-left"
         aria-expanded={isOpen}
       >
-        <h2 className="flex items-center gap-2 text-lg font-semibold text-sky-600 lg:text-xl 2xl:text-2xl dark:text-sky-500">
-          <MdTipsAndUpdates
-            className="h-5 w-5 text-sky-600 lg:h-6 lg:w-6 dark:text-sky-500"
-            aria-hidden="true"
+        <div className="flex items-center gap-2">
+          <h2 className="flex items-center gap-2 text-lg font-semibold text-sky-600 lg:text-xl 2xl:text-2xl dark:text-sky-500">
+            <MdTipsAndUpdates
+              className="h-5 w-5 text-sky-600 lg:h-6 lg:w-6 dark:text-sky-500"
+              aria-hidden="true"
+            />
+            Conseils pratiques
+          </h2>
+          <SectionHelpButton
+            message="Les conseils pratiques vous guident sur la meilleure façon d'utiliser ce remède au quotidien."
+            iconColor="text-sky-600 dark:text-sky-500"
           />
-          Conseils pratiques
-        </h2>
+        </div>
         {isOpen ? (
           <HiChevronUp
             className="h-5 w-5 text-neutral-500 lg:h-6 lg:w-6"
