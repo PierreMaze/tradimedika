@@ -20,12 +20,12 @@ import HeroSearch from "./HeroSearch";
 export default function Hero() {
   return (
     <div className="mx-auto flex flex-1 flex-col items-center justify-center px-4 py-8 lg:py-12">
-      <div className="z-20 flex [animation:var(--animate-fade-in-up)] flex-col items-center justify-center gap-y-10 motion-reduce:animate-none motion-reduce:opacity-100 md:gap-y-12 lg:gap-y-14 xl:gap-y-16 2xl:gap-y-20">
+      <div className="animate-fade-in-up z-20 flex flex-col items-center justify-center gap-y-10 motion-reduce:opacity-100 md:gap-y-12 lg:gap-y-14 xl:gap-y-16 2xl:gap-y-20">
         {/* En-tête : Badge + Titre + Description */}
         <HeroHeader />
 
         {/* Formulaire de recherche de symptômes */}
-        <div className="w-full [animation:var(--animate-fade-in-up-delayed)] motion-reduce:animate-none motion-reduce:opacity-100">
+        <div className="animate-fade-in-up-delayed w-full motion-reduce:opacity-100">
           <HeroSearch />
         </div>
 
