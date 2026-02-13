@@ -179,7 +179,7 @@ describe("SearchHistoryModal", () => {
     });
 
     it("should render backdrop", () => {
-      const { container } = render(
+      render(
         <SearchHistoryModal
           isOpen={true}
           onClose={mockOnClose}
@@ -190,8 +190,8 @@ describe("SearchHistoryModal", () => {
         />,
       );
 
-      // Backdrop has bg-black/60 class (ModalLayout standard)
-      const backdrop = container.querySelector(".bg-black\\/60");
+      // Le backdrop est rendu dans document.body via createPortal et a l'attribut aria-hidden="true"
+      const backdrop = document.body.querySelector('[aria-hidden="true"]');
       expect(backdrop).toBeInTheDocument();
     });
   });
@@ -220,7 +220,7 @@ describe("SearchHistoryModal", () => {
     it("should call onClose when backdrop is clicked", async () => {
       const user = userEvent.setup();
 
-      const { container } = render(
+      render(
         <SearchHistoryModal
           isOpen={true}
           onClose={mockOnClose}
@@ -231,7 +231,8 @@ describe("SearchHistoryModal", () => {
         />,
       );
 
-      const backdrop = container.querySelector(".bg-black\\/60");
+      // Le backdrop est rendu dans document.body via createPortal
+      const backdrop = document.body.querySelector('[aria-hidden="true"]');
       await user.click(backdrop);
 
       expect(mockOnClose).toHaveBeenCalledTimes(1);

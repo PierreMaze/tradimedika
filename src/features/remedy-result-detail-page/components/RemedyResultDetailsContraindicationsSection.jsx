@@ -14,10 +14,18 @@ function RemedyResultDetailsContraindicationsSection({ contraindications }) {
 
   return (
     <section className="animate-fade-in-up rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition delay-450 duration-300 motion-reduce:animate-none motion-reduce:opacity-100 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800">
-      <button
+      <div
         onClick={() => setIsOpen(!isOpen)}
-        className="mb-3 flex w-full cursor-pointer items-center justify-between text-left"
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setIsOpen(!isOpen);
+          }
+        }}
+        role="button"
+        tabIndex={0}
         aria-expanded={isOpen}
+        className="mb-3 flex w-full cursor-pointer items-center justify-between text-left"
       >
         <div className="flex items-center gap-2">
           <h2 className="flex items-center gap-2 text-lg font-semibold text-red-700 lg:text-xl 2xl:text-2xl dark:text-red-500">
@@ -44,7 +52,7 @@ function RemedyResultDetailsContraindicationsSection({ contraindications }) {
             aria-hidden="true"
           />
         )}
-      </button>
+      </div>
       {isOpen && (
         <div className="animate-collapse-in overflow-hidden motion-reduce:animate-none motion-reduce:opacity-100">
           <div className="h-full max-h-fit border-l-4 border-red-700 pl-4 md:max-h-4/5 dark:border-red-500">

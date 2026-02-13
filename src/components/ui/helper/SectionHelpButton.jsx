@@ -76,7 +76,8 @@ function SectionHelpButton({
     setTooltipPosition({ top, left });
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (e) => {
+    e.stopPropagation();
     if (!isTooltipClickOpen) {
       calculatePosition();
     }

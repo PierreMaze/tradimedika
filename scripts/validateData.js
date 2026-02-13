@@ -251,9 +251,18 @@ if (!Array.isArray(allergensList)) {
 
   // Vérifier les doublons dans allergensList
   if (validAllergenIds.size !== allergensList.length) {
+    const idCounts = {};
+    allergensList.forEach((allergen) => {
+      idCounts[allergen.id] = (idCounts[allergen.id] || 0) + 1;
+    });
+    const duplicateIds = Object.entries(idCounts)
+      .filter(([, count]) => count > 1)
+      .map(([id, count]) => `"${id}" (${count}x)`);
+
     console.error(
       `  ❌ Doublons détectés dans allergensList (${allergensList.length} items, ${validAllergenIds.size} uniques)`,
     );
+    console.error(`     IDs dupliqués: ${duplicateIds.join(", ")}`);
     errors++;
   }
 

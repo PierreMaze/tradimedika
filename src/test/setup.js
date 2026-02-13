@@ -14,6 +14,9 @@ Object.defineProperty(window, "matchMedia", {
   }),
 });
 
+// Mock window.scrollTo
+window.scrollTo = vi.fn();
+
 // Mock global pour useAccessibility
 vi.mock(
   "../features/settings/context/AccessibilityContext",

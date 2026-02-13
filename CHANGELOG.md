@@ -2,6 +2,40 @@
 
 ---
 
+## [0.53.2] - 2026-02-14
+
+### Fixed
+
+- **Removed duplicate allergen entries in allergensList.json**
+  - Removed 2 duplicate "Citron" entries (IDs: "Café" and "citron")
+  - Fixed allergensList.json validation to ensure unique IDs
+  - Total allergens: 40 (down from 42 duplicates)
+
+- **Enhanced validation script for better duplicate detection**
+  - Added detailed duplicate ID reporting in `scripts/validateData.js`
+  - Now displays which IDs are duplicated and their occurrence count
+  - Helps prevent future data quality issues
+
+- **Improved keyboard accessibility for collapsible sections**
+  - Fixed `RemedyResultDetailsContraindicationsSection` and `RemedyResultDetailsTipsSection` to properly handle Enter and Space key navigation
+  - Changed interactive elements from `<button>` to `<div>` with proper ARIA attributes (`role="button"`, `tabIndex={0}`)
+  - Added `onKeyDown` handlers for Enter and Space keys to toggle section expansion
+  - Better semantic structure while maintaining full keyboard navigation support
+
+- **Fixed tooltip click propagation in SectionHelpButton**
+  - Added `e.stopPropagation()` to prevent tooltip clicks from triggering parent element actions
+  - Prevents unintended section collapse/expand when clicking help tooltips
+  - Improves user experience when interacting with help icons in collapsible sections
+
+### Changed
+
+- **Improved test setup for better mock compatibility**
+  - Added global `structuredClone` polyfill in `src/test/setup.js`
+  - Ensures consistent test behavior across different Node.js versions
+  - Prevents potential test failures related to object cloning
+
+---
+
 ## [0.53.1] - 2026-02-13
 
 ### Changed

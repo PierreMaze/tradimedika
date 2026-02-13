@@ -220,7 +220,7 @@ describe("SettingsModal", () => {
   it("should call close when backdrop is clicked", async () => {
     const user = userEvent.setup();
 
-    const { container } = render(
+    render(
       <TestWrapper>
         <OpenSettingsButton />
         <SettingsModal />
@@ -229,7 +229,8 @@ describe("SettingsModal", () => {
 
     await user.click(screen.getByText("open-settings"));
 
-    const backdrop = container.querySelector(".bg-black\\/60");
+    // Le backdrop est rendu dans document.body via createPortal
+    const backdrop = document.body.querySelector('[aria-hidden="true"]');
     expect(backdrop).toBeInTheDocument();
 
     await user.click(backdrop);
@@ -378,7 +379,7 @@ describe("SettingsModal", () => {
   it("should have settings icon in header", async () => {
     const user = userEvent.setup();
 
-    const { container } = render(
+    render(
       <TestWrapper>
         <OpenSettingsButton />
         <SettingsModal />
@@ -387,8 +388,14 @@ describe("SettingsModal", () => {
 
     await user.click(screen.getByText("open-settings"));
 
-    // L'icône IoMdSettings est rendue comme SVG
-    const svgIcons = container.querySelectorAll("svg");
-    expect(svgIcons.length).toBeGreaterThan(0);
+    // Vérifier que le titre "Paramètres" est présent avec l'icône dans le header
+    const title = screen.getByText("Paramètres");
+    expect(title).toBeInTheDocument();
+
+    // Vérifier la présence de l'icône IoMdSettings dans le header du titre
+    const header = title.closest("h2");
+    expect(header).toBeInTheDocument();
+    const icon = header.querySelector("svg");
+    expect(icon).toBeInTheDocument();
   });
 });
