@@ -32,6 +32,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@fontsource/poppins": "^5.2.7",
     "@tailwindcss/vite": "^4.1.18",
     "ccusage": "^17.1.8",
     "framer-motion": "^12.23.26",

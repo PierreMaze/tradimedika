@@ -1,5 +1,3 @@
-import { motion } from "framer-motion";
-
 import HeroFeatures from "./HeroFeatures";
 import HeroHeader from "./HeroHeader";
 import HeroSearch from "./HeroSearch";
@@ -15,33 +13,25 @@ import HeroSearch from "./HeroSearch";
  * Pure component de composition - Ne contient que la structure et la présentation
  * Toute la logique métier est déléguée aux composants enfants
  *
+ * Performance: Utilise des animations Tailwind au lieu de Framer Motion pour réduire FCP
+ *
  * @returns {JSX.Element}
  */
 export default function Hero() {
   return (
     <div className="mx-auto flex flex-1 flex-col items-center justify-center px-4 py-8 lg:py-12">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="z-20 flex flex-col items-center justify-center gap-y-10 md:gap-y-12 lg:gap-y-14 xl:gap-y-16 2xl:gap-y-20"
-      >
+      <div className="z-20 flex [animation:var(--animate-fade-in-up)] flex-col items-center justify-center gap-y-10 motion-reduce:animate-none motion-reduce:opacity-100 md:gap-y-12 lg:gap-y-14 xl:gap-y-16 2xl:gap-y-20">
         {/* En-tête : Badge + Titre + Description */}
         <HeroHeader />
 
         {/* Formulaire de recherche de symptômes */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="w-full"
-        >
+        <div className="w-full [animation:var(--animate-fade-in-up-delayed)] motion-reduce:animate-none motion-reduce:opacity-100">
           <HeroSearch />
-        </motion.div>
+        </div>
 
         {/* Liste des fonctionnalités */}
         <HeroFeatures />
-      </motion.div>
+      </div>
     </div>
   );
 }
