@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { IoMdClose } from "react-icons/io";
 
 /**
@@ -92,64 +93,63 @@ function ModalLayout({
     };
   }, [isOpen]);
 
-  return (
+  if (!isOpen) return null;
+
+  return createPortal(
     <>
-      {isOpen && (
-        <>
-          {/* Backdrop */}
-          <div
-            className="animate-in fade-in fixed inset-0 z-40 bg-black/60 duration-200 motion-reduce:animate-none"
-            onClick={onClose}
-            aria-hidden="true"
-          />
+      {/* Backdrop */}
+      <div
+        className="animate-in fade-in fixed top-20 right-0 bottom-0 left-0 z-50 bg-black/60 duration-200 motion-reduce:animate-none"
+        onClick={onClose}
+        aria-hidden="true"
+      />
 
-          {/* Modal */}
-          <div
-            ref={modalRef}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="modal-title"
-            tabIndex={-1}
-            className={`animate-in fade-in zoom-in-95 fixed inset-x-4 top-1/2 z-50 flex max-h-[90vh] -translate-y-1/2 flex-col overflow-hidden rounded-lg bg-[var(--color-light)] shadow-2xl duration-200 motion-reduce:animate-none md:inset-x-auto md:left-1/2 md:w-full md:-translate-x-1/2 ${maxWidthClasses[maxWidth]} dark:bg-[var(--color-dark)]`}
-          >
-            {/* Header (fixe) */}
-            <div className="flex-shrink-0 border-b border-neutral-200 p-6 pb-4 dark:border-neutral-700">
-              <div className="flex items-center justify-between">
-                <h2
-                  id="modal-title"
-                  className="flex items-center gap-2 text-lg font-semibold text-neutral-900 dark:text-neutral-100"
-                >
-                  {Icon && <Icon className="text-xl" aria-hidden="true" />}
-                  {title}
-                </h2>
-                <button
-                  onClick={onClose}
-                  aria-label={closeLabel}
-                  className="flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-lg bg-neutral-600/90 p-1.5 text-white transition-colors hover:bg-red-700 dark:bg-neutral-500 dark:text-white dark:hover:bg-red-800"
-                >
-                  <IoMdClose className="text-2xl" />
-                </button>
-              </div>
-              {subtitle && (
-                <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
-                  {subtitle}
-                </p>
-              )}
-            </div>
-
-            {/* Content (scrollable) */}
-            <div className="flex-1 overflow-y-auto px-6 py-6">{children}</div>
-
-            {/* Footer (fixe, optionnel) */}
-            {footer && (
-              <div className="flex flex-shrink-0 items-center justify-between gap-4 border-t border-neutral-200 p-6 pt-4 dark:border-neutral-700">
-                {footer}
-              </div>
-            )}
+      {/* Modal */}
+      <div
+        ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        tabIndex={-1}
+        className={`animate-in fade-in zoom-in-95 bg-light fixed inset-x-4 top-1/2 z-60 flex max-h-[90vh] -translate-y-1/2 flex-col overflow-hidden rounded-lg shadow-2xl duration-200 motion-reduce:animate-none md:inset-x-auto md:left-1/2 md:w-full md:-translate-x-1/2 ${maxWidthClasses[maxWidth]} dark:bg-dark`}
+      >
+        {/* Header (fixe) */}
+        <div className="flex-shrink-0 border-b border-neutral-200 p-6 pb-4 dark:border-neutral-700">
+          <div className="flex items-center justify-between">
+            <h2
+              id="modal-title"
+              className="flex items-center gap-2 text-lg font-semibold text-neutral-900 dark:text-neutral-100"
+            >
+              {Icon && <Icon className="text-xl" aria-hidden="true" />}
+              {title}
+            </h2>
+            <button
+              onClick={onClose}
+              aria-label={closeLabel}
+              className="flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-lg bg-neutral-600/90 p-1.5 text-white transition-colors hover:bg-red-700 dark:bg-neutral-500 dark:text-white dark:hover:bg-red-800"
+            >
+              <IoMdClose className="text-2xl" />
+            </button>
           </div>
-        </>
-      )}
-    </>
+          {subtitle && (
+            <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-400">
+              {subtitle}
+            </p>
+          )}
+        </div>
+
+        {/* Content (scrollable) */}
+        <div className="flex-1 overflow-y-auto px-6 py-6">{children}</div>
+
+        {/* Footer (fixe, optionnel) */}
+        {footer && (
+          <div className="flex shrink-0 items-center justify-between gap-4 border-t border-neutral-200 p-6 pt-4 dark:border-neutral-700">
+            {footer}
+          </div>
+        )}
+      </div>
+    </>,
+    document.body,
   );
 }
 

@@ -27,7 +27,7 @@ function ModalButton({
     primary:
       "bg-emerald-600 text-white hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600",
     secondary:
-      "border-2 border-neutral-400 bg-[var(--color-light)] text-neutral-700 hover:bg-neutral-200 dark:border-neutral-600 dark:bg-[var(--color-dark)] dark:text-white dark:hover:bg-neutral-700",
+      "border-2 border-neutral-400 bg-light text-neutral-700 hover:bg-neutral-200 dark:border-neutral-600 dark:bg-dark dark:text-white dark:hover:bg-neutral-700",
     danger:
       "border-2 border-red-700 bg-red-100 text-red-700 hover:border-red-800 hover:bg-red-700 hover:text-white dark:border-red-400 dark:bg-red-900/30 dark:text-white dark:hover:bg-red-800",
   };

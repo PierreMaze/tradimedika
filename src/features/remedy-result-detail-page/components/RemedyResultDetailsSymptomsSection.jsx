@@ -6,12 +6,12 @@ function RemedyResultDetailsSymptomsSection({ symptoms }) {
 
   return (
     <section className="animate-fade-in-up rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition delay-250 duration-300 motion-reduce:animate-none motion-reduce:opacity-100 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800">
-      <div className="mb-4 flex min-h-[2rem] items-center gap-2">
+      <div className="mb-2.5 flex min-h-8 items-center gap-2">
         <h2 className="text-lg font-semibold lg:text-xl 2xl:text-2xl">
           Symptômes traités
         </h2>
       </div>
-      <div className="flex flex-wrap gap-x-2 gap-y-4">
+      <div className="flex flex-wrap gap-2">
         {symptoms.map((symptom, index) => (
           <span
             key={index}

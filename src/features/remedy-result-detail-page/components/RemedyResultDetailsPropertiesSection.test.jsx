@@ -13,17 +13,17 @@ vi.mock("framer-motion", () => ({
   },
 }));
 
-const MockTermPopover = function TermPopover({ children, variant }) {
-  return <div data-testid={`term-popover-${variant}`}>{children}</div>;
-};
-MockTermPopover.propTypes = {
-  children: PropTypes.node,
-  variant: PropTypes.string,
-};
-
-vi.mock("../../../components/ui/popover", () => ({
-  TermPopover: MockTermPopover,
-}));
+// CORRECTION: Déplacer le mock component INSIDE le factory pour éviter TDZ
+vi.mock("../../../components/ui/popover/", () => {
+  const TermPopover = function ({ children, variant }) {
+    return <div data-testid={`term-popover-${variant}`}>{children}</div>;
+  };
+  TermPopover.propTypes = {
+    children: PropTypes.node.isRequired,
+    variant: PropTypes.string.isRequired,
+  };
+  return { TermPopover };
+});
 
 describe("RemedyResultDetailsPropertiesSection", () => {
   describe("Rendering", () => {

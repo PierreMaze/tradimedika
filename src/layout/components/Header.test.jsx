@@ -58,7 +58,7 @@ describe("Header", () => {
       const { container } = render(<Header />);
 
       const header = container.querySelector("header");
-      expect(header).toHaveClass("z-50");
+      expect(header).toHaveClass("z-100");
     });
 
     it("should have full width", () => {
@@ -96,7 +96,7 @@ describe("Header", () => {
 
       const header = container.querySelector("header");
       expect(header).toHaveClass(
-        "fixed top-0 right-0 left-0 z-50 h-auto w-full bg-light dark:bg-dark transition-transform duration-300 ease-in-out motion-reduce:transform-none",
+        "fixed top-0 right-0 left-0 z-100 h-auto w-full bg-light dark:bg-dark transition-transform duration-300 ease-in-out motion-reduce:transform-none",
       );
     });
 
@@ -257,7 +257,7 @@ describe("Header", () => {
       const { container } = render(<Header />);
 
       const header = container.querySelector("header");
-      expect(header).toHaveClass("z-50");
+      expect(header).toHaveClass("z-100");
     });
 
     it("should cover full width when sticky", () => {
