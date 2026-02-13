@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import PropTypes from "prop-types";
 import { describe, expect, it, vi } from "vitest";
 import RemedyResultDetailsAllergensSection from "./RemedyResultDetailsAllergensSection";
 
@@ -8,6 +9,18 @@ vi.mock("framer-motion", () => ({
       <section {...props}>{children}</section>
     ),
   },
+}));
+
+const MockTermPopover = function TermPopover({ children, variant }) {
+  return <div data-testid={`term-popover-${variant}`}>{children}</div>;
+};
+MockTermPopover.propTypes = {
+  children: PropTypes.node,
+  variant: PropTypes.string,
+};
+
+vi.mock("../../../components/ui/popover", () => ({
+  TermPopover: MockTermPopover,
 }));
 
 describe("RemedyResultDetailsAllergensSection", () => {

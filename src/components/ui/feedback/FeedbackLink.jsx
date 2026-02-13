@@ -1,15 +1,11 @@
-import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { MdFeedback } from "react-icons/md";
 import ExternalLink from "../links/ExternalLink";
 
 const FeedbackLink = ({ className = "" }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.2 }}
-      className={`mx-auto mt-12 max-w-2xl rounded-lg border-2 border-dashed border-emerald-600/40 bg-emerald-50 p-6 text-center transition duration-300 dark:border-emerald-500/30 dark:bg-emerald-950/20 ${className}`}
+    <div
+      className={`animate-fade-in-up mx-auto mt-12 max-w-2xl rounded-lg border-2 border-dashed border-emerald-600/40 bg-emerald-50 p-6 text-center transition delay-200 duration-300 motion-reduce:animate-none motion-reduce:opacity-100 dark:border-emerald-500/30 dark:bg-emerald-950/20 ${className}`}
     >
       <p className="mb-4 text-base text-neutral-700 lg:text-lg dark:text-neutral-300">
         Le projet vous plaît, vous avez trouvé un bug ? Faites-le nous savoir !
@@ -23,7 +19,7 @@ const FeedbackLink = ({ className = "" }) => {
         <MdFeedback className="text-xl" aria-hidden="true" />
         <span>Envoyer votre feedback</span>
       </ExternalLink>
-    </motion.div>
+    </div>
   );
 };
 

@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { FiInfo } from "react-icons/fi";
 import { HiExclamationTriangle } from "react-icons/hi2";
 import { IoMdSettings } from "react-icons/io";
@@ -52,104 +51,56 @@ export default function PolitiqueConfidentialite() {
           Sommaire
         </h2>
         <div className="h-full max-h-fit border-l-4 border-emerald-600 pl-4 dark:border-emerald-500">
-          <motion.ul
-            className="space-y-2 pl-2 text-sm"
-            initial="hidden"
-            animate="visible"
-            variants={{
-              visible: {
-                transition: {
-                  staggerChildren: 0.05,
-                  delayChildren: 0.3,
-                },
-              },
-            }}
-          >
-            <motion.li
-              variants={{
-                hidden: { opacity: 0, x: -20 },
-                visible: { opacity: 1, x: 0 },
-              }}
-              className="text-sm leading-relaxed font-medium text-black 2xl:text-base dark:text-white"
-            >
+          <ul className="space-y-2 pl-2 text-sm">
+            <li className="animate-fade-in-up text-sm leading-relaxed font-medium text-black delay-300 motion-reduce:animate-none motion-reduce:opacity-100 2xl:text-base dark:text-white">
               <a
                 href="#responsable"
                 className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 1. Responsable du traitement
               </a>
-            </motion.li>
-            <motion.li
-              variants={{
-                hidden: { opacity: 0, x: -20 },
-                visible: { opacity: 1, x: 0 },
-              }}
-              className="text-sm leading-relaxed font-medium text-black 2xl:text-base dark:text-white"
-            >
+            </li>
+            <li className="animate-fade-in-up text-sm leading-relaxed font-medium text-black delay-350 motion-reduce:animate-none motion-reduce:opacity-100 2xl:text-base dark:text-white">
               <a
                 href="#donnees"
                 className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 2. Données collectées et finalités
               </a>
-            </motion.li>
-            <motion.li
-              variants={{
-                hidden: { opacity: 0, x: -20 },
-                visible: { opacity: 1, x: 0 },
-              }}
-              className="text-sm leading-relaxed font-medium text-black 2xl:text-base dark:text-white"
-            >
+            </li>
+            <li className="animate-fade-in-up text-sm leading-relaxed font-medium text-black delay-400 motion-reduce:animate-none motion-reduce:opacity-100 2xl:text-base dark:text-white">
               <a
                 href="#ga4"
                 className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 3. Google Analytics 4 et transfert de données
               </a>
-            </motion.li>
-            <motion.li
-              variants={{
-                hidden: { opacity: 0, x: -20 },
-                visible: { opacity: 1, x: 0 },
-              }}
-              className="text-sm leading-relaxed font-medium text-black 2xl:text-base dark:text-white"
-            >
+            </li>
+            <li className="animate-fade-in-up text-sm leading-relaxed font-medium text-black delay-450 motion-reduce:animate-none motion-reduce:opacity-100 2xl:text-base dark:text-white">
               <a
                 href="#securite"
                 className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 4. Sécurité des données
               </a>
-            </motion.li>
-            <motion.li
-              variants={{
-                hidden: { opacity: 0, x: -20 },
-                visible: { opacity: 1, x: 0 },
-              }}
-              className="text-sm leading-relaxed font-medium text-black 2xl:text-base dark:text-white"
-            >
+            </li>
+            <li className="animate-fade-in-up text-sm leading-relaxed font-medium text-black delay-500 motion-reduce:animate-none motion-reduce:opacity-100 2xl:text-base dark:text-white">
               <a
                 href="#modifications"
                 className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 5. Modifications
               </a>
-            </motion.li>
-            <motion.li
-              variants={{
-                hidden: { opacity: 0, x: -20 },
-                visible: { opacity: 1, x: 0 },
-              }}
-              className="text-sm leading-relaxed font-medium text-black 2xl:text-base dark:text-white"
-            >
+            </li>
+            <li className="animate-fade-in-up text-sm leading-relaxed font-medium text-black delay-550 motion-reduce:animate-none motion-reduce:opacity-100 2xl:text-base dark:text-white">
               <a
                 href="#contact"
                 className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 6. Contact
               </a>
-            </motion.li>
-          </motion.ul>
+            </li>
+          </ul>
         </div>
       </nav>
 

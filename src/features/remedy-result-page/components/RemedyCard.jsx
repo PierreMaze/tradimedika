@@ -1,5 +1,4 @@
 // components/remedy/RemedyCard.jsx
-import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { memo, useRef } from "react";
 import { FiInfo } from "react-icons/fi";
@@ -83,13 +82,8 @@ function RemedyCard({
     : "ring-2 ring-emerald-500 hover:ring-emerald-600 dark:ring-emerald-600";
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 20 }}
-      whileHover={{ scale: 1.02 }}
-      transition={{ duration: 0.3 }}
-      className={cardClasses}
+    <div
+      className={`transition-transform duration-200 hover:scale-102 motion-reduce:hover:scale-100 ${cardClasses}`}
     >
       <Link
         to={`/remedes/${generateSlug(name)}`}
@@ -274,7 +268,7 @@ function RemedyCard({
       </Link>
 
       <TagsAccordionPopover ref={popoverRef} />
-    </motion.div>
+    </div>
   );
 }
 

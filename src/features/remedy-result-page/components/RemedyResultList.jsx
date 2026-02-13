@@ -1,5 +1,4 @@
 // components/remedy/RemedyResultList.jsx
-import { AnimatePresence } from "framer-motion";
 import PropTypes from "prop-types";
 import RemedyCard from "./RemedyCard";
 import RemedyResultNotFound from "./RemedyResultNotFound";
@@ -9,7 +8,7 @@ import RemedyResultNotFound from "./RemedyResultNotFound";
  * - Reçoit les remèdes filtrés en prop
  * - Affiche une grille responsive (1 col mobile → 2 cols tablet → 3 cols desktop)
  * - Affiche RemedyResultNotFound si aucun remède
- * - Utilise AnimatePresence pour les animations enter/exit
+ * - Utilise animations Tailwind pour les animations enter/exit
  * - Gère deux scénarios d'état vide (pas de résultats initiaux vs pas de correspondance après filtrage)
  */
 export default function RemedyResultList({
@@ -32,20 +31,18 @@ export default function RemedyResultList({
   return (
     <div className="w-full">
       {/* Grille responsive pour les cartes de remèdes */}
-      <AnimatePresence mode="sync">
-        <div className="mx-2 grid grid-cols-1 gap-6 md:grid-cols-2 lg:mx-4 lg:gap-12 xl:mx-6 xl:grid-cols-3">
-          {remedies.map((result) => (
-            <RemedyCard
-              key={result.remedy.id}
-              remedy={result.remedy}
-              selectedSymptoms={selectedSymptoms}
-              matchedSymptoms={result.matchedSymptoms}
-              isFiltered={result.isFiltered || false}
-              isRecommended={result.isRecommended || false}
-            />
-          ))}
-        </div>
-      </AnimatePresence>
+      <div className="mx-2 grid grid-cols-1 gap-6 md:grid-cols-2 lg:mx-4 lg:gap-12 xl:mx-6 xl:grid-cols-3">
+        {remedies.map((result) => (
+          <RemedyCard
+            key={result.remedy.id}
+            remedy={result.remedy}
+            selectedSymptoms={selectedSymptoms}
+            matchedSymptoms={result.matchedSymptoms}
+            isFiltered={result.isFiltered || false}
+            isRecommended={result.isRecommended || false}
+          />
+        ))}
+      </div>
     </div>
   );
 }

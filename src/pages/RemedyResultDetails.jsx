@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { useLocation, useParams } from "react-router-dom";
 import FeedbackLink from "../components/ui/feedback/FeedbackLink";
@@ -19,7 +18,6 @@ import {
   useRemedyDetails,
 } from "../features/remedy-result-detail-page";
 import { RemedyResultNotFound } from "../features/remedy-result-page";
-import { useReducedMotion } from "../features/settings";
 
 /**
  * RemedyResultDetails Page
@@ -34,7 +32,6 @@ function RemedyResultDetails() {
   const location = useLocation();
   const selectedSymptoms = location.state?.symptoms || [];
   const isRecommended = location.state?.isRecommended || false;
-  const prefersReducedMotion = useReducedMotion();
 
   const { remedy, safeImageUrl, notFound } = useRemedyDetails(slug);
   const { hasUserAllergens, allergenNames } = useRemedyAllergyCheck(remedy);
@@ -69,28 +66,16 @@ function RemedyResultDetails() {
         <meta name="twitter:image" content={safeImageUrl} />
       </Helmet>
 
-      <motion.article
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="text-dark dark:text-light w-full transition duration-300 ease-in-out"
-      >
+      <article className="text-dark dark:text-light animate-fade-in-up w-full transition duration-300 ease-in-out motion-reduce:animate-none motion-reduce:opacity-100">
         <RemedyResultDetailsNavigation
           selectedSymptoms={selectedSymptoms}
           variant="top"
         />
 
-        {isRecommended && (
-          <RemedyResultDetailsRecommendedBanner
-            prefersReducedMotion={prefersReducedMotion}
-          />
-        )}
+        {isRecommended && <RemedyResultDetailsRecommendedBanner />}
 
         {hasUserAllergens && (
-          <RemedyResultDetailsAllergyWarning
-            allergenNames={allergenNames}
-            prefersReducedMotion={prefersReducedMotion}
-          />
+          <RemedyResultDetailsAllergyWarning allergenNames={allergenNames} />
         )}
 
         <RemedyResultDetailsHeader
@@ -134,7 +119,7 @@ function RemedyResultDetails() {
 
         {/* Feedback Section */}
         <FeedbackLink />
-      </motion.article>
+      </article>
     </>
   );
 }

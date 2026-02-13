@@ -1,11 +1,9 @@
 // components/info/AllergyFilterInfo.jsx
-import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { HiEye, HiEyeSlash } from "react-icons/hi2";
 import { TbEyeClosed } from "react-icons/tb";
 
 import allergensList from "../../../data/allergensList.json";
-import { useReducedMotion } from "../../settings";
 
 /**
  * Composant d'information sur le filtrage des remèdes
@@ -19,8 +17,6 @@ export default function AllergyFilterInfo({
   showFiltered,
   onToggleFiltered,
 }) {
-  const prefersReducedMotion = useReducedMotion();
-
   if (filteredCount === 0 || userAllergies.length === 0) {
     return null;
   }
@@ -35,14 +31,10 @@ export default function AllergyFilterInfo({
     .join(", ");
 
   return (
-    <motion.div
-      initial={prefersReducedMotion ? {} : { opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={prefersReducedMotion ? {} : { opacity: 0 }}
-      transition={{ duration: 0.3 }}
+    <div
       role="status"
       aria-live="polite"
-      className="flex flex-col gap-3 rounded-lg border-2 border-dashed border-emerald-700/60 bg-emerald-50 p-4 dark:border-emerald-400/60 dark:bg-emerald-950/80"
+      className="animate-in fade-in slide-in-from-top-2 flex flex-col gap-3 rounded-lg border-2 border-dashed border-emerald-700/60 bg-emerald-50 p-4 duration-300 motion-reduce:animate-none dark:border-emerald-400/60 dark:bg-emerald-950/80"
     >
       {/* Contenu principal */}
       <div className="flex items-start gap-4">
@@ -68,7 +60,7 @@ export default function AllergyFilterInfo({
 
       {/* Bouton toggle en bas à droite */}
       <div className="flex justify-end">
-        <motion.button
+        <button
           onClick={onToggleFiltered}
           aria-label={
             showFiltered
@@ -76,9 +68,7 @@ export default function AllergyFilterInfo({
               : "Afficher les remèdes filtrés"
           }
           aria-pressed={showFiltered}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="inline-flex shrink-0 items-center gap-2 rounded-md bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-md transition-colors hover:bg-emerald-700 focus:ring-2 focus:ring-emerald-300 focus:outline-none dark:bg-emerald-700 dark:hover:bg-emerald-600"
+          className="inline-flex shrink-0 items-center gap-2 rounded-md bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-md transition-all duration-200 hover:scale-105 hover:bg-emerald-700 focus:ring-2 focus:ring-emerald-300 focus:outline-none active:scale-95 motion-reduce:hover:scale-100 motion-reduce:active:scale-100 dark:bg-emerald-700 dark:hover:bg-emerald-600"
         >
           {showFiltered ? (
             <>
@@ -91,9 +81,9 @@ export default function AllergyFilterInfo({
               <span>Afficher</span>
             </>
           )}
-        </motion.button>
+        </button>
       </div>
-    </motion.div>
+    </div>
   );
 }
 

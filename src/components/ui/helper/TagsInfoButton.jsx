@@ -80,13 +80,13 @@ function TagsInfoButton({
     <div
       ref={tooltipRef}
       className={`relative ${variant === "inline" ? "inline-flex" : "flex"} ${className}`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
     >
       <button
         ref={buttonRef}
         type="button"
         onClick={handleButtonClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         aria-expanded={showTooltip}
         aria-label={
           label

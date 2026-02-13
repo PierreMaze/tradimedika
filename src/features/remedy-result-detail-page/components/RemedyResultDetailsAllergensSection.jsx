@@ -1,21 +1,13 @@
-import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import SectionHelpButton from "../../../components/ui/helper/SectionHelpButton";
 import { TermPopover } from "../../../components/ui/popover";
-import { useAnimationVariants } from "../../../hooks/useAnimationVariants";
 
 function RemedyResultDetailsAllergensSection({ allergens }) {
-  const sectionAnimation = useAnimationVariants(0.35, "section");
-  const tagAnimation = useAnimationVariants(0, "tag");
-
   if (!allergens || allergens.length === 0) return null;
 
   return (
-    <motion.section
-      {...sectionAnimation}
-      className="rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition duration-300 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800"
-    >
-      <div className="mb-4 flex items-center gap-2">
+    <section className="animate-fade-in-up rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition delay-350 duration-300 motion-reduce:animate-none motion-reduce:opacity-100 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800">
+      <div className="mb-4 flex min-h-[2rem] items-center gap-2">
         <h2 className="text-lg font-semibold lg:text-xl 2xl:text-2xl">
           Allergènes potentiels
         </h2>
@@ -24,17 +16,12 @@ function RemedyResultDetailsAllergensSection({ allergens }) {
           message="Les allergènes potentiels regroupent les substances présentes dans le remède susceptibles de provoquer une réaction. Cliquez sur un allergène souligné pour en savoir plus."
         />
       </div>
-      <motion.div
-        className="flex flex-wrap gap-x-2 gap-y-4"
-        initial="hidden"
-        animate="visible"
-        variants={tagAnimation.containerVariants}
-      >
+      <div className="flex flex-wrap gap-x-2 gap-y-4">
         {allergens.map((allergen, index) => (
-          <motion.span
+          <span
             key={index}
-            variants={tagAnimation.itemVariants}
-            transition={tagAnimation.itemTransition}
+            className="animate-scale-in motion-reduce:animate-none motion-reduce:opacity-100"
+            style={{ animationDelay: `${100 + index * 40}ms` }}
           >
             <TermPopover
               termId={allergen}
@@ -45,10 +32,10 @@ function RemedyResultDetailsAllergensSection({ allergens }) {
                 {allergen}
               </span>
             </TermPopover>
-          </motion.span>
+          </span>
         ))}
-      </motion.div>
-    </motion.section>
+      </div>
+    </section>
   );
 }
 

@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import { describe, expect, it, vi } from "vitest";
 import { CookieConsentProvider } from "../features/cookie-consent/context/CookieConsentContext";
@@ -67,13 +67,18 @@ const renderWithRouter = (component) => {
 
 describe("LayoutApp", () => {
   describe("Rendering", () => {
-    it("should render all main components", () => {
+    it("should render all main components", async () => {
       renderWithRouter(<LayoutApp />);
 
       expect(screen.getByTestId("header")).toBeInTheDocument();
       expect(screen.getByTestId("disclaimer")).toBeInTheDocument();
       expect(screen.getByTestId("footer")).toBeInTheDocument();
-      expect(screen.getByTestId("leaf-fall")).toBeInTheDocument();
+      await waitFor(
+        () => {
+          expect(screen.getByTestId("leaf-fall")).toBeInTheDocument();
+        },
+        { timeout: 2000 },
+      );
       expect(screen.getByTestId("cookie-banner")).toBeInTheDocument();
     });
 
@@ -95,10 +100,15 @@ describe("LayoutApp", () => {
       expect(screen.getByText("Disclaimer")).toBeInTheDocument();
     });
 
-    it("should render LeafFall animation", () => {
+    it("should render LeafFall animation", async () => {
       renderWithRouter(<LayoutApp />);
 
-      expect(screen.getByText("LeafFall Animation")).toBeInTheDocument();
+      await waitFor(
+        () => {
+          expect(screen.getByText("LeafFall Animation")).toBeInTheDocument();
+        },
+        { timeout: 2000 },
+      );
     });
 
     it("should render CookieBanner component", () => {
@@ -178,14 +188,19 @@ describe("LayoutApp", () => {
       );
     });
 
-    it("should render LeafFall before other content", () => {
+    it("should render LeafFall before other content", async () => {
       renderWithRouter(<LayoutApp />);
 
-      const leafFall = screen.getByTestId("leaf-fall");
-      const header = screen.getByTestId("header");
+      await waitFor(
+        () => {
+          const leafFall = screen.getByTestId("leaf-fall");
+          const header = screen.getByTestId("header");
 
-      expect(leafFall.compareDocumentPosition(header)).toBe(
-        Node.DOCUMENT_POSITION_FOLLOWING,
+          expect(leafFall.compareDocumentPosition(header)).toBe(
+            Node.DOCUMENT_POSITION_FOLLOWING,
+          );
+        },
+        { timeout: 2000 },
       );
     });
   });
@@ -230,17 +245,27 @@ describe("LayoutApp", () => {
   });
 
   describe("Background Animation", () => {
-    it("should render LeafFall as background", () => {
+    it("should render LeafFall as background", async () => {
       renderWithRouter(<LayoutApp />);
 
-      expect(screen.getByTestId("leaf-fall")).toBeInTheDocument();
+      await waitFor(
+        () => {
+          expect(screen.getByTestId("leaf-fall")).toBeInTheDocument();
+        },
+        { timeout: 2000 },
+      );
     });
 
-    it("should render LeafFall only once globally", () => {
+    it("should render LeafFall only once globally", async () => {
       renderWithRouter(<LayoutApp />);
 
-      const leafFalls = screen.getAllByTestId("leaf-fall");
-      expect(leafFalls).toHaveLength(1);
+      await waitFor(
+        () => {
+          const leafFalls = screen.getAllByTestId("leaf-fall");
+          expect(leafFalls).toHaveLength(1);
+        },
+        { timeout: 2000 },
+      );
     });
   });
 
@@ -273,14 +298,19 @@ describe("LayoutApp", () => {
   });
 
   describe("Layering", () => {
-    it("should layer LeafFall behind content", () => {
+    it("should layer LeafFall behind content", async () => {
       const { container } = renderWithRouter(<LayoutApp />);
 
-      const leafFallParent = screen.getByTestId("leaf-fall").parentElement;
-      const contentContainer = container.querySelector(".z-10");
+      await waitFor(
+        () => {
+          const leafFallParent = screen.getByTestId("leaf-fall").parentElement;
+          const contentContainer = container.querySelector(".z-10");
 
-      expect(leafFallParent).toBeInTheDocument();
-      expect(contentContainer).toBeInTheDocument();
+          expect(leafFallParent).toBeInTheDocument();
+          expect(contentContainer).toBeInTheDocument();
+        },
+        { timeout: 2000 },
+      );
     });
 
     it("should apply relative positioning to main container", () => {

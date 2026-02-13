@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { TbFilterCog } from "react-icons/tb";
 
@@ -17,14 +16,11 @@ function FilterButton({ onClick, activeFiltersCount }) {
   const hasActiveFilters = activeFiltersCount > 0;
 
   return (
-    <motion.button
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.3 }}
+    <button
       onClick={onClick}
       aria-label="Ouvrir les filtres"
       type="button"
-      className="relative cursor-pointer rounded-md bg-emerald-600 px-3 py-2 text-sm font-medium tracking-wider text-white shadow-md transition duration-150 ease-in-out hover:bg-emerald-700 lg:text-base dark:bg-emerald-700 dark:hover:bg-emerald-600"
+      className="animate-fade-in-up relative cursor-pointer rounded-md bg-emerald-600 px-3 py-2 text-sm font-medium tracking-wider text-white shadow-md transition duration-150 ease-in-out hover:bg-emerald-700 motion-reduce:animate-none motion-reduce:opacity-100 lg:text-base dark:bg-emerald-700 dark:hover:bg-emerald-600"
     >
       <span className="flex items-center gap-2">
         <TbFilterCog className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
@@ -42,7 +38,7 @@ function FilterButton({ onClick, activeFiltersCount }) {
           {activeFiltersCount}
         </span>
       )}
-    </motion.button>
+    </button>
   );
 }
 

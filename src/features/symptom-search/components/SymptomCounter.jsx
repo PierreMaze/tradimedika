@@ -1,4 +1,3 @@
-import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
 
 /**
@@ -13,22 +12,14 @@ import PropTypes from "prop-types";
  * @returns {JSX.Element}
  */
 export default function SymptomCounter({ count, max = 5 }) {
+  if (count <= 0) return null;
+
   return (
-    <AnimatePresence>
-      {count > 0 && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.3 }}
-          className="text-center"
-        >
-          <span className="text-sm font-medium text-neutral-600 transition duration-300 ease-in-out dark:text-neutral-400">
-            {count}/{max} symptômes sélectionnés
-          </span>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <div className="animate-fade-in-up text-center motion-reduce:animate-none motion-reduce:opacity-100">
+      <span className="text-sm font-medium text-neutral-600 transition duration-300 ease-in-out dark:text-neutral-400">
+        {count}/{max} symptômes sélectionnés
+      </span>
+    </div>
   );
 }
 

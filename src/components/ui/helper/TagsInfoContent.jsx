@@ -1,6 +1,5 @@
 // tradimedika/src/components/ui/helper/TagsInfoContent.jsx
 
-import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { HiChevronDown, HiChevronUp } from "react-icons/hi2";
@@ -137,34 +136,28 @@ function TagsCategoryAccordion({ category, isOpen, onToggle }) {
         )}
       </button>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            id={`tags-category-${category.id}`}
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="overflow-hidden"
-          >
-            <div className="space-y-4 pb-4">
-              {category.options.map((option) => (
-                <div
-                  key={option.id}
-                  className="grid grid-cols-1 gap-3 rounded-md p-2 transition-colors lg:grid-cols-3"
-                >
-                  <div className="flex h-8 shrink-0 lg:col-span-1">
-                    {option.tag}
-                  </div>
-                  <p className="text-sm leading-relaxed text-neutral-900 lg:col-span-2 dark:text-neutral-100">
-                    {option.description}
-                  </p>
+      {isOpen && (
+        <div
+          id={`tags-category-${category.id}`}
+          className="animate-in fade-in slide-in-from-top-2 duration-200 motion-reduce:transition-none"
+        >
+          <div className="space-y-4 pb-4">
+            {category.options.map((option) => (
+              <div
+                key={option.id}
+                className="grid grid-cols-1 gap-3 rounded-md p-2 transition-colors lg:grid-cols-3"
+              >
+                <div className="flex h-8 shrink-0 lg:col-span-1">
+                  {option.tag}
                 </div>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                <p className="text-sm leading-relaxed text-neutral-900 lg:col-span-2 dark:text-neutral-100">
+                  {option.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

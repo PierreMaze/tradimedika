@@ -20,7 +20,7 @@ describe("Disclaimer", () => {
     it("should render medical disclaimer warning", () => {
       render(<Disclaimer />);
       expect(
-        screen.getByText(/ne remplacent pas un avis médical professionnel/i),
+        screen.getByText(/ne remplacent pas un avis\/traitement médical/i),
       ).toBeInTheDocument();
     });
 

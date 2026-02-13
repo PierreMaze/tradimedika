@@ -1,5 +1,4 @@
 // tradimedika-v1/src/pages/NotFound.jsx
-import { motion } from "framer-motion";
 import { GiFallingLeaf } from "react-icons/gi";
 import { Link } from "react-router-dom";
 
@@ -13,12 +12,7 @@ import { Link } from "react-router-dom";
 function NotFound() {
   return (
     <main className="container mx-auto flex grow flex-col items-center justify-center px-4 py-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-dark dark:text-light w-full max-w-2xl text-center transition duration-300 ease-in-out"
-      >
+      <div className="text-dark dark:text-light animate-fade-in-up w-full max-w-2xl text-center transition duration-300 ease-in-out motion-reduce:animate-none motion-reduce:opacity-100">
         {/* 404 Number */}
         <h1 className="mb-4 text-9xl font-bold text-emerald-600 dark:text-emerald-500">
           404
@@ -65,7 +59,7 @@ function NotFound() {
             <li>Retournez à la page d&apos;accueil</li>
           </ul>
         </div>
-      </motion.div>
+      </div>
     </main>
   );
 }

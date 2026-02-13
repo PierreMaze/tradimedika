@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { RiHistoryLine } from "react-icons/ri";
 import { useCookieConsent } from "../../cookie-consent";
 
@@ -6,7 +5,7 @@ export default function HistoryToggle() {
   const { isHistoryAccepted, toggleHistory } = useCookieConsent();
 
   return (
-    <motion.button
+    <button
       aria-label={
         isHistoryAccepted
           ? "Désactiver l'historique de recherche"
@@ -20,17 +19,14 @@ export default function HistoryToggle() {
           : "justify-start border-neutral-400 bg-neutral-200 dark:border-neutral-600 dark:bg-neutral-700"
       }`}
     >
-      <motion.span
-        layout
+      <span
         className={`pointer-events-none absolute inset-0 z-0 rounded-md border-none transition-opacity duration-300 ${
           isHistoryAccepted ? "bg-emerald-500 opacity-30" : "opacity-0"
         }`}
       />
 
-      <motion.div
-        layout
-        transition={{ type: "spring", bounce: 0.25, duration: 0.25 }}
-        className={`z-10 flex h-6 w-6 items-center justify-center rounded-md text-current group-hover:scale-105 ${
+      <div
+        className={`z-10 flex h-6 w-6 items-center justify-center rounded-md text-current transition-transform duration-200 group-hover:scale-105 motion-reduce:transition-none ${
           isHistoryAccepted ? "bg-white" : "bg-neutral-400 dark:bg-neutral-600"
         }`}
       >
@@ -41,7 +37,7 @@ export default function HistoryToggle() {
               : "text-white dark:text-neutral-300"
           }`}
         />
-      </motion.div>
-    </motion.button>
+      </div>
+    </button>
   );
 }

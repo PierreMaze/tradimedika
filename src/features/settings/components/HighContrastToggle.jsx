@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { IoContrastOutline } from "react-icons/io5";
 import { useAccessibility } from "../context/AccessibilityContext";
 
@@ -6,7 +5,7 @@ export default function HighContrastToggle() {
   const { isHighContrast, toggleHighContrast } = useAccessibility();
 
   return (
-    <motion.button
+    <button
       aria-label={
         isHighContrast
           ? "Désactiver le contraste élevé"
@@ -21,17 +20,14 @@ export default function HighContrastToggle() {
       }`}
     >
       {/* Glow / halo UX */}
-      <motion.span
-        layout
+      <span
         className={`pointer-events-none absolute inset-0 z-0 rounded-md border-none transition-opacity duration-300 ${
           isHighContrast ? "bg-emerald-500 opacity-30" : "opacity-0"
         }`}
       />
 
-      <motion.div
-        layout
-        transition={{ type: "spring", bounce: 0.25, duration: 0.25 }}
-        className={`z-10 flex h-6 w-6 items-center justify-center rounded-md text-current group-hover:scale-105 ${
+      <div
+        className={`z-10 flex h-6 w-6 items-center justify-center rounded-md text-current transition-transform duration-200 group-hover:scale-105 motion-reduce:transition-none ${
           isHighContrast ? "bg-white" : "bg-neutral-400 dark:bg-neutral-600"
         }`}
       >
@@ -42,7 +38,7 @@ export default function HighContrastToggle() {
               : "text-white dark:text-neutral-300"
           }`}
         />
-      </motion.div>
-    </motion.button>
+      </div>
+    </button>
   );
 }

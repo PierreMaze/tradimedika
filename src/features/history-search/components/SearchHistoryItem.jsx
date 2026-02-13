@@ -1,10 +1,8 @@
 // components/search/SearchHistoryItem.jsx
-import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 
 import allergensList from "../../../data/allergensList.json";
-import { useReducedMotion } from "../../settings";
 
 // Migration v0.52.0 : IDs anglais → français
 const ALLERGEN_MIGRATION_MAP = {
@@ -46,8 +44,6 @@ const migrateAllergenId = (id) => ALLERGEN_MIGRATION_MAP[id] || id;
  * @param {Function} props.onRemove - Callback when delete button is clicked
  */
 export default function SearchHistoryItem({ search, onClick, onRemove }) {
-  const prefersReducedMotion = useReducedMotion();
-
   const handleClick = () => {
     onClick(search);
   };
@@ -58,13 +54,7 @@ export default function SearchHistoryItem({ search, onClick, onRemove }) {
   };
 
   return (
-    <motion.li
-      initial={prefersReducedMotion ? {} : { opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={prefersReducedMotion ? {} : { opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.2 }}
-      className="group relative"
-    >
+    <li className="group animate-fade-in-down relative motion-reduce:animate-none motion-reduce:opacity-100">
       {/* Delete button (top-right, outside main button to avoid nesting) */}
       <button
         onClick={handleRemove}
@@ -147,7 +137,7 @@ export default function SearchHistoryItem({ search, onClick, onRemove }) {
           </div>
         )}
       </button>
-    </motion.li>
+    </li>
   );
 }
 

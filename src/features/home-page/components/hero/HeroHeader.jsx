@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { GiSprout } from "react-icons/gi";
 
@@ -27,26 +26,16 @@ export default function HeroHeader({
     <div className="flex flex-col items-center gap-y-4 lg:gap-y-6 2xl:gap-y-8">
       {/* Badge "Medecine douce & naturelle" */}
       <div className="mx-auto w-fit">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="border-dark/60 text-dark flex items-center gap-2 rounded-lg border-2 bg-white px-4 py-2 shadow-md transition duration-300 ease-in-out dark:border-emerald-500/60 dark:bg-emerald-950 dark:text-emerald-400"
-        >
+        <div className="border-dark/60 text-dark animate-fade-in-down flex items-center gap-2 rounded-lg border-2 bg-white px-4 py-2 shadow-md transition duration-300 ease-in-out motion-reduce:animate-none motion-reduce:opacity-100 dark:border-emerald-500/60 dark:bg-emerald-950 dark:text-emerald-400">
           <GiSprout className="text-lg text-emerald-600 transition duration-300 ease-in-out dark:text-emerald-400" />
           <span className="font-sans text-sm font-semibold lg:text-base 2xl:text-lg">
             {badgeText}
           </span>
-        </motion.div>
+        </div>
       </div>
 
       {/* Titre principal */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="text-center"
-      >
+      <div className="animate-fade-in-up text-center delay-200 motion-reduce:animate-none motion-reduce:opacity-100">
         <h1 className="text-5xl font-semibold lg:text-7xl 2xl:text-8xl">
           <span className="text-dark dark:text-light transition duration-300 ease-in-out">
             {title}
@@ -56,17 +45,12 @@ export default function HeroHeader({
             {titleHighlight}
           </span>
         </h1>
-      </motion.div>
+      </div>
 
       {/* Texte descriptif */}
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        className="max-w-3xl text-center text-base text-neutral-600 transition duration-300 ease-in-out lg:text-xl 2xl:max-w-5xl 2xl:text-2xl dark:text-neutral-400"
-      >
+      <p className="animate-fade-in-up max-w-3xl text-center text-base text-neutral-600 transition delay-300 duration-300 ease-in-out motion-reduce:animate-none motion-reduce:opacity-100 lg:text-xl 2xl:max-w-5xl 2xl:text-2xl dark:text-neutral-400">
         {description}
-      </motion.p>
+      </p>
     </div>
   );
 }

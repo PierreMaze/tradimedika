@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { FiExternalLink } from "react-icons/fi";
 import { useAccessibility } from "../context/AccessibilityContext";
 
@@ -7,7 +6,7 @@ export default function ExternalLinkConfirmToggle() {
     useAccessibility();
 
   return (
-    <motion.button
+    <button
       aria-label={
         isExternalLinkConfirmEnabled
           ? "Désactiver la confirmation des liens externes"
@@ -22,8 +21,7 @@ export default function ExternalLinkConfirmToggle() {
       }`}
     >
       {/* Glow / halo UX */}
-      <motion.span
-        layout
+      <span
         className={`pointer-events-none absolute inset-0 z-0 rounded-md border-none transition-opacity duration-300 ${
           isExternalLinkConfirmEnabled
             ? "bg-emerald-500 opacity-30"
@@ -31,10 +29,8 @@ export default function ExternalLinkConfirmToggle() {
         }`}
       />
 
-      <motion.div
-        layout
-        transition={{ type: "spring", bounce: 0.25, duration: 0.25 }}
-        className={`z-10 flex h-6 w-6 items-center justify-center rounded-md text-current group-hover:scale-105 ${
+      <div
+        className={`z-10 flex h-6 w-6 items-center justify-center rounded-md text-current transition-transform duration-200 group-hover:scale-105 motion-reduce:transition-none ${
           isExternalLinkConfirmEnabled
             ? "bg-white"
             : "bg-neutral-400 dark:bg-neutral-600"
@@ -47,7 +43,7 @@ export default function ExternalLinkConfirmToggle() {
               : "text-white dark:text-neutral-300"
           }`}
         />
-      </motion.div>
-    </motion.button>
+      </div>
+    </button>
   );
 }

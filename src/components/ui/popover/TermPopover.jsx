@@ -1,17 +1,9 @@
-import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types"; // Validation des props
-import {
-  useCallback,
-  useEffect,
-  useId,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { BiLinkExternal } from "react-icons/bi";
 import { TECHNICAL_TERMS_DATA } from "../../../data/technicalTermsDefinitions";
 import { useExternalLink } from "../../../features/external-link/hooks/useExternalLink";
-import { useReducedMotion } from "../../../features/settings";
+import { useHoverDelay } from "../../../utils/hoverDelay";
 
 /**
  * TermPopover - Popover interactif pour afficher les définitions de termes techniques
@@ -44,15 +36,28 @@ function TermPopover({
 
   const triggerRef = useRef(null);
   const popoverRef = useRef(null);
-  const hoverTimeoutRef = useRef(null);
 
   const titleId = useId();
-  const prefersReducedMotion = useReducedMotion();
   const { openConfirmation } = useExternalLink();
 
   // Normaliser le termId et récupérer la définition
   const normalizedTermId = termId.toLowerCase().replace(/\s+/g, "-");
   const termData = TECHNICAL_TERMS_DATA[normalizedTermId];
+
+  // Utiliser le hook useHoverDelay pour gérer le délai de hover
+  const handleHoverDelay = useCallback(
+    (isHovering) => {
+      if (isLocked) return;
+      if (isHovering) {
+        setShowPopover(true);
+      } else if (!isLocked) {
+        setShowPopover(false);
+      }
+    },
+    [isLocked],
+  );
+
+  const { onMouseEnter, onMouseLeave } = useHoverDelay(handleHoverDelay, 300);
 
   // Calculer la position du popover
   const calculatePosition = useCallback(() => {
@@ -109,29 +114,10 @@ function TermPopover({
     popoverRef.current.style.left = `${left}px`;
   }, []);
 
-  // Gérer le hover (desktop uniquement)
-  const handleMouseEnter = useCallback(() => {
-    if (isLocked) return;
-
-    hoverTimeoutRef.current = setTimeout(() => {
-      setShowPopover(true);
-    }, 300); // Délai 300ms avant affichage
-  }, [isLocked]);
-
-  const handleMouseLeave = useCallback(() => {
-    clearTimeout(hoverTimeoutRef.current);
-
-    // Ne fermer que si pas verrouillé par clic
-    if (!isLocked) {
-      setShowPopover(false);
-    }
-  }, [isLocked]);
-
   // Gérer le clic (verrouille/déverrouille le popover)
   const handleClick = useCallback(
     (e) => {
       e.preventDefault();
-      clearTimeout(hoverTimeoutRef.current);
 
       if (isLocked) {
         setIsLocked(false);
@@ -201,28 +187,6 @@ function TermPopover({
     }
   }, [showPopover, handleClickOutside]);
 
-  // Cleanup timeout
-  useEffect(() => {
-    return () => clearTimeout(hoverTimeoutRef.current);
-  }, []);
-
-  // Variants d'animation (memoized pour éviter recréation)
-  const popoverVariants = useMemo(
-    () => ({
-      hidden: {
-        opacity: 0,
-        scale: 0.95,
-        transition: { duration: prefersReducedMotion ? 0 : 0.15 },
-      },
-      visible: {
-        opacity: 1,
-        scale: 1,
-        transition: { duration: prefersReducedMotion ? 0 : 0.2 },
-      },
-    }),
-    [prefersReducedMotion],
-  );
-
   // Si pas de définition trouvée, ne pas afficher le popover
   if (!termData) {
     return <span className={className}>{children}</span>;
@@ -243,91 +207,85 @@ function TermPopover({
         aria-haspopup="dialog"
         aria-expanded={showPopover}
         className={triggerClasses}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
       >
         {children}
       </span>
 
-      <AnimatePresence>
-        {showPopover && (
-          <motion.div
-            ref={popoverRef}
-            role="dialog"
-            aria-modal="false"
-            aria-labelledby={titleId}
-            variants={popoverVariants}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            style={{
-              position: "fixed",
-              top: 0,
-              left: 0,
-              zIndex: 9999,
-            }}
-            className={`w-64 rounded-lg bg-white p-4 shadow-xl drop-shadow-2xl transition-colors duration-300 dark:bg-neutral-800`}
-            onMouseEnter={() => clearTimeout(hoverTimeoutRef.current)}
-            onMouseLeave={handleMouseLeave}
+      {showPopover && (
+        <div
+          ref={popoverRef}
+          role="dialog"
+          aria-modal="false"
+          aria-labelledby={titleId}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            zIndex: 9999,
+          }}
+          className="animate-in fade-in zoom-in-95 w-64 rounded-lg bg-white p-4 shadow-xl drop-shadow-2xl transition-colors duration-200 duration-300 dark:bg-neutral-800"
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        >
+          {/* Annonce pour lecteurs d'écran */}
+          <div
+            className="sr-only"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
           >
-            {/* Annonce pour lecteurs d'écran */}
-            <div
-              className="sr-only"
-              role="status"
-              aria-live="polite"
-              aria-atomic="true"
+            {showPopover ? `Définition de ${termData.name} affichée` : ""}
+          </div>
+
+          {/* Header avec titre et bouton fermer */}
+          <div className="mb-2 flex items-start justify-between">
+            <h3
+              id={titleId}
+              className="text-sm font-semibold text-neutral-900 dark:text-neutral-100"
             >
-              {showPopover ? `Définition de ${termData.name} affichée` : ""}
-            </div>
+              {termData.name}
+            </h3>
+            <button
+              onClick={() => {
+                setShowPopover(false);
+                setIsLocked(false);
+                triggerRef.current?.focus();
+              }}
+              className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded text-neutral-500 transition-colors hover:text-neutral-700 focus:ring-2 focus:ring-emerald-500 focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-200"
+              aria-label="Fermer"
+            >
+              <span className="text-xl leading-none">&times;</span>
+            </button>
+          </div>
 
-            {/* Header avec titre et bouton fermer */}
-            <div className="mb-2 flex items-start justify-between">
-              <h3
-                id={titleId}
-                className="text-sm font-semibold text-neutral-900 dark:text-neutral-100"
-              >
-                {termData.name}
-              </h3>
-              <button
-                onClick={() => {
-                  setShowPopover(false);
-                  setIsLocked(false);
-                  triggerRef.current?.focus();
-                }}
-                className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded text-neutral-500 transition-colors hover:text-neutral-700 focus:ring-2 focus:ring-emerald-500 focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-200"
-                aria-label="Fermer"
-              >
-                <span className="text-xl leading-none">&times;</span>
-              </button>
-            </div>
+          {/* Définition */}
+          <p className="mb-3 text-xs leading-relaxed text-neutral-700 dark:text-neutral-300">
+            {termData.definition}
+          </p>
 
-            {/* Définition */}
-            <p className="mb-3 text-xs leading-relaxed text-neutral-700 dark:text-neutral-300">
-              {termData.definition}
-            </p>
-
-            {/* Lien Wikipedia si disponible */}
-            {termData.wikipediaUrl && (
-              <button
-                type="button"
-                onClick={() =>
-                  openConfirmation(termData.wikipediaUrl, "Wikipedia")
-                }
-                className="inline-flex items-center gap-1 rounded text-xs font-semibold text-emerald-700 transition-colors hover:text-emerald-800 hover:underline focus:ring-2 focus:ring-emerald-500 focus:outline-none dark:text-emerald-500 dark:hover:text-emerald-400"
-                aria-label={`En savoir plus sur ${termData.name} sur Wikipedia (ouvre dans une nouvelle fenêtre)`}
-              >
-                En savoir plus
-                <BiLinkExternal
-                  className="h-3 w-3 text-current"
-                  aria-hidden="true"
-                />
-              </button>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+          {/* Lien Wikipedia si disponible */}
+          {termData.wikipediaUrl && (
+            <button
+              type="button"
+              onClick={() =>
+                openConfirmation(termData.wikipediaUrl, "Wikipedia")
+              }
+              className="inline-flex items-center gap-1 rounded text-xs font-semibold text-emerald-700 transition-colors hover:text-emerald-800 hover:underline focus:ring-2 focus:ring-emerald-500 focus:outline-none dark:text-emerald-500 dark:hover:text-emerald-400"
+              aria-label={`En savoir plus sur ${termData.name} sur Wikipedia (ouvre dans une nouvelle fenêtre)`}
+            >
+              En savoir plus
+              <BiLinkExternal
+                className="h-3 w-3 text-current"
+                aria-hidden="true"
+              />
+            </button>
+          )}
+        </div>
+      )}
     </span>
   );
 }

@@ -1,24 +1,16 @@
-import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { HiChevronDown, HiChevronUp } from "react-icons/hi2";
 import { MdTipsAndUpdates } from "react-icons/md";
 import SectionHelpButton from "../../../components/ui/helper/SectionHelpButton";
-import { useAnimationVariants } from "../../../hooks/useAnimationVariants";
 
 function RemedyResultDetailsTipsSection({ tips }) {
   const [isOpen, setIsOpen] = useState(false);
-  const sectionAnimation = useAnimationVariants(0.65, "section");
-  const listAnimation = useAnimationVariants(0, "list");
-  const collapseAnimation = useAnimationVariants(0, "collapse");
 
   if (!tips || tips.length === 0) return null;
 
   return (
-    <motion.section
-      {...sectionAnimation}
-      className="rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition duration-300 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800"
-    >
+    <section className="animate-fade-in-up rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition delay-[650ms] duration-300 motion-reduce:animate-none motion-reduce:opacity-100 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="mb-3 flex w-full cursor-pointer items-center justify-between text-left"
@@ -49,32 +41,24 @@ function RemedyResultDetailsTipsSection({ tips }) {
           />
         )}
       </button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div {...collapseAnimation} className="overflow-hidden">
-            <div className="border-l-4 border-sky-600 pl-4 dark:border-sky-500">
-              <motion.ul
-                className="list-disc space-y-1 pl-5"
-                initial="hidden"
-                animate="visible"
-                variants={listAnimation.containerVariants}
-              >
-                {tips.map((tip, index) => (
-                  <motion.li
-                    key={index}
-                    variants={listAnimation.itemVariants}
-                    transition={listAnimation.itemTransition(index, 10)}
-                    className="text-sm leading-relaxed font-medium text-black 2xl:text-base dark:text-white"
-                  >
-                    {tip}
-                  </motion.li>
-                ))}
-              </motion.ul>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.section>
+      {isOpen && (
+        <div className="animate-in fade-in overflow-hidden duration-300 motion-reduce:animate-none">
+          <div className="border-l-4 border-sky-600 pl-4 dark:border-sky-500">
+            <ul className="list-disc space-y-1 pl-5">
+              {tips.map((tip, index) => (
+                <li
+                  key={index}
+                  className="animate-fade-in text-sm leading-relaxed font-medium text-black motion-reduce:animate-none motion-reduce:opacity-100 2xl:text-base dark:text-white"
+                  style={{ animationDelay: `${300 + index * 50}ms` }}
+                >
+                  {tip}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+    </section>
   );
 }
 

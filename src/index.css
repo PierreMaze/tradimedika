@@ -7,11 +7,19 @@
   --font-poppins: "Poppins", sans-serif;
 
   /* Hero animations - CSS animations for better FCP performance */
-  --animate-fade-in-up: fade-in-up 0.6s ease-out 0.2s both;
-  --animate-fade-in-up-delayed: fade-in-up 0.6s ease-out 0.4s both;
+  --animate-hero-fade-in-up: fade-in-up 0.6s ease-out 0.2s both;
 }
 
-/* Keyframes for Hero animations */
+/* Keyframes for animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes fade-in-up {
   from {
     opacity: 0;
@@ -20,6 +28,97 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes collapse-in {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: auto;
+    opacity: 1;
+  }
+}
+
+@keyframes leaf-fall-simple {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) translateX(0) rotate(0deg);
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(50vh) translateX(30px) rotate(180deg);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100vh) translateX(0) rotate(360deg);
+  }
+}
+
+@keyframes leaf-fall {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
   }
 }
 
@@ -118,6 +217,100 @@ html.high-contrast .tag-base {
 html.high-contrast *:focus-visible {
   outline: 3px solid #000000 !important;
   outline-offset: 2px;
+}
+
+/* Animation utility classes */
+@utility animate-fade-in {
+  animation: fade-in 0.6s ease-out both;
+}
+
+@utility animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out both;
+}
+
+@utility animate-fade-in-down {
+  animation: fade-in-down 0.6s ease-out both;
+}
+
+@utility animate-scale-in {
+  animation: scale-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@utility animate-slide-in-right {
+  animation: slide-in-right 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@utility animate-slide-in-left {
+  animation: slide-in-left 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@utility animate-collapse-in {
+  animation: collapse-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Animation delay utilities */
+@utility delay-100 {
+  animation-delay: 100ms;
+}
+
+@utility delay-150 {
+  animation-delay: 150ms;
+}
+
+@utility delay-200 {
+  animation-delay: 200ms;
+}
+
+@utility delay-250 {
+  animation-delay: 250ms;
+}
+
+@utility delay-300 {
+  animation-delay: 300ms;
+}
+
+@utility delay-350 {
+  animation-delay: 350ms;
+}
+
+@utility delay-400 {
+  animation-delay: 400ms;
+}
+
+@utility delay-450 {
+  animation-delay: 450ms;
+}
+
+@utility delay-500 {
+  animation-delay: 500ms;
+}
+
+@utility delay-550 {
+  animation-delay: 550ms;
+}
+
+@utility delay-600 {
+  animation-delay: 600ms;
+}
+
+@utility delay-650 {
+  animation-delay: 650ms;
+}
+
+@utility delay-700 {
+  animation-delay: 700ms;
+}
+
+@utility delay-750 {
+  animation-delay: 750ms;
+}
+
+@utility delay-800 {
+  animation-delay: 800ms;
+}
+
+@utility delay-1000 {
+  animation-delay: 1000ms;
 }
 
 /* Utility classes for tags */

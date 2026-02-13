@@ -1,6 +1,5 @@
 // tradimedika/src/components/ui/helper/TagsAccordionPopover.jsx
 
-import { AnimatePresence, motion } from "framer-motion";
 import {
   forwardRef,
   useCallback,
@@ -12,7 +11,6 @@ import {
 import { createPortal } from "react-dom";
 import { GrCircleQuestion } from "react-icons/gr";
 import { HiXMark } from "react-icons/hi2";
-import { useReducedMotion } from "../../../features/settings/hooks/useReducedMotion";
 import TagsInfoContent from "./TagsInfoContent";
 
 /**
@@ -44,7 +42,6 @@ const TagsAccordionPopover = forwardRef(
     });
 
     const popoverRef = useRef(null);
-    const prefersReducedMotion = useReducedMotion();
 
     useEffect(() => {
       const handleResize = () => {
@@ -209,92 +206,60 @@ const TagsAccordionPopover = forwardRef(
 
     return createPortal(
       <>
-        <AnimatePresence>
-          <motion.div
-            initial={prefersReducedMotion ? {} : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={prefersReducedMotion ? {} : { opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 bg-black/50 lg:pointer-events-none lg:bg-transparent"
-            onClick={closePopover}
-            aria-hidden="true"
-          />
-        </AnimatePresence>
+        <div
+          className="animate-in fade-in fixed inset-0 z-50 bg-black/50 duration-200 lg:pointer-events-none lg:bg-transparent"
+          onClick={closePopover}
+          aria-hidden="true"
+        />
 
-        <AnimatePresence>
-          <motion.div
-            ref={popoverRef}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Explication des indications d'usage"
-            onClick={handlePopoverClick}
-            onMouseLeave={handleMouseLeave}
-            initial={
-              prefersReducedMotion
-                ? {}
-                : {
-                    opacity: 0,
-                    y: isDesktop ? -10 : 20,
-                    scale: 0.95,
-                  }
-            }
-            animate={{
-              opacity: 1,
-              y: 0,
-              scale: 1,
-            }}
-            exit={
-              prefersReducedMotion
-                ? {}
-                : {
-                    opacity: 0,
-                    y: isDesktop ? -10 : 20,
-                    scale: 0.95,
-                  }
-            }
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            style={
-              isDesktop
-                ? {
-                    top: `${popoverPosition.top}px`,
-                    left: `${popoverPosition.left}px`,
-                  }
-                : {}
-            }
-            className={`${
-              isDesktop
-                ? "fixed w-full lg:max-w-2xl 2xl:max-w-3xl"
-                : "fixed top-1/2 left-1/2 w-full max-w-3xl -translate-x-1/2 -translate-y-1/2"
-            } z-60 max-h-[80vh] overflow-auto rounded-xl bg-white p-6 shadow-2xl ring-1 ring-neutral-200 dark:bg-neutral-800 dark:ring-neutral-700`}
-          >
-            {!isDesktop && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  closePopover(e);
-                }}
-                aria-label="Fermer l'aide"
-                className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full text-neutral-700 transition duration-200 hover:bg-neutral-200 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-50"
-              >
-                <HiXMark className="h-5 w-5" aria-hidden="true" />
-              </button>
-            )}
-
-            <h3
-              className={`border-b-2 border-dashed border-emerald-200 pb-4 text-xl font-bold text-black lg:text-2xl dark:border-emerald-700 dark:text-white ${!isDesktop ? "pr-8" : ""}`}
+        <div
+          ref={popoverRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Explication des indications d'usage"
+          onClick={handlePopoverClick}
+          onMouseLeave={handleMouseLeave}
+          style={
+            isDesktop
+              ? {
+                  top: `${popoverPosition.top}px`,
+                  left: `${popoverPosition.left}px`,
+                }
+              : {}
+          }
+          className={`animate-in fade-in slide-in-from-top-2 duration-200 ${
+            isDesktop
+              ? "fixed w-full lg:max-w-2xl 2xl:max-w-3xl"
+              : "fixed top-1/2 left-1/2 w-full max-w-3xl -translate-x-1/2 -translate-y-1/2"
+          } z-60 max-h-[80vh] overflow-auto rounded-xl bg-white p-6 shadow-2xl ring-1 ring-neutral-200 dark:bg-neutral-800 dark:ring-neutral-700`}
+        >
+          {!isDesktop && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                closePopover(e);
+              }}
+              aria-label="Fermer l'aide"
+              className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full text-neutral-700 transition duration-200 hover:bg-neutral-200 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-50"
             >
-              <GrCircleQuestion className="mr-2 inline-block h-5 w-5 lg:h-6 lg:w-6" />
-              Lexique des indications d&apos;usage
-            </h3>
+              <HiXMark className="h-5 w-5" aria-hidden="true" />
+            </button>
+          )}
 
-            <TagsInfoContent
-              variant="full"
-              openAccordionIds={openAccordionIds}
-              onAccordionToggle={handleAccordionToggle}
-              defaultOpenFirst={false}
-            />
-          </motion.div>
-        </AnimatePresence>
+          <h3
+            className={`border-b-2 border-dashed border-emerald-200 pb-4 text-xl font-bold text-black lg:text-2xl dark:border-emerald-700 dark:text-white ${!isDesktop ? "pr-8" : ""}`}
+          >
+            <GrCircleQuestion className="mr-2 inline-block h-5 w-5 lg:h-6 lg:w-6" />
+            Lexique des indications d&apos;usage
+          </h3>
+
+          <TagsInfoContent
+            variant="full"
+            openAccordionIds={openAccordionIds}
+            onAccordionToggle={handleAccordionToggle}
+            defaultOpenFirst={false}
+          />
+        </div>
       </>,
       document.body,
     );

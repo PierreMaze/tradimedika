@@ -1,4 +1,3 @@
-import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { HiChevronDown, HiChevronUp } from "react-icons/hi2";
@@ -54,55 +53,47 @@ function FilterAccordion({
         )}
       </button>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="overflow-hidden"
-          >
-            <div className="space-y-3 pb-4">
-              {category.options.map((option) => (
-                <label
-                  key={option.id}
-                  className="flex cursor-pointer items-start gap-3 rounded-md p-2 transition-colors hover:bg-neutral-50 dark:hover:bg-neutral-800"
-                >
-                  <input
-                    type="checkbox"
-                    checked={activeFilters[option.id] || false}
-                    onChange={() => handleCheckboxChange(option.id)}
-                    className="h-4 w-4 cursor-pointer border-neutral-300 text-emerald-600 accent-emerald-700 dark:border-neutral-600 dark:accent-emerald-500"
-                  />
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
-                        {option.label}
-                      </span>
-                      <span
-                        className={`h-2 w-2 rounded-full ${
-                          option.color === "green"
-                            ? "bg-green-600 dark:bg-green-500"
-                            : option.color === "amber"
-                              ? "bg-amber-500"
-                              : option.color === "red"
-                                ? "bg-red-600 dark:bg-red-500"
-                                : "bg-amber-500"
-                        }`}
-                        aria-hidden="true"
-                      ></span>
-                    </div>
-                    <p className="text-xs text-neutral-600 dark:text-neutral-400">
-                      {option.description}
-                    </p>
+      {isOpen && (
+        <div className="animate-in fade-in slide-in-from-top-2 duration-200 motion-reduce:transition-none">
+          <div className="space-y-3 pb-4">
+            {category.options.map((option) => (
+              <label
+                key={option.id}
+                className="flex cursor-pointer items-start gap-3 rounded-md p-2 transition-colors hover:bg-neutral-50 dark:hover:bg-neutral-800"
+              >
+                <input
+                  type="checkbox"
+                  checked={activeFilters[option.id] || false}
+                  onChange={() => handleCheckboxChange(option.id)}
+                  className="h-4 w-4 cursor-pointer border-neutral-300 text-emerald-600 accent-emerald-700 dark:border-neutral-600 dark:accent-emerald-500"
+                />
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+                      {option.label}
+                    </span>
+                    <span
+                      className={`h-2 w-2 rounded-full ${
+                        option.color === "green"
+                          ? "bg-green-600 dark:bg-green-500"
+                          : option.color === "amber"
+                            ? "bg-amber-500"
+                            : option.color === "red"
+                              ? "bg-red-600 dark:bg-red-500"
+                              : "bg-amber-500"
+                      }`}
+                      aria-hidden="true"
+                    ></span>
                   </div>
-                </label>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                  <p className="text-xs text-neutral-600 dark:text-neutral-400">
+                    {option.description}
+                  </p>
+                </div>
+              </label>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

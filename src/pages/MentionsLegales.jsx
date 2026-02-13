@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { LiaBalanceScaleSolid } from "react-icons/lia";
 import { Link } from "react-router-dom";
 import ExternalLink from "../components/ui/links/ExternalLink";
@@ -42,90 +41,48 @@ export default function MentionsLegales() {
           Sommaire
         </h2>
         <div className="h-full max-h-fit border-l-4 border-emerald-600 pl-4 dark:border-emerald-500">
-          <motion.ul
-            className="space-y-2 pl-2"
-            initial="hidden"
-            animate="visible"
-            variants={{
-              visible: {
-                transition: {
-                  staggerChildren: 0.05,
-                  delayChildren: 0.3,
-                },
-              },
-            }}
-          >
-            <motion.li
-              variants={{
-                hidden: { opacity: 0, x: -20 },
-                visible: { opacity: 1, x: 0 },
-              }}
-              className="text-sm leading-relaxed font-medium text-black 2xl:text-base dark:text-white"
-            >
+          <ul className="space-y-2 pl-2">
+            <li className="animate-fade-in-up text-sm leading-relaxed font-medium text-black delay-300 motion-reduce:animate-none motion-reduce:opacity-100 2xl:text-base dark:text-white">
               <a
                 href="#editeur"
                 className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 1. Éditeur du site
               </a>
-            </motion.li>
-            <motion.li
-              variants={{
-                hidden: { opacity: 0, x: -20 },
-                visible: { opacity: 1, x: 0 },
-              }}
-              className="text-sm leading-relaxed font-medium text-black 2xl:text-base dark:text-white"
-            >
+            </li>
+            <li className="animate-fade-in-up text-sm leading-relaxed font-medium text-black delay-350 motion-reduce:animate-none motion-reduce:opacity-100 2xl:text-base dark:text-white">
               <a
                 href="#hebergeur"
                 className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 2. Hébergement
               </a>
-            </motion.li>
-            <motion.li
-              variants={{
-                hidden: { opacity: 0, x: -20 },
-                visible: { opacity: 1, x: 0 },
-              }}
-              className="text-sm leading-relaxed font-medium text-black 2xl:text-base dark:text-white"
-            >
+            </li>
+            <li className="animate-fade-in-up text-sm leading-relaxed font-medium text-black delay-400 motion-reduce:animate-none motion-reduce:opacity-100 2xl:text-base dark:text-white">
               <a
                 href="#directeur"
                 className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 3. Directeur de publication
               </a>
-            </motion.li>
-            <motion.li
-              variants={{
-                hidden: { opacity: 0, x: -20 },
-                visible: { opacity: 1, x: 0 },
-              }}
-              className="text-sm leading-relaxed font-medium text-black 2xl:text-base dark:text-white"
-            >
+            </li>
+            <li className="animate-fade-in-up text-sm leading-relaxed font-medium text-black delay-450 motion-reduce:animate-none motion-reduce:opacity-100 2xl:text-base dark:text-white">
               <a
                 href="#propriete"
                 className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 4. Propriété intellectuelle
               </a>
-            </motion.li>
-            <motion.li
-              variants={{
-                hidden: { opacity: 0, x: -20 },
-                visible: { opacity: 1, x: 0 },
-              }}
-              className="text-sm leading-relaxed font-medium text-black 2xl:text-base dark:text-white"
-            >
+            </li>
+            <li className="animate-fade-in-up text-sm leading-relaxed font-medium text-black delay-500 motion-reduce:animate-none motion-reduce:opacity-100 2xl:text-base dark:text-white">
               <a
                 href="#responsabilite"
                 className="text-emerald-700 transition hover:underline dark:text-emerald-500"
               >
                 5. Limitation de responsabilité
               </a>
-            </motion.li>
-          </motion.ul>
+            </li>
+          </ul>
         </div>
       </nav>
 

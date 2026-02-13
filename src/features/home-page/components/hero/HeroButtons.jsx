@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import { FaCheck } from "react-icons/fa6";
@@ -144,7 +143,7 @@ export default function HeroButtons({
         onMouseEnter={handlePrimaryMouseEnter}
         onMouseLeave={handlePrimaryMouseLeave}
       >
-        <motion.button
+        <button
           onClick={handlePrimaryButtonClick}
           disabled={isLoading}
           aria-label={
@@ -157,9 +156,6 @@ export default function HeroButtons({
           aria-expanded={
             isDisabled && !isLoading ? showPrimaryTooltip : undefined
           }
-          whileHover={!isDisabled && !isLoading}
-          whileTap={!isDisabled && !isLoading}
-          transition={{ duration: 0.2 }}
           className={`flex min-w-[280px] items-center justify-center gap-2 rounded-lg px-7 py-3.5 font-semibold shadow-lg transition duration-300 ease-in-out lg:text-base 2xl:text-lg ${
             isDisabled || isLoading
               ? "cursor-pointer bg-neutral-400 text-neutral-950 opacity-50 dark:bg-neutral-600 dark:text-neutral-100"
@@ -168,11 +164,7 @@ export default function HeroButtons({
         >
           {isLoading ? (
             <>
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                className="h-5 w-5 rounded-full border-2 border-white border-t-transparent"
-              />
+              <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
               <span>Recherche en cours...</span>
             </>
           ) : hasSubmitted ? (
@@ -186,7 +178,7 @@ export default function HeroButtons({
               <IoMdArrowForward className="text-xl" />
             </>
           )}
-        </motion.button>
+        </button>
 
         {/* Tooltip pour bouton désactivé */}
         {isDisabled && !isLoading && showPrimaryTooltip && (
@@ -210,7 +202,7 @@ export default function HeroButtons({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <motion.button
+        <button
           onClick={isHistoryAccepted ? onHistoryOpen : handleHistoryButtonClick}
           aria-label={
             isHistoryAccepted
@@ -219,9 +211,6 @@ export default function HeroButtons({
           }
           aria-disabled={!isHistoryAccepted}
           aria-expanded={!isHistoryAccepted ? showTooltip : undefined}
-          whileHover={isHistoryAccepted}
-          whileTap={isHistoryAccepted}
-          transition={{ duration: 0.2 }}
           className={`group flex min-w-[280px] items-center justify-center gap-2 rounded-lg px-7 py-3.5 font-semibold shadow-lg transition duration-300 ease-in-out lg:text-base 2xl:text-lg ${
             isHistoryAccepted
               ? `cursor-pointer ${BUTTON_SECONDARY_STYLES}`
@@ -237,7 +226,7 @@ export default function HeroButtons({
               {historyCount}
             </span>
           )}
-        </motion.button>
+        </button>
 
         {/* Tooltip */}
         {!isHistoryAccepted && showTooltip && (

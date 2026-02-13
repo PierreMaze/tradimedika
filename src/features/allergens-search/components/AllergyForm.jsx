@@ -1,5 +1,4 @@
 // components/input/AllergyForm.jsx
-import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { HiMagnifyingGlass } from "react-icons/hi2";
@@ -8,7 +7,6 @@ import { BUTTON_PRIMARY_STYLES } from "../../../constants/buttonStyles";
 import allergensList from "../../../data/allergensList.json";
 import { useClickOutside } from "../../../hooks/useClickOutside";
 import { normalizeForMatching } from "../../symptom-search/utils/normalizeSymptom";
-import { useReducedMotion } from "../../settings";
 import { useAllergies } from "../context/AllergiesContext";
 
 // Fonction pour capitaliser la première lettre
@@ -29,7 +27,6 @@ export default function AllergyForm({
   placeholder = "Rechercher une allergie...",
 }) {
   const { userAllergies, toggleAllergen } = useAllergies();
-  const prefersReducedMotion = useReducedMotion();
 
   const [inputValue, setInputValue] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -208,42 +205,29 @@ export default function AllergyForm({
 
       {/* Pills des allergies sélectionnées (style symptômes) */}
       {userAllergies.length > 0 && (
-        <motion.div
-          initial={prefersReducedMotion ? {} : { opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="flex flex-wrap items-center gap-2"
-        >
-          <AnimatePresence mode="popLayout">
-            {userAllergies.map((allergenId) => {
-              // FIX: Conversion stricte de l'ID pour le matching
-              const allergen = allergensList.find(
-                (a) => String(a.id) === String(allergenId),
-              );
-              if (!allergen) return null;
+        <div className="animate-fade-in flex flex-wrap items-center gap-2">
+          {userAllergies.map((allergenId) => {
+            // FIX: Conversion stricte de l'ID pour le matching
+            const allergen = allergensList.find(
+              (a) => String(a.id) === String(allergenId),
+            );
+            if (!allergen) return null;
 
-              return (
-                <motion.button
-                  key={allergenId}
-                  initial={
-                    prefersReducedMotion ? {} : { opacity: 0, scale: 0.8 }
-                  }
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={prefersReducedMotion ? {} : { opacity: 0, scale: 0.8 }}
-                  transition={{ duration: 0.3 }}
-                  onClick={() => toggleAllergen(allergenId)}
-                  aria-label={`Supprimer ${allergen.name}`}
-                  className={`flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 shadow-md ${BUTTON_PRIMARY_STYLES}`}
-                >
-                  <span className="text-sm font-medium tracking-wider lg:text-base">
-                    {capitalizeAllergen(allergen.name)}
-                  </span>
-                  <IoMdClose className="text-lg" />
-                </motion.button>
-              );
-            })}
-          </AnimatePresence>
-        </motion.div>
+            return (
+              <button
+                key={allergenId}
+                onClick={() => toggleAllergen(allergenId)}
+                aria-label={`Supprimer ${allergen.name}`}
+                className={`animate-scale-in flex cursor-pointer items-center gap-2 rounded-md px-3 py-2 shadow-md ${BUTTON_PRIMARY_STYLES}`}
+              >
+                <span className="text-sm font-medium tracking-wider lg:text-base">
+                  {capitalizeAllergen(allergen.name)}
+                </span>
+                <IoMdClose className="text-lg" />
+              </button>
+            );
+          })}
+        </div>
       )}
 
       <div ref={dropdownContainerRef} className="relative w-full">

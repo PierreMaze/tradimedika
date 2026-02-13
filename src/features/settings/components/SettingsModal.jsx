@@ -1,4 +1,3 @@
-import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { IoMdSettings } from "react-icons/io";
 import { IoChevronDown, IoWarning } from "react-icons/io5";
@@ -21,7 +20,6 @@ import {
 import { COOKIE_CATEGORIES } from "../../cookie-consent/constants/cookieConfig";
 import { usePerformance } from "../context/PerformanceContext";
 import { useSettingsModal } from "../context/SettingsModalContext";
-import { useReducedMotion } from "../hooks/useReducedMotion";
 import AllergiesToggle from "./AllergiesToggle";
 import AnalyticsToggle from "./AnalyticsToggle";
 import DarkModeToggle from "./DarkModeToggle";
@@ -37,7 +35,6 @@ export default function SettingsModal() {
     closeSettings,
     resetCookieSectionFlag,
   } = useSettingsModal();
-  const prefersReducedMotion = useReducedMotion();
   const { isHighPerformance } = usePerformance();
 
   const [showResetConfirm, setShowResetConfirm] = useState(false);
@@ -165,48 +162,40 @@ export default function SettingsModal() {
               />
             </button>
 
-            <AnimatePresence>
-              {isAccessibilitySectionOpen && (
-                <motion.div
-                  id="accessibility-section-content"
-                  initial={
-                    prefersReducedMotion ? {} : { height: 0, opacity: 0 }
-                  }
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={prefersReducedMotion ? {} : { height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="overflow-hidden"
-                >
-                  <div className="space-y-4">
-                    {/* Contraste élevé */}
-                    <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
-                      <div className="mb-3 flex items-center justify-between">
-                        <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
-                          {ACCESSIBILITY_HIGH_CONTRAST_LABEL}
-                        </h4>
-                        <HighContrastToggle />
-                      </div>
-                      <p className="text-xs text-neutral-600 dark:text-neutral-400">
-                        {ACCESSIBILITY_HIGH_CONTRAST_DESC}
-                      </p>
+            {isAccessibilitySectionOpen && (
+              <div
+                id="accessibility-section-content"
+                className="animate-in fade-in slide-in-from-top-2 duration-300 motion-reduce:transition-none"
+              >
+                <div className="space-y-4">
+                  {/* Contraste élevé */}
+                  <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+                    <div className="mb-3 flex items-center justify-between">
+                      <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                        {ACCESSIBILITY_HIGH_CONTRAST_LABEL}
+                      </h4>
+                      <HighContrastToggle />
                     </div>
-
-                    {/* Confirmation liens externes */}
-                    <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
-                      <div className="mb-3 flex items-center justify-between">
-                        <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
-                          {ACCESSIBILITY_EXTERNAL_LINK_LABEL}
-                        </h4>
-                        <ExternalLinkConfirmToggle />
-                      </div>
-                      <p className="text-xs text-neutral-600 dark:text-neutral-400">
-                        {ACCESSIBILITY_EXTERNAL_LINK_DESC}
-                      </p>
-                    </div>
+                    <p className="text-xs text-neutral-600 dark:text-neutral-400">
+                      {ACCESSIBILITY_HIGH_CONTRAST_DESC}
+                    </p>
                   </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+
+                  {/* Confirmation liens externes */}
+                  <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+                    <div className="mb-3 flex items-center justify-between">
+                      <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                        {ACCESSIBILITY_EXTERNAL_LINK_LABEL}
+                      </h4>
+                      <ExternalLinkConfirmToggle />
+                    </div>
+                    <p className="text-xs text-neutral-600 dark:text-neutral-400">
+                      {ACCESSIBILITY_EXTERNAL_LINK_DESC}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* History section */}
@@ -232,86 +221,78 @@ export default function SettingsModal() {
               />
             </button>
 
-            <AnimatePresence>
-              {isHistorySectionOpen && (
-                <motion.div
-                  id="history-section-content"
-                  initial={
-                    prefersReducedMotion ? {} : { height: 0, opacity: 0 }
-                  }
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={prefersReducedMotion ? {} : { height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="overflow-hidden"
-                >
-                  <div className="space-y-4">
-                    {/* Historique de recherche */}
-                    <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
-                      <div className="mb-3 flex items-center justify-between">
-                        <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
-                          {COOKIE_CATEGORIES.history.label}
-                        </h4>
-                        <HistoryToggle />
-                      </div>
-                      <p className="mb-2 text-xs text-neutral-600 dark:text-neutral-400">
-                        {COOKIE_CATEGORIES.history.description}
-                      </p>
-                      <details className="cursor-pointer">
-                        <summary className="text-xs font-medium text-emerald-600 hover:text-emerald-700 dark:text-emerald-500 dark:hover:text-emerald-400">
-                          Voir les détails
-                        </summary>
-                        <ul className="mt-2 space-y-1 pl-3">
-                          {COOKIE_CATEGORIES.history.cookies.map((cookie) => (
-                            <li
-                              key={cookie.name}
-                              className="text-xs text-neutral-600 dark:text-neutral-400"
-                            >
-                              <span className="font-mono font-semibold text-neutral-900 dark:text-neutral-100">
-                                {cookie.name}
-                              </span>
-                              <br />
-                              {cookie.purpose}
-                            </li>
-                          ))}
-                        </ul>
-                      </details>
+            {isHistorySectionOpen && (
+              <div
+                id="history-section-content"
+                className="animate-in fade-in slide-in-from-top-2 duration-300 motion-reduce:transition-none"
+              >
+                <div className="space-y-4">
+                  {/* Historique de recherche */}
+                  <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+                    <div className="mb-3 flex items-center justify-between">
+                      <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                        {COOKIE_CATEGORIES.history.label}
+                      </h4>
+                      <HistoryToggle />
                     </div>
-
-                    {/* Allergies sauvegardées */}
-                    <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
-                      <div className="mb-3 flex items-center justify-between">
-                        <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
-                          {COOKIE_CATEGORIES.allergies.label}
-                        </h4>
-                        <AllergiesToggle />
-                      </div>
-                      <p className="mb-2 text-xs text-neutral-600 dark:text-neutral-400">
-                        {COOKIE_CATEGORIES.allergies.description}
-                      </p>
-                      <details className="cursor-pointer">
-                        <summary className="text-xs font-medium text-emerald-600 hover:text-emerald-700 dark:text-emerald-500 dark:hover:text-emerald-400">
-                          Voir les détails
-                        </summary>
-                        <ul className="mt-2 space-y-1 pl-3">
-                          {COOKIE_CATEGORIES.allergies.cookies.map((cookie) => (
-                            <li
-                              key={cookie.name}
-                              className="text-xs text-neutral-600 dark:text-neutral-400"
-                            >
-                              <span className="font-mono font-semibold text-neutral-900 dark:text-neutral-100">
-                                {cookie.name}
-                              </span>
-                              <br />
-                              {cookie.purpose}
-                            </li>
-                          ))}
-                        </ul>
-                      </details>
-                    </div>
+                    <p className="mb-2 text-xs text-neutral-600 dark:text-neutral-400">
+                      {COOKIE_CATEGORIES.history.description}
+                    </p>
+                    <details className="cursor-pointer">
+                      <summary className="text-xs font-medium text-emerald-600 hover:text-emerald-700 dark:text-emerald-500 dark:hover:text-emerald-400">
+                        Voir les détails
+                      </summary>
+                      <ul className="mt-2 space-y-1 pl-3">
+                        {COOKIE_CATEGORIES.history.cookies.map((cookie) => (
+                          <li
+                            key={cookie.name}
+                            className="text-xs text-neutral-600 dark:text-neutral-400"
+                          >
+                            <span className="font-mono font-semibold text-neutral-900 dark:text-neutral-100">
+                              {cookie.name}
+                            </span>
+                            <br />
+                            {cookie.purpose}
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
                   </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+
+                  {/* Allergies sauvegardées */}
+                  <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+                    <div className="mb-3 flex items-center justify-between">
+                      <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                        {COOKIE_CATEGORIES.allergies.label}
+                      </h4>
+                      <AllergiesToggle />
+                    </div>
+                    <p className="mb-2 text-xs text-neutral-600 dark:text-neutral-400">
+                      {COOKIE_CATEGORIES.allergies.description}
+                    </p>
+                    <details className="cursor-pointer">
+                      <summary className="text-xs font-medium text-emerald-600 hover:text-emerald-700 dark:text-emerald-500 dark:hover:text-emerald-400">
+                        Voir les détails
+                      </summary>
+                      <ul className="mt-2 space-y-1 pl-3">
+                        {COOKIE_CATEGORIES.allergies.cookies.map((cookie) => (
+                          <li
+                            key={cookie.name}
+                            className="text-xs text-neutral-600 dark:text-neutral-400"
+                          >
+                            <span className="font-mono font-semibold text-neutral-900 dark:text-neutral-100">
+                              {cookie.name}
+                            </span>
+                            <br />
+                            {cookie.purpose}
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Cookie management section */}
@@ -337,107 +318,99 @@ export default function SettingsModal() {
               />
             </button>
 
-            <AnimatePresence>
-              {isCookieSectionOpen && (
-                <motion.div
-                  id="cookie-section-content"
-                  initial={
-                    prefersReducedMotion ? {} : { height: 0, opacity: 0 }
-                  }
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={prefersReducedMotion ? {} : { height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="overflow-hidden"
-                >
-                  <div className="space-y-4">
-                    {/* Cookies nécessaires */}
-                    <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
-                      <div className="mb-3 flex items-center justify-between">
-                        <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
-                          {COOKIE_CATEGORIES.necessary.label}
-                        </h4>
-                        <span className="rounded-md bg-emerald-200 px-2 py-1 text-xs font-medium text-emerald-800 dark:bg-emerald-700 dark:text-emerald-200">
-                          Toujours activé
-                        </span>
-                      </div>
-                      <p className="mb-2 text-xs text-neutral-600 dark:text-neutral-400">
-                        {COOKIE_CATEGORIES.necessary.description}
-                      </p>
-                      <details className="cursor-pointer">
-                        <summary className="text-xs font-medium text-emerald-600 hover:text-emerald-700 dark:text-emerald-500 dark:hover:text-emerald-400">
-                          Voir les détails
-                        </summary>
-                        <ul className="mt-2 space-y-1 pl-3">
-                          {COOKIE_CATEGORIES.necessary.cookies.map((cookie) => (
-                            <li
-                              key={cookie.name}
-                              className="text-xs text-neutral-600 dark:text-neutral-400"
-                            >
-                              <span className="font-mono font-semibold text-neutral-900 dark:text-neutral-100">
-                                {cookie.name}
-                              </span>
-                              <br />
-                              {cookie.purpose}
-                            </li>
-                          ))}
-                        </ul>
-                      </details>
+            {isCookieSectionOpen && (
+              <div
+                id="cookie-section-content"
+                className="animate-in fade-in slide-in-from-top-2 duration-300 motion-reduce:transition-none"
+              >
+                <div className="space-y-4">
+                  {/* Cookies nécessaires */}
+                  <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+                    <div className="mb-3 flex items-center justify-between">
+                      <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                        {COOKIE_CATEGORIES.necessary.label}
+                      </h4>
+                      <span className="rounded-md bg-emerald-200 px-2 py-1 text-xs font-medium text-emerald-800 dark:bg-emerald-700 dark:text-emerald-200">
+                        Toujours activé
+                      </span>
                     </div>
-
-                    {/* Cookies analytics */}
-                    <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
-                      <div className="mb-3 flex items-center justify-between">
-                        <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
-                          {COOKIE_CATEGORIES.analytics.label}
-                        </h4>
-                        <AnalyticsToggle />
-                      </div>
-                      <p className="mb-2 text-xs text-neutral-600 dark:text-neutral-400">
-                        {COOKIE_CATEGORIES.analytics.description}
-                      </p>
-                      <details className="cursor-pointer">
-                        <summary className="text-xs font-medium text-emerald-600 hover:text-emerald-700 dark:text-emerald-500 dark:hover:text-emerald-400">
-                          Voir les détails
-                        </summary>
-                        <ul className="mt-2 space-y-1 pl-3">
-                          {COOKIE_CATEGORIES.analytics.cookies.map((cookie) => (
-                            <li
-                              key={cookie.name}
-                              className="text-xs text-neutral-600 dark:text-neutral-400"
-                            >
-                              <span className="font-mono font-semibold text-neutral-900 dark:text-neutral-100">
-                                {cookie.name}
-                              </span>
-                              <br />
-                              {cookie.purpose}
-                            </li>
-                          ))}
-                        </ul>
-                      </details>
-                    </div>
-
-                    {/* Reset storage section */}
-                    <div className="flex items-center justify-between rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
-                      <div className="flex-1">
-                        <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
-                          {SETTINGS_RESET_LABEL}
-                        </h4>
-                        <p className="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
-                          Supprimer toutes les préférences
-                        </p>
-                      </div>
-                      <ModalButton
-                        variant="danger"
-                        onClick={handleResetRequest}
-                        ariaLabel={ARIA_RESET_STORAGE}
-                        icon={RiDeleteBin2Fill}
-                        className="min-h-[44px] min-w-[44px] px-3 py-2"
-                      />
-                    </div>
+                    <p className="mb-2 text-xs text-neutral-600 dark:text-neutral-400">
+                      {COOKIE_CATEGORIES.necessary.description}
+                    </p>
+                    <details className="cursor-pointer">
+                      <summary className="text-xs font-medium text-emerald-600 hover:text-emerald-700 dark:text-emerald-500 dark:hover:text-emerald-400">
+                        Voir les détails
+                      </summary>
+                      <ul className="mt-2 space-y-1 pl-3">
+                        {COOKIE_CATEGORIES.necessary.cookies.map((cookie) => (
+                          <li
+                            key={cookie.name}
+                            className="text-xs text-neutral-600 dark:text-neutral-400"
+                          >
+                            <span className="font-mono font-semibold text-neutral-900 dark:text-neutral-100">
+                              {cookie.name}
+                            </span>
+                            <br />
+                            {cookie.purpose}
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
                   </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+
+                  {/* Cookies analytics */}
+                  <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+                    <div className="mb-3 flex items-center justify-between">
+                      <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                        {COOKIE_CATEGORIES.analytics.label}
+                      </h4>
+                      <AnalyticsToggle />
+                    </div>
+                    <p className="mb-2 text-xs text-neutral-600 dark:text-neutral-400">
+                      {COOKIE_CATEGORIES.analytics.description}
+                    </p>
+                    <details className="cursor-pointer">
+                      <summary className="text-xs font-medium text-emerald-600 hover:text-emerald-700 dark:text-emerald-500 dark:hover:text-emerald-400">
+                        Voir les détails
+                      </summary>
+                      <ul className="mt-2 space-y-1 pl-3">
+                        {COOKIE_CATEGORIES.analytics.cookies.map((cookie) => (
+                          <li
+                            key={cookie.name}
+                            className="text-xs text-neutral-600 dark:text-neutral-400"
+                          >
+                            <span className="font-mono font-semibold text-neutral-900 dark:text-neutral-100">
+                              {cookie.name}
+                            </span>
+                            <br />
+                            {cookie.purpose}
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  </div>
+
+                  {/* Reset storage section */}
+                  <div className="flex items-center justify-between rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+                    <div className="flex-1">
+                      <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                        {SETTINGS_RESET_LABEL}
+                      </h4>
+                      <p className="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
+                        Supprimer toutes les préférences
+                      </p>
+                    </div>
+                    <ModalButton
+                      variant="danger"
+                      onClick={handleResetRequest}
+                      ariaLabel={ARIA_RESET_STORAGE}
+                      icon={RiDeleteBin2Fill}
+                      className="min-h-[44px] min-w-[44px] px-3 py-2"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </ModalLayout>

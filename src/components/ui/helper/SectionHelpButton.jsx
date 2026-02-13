@@ -96,24 +96,21 @@ function SectionHelpButton({
   };
 
   const buttonSizeClasses = {
-    sm: "min-h-[44px] min-w-[44px] h-fit w-fit text-sm",
-    md: "min-h-[44px] min-w-[44px] h-fit w-fit text-base",
+    sm: "text-sm",
+    md: "text-base",
   };
 
   return (
-    <div
-      ref={tooltipRef}
-      className={`relative inline-flex ${className}`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <div ref={tooltipRef} className={`relative inline-flex ${className}`}>
       <button
         ref={buttonRef}
         type="button"
         onClick={handleButtonClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         aria-expanded={showTooltip}
         aria-label="Aide sur l'utilisation des termes"
-        className={`group inline-flex cursor-help items-center gap-2 rounded-full bg-transparent font-bold transition-colors duration-200 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-emerald-500 active:scale-95 ${iconColor || "dark:text-white"} ${buttonSizeClasses[size]}`}
+        className={`group inline-flex cursor-help items-center gap-x-2 rounded-full bg-transparent font-bold transition-colors duration-200 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-emerald-500 active:scale-95 ${iconColor || "dark:text-white"} ${buttonSizeClasses[size]}`}
       >
         <GrCircleQuestion className="h-4 w-4 text-inherit" aria-hidden="true" />
       </button>

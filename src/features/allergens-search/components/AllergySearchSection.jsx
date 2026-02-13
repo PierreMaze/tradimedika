@@ -1,4 +1,3 @@
-import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { useRef } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
@@ -69,16 +68,10 @@ export default function AllergySearchSection({
           <div className="flex flex-row">
             {/* Badge compteur (visible quand allergies > 0) */}
             {userAllergies.length > 0 && (
-              <motion.span
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                exit={{ scale: 0 }}
-                transition={{ duration: 0.2 }}
-                className="flex items-center gap-1 rounded-md bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-700 lg:text-sm 2xl:text-base dark:bg-emerald-900/40 dark:text-emerald-300"
-              >
+              <span className="animate-in zoom-in flex items-center gap-1 rounded-md bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-700 duration-200 motion-reduce:transition-none lg:text-sm 2xl:text-base dark:bg-emerald-900/40 dark:text-emerald-300">
                 {userAllergies.length} allergie
                 {userAllergies.length > 1 ? "s" : ""}
-              </motion.span>
+              </span>
             )}
 
             {/* Bouton dropdown pour expand/collapse */}
@@ -93,33 +86,26 @@ export default function AllergySearchSection({
               <span className="text-xs font-medium lg:text-sm 2xl:text-base">
                 {isExpanded ? "Masquer" : "Afficher"}
               </span>
-              <motion.div
-                animate={{ rotate: isExpanded ? 180 : 0 }}
-                transition={{ duration: 0.2 }}
+              <div
+                className={`transition-transform duration-200 motion-reduce:transition-none ${
+                  isExpanded ? "rotate-180" : ""
+                }`}
               >
                 <IoMdArrowDropdown className="text-lg" />
-              </motion.div>
+              </div>
             </button>
           </div>
         )}
       </div>
 
       {/* Section collapse avec AllergyForm */}
-      <AnimatePresence>
-        {isExpanded && (
-          <motion.div
-            initial={{ opacity: 0, scaleY: 0 }}
-            animate={{ opacity: 1, scaleY: 1 }}
-            exit={{ opacity: 0, scaleY: 0 }}
-            transition={{ duration: 0.3 }}
-            style={{ transformOrigin: "top" }}
-          >
-            <div className="dark:bg-dark rounded-lg border-2 border-dashed border-emerald-600 bg-neutral-50 p-4 dark:border-emerald-500">
-              <AllergyForm />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isExpanded && (
+        <div className="animate-in fade-in slide-in-from-top-2 duration-300 motion-reduce:transition-none">
+          <div className="dark:bg-dark rounded-lg border-2 border-dashed border-emerald-600 bg-neutral-50 p-4 dark:border-emerald-500">
+            <AllergyForm />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

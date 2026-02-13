@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { FaLeaf } from "react-icons/fa6";
 import { useCookieConsent } from "../../cookie-consent";
 
@@ -6,7 +5,7 @@ export default function AllergiesToggle() {
   const { isAllergiesAccepted, toggleAllergies } = useCookieConsent();
 
   return (
-    <motion.button
+    <button
       aria-label={
         isAllergiesAccepted
           ? "Désactiver la sauvegarde des allergies"
@@ -20,17 +19,14 @@ export default function AllergiesToggle() {
           : "justify-start border-neutral-400 bg-neutral-200 dark:border-neutral-600 dark:bg-neutral-700"
       }`}
     >
-      <motion.span
-        layout
+      <span
         className={`pointer-events-none absolute inset-0 z-0 rounded-md border-none transition-opacity duration-300 ${
           isAllergiesAccepted ? "bg-emerald-500 opacity-30" : "opacity-0"
         }`}
       />
 
-      <motion.div
-        layout
-        transition={{ type: "spring", bounce: 0.25, duration: 0.25 }}
-        className={`z-10 flex h-6 w-6 items-center justify-center rounded-md text-current group-hover:scale-105 ${
+      <div
+        className={`z-10 flex h-6 w-6 items-center justify-center rounded-md text-current transition-transform duration-200 group-hover:scale-105 motion-reduce:transition-none ${
           isAllergiesAccepted
             ? "bg-white"
             : "bg-neutral-400 dark:bg-neutral-600"
@@ -43,7 +39,7 @@ export default function AllergiesToggle() {
               : "text-white dark:text-neutral-300"
           }`}
         />
-      </motion.div>
-    </motion.button>
+      </div>
+    </button>
   );
 }

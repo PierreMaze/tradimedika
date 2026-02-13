@@ -1,6 +1,5 @@
 // tradimedika-v1/src/pages/RemedyResult.jsx
 
-import { motion } from "framer-motion";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useLocation } from "react-router-dom";
@@ -236,12 +235,7 @@ function RemedyResult() {
       </Helmet>
 
       {/* Bouton Retour */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3 }}
-        className="flex items-center gap-3"
-      >
+      <div className="animate-fade-in flex items-center gap-3 delay-300 motion-reduce:animate-none motion-reduce:opacity-100">
         <Link
           to="/"
           aria-label="Retour à l'accueil"
@@ -261,7 +255,7 @@ function RemedyResult() {
             />
           </svg>
         </Link>
-      </motion.div>
+      </div>
       <div className="text-dark dark:text-light mt-8 flex flex-col items-center gap-y-4 text-center transition duration-300 ease-in-out lg:mt-4">
         {/* Titre principal */}
         <h1 className="text-3xl font-bold lg:text-4xl">
@@ -341,12 +335,7 @@ function RemedyResult() {
           selectedSymptoms={selectedSymptoms}
         />
       </div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-        className="mt-12 flex w-full justify-center"
-      >
+      <div className="animate-fade-in mt-12 flex w-full justify-center delay-1000 motion-reduce:animate-none motion-reduce:opacity-100">
         {/* Bouton Retour */}
         <Link
           to="/"
@@ -355,7 +344,7 @@ function RemedyResult() {
         >
           Nouvelle recherche
         </Link>
-      </motion.div>
+      </div>
 
       {/* Feedback Section */}
       <FeedbackLink />

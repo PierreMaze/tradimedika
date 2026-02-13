@@ -47,11 +47,11 @@ describe("Header", () => {
   });
 
   describe("Layout Structure", () => {
-    it("should have sticky positioning", () => {
+    it("should have fixed positioning", () => {
       const { container } = render(<Header />);
 
       const header = container.querySelector("header");
-      expect(header).toHaveClass("sticky", "top-0");
+      expect(header).toHaveClass("fixed", "top-0");
     });
 
     it("should have correct z-index", () => {
@@ -96,7 +96,7 @@ describe("Header", () => {
 
       const header = container.querySelector("header");
       expect(header).toHaveClass(
-        "bg-light dark:bg-dark sticky top-0 right-0 left-0 z-50 h-auto w-full transition-transform duration-300 ease-in-out",
+        "fixed top-0 right-0 left-0 z-50 h-auto w-full bg-light dark:bg-dark transition-transform duration-300 ease-in-out motion-reduce:transform-none",
       );
     });
 
@@ -245,12 +245,12 @@ describe("Header", () => {
     });
   });
 
-  describe("Sticky Behavior", () => {
-    it("should stick to top of viewport", () => {
+  describe("Fixed Positioning Behavior", () => {
+    it("should be fixed at top of viewport", () => {
       const { container } = render(<Header />);
 
       const header = container.querySelector("header");
-      expect(header).toHaveClass("sticky", "top-0");
+      expect(header).toHaveClass("fixed", "top-0");
     });
 
     it("should have appropriate z-index for stacking", () => {

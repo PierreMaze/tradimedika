@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { useRef } from "react";
 import {
@@ -18,15 +17,10 @@ import SourcesSection from "./RemedyResultDetailsSourcesSection";
 function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
   const popoverRef = useRef(null);
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.2 }}
-      className="mb-6 grid gap-6 lg:mb-8 lg:grid-cols-5 lg:gap-8 2xl:grid-cols-4"
-    >
+    <div className="animate-fade-in mb-6 grid gap-6 delay-200 motion-reduce:animate-none motion-reduce:opacity-100 lg:mb-8 lg:grid-cols-5 lg:gap-8 2xl:grid-cols-4">
       <div className="lg:col-span-2 2xl:col-span-1">
         <div className="aspect-square w-full overflow-hidden rounded-lg bg-neutral-50 shadow-md dark:bg-neutral-700/50">
-          <motion.img
+          <img
             src={safeImageUrl}
             alt={`${remedy.name} - remède naturel traditionnel de type ${remedy.type}`}
             width="400"
@@ -92,7 +86,7 @@ function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
       </div>
 
       <TagsAccordionPopover ref={popoverRef} />
-    </motion.div>
+    </div>
   );
 }
 

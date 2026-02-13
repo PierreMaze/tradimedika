@@ -1,5 +1,4 @@
 // tradimedika-v1/src/components/btn/DarkModeToggle.jsx
-import { motion } from "framer-motion";
 import { HiMoon, HiSun } from "react-icons/hi2";
 import { useAccessibility } from "../context/AccessibilityContext";
 import { useTheme } from "../context/ThemeContext";
@@ -11,7 +10,7 @@ export default function DarkModeToggle() {
   const isDisabled = isHighContrast;
 
   return (
-    <motion.button
+    <button
       aria-label={
         isDisabled
           ? "Mode sombre désactivé en mode contraste élevé"
@@ -33,17 +32,14 @@ export default function DarkModeToggle() {
       }`}
     >
       {/* Glow / halo UX */}
-      <motion.span
-        layout
+      <span
         className={`pointer-events-none absolute inset-0 z-0 rounded-md border-none transition-opacity duration-300 ${
           isDarkMode ? "bg-emerald-500 opacity-30" : "opacity-0"
         }`}
       />
 
-      <motion.div
-        layout
-        transition={{ type: "spring", bounce: 0.25, duration: 0.25 }}
-        className={`z-10 flex h-6 w-6 items-center justify-center rounded-md text-current group-hover:scale-105 ${
+      <div
+        className={`z-10 flex h-6 w-6 items-center justify-center rounded-md text-current transition-transform duration-200 group-hover:scale-105 motion-reduce:transition-none ${
           isDarkMode ? "bg-white" : "bg-neutral-400 dark:bg-neutral-600"
         }`}
       >
@@ -56,7 +52,7 @@ export default function DarkModeToggle() {
             className={`text-xs text-white transition-colors duration-300`}
           />
         )}
-      </motion.div>
-    </motion.button>
+      </div>
+    </button>
   );
 }

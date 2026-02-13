@@ -1,5 +1,3 @@
-import { motion } from "framer-motion";
-import PropTypes from "prop-types";
 import { MdThumbUp } from "react-icons/md";
 
 /**
@@ -8,17 +6,12 @@ import { MdThumbUp } from "react-icons/md";
  * Bannière indiquant que ce remède est le plus pertinent pour les symptômes recherchés.
  * Affichée en haut de la page de détails si le remède est marqué comme "isRecommended".
  */
-function RemedyResultDetailsRecommendedBanner({
-  prefersReducedMotion = false,
-}) {
+function RemedyResultDetailsRecommendedBanner() {
   return (
-    <motion.div
-      initial={prefersReducedMotion ? {} : { opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
+    <div
       role="status"
       aria-live="polite"
-      className="mb-6 flex items-start gap-4 rounded-lg border-2 border-dashed border-emerald-700/60 bg-emerald-50 p-4 dark:border-emerald-400/60 dark:bg-emerald-950/75"
+      className="animate-fade-in-up mb-6 flex items-start gap-4 rounded-lg border-2 border-dashed border-emerald-700/60 bg-emerald-50 p-4 motion-reduce:animate-none motion-reduce:opacity-100 dark:border-emerald-400/60 dark:bg-emerald-950/75"
     >
       <MdThumbUp
         className="mt-0.5 flex shrink-0 text-lg text-emerald-700 dark:text-emerald-400"
@@ -37,12 +30,8 @@ function RemedyResultDetailsRecommendedBanner({
           pour vos symptômes.
         </p>
       </div>
-    </motion.div>
+    </div>
   );
 }
-
-RemedyResultDetailsRecommendedBanner.propTypes = {
-  prefersReducedMotion: PropTypes.bool,
-};
 
 export default RemedyResultDetailsRecommendedBanner;

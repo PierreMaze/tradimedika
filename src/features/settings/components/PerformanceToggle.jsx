@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { FaWandMagicSparkles } from "react-icons/fa6";
 
 import { usePerformance } from "../context/PerformanceContext";
@@ -7,7 +6,7 @@ export default function PerformanceToggle() {
   const { isHighPerformance, togglePerformance } = usePerformance();
 
   return (
-    <motion.button
+    <button
       aria-label={
         isHighPerformance
           ? "Passer en mode économie de performance"
@@ -22,17 +21,14 @@ export default function PerformanceToggle() {
       }`}
     >
       {/* Glow / halo UX */}
-      <motion.span
-        layout
+      <span
         className={`pointer-events-none absolute inset-0 z-0 rounded-md border-none transition-opacity duration-300 ${
           isHighPerformance ? "bg-emerald-500 opacity-30" : "opacity-0"
         }`}
       />
 
-      <motion.div
-        layout
-        transition={{ type: "spring", bounce: 0.25, duration: 0.25 }}
-        className={`z-10 flex h-6 w-6 items-center justify-center rounded-md group-hover:scale-105 ${
+      <div
+        className={`z-10 flex h-6 w-6 items-center justify-center rounded-md transition-transform duration-200 group-hover:scale-105 motion-reduce:transition-none ${
           isHighPerformance ? "bg-white" : "bg-neutral-400 dark:bg-neutral-600"
         }`}
       >
@@ -43,7 +39,7 @@ export default function PerformanceToggle() {
               : "text-white dark:text-neutral-300"
           }`}
         />
-      </motion.div>
-    </motion.button>
+      </div>
+    </button>
   );
 }

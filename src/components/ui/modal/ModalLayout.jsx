@@ -1,8 +1,6 @@
-import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { useEffect, useRef } from "react";
 import { IoMdClose } from "react-icons/io";
-import { useReducedMotion } from "../../../features/settings/hooks/useReducedMotion";
 
 /**
  * ModalLayout Component
@@ -42,7 +40,6 @@ function ModalLayout({
   maxWidth = "lg",
   closeLabel = "Fermer",
 }) {
-  const prefersReducedMotion = useReducedMotion();
   const modalRef = useRef(null);
   const previousFocusRef = useRef(null);
 
@@ -96,32 +93,24 @@ function ModalLayout({
   }, [isOpen]);
 
   return (
-    <AnimatePresence>
+    <>
       {isOpen && (
         <>
           {/* Backdrop */}
-          <motion.div
-            className="fixed inset-0 z-40 bg-black/60"
+          <div
+            className="animate-in fade-in fixed inset-0 z-40 bg-black/60 duration-200 motion-reduce:animate-none"
             onClick={onClose}
-            initial={prefersReducedMotion ? {} : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={prefersReducedMotion ? {} : { opacity: 0 }}
-            transition={{ duration: 0.2 }}
             aria-hidden="true"
           />
 
           {/* Modal */}
-          <motion.div
+          <div
             ref={modalRef}
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-title"
             tabIndex={-1}
-            className={`fixed inset-x-4 top-1/2 z-50 flex max-h-[90vh] -translate-y-1/2 flex-col overflow-hidden rounded-lg bg-[var(--color-light)] shadow-2xl md:inset-x-auto md:left-1/2 md:w-full md:-translate-x-1/2 ${maxWidthClasses[maxWidth]} dark:bg-[var(--color-dark)]`}
-            initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={prefersReducedMotion ? {} : { opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
+            className={`animate-in fade-in zoom-in-95 fixed inset-x-4 top-1/2 z-50 flex max-h-[90vh] -translate-y-1/2 flex-col overflow-hidden rounded-lg bg-[var(--color-light)] shadow-2xl duration-200 motion-reduce:animate-none md:inset-x-auto md:left-1/2 md:w-full md:-translate-x-1/2 ${maxWidthClasses[maxWidth]} dark:bg-[var(--color-dark)]`}
           >
             {/* Header (fixe) */}
             <div className="flex-shrink-0 border-b border-neutral-200 p-6 pb-4 dark:border-neutral-700">
@@ -157,10 +146,10 @@ function ModalLayout({
                 {footer}
               </div>
             )}
-          </motion.div>
+          </div>
         </>
       )}
-    </AnimatePresence>
+    </>
   );
 }
 
