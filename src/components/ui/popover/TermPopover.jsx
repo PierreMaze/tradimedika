@@ -1,6 +1,13 @@
 import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from "prop-types"; // Validation des props
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { BiLinkExternal } from "react-icons/bi";
 import { TECHNICAL_TERMS_DATA } from "../../../data/technicalTermsDefinitions";
 import { useExternalLink } from "../../../features/external-link/hooks/useExternalLink";
@@ -171,16 +178,18 @@ function TermPopover({
 
   // Recalculer position au resize
   useEffect(() => {
-    if (showPopover) {
-      calculatePosition();
-      window.addEventListener("resize", calculatePosition);
-      window.addEventListener("scroll", calculatePosition, true);
+    if (!showPopover) return;
 
-      return () => {
-        window.removeEventListener("resize", calculatePosition);
-        window.removeEventListener("scroll", calculatePosition, true);
-      };
-    }
+    calculatePosition();
+
+    const handleUpdate = () => calculatePosition();
+    window.addEventListener("resize", handleUpdate);
+    window.addEventListener("scroll", handleUpdate, true);
+
+    return () => {
+      window.removeEventListener("resize", handleUpdate);
+      window.removeEventListener("scroll", handleUpdate, true);
+    };
   }, [showPopover, calculatePosition]);
 
   // Listener clic extérieur
@@ -197,19 +206,22 @@ function TermPopover({
     return () => clearTimeout(hoverTimeoutRef.current);
   }, []);
 
-  // Variants d'animation
-  const popoverVariants = {
-    hidden: {
-      opacity: 0,
-      scale: 0.95,
-      transition: { duration: prefersReducedMotion ? 0 : 0.15 },
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: prefersReducedMotion ? 0 : 0.2 },
-    },
-  };
+  // Variants d'animation (memoized pour éviter recréation)
+  const popoverVariants = useMemo(
+    () => ({
+      hidden: {
+        opacity: 0,
+        scale: 0.95,
+        transition: { duration: prefersReducedMotion ? 0 : 0.15 },
+      },
+      visible: {
+        opacity: 1,
+        scale: 1,
+        transition: { duration: prefersReducedMotion ? 0 : 0.2 },
+      },
+    }),
+    [prefersReducedMotion],
+  );
 
   // Si pas de définition trouvée, ne pas afficher le popover
   if (!termData) {
@@ -260,6 +272,16 @@ function TermPopover({
             onMouseEnter={() => clearTimeout(hoverTimeoutRef.current)}
             onMouseLeave={handleMouseLeave}
           >
+            {/* Annonce pour lecteurs d'écran */}
+            <div
+              className="sr-only"
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              {showPopover ? `Définition de ${termData.name} affichée` : ""}
+            </div>
+
             {/* Header avec titre et bouton fermer */}
             <div className="mb-2 flex items-start justify-between">
               <h3
@@ -274,7 +296,7 @@ function TermPopover({
                   setIsLocked(false);
                   triggerRef.current?.focus();
                 }}
-                className="rounded text-neutral-500 transition-colors hover:text-neutral-700 focus:ring-2 focus:ring-emerald-500 focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-200"
+                className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded text-neutral-500 transition-colors hover:text-neutral-700 focus:ring-2 focus:ring-emerald-500 focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-200"
                 aria-label="Fermer"
               >
                 <span className="text-xl leading-none">&times;</span>

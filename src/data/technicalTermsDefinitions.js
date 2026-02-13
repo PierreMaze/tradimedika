@@ -344,14 +344,6 @@ export const TECHNICAL_TERMS_DATA = {
     categories: ["allergens"],
   },
 
-  cafeine: {
-    name: "apiacées",
-    definition:
-      "Famille botanique (ex-ombellifères) incluant fenouil, carotte, céleri, anis, persil. Risque d'allergies croisées et FODMAP.",
-    wikipediaUrl: "https://fr.wikipedia.org/wiki/Apiaceae",
-    categories: ["allergens"],
-  },
-
   // ==================== TERMES MÉDICAUX ====================
 
   "ulceres-gastriques": {
