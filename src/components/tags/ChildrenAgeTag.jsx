@@ -9,10 +9,10 @@ import { Tooltip } from "../ui/tooltip";
 /**
  * ChildrenAgeTag Component
  *
- * Tag indiquant la compatibilité d'un remède avec les enfants.
+ * Tag indiquant la compatibilité d&apos;un remède avec les enfants.
  * Affiche 2 variantes selon la valeur de age :
- * - age: null → Vert (OK pour tous les enfants, pas de limite d'âge) - Icône check
- * - age: number → Teal (Limite d'âge, affiche "Enfants +X ans") - Icône alerte
+ * - age: null → Vert (OK pour tous les enfants, pas de limite d&apos;âge) - Icône check
+ * - age: number → Teal (Limite d&apos;âge, affiche "Enfants +X ans") - Icône alerte
  *
  * Props:
  * - age: Âge minimum en années (peut être null)
@@ -27,27 +27,55 @@ function ChildrenAgeTag({ age, className = "", showLabel = true }) {
 
   let colorClasses;
   let label;
-  let tooltip;
+  let tooltipContent;
   let Icon;
 
   if (isAdultOnly) {
     colorClasses = "bg-red-100 text-red-800 dark:bg-red-900 dark:text-white";
     label = "Adultes uniquement";
-    tooltip =
-      "Ce remède est réservé à l’adulte et ne doit pas être utilisé chez l’enfant.";
+    tooltipContent = (
+      <>
+        <h3 className="mb-1 text-lg font-semibold text-neutral-900 dark:text-white">
+          Adultes uniquement
+        </h3>
+        <p className="text-sm text-neutral-900 dark:text-white">
+          Ce remède est réservé à l&apos;adulte et ne doit pas être utilisé chez
+          l&apos;enfant.
+        </p>
+      </>
+    );
     Icon = IoCloseCircleOutline;
   } else if (isAllAges) {
     colorClasses =
       "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200";
     label = "Tout public";
-    tooltip =
-      "Ce remède peut être utilisé chez l’enfant sans limite d’âge, dans le respect des doses recommandées.";
+    tooltipContent = (
+      <>
+        <h3 className="mb-1 text-lg font-semibold text-neutral-900 dark:text-white">
+          Tout public
+        </h3>
+        <p className="text-sm text-neutral-900 dark:text-white">
+          Ce remède peut être utilisé chez l&apos;enfant sans limite d&apos;âge,
+          dans le respect des doses recommandées.
+        </p>
+      </>
+    );
     Icon = IoMdCheckmarkCircleOutline;
   } else if (hasLimit) {
     colorClasses =
       "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200";
     label = `Enfants +${age} ans`;
-    tooltip = `Ce remède peut être utilisé chez l’enfant à partir de ${age} ans, dans le respect des doses recommandées.`;
+    tooltipContent = (
+      <>
+        <h3 className="mb-1 text-lg font-semibold text-neutral-900 dark:text-white">
+          Enfants +{age} ans
+        </h3>
+        <p className="text-sm text-neutral-900 dark:text-white">
+          Ce remède peut être utilisé chez l&apos;enfant à partir de {age} ans,
+          dans le respect des doses recommandées.
+        </p>
+      </>
+    );
     Icon = FiInfo;
   } else {
     // garde-fou : donnée incohérente
@@ -55,7 +83,7 @@ function ChildrenAgeTag({ age, className = "", showLabel = true }) {
   }
 
   return (
-    <Tooltip content={tooltip} placement="top" hoverDelay={200}>
+    <Tooltip content={tooltipContent} placement="top" hoverDelay={200}>
       <span
         data-testid="children-tag"
         className={`transition-color inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-semibold duration-150 lg:text-sm 2xl:text-base ${colorClasses} ${className}`}

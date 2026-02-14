@@ -1,11 +1,11 @@
-import { useId, cloneElement, isValidElement } from "react";
-import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
+import { cloneElement, isValidElement, useId } from "react";
+import { createPortal } from "react-dom";
+import { Z_INDEX_CLASSES } from "../../../constants/zIndexLevels";
+import { useReducedMotion } from "../../../features/settings/hooks/useReducedMotion";
+import { useClickOutside } from "../../../hooks/useClickOutside";
 import { useTooltip } from "../../../hooks/useTooltip";
 import { useTooltipPosition } from "../../../hooks/useTooltipPosition";
-import { useClickOutside } from "../../../hooks/useClickOutside";
-import { useReducedMotion } from "../../../features/settings/hooks/useReducedMotion";
-import { Z_INDEX_CLASSES } from "../../../constants/zIndexLevels";
 
 /**
  * Composant Tooltip vanilla React avec positionnement intelligent
@@ -79,8 +79,8 @@ export function Tooltip({
   const tooltipClasses = `
     ${Z_INDEX_CLASSES.TOOLTIP}
     rounded-lg shadow-lg px-3 py-2 text-sm
-    bg-white text-gray-900 border border-gray-200
-    dark:bg-gray-800 dark:text-white dark:border-gray-700
+    bg-white text-neutral-900 border border-neutral-200
+    dark:bg-neutral-900 dark:text-white dark:border-neutral-700
     ${animationClass}
     ${className}
   `

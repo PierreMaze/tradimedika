@@ -20,14 +20,6 @@ vi.spyOn(useTruncateHook, "useVisibleItems").mockImplementation((items) => ({
 
 // Mock des composants tags
 vi.mock("../../../components/tags", () => {
-  const ClickableTag = ({ children }) => (
-    <div data-testid="clickable-tag">{children}</div>
-  );
-
-  ClickableTag.propTypes = {
-    children: PropTypes.node.isRequired,
-  };
-
   const PregnancyTagMock = ({ variant }) => (
     <div data-testid="pregnancy-tag">{variant}</div>
   );
@@ -42,7 +34,6 @@ vi.mock("../../../components/tags", () => {
   };
 
   return {
-    ClickableTag,
     ProuvedTag: () => <div data-testid="verified-tag" />,
     TraditionnalTag: () => <div data-testid="traditional-tag" />,
     PregnancyTag: PregnancyTagMock,
@@ -50,11 +41,6 @@ vi.mock("../../../components/tags", () => {
     RecommendedTag: () => <div data-testid="recommended-tag" />,
   };
 });
-
-// Mock TagsAccordionPopover
-vi.mock("../../../components/ui/helper", () => ({
-  TagsAccordionPopover: () => null,
-}));
 
 // Mock InfoTooltip
 vi.mock("../../../components/ui/tooltip", () => ({

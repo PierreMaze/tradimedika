@@ -71,7 +71,7 @@ export function InfoTooltip({
         </p>
         <p className="mt-1 text-sm leading-relaxed text-neutral-800 lg:text-base dark:text-neutral-200">
           Les badges résument le niveau de fiabilité et les conditions
-          d&apos;usage. Cliquez sur un badge pour en savoir plus.
+          d&apos;usage. Cliquer sur un badge pour en savoir plus.
         </p>
       </div>
     );

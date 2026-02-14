@@ -3,11 +3,12 @@
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 
 import PropTypes from "prop-types";
+import { Tooltip } from "../ui/tooltip";
 
 /**
  * ProuvedTag Component
  *
- * Tag indiquant qu'un remède a été approuvé par un professionnel de santé.
+ * Tag indiquant qu'&apos';un remède a été approuvé par un professionnel de santé.
  * Utilise HiMiniShieldCheck de react-icons/hi2 pour cohérence visuelle.
  *
  * Props:
@@ -17,18 +18,31 @@ import PropTypes from "prop-types";
  */
 
 function ProuvedTag({ className = "", showLabel = true }) {
+  const tooltipContent = (
+    <>
+      <h3 className="mb-1 text-lg font-semibold text-neutral-900 dark:text-white">
+        Reconnu
+      </h3>
+      <p className="text-sm text-neutral-900 dark:text-white">
+        Ce remède est soutenu par des données scientifiques et/ou reconnu par
+        des professionnels de santé dans un cadre d&apos;usage défini.
+      </p>
+    </>
+  );
+
   return (
-    <span
-      data-testid="verified-tag"
-      className={`transition-color inline-flex items-center gap-1.5 rounded-md bg-green-100 px-3 py-1.5 text-xs font-semibold text-green-800 duration-150 lg:text-sm 2xl:text-base dark:bg-green-900 dark:text-green-200 ${className}`}
-      title="Ce remède est soutenu par des données scientifiques et/ou reconnu par des professionnels de santé dans un cadre d’usage défini."
-    >
-      <IoMdCheckmarkCircleOutline
-        className="h-4 w-4 lg:h-5 lg:w-5"
-        aria-hidden="true"
-      />
-      {showLabel && "Reconnu"}
-    </span>
+    <Tooltip content={tooltipContent} placement="top" hoverDelay={200}>
+      <span
+        data-testid="verified-tag"
+        className={`transition-color inline-flex items-center gap-1.5 rounded-md bg-green-100 px-3 py-1.5 text-xs font-semibold text-green-800 duration-150 lg:text-sm 2xl:text-base dark:bg-green-900 dark:text-green-200 ${className}`}
+      >
+        <IoMdCheckmarkCircleOutline
+          className="h-4 w-4 lg:h-5 lg:w-5"
+          aria-hidden="true"
+        />
+        {showLabel && "Reconnu"}
+      </span>
+    </Tooltip>
   );
 }
 

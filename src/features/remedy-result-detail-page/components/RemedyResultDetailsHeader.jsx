@@ -1,19 +1,15 @@
 import PropTypes from "prop-types";
-import { useRef } from "react";
 import {
   ChildrenAgeTag,
-  ClickableTag,
   PregnancyTag,
   ProuvedTag,
   TraditionnalTag,
 } from "../../../components/tags";
-import { TagsAccordionPopover } from "../../../components/ui/helper";
 import { InfoTooltip } from "../../../components/ui/tooltip";
 import ImageCredit from "./ImageCredit";
 import SourcesSection from "./RemedyResultDetailsSourcesSection";
 
 function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
-  const popoverRef = useRef(null);
   return (
     <div className="animate-fade-in mb-6 grid gap-6 transition-all duration-150 motion-reduce:animate-none motion-reduce:opacity-100 lg:mb-8 lg:grid-cols-5 lg:gap-8 2xl:grid-cols-4">
       <div className="lg:col-span-2 2xl:col-span-1">
@@ -41,7 +37,7 @@ function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
             {remedy.type}
           </span>
         </div>
-        <p className="-mb-2 text-sm leading-relaxed text-neutral-800 lg:text-base 2xl:text-lg dark:text-neutral-300">
+        <p className="mb-2 text-sm leading-relaxed text-neutral-800 lg:text-base 2xl:text-lg dark:text-neutral-300">
           {remedy.description}
         </p>
 
@@ -49,37 +45,27 @@ function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
           <InfoTooltip size="sm" variant="inline" label="Indications d'usage" />
           <div className="my-1 flex flex-wrap items-center gap-2">
             {remedy.verifiedByProfessional ? (
-              <ClickableTag categoryId="usages" popoverRef={popoverRef}>
-                <ProuvedTag />
-              </ClickableTag>
+              <ProuvedTag />
             ) : (
-              <ClickableTag categoryId="usages" popoverRef={popoverRef}>
-                <TraditionnalTag />
-              </ClickableTag>
+              <TraditionnalTag />
             )}
 
-            <ClickableTag categoryId="grossesse" popoverRef={popoverRef}>
-              <PregnancyTag
-                variant={
-                  remedy.pregnancySafe === true
-                    ? "ok"
-                    : remedy.pregnancySafe === false
-                      ? "interdit"
-                      : "variant"
-                }
-              />
-            </ClickableTag>
+            <PregnancyTag
+              variant={
+                remedy.pregnancySafe === true
+                  ? "ok"
+                  : remedy.pregnancySafe === false
+                    ? "interdit"
+                    : "variant"
+              }
+            />
 
-            <ClickableTag categoryId="enfants" popoverRef={popoverRef}>
-              <ChildrenAgeTag age={remedy.childrenAge} />
-            </ClickableTag>
+            <ChildrenAgeTag age={remedy.childrenAge} />
           </div>
 
           <SourcesSection sources={remedy.sources} />
         </div>
       </div>
-
-      <TagsAccordionPopover ref={popoverRef} />
     </div>
   );
 }

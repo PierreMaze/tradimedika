@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import { InfoTooltip } from "../../../components/ui/tooltip";
 import { TermPopover } from "../../../components/ui/popover";
+import { InfoTooltip } from "../../../components/ui/tooltip";
 
 function RemedyResultDetailsPropertiesSection({ properties }) {
   if (!properties || properties.length === 0) return null;
@@ -13,7 +13,7 @@ function RemedyResultDetailsPropertiesSection({ properties }) {
         </h2>
         <InfoTooltip
           title="Effets et caractéristiques observés"
-          message="Les propriétés résument les principaux effets et caractéristiques du remède. Cliquez sur une propriété soulignée pour en savoir plus."
+          message="Cette section résument les principaux effets et caractéristiques de cette aliment. Cliquez sur une propriété soulignée pour en savoir plus."
         />
       </div>
       <div className="flex flex-wrap gap-x-2 gap-y-4">

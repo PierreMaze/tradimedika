@@ -1,6 +1,5 @@
 export { default as AllergyTag } from "./AllergyTag";
 export { default as ChildrenAgeTag } from "./ChildrenAgeTag";
-export { default as ClickableTag } from "./ClickableTag";
 export { default as PregnancyTag } from "./PregnancyTag";
 export { default as ProuvedTag } from "./ProuvedTag";
 export { default as RecommendedTag } from "./RecommendedTag";

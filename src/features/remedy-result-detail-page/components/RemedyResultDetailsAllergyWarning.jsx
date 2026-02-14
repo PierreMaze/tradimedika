@@ -15,10 +15,10 @@ function RemedyResultDetailsAllergyWarning({ allergenNames }) {
 
       <div className="flex-1 text-start">
         <p className="text-base font-bold text-amber-700 uppercase dark:text-amber-400">
-          Ce remède contient vos allergènes
+          Cette aliment contient vos allergènes
         </p>
         <p className="mt-1 text-sm text-amber-900 dark:text-amber-50">
-          Ce remède contient :{" "}
+          Cette aliment contient :{" "}
           <span className="font-semibold text-amber-700 dark:text-amber-400">
             {allergenNames}
           </span>

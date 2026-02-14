@@ -26,23 +26,49 @@ const VARIANT_CONFIG = {
     label: "Grossesse",
     colorClasses:
       "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
-    tooltip:
-      "L'usage de ce remède est considéré comme compatible avec la grossesse aux doses indiquées.",
+    tooltipContent: (
+      <>
+        <h3 className="mb-1 text-lg font-semibold text-neutral-900 dark:text-white">
+          Grossesse
+        </h3>
+        <p className="text-sm text-neutral-900 dark:text-white">
+          &apos;usage de ce remède est considéré comme compatible avec la
+          grossesse aux doses indiquées.
+        </p>
+      </>
+    ),
     Icon: IoMdCheckmarkCircleOutline,
   },
   variant: {
     label: "Grossesse",
     colorClasses:
       "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200",
-    tooltip:
-      "Données insuffisantes ou usage conditionnel. Consulter un professionnel de santé avant utilisation.",
+    tooltipContent: (
+      <>
+        <h3 className="mb-1 text-lg font-semibold text-neutral-900 dark:text-white">
+          Grossesse
+        </h3>
+        <p className="text-sm text-neutral-900 dark:text-white">
+          Données insuffisantes ou usage conditionnel. Consulter un
+          professionnel de santé avant utilisation.
+        </p>
+      </>
+    ),
     Icon: FiInfo,
   },
   interdit: {
     label: "Grossesse",
     colorClasses: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-50",
-    tooltip:
-      "Ce remède est contre-indiqué pendant la grossesse. Ne pas utiliser.",
+    tooltipContent: (
+      <>
+        <h3 className="mb-1 text-lg font-semibold text-neutral-900 dark:text-white">
+          Grossesse
+        </h3>
+        <p className="text-sm text-neutral-900 dark:text-white">
+          Ce remède est contre-indiqué pendant la grossesse. Ne pas utiliser.
+        </p>
+      </>
+    ),
     Icon: IoCloseCircleOutline,
   },
 };
@@ -52,7 +78,7 @@ function PregnancyTag({ variant, className = "", showLabel = true }) {
   const Icon = config.Icon;
 
   return (
-    <Tooltip content={config.tooltip} placement="top" hoverDelay={200}>
+    <Tooltip content={config.tooltipContent} placement="top" hoverDelay={200}>
       <span
         data-testid="pregnancy-tag"
         className={`transition-color inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-semibold duration-150 lg:text-sm 2xl:text-base ${config.colorClasses} ${className}`}

@@ -8,20 +8,6 @@ vi.mock("../../../components/ui/tooltip", () => ({
   InfoTooltip: () => null,
 }));
 
-// Mock ClickableTag to render children without wrapping
-vi.mock("../../../components/tags", async () => {
-  const actual = await vi.importActual("../../../components/tags");
-  return {
-    ...actual,
-    ClickableTag: ({ children }) => children,
-  };
-});
-
-// Mock TagsAccordionPopover
-vi.mock("../../../components/ui/helper", () => ({
-  TagsAccordionPopover: () => null,
-}));
-
 const baseRemedy = {
   name: "Camomille",
   type: "plante",

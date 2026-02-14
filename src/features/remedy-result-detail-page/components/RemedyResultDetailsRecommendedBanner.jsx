@@ -20,10 +20,10 @@ function RemedyResultDetailsRecommendedBanner() {
 
       <div className="flex-1 text-start">
         <p className="text-base font-bold text-emerald-700 uppercase dark:text-emerald-400">
-          Remède recommandé
+          Aliment recommandé
         </p>
         <p className="mt-1 text-sm text-emerald-900 dark:text-emerald-50">
-          Ce remède est le{" "}
+          Cette aliment est le{" "}
           <span className="font-semibold text-emerald-700 dark:text-emerald-400">
             plus pertinent
           </span>{" "}

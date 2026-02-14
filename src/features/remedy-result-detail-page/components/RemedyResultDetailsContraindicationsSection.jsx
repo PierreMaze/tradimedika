@@ -2,8 +2,8 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { HiChevronDown, HiChevronUp } from "react-icons/hi2";
 import { RiAlarmWarningFill } from "react-icons/ri";
-import { InfoTooltip } from "../../../components/ui/tooltip";
 import { TermPopover } from "../../../components/ui/popover";
+import { InfoTooltip } from "../../../components/ui/tooltip";
 import { capitalizeFirstLetter } from "../../../utils/capitalizeFirstLetter";
 import { parseContraindicationText } from "../utils/parseContraindicationText";
 
@@ -37,7 +37,7 @@ function RemedyResultDetailsContraindicationsSection({ contraindications }) {
           </h2>
           <InfoTooltip
             title="Incompatibilités"
-            message="Les contre-indications indiquent les situations ou traitements pour lesquels le remède est déconseillé. Cliquez sur un terme médical souligné pour en savoir plus."
+            message="Cette section vous indiquent les situations ou traitements pour lesquels cette aliment est déconseillé. Cliquez sur un terme médical en souligné pour en savoir plus."
             iconColor="text-red-700 dark:text-red-500"
           />
         </div>

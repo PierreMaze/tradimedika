@@ -30,10 +30,11 @@ function RemedyResultDetailsTipsSection({ tips }) {
               className="h-5 w-5 text-sky-600 lg:h-6 lg:w-6 dark:text-sky-500"
               aria-hidden="true"
             />
-            Conseils pratiques
+            Conseils
           </h2>
           <InfoTooltip
-            message="Les conseils pratiques vous guident sur la meilleure façon d'utiliser ce remède au quotidien."
+            title="Astuces pratiques"
+            message="Cette section vous guide sur la meilleure façon de conserver, de ce fournir et d'utiliser cette aliment au quotidien."
             iconColor="text-sky-600 dark:text-sky-500"
           />
         </div>

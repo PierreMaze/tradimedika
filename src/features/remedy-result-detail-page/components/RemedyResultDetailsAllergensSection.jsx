@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import { InfoTooltip } from "../../../components/ui/tooltip";
 import { TermPopover } from "../../../components/ui/popover";
+import { InfoTooltip } from "../../../components/ui/tooltip";
 
 function RemedyResultDetailsAllergensSection({ allergens }) {
   if (!allergens || allergens.length === 0) return null;
@@ -9,11 +9,11 @@ function RemedyResultDetailsAllergensSection({ allergens }) {
     <section className="animate-fade-in-up rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition-all duration-150 motion-reduce:animate-none motion-reduce:opacity-100 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800">
       <div className="mb-4 flex min-h-8 items-center gap-2">
         <h2 className="text-lg font-semibold lg:text-xl 2xl:text-2xl">
-          Allergènes potentiels
+          Allergènes
         </h2>
         <InfoTooltip
-          title="Réactions allergiques"
-          message="Les allergènes potentiels regroupent les substances présentes dans le remède susceptibles de provoquer une réaction. Cliquez sur un allergène souligné pour en savoir plus."
+          title="Substances allergènes potentielles"
+          message="Cette section regroupent les substances présentes dans cette aliment susceptibles de provoquer une réaction. Cliquez sur un allergène souligné pour en savoir plus."
         />
       </div>
       <div className="flex flex-wrap gap-x-2 gap-y-4">

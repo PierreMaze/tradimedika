@@ -2,6 +2,7 @@
 
 import PropTypes from "prop-types";
 import { FiInfo } from "react-icons/fi";
+import { Tooltip } from "../ui/tooltip";
 
 /**
  * TraditionnalTag Component
@@ -16,15 +17,28 @@ import { FiInfo } from "react-icons/fi";
  */
 
 function TraditionnalTag({ className = "", showLabel = true }) {
+  const tooltipContent = (
+    <>
+      <h3 className="mb-1 text-lg font-semibold text-neutral-900 dark:text-white">
+        Traditionnel
+      </h3>
+      <p className="text-sm text-neutral-900 dark:text-white">
+        Ce remède repose principalement sur un usage traditionnel. Son
+        efficacité n&apos;est pas validée par des études scientifiques solides.
+      </p>
+    </>
+  );
+
   return (
-    <span
-      data-testid="verified-tag"
-      className={`transition-color inline-flex items-center gap-1.5 rounded-md bg-amber-100 px-3 py-1.5 text-xs font-semibold text-amber-800 duration-150 lg:text-sm 2xl:text-base dark:bg-amber-900 dark:text-amber-200 ${className}`}
-      title="Ce remède repose principalement sur un usage traditionnel. Son efficacité n’est pas validée par des études scientifiques solides."
-    >
-      <FiInfo className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
-      {showLabel && "Traditionnel"}
-    </span>
+    <Tooltip content={tooltipContent} placement="top" hoverDelay={200}>
+      <span
+        data-testid="verified-tag"
+        className={`transition-color inline-flex items-center gap-1.5 rounded-md bg-amber-100 px-3 py-1.5 text-xs font-semibold text-amber-800 duration-150 lg:text-sm 2xl:text-base dark:bg-amber-900 dark:text-amber-200 ${className}`}
+      >
+        <FiInfo className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
+        {showLabel && "Traditionnel"}
+      </span>
+    </Tooltip>
   );
 }
 

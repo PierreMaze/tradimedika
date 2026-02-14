@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { FaPrescriptionBottleMedical } from "react-icons/fa6";
 import { HiChevronDown, HiChevronUp } from "react-icons/hi2";
+import { InfoTooltip } from "../../../components/ui/tooltip";
 import { formatUsageFrequency } from "../utils/formatUsageFrequency";
 
 function RemedyResultDetailsUsagesList({ uses }) {
@@ -22,7 +23,13 @@ function RemedyResultDetailsUsagesList({ uses }) {
             aria-hidden="true"
           />
           Utilisations / Préparations
+          <InfoTooltip
+            title="Méthode de préparation et d'utilisation"
+            message="Cette section vous guide sur la manière optimale d'utiliser cet aliment pour obtenir les meilleurs résultats."
+            iconColor="text-emerald-600 dark:text-emerald-500"
+          />
         </h2>
+
         {isOpen ? (
           <HiChevronUp
             className="h-5 w-5 text-neutral-500 lg:h-6 lg:w-6"

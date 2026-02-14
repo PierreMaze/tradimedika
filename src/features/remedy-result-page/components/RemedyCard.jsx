@@ -1,18 +1,16 @@
 // components/remedy/RemedyCard.jsx
 import PropTypes from "prop-types";
-import { memo, useRef } from "react";
+import { memo } from "react";
 import { FiInfo } from "react-icons/fi";
 import { HiArrowRight } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import {
   ChildrenAgeTag,
-  ClickableTag,
   PregnancyTag,
   ProuvedTag,
   RecommendedTag,
   TraditionnalTag,
 } from "../../../components/tags";
-import { TagsAccordionPopover } from "../../../components/ui/helper";
 import { InfoTooltip } from "../../../components/ui/tooltip";
 import useGAEvent from "../../../hooks/useGAEvent";
 import { capitalizeFirstLetter } from "../../../utils/capitalizeFirstLetter";
@@ -34,7 +32,6 @@ function RemedyCard({
   isFiltered = false,
   isRecommended = false,
 }) {
-  const popoverRef = useRef(null);
   const trackEvent = useGAEvent();
   const {
     name,
@@ -218,36 +215,24 @@ function RemedyCard({
             )}
 
             {/* Tags de sécurité */}
-            <div className={`-mt-2 flex flex-col ${textClasses}`}>
+            <div className={`mt-2 flex flex-col ${textClasses}`}>
               <InfoTooltip
                 size="sm"
                 variant="inline"
                 label="Indications d'usage"
               />
               <div className="flex flex-wrap gap-2">
-                {verifiedByProfessional ? (
-                  <ClickableTag categoryId="usages" popoverRef={popoverRef}>
-                    <ProuvedTag />
-                  </ClickableTag>
-                ) : (
-                  <ClickableTag categoryId="usages" popoverRef={popoverRef}>
-                    <TraditionnalTag />
-                  </ClickableTag>
-                )}
-                <ClickableTag categoryId="grossesse" popoverRef={popoverRef}>
-                  <PregnancyTag
-                    variant={
-                      pregnancySafe === true
-                        ? "ok"
-                        : pregnancySafe === false
-                          ? "interdit"
-                          : "variant"
-                    }
-                  />
-                </ClickableTag>
-                <ClickableTag categoryId="enfants" popoverRef={popoverRef}>
-                  <ChildrenAgeTag age={childrenAge} />
-                </ClickableTag>
+                {verifiedByProfessional ? <ProuvedTag /> : <TraditionnalTag />}
+                <PregnancyTag
+                  variant={
+                    pregnancySafe === true
+                      ? "ok"
+                      : pregnancySafe === false
+                        ? "interdit"
+                        : "variant"
+                  }
+                />
+                <ChildrenAgeTag age={childrenAge} />
               </div>
             </div>
 
@@ -264,8 +249,6 @@ function RemedyCard({
           </div>
         </div>
       </Link>
-
-      <TagsAccordionPopover ref={popoverRef} />
     </div>
   );
 }
