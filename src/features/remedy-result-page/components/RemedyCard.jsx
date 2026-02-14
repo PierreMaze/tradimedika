@@ -12,10 +12,8 @@ import {
   RecommendedTag,
   TraditionnalTag,
 } from "../../../components/tags";
-import {
-  TagsAccordionPopover,
-  TagsInfoButton,
-} from "../../../components/ui/helper";
+import { TagsAccordionPopover } from "../../../components/ui/helper";
+import { InfoTooltip } from "../../../components/ui/tooltip";
 import useGAEvent from "../../../hooks/useGAEvent";
 import { capitalizeFirstLetter } from "../../../utils/capitalizeFirstLetter";
 import { useVisibleItems } from "../hooks/useTruncatePropertiesItems";
@@ -221,7 +219,7 @@ function RemedyCard({
 
             {/* Tags de sécurité */}
             <div className={`-mt-2 flex flex-col ${textClasses}`}>
-              <TagsInfoButton
+              <InfoTooltip
                 size="sm"
                 variant="inline"
                 label="Indications d'usage"

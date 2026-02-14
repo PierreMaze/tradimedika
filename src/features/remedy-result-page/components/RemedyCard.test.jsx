@@ -51,10 +51,14 @@ vi.mock("../../../components/tags", () => {
   };
 });
 
-// Mock TagsAccordionPopover et TagsInfoButton
+// Mock TagsAccordionPopover
 vi.mock("../../../components/ui/helper", () => ({
   TagsAccordionPopover: () => null,
-  TagsInfoButton: () => null,
+}));
+
+// Mock InfoTooltip
+vi.mock("../../../components/ui/tooltip", () => ({
+  InfoTooltip: () => null,
 }));
 
 // ------------------------------

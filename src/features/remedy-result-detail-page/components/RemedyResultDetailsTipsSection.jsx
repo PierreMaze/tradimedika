@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { HiChevronDown, HiChevronUp } from "react-icons/hi2";
 import { MdTipsAndUpdates } from "react-icons/md";
-import SectionHelpButton from "../../../components/ui/helper/SectionHelpButton";
+import { InfoTooltip } from "../../../components/ui/tooltip";
 
 function RemedyResultDetailsTipsSection({ tips }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,7 +32,7 @@ function RemedyResultDetailsTipsSection({ tips }) {
             />
             Conseils pratiques
           </h2>
-          <SectionHelpButton
+          <InfoTooltip
             message="Les conseils pratiques vous guident sur la meilleure façon d'utiliser ce remède au quotidien."
             iconColor="text-sky-600 dark:text-sky-500"
           />

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import SectionHelpButton from "../../../components/ui/helper/SectionHelpButton";
+import { InfoTooltip } from "../../../components/ui/tooltip";
 import { TermPopover } from "../../../components/ui/popover";
 
 function RemedyResultDetailsPropertiesSection({ properties }) {
@@ -11,7 +11,7 @@ function RemedyResultDetailsPropertiesSection({ properties }) {
         <h2 className="text-lg font-semibold lg:text-xl 2xl:text-2xl">
           Propriétés
         </h2>
-        <SectionHelpButton
+        <InfoTooltip
           title="Effets et caractéristiques observés"
           message="Les propriétés résument les principaux effets et caractéristiques du remède. Cliquez sur une propriété soulignée pour en savoir plus."
         />

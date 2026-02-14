@@ -7,10 +7,8 @@ import {
   ProuvedTag,
   TraditionnalTag,
 } from "../../../components/tags";
-import {
-  TagsAccordionPopover,
-  TagsInfoButton,
-} from "../../../components/ui/helper";
+import { TagsAccordionPopover } from "../../../components/ui/helper";
+import { InfoTooltip } from "../../../components/ui/tooltip";
 import ImageCredit from "./ImageCredit";
 import SourcesSection from "./RemedyResultDetailsSourcesSection";
 
@@ -48,11 +46,7 @@ function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
         </p>
 
         <div className="flex flex-col">
-          <TagsInfoButton
-            size="sm"
-            variant="inline"
-            label="Indications d'usage"
-          />
+          <InfoTooltip size="sm" variant="inline" label="Indications d'usage" />
           <div className="my-1 flex flex-wrap items-center gap-2">
             {remedy.verifiedByProfessional ? (
               <ClickableTag categoryId="usages" popoverRef={popoverRef}>

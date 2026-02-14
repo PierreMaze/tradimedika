@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import SectionHelpButton from "../../../components/ui/helper/SectionHelpButton";
+import { InfoTooltip } from "../../../components/ui/tooltip";
 import { TermPopover } from "../../../components/ui/popover";
 
 function RemedyResultDetailsAllergensSection({ allergens }) {
@@ -11,7 +11,7 @@ function RemedyResultDetailsAllergensSection({ allergens }) {
         <h2 className="text-lg font-semibold lg:text-xl 2xl:text-2xl">
           Allergènes potentiels
         </h2>
-        <SectionHelpButton
+        <InfoTooltip
           title="Réactions allergiques"
           message="Les allergènes potentiels regroupent les substances présentes dans le remède susceptibles de provoquer une réaction. Cliquez sur un allergène souligné pour en savoir plus."
         />

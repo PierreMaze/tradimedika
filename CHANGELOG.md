@@ -2,6 +2,61 @@
 
 ---
 
+## [0.54.0] - 2026-02-14
+
+### Added
+
+- **Vanilla React tooltip system**
+  - Created unified tooltip system with zero external dependencies (0 deps, ~15kB bundle size reduction)
+  - Added `Tooltip.jsx` base component with WCAG 2.2 AA accessibility, portal rendering, and animations
+  - Added `InfoTooltip.jsx` component merging `TagsInfoButton` and `SectionHelpButton` functionality
+  - Implemented 4 custom hooks for tooltip management:
+    - `useTooltip.js` - State management (open/close/toggle), hover delays, ESC key support
+    - `useTooltipPosition.js` - Intelligent positioning with auto-update on scroll/resize
+    - `useClickOutside.js` - External click detection for tooltip dismissal
+    - `useKeyboard.js` - Global keyboard event handling
+  - Created `tooltipPositioning.js` utility with advanced collision detection algorithms (flip/shift strategies)
+  - Supports multi-directional positioning (top/bottom/left/right) with automatic viewport boundary detection
+
+### Changed
+
+- **Refactored TermPopover with new primitives**
+  - Migrated `TermPopover.jsx` to use new tooltip hooks while preserving all features:
+    - Lock state (click to keep open)
+    - Wikipedia external links with confirmation modal
+    - Three visual variants (property, allergen, medical)
+    - 300ms hover delay for accidental trigger prevention
+    - Complete focus management and keyboard navigation
+  - Reduced component complexity from 297 to ~200 lines while improving maintainability
+  - Now uses `createPortal` for better z-index management and positioning consistency
+
+- **Converted HTML title tooltips to React components**
+  - Migrated `PregnancyTag` from native HTML `title` attribute to React `<Tooltip>` wrapper
+  - Migrated `ChildrenAgeTag` from native HTML `title` attribute to React `<Tooltip>` wrapper
+  - Ensures consistent UX across all tooltips (unified timing, positioning, styling)
+  - Enables better accessibility control and mobile-first interactions (tap vs hover)
+
+- **Unified tooltip components across application**
+  - Replaced `TagsInfoButton` usage with `InfoTooltip` in 2 components:
+    - `RemedyResultDetailsHeader.jsx`
+    - `RemedyCard.jsx`
+  - Replaced `SectionHelpButton` usage with `InfoTooltip` in 4 components:
+    - `RemedyResultDetailsPropertiesSection.jsx`
+    - `RemedyResultDetailsAllergensSection.jsx`
+    - `RemedyResultDetailsContraindicationsSection.jsx`
+    - `RemedyResultDetailsTipsSection.jsx`
+  - Updated test mocks to reflect new tooltip architecture
+
+### Removed
+
+- **Deprecated tooltip components**
+  - Removed `TagsInfoButton.jsx` (185 lines) - replaced by `InfoTooltip`
+  - Removed `SectionHelpButton.jsx` (149 lines) - replaced by `InfoTooltip`
+  - Updated `src/components/ui/helper/index.js` to remove obsolete exports
+  - Net code reduction: ~390 lines removed, improved maintainability
+
+---
+
 ## [0.53.3] - 2026-02-14
 
 ### Added

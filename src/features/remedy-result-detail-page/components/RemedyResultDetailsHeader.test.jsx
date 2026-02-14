@@ -2,6 +2,12 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import RemedyResultDetailsHeader from "./RemedyResultDetailsHeader";
 
+// Mock Tooltip to render children without wrapping
+vi.mock("../../../components/ui/tooltip", () => ({
+  Tooltip: ({ children }) => children,
+  InfoTooltip: () => null,
+}));
+
 // Mock ClickableTag to render children without wrapping
 vi.mock("../../../components/tags", async () => {
   const actual = await vi.importActual("../../../components/tags");
@@ -14,7 +20,6 @@ vi.mock("../../../components/tags", async () => {
 // Mock TagsAccordionPopover
 vi.mock("../../../components/ui/helper", () => ({
   TagsAccordionPopover: () => null,
-  TagsInfoButton: () => null,
 }));
 
 const baseRemedy = {
