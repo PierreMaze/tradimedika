@@ -54,6 +54,7 @@ function TermPopover({
     placement: "top",
     offset: 12,
     autoUpdate: true, // Recalcule au scroll/resize
+    isOpen: showPopover, // Synchronise le calcul avec l'affichage du popover
   });
 
   // Handlers hover avec lock state
@@ -133,7 +134,7 @@ function TermPopover({
       role="dialog"
       aria-modal="false"
       aria-labelledby={titleId}
-      className={`animate-in fade-in zoom-in-95 fixed ${Z_INDEX_CLASSES.TERM_POPOVER} w-64 rounded-lg bg-white p-4 shadow-xl drop-shadow-2xl transition-all duration-150 dark:bg-neutral-800`}
+      className={`fixed ${Z_INDEX_CLASSES.TERM_POPOVER} w-64 rounded-lg border border-neutral-200 bg-white p-3 text-neutral-900 opacity-100 shadow-lg transition-opacity duration-200 ease-in-out lg:w-96 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white`}
       style={{
         top: `${position.y}px`,
         left: `${position.x}px`,
@@ -152,28 +153,17 @@ function TermPopover({
       </div>
 
       {/* Header avec titre et bouton fermer */}
-      <div className="mb-2 flex items-start justify-between">
+      <div className="flex items-center justify-between">
         <h3
           id={titleId}
-          className="text-sm font-semibold text-neutral-900 dark:text-neutral-100"
+          className="text-lg font-semibold text-neutral-900 dark:text-white"
         >
           {termData.name}
         </h3>
-        <button
-          onClick={() => {
-            setShowPopover(false);
-            setIsLocked(false);
-            triggerRef.current?.focus();
-          }}
-          className="transition-color flex min-h-[44px] min-w-[44px] items-center justify-center rounded text-neutral-500 duration-150 hover:text-neutral-700 focus:ring-2 focus:ring-emerald-500 focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-200"
-          aria-label="Fermer"
-        >
-          <span className="text-xl leading-none">&times;</span>
-        </button>
       </div>
 
       {/* Définition */}
-      <p className="mb-3 text-xs leading-relaxed text-neutral-700 dark:text-neutral-300">
+      <p className="my-2 text-sm leading-relaxed text-neutral-900 dark:text-white">
         {termData.definition}
       </p>
 
@@ -182,7 +172,7 @@ function TermPopover({
         <button
           type="button"
           onClick={() => openConfirmation(termData.wikipediaUrl, "Wikipedia")}
-          className="inline-flex items-center gap-1 rounded text-xs font-semibold text-emerald-700 transition-colors hover:text-emerald-800 hover:underline focus:ring-2 focus:ring-emerald-500 focus:outline-none dark:text-emerald-500 dark:hover:text-emerald-400"
+          className="inline-flex cursor-pointer items-center justify-end gap-1 rounded text-sm font-semibold text-emerald-700 transition-colors hover:text-emerald-800 hover:underline focus:ring-2 focus:ring-emerald-500 focus:outline-none dark:text-emerald-500 dark:hover:text-emerald-400"
           aria-label={`En savoir plus sur ${termData.name} sur Wikipedia (ouvre dans une nouvelle fenêtre)`}
         >
           En savoir plus
