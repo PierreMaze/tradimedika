@@ -39,7 +39,7 @@ export default function AllergyFilterInfo({
       {/* Contenu principal */}
       <div className="flex items-start gap-4">
         <TbEyeClosed
-          className="mt-0.5 flex shrink-0 rounded-md bg-emerald-100 p-2 text-4xl text-emerald-600 dark:bg-emerald-900/50 dark:text-emerald-400"
+          className="mt-0.5 shrink-0 rounded-md bg-emerald-100 p-2 text-4xl text-emerald-600 dark:bg-emerald-900/50 dark:text-emerald-400"
           aria-hidden="true"
         />
 

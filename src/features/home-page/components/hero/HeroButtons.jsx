@@ -4,6 +4,7 @@ import { FaCheck } from "react-icons/fa6";
 import { IoMdArrowForward } from "react-icons/io";
 import { RiHistoryLine } from "react-icons/ri";
 
+import Button from "../../../../components/ui/button/Button";
 import { BUTTON_HISTORY } from "../../../../constants/buttonLabels";
 import {
   BUTTON_PRIMARY_STYLES,
@@ -238,12 +239,13 @@ export default function HeroButtons({
               Activez-le dans Paramètres &gt; Gestion des cookies, il est
               nécessaire pour des raisons de confidentialité (RGPD)
             </p>
-            <button
+            <Button
               onClick={handleOpenSettings}
-              className="mt-3 w-full cursor-pointer rounded-md bg-emerald-600 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-800"
+              variant="primary"
+              className="mt-3 w-full text-sm"
             >
               Ouvrir les paramètres
-            </button>
+            </Button>
             <div className="absolute -bottom-2 left-1/2 h-0 w-0 -translate-x-1/2 border-t-8 border-r-8 border-l-8 border-t-neutral-100 border-r-transparent border-l-transparent dark:border-t-neutral-900"></div>
           </div>
         )}

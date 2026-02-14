@@ -1,4 +1,5 @@
 // tradimedika-v1/src/layout/Footer.jsx
+import { memo } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { LINK_COOKIES_PAGE } from "../../constants/buttonLabels";
@@ -8,9 +9,9 @@ import LogoTradimedika from "./LogoTradimedika";
 const Footer = ({ className = "" }) => {
   return (
     <footer
-      className={`bg-light text-dark dark:bg-dark dark:text-light animate-fade-in-up w-full transition delay-1200 duration-300 ease-in-out motion-reduce:animate-none motion-reduce:opacity-100 lg:py-4 ${className}`}
+      className={`bg-light text-dark dark:bg-dark dark:text-light animate-fade-in-up w-full transition-colors duration-150 ease-out motion-reduce:animate-none motion-reduce:opacity-100 lg:py-4 ${className}`}
     >
-      <div className="border-dark/80 dark:border-light/60 mx-auto flex w-full flex-col items-center justify-center border-t-2 border-dashed py-4 transition duration-300 ease-in-out lg:w-3/4">
+      <div className="border-dark/80 dark:border-light/60 mx-auto flex w-full flex-col items-center justify-center border-t-2 border-dashed py-4 transition-colors duration-150 ease-out lg:w-3/4">
         {/* Logo */}
         <div className="mb-4">
           <LogoTradimedika />
@@ -33,7 +34,7 @@ const Footer = ({ className = "" }) => {
         </div>
 
         {/* Copyright */}
-        <p className="text-xs text-neutral-600 transition duration-300 ease-in-out dark:text-neutral-500">
+        <p className="text-xs text-neutral-600 transition-colors duration-150 ease-out dark:text-neutral-500">
           © TRADIMEDIKA 2026 - Tous droits réservés
         </p>
       </div>
@@ -45,4 +46,4 @@ Footer.propTypes = {
   className: PropTypes.string,
 };
 
-export default Footer;
+export default memo(Footer);

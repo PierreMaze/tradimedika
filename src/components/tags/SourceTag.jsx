@@ -79,7 +79,7 @@ function SourceTag({ title, url, className = "" }) {
     <ExternalLink
       href={url}
       siteName={title}
-      className={`inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-xs font-semibold transition duration-300 lg:text-sm 2xl:text-base ${colorClasses} ${className}`}
+      className={`transition-color inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-xs font-semibold duration-150 lg:text-sm 2xl:text-base ${colorClasses} ${className}`}
       title={`Consulter sur ${title}`}
       data-testid="source-tag"
     >

@@ -2,9 +2,11 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link, useLocation } from "react-router-dom";
-import db from "../data/db.json";
+import { HiArrowLeft } from "react-icons/hi";
+import { useLocation } from "react-router-dom";
+import Button from "../components/ui/button/Button";
 import FeedbackLink from "../components/ui/feedback/FeedbackLink";
+import db from "../data/db.json";
 import { AllergyFilterInfo, useAllergies } from "../features/allergens-search";
 import {
   FilterButton,
@@ -236,27 +238,15 @@ function RemedyResult() {
 
       {/* Bouton Retour */}
       <div className="animate-fade-in flex items-center gap-3 delay-300 motion-reduce:animate-none motion-reduce:opacity-100">
-        <Link
+        <Button
+          as="link"
           to="/"
-          aria-label="Retour à l'accueil"
-          className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition duration-200 hover:bg-emerald-700 hover:shadow-lg focus:ring-2 focus:ring-emerald-300 focus:outline-none dark:bg-emerald-800"
-        >
-          <svg
-            className="h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
-            />
-          </svg>
-        </Link>
+          variant="primary"
+          icon={HiArrowLeft}
+          ariaLabel="Retour à l'accueil"
+        />
       </div>
-      <div className="text-dark dark:text-light mt-8 flex flex-col items-center gap-y-4 text-center transition duration-300 ease-in-out lg:mt-4">
+      <div className="text-dark dark:text-light transition-color mt-8 flex flex-col items-center gap-y-4 text-center duration-150 ease-in-out lg:mt-4">
         {/* Titre principal */}
         <h1 className="text-3xl font-bold lg:text-4xl">
           Résultats des Remèdes
@@ -282,7 +272,7 @@ function RemedyResult() {
               />
               {shouldShowSeparator && (
                 <span
-                  className="h-8 border-1 border-dashed border-emerald-600 dark:border-emerald-500"
+                  className="h-8 border border-dashed border-emerald-600 dark:border-emerald-500"
                   aria-hidden="true"
                 ></span>
               )}
@@ -337,13 +327,14 @@ function RemedyResult() {
       </div>
       <div className="animate-fade-in mt-12 flex w-full justify-center delay-1000 motion-reduce:animate-none motion-reduce:opacity-100">
         {/* Bouton Retour */}
-        <Link
+        <Button
+          as="link"
           to="/"
-          aria-label="Retour à l'accueil"
-          className="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-semibold text-white shadow-md transition duration-200 hover:bg-emerald-700 hover:shadow-lg focus:ring-2 focus:ring-emerald-300 focus:outline-none dark:bg-emerald-800"
+          variant="primary"
+          ariaLabel="Retour à l'accueil"
         >
           Nouvelle recherche
-        </Link>
+        </Button>
       </div>
 
       {/* Feedback Section */}

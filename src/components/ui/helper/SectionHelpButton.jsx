@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import { GrCircleQuestion } from "react-icons/gr";
+import { Z_INDEX_CLASSES } from "../../../constants/zIndexLevels";
 
 /**
  * SectionHelpButton - Bouton d'aide avec tooltip d'instruction
@@ -111,7 +112,7 @@ function SectionHelpButton({
         onMouseLeave={handleMouseLeave}
         aria-expanded={showTooltip}
         aria-label="Aide sur l'utilisation des termes"
-        className={`group inline-flex cursor-help items-center gap-x-2 rounded-full bg-transparent font-bold transition-colors duration-200 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-emerald-500 active:scale-95 ${iconColor || "dark:text-white"} ${buttonSizeClasses[size]}`}
+        className={`group inline-flex cursor-help items-center gap-x-2 rounded-full bg-transparent font-bold transition-colors duration-150 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-emerald-500 active:scale-95 ${iconColor || "dark:text-white"} ${buttonSizeClasses[size]}`}
       >
         <GrCircleQuestion className="h-4 w-4 text-inherit" aria-hidden="true" />
       </button>
@@ -119,7 +120,7 @@ function SectionHelpButton({
       {showTooltip && (
         <div
           ref={tooltipRef}
-          className="fixed z-50 w-80 rounded-lg bg-white px-4 py-3 shadow-2xl sm:w-80 lg:w-72 dark:bg-neutral-900"
+          className={`fixed ${Z_INDEX_CLASSES.TOOLTIP} w-80 rounded-lg bg-white px-4 py-3 shadow-2xl sm:w-80 lg:w-72 dark:bg-neutral-900`}
           style={{
             top: `${tooltipPosition.top}px`,
             left: `${tooltipPosition.left}px`,

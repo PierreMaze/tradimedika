@@ -16,7 +16,7 @@ export default function SymptomCounter({ count, max = 5 }) {
 
   return (
     <div className="animate-fade-in-up text-center motion-reduce:animate-none motion-reduce:opacity-100">
-      <span className="text-sm font-medium text-neutral-600 transition duration-300 ease-in-out dark:text-neutral-400">
+      <span className="text-sm font-medium text-neutral-600 transition-colors duration-150 ease-in-out dark:text-neutral-400">
         {count}/{max} symptômes sélectionnés
       </span>
     </div>

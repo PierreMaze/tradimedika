@@ -6,7 +6,7 @@ function RemedyResultDetailsPropertiesSection({ properties }) {
   if (!properties || properties.length === 0) return null;
 
   return (
-    <section className="animate-fade-in-up rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition delay-150 duration-300 motion-reduce:animate-none motion-reduce:opacity-100 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800">
+    <section className="animate-fade-in-up rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition-colors duration-150 motion-reduce:animate-none motion-reduce:opacity-100 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800">
       <div className="mb-4 flex min-h-8 items-center gap-2">
         <h2 className="text-lg font-semibold lg:text-xl 2xl:text-2xl">
           Propriétés

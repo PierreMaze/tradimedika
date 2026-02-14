@@ -29,7 +29,7 @@ function LayoutApp() {
 
   return (
     <SettingsModalProvider>
-      <div className="bg-light dark:bg-dark relative flex min-h-screen flex-col items-center transition duration-300 ease-in-out">
+      <div className="bg-light dark:bg-dark relative flex min-h-screen flex-col items-center transition-colors duration-150 ease-out">
         {/* LeafFall global - animation d'arrière-plan sur toutes les pages */}
         {/* Lazy-loaded with 1s delay to improve FCP */}
         {/* NE PAS dupliquer dans les composants enfants (Hero, etc.) */}

@@ -96,7 +96,7 @@ describe("Header", () => {
 
       const header = container.querySelector("header");
       expect(header).toHaveClass(
-        "fixed top-0 right-0 left-0 z-100 h-auto w-full bg-light dark:bg-dark transition-transform duration-300 ease-in-out motion-reduce:transform-none",
+        "fixed top-0 right-0 left-0 z-100 h-auto w-full bg-light dark:bg-dark transition-transform duration-150 motion-reduce:transform-none",
       );
     });
 
@@ -241,7 +241,7 @@ describe("Header", () => {
       const { container } = render(<Header />);
 
       const innerContainer = container.querySelector(".border-b-2");
-      expect(innerContainer).toHaveClass("transition", "duration-300");
+      expect(innerContainer).toHaveClass("transition-colors", "duration-150");
     });
   });
 

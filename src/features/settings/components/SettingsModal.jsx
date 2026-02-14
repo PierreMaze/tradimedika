@@ -113,7 +113,7 @@ export default function SettingsModal() {
           </div>
 
           {/* Performance section */}
-          <div className="flex items-center justify-between border-t border-neutral-200 pt-6 dark:border-neutral-700">
+          <div className="flex items-center justify-between border-t border-neutral-200 pt-6 transition-colors duration-150 dark:border-neutral-700">
             <div className="flex-1">
               <h3 className="text-base font-medium text-neutral-900 dark:text-neutral-100">
                 {SETTINGS_PERFORMANCE_LABEL}
@@ -140,10 +140,10 @@ export default function SettingsModal() {
           </div>
 
           {/* Accessibility section */}
-          <div className="border-t border-neutral-200 pt-6 dark:border-neutral-700">
+          <div className="border-t border-neutral-200 pt-6 transition-colors duration-150 dark:border-neutral-700">
             <button
               onClick={toggleAccessibilitySection}
-              className="mb-4 flex w-full cursor-pointer items-center justify-between text-left transition-colors hover:opacity-80"
+              className="mb-4 flex w-full cursor-pointer items-center justify-between text-left transition-colors duration-150 hover:opacity-80"
               aria-expanded={isAccessibilitySectionOpen}
               aria-controls="accessibility-section-content"
             >
@@ -156,7 +156,7 @@ export default function SettingsModal() {
                 </p>
               </div>
               <IoChevronDown
-                className={`text-xl text-neutral-600 transition-transform dark:text-neutral-400 ${
+                className={`text-xl text-neutral-600 transition-transform duration-150 dark:text-neutral-400 ${
                   isAccessibilitySectionOpen ? "rotate-180" : ""
                 }`}
               />
@@ -165,11 +165,11 @@ export default function SettingsModal() {
             {isAccessibilitySectionOpen && (
               <div
                 id="accessibility-section-content"
-                className="animate-in fade-in slide-in-from-top-2 duration-300 motion-reduce:transition-none"
+                className="animate-in fade-in slide-in-from-top-2 transition-color duration-150 motion-reduce:transition-none"
               >
                 <div className="space-y-4">
                   {/* Contraste élevé */}
-                  <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+                  <div className="rounded-lg border border-neutral-200 p-4 transition-colors duration-150 dark:border-neutral-700">
                     <div className="mb-3 flex items-center justify-between">
                       <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
                         {ACCESSIBILITY_HIGH_CONTRAST_LABEL}
@@ -182,7 +182,7 @@ export default function SettingsModal() {
                   </div>
 
                   {/* Confirmation liens externes */}
-                  <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+                  <div className="rounded-lg border border-neutral-200 p-4 transition-colors duration-150 dark:border-neutral-700">
                     <div className="mb-3 flex items-center justify-between">
                       <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
                         {ACCESSIBILITY_EXTERNAL_LINK_LABEL}
@@ -199,10 +199,10 @@ export default function SettingsModal() {
           </div>
 
           {/* History section */}
-          <div className="border-t border-neutral-200 pt-6 dark:border-neutral-700">
+          <div className="border-t border-neutral-200 pt-6 transition-colors duration-150 dark:border-neutral-700">
             <button
               onClick={toggleHistorySection}
-              className="mb-4 flex w-full cursor-pointer items-center justify-between text-left transition-colors hover:opacity-80"
+              className="mb-4 flex w-full cursor-pointer items-center justify-between text-left transition-colors duration-150 hover:opacity-80"
               aria-expanded={isHistorySectionOpen}
               aria-controls="history-section-content"
             >
@@ -215,7 +215,7 @@ export default function SettingsModal() {
                 </p>
               </div>
               <IoChevronDown
-                className={`text-xl text-neutral-600 transition-transform dark:text-neutral-400 ${
+                className={`text-xl text-neutral-600 transition-transform duration-150 dark:text-neutral-400 ${
                   isHistorySectionOpen ? "rotate-180" : ""
                 }`}
               />
@@ -224,11 +224,11 @@ export default function SettingsModal() {
             {isHistorySectionOpen && (
               <div
                 id="history-section-content"
-                className="animate-in fade-in slide-in-from-top-2 duration-300 motion-reduce:transition-none"
+                className="animate-in fade-in slide-in-from-top-2 transition-color duration-150 motion-reduce:transition-none"
               >
                 <div className="space-y-4">
                   {/* Historique de recherche */}
-                  <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+                  <div className="rounded-lg border border-neutral-200 p-4 transition-colors duration-150 dark:border-neutral-700">
                     <div className="mb-3 flex items-center justify-between">
                       <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
                         {COOKIE_CATEGORIES.history.label}
@@ -260,7 +260,7 @@ export default function SettingsModal() {
                   </div>
 
                   {/* Allergies sauvegardées */}
-                  <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+                  <div className="rounded-lg border border-neutral-200 p-4 transition-colors duration-150 dark:border-neutral-700">
                     <div className="mb-3 flex items-center justify-between">
                       <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
                         {COOKIE_CATEGORIES.allergies.label}
@@ -296,7 +296,7 @@ export default function SettingsModal() {
           </div>
 
           {/* Cookie management section */}
-          <div className="border-t border-neutral-200 pt-6 dark:border-neutral-700">
+          <div className="border-t border-neutral-200 pt-6 transition-colors duration-150 dark:border-neutral-700">
             <button
               onClick={toggleCookieSection}
               className="mb-4 flex w-full cursor-pointer items-center justify-between text-left transition-colors hover:opacity-80"
@@ -321,11 +321,11 @@ export default function SettingsModal() {
             {isCookieSectionOpen && (
               <div
                 id="cookie-section-content"
-                className="animate-in fade-in slide-in-from-top-2 duration-300 motion-reduce:transition-none"
+                className="animate-in fade-in slide-in-from-top-2 transition-color duration-150 motion-reduce:transition-none"
               >
                 <div className="space-y-4">
                   {/* Cookies nécessaires */}
-                  <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+                  <div className="rounded-lg border border-neutral-200 p-4 transition-colors duration-150 dark:border-neutral-700">
                     <div className="mb-3 flex items-center justify-between">
                       <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
                         {COOKIE_CATEGORIES.necessary.label}
@@ -359,7 +359,7 @@ export default function SettingsModal() {
                   </div>
 
                   {/* Cookies analytics */}
-                  <div className="rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+                  <div className="rounded-lg border border-neutral-200 p-4 transition-colors duration-150 dark:border-neutral-700">
                     <div className="mb-3 flex items-center justify-between">
                       <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
                         {COOKIE_CATEGORIES.analytics.label}
@@ -391,7 +391,7 @@ export default function SettingsModal() {
                   </div>
 
                   {/* Reset storage section */}
-                  <div className="flex items-center justify-between rounded-lg border border-neutral-200 p-4 dark:border-neutral-700">
+                  <div className="flex items-center justify-between rounded-lg border border-neutral-200 p-4 transition-colors duration-150 dark:border-neutral-700">
                     <div className="flex-1">
                       <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
                         {SETTINGS_RESET_LABEL}
@@ -436,7 +436,7 @@ export default function SettingsModal() {
           </>
         }
       >
-        <div className="mb-4 rounded-lg border-2 border-dashed border-amber-700/60 bg-amber-50 px-4 py-3 transition-all duration-300 ease-in-out dark:border-amber-400/60 dark:bg-amber-950/80">
+        <div className="transition-color mb-4 rounded-lg border-2 border-dashed border-amber-700/60 bg-amber-50 px-4 py-3 transition-all duration-150 ease-in-out dark:border-amber-400/60 dark:bg-amber-950/80">
           <p className="text-sm font-bold text-amber-800 dark:text-amber-300">
             <IoWarning className="inline-flex text-lg text-amber-700 dark:text-amber-400" />{" "}
             ATTENTION : Cette action est irréversible

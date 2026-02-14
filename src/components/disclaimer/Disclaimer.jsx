@@ -9,10 +9,10 @@ function Disclaimer() {
     >
       <div className="container mx-auto flex items-center justify-center gap-3 lg:gap-4">
         <HiExclamationTriangle
-          className="flex h-5 w-5 shrink-0 text-amber-700 transition duration-300 ease-in-out lg:h-6 lg:w-6 dark:text-amber-400"
+          className="transition-color flex h-5 w-5 shrink-0 text-amber-700 duration-150 ease-in-out lg:h-6 lg:w-6 dark:text-amber-400"
           aria-hidden="true"
         />
-        <p className="text-sm font-medium tracking-wider text-amber-900 transition duration-300 ease-in-out lg:text-base dark:text-amber-50">
+        <p className="transition-color text-sm font-medium tracking-wider text-amber-900 duration-150 ease-in-out lg:text-base dark:text-amber-50">
           Les informations présentées sont fournies à{" "}
           <span className="font-semibold text-amber-700 dark:text-amber-400">
             titre informatif et ne remplacent pas un avis/traitement médical

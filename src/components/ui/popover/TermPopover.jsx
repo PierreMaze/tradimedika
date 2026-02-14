@@ -1,6 +1,7 @@
 import PropTypes from "prop-types"; // Validation des props
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { BiLinkExternal } from "react-icons/bi";
+import { Z_INDEX_CLASSES } from "../../../constants/zIndexLevels";
 import { TECHNICAL_TERMS_DATA } from "../../../data/technicalTermsDefinitions";
 import { useExternalLink } from "../../../features/external-link/hooks/useExternalLink";
 import { useHoverDelay } from "../../../utils/hoverDelay";
@@ -195,8 +196,8 @@ function TermPopover({
   // Classes CSS pour le trigger selon le variant
   const triggerClasses =
     variant === "medical"
-      ? "inline-block cursor-pointer rounded-sm underline underline-offset-2 decoration-neutral-800 dark:decoration-neutral-200 hover:decoration-emerald-500 decoration-2 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 dark:decoration-emerald-400"
-      : "inline-block cursor-pointer rounded-sm underline underline-offset-2 decoration-neutral-700 dark:decoration-neutral-200 hover:decoration-emerald-500 decoration-2 dark:decoration-emerald-400 dark:hover:decoration-emerald-500 border-b border-dotted border-neutral-400 transition-all duration-200 hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 dark:border-neutral-500";
+      ? "inline-block cursor-pointer rounded-sm underline underline-offset-2 decoration-neutral-800 dark:decoration-neutral-200 hover:decoration-emerald-500 decoration-2 transition-color duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 dark:decoration-emerald-400"
+      : "inline-block cursor-pointer rounded-sm underline underline-offset-2 decoration-neutral-700 dark:decoration-neutral-200 hover:decoration-emerald-500 decoration-2 transition-color duration-150 dark:decoration-emerald-400 dark:hover:decoration-emerald-500 border-b border-dotted border-neutral-400 transition-all duration-200 hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 dark:border-neutral-500";
 
   return (
     <span className={`relative inline-block ${className}`}>
@@ -221,13 +222,7 @@ function TermPopover({
           role="dialog"
           aria-modal="false"
           aria-labelledby={titleId}
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            zIndex: 9999,
-          }}
-          className="animate-in fade-in zoom-in-95 w-64 rounded-lg bg-white p-4 shadow-xl drop-shadow-2xl transition-colors duration-200 duration-300 dark:bg-neutral-800"
+          className={`animate-in fade-in zoom-in-95 fixed ${Z_INDEX_CLASSES.TERM_POPOVER} w-64 rounded-lg bg-white p-4 shadow-xl drop-shadow-2xl transition-all duration-150 dark:bg-neutral-800`}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
         >
@@ -255,7 +250,7 @@ function TermPopover({
                 setIsLocked(false);
                 triggerRef.current?.focus();
               }}
-              className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded text-neutral-500 transition-colors hover:text-neutral-700 focus:ring-2 focus:ring-emerald-500 focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-200"
+              className="transition-color flex min-h-[44px] min-w-[44px] items-center justify-center rounded text-neutral-500 duration-150 hover:text-neutral-700 focus:ring-2 focus:ring-emerald-500 focus:outline-none dark:text-neutral-400 dark:hover:text-neutral-200"
               aria-label="Fermer"
             >
               <span className="text-xl leading-none">&times;</span>

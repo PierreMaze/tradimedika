@@ -7,7 +7,6 @@ import {
 } from "react";
 import PropTypes from "prop-types";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
-import { useTheme } from "./ThemeContext";
 
 const AccessibilityContext = createContext(undefined);
 
@@ -20,25 +19,34 @@ export function AccessibilityProvider({ children }) {
   const [isExternalLinkConfirmEnabled, setIsExternalLinkConfirmEnabled] =
     useLocalStorage("tradimedika-external-link-confirm", true);
 
-  // Accès au ThemeContext pour désactiver dark mode si contraste élevé
-  const { disableDark } = useTheme();
-
   // Toggle contraste élevé
+  // Note: Si high contrast activé, on force le light mode directement
+  // via localStorage et manipulation DOM pour éviter le couplage avec ThemeContext
   const toggleHighContrast = useCallback(() => {
-    setIsHighContrast((prev) => !prev);
+    setIsHighContrast((prev) => {
+      const newValue = !prev;
+
+      // Si on active le contraste élevé, forcer light mode immédiatement
+      if (newValue && typeof window !== "undefined") {
+        // Écriture synchrone dans localStorage
+        window.localStorage.setItem(
+          "tradimedika-theme",
+          JSON.stringify("light"),
+        );
+
+        // Forcer la classe dark sur <html> immédiatement
+        document.documentElement.classList.remove("dark");
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+
+      return newValue;
+    });
   }, [setIsHighContrast]);
 
   // Toggle confirmation liens externes
   const toggleExternalLinkConfirm = useCallback(() => {
     setIsExternalLinkConfirmEnabled((prev) => !prev);
   }, [setIsExternalLinkConfirmEnabled]);
-
-  // EFFET CRITIQUE: Forcer light mode quand contraste élevé activé
-  useEffect(() => {
-    if (isHighContrast) {
-      disableDark();
-    }
-  }, [isHighContrast, disableDark]);
 
   // Appliquer les classes CSS sur <html>
   useEffect(() => {

@@ -1,5 +1,6 @@
 import { LiaBalanceScaleSolid } from "react-icons/lia";
 import { Link } from "react-router-dom";
+import Button from "../components/ui/button/Button";
 import ExternalLink from "../components/ui/links/ExternalLink";
 
 export default function MentionsLegales() {
@@ -280,13 +281,14 @@ export default function MentionsLegales() {
           Pour toute question concernant ces mentions légales, vous pouvez nous
           contacter :
         </p>
-        <ExternalLink
+        <Button
+          as="external"
           href="https://tally.so/r/q4RN95"
           siteName="Tally"
-          className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 font-medium text-white transition hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600"
+          variant="primary"
         >
           Nous contacter
-        </ExternalLink>
+        </Button>
       </div>
     </div>
   );

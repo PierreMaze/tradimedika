@@ -6,10 +6,10 @@ function RemedyResultDetailsAllergyWarning({ allergenNames }) {
     <div
       role="alert"
       aria-live="assertive"
-      className="animate-fade-in-up mb-6 flex items-start gap-4 rounded-lg border-2 border-dashed border-amber-700/60 bg-amber-50 p-4 motion-reduce:animate-none motion-reduce:opacity-100 dark:border-amber-400/60 dark:bg-amber-950/75"
+      className="animate-fade-in-up mb-6 flex items-start gap-4 rounded-lg border-2 border-dashed border-amber-700/60 bg-amber-50 p-4 transition-colors duration-150 motion-reduce:animate-none motion-reduce:opacity-100 dark:border-amber-400/60 dark:bg-amber-950/75"
     >
       <PiSealWarningFill
-        className="mt-0.5 flex shrink-0 text-2xl text-amber-700 dark:text-amber-400"
+        className="mt-0.5 shrink-0 text-2xl text-amber-700 dark:text-amber-400"
         aria-hidden="true"
       />
 

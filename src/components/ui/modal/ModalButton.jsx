@@ -21,7 +21,7 @@ function ModalButton({
   icon: Icon,
 }) {
   const baseClasses =
-    "min-h-[44px] cursor-pointer rounded-md px-4 py-2 text-sm font-semibold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50";
+    "min-h-[44px] cursor-pointer rounded-md px-4 py-2 text-sm font-semibold transition-all duration-150 disabled:cursor-not-allowed disabled:opacity-50";
 
   const variantClasses = {
     primary:

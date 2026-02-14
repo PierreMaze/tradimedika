@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { GiFallingLeaf } from "react-icons/gi";
-import { useMediaQuery } from "../../../../hooks/useMediaQuery";
 import { usePerformance } from "../../../../features/settings";
+import { useMediaQuery } from "../../../../hooks/useMediaQuery";
 
 export default function LeafFall() {
   const [show, setShow] = useState(false);
@@ -58,7 +58,7 @@ export default function LeafFall() {
         >
           <GiFallingLeaf
             size={24}
-            className="text-emerald-700/75 drop-shadow-lg dark:text-emerald-500/75"
+            className="transition-color text-emerald-700/75 drop-shadow-lg duration-150 dark:text-emerald-500/75"
           />
         </div>
       ))}

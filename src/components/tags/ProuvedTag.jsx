@@ -20,7 +20,7 @@ function ProuvedTag({ className = "", showLabel = true }) {
   return (
     <span
       data-testid="verified-tag"
-      className={`inline-flex items-center gap-1.5 rounded-md bg-green-100 px-3 py-1.5 text-xs font-semibold text-green-800 transition duration-300 lg:text-sm 2xl:text-base dark:bg-green-900 dark:text-green-200 ${className}`}
+      className={`transition-color inline-flex items-center gap-1.5 rounded-md bg-green-100 px-3 py-1.5 text-xs font-semibold text-green-800 duration-150 lg:text-sm 2xl:text-base dark:bg-green-900 dark:text-green-200 ${className}`}
       title="Ce remède est soutenu par des données scientifiques et/ou reconnu par des professionnels de santé dans un cadre d’usage défini."
     >
       <IoMdCheckmarkCircleOutline

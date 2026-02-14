@@ -10,7 +10,7 @@ function RemedyResultDetailsTipsSection({ tips }) {
   if (!tips || tips.length === 0) return null;
 
   return (
-    <section className="animate-fade-in-up rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition delay-[650ms] duration-300 motion-reduce:animate-none motion-reduce:opacity-100 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800">
+    <section className="animate-fade-in-up rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition-colors duration-150 motion-reduce:animate-none motion-reduce:opacity-100 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800">
       <div
         onClick={() => setIsOpen(!isOpen)}
         onKeyDown={(e) => {

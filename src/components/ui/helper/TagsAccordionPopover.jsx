@@ -227,7 +227,7 @@ const TagsAccordionPopover = forwardRef(
                 }
               : {}
           }
-          className={`animate-in fade-in slide-in-from-top-2 duration-200 ${
+          className={`animate-in fade-in slide-in-from-top-2 transition-all duration-150 ${
             isDesktop
               ? "fixed w-full lg:max-w-2xl 2xl:max-w-3xl"
               : "fixed top-1/2 left-1/2 w-full max-w-3xl -translate-x-1/2 -translate-y-1/2"
@@ -240,7 +240,7 @@ const TagsAccordionPopover = forwardRef(
                 closePopover(e);
               }}
               aria-label="Fermer l'aide"
-              className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full text-neutral-700 transition duration-200 hover:bg-neutral-200 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-50"
+              className="transition-color absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full text-neutral-700 duration-150 hover:bg-neutral-200 hover:text-neutral-900 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-50"
             >
               <HiXMark className="h-5 w-5" aria-hidden="true" />
             </button>

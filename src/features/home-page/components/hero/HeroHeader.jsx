@@ -17,7 +17,7 @@ import { GiSprout } from "react-icons/gi";
  * @returns {JSX.Element}
  */
 export default function HeroHeader({
-  badgeText = "Version Bêta · v0.53.2",
+  badgeText = "Version Bêta · v0.53.3",
   title = "Prenez soin de vous",
   titleHighlight = "naturellement",
   description = "Solutions préventives et remèdes pour le quotidien, à votre portée.",
@@ -26,8 +26,8 @@ export default function HeroHeader({
     <div className="flex flex-col items-center gap-y-4 lg:gap-y-6 2xl:gap-y-8">
       {/* Badge "Medecine douce & naturelle" */}
       <div className="mx-auto w-fit">
-        <div className="border-dark/60 text-dark animate-fade-in-down flex items-center gap-2 rounded-lg border-2 bg-white px-4 py-2 shadow-md transition duration-300 ease-in-out motion-reduce:animate-none motion-reduce:opacity-100 dark:border-emerald-500/60 dark:bg-emerald-950 dark:text-emerald-400">
-          <GiSprout className="text-lg text-emerald-600 transition duration-300 ease-in-out dark:text-emerald-400" />
+        <div className="border-dark/60 text-dark animate-fade-in-down flex items-center gap-2 rounded-lg border-2 bg-white px-4 py-2 shadow-md transition-colors duration-150 ease-in-out motion-reduce:animate-none motion-reduce:opacity-100 dark:border-emerald-500/60 dark:bg-emerald-950 dark:text-emerald-400">
+          <GiSprout className="items-center text-lg text-emerald-600 transition-colors duration-150 ease-in-out dark:text-emerald-400" />
           <span className="font-sans text-sm font-semibold lg:text-base 2xl:text-lg">
             {badgeText}
           </span>
@@ -37,18 +37,18 @@ export default function HeroHeader({
       {/* Titre principal */}
       <div className="animate-fade-in-up text-center delay-200 motion-reduce:animate-none motion-reduce:opacity-100">
         <h1 className="text-5xl font-semibold lg:text-7xl 2xl:text-8xl">
-          <span className="text-dark dark:text-light transition duration-300 ease-in-out">
+          <span className="text-dark dark:text-light transition-colors duration-150 ease-in-out">
             {title}
           </span>
           <br />
-          <span className="text-emerald-600 transition duration-300 ease-in-out dark:text-emerald-500">
+          <span className="text-emerald-600 transition-colors duration-150 ease-in-out dark:text-emerald-500">
             {titleHighlight}
           </span>
         </h1>
       </div>
 
       {/* Texte descriptif */}
-      <p className="animate-fade-in-up max-w-3xl text-center text-base text-neutral-600 transition delay-300 duration-300 ease-in-out motion-reduce:animate-none motion-reduce:opacity-100 lg:text-xl 2xl:max-w-5xl 2xl:text-2xl dark:text-neutral-400">
+      <p className="animate-fade-in-up max-w-3xl text-center text-base text-neutral-600 transition-colors duration-150 ease-in-out motion-reduce:animate-none motion-reduce:opacity-100 lg:text-xl 2xl:max-w-5xl 2xl:text-2xl dark:text-neutral-400">
         {description}
       </p>
     </div>

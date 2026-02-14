@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { TbFilterCog } from "react-icons/tb";
 import { ModalButton, ModalLayout } from "../../../components/ui/modal";
 import { TAG_LABELS_CATEGORIES } from "../../../constants/tagsLabelsHelper";
-import FilterAccordion from "./FilterAccordion";
+import FilterAccordion from "../../remedy-filter/components/FilterAccordion";
 
 /**
  * FilterModal Component

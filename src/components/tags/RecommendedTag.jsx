@@ -22,7 +22,7 @@ function RecommendedTag({ className = "", showLabel = true }) {
   return (
     <span
       data-testid="recommended-tag"
-      className={`inline-flex items-center gap-1.5 rounded-md bg-sky-100 px-3 py-1.5 text-sm font-medium text-sky-800 transition duration-300 lg:text-base dark:bg-sky-900 dark:text-sky-200 ${className}`}
+      className={`transition-color inline-flex items-center gap-1.5 rounded-md bg-sky-100 px-3 py-1.5 text-sm font-medium text-sky-800 duration-150 lg:text-base dark:bg-sky-900 dark:text-sky-200 ${className}`}
       title="Ce remède est le plus pertinent pour vos symptômes"
     >
       <MdThumbUp className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />

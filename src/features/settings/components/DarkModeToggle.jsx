@@ -21,7 +21,7 @@ export default function DarkModeToggle() {
       aria-pressed={isDarkMode}
       onClick={isDisabled ? undefined : toggleDarkMode}
       disabled={isDisabled}
-      className={`group relative flex h-8 w-14 items-center rounded-md border-2 p-1 transition-all duration-300 ease-out ${
+      className={`group relative flex h-8 w-14 items-center rounded-md border-2 p-1 transition-all duration-100 ease-out ${
         isDisabled
           ? "cursor-not-allowed opacity-50 grayscale"
           : "cursor-pointer"
@@ -33,23 +33,23 @@ export default function DarkModeToggle() {
     >
       {/* Glow / halo UX */}
       <span
-        className={`pointer-events-none absolute inset-0 z-0 rounded-md border-none transition-opacity duration-300 ${
+        className={`pointer-events-none absolute inset-0 z-0 rounded-md border-none transition-opacity duration-100 ${
           isDarkMode ? "bg-emerald-500 opacity-30" : "opacity-0"
         }`}
       />
 
       <div
-        className={`z-10 flex h-6 w-6 items-center justify-center rounded-md text-current transition-transform duration-200 group-hover:scale-105 motion-reduce:transition-none ${
+        className={`z-10 flex h-6 w-6 items-center justify-center rounded-md text-current transition-transform duration-100 group-hover:scale-105 motion-reduce:transition-none ${
           isDarkMode ? "bg-white" : "bg-neutral-400 dark:bg-neutral-600"
         }`}
       >
         {isDarkMode ? (
           <HiSun
-            className={`text-base text-emerald-600 transition-colors duration-300`}
+            className={`text-base text-emerald-600 transition-colors duration-100`}
           />
         ) : (
           <HiMoon
-            className={`text-xs text-white transition-colors duration-300`}
+            className={`text-xs text-white transition-colors duration-100`}
           />
         )}
       </div>

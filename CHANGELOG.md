@@ -2,6 +2,58 @@
 
 ---
 
+## [0.53.3] - 2026-02-14
+
+### Added
+
+- **Unified Button component**
+  - Created `Button.jsx` in `src/components/ui/button/` to replace fragmented button implementations
+  - Supports 3 variants: `primary`, `secondary`, `danger`
+  - Supports 3 types: HTML `<button>`, React Router `<Link>`, `<ExternalLink>`
+  - Built-in loading state with spinner and customizable loading text
+  - Icon support with configurable position (left/right) using react-icons
+  - Full accessibility compliance: WCAG 2.2 Level AA with min-height 44px
+  - Comprehensive test suite with 100% coverage in `Button.test.jsx`
+
+- **Centralized z-index system**
+  - Created `src/constants/zIndexLevels.js` for normalized layer hierarchy
+  - Defined 5 distinct layers: Base (0-10), UI Elements (40-49), Overlays (50-59), Dialogs (60-69), Tooltips (70-79)
+  - Exported both numeric constants (`Z_INDEX`) and Tailwind classes (`Z_INDEX_CLASSES`)
+  - Added custom z-index utilities in `src/index.css` for levels 70 and 90
+  - Prevents z-index conflicts between modals, popovers, and tooltips
+
+### Changed
+
+- **Improved TagsInfoButton tooltip positioning**
+  - Migrated tooltip from absolute to fixed positioning to prevent viewport overflow
+  - Implemented dynamic position calculation based on button location and viewport boundaries
+  - Added left/right edge detection with automatic adjustment (8px spacing)
+  - Added vertical overflow handling: displays below button if insufficient space above
+  - Removed tooltip arrow (incompatible with dynamic positioning)
+  - Enhanced keyboard navigation with Enter and Space key support
+  - Applied centralized z-index from `Z_INDEX_CLASSES.TOOLTIP` (level 70)
+
+- **Refactored AccessibilityContext for better architecture**
+  - Removed tight coupling with ThemeContext to improve modularity
+  - High contrast mode now directly manipulates DOM and localStorage without ThemeContext dependency
+  - Synchronous light mode enforcement when high contrast is activated
+  - Simplified context provider with better separation of concerns
+  - Improved maintainability and testability
+
+- **Reorganized FilterModal location**
+  - Moved `FilterModal.jsx` from `src/features/remedy-filter/components/` to `src/features/remedy-result-page/components/`
+  - Updated export path in `src/features/remedy-filter/index.js` to reflect new location
+  - Better feature organization: filter modal is now co-located with its primary usage context
+
+### Fixed
+
+- **Fixed z-index conflicts in overlay system**
+  - TagsInfoButton tooltips now properly appear above all other UI elements
+  - Consistent stacking order: tooltips (70) > dialogs (60) > backdrops (50) > UI elements (40)
+  - Resolved visual bugs where tooltips were hidden behind modal backdrops
+
+---
+
 ## [0.53.2] - 2026-02-14
 
 ### Fixed

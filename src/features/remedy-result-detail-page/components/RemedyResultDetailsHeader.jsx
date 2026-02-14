@@ -17,7 +17,7 @@ import SourcesSection from "./RemedyResultDetailsSourcesSection";
 function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
   const popoverRef = useRef(null);
   return (
-    <div className="animate-fade-in mb-6 grid gap-6 delay-200 motion-reduce:animate-none motion-reduce:opacity-100 lg:mb-8 lg:grid-cols-5 lg:gap-8 2xl:grid-cols-4">
+    <div className="animate-fade-in mb-6 grid gap-6 transition-all duration-150 motion-reduce:animate-none motion-reduce:opacity-100 lg:mb-8 lg:grid-cols-5 lg:gap-8 2xl:grid-cols-4">
       <div className="lg:col-span-2 2xl:col-span-1">
         <div className="aspect-square w-full overflow-hidden rounded-lg bg-neutral-50 shadow-md dark:bg-neutral-700/50">
           <img

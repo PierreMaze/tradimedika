@@ -13,7 +13,7 @@ function RemedyResultDetailsContraindicationsSection({ contraindications }) {
   if (!contraindications || contraindications.length === 0) return null;
 
   return (
-    <section className="animate-fade-in-up rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition delay-450 duration-300 motion-reduce:animate-none motion-reduce:opacity-100 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800">
+    <section className="animate-fade-in-up rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition-all duration-150 motion-reduce:animate-none motion-reduce:opacity-100 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800">
       <div
         onClick={() => setIsOpen(!isOpen)}
         onKeyDown={(e) => {
@@ -59,24 +59,11 @@ function RemedyResultDetailsContraindicationsSection({ contraindications }) {
             <ul className="list-disc space-y-1 pl-5">
               {contraindications.map((contraindication, index) => {
                 const segments = parseContraindicationText(contraindication);
-                const delayClass =
-                  {
-                    0: "delay-300",
-                    1: "delay-350",
-                    2: "delay-400",
-                    3: "delay-450",
-                    4: "delay-500",
-                    5: "delay-550",
-                    6: "delay-600",
-                    7: "delay-650",
-                    8: "delay-700",
-                    9: "delay-750",
-                  }[index] || "delay-800";
 
                 return (
                   <li
                     key={index}
-                    className={`animate-slide-in-left text-sm leading-relaxed font-medium text-black 2xl:text-base dark:text-white ${delayClass} motion-reduce:animate-none motion-reduce:opacity-100`}
+                    className={`animate-slide-in-left duration-150motion-reduce:animate-none text-sm leading-relaxed font-medium text-black transition-colors motion-reduce:opacity-100 2xl:text-base dark:text-white`}
                     style={{
                       display: index >= 10 ? "list-item" : undefined,
                     }}

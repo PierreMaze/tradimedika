@@ -19,7 +19,7 @@ function TraditionnalTag({ className = "", showLabel = true }) {
   return (
     <span
       data-testid="verified-tag"
-      className={`inline-flex items-center gap-1.5 rounded-md bg-amber-100 px-3 py-1.5 text-xs font-semibold text-amber-800 transition duration-300 lg:text-sm 2xl:text-base dark:bg-amber-900 dark:text-amber-200 ${className}`}
+      className={`transition-color inline-flex items-center gap-1.5 rounded-md bg-amber-100 px-3 py-1.5 text-xs font-semibold text-amber-800 duration-150 lg:text-sm 2xl:text-base dark:bg-amber-900 dark:text-amber-200 ${className}`}
       title="Ce remède repose principalement sur un usage traditionnel. Son efficacité n’est pas validée par des études scientifiques solides."
     >
       <FiInfo className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />

@@ -160,8 +160,8 @@ describe("LayoutApp", () => {
     it("should apply transition classes", () => {
       const { container } = renderWithRouter(<LayoutApp />);
 
-      const mainContainer = container.querySelector(".transition");
-      expect(mainContainer).toHaveClass("duration-300", "ease-in-out");
+      const mainContainer = container.querySelector(".transition-colors");
+      expect(mainContainer).toHaveClass("duration-150");
     });
 
     it("should have proper z-index layering", () => {
@@ -355,8 +355,8 @@ describe("LayoutApp", () => {
     it("should apply smooth transition for theme changes", () => {
       const { container } = renderWithRouter(<LayoutApp />);
 
-      const mainContainer = container.querySelector(".transition");
-      expect(mainContainer).toHaveClass("duration-300");
+      const mainContainer = container.querySelector(".transition-colors");
+      expect(mainContainer).toHaveClass("duration-150");
     });
   });
 });

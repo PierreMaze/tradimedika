@@ -69,12 +69,12 @@ function RemedyCard({
   const imageClasses = isFiltered ? "grayscale" : "";
 
   const cardClasses = isFiltered
-    ? "opacity-70 transition-all duration-300"
+    ? "opacity-70 transition-all duration-150"
     : "";
 
   // Classes pour griser le contenu individuellement au lieu du parent
   const textClasses = isFiltered
-    ? "grayscale group-hover:grayscale-0 transition-all duration-300"
+    ? "grayscale group-hover:grayscale-0 transition-all duration-150"
     : "";
 
   const cardBorderClasses = isFiltered
@@ -83,7 +83,7 @@ function RemedyCard({
 
   return (
     <div
-      className={`transition-transform duration-200 hover:scale-102 motion-reduce:hover:scale-100 ${cardClasses}`}
+      className={`transition-transform duration-150 hover:scale-102 motion-reduce:hover:scale-100 ${cardClasses}`}
     >
       <Link
         to={`/remedes/${generateSlug(name)}`}
@@ -93,7 +93,7 @@ function RemedyCard({
         onClick={handleRemedyClick}
       >
         <div
-          className={`group h-full overflow-hidden rounded-lg bg-white shadow-md transition duration-300 ease-in-out hover:shadow-lg dark:bg-neutral-800 ${cardBorderClasses}`}
+          className={`group h-full overflow-hidden rounded-lg bg-white shadow-md transition-colors duration-150 ease-in-out hover:shadow-lg dark:bg-neutral-800 ${cardBorderClasses}`}
         >
           {/* Image */}
           {image && (
@@ -136,7 +136,7 @@ function RemedyCard({
                 alt={`${name} - remède naturel traditionnel de type ${type}`}
                 width="300"
                 height="300"
-                className={`mx-auto h-full w-2/3 object-scale-down p-4 transition duration-300 lg:w-3/4 2xl:w-4/5 ${imageClasses}`}
+                className={`mx-auto h-full w-2/3 object-scale-down p-4 transition-colors duration-150 lg:w-3/4 2xl:w-4/5 ${imageClasses}`}
                 loading="lazy"
               />
             </div>
@@ -202,14 +202,14 @@ function RemedyCard({
                     {properties.slice(0, visibleCount).map((prop, index) => (
                       <span
                         key={index}
-                        className={`inline-flex shrink-0 items-center gap-1 rounded-md bg-emerald-100 px-3 py-1.5 font-medium text-emerald-800 transition-all duration-300 dark:bg-emerald-900 dark:text-emerald-200 ${textClasses}`}
+                        className={`inline-flex shrink-0 items-center gap-1 rounded-md bg-emerald-100 px-3 py-1.5 font-medium text-emerald-800 transition-all duration-150 dark:bg-emerald-900 dark:text-emerald-200 ${textClasses}`}
                       >
                         {capitalizeFirstLetter(prop.name, true)}
                       </span>
                     ))}
                     {visibleCount < properties.length && (
                       <span
-                        className={`inline-flex shrink-0 items-center gap-1 rounded-md bg-emerald-100 px-3 py-1.5 font-medium text-emerald-800 transition-all duration-300 dark:bg-emerald-900 dark:text-emerald-200${textClasses}`}
+                        className={`inline-flex shrink-0 items-center gap-1 rounded-md bg-emerald-100 px-3 py-1.5 font-medium text-emerald-800 transition-all duration-150 dark:bg-emerald-900 dark:text-emerald-200${textClasses}`}
                       >
                         +{properties.length - visibleCount}
                       </span>
@@ -255,11 +255,11 @@ function RemedyCard({
 
             {/* Indicateur "Voir plus" */}
             <div
-              className={`mt-4 flex items-center justify-end gap-1 text-xs font-semibold text-emerald-600 transition-colors group-hover:text-emerald-700 lg:text-sm 2xl:text-base dark:text-emerald-400 dark:group-hover:text-emerald-300 ${textClasses}`}
+              className={`transition-color mt-4 flex items-center justify-end gap-1 text-xs font-semibold text-emerald-600 duration-150 group-hover:text-emerald-700 lg:text-sm 2xl:text-base dark:text-emerald-400 dark:group-hover:text-emerald-300 ${textClasses}`}
             >
               <span>Voir plus</span>
               <HiArrowRight
-                className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                className="h-4 w-4 transition-transform duration-150 group-hover:translate-x-1"
                 aria-hidden="true"
               />
             </div>

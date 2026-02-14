@@ -56,7 +56,7 @@ function ChildrenAgeTag({ age, className = "", showLabel = true }) {
   return (
     <span
       data-testid="children-tag"
-      className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-semibold transition duration-300 lg:text-sm 2xl:text-base ${colorClasses} ${className}`}
+      className={`transition-color inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-semibold duration-150 lg:text-sm 2xl:text-base ${colorClasses} ${className}`}
       title={tooltip}
     >
       <Icon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />

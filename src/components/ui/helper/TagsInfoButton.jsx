@@ -3,6 +3,7 @@
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import { GrCircleQuestion } from "react-icons/gr";
+import { Z_INDEX_CLASSES } from "../../../constants/zIndexLevels";
 
 /**
  * TagsInfoButton Component
@@ -35,6 +36,8 @@ function TagsInfoButton({
 }) {
   const [showTooltip, setShowTooltip] = useState(false);
   const [isTooltipClickOpen, setIsTooltipClickOpen] = useState(false);
+  const [tooltipPosition, setTooltipPosition] = useState({ top: 0, left: 0 });
+
   const tooltipRef = useRef(null);
   const buttonRef = useRef(null);
 
@@ -56,12 +59,59 @@ function TagsInfoButton({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isTooltipClickOpen]);
 
-  const handleButtonClick = () => {
+  const calculatePosition = () => {
+    if (!buttonRef.current) return;
+
+    const rect = buttonRef.current.getBoundingClientRect();
+    const tooltipWidth = window.innerWidth < 1024 ? 320 : 400; // w-80 = 320px, lg:w-100 = 400px
+    const tooltipHeight = 128; // Estimation (~8rem)
+    const spacing = 8;
+
+    let top = rect.top - tooltipHeight - spacing;
+    let left = rect.left + rect.width / 2 - tooltipWidth / 2;
+
+    // Ajuster si déborde à gauche
+    if (left < spacing) {
+      left = spacing;
+    }
+
+    // Ajuster si déborde à droite
+    if (left + tooltipWidth > window.innerWidth - spacing) {
+      left = window.innerWidth - tooltipWidth - spacing;
+    }
+
+    // Si pas assez de place en haut, afficher en bas
+    if (top < spacing) {
+      top = rect.bottom + spacing;
+    }
+
+    setTooltipPosition({ top, left });
+  };
+
+  const handleButtonClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!isTooltipClickOpen) {
+      calculatePosition();
+    }
     setIsTooltipClickOpen(!isTooltipClickOpen);
     setShowTooltip(!isTooltipClickOpen);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      e.stopPropagation();
+      if (!isTooltipClickOpen) {
+        calculatePosition();
+      }
+      setIsTooltipClickOpen(!isTooltipClickOpen);
+      setShowTooltip(!isTooltipClickOpen);
+    }
+  };
+
   const handleMouseEnter = () => {
+    calculatePosition();
     setShowTooltip(true);
   };
 
@@ -78,13 +128,13 @@ function TagsInfoButton({
 
   return (
     <div
-      ref={tooltipRef}
       className={`relative ${variant === "inline" ? "inline-flex" : "flex"} ${className}`}
     >
       <button
         ref={buttonRef}
         type="button"
         onClick={handleButtonClick}
+        onKeyDown={handleKeyDown}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         aria-expanded={showTooltip}
@@ -93,7 +143,7 @@ function TagsInfoButton({
             ? `${label} - Informations`
             : "Informations sur les indications d'usage"
         }
-        className={`group inline-flex cursor-help items-center gap-2 rounded-full bg-transparent font-bold transition-colors duration-200 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-emerald-500 active:scale-95 dark:text-white ${buttonSizeClasses[size]}`}
+        className={`group transition-color inline-flex cursor-help items-center gap-2 rounded-full bg-transparent font-bold duration-150 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-emerald-500 active:scale-95 dark:text-white ${buttonSizeClasses[size]}`}
       >
         {label && (
           <span className="text-xs font-semibold text-neutral-700 lg:text-sm 2xl:text-base dark:text-neutral-200">
@@ -104,7 +154,14 @@ function TagsInfoButton({
       </button>
 
       {showTooltip && (
-        <div className="absolute -top-32 left-0 z-50 w-80 rounded-lg bg-white px-4 py-3 shadow-2xl lg:w-100 dark:bg-neutral-900">
+        <div
+          ref={tooltipRef}
+          className={`fixed ${Z_INDEX_CLASSES.TOOLTIP} w-80 rounded-lg bg-white px-4 py-3 shadow-2xl lg:w-100 dark:bg-neutral-900`}
+          style={{
+            top: `${tooltipPosition.top}px`,
+            left: `${tooltipPosition.left}px`,
+          }}
+        >
           <p className="text-lg font-semibold text-black dark:text-white">
             Indications d&apos;usage
           </p>
@@ -112,7 +169,6 @@ function TagsInfoButton({
             Les badges résument le niveau de fiabilité et les conditions
             d&apos;usage. Cliquez sur un badge pour en savoir plus.
           </p>
-          <div className="absolute right-44 -bottom-2 h-0 w-0 border-t-8 border-r-8 border-l-8 border-t-neutral-100 border-r-transparent border-l-transparent lg:right-54 dark:border-t-neutral-900"></div>
         </div>
       )}
     </div>

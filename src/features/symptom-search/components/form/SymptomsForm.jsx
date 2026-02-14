@@ -283,7 +283,7 @@ export default function SymptomsForm({
     <div ref={containerRef} className="relative mx-auto w-full max-w-2xl">
       {/* Input avec icône de recherche */}
       <div className="border-dark/10 relative flex items-center rounded-lg border shadow-sm dark:border-neutral-700">
-        <HiMagnifyingGlass className="text-dark/60 dark:text-light absolute left-4 text-xl transition duration-300 ease-in-out" />
+        <HiMagnifyingGlass className="text-dark/60 dark:text-light absolute left-4 text-xl transition-colors duration-150 ease-in-out" />
         <input
           ref={inputRef}
           type="text"
@@ -301,7 +301,7 @@ export default function SymptomsForm({
           aria-activedescendant={
             selectedIndex >= 0 ? `symptom-option-${selectedIndex}` : undefined
           }
-          className={`text-dark dark:bg-dark dark:text-light w-full rounded-lg bg-white py-4 pr-4 pl-12 text-sm ring-2 ring-neutral-600 transition duration-300 ease-in-out placeholder:text-neutral-700 focus:ring-emerald-600 focus:outline-none lg:text-base 2xl:text-lg dark:ring-neutral-500 dark:placeholder:text-neutral-400 dark:focus:ring-emerald-500 ${
+          className={`text-dark dark:bg-dark dark:text-light w-full rounded-lg bg-white py-4 pr-4 pl-12 text-sm ring-2 ring-neutral-600 transition-colors duration-150 ease-in-out placeholder:text-neutral-700 focus:ring-emerald-600 focus:outline-none lg:text-base 2xl:text-lg dark:ring-neutral-500 dark:placeholder:text-neutral-400 dark:focus:ring-emerald-500 ${
             selectedSymptoms.length >= 5 ? "cursor-not-allowed opacity-50" : ""
           }`}
         />
@@ -309,7 +309,7 @@ export default function SymptomsForm({
 
       {/* Message de limite atteinte avec animation Tailwind */}
       {selectedSymptoms.length >= 5 && (
-        <div className="animate-in fade-in slide-in-from-top-2 mt-2 flex items-center gap-2 rounded-lg border-2 border-dashed border-amber-700/60 bg-amber-50 px-4 py-2 duration-300 motion-reduce:animate-none dark:border-amber-400/60 dark:bg-amber-950">
+        <div className="animate-in fade-in slide-in-from-top-2 mt-2 flex items-center gap-2 rounded-lg border-2 border-dashed border-amber-700/60 bg-amber-50 px-4 py-2 duration-150 motion-reduce:animate-none dark:border-amber-400/60 dark:bg-amber-950">
           <HiExclamationTriangle className="text-lg text-amber-700 dark:text-amber-400" />
           <p className="text-sm font-medium tracking-wider text-amber-800 dark:text-amber-100">
             Limite de 5 symptômes atteinte.
@@ -333,7 +333,7 @@ export default function SymptomsForm({
           ref={listRef}
           id="symptoms-listbox"
           role="listbox"
-          className="dark:bg-dark absolute z-50 mt-2 max-h-80 w-full overflow-y-auto rounded-lg border border-neutral-200 bg-white shadow-lg transition duration-200 ease-in-out dark:border-neutral-700"
+          className="dark:bg-dark absolute z-50 mt-2 max-h-80 w-full overflow-y-auto rounded-lg border border-neutral-200 bg-white shadow-lg transition duration-100 ease-in-out dark:border-neutral-700"
         >
           {filteredSymptoms.length > 0 ? (
             filteredSymptoms.map((symptom, index) => (
@@ -344,7 +344,7 @@ export default function SymptomsForm({
                 aria-selected={selectedIndex === index}
                 onClick={() => handleSelectSymptom(symptom)}
                 onMouseEnter={() => setSelectedIndex(index)}
-                className={`cursor-pointer px-4 py-3 text-sm tracking-wider transition duration-150 ease-in-out lg:text-base 2xl:text-lg ${
+                className={`cursor-pointer px-4 py-3 text-sm tracking-wider transition-colors duration-150 ease-in-out lg:text-base 2xl:text-lg ${
                   selectedIndex === index
                     ? "bg-emerald-600 text-white"
                     : "text-dark dark:text-light hover:bg-neutral-100 dark:hover:bg-neutral-800"

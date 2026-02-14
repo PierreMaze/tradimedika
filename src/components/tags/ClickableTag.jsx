@@ -60,7 +60,7 @@ function ClickableTag({ children, categoryId, popoverRef, className = "" }) {
       onKeyDown={handleKeyDown}
       aria-haspopup="dialog"
       aria-label={`Voir les détails - ${categoryLabels[categoryId]}`}
-      className={`cursor-pointer transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 active:scale-95 ${className}`}
+      className={`cursor-pointer transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500 active:scale-95 ${className}`}
       tabIndex={0}
     >
       {children}

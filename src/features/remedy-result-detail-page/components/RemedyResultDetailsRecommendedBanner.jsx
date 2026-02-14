@@ -11,10 +11,10 @@ function RemedyResultDetailsRecommendedBanner() {
     <div
       role="status"
       aria-live="polite"
-      className="animate-fade-in-up mb-6 flex items-start gap-4 rounded-lg border-2 border-dashed border-emerald-700/60 bg-emerald-50 p-4 motion-reduce:animate-none motion-reduce:opacity-100 dark:border-emerald-400/60 dark:bg-emerald-950/75"
+      className="animate-fade-in-up mb-6 flex items-start gap-4 rounded-lg border-2 border-dashed border-emerald-700/60 bg-emerald-50 p-4 transition-colors duration-150 motion-reduce:animate-none motion-reduce:opacity-100 dark:border-emerald-400/60 dark:bg-emerald-950/75"
     >
       <MdThumbUp
-        className="mt-0.5 flex shrink-0 text-lg text-emerald-700 dark:text-emerald-400"
+        className="mt-0.5 shrink-0 text-lg text-emerald-700 dark:text-emerald-400"
         aria-hidden="true"
       />
 

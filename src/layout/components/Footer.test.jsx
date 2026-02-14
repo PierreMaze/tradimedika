@@ -127,7 +127,7 @@ describe("Footer", () => {
       const { container } = renderWithRouter(<Footer />);
 
       const footer = container.querySelector("footer");
-      expect(footer).toHaveClass("transition", "duration-300", "ease-in-out");
+      expect(footer).toHaveClass("transition-colors", "duration-150");
     });
 
     it("should have border styling", () => {
@@ -217,11 +217,7 @@ describe("Footer", () => {
       const copyright = screen.getByText(
         /© TRADIMEDIKA 2026 - Tous droits réservés/i,
       );
-      expect(copyright).toHaveClass(
-        "transition",
-        "duration-300",
-        "ease-in-out",
-      );
+      expect(copyright).toHaveClass("transition-colors", "duration-150");
     });
   });
 
@@ -325,7 +321,7 @@ describe("Footer", () => {
       const { container } = renderWithRouter(<Footer />);
 
       const innerContainer = container.querySelector(".border-t-2");
-      expect(innerContainer).toHaveClass("transition", "duration-300");
+      expect(innerContainer).toHaveClass("transition-colors", "duration-150");
     });
   });
 });

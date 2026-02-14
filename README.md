@@ -15,7 +15,7 @@
 
 [🌐 **Voir le site**](https://tradimedika.com/) • [🐛 **Signaler un bug**](https://tally.so/r/3x0O8o) • [💬 **Discuter**](https://www.linkedin.com/in/pierremazelaygue/)
 
-[![TRADIMEDIKA](<https://img.shields.io/badge/TRADIMEDIKA-Bêta(0.53.2)-1a1a1a?style=for-the-badge&logo=leaflet&logoColor=00bd7e>)](https://tradimedika.com/)
+[![TRADIMEDIKA](<https://img.shields.io/badge/TRADIMEDIKA-Bêta(0.53.3)-1a1a1a?style=for-the-badge&logo=leaflet&logoColor=00bd7e>)](https://tradimedika.com/)
 
 </div>
 

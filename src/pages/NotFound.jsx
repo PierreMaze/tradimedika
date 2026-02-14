@@ -1,6 +1,6 @@
 // tradimedika-v1/src/pages/NotFound.jsx
 import { GiFallingLeaf } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import Button from "../components/ui/button/Button";
 
 /**
  * NotFound Page - 404 Error Handler
@@ -36,18 +36,12 @@ function NotFound() {
 
         {/* Action Buttons */}
         <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-          <Link
-            to="/"
-            className="rounded-lg bg-emerald-600 px-6 py-3 font-semibold text-white transition duration-200 hover:bg-emerald-700"
-          >
+          <Button as="link" to="/" variant="primary">
             Retour à l&apos;accueil
-          </Link>
-          <Link
-            to="/remedes"
-            className="rounded-lg border-2 border-emerald-600 px-6 py-3 font-semibold text-emerald-600 transition duration-200 hover:bg-emerald-50 dark:hover:bg-emerald-950"
-          >
+          </Button>
+          <Button as="link" to="/remedes" variant="secondary">
             Explorer les remèdes
-          </Link>
+          </Button>
         </div>
 
         {/* Helpful Links */}

@@ -91,8 +91,8 @@ describe("SymptomCounter", () => {
       render(<SymptomCounter count={1} />);
 
       const text = screen.getByText("1/5 symptômes sélectionnés");
-      expect(text).toHaveClass("transition");
-      expect(text).toHaveClass("duration-300");
+      expect(text).toHaveClass("transition-colors");
+      expect(text).toHaveClass("duration-150");
     });
 
     it("should be centered", () => {
