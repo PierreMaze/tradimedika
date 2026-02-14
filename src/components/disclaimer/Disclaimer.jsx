@@ -3,7 +3,7 @@ import { HiExclamationTriangle } from "react-icons/hi2";
 function Disclaimer() {
   return (
     <div
-      className={`z-40 w-full border-b-2 border-dashed border-amber-700/60 bg-amber-50 px-4 py-3 transition-all duration-300 ease-in-out lg:w-3/4 dark:border-amber-400/60 dark:bg-amber-950/80`}
+      className={`z-40 mt-20 w-full border-b-2 border-dashed border-amber-700/60 bg-amber-50 px-4 py-3 transition-all duration-300 ease-in-out lg:w-3/4 dark:border-amber-400/60 dark:bg-amber-950/80`}
       role="alert"
       aria-live="polite"
     >
