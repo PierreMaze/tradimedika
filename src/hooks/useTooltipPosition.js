@@ -28,14 +28,21 @@ function throttle(func, limit = 100) {
  * @param {string} [options.placement='top'] - Position initiale ('top', 'bottom', 'left', 'right')
  * @param {number} [options.offset=8] - Espacement en pixels
  * @param {boolean} [options.autoUpdate=false] - Recalculer au resize/scroll
+ * @param {boolean} [options.isOpen=true] - Le tooltip est-il ouvert/visible
  * @returns {Object} { triggerRef, tooltipRef, position, actualPlacement, updatePosition }
  */
 export function useTooltipPosition(options = {}) {
-  const { placement = "top", offset = 8, autoUpdate = false } = options;
+  const {
+    placement = "top",
+    offset = 8,
+    autoUpdate = false,
+    isOpen = true,
+  } = options;
 
   const triggerRef = useRef(null);
   const tooltipRef = useRef(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  // Position initiale hors viewport pour éviter flash en (0,0)
+  const [position, setPosition] = useState({ x: -9999, y: -9999 });
   const [actualPlacement, setActualPlacement] = useState(placement);
 
   /**
@@ -59,12 +66,14 @@ export function useTooltipPosition(options = {}) {
   }, [placement, offset]);
 
   /**
-   * Calcul initial de position avec useLayoutEffect
+   * Calcul de position quand le tooltip est ouvert
    * Évite les flickers en calculant avant le paint
    */
   useLayoutEffect(() => {
-    updatePosition();
-  }, [updatePosition]);
+    if (isOpen) {
+      updatePosition();
+    }
+  }, [updatePosition, isOpen]);
 
   /**
    * Auto-update optionnel au resize/scroll

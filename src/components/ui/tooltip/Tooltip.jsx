@@ -46,7 +46,8 @@ export function Tooltip({
     useTooltipPosition({
       placement,
       offset,
-      autoUpdate: false, // Sera true si besoin après tests
+      autoUpdate: false,
+      isOpen,
     });
 
   // Fermeture au clic externe
@@ -64,10 +65,15 @@ export function Tooltip({
     return <>{children}</>;
   }
 
-  // Classes pour animations
+  // Déterminer si le tooltip est positionné (pas en position initiale hors viewport)
+  const isPositioned = position.x !== -9999 && position.y !== -9999;
+
+  // Classes pour animations avec masquage initial jusqu'au positionnement
   const animationClass = prefersReducedMotion
-    ? "opacity-100"
-    : "transition-opacity duration-200 ease-in-out opacity-100";
+    ? isPositioned
+      ? "opacity-100"
+      : "opacity-0"
+    : `transition-opacity duration-200 ease-in-out ${isPositioned ? "opacity-100" : "opacity-0"}`;
 
   // Classes de base du tooltip
   const tooltipClasses = `
