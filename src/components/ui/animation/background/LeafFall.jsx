@@ -9,7 +9,7 @@ export default function LeafFall() {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   const START_FALL_AFTER = 0;
-  const COUNT = isMobile ? 3 : 5; // Dynamique : responsive au resize
+  const COUNT = isMobile ? 8 : 12; // Dynamique : responsive au resize
 
   useEffect(() => {
     const timer = setTimeout(() => setShow(true), START_FALL_AFTER);
@@ -19,7 +19,7 @@ export default function LeafFall() {
   // Initialiser les feuilles avec useState pour garantir la pureté
   // Génère plus de feuilles que nécessaire, filtrage au render pour responsivité
   const [leaves] = useState(() => {
-    const MAX_LEAVES = 15; // Générer suffisamment pour tous les cas
+    const MAX_LEAVES = 20; // Générer suffisamment pour tous les cas
 
     return Array.from({ length: MAX_LEAVES }).map(() => {
       const left = Math.random() * 100;
