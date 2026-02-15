@@ -23,7 +23,7 @@ export function Tooltip({
   placement = "top",
   offset = 8,
   hoverDelay = 200,
-  hideDelay = 100,
+  hideDelay = 300,
   closeOnEsc = true,
   closeOnClickOutside = true,
   className = "",
@@ -35,7 +35,14 @@ export function Tooltip({
   const prefersReducedMotion = useReducedMotion();
 
   // Gestion de l'état ouvert/fermé
-  const { isOpen, open, close, closeImmediate, bind } = useTooltip({
+  const {
+    isOpen,
+    open: _open,
+    close,
+    closeImmediate,
+    bind,
+    keepOpen,
+  } = useTooltip({
     hoverDelay,
     hideDelay,
     closeOnEsc,
@@ -111,10 +118,10 @@ export function Tooltip({
         position: "fixed",
         left: `${position.x}px`,
         top: `${position.y}px`,
-        pointerEvents: "auto", // Permet hover sur le tooltip lui-même
+        pointerEvents: "auto", // Permet hover sur le tooltip (zone de sécurité)
       }}
       data-placement={actualPlacement}
-      onMouseEnter={open}
+      onMouseEnter={keepOpen}
       onMouseLeave={close}
     >
       {content}
