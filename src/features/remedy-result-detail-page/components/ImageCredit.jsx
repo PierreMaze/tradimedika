@@ -27,7 +27,7 @@ function ImageCredit({ imageCredit }) {
       <ExternalLink
         href={url}
         siteName={source || author}
-        className="text-xs text-neutral-500 transition-colors duration-150 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200"
+        className="text-xs text-neutral-600 transition-colors duration-150 hover:text-emerald-700 hover:underline hover:underline-offset-2 dark:text-neutral-400 dark:hover:text-emerald-500 dark:hover:underline dark:hover:underline-offset-2"
         title={`Voir les crédits sur ${source || author}`}
       >
         {creditText}
