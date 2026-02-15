@@ -110,18 +110,69 @@
   }
 }
 
+/* Animation de chute naturelle avec mouvement sinusoïdal
+   Utilise des variables CSS pour personnaliser chaque feuille:
+   --amplitude: largeur du balancement (en px)
+   --phase: décalage de phase pour variation du pattern
+   --rotation-start: angle de départ de rotation
+
+   Valeurs sin() pré-calculées pour 6 cycles (3 oscillations complètes):
+   0° = 0, 54° = 0.809, 108° = 0.951, 162° = 0.309, 216° = -0.588,
+   270° = -1, 324° = -0.588, 378° = 0.309, 432° = 0.951, 486° = 0.809, 540° = 0
+*/
 @keyframes leaf-fall {
   0% {
-    transform: translateY(0) translateX(0) rotate(0deg);
+    transform: translateY(0) translateX(0) rotate(var(--rotation-start));
     opacity: 0;
   }
   10% {
+    transform: translateY(10vh) translateX(calc(0.809 * var(--amplitude)))
+      rotate(calc(var(--rotation-start) + 48deg));
+    opacity: 0.7;
+  }
+  20% {
+    transform: translateY(20vh) translateX(calc(0.951 * var(--amplitude)))
+      rotate(calc(var(--rotation-start) + 72deg));
+    opacity: 0.7;
+  }
+  30% {
+    transform: translateY(30vh) translateX(calc(0.309 * var(--amplitude)))
+      rotate(calc(var(--rotation-start) + 108deg));
+    opacity: 0.7;
+  }
+  40% {
+    transform: translateY(40vh) translateX(calc(-0.588 * var(--amplitude)))
+      rotate(calc(var(--rotation-start) + 144deg));
     opacity: 0.7;
   }
   50% {
+    transform: translateY(50vh) translateX(calc(-1 * var(--amplitude)))
+      rotate(calc(var(--rotation-start) + 180deg));
     opacity: 0.7;
   }
+  60% {
+    transform: translateY(60vh) translateX(calc(-0.588 * var(--amplitude)))
+      rotate(calc(var(--rotation-start) + 216deg));
+    opacity: 0.7;
+  }
+  70% {
+    transform: translateY(70vh) translateX(calc(0.309 * var(--amplitude)))
+      rotate(calc(var(--rotation-start) + 252deg));
+    opacity: 0.6;
+  }
+  80% {
+    transform: translateY(80vh) translateX(calc(0.951 * var(--amplitude)))
+      rotate(calc(var(--rotation-start) + 288deg));
+    opacity: 0.5;
+  }
+  90% {
+    transform: translateY(90vh) translateX(calc(0.809 * var(--amplitude)))
+      rotate(calc(var(--rotation-start) + 324deg));
+    opacity: 0.3;
+  }
   100% {
+    transform: translateY(100vh) translateX(0)
+      rotate(calc(var(--rotation-start) + 360deg));
     opacity: 0;
   }
 }

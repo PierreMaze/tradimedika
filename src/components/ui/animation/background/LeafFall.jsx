@@ -25,7 +25,11 @@ export default function LeafFall() {
       const left = Math.random() * 100;
       const duration = Math.random() * 12 + 16;
       const delay = Math.random() * 8;
-      const amplitude = Math.random() * 80 + 60;
+      // Amplitude du mouvement horizontal (balancement)
+      const amplitude = Math.random() * 40 + 30; // Entre 30 et 70px
+      // Phase aléatoire pour variation du mouvement sinusoïdal
+      const phase = Math.random() * 360;
+      // Rotation de départ aléatoire
       const rotationStart = Math.random() * 360;
 
       return {
@@ -33,6 +37,7 @@ export default function LeafFall() {
         duration,
         delay,
         amplitude,
+        phase,
         rotationStart,
       };
     });
@@ -52,13 +57,17 @@ export default function LeafFall() {
           style={{
             left: `${leaf.left}%`,
             top: "-20px",
-            animation: `leaf-fall ${leaf.duration}s ease-in-out infinite`,
+            // Utilisation de variables CSS pour personnaliser l'animation par feuille
+            "--amplitude": `${leaf.amplitude}px`,
+            "--phase": `${leaf.phase}deg`,
+            "--rotation-start": `${leaf.rotationStart}deg`,
+            animation: `leaf-fall ${leaf.duration}s linear infinite`,
             animationDelay: `${leaf.delay}s`,
           }}
         >
           <GiFallingLeaf
             size={24}
-            className="transition-color text-emerald-700/75 drop-shadow-lg duration-150 dark:text-emerald-500/75"
+            className="text-emerald-700/75 drop-shadow-lg dark:text-emerald-500/75"
           />
         </div>
       ))}
