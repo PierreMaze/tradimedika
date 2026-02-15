@@ -45,7 +45,7 @@ export default function AllergyFilterInfo({
 
         <div className="flex-1 text-start">
           <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
-            <span className="font-bold">{filteredCount}</span> remède
+            <span className="font-bold">{filteredCount}</span> produit naturel
             {filteredCount > 1 ? "s" : ""} masqué{filteredCount > 1 ? "s" : ""}
           </p>
           <p className="mt-1 text-sm font-medium text-emerald-900 dark:text-emerald-50">
