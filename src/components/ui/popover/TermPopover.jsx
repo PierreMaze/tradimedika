@@ -1,5 +1,5 @@
 import PropTypes from "prop-types"; // Validation des props
-import { useCallback, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { BiLinkExternal } from "react-icons/bi";
 import { Z_INDEX_CLASSES } from "../../../constants/zIndexLevels";
@@ -12,7 +12,7 @@ import { useTooltipPosition } from "../../../hooks/useTooltipPosition";
  * TermPopover - Popover interactif pour afficher les définitions de termes techniques
  *
  * Comportement:
- * - Desktop: Hover (300ms délai) ou clic pour afficher
+ * - Desktop: Hover (200ms délai) ou clic pour afficher
  * - Mobile: Clic pour afficher
  * - Échap pour fermer, focus retourne au terme
  * - Lien Wikipedia cliquable dans le popover
@@ -38,6 +38,7 @@ function TermPopover({
   const [isLocked, setIsLocked] = useState(false);
 
   const hoverTimeoutRef = useRef(null);
+  const hideTimeoutRef = useRef(null);
   const titleId = useId();
   const { openConfirmation } = useExternalLink();
 
@@ -61,22 +62,48 @@ function TermPopover({
   const handleMouseEnter = useCallback(() => {
     if (isLocked) return;
 
+    clearTimeout(hideTimeoutRef.current); // Annule fermeture si en cours
+    clearTimeout(hoverTimeoutRef.current); // Annule ouverture précédente
+
     hoverTimeoutRef.current = setTimeout(() => {
       setShowPopover(true);
-    }, 300); // Délai 300ms comme avant
+    }, 200); // Délai 200ms uniformisé avec Tooltip
   }, [isLocked]);
 
   const handleMouseLeave = useCallback(() => {
     if (isLocked) return;
 
-    clearTimeout(hoverTimeoutRef.current);
-    setShowPopover(false);
+    clearTimeout(hoverTimeoutRef.current); // Annule ouverture si en cours
+    clearTimeout(hideTimeoutRef.current); // Annule fermeture précédente
+
+    hideTimeoutRef.current = setTimeout(() => {
+      setShowPopover(false);
+    }, 300); // Délai de sécurité pour permettre le mouvement vers le popover
   }, [isLocked]);
 
+  // Handler pour maintenir le popover ouvert sans relancer le délai d'ouverture
+  const handleKeepOpen = useCallback(() => {
+    if (isLocked) return;
+    clearTimeout(hideTimeoutRef.current); // Annule SEULEMENT la fermeture programmée
+  }, [isLocked]);
+
+  // Cleanup des timeouts au démontage du composant
+  useEffect(() => {
+    return () => {
+      clearTimeout(hoverTimeoutRef.current);
+      clearTimeout(hideTimeoutRef.current);
+    };
+  }, []);
+
   // Fermeture au clic externe (utilise le nouveau hook)
+  // IMPORTANT: Exclure le popoverRef car il est rendu via portal dans document.body
   const containerRef = useClickOutside(
-    () => {
+    (event) => {
       if (showPopover) {
+        // Ne pas fermer si le clic est dans le popover lui-même
+        if (popoverRef.current && popoverRef.current.contains(event.target)) {
+          return;
+        }
         setShowPopover(false);
         setIsLocked(false);
       }
@@ -139,7 +166,7 @@ function TermPopover({
         top: `${position.y}px`,
         left: `${position.x}px`,
       }}
-      onMouseEnter={handleMouseEnter}
+      onMouseEnter={handleKeepOpen}
       onMouseLeave={handleMouseLeave}
     >
       {/* Annonce pour lecteurs d'écran */}
@@ -171,7 +198,11 @@ function TermPopover({
       {termData.wikipediaUrl && (
         <button
           type="button"
-          onClick={() => openConfirmation(termData.wikipediaUrl, "Wikipedia")}
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsLocked(true); // Verrouille le popover pendant l'ouverture de la modal
+            openConfirmation(termData.wikipediaUrl, "Wikipedia");
+          }}
           className="inline-flex cursor-pointer items-center justify-end gap-1 rounded text-sm font-semibold text-emerald-700 transition-colors hover:text-emerald-800 hover:underline focus:ring-2 focus:ring-emerald-500 focus:outline-none dark:text-emerald-500 dark:hover:text-emerald-400"
           aria-label={`En savoir plus sur ${termData.name} sur Wikipedia (ouvre dans une nouvelle fenêtre)`}
         >

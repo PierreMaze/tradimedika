@@ -6,12 +6,12 @@ import { useState, useCallback, useRef, useEffect } from "react";
  *
  * @param {Object} options - Options de configuration
  * @param {number} [options.hoverDelay=200] - Délai avant affichage au hover (ms)
- * @param {number} [options.hideDelay=100] - Délai avant masquage (ms)
+ * @param {number} [options.hideDelay=300] - Délai avant masquage (ms)
  * @param {boolean} [options.closeOnEsc=true] - Fermer avec la touche Escape
  * @returns {Object} État et handlers du tooltip
  */
 export function useTooltip(options = {}) {
-  const { hoverDelay = 200, hideDelay = 100, closeOnEsc = true } = options;
+  const { hoverDelay = 200, hideDelay = 300, closeOnEsc = true } = options;
 
   const [isOpen, setIsOpen] = useState(false);
   const hoverTimeoutRef = useRef(null);
@@ -19,9 +19,12 @@ export function useTooltip(options = {}) {
 
   /**
    * Ouvre le tooltip après le délai configuré
+   * Annule tout timeout de fermeture en cours pour créer une "zone de sécurité"
+   * permettant à l'utilisateur de déplacer sa souris du trigger vers le contenu
    */
   const open = useCallback(() => {
     clearTimeout(hideTimeoutRef.current);
+    clearTimeout(hoverTimeoutRef.current);
     hoverTimeoutRef.current = setTimeout(() => {
       setIsOpen(true);
     }, hoverDelay);
@@ -32,10 +35,19 @@ export function useTooltip(options = {}) {
    */
   const close = useCallback(() => {
     clearTimeout(hoverTimeoutRef.current);
+    clearTimeout(hideTimeoutRef.current);
     hideTimeoutRef.current = setTimeout(() => {
       setIsOpen(false);
     }, hideDelay);
   }, [hideDelay]);
+
+  /**
+   * Annule la fermeture programmée sans relancer le délai d'ouverture
+   * Utilisé quand l'utilisateur survole le contenu du tooltip déjà affiché
+   */
+  const keepOpen = useCallback(() => {
+    clearTimeout(hideTimeoutRef.current);
+  }, []);
 
   /**
    * Ferme immédiatement le tooltip sans délai
@@ -95,6 +107,7 @@ export function useTooltip(options = {}) {
     isOpen,
     open,
     close,
+    keepOpen,
     closeImmediate,
     toggle,
     bind,
