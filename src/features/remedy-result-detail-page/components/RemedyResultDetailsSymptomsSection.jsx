@@ -14,7 +14,6 @@ function RemedyResultDetailsSymptomsSection({ symptoms }) {
         <InfoTooltip
           title="Symptômes traités"
           message="Cette section vous guide sur la meilleure façon de conserver, de ce fournir et d'utiliser cette aliment au quotidien."
-          iconColor="text-neutral-600 dark:text-neutral-500"
         />
       </div>
       <div className="flex flex-wrap gap-2">

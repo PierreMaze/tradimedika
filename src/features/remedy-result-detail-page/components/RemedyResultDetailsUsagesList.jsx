@@ -8,40 +8,56 @@ import { formatUsageFrequency } from "../utils/formatUsageFrequency";
 function RemedyResultDetailsUsagesList({ uses }) {
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleToggle = () => setIsOpen(!isOpen);
+
   if (!uses || uses.length === 0) return null;
 
   return (
     <section className="animate-fade-in-up rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition-colors duration-150 motion-reduce:animate-none motion-reduce:opacity-100 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="mb-4 flex w-full cursor-pointer items-center justify-between text-left"
-        aria-expanded={isOpen}
-      >
-        <h2 className="te flex items-center gap-2 text-lg font-semibold text-emerald-600 lg:text-xl 2xl:text-2xl dark:text-emerald-500">
-          <FaPrescriptionBottleMedical
-            className="h-4 w-4 text-emerald-600 lg:h-5 lg:w-5 dark:text-emerald-500"
-            aria-hidden="true"
-          />
-          Utilisations / Préparations
-          <InfoTooltip
-            title="Méthode de préparation et d'utilisation"
-            message="Cette section vous guide sur la manière optimale d'utiliser cet aliment pour obtenir les meilleurs résultats."
-            iconColor="text-emerald-600 dark:text-emerald-500"
-          />
-        </h2>
+      <div className="mb-4">
+        <div className="flex items-center justify-between gap-2">
+          {/* Partie gauche : titre avec son InfoTooltip */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleToggle}
+              aria-expanded={isOpen}
+              className="flex cursor-pointer items-center gap-2 text-left"
+            >
+              <h2 className="te flex items-center gap-2 text-lg font-semibold text-emerald-600 lg:text-xl 2xl:text-2xl dark:text-emerald-500">
+                <FaPrescriptionBottleMedical
+                  className="h-4 w-4 text-emerald-600 lg:h-5 lg:w-5 dark:text-emerald-500"
+                  aria-hidden="true"
+                />
+                Utilisations
+              </h2>
+            </button>
+            <InfoTooltip
+              title="Méthode de préparation et d'utilisation"
+              message="Cette section vous guide sur la manière optimale d'utiliser cet aliment pour obtenir les meilleurs résultats."
+              iconColor="text-emerald-600 dark:text-emerald-500"
+            />
+          </div>
 
-        {isOpen ? (
-          <HiChevronUp
-            className="h-5 w-5 text-neutral-500 lg:h-6 lg:w-6"
-            aria-hidden="true"
-          />
-        ) : (
-          <HiChevronDown
-            className="h-5 w-5 text-neutral-500 lg:h-6 lg:w-6"
-            aria-hidden="true"
-          />
-        )}
-      </button>
+          {/* Partie droite : chevron cliquable */}
+          <button
+            onClick={handleToggle}
+            aria-label="Replier ou déplier la section utilisations"
+            className="flex items-center"
+          >
+            {isOpen ? (
+              <HiChevronUp
+                className="h-5 w-5 text-neutral-500 lg:h-6 lg:w-6"
+                aria-hidden="true"
+              />
+            ) : (
+              <HiChevronDown
+                className="h-5 w-5 text-neutral-500 lg:h-6 lg:w-6"
+                aria-hidden="true"
+              />
+            )}
+          </button>
+        </div>
+      </div>
       {isOpen && (
         <div className="animate-in fade-in overflow-hidden duration-300 motion-reduce:animate-none">
           <div className="border-l-4 border-emerald-600 pl-4 dark:border-emerald-500">
