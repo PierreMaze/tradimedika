@@ -113,7 +113,7 @@ function RemedyCard({
                   {isFiltered && (
                     <span
                       className="inline-flex shrink-0 items-center gap-1 rounded-md bg-amber-100 px-3 py-1.5 text-sm font-medium text-amber-800 shadow-md lg:text-base 2xl:text-lg dark:bg-amber-900 dark:text-amber-200"
-                      title="Ce remède contient des allergènes que vous avez déclarés"
+                      title="Ce produit naturel contient des allergènes que vous avez déclarés"
                       role="status"
                       aria-live="polite"
                     >
@@ -128,7 +128,7 @@ function RemedyCard({
               )}
               <img
                 src={image}
-                alt={`${name} - remède naturel traditionnel de type ${type}`}
+                alt={`${name} - produit naturel traditionnel de type ${type}`}
                 width="300"
                 height="300"
                 className={`mx-auto h-full w-2/3 object-scale-down p-4 transition-colors duration-150 lg:w-3/4 2xl:w-4/5 ${imageClasses}`}

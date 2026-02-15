@@ -1,8 +1,8 @@
 // scripts/validateSources.js
-// Script de validation pour vérifier les sources des remèdes
+// Script de validation pour vérifier les sources des produits naturels
 
 import { readFileSync } from "fs";
-import { resolve, dirname } from "path";
+import { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -13,7 +13,7 @@ const PATHS = {
   db: resolve(__dirname, "../src/data/db.json"),
 };
 
-console.log("\n🔍 Validation des sources des remèdes...\n");
+console.log("\n🔍 Validation des sources des produits naturels...\n");
 
 // ==================== CHARGEMENT DES DONNÉES ====================
 
@@ -111,7 +111,7 @@ db.forEach((remedy) => {
 });
 
 console.log(
-  `  ℹ️  ${remediesWithSources}/${db.length} remèdes ont des sources`,
+  `  ℹ️  ${remediesWithSources}/${db.length} produits naturels ont des sources`,
 );
 console.log(`  ℹ️  ${totalScientificSources} sources scientifiques au total`);
 console.log(
@@ -233,10 +233,12 @@ if (incoherences === 0) {
 // ==================== 5. STATISTIQUES ====================
 
 console.log("📊 Statistiques :");
-console.log(`  • Total remèdes               : ${db.length}`);
-console.log(`  • Remèdes avec sources        : ${remediesWithSources}`);
+console.log(`  • Total produits naturels               : ${db.length}`);
 console.log(
-  `  • Remèdes sans sources        : ${db.length - remediesWithSources}`,
+  `  • produits naturels avec sources        : ${remediesWithSources}`,
+);
+console.log(
+  `  • produits naturels sans sources        : ${db.length - remediesWithSources}`,
 );
 console.log(`  • Sources scientifiques       : ${totalScientificSources}`);
 console.log(`  • Sources traditionnelles     : ${totalTraditionalSources}`);
@@ -248,7 +250,9 @@ console.log(`  • URLs uniques                : ${urlMap.size}`);
 const verifiedCount = db.filter(
   (r) => r.verifiedByProfessional === true,
 ).length;
-console.log(`  • Remèdes vérifiés            : ${verifiedCount}/${db.length}`);
+console.log(
+  `  • produits naturels vérifiés            : ${verifiedCount}/${db.length}`,
+);
 
 // ==================== 6. RÉSULTAT FINAL ====================
 

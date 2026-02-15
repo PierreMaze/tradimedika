@@ -28,7 +28,7 @@ try {
 
   // 1. Lire db.json
   const db = JSON.parse(fs.readFileSync(dbPath, "utf-8"));
-  console.log(`✅ Fichier db.json lu : ${db.length} remèdes trouvés`);
+  console.log(`✅ Fichier db.json lu : ${db.length} produit naturel trouvés`);
 
   // 2. Lire allergensList.json existant
   const existingAllergens = JSON.parse(fs.readFileSync(allergensPath, "utf-8"));
@@ -36,7 +36,7 @@ try {
     `✅ Fichier allergensList.json lu : ${existingAllergens.length} allergènes existants`,
   );
 
-  // 3. Créer un Map pour associer chaque allergène à ses remèdes
+  // 3. Créer un Map pour associer chaque allergène à ses produit naturel
   const allergensMap = new Map();
 
   db.forEach((remedy) => {
@@ -60,7 +60,7 @@ try {
   // 4. Créer un index des allergènes existants
   const existingById = new Map(existingAllergens.map((a) => [a.id, a]));
 
-  // 5. Mettre à jour les allergènes existants avec les remèdes
+  // 5. Mettre à jour les allergènes existants avec les produit naturel
   let updatedCount = 0;
   let newCount = 0;
 
@@ -68,11 +68,13 @@ try {
 
   allergensMap.forEach((remedies, allergenId) => {
     if (existingById.has(allergenId)) {
-      // Allergène existant : mettre à jour les remèdes
+      // Allergène existant : mettre à jour les produit naturel
       const existing = existingById.get(allergenId);
       existing.remedies = [...new Set(remedies)].sort(); // Dédoublonner et trier
       updatedCount++;
-      console.log(`   ✓ ${allergenId} → ${existing.remedies.length} remède(s)`);
+      console.log(
+        `   ✓ ${allergenId} → ${existing.remedies.length} produit naturel(s)`,
+      );
     } else {
       // Nouvel allergène : créer une entrée
       const newAllergen = {
@@ -85,7 +87,7 @@ try {
       existingById.set(allergenId, newAllergen);
       newCount++;
       console.log(
-        `   🆕 ${allergenId} → "${newAllergen.name}" (${newAllergen.remedies.length} remède(s))`,
+        `   🆕 ${allergenId} → "${newAllergen.name}" (${newAllergen.remedies.length} produit naturel(s))`,
       );
     }
   });
@@ -106,11 +108,11 @@ try {
     `\n   - Total : ${existingAllergens.length} allergènes`,
   );
 
-  // 8. Afficher le résumé des remèdes par allergène
-  console.log(`\n📋 Résumé des remèdes par allergène :`);
+  // 8. Afficher le résumé des produit naturel par allergène
+  console.log(`\n📋 Résumé des produit naturel par allergène :`);
   existingAllergens.forEach((allergen) => {
     const remediesCount = allergen.remedies ? allergen.remedies.length : 0;
-    console.log(`   ${allergen.id}: ${remediesCount} remède(s)`);
+    console.log(`   ${allergen.id}: ${remediesCount} produit naturel(s)`);
   });
 
   console.log(`\n✨ Extraction terminée avec succès !\n`);

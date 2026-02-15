@@ -16,7 +16,7 @@ function RemedyResultDetailsHeader({ remedy, safeImageUrl }) {
         <div className="aspect-square w-full overflow-hidden rounded-lg bg-neutral-50 shadow-md dark:bg-neutral-700/50">
           <img
             src={safeImageUrl}
-            alt={`${remedy.name} - remède naturel traditionnel de type ${remedy.type}`}
+            alt={`${remedy.name} - produit naturel traditionnel de type ${remedy.type}`}
             width="400"
             height="400"
             className="mx-auto h-full w-2/3 object-scale-down p-6 lg:w-3/4 2xl:w-4/5"

@@ -21,7 +21,7 @@ export default function ListAllergyTag({ tags, activeTag, onTagClick }) {
     <div
       className="animate-fade-in-down flex flex-wrap items-center justify-center gap-2 motion-reduce:animate-none motion-reduce:opacity-100"
       role="group"
-      aria-label="Filtrer les remèdes par symptôme"
+      aria-label="Filtrer les produits par symptôme"
     >
       {tags.map((tag) => (
         <AllergyTag

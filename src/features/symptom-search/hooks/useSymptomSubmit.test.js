@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { renderHook, act } from "@testing-library/react";
+import { act, renderHook } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { useSymptomSubmit } from "./useSymptomSubmit";
 
 // Mock react-router-dom
@@ -92,7 +92,7 @@ describe("useSymptomSubmit", () => {
     expect(result.current.isLoading).toBe(true);
   });
 
-  it("doit rechercher les remèdes et naviguer après soumission", async () => {
+  it("doit rechercher les produit naturels et naviguer après soumission", async () => {
     const { result } = renderHook(() => useSymptomSubmit(mockAddSearch));
 
     act(() => {

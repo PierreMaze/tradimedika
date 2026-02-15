@@ -49,7 +49,7 @@ const segmentToLabel = (segment, isSlug = false, remedyName = null) => {
 
   // Priorité 2: Labels statiques pour les routes connues
   const labels = {
-    remedes: "Remèdes",
+    remedes: "Produits naturels",
   };
 
   if (labels[segment]) {

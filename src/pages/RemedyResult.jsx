@@ -196,13 +196,13 @@ function RemedyResult() {
   const { pageTitle, pageDescription, canonicalUrl } = useMemo(() => {
     const title =
       selectedSymptoms.length > 0
-        ? `Remèdes pour ${selectedSymptoms.join(", ")} - TRADIMEDIKA`
-        : "Résultats des remèdes - TRADIMEDIKA";
+        ? `Produits naturels pour ${selectedSymptoms.join(", ")} - TRADIMEDIKA`
+        : "Résultats des produits naturels - TRADIMEDIKA";
 
     const description =
       matchedRemedies.length > 0
-        ? `${matchedRemedies.length} remède${matchedRemedies.length > 1 ? "s" : ""} naturel${matchedRemedies.length > 1 ? "s" : ""} trouvé${matchedRemedies.length > 1 ? "s" : ""} pour ${selectedSymptoms.join(", ")}`
-        : `Recherche de remèdes naturels pour ${selectedSymptoms.join(", ")}`;
+        ? `${matchedRemedies.length} produit${matchedRemedies.length > 1 ? "s" : ""} naturel${matchedRemedies.length > 1 ? "s" : ""} trouvé${matchedRemedies.length > 1 ? "s" : ""} pour ${selectedSymptoms.join(", ")}`
+        : `Recherche de produits naturels pour ${selectedSymptoms.join(", ")}`;
 
     const canonical =
       selectedSymptoms.length > 0
@@ -249,13 +249,13 @@ function RemedyResult() {
       <div className="text-dark dark:text-light transition-color mt-8 flex flex-col items-center gap-y-4 text-center duration-150 ease-in-out lg:mt-4">
         {/* Titre principal */}
         <h1 className="text-3xl font-bold lg:text-4xl">
-          Résultats des Remèdes
+          Résultats des Produits
         </h1>
 
         {/* Sous-titre avec symptômes sélectionnés */}
         {selectedSymptoms.length > 0 && (
           <p className="text-center text-base text-neutral-600 lg:text-lg dark:text-neutral-400">
-            Remèdes naturels pour :{" "}
+            Produits naturels pour :{" "}
             <span className="font-semibold text-emerald-600 dark:text-emerald-400">
               {selectedSymptoms.join(", ")}
             </span>

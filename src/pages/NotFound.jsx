@@ -40,7 +40,7 @@ function NotFound() {
             Retour à l&apos;accueil
           </Button>
           <Button as="link" to="/remedes" variant="secondary">
-            Explorer les remèdes
+            Explorer les produits naturels
           </Button>
         </div>
 

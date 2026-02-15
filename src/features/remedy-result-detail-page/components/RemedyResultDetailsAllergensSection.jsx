@@ -13,7 +13,7 @@ function RemedyResultDetailsAllergensSection({ allergens }) {
         </h2>
         <InfoTooltip
           title="Substances allergènes potentielles"
-          message="Cette section regroupent les substances présentes dans cette aliment susceptibles de provoquer une réaction. Cliquez sur un allergène souligné pour en savoir plus."
+          message="Cette section regroupent les substances présentes dans ce produit susceptibles de provoquer une réaction. Cliquez sur un allergène souligné pour en savoir plus."
         />
       </div>
       <div className="flex flex-wrap gap-x-2 gap-y-4">

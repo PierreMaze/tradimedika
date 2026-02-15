@@ -13,7 +13,7 @@ function RemedyResultDetailsPropertiesSection({ properties }) {
         </h2>
         <InfoTooltip
           title="Effets et caractéristiques observés"
-          message="Cette section résument les principaux effets et caractéristiques de cette aliment. Cliquez sur une propriété soulignée pour en savoir plus."
+          message="Cette section résument les principaux effets et caractéristiques de ce produit. Cliquez sur une propriété soulignée pour en savoir plus."
         />
       </div>
       <div className="flex flex-wrap gap-x-2 gap-y-4">

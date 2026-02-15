@@ -9,7 +9,7 @@ import { Tooltip } from "../ui/tooltip";
 /**
  * ChildrenAgeTag Component
  *
- * Tag indiquant la compatibilité d&apos;un remède avec les enfants.
+ * Tag indiquant la compatibilité d&apos;un produit naturel avec les enfants.
  * Affiche 2 variantes selon la valeur de age :
  * - age: null → Vert (OK pour tous les enfants, pas de limite d&apos;âge) - Icône check
  * - age: number → Teal (Limite d&apos;âge, affiche "Enfants +X ans") - Icône alerte
@@ -39,8 +39,8 @@ function ChildrenAgeTag({ age, className = "", showLabel = true }) {
           Adultes uniquement
         </h3>
         <p className="text-sm text-neutral-900 dark:text-white">
-          Ce remède est réservé à l&apos;adulte et ne doit pas être utilisé chez
-          l&apos;enfant.
+          Ce produit naturel est réservé à l&apos;adulte et ne doit pas être
+          utilisé chez l&apos;enfant.
         </p>
       </>
     );
@@ -55,8 +55,8 @@ function ChildrenAgeTag({ age, className = "", showLabel = true }) {
           Tout public
         </h3>
         <p className="text-sm text-neutral-900 dark:text-white">
-          Ce remède peut être utilisé chez l&apos;enfant sans limite d&apos;âge,
-          dans le respect des doses recommandées.
+          Ce produit naturel peut être utilisé chez l&apos;enfant sans limite
+          d&apos;âge, dans le respect des doses recommandées.
         </p>
       </>
     );
@@ -71,8 +71,8 @@ function ChildrenAgeTag({ age, className = "", showLabel = true }) {
           Enfants +{age} ans
         </h3>
         <p className="text-sm text-neutral-900 dark:text-white">
-          Ce remède peut être utilisé chez l&apos;enfant à partir de {age} ans,
-          dans le respect des doses recommandées.
+          Ce produit naturel peut être utilisé chez l&apos;enfant à partir de{" "}
+          {age} ans, dans le respect des doses recommandées.
         </p>
       </>
     );

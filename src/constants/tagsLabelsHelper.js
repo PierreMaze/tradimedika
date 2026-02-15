@@ -18,7 +18,7 @@ export const TAG_LABELS_CATEGORIES = [
         id: "traditional",
         label: "Traditionnel",
         description:
-          "Usage traditionnel sans soutien scientifique (remède de grand-mère)",
+          "Usage traditionnel sans soutien scientifique (produit naturel de grand-mère)",
         color: "amber",
       },
     ],

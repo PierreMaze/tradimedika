@@ -305,9 +305,9 @@
 
 - **Enrichissement des allergènes : de 9 à 40 allergènes**
   - Ajout de 15 nouveaux allergènes de familles/composés : allium, fodmap, sulfites, bromelaine, latex-fruit, cafeine, zingiberacees, eugenol, rosacees, sorbitol, gluten-trace, propolis, lamiacees, menthol, aloine
-  - Ajout de 16 allergènes individuels (un par remède) : ail, aloe-vera, ananas, banane, cafe, camomille, citron, clou-de-girofle, fenouil, gingembre, miel, menthe, oignon, pruneau, riz, yaourt
+  - Ajout de 16 allergènes individuels (un par produit naturel) : ail, aloe-vera, ananas, banane, cafe, camomille, citron, clou-de-girofle, fenouil, gingembre, miel, menthe, oignon, pruneau, riz, yaourt
   - Permet un filtrage granulaire : ex. allergique à la prune mais pas à l'abricot
-  - Tous les remèdes dans db.json ont maintenant leurs allergènes multiples référencés
+  - Tous les produits naturels dans db.json ont maintenant leurs allergènes multiples référencés
 
 - **Francisation complète des IDs d'allergènes**
   - `citrus` → `agrumes`
@@ -327,11 +327,11 @@
 - **allergensList.json : restructuration complète**
   - Passage de 9 à 40 allergènes
   - Ordre alphabétique par ID (français)
-  - Descriptions génériques pour les allergènes individuels de remèdes
-  - Script `extractAllergensFromDb.js` synchronise automatiquement les remèdes associés
+  - Descriptions génériques pour les allergènes individuels de produits naturels
+  - Script `extractAllergensFromDb.js` synchronise automatiquement les produits naturels associés
 
-- **db.json : mise à jour de tous les remèdes**
-  - Chaque remède a maintenant un tableau `allergens` enrichi avec les nouveaux IDs
+- **db.json : mise à jour de tous les produits naturels**
+  - Chaque produit naturel a maintenant un tableau `allergens` enrichi avec les nouveaux IDs
   - Exemples : Miel [`pollen`, `fodmap`, `propolis`, `miel`], Oignon [`allium`, `fodmap`, `sulfites`, `oignon`]
 
 ### Fixed
@@ -384,7 +384,7 @@
 ### Added
 
 - **Tag "Recommandé" sur la page résultats**
-  - Nouveau composant `RecommendedTag` : badge visuel (sky) avec icône thumbUp affiché sur la carte du remède le plus pertinent
+  - Nouveau composant `RecommendedTag` : badge visuel (sky) avec icône thumbUp affiché sur la carte du produit naturel le plus pertinent
   - Nouveau composant `RemedyResultDetailsRecommendedBanner` : bannière en haut de la page détails confirmant le statut recommandé
   - `findMatchingRemedies()` marque désormais le premier résultat non-allergène comme `isRecommended`
 
@@ -393,8 +393,8 @@
 - **Recalcul dynamique du tag "Recommandé"**
   - Le tag se met à jour automatiquement lorsque l'utilisateur filtre par symptôme individuel via `FilterRemedyResult`
   - Le tag se met à jour lorsque des filtres de propriétés sont appliqués (grossesse, reconnaissance, âge)
-  - Clicking "Tous" restaure le tag sur le remède le plus pertinent globalement
-  - Implémenté via un `useMemo` post-filtrage dans `RemedyResult.jsx` : identifie le premier remède non-allergène (`isFiltered: false`) de la liste actuelle
+  - Clicking "Tous" restaure le tag sur le produit naturel le plus pertinent globalement
+  - Implémenté via un `useMemo` post-filtrage dans `RemedyResult.jsx` : identifie le premier produit naturel non-allergène (`isFiltered: false`) de la liste actuelle
   - Optimisé pour `React.memo` : les items dont `isRecommended` n'a pas changé conservent la même référence objet
 
 - **Données symptômes — reclassification**
@@ -540,7 +540,7 @@
   - Blocage du scroll du body pendant l'ouverture de la modal
   - Message clair informant l'utilisateur qu'un nouvel onglet sera ouvert
 
-- **Système de sources pour les remèdes**
+- **Système de sources pour les produits naturels**
   - Nouveau composant `SourceTag` avec affichage d'icônes et favicons
   - Nouveau composant `SourcesSection` pour regrouper sources scientifiques et traditionnelles
   - Support de 13 domaines reconnus (VIDAL, WHO, PubMed, Passeport Santé, Doctissimo, etc.)
@@ -777,7 +777,7 @@ Comportements préservés :
 
 ### Added
 
-- **New système of filtrage par propriétés of remèdes**
+- **New système of filtrage par propriétés of produits naturels**
   - Création of la feature `remedy-filter/` with architecture complète
   - Components :
     - `FilterButton` : Bouton with badge du nombre of filtres actifs, style cohérent with tags of symptômes
@@ -804,7 +804,7 @@ Comportements préservés :
     - `age={null}` : Vert, icône check (IoMdCheckmarkCircleOutline), label "Enfants"
     - `age={number}` : Teal, icône alerte (IoMdAlert), label "Enfants +X ans"
     - Labels and tooltips dynamiques selon l'âge
-  - Affichage **toujours visible** des tags on les cartes of remèdes (plus of condition)
+  - Affichage **toujours visible** des tags on les cartes of produits naturels (plus of condition)
   - Support compland du dark mode for toutes les variantes
 
 ### Fixed
@@ -812,7 +812,7 @@ Comportements préservés :
 - **Fixed logique of filtrage par propriétés**
   - Fixed du bug : filtres of catégories différentes combinés incorrectement (OU global)
   - New logique optimisée : ET entre catégories, OU au sein d'une catégorie
-  - Exemple corrigé : "Reconnu + Grossesse Interdite" affiche UNIQUEMENT les remèdes reconnus ET interdits for grossesse
+  - Exemple corrigé : "Reconnu + Grossesse Interdite" affiche UNIQUEMENT les produits naturels reconnus ET interdits for grossesse
 
 ### Refactored
 
@@ -904,7 +904,7 @@ Comportements préservés :
     - `RemedyResultDetailsTipsSection` : Section conseils pratiques
     - `RemedyResultDetailsAllergensSection` : Section allergènes potentiels
   - Extraction of 2 hooks personnalisés :
-    - `useRemedyDetails` : Gestion of récupération and validation du remède
+    - `useRemedyDetails` : Gestion of récupération and validation du produit naturel
     - `useRemedyAllergyCheck` : Vérification des allergènes utilisateur
   - Extraction of 2 fichiers utils :
     - `remedyImageValidator` : Validation HTTPS des URLs d'images
@@ -975,7 +975,7 @@ Comportements préservés :
   ├── features/              # Features organisées par domaine
   │   ├── allergens/        # Gestion des allergies
   │   ├── home/             # Page d'accueil (hero, features)
-  │   ├── remedy/           # Affichage des remèdes
+  │   ├── remedy/           # Affichage des produits naturels
   │   ├── settings/         # Paramètres (dark mode, performance)
   │   └── symptom-search/   # Recherche of symptômes
   ├── components/           # Components UI partagés
@@ -1009,21 +1009,21 @@ Comportements préservés :
   - Icônes HiEye/HiEyeSlash for meilleure clarté visuelle
   - Animations Framer Motion (whileHover, whileTap) conservées
 
-- **Ordre d'affichage des remèdes with allergènes**
-  - Les remèdes contenant des allergènes apparaissent **EN PREMIER** lorsqu'ils sont affichés
-  - Facilite l'identification rapide des remèdes à risque
+- **Ordre d'affichage des produits naturels with allergènes**
+  - Les produits naturels contenant des allergènes apparaissent **EN PREMIER** lorsqu'ils sont affichés
+  - Facilite l'identification rapide des produits naturels à risque
 
 ### <u>Fixed:</u>
 
 - **Persistance of la bannière allergènes après navigation**
   - Utilisation of `AllergiesContext` au lieu of `location.state`
-  - La bannière reste visible après navigation vers les détails d'un remède and retour
+  - La bannière reste visible après navigation vers les détails d'un produit naturel and retour
   - Allergies persistées in localStorage via le contexte
 
 - **État du toggle allergènes non persisté**
   - Changement of `useLocalStorage` → `useState(false)`
   - Les cartes allergènes sont **toujours masquées par défaut** au chargement
-  - Évite la confusion en affichant systématiquement les remèdes sûrs en premier
+  - Évite la confusion en affichant systématiquement les produits naturels sûrs en premier
 
 - **Tests Disclaimer.test.jsx mis à jour**
   - Expectations corrigées : `dark:bg-amber-950` → `dark:bg-amber-950/80`
@@ -1042,17 +1042,17 @@ Comportements préservés :
 
 ### <u>Added:</u>
 
-- **Affichage des remèdes masqués in l'historique of recherche**
+- **Affichage des produits naturels masqués in l'historique of recherche**
   - New champ `filteredCount` in la structure of données of l'historique
-  - Affichage en jaune du nombre of remèdes masqués par filtrage d'allergies
-  - Format : "3 résultats • 2 remèdes masqués • il y a 5 min"
-  - Support du singulier/pluriel automatique ("1 remède masqué" vs "2 remèdes masqués")
+  - Affichage en jaune du nombre of produits naturels masqués par filtrage d'allergies
+  - Format : "3 résultats • 2 produits naturels masqués • il y a 5 min"
+  - Support du singulier/pluriel automatique ("1 produit naturel masqué" vs "2 produits naturels masqués")
 
 - **Amélioration du script extractAllergensFromDb.js**
-  - Extraction enrichie : associe chaque allergène à la liste of ses remèdes en français
-  - `allergensList.json` contient maintenant un champ `remedies[]` with les noms of remèdes
+  - Extraction enrichie : associe chaque allergène à la liste of ses produits naturels en français
+  - `allergensList.json` contient maintenant un champ `remedies[]` with les noms of produits naturels
   - Comparaison intelligente for éviter les doublons lors of chaque exécution
-  - Tri alphabétique automatique des remèdes par allergène
+  - Tri alphabétique automatique des produits naturels par allergène
   - Updated incrémentale : ne modifie que les nouvelles entrées
 
 ### <u>Changed:</u>
@@ -1085,12 +1085,12 @@ Comportements préservés :
 
 ### <u>Statistiques:</u>
 
-- 5 allergènes with remèdes associés :
-  - citrus → 1 remède (Citron)
-  - pollen → 2 remèdes (Banane, Miel)
-  - asteraceae → 1 remède (Camomille)
-  - pollen-olive → 1 remède (Ananas)
-  - bee-venom → 1 remède (Ananas)
+- 5 allergènes with produits naturels associés :
+  - citrus → 1 produit naturel (Citron)
+  - pollen → 2 produits naturels (Banane, Miel)
+  - asteraceae → 1 produit naturel (Camomille)
+  - pollen-olive → 1 produit naturel (Ananas)
+  - bee-venom → 1 produit naturel (Ananas)
 
 ---
 
@@ -1153,7 +1153,7 @@ Comportements préservés :
 
 - 35 symptômes uniques
 - 31 mappings of synonymes (91 synonymes au total)
-- 14 remèdes
+- 14 produits naturels
 - 5 allergènes validés
 - 10 recherches max in l'historique
 
@@ -1163,7 +1163,7 @@ Comportements préservés :
 
 ### <u>Added:</u>
 
-- **Système of gestion des allergies** : New fonctionnalité majeure for filtrer les remèdes dangereux
+- **Système of gestion des allergies** : New fonctionnalité majeure for filtrer les produits naturels dangereux
   - `allergensList.json` : Liste normalisée of 5 allergènes (IDs kebab-case)
     - `citrus` (Agrumes), `pollen` (Pollen), `asteraceae` (Astéracées)
     - `pollen-olive` (Pollen d'olivier), `bee-venom` (Venin d'abeille)
@@ -1190,9 +1190,9 @@ Comportements préservés :
   - Fermeture automatique du dropdown au clic extérieur ou blur
   - Nombre d'allergies illimité
   - 11 tests unitaires (render, search, select, keyboard, blur, exclusion)
-- **AllergyFilterInfo.jsx** : Message d'information for remèdes filtrés
+- **AllergyFilterInfo.jsx** : Message d'information for produits naturels filtrés
   - Affichage bleu with icône alerte (`IoMdAlert`)
-  - Compteur of remèdes masqués with liste des allergènes concernés
+  - Compteur of produits naturels masqués with liste des allergènes concernés
   - `role="status"` and `aria-live="polite"` for lecteurs d'écran
   - 10 tests unitaires (render, hide, singular/plural, allergen names)
 - **Intégration Home (Hero.jsx)** : Section allergies with contrôle of filtrage
@@ -1213,9 +1213,9 @@ Comportements préservés :
 - **Filtrage strict des résultats (RemedyResult.jsx)** :
   - Extraction des allergies depuis URL params (`?allergies=citrus,pollen`) ou location.state
   - Filtrage en 2 temps : matching symptômes → filtrage allergies via `canUseRemedy()`
-  - Mode strict : masquage compland des remèdes with allergènes dangereux
-  - Affichage of `AllergyFilterInfo` si remèdes masqués
-  - Compteur précis of remèdes filtrés
+  - Mode strict : masquage compland des produits naturels with allergènes dangereux
+  - Affichage of `AllergyFilterInfo` si produits naturels masqués
+  - Compteur précis of produits naturels filtrés
 - **Navigation with allergies conditionnelle** :
   - `useSymptomSubmit.js` : Paramètres étendus `handleSubmit(symptoms, allergies, isFilteringEnabled)`
   - Les allergies ne sont ajoutées aux query params QUE si `isFilteringEnabled === true`
@@ -1258,7 +1258,7 @@ Comportements préservés :
 - **validateData.js** : Section 6 ajoutée
   - Vérification du format kebab-case des IDs allergènes
   - Cross-check : tous les allergènes of `db.json` doivent exister in `allergensList.json`
-  - Erreurs explicites with nom du remède concerné
+  - Erreurs explicites with nom du produit naturel concerné
 - **Rétrocompatibilité** : Pattern `?? []` utilisé partout for gérer les anciennes entrées d'historique sans champ `allergies`
 
 ### <u>Accessibility:</u>
@@ -1483,7 +1483,7 @@ Le cache maintient un ordre LRU (Least Recently Used) with :
   - `ListFilterTag.test.jsx` (14 tests) - Tests du conteneur of liste of tags of filtre
   - `BreadCrumb.test.jsx` (14 tests) - Tests of la navigation breadcrumb with MemoryRouter
   - `RemedyResultNotFound.test.jsx` (18 tests) - Tests des états vides (no-results and no-filter-match)
-  - `RemedyResultList.test.jsx` (13 tests) - Tests of la grille of résultats of remèdes
+  - `RemedyResultList.test.jsx` (13 tests) - Tests of la grille of résultats of produits naturels
   - `ErrorFallback.test.jsx` (16 tests) - Tests du fallback d'erreur boundary with dev mode
   - `LoadingFallback.test.jsx` (11 tests) - Tests du spinner of chargement
 - Couverture of tests étendue : 507 tests passent with succès
@@ -1557,7 +1557,7 @@ Le cache maintient un ordre LRU (Least Recently Used) with :
 
 ### <u>Fixed:</u>
 
-- Fixed du format d'affichage des fréquences d'utilisation des remèdes
+- Fixed du format d'affichage des fréquences d'utilisation des produits naturels
   - Avant : "2x/fois par jour", "3x/tasses maximum par jour", "1x/jour"
   - Après : "2 fois par jour", "3 tasses maximum par jour", "1 fois par jour"
   - Cas spécial : "3x/heures (espacer)" → "Toutes les 3 heures"
@@ -2765,7 +2765,7 @@ Le cache maintient un ordre LRU (Least Recently Used) with :
 ### <u>standardization:</u>
 
 - Standardized URL pattern across application: all remedy links now use slug-based navigation
-- Standardized breadcrumb display format: "Accueil > Remèdes > [Nom du remède]"
+- Standardized breadcrumb display format: "Accueil > Remèdes > [Nom du produit naturel]"
 - Standardized route naming: consistent use of `/remedes` (French) instead of `/remedies` (English)
 
 ### <u>issues resolved:</u>

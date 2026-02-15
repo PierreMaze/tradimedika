@@ -6,14 +6,14 @@ function Home() {
   return (
     <>
       <Helmet>
-        <title>TRADIMEDIKA - Remèdes naturels pour vos symptômes</title>
+        <title>TRADIMEDIKA - Produits naturels pour vos symptômes</title>
         <meta
           name="description"
-          content="Trouvez des remèdes naturels efficaces basés sur vos symptômes. Base de données de plantes, aliments et épices avec conseils d'utilisation."
+          content="Solutions préventives et produits naturels pour le quotidien, à votre portée."
         />
         <meta
           name="keywords"
-          content="remèdes naturels, plantes, symptômes, santé, médecine traditionnelle, traitement naturel"
+          content="produits naturels, plantes, symptômes, santé, médecine traditionnelle, traitement naturel"
         />
         <link rel="canonical" href="https://tradimedika.com/" />
 
@@ -22,20 +22,20 @@ function Home() {
         <meta property="og:url" content="https://tradimedika.com/" />
         <meta
           property="og:title"
-          content="TRADIMEDIKA - Remèdes naturels pour vos symptômes"
+          content="TRADIMEDIKA - Produits naturels pour vos symptômes"
         />
         <meta
           property="og:description"
-          content="Trouvez des remèdes naturels efficaces basés sur vos symptômes. Base de données de plantes, aliments et épices."
+          content="Solutions préventives et produits naturels pour le quotidien, à votre portée."
         />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://tradimedika.com/" />
-        <meta name="twitter:title" content="TRADIMEDIKA - Remèdes naturels" />
+        <meta name="twitter:title" content="TRADIMEDIKA - Produits naturels" />
         <meta
           name="twitter:description"
-          content="Trouvez des remèdes naturels efficaces basés sur vos symptômes"
+          content="Solutions préventives et produits naturels pour le quotidien, à votre portée."
         />
       </Helmet>
       <Hero />

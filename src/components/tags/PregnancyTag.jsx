@@ -9,11 +9,11 @@ import { Tooltip } from "../ui/tooltip";
 /**
  * PregnancyTag Component
  *
- * Tag indiquant la compatibilité d'un remède avec la grossesse.
+ * Tag indiquant la compatibilité d'un produit naturel avec la grossesse.
  * Affiche 3 variantes selon la valeur de pregnancySafe :
- * - "ok" (vert) : Remède compatible avec la grossesse
+ * - "ok" (vert) : produit naturel compatible avec la grossesse
  * - "variant" (ambre) : Données insuffisantes ou usage conditionnel
- * - "interdit" (rouge) : Remède contre-indiqué pendant la grossesse
+ * - "interdit" (rouge) : produit naturel contre-indiqué pendant la grossesse
  *
  * Props:
  * - variant: 'ok' | 'variant' | 'interdit' (REQUIS)
@@ -32,8 +32,8 @@ const VARIANT_CONFIG = {
           Grossesse
         </h3>
         <p className="text-sm text-neutral-900 dark:text-white">
-          &apos;usage de ce remède est considéré comme compatible avec la
-          grossesse aux doses indiquées.
+          &apos;usage de ce produit naturel est considéré comme compatible avec
+          la grossesse aux doses indiquées.
         </p>
       </>
     ),
@@ -65,7 +65,8 @@ const VARIANT_CONFIG = {
           Grossesse
         </h3>
         <p className="text-sm text-neutral-900 dark:text-white">
-          Ce remède est contre-indiqué pendant la grossesse. Ne pas utiliser.
+          Ce produit naturel est contre-indiqué pendant la grossesse. Ne pas
+          utiliser.
         </p>
       </>
     ),

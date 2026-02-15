@@ -24,8 +24,9 @@ function ProuvedTag({ className = "", showLabel = true }) {
         Reconnu
       </h3>
       <p className="text-sm text-neutral-900 dark:text-white">
-        Ce remède est soutenu par des données scientifiques et/ou reconnu par
-        des professionnels de santé dans un cadre d&apos;usage défini.
+        Ce produit naturel est soutenu par des données scientifiques et/ou
+        reconnu par des professionnels de santé dans un cadre d&apos;usage
+        défini.
       </p>
     </>
   );

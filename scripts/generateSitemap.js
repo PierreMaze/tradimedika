@@ -2,13 +2,13 @@
 
 /**
  * Script de génération du sitemap.xml
- * Génère automatiquement un sitemap à partir de la base de données des remèdes
+ * Génère automatiquement un sitemap à partir de la base de données des produits naturels
  *
  * Usage: node scripts/generateSitemap.js
  */
 
 import { readFileSync, writeFileSync } from "fs";
-import { join, dirname } from "path";
+import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
 // Configuration
@@ -22,7 +22,7 @@ const db = JSON.parse(
   readFileSync(join(__dirname, "../src/data/db.json"), "utf-8"),
 );
 
-// Fonction pour générer un slug à partir du nom du remède
+// Fonction pour générer un slug à partir du nom du produit naturel
 function generateSlug(name) {
   return name
     .toLowerCase()
@@ -63,7 +63,7 @@ const staticPages = [
   },
 ];
 
-// Générer les URLs des remèdes à partir de la DB
+// Générer les URLs des produits naturels à partir de la DB
 const remedyPages = db.map((remedy) => {
   const slug = generateSlug(remedy.name);
   return {
@@ -104,5 +104,5 @@ console.log("✅ Sitemap généré avec succès !");
 console.log(`📍 Fichier : ${OUTPUT_PATH}`);
 console.log(`📊 Statistiques :`);
 console.log(`   - Pages statiques : ${staticPages.length}`);
-console.log(`   - Pages de remèdes : ${remedyPages.length}`);
+console.log(`   - Pages de produits naturels : ${remedyPages.length}`);
 console.log(`   - Total : ${allPages.length} URLs`);

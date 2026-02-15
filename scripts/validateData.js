@@ -2,7 +2,7 @@
 // Script de validation pour vérifier la cohérence des données normalisées
 
 import { readFileSync } from "fs";
-import { resolve, dirname } from "path";
+import { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -356,7 +356,7 @@ db.forEach((remedy) => {
 if (invalidImageCredits === 0) {
   const remediesWithCredit = db.filter((r) => r.imageCredit).length;
   console.log(
-    `  ✅ Crédits d'images valides (${remediesWithCredit}/${db.length} remèdes avec crédit)\n`,
+    `  ✅ Crédits d'images valides (${remediesWithCredit}/${db.length} produits naturels avec crédit)\n`,
   );
 } else {
   errors += invalidImageCredits;
@@ -395,12 +395,12 @@ console.log(
 console.log(
   `  • synonymsSymptomList  : ${Object.keys(synonyms).length} mappings (${synonymCount} synonymes)`,
 );
-console.log(`  • db.json              : ${db.length} remèdes`);
+console.log(`  • db.json              : ${db.length} produits naturels`);
 console.log(`  • Symptômes uniques (db): ${dbSymptoms.size} symptômes`);
 console.log(`  • allergensList.json   : ${allergensList.length} allergènes`);
 const remediesWithImageCredit = db.filter((r) => r.imageCredit).length;
 console.log(
-  `  • Crédits d'images      : ${remediesWithImageCredit}/${db.length} remèdes avec crédit`,
+  `  • Crédits d'images      : ${remediesWithImageCredit}/${db.length} produits naturels avec crédit`,
 );
 
 // ==================== 9. RÉSULTAT FINAL ====================

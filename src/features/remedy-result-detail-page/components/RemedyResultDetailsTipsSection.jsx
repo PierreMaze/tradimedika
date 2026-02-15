@@ -34,7 +34,7 @@ function RemedyResultDetailsTipsSection({ tips }) {
           </h2>
           <InfoTooltip
             title="Astuces pratiques"
-            message="Cette section vous guide sur la meilleure façon de conserver, de ce fournir et d'utiliser cette aliment au quotidien."
+            message="Cette section vous guide sur la meilleure façon de conserver, de ce fournir et d'utiliser ce produit au quotidien."
             iconColor="text-sky-600 dark:text-sky-500"
           />
         </div>

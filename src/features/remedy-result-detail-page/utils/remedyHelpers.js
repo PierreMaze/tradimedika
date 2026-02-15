@@ -20,10 +20,10 @@ export function getTypeColors() {
  * @returns {Object} SEO metadata (pageTitle, pageDescription, canonicalUrl)
  */
 export function generateRemedySEOMeta(remedy, slug) {
-  const pageTitle = `${remedy.name} - Remède naturel | TRADIMEDIKA`;
+  const pageTitle = `${remedy.name} - Produit naturel | TRADIMEDIKA`;
   const pageDescription =
     remedy.description ||
-    `Découvrez ${remedy.name}, un remède naturel de type ${remedy.type}`;
+    `Découvrez ${remedy.name}, un produit naturel de type ${remedy.type}`;
   const canonicalUrl = `https://tradimedika.com/remedes/${slug}`;
 
   return { pageTitle, pageDescription, canonicalUrl };

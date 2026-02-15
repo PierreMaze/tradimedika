@@ -23,7 +23,7 @@ function TraditionnalTag({ className = "", showLabel = true }) {
         Traditionnel
       </h3>
       <p className="text-sm text-neutral-900 dark:text-white">
-        Ce remède repose principalement sur un usage traditionnel. Son
+        Ce produit naturel repose principalement sur un usage traditionnel. Son
         efficacité n&apos;est pas validée par des études scientifiques solides.
       </p>
     </>

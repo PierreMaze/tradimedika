@@ -33,7 +33,7 @@ function RemedyResultDetailsUsagesList({ uses }) {
             </button>
             <InfoTooltip
               title="Méthode de préparation et d'utilisation"
-              message="Cette section vous guide sur la manière optimale d'utiliser cet aliment pour obtenir les meilleurs résultats."
+              message="Cette section vous guide sur la manière optimale d'utiliser ce produit pour obtenir les meilleurs résultats."
               iconColor="text-emerald-600 dark:text-emerald-500"
             />
           </div>

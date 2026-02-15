@@ -199,7 +199,7 @@ export default function AllergyForm({
     <div ref={containerRef} className="space-y-3">
       {/* Description courte */}
       <p className="text-sm text-neutral-600 lg:text-base dark:text-neutral-300">
-        Recherchez et sélectionnez vos allergies pour filtrer les remèdes
+        Recherchez et sélectionnez vos allergies pour filtrer les porduits
         dangereux.
       </p>
 

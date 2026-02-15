@@ -1,4 +1,5 @@
 import { FiExternalLink } from "react-icons/fi";
+import { IoMdSettings } from "react-icons/io";
 import { ModalButton, ModalLayout } from "../../../components/ui/modal";
 import { useExternalLink } from "../hooks/useExternalLink";
 
@@ -38,6 +39,12 @@ export default function ExternalLinkConfirmationModal() {
           <li>Un nouvel onglet sera ouvert</li>
           <li>Votre onglet TradiMedika reste actif</li>
           <li>Vous pouvez revenir à tout moment</li>
+          <li>
+            Vous pouvez désactiver cette fonctionnalité en haut à droite de la
+            page, dans{" "}
+            <IoMdSettings className="mx-1 inline size-5 rounded-full bg-neutral-200 p-1 dark:bg-neutral-700" />{" "}
+            &gt; Accessibilité &gt; Confirmation liens externes
+          </li>
         </ul>
       </div>
     </ModalLayout>

@@ -6,8 +6,8 @@ import { TbEyeClosed } from "react-icons/tb";
 import allergensList from "../../../data/allergensList.json";
 
 /**
- * Composant d'information sur le filtrage des remèdes
- * Affiche un message quand des remèdes sont masqués à cause des allergies
+ * Composant d'information sur le filtrage des produits
+ * Affiche un message quand des produits sont masqués à cause des allergies
  *
  * Design: Bordure bleue avec icône d'alerte
  */
@@ -64,8 +64,8 @@ export default function AllergyFilterInfo({
           onClick={onToggleFiltered}
           aria-label={
             showFiltered
-              ? "Masquer les remèdes filtrés"
-              : "Afficher les remèdes filtrés"
+              ? "Masquer les produits filtrés"
+              : "Afficher les produits filtrés"
           }
           aria-pressed={showFiltered}
           className="inline-flex shrink-0 items-center gap-2 rounded-md bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-md transition-all duration-200 hover:scale-105 hover:bg-emerald-700 focus:ring-2 focus:ring-emerald-300 focus:outline-none active:scale-95 motion-reduce:hover:scale-100 motion-reduce:active:scale-100 dark:bg-emerald-700 dark:hover:bg-emerald-600"

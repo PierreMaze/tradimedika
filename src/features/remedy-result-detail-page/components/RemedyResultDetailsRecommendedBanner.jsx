@@ -3,8 +3,8 @@ import { MdThumbUp } from "react-icons/md";
 /**
  * RemedyResultDetailsRecommendedBanner Component
  *
- * Bannière indiquant que ce remède est le plus pertinent pour les symptômes recherchés.
- * Affichée en haut de la page de détails si le remède est marqué comme "isRecommended".
+ * Bannière indiquant que ce produit est le plus pertinent pour les symptômes recherchés.
+ * Affichée en haut de la page de détails si le produit est marqué comme "isRecommended".
  */
 function RemedyResultDetailsRecommendedBanner() {
   return (
@@ -20,10 +20,10 @@ function RemedyResultDetailsRecommendedBanner() {
 
       <div className="flex-1 text-start">
         <p className="text-base font-bold text-emerald-700 uppercase dark:text-emerald-400">
-          Aliment recommandé
+          Produit recommandé
         </p>
         <p className="mt-1 text-sm text-emerald-900 dark:text-emerald-50">
-          Cette aliment est le{" "}
+          Ce produit est le{" "}
           <span className="font-semibold text-emerald-700 dark:text-emerald-400">
             plus pertinent
           </span>{" "}

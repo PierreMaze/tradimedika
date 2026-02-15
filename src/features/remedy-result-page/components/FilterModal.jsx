@@ -23,7 +23,7 @@ function FilterModal({
     <ModalLayout
       isOpen={isOpen}
       onClose={onClose}
-      title="Filtrer les remèdes"
+      title="Filtrer les produits"
       icon={TbFilterCog}
       subtitle="Sélectionnez les critères pour affiner votre recherche"
       footer={

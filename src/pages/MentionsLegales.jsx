@@ -187,10 +187,10 @@ export default function MentionsLegales() {
             Important
           </p>
           <p className="mt-2 text-sm text-amber-800 dark:text-amber-200">
-            Les contenus proposés sur ce site (remèdes naturels, informations
+            Les contenus proposés sur ce site (produits naturels, informations
             médicales) sont fournis à titre informatif uniquement et ne
             constituent pas un avis médical professionnel. Consultez toujours un
-            professionnel de santé qualifié avant d&apos;utiliser tout remède.
+            professionnel de santé qualifié avant d&apos;utiliser tout produit.
           </p>
         </div>
         <p className="mt-4 text-sm text-neutral-600 dark:text-neutral-400">
@@ -213,15 +213,16 @@ export default function MentionsLegales() {
           5.1. Informations médicales
         </h3>
         <p className="mb-4 text-neutral-700 dark:text-neutral-300">
-          Les informations contenues sur ce site concernant les remèdes naturels
-          sont fournies à titre indicatif et éducatif uniquement. Elles ne
-          sauraient engager la responsabilité de l&apos;éditeur et ne peuvent en
-          aucun cas se substituer à une consultation médicale professionnelle.
+          Les informations contenues sur ce site concernant les produits
+          naturels sont fournies à titre indicatif et éducatif uniquement. Elles
+          ne sauraient engager la responsabilité de l&apos;éditeur et ne peuvent
+          en aucun cas se substituer à une consultation médicale
+          professionnelle.
         </p>
         <p className="mb-4 text-neutral-700 dark:text-neutral-300">
           L&apos;éditeur ne garantit pas l&apos;exactitude, la complétude ou
           l&apos;actualité des informations diffusées sur le site.
-          L&apos;utilisation des remèdes proposés se fait sous la seule
+          L&apos;utilisation des produits proposés se fait sous la seule
           responsabilité de l&apos;utilisateur.
         </p>
 

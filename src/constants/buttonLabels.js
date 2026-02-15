@@ -65,7 +65,7 @@ export const BUTTON_BACK_RESULTS = "Retour aux résultats";
  * Link label to explore all remedies (NotFound page)
  * @type {string}
  */
-export const BUTTON_EXPLORE_REMEDIES = "Explorer les remèdes";
+export const BUTTON_EXPLORE_REMEDIES = "Explorer les produits naturels";
 
 /**
  * Button label to close modal/tooltip

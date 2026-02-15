@@ -66,7 +66,7 @@
 
 ### 🔍 Filtrage Intelligent des Résultats
 
-- **Affichage adaptatif** : Lorsque plusieurs symptômes uniques sont trouvés dans les remèdes, un système de filtrage apparaît automatiquement pour affiner les résultats.
+- **Affichage adaptatif** : Lorsque plusieurs symptômes uniques sont trouvés dans les produits naturels, un système de filtrage apparaît automatiquement pour affiner les résultats.
 - **Interface épurée** : Si un seul symptôme correspond, le filtre est masqué pour simplifier l'interface.
 
 ### 📱 Responsive Design
@@ -102,19 +102,19 @@
 ### 🛡️ Gestion des Allergies
 
 - **Sélecteur d'allergies** : Recherche intelligente avec autocomplétion pour sélectionner vos allergies
-- **Filtrage automatique** : Les remèdes dangereux sont masqués automatiquement selon vos allergies
-- **Base de données enrichie** : 5 allergènes référencés avec leurs remèdes associés
+- **Filtrage automatique** : Les produits naturels dangereux sont masqués automatiquement selon vos allergies
+- **Base de données enrichie** : 5 allergènes référencés avec leurs produits naturels associés
   - Agrumes, Pollen, Astéracées, Pollen d'olivier, Venin d'abeille
-- **Bannière d'information** : Affichage du nombre de remèdes masqués avec bouton toggle intégré
-- **Affichage contrôlé** : Les remèdes avec allergènes peuvent être affichés temporairement en premier (visuellement distincts)
+- **Bannière d'information** : Affichage du nombre de produits naturels masqués avec bouton toggle intégré
+- **Affichage contrôlé** : Les produits naturels avec allergènes peuvent être affichés temporairement en premier (visuellement distincts)
 - **UX optimisée** : Cartes allergènes en grayscale avec tags colorés au hover pour identification rapide
 - **Persistance intelligente** : Allergies sauvegardées, affichage des allergènes toujours masqué par défaut
 
 ### 📜 Historique de Recherche
 
 - **Sauvegarde automatique** : Les 10 dernières recherches sont conservées localement
-- **Remèdes masqués affichés** : Le nombre de remèdes filtrés par allergies est affiché en jaune
-  - Format : "3 résultats • 2 remèdes masqués • il y a 5 min"
+- **Remèdes masqués affichés** : Le nombre de produits naturels filtrés par allergies est affiché en jaune
+  - Format : "3 résultats • 2 produits naturels masqués • il y a 5 min"
 - **Réutilisation rapide** : Cliquez sur une recherche pour la relancer instantanément
 - **Déduplication intelligente** : Pas de doublons, insensible à l'ordre des symptômes
 - **Gestion flexible** : Suppression individuelle ou effacement complet de l'historique

@@ -73,7 +73,7 @@ function findBadSymptomMatches(remedy, selectedSymptoms) {
 function calculateRemedyMatch(remedy, selectedSymptoms) {
   // Vérifier que le remède a un champ symptoms valide
   if (!Array.isArray(remedy.symptoms)) {
-    logger.warn(`Remède "${remedy.name}" sans champ symptoms valide`);
+    logger.warn(`Produit "${remedy.name}" sans champ symptoms valide`);
     return null;
   }
 
@@ -95,7 +95,7 @@ function calculateRemedyMatch(remedy, selectedSymptoms) {
   const badMatches = findBadSymptomMatches(remedy, selectedSymptoms);
   if (badMatches.length > 0) {
     logger.info(
-      `Remède "${remedy.name}" exclu : mauvais pour ${badMatches.join(", ")}`,
+      `Produit "${remedy.name}" exclu : mauvais pour ${badMatches.join(", ")}`,
     );
     return null;
   }
@@ -261,7 +261,7 @@ export function getRemedyById(id, database) {
   const remedy = database.find((item) => item.id === numericId);
 
   if (!remedy) {
-    logger.warn(`Aucun remède trouvé avec l'ID ${numericId}`);
+    logger.warn(`Aucun produit naturel trouvé avec l'ID ${numericId}`);
     return null;
   }
 
@@ -344,7 +344,7 @@ export function getRemedyBySlug(slug, database) {
   });
 
   if (!remedy) {
-    logger.warn(`Aucun remède trouvé avec le slug "${decodedSlug}"`);
+    logger.warn(`Aucun produit naturel trouvé avec le slug "${decodedSlug}"`);
     return null;
   }
 

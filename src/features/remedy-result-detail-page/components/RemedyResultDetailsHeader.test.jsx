@@ -39,7 +39,7 @@ describe("RemedyResultDetailsHeader", () => {
       const img = screen.getByRole("img");
       expect(img).toHaveAttribute(
         "alt",
-        "Camomille - remède naturel traditionnel de type plante",
+        "Camomille - produuit naturel traditionnel de type plante",
       );
     });
 

@@ -121,7 +121,9 @@ export default function SearchHistoryItem({ search, onClick, onRemove }) {
             {(search.filteredCount ?? 0) > 0 && (
               <span className="font-semibold text-sky-600 dark:text-sky-400">
                 {search.filteredCount}{" "}
-                {search.filteredCount > 1 ? "remèdes masqués" : "remède masqué"}
+                {search.filteredCount > 1
+                  ? "produits masqués"
+                  : "produit masqué"}
                 <span className="pl-2 text-neutral-400 dark:text-neutral-500">
                   •
                 </span>
