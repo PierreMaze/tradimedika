@@ -1,5 +1,5 @@
 import { FiExternalLink } from "react-icons/fi";
-import { useAccessibility } from "../context/AccessibilityContext";
+import { useAccessibility } from "../hooks/useAccessibility";
 
 export default function ExternalLinkConfirmToggle() {
   const { isExternalLinkConfirmEnabled, toggleExternalLinkConfirm } =

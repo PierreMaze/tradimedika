@@ -1,6 +1,6 @@
 // tradimedika-v1/src/components/btn/DarkModeToggle.jsx
 import { HiMoon, HiSun } from "react-icons/hi2";
-import { useAccessibility } from "../context/AccessibilityContext";
+import { useAccessibility } from "../hooks/useAccessibility";
 import { useTheme } from "../context/ThemeContext";
 
 export default function DarkModeToggle() {

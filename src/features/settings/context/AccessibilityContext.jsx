@@ -1,14 +1,9 @@
-import {
-  createContext,
-  useContext,
-  useMemo,
-  useCallback,
-  useEffect,
-} from "react";
+import { createContext, useMemo, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 
-const AccessibilityContext = createContext(undefined);
+// eslint-disable-next-line react-refresh/only-export-components
+export const AccessibilityContext = createContext(undefined);
 
 export function AccessibilityProvider({ children }) {
   // État localStorage pour les 2 préférences d'accessibilité
@@ -89,13 +84,3 @@ export function AccessibilityProvider({ children }) {
 AccessibilityProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
-
-export function useAccessibility() {
-  const context = useContext(AccessibilityContext);
-  if (context === undefined) {
-    throw new Error(
-      "useAccessibility must be used within AccessibilityProvider",
-    );
-  }
-  return context;
-}

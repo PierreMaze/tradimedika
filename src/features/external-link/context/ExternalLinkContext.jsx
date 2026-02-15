@@ -1,6 +1,6 @@
 import { createContext, useCallback, useMemo, useState } from "react";
 import PropTypes from "prop-types";
-import { useAccessibility } from "../../settings/context/AccessibilityContext";
+import { useAccessibility } from "../../settings/hooks/useAccessibility";
 
 const ExternalLinkContext = createContext(undefined);
 

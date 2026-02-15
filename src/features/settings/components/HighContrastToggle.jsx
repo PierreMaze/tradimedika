@@ -1,5 +1,5 @@
 import { IoContrastOutline } from "react-icons/io5";
-import { useAccessibility } from "../context/AccessibilityContext";
+import { useAccessibility } from "../hooks/useAccessibility";
 
 export default function HighContrastToggle() {
   const { isHighContrast, toggleHighContrast } = useAccessibility();

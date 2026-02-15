@@ -13,10 +13,7 @@ export {
   PerformanceProvider,
   usePerformance,
 } from "./context/PerformanceContext";
-export {
-  AccessibilityProvider,
-  useAccessibility,
-} from "./context/AccessibilityContext";
+export { AccessibilityProvider } from "./context/AccessibilityContext";
 export {
   SettingsModalProvider,
   useSettingsModal,
@@ -25,3 +22,4 @@ export {
 // Hooks
 export { useDarkMode } from "./hooks/useDarkMode.js";
 export { useReducedMotion } from "./hooks/useReducedMotion";
+export { useAccessibility } from "./hooks/useAccessibility";
