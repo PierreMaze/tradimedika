@@ -2,6 +2,76 @@
 
 ---
 
+## [0.54.4] - 2026-02-15
+
+### Fixed
+
+- **RemedyResultDetailsUsagesList nested button HTML validation error**
+  - Restructured accordion layout to separate InfoTooltip from main button element
+  - Extracted toggle logic into dedicated `handleToggle` function to avoid duplication
+  - Split accordion trigger into two separate buttons: one for title, one for chevron icon
+  - Both buttons trigger the same toggle behavior while maintaining proper HTML semantics
+  - Added `aria-label` to chevron button for improved screen reader accessibility
+  - Resolved React hydration error: `<button> cannot be a descendant of <button>`
+
+- **LeafFall animation falling naturally**
+  - Improved leaf falling physics with more natural motion curves
+  - Added custom Tailwind CSS keyframes for organic leaf movement
+  - Enhanced visual realism with varied animation timings
+
+### Changed
+
+- **ImageCredit styling improvements**
+  - Updated text color for better contrast
+  - Added underline effect on hover for better link affordance
+
+---
+
+## [0.54.3] - 2026-02-14
+
+### Fixed
+
+- **Added tooltips for all tag components with usage indicators**
+  - Migrated `PregnancyTag` from native HTML `title` attribute to React `<Tooltip>` wrapper
+  - Migrated `ChildrenAgeTag` from native HTML `title` attribute to React `<Tooltip>` wrapper
+  - Migrated `ProuvedTag` from native HTML `title` attribute to React `<Tooltip>` wrapper
+  - Migrated `TraditionnalTag` from native HTML `title` attribute to React `<Tooltip>` wrapper
+  - Ensures consistent UX across all tag tooltips with unified timing and positioning
+  - Added comprehensive tooltip content explaining each tag's meaning and usage
+
+### Removed
+
+- **Deprecated tag helper components**
+  - Removed `TagsAccordionPopover.jsx` (271 lines) - replaced by individual tag tooltips
+  - Removed `TagsInfoContent.jsx` (261 lines) - content distributed to respective tag components
+  - Updated `src/components/ui/helper/index.js` to remove obsolete exports
+  - Net code reduction: ~532 lines removed while improving component modularity
+
+---
+
+## [0.54.2] - 2026-02-14
+
+### Fixed
+
+- **TermPopover background and logic improvements**
+  - Simplified popover rendering logic by removing redundant conditions
+  - Improved background styling consistency across theme modes
+  - Reduced component complexity from redundant state checks
+
+---
+
+## [0.54.1] - 2026-02-14
+
+### Fixed
+
+- **Tooltip positioning and behavior for tags**
+  - Enhanced `useTooltipPosition.js` with better viewport boundary detection
+  - Improved collision detection algorithm for edge cases
+  - Updated `Tooltip.jsx` z-index management for proper stacking context
+  - Fixed tooltip clipping issues on small viewports
+
+---
+
 ## [0.54.0] - 2026-02-14
 
 ### Added
