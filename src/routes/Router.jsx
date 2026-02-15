@@ -13,6 +13,7 @@ const Home = lazy(() => import("../pages/Home"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 const RemedyResult = lazy(() => import("../pages/RemedyResult"));
 const RemedyResultDetails = lazy(() => import("../pages/RemedyResultDetails"));
+const EmergencyAlert = lazy(() => import("../pages/EmergencyAlert"));
 const MentionsLegales = lazy(() => import("../pages/MentionsLegales"));
 const PolitiqueConfidentialite = lazy(
   () => import("../pages/PolitiqueConfidentialite"),
@@ -106,6 +107,14 @@ const router = createBrowserRouter(
           element: (
             <Suspense fallback={<LoadingFallback />}>
               <GestionCookies />
+            </Suspense>
+          ),
+        },
+        {
+          path: "urgence",
+          element: (
+            <Suspense fallback={<LoadingFallback />}>
+              <EmergencyAlert />
             </Suspense>
           ),
         },

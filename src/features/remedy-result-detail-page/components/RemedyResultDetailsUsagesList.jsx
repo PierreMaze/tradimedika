@@ -14,7 +14,7 @@ function RemedyResultDetailsUsagesList({ uses }) {
 
   return (
     <section className="animate-fade-in-up rounded-lg border border-neutral-200 bg-white p-4 shadow-md transition-colors duration-150 motion-reduce:animate-none motion-reduce:opacity-100 lg:p-6 dark:border-neutral-700 dark:bg-neutral-800">
-      <div className="mb-4">
+      <div className="">
         <div className="flex items-center justify-between gap-2">
           {/* Partie gauche : titre avec son InfoTooltip */}
           <div className="flex items-center gap-2">
@@ -33,7 +33,7 @@ function RemedyResultDetailsUsagesList({ uses }) {
             </button>
             <InfoTooltip
               title="Méthode de préparation et d'utilisation"
-              message="Cette section vous guide sur la manière optimale d'utiliser ce produit pour obtenir les meilleurs résultats."
+              message="Information générale non personnalisée. Ces indications sont fournies à titre informatif. Consultez un professionnel de santé pour un dosage adapté"
               iconColor="text-emerald-600 dark:text-emerald-500"
             />
           </div>
@@ -59,7 +59,7 @@ function RemedyResultDetailsUsagesList({ uses }) {
         </div>
       </div>
       {isOpen && (
-        <div className="animate-in fade-in overflow-hidden duration-300 motion-reduce:animate-none">
+        <div className="animate-in fade-in mt-4 overflow-hidden duration-300 motion-reduce:animate-none">
           <div className="border-l-4 border-emerald-600 pl-4 dark:border-emerald-500">
             <ul className="space-y-4">
               {uses.map((use, index) => (

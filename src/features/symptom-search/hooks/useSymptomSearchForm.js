@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 
 import { useAllergies } from "../../allergens-search";
+import { useConsent } from "../../consent";
 import { useSearchHistory } from "../../history-search";
 import { useSymptomSubmit } from "./useSymptomSubmit";
 import { useSymptomTags } from "./useSymptomTags";
@@ -30,6 +31,7 @@ export function useSymptomSearchForm() {
     enableFiltering,
     disableFiltering,
   } = useAllergies();
+  const { hasConsent, openConsentModal } = useConsent();
   const { handleSubmit, isLoading, results, hasSubmitted } =
     useSymptomSubmit(addSearch);
 
@@ -42,8 +44,19 @@ export function useSymptomSearchForm() {
    * Handler pour la soumission du formulaire
    */
   const onSubmit = useCallback(() => {
+    if (!hasConsent) {
+      openConsentModal();
+      return;
+    }
     handleSubmit(selectedSymptoms, userAllergies, isFilteringEnabled);
-  }, [handleSubmit, selectedSymptoms, userAllergies, isFilteringEnabled]);
+  }, [
+    hasConsent,
+    openConsentModal,
+    handleSubmit,
+    selectedSymptoms,
+    userAllergies,
+    isFilteringEnabled,
+  ]);
 
   /**
    * Handler pour relancer une recherche depuis l'historique
@@ -51,6 +64,10 @@ export function useSymptomSearchForm() {
    */
   const handleSearchSelect = useCallback(
     (search) => {
+      if (!hasConsent) {
+        openConsentModal();
+        return;
+      }
       // Remplacer les symptômes actuels par ceux de l'historique
       setSelectedSymptoms(search.symptoms);
       // Restaurer les allergies depuis l'historique (rétrocompatibilité avec ??)
@@ -64,7 +81,14 @@ export function useSymptomSearchForm() {
       // Soumettre automatiquement avec les symptômes, allergies et état filtrage
       handleSubmit(search.symptoms, historicAllergies, wasFilteringEnabled);
     },
-    [handleSubmit, setSelectedSymptoms, setAllergies, enableFiltering],
+    [
+      hasConsent,
+      openConsentModal,
+      handleSubmit,
+      setSelectedSymptoms,
+      setAllergies,
+      enableFiltering,
+    ],
   );
 
   /**
@@ -119,5 +143,7 @@ export function useSymptomSearchForm() {
     setIsHistoryOpen,
     isAllergySectionExpanded,
     setIsAllergySectionExpanded,
+    // Consentement
+    hasConsent,
   };
 }

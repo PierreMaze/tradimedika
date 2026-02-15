@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { ConsentProvider } from "../features/consent";
 import { ExternalLinkProvider } from "../features/external-link/context/ExternalLinkContext";
 import {
   AccessibilityProvider,
@@ -14,6 +15,7 @@ import {
  * - PerformanceProvider (animations)
  * - AccessibilityProvider (high contrast)
  * - ExternalLinkProvider (confirmation liens externes)
+ * - ConsentProvider (consentement RGPD)
  *
  * Performance: Réduit le nombre de composants dans l'arbre React
  *
@@ -25,7 +27,9 @@ export default function AppProviders({ children }) {
     <ThemeProvider>
       <PerformanceProvider>
         <AccessibilityProvider>
-          <ExternalLinkProvider>{children}</ExternalLinkProvider>
+          <ExternalLinkProvider>
+            <ConsentProvider>{children}</ConsentProvider>
+          </ExternalLinkProvider>
         </AccessibilityProvider>
       </PerformanceProvider>
     </ThemeProvider>

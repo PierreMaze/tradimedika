@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import FeedbackLink from "../components/ui/feedback/FeedbackLink";
+import { useConsent } from "../features/consent";
 import {
   generateRemedySEOMeta,
   getTypeColors,
@@ -30,11 +32,19 @@ import { RemedyResultNotFound } from "../features/remedy-result-page";
 function RemedyResultDetails() {
   const { slug } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
+  const { hasConsent } = useConsent();
   const selectedSymptoms = location.state?.symptoms || [];
   const isRecommended = location.state?.isRecommended || false;
 
   const { remedy, safeImageUrl, notFound } = useRemedyDetails(slug);
   const { hasUserAllergens, allergenNames } = useRemedyAllergyCheck(remedy);
+
+  useEffect(() => {
+    if (!hasConsent) {
+      navigate("/", { replace: true });
+    }
+  }, [hasConsent, navigate]);
 
   if (notFound) {
     return <RemedyResultNotFound variant="remedy-not-found" />;

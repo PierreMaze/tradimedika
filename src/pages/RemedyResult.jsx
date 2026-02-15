@@ -3,11 +3,14 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { HiArrowLeft } from "react-icons/hi";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../components/ui/button/Button";
 import FeedbackLink from "../components/ui/feedback/FeedbackLink";
 import db from "../data/db.json";
 import { AllergyFilterInfo, useAllergies } from "../features/allergens-search";
+import { useConsent } from "../features/consent";
+import RedFlagsModal from "../features/red-flags/components/RedFlagsModal";
+import { useRedFlags } from "../features/red-flags/hooks/useRedFlags";
 import {
   FilterButton,
   FilterModal,
@@ -39,7 +42,43 @@ import { parseAndValidateSymptoms } from "../features/symptom-search/utils/valid
 
 function RemedyResult() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { hasConsent } = useConsent();
   const { canUseRemedy, userAllergies: contextAllergies } = useAllergies();
+  const {
+    answers: redFlagsAnswers,
+    setAnswer: setRedFlagAnswer,
+    allQuestionsAnswered,
+    hasRedFlags,
+    isModalOpen: isRedFlagsModalOpen,
+    disclaimerAccepted,
+    acceptDisclaimer,
+    openModal: openRedFlagsModal,
+    closeModal: closeRedFlagsModal,
+    saveSession: saveRedFlagsSession,
+    isSessionValidated,
+  } = useRedFlags();
+
+  useEffect(() => {
+    if (!hasConsent) {
+      navigate("/", { replace: true });
+    }
+  }, [hasConsent, navigate]);
+
+  useEffect(() => {
+    if (hasConsent && !isSessionValidated()) {
+      openRedFlagsModal();
+    }
+  }, [hasConsent, isSessionValidated, openRedFlagsModal]);
+
+  const handleRedFlagsComplete = useCallback(() => {
+    if (hasRedFlags) {
+      navigate("/urgence", { replace: true });
+    } else {
+      saveRedFlagsSession();
+      closeRedFlagsModal();
+    }
+  }, [hasRedFlags, saveRedFlagsSession, closeRedFlagsModal, navigate]);
 
   // Hook pour gérer les filtres par tags (Grossesse, Reconnu, Âge)
   const {
@@ -348,6 +387,18 @@ function RemedyResult() {
         onToggleTempFilter={toggleTempFilter}
         onResetTempFilters={resetTempFilters}
         onApplyFilters={applyFilters}
+      />
+
+      {/* Modal Red Flags */}
+      <RedFlagsModal
+        isOpen={isRedFlagsModalOpen}
+        onClose={closeRedFlagsModal}
+        onComplete={handleRedFlagsComplete}
+        answers={redFlagsAnswers}
+        setAnswer={setRedFlagAnswer}
+        disclaimerAccepted={disclaimerAccepted}
+        acceptDisclaimer={acceptDisclaimer}
+        allQuestionsAnswered={allQuestionsAnswered}
       />
     </>
   );

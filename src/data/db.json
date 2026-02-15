@@ -33,7 +33,8 @@
           "value": null,
           "unit": ""
         },
-        "description": "Presser un demi-citron dans de l'eau tiède le matin. Boire lentement avant le petit-déjeuner pour stimuler la digestion."
+        "description": "Presser un demi-citron dans de l'eau tiède le matin. Boire lentement avant le petit-déjeuner pour stimuler la digestion.",
+        "dose_disclaimer": "Information générale non personnalisée. Consultez un professionnel pour un dosage adapté."
       }
     ],
     "contraindications": [
@@ -114,7 +115,8 @@
           "value": 3,
           "unit": "jours"
         },
-        "description": "Couper 2 oignons grossièrement en rondelles, faire bouillir dans l'eau pendant 5 minutes, puis placer le récipient dans la pièce pour respirer les vapeurs.."
+        "description": "Couper 2 oignons grossièrement en rondelles, faire bouillir dans l'eau pendant 5 minutes, puis placer le récipient dans la pièce pour respirer les vapeurs..",
+        "dose_disclaimer": "Information générale non personnalisée. Consultez un professionnel pour un dosage adapté."
       }
     ],
     "contraindications": [
@@ -190,7 +192,8 @@
           "value": 2,
           "unit": "jours maximum"
         },
-        "description": "Écraser légèrement un clou de girofle entre les doigts et le placer au contact de la dent douloureuse. OU diluer 1 goutte d'huile essentielle dans de l'huile d'olive et appliquer avec un coton-tige. Maximum 2-3 fois par jour. CONSULTER RAPIDEMENT UN DENTISTE."
+        "description": "Écraser légèrement un clou de girofle entre les doigts et le placer au contact de la dent douloureuse. OU diluer 1 goutte d'huile essentielle dans de l'huile d'olive et appliquer avec un coton-tige. Maximum 2-3 fois par jour. CONSULTER RAPIDEMENT UN DENTISTE.",
+        "dose_disclaimer": "Information générale non personnalisée. Consultez un professionnel pour un dosage adapté."
       }
     ],
     "contraindications": [
@@ -272,7 +275,8 @@
           "value": 7,
           "unit": "jours"
         },
-        "description": "Consommer 1 cuillère à café de miel pur ou dilué dans une boisson tiède (thé, tisane de thym). Laisser fondre lentement dans la bouche pour apaiser la gorge. Pour enfants : adapter la dose selon l'âge."
+        "description": "Consommer 1 cuillère à café de miel pur ou dilué dans une boisson tiède (thé, tisane de thym). Laisser fondre lentement dans la bouche pour apaiser la gorge. Pour enfants : adapter la dose selon l'âge.",
+        "dose_disclaimer": "Information générale non personnalisée. Consultez un professionnel pour un dosage adapté."
       }
     ],
     "contraindications": [
@@ -350,7 +354,8 @@
           "value": null,
           "unit": "au besoin"
         },
-        "description": "Consommer 1 à 2 gousses d'ail cru par jour, finement hachées ou écrasées pour libérer l'allicine. Intégrer dans les plats ou salades. L'ail cuit perd une partie de ses principes actifs. Attendre 10 minutes après écrasement avant consommation."
+        "description": "Consommer 1 à 2 gousses d'ail cru par jour, finement hachées ou écrasées pour libérer l'allicine. Intégrer dans les plats ou salades. L'ail cuit perd une partie de ses principes actifs. Attendre 10 minutes après écrasement avant consommation.",
+        "dose_disclaimer": "Information générale non personnalisée. Consultez un professionnel pour un dosage adapté."
       }
     ],
     "contraindications": [
@@ -427,7 +432,8 @@
           "value": 2,
           "unit": "jours"
         },
-        "description": "Bien rincer le riz pour enlever les pesticides. Cuire à l'eau et consommer nature ou légèrement salé. L'eau de cuisson du riz peut également être bue (riche en amidon). Éviter d'ajouter beurre, huile ou épices."
+        "description": "Bien rincer le riz pour enlever les pesticides. Cuire à l'eau et consommer nature ou légèrement salé. L'eau de cuisson du riz peut également être bue (riche en amidon). Éviter d'ajouter beurre, huile ou épices.",
+        "dose_disclaimer": "Information générale non personnalisée. Consultez un professionnel pour un dosage adapté."
       }
     ],
     "contraindications": ["constipation chronique", "intolérance au riz"],
@@ -498,7 +504,8 @@
           "value": 2,
           "unit": "jours"
         },
-        "description": "Pour la diarrhée : choisir une banane jaune à taches brunes (bon compromis pectine/sucre) et pour la constipation : choisir une banane jaune à taches brunes (bien mûr). Consommer entière ou écrasée/en compote. Espacer de 3-4h entre chaque banane pour laisser l'intestin se reposer."
+        "description": "Pour la diarrhée : choisir une banane jaune à taches brunes (bon compromis pectine/sucre) et pour la constipation : choisir une banane jaune à taches brunes (bien mûr). Consommer entière ou écrasée/en compote. Espacer de 3-4h entre chaque banane pour laisser l'intestin se reposer.",
+        "dose_disclaimer": "Information générale non personnalisée. Consultez un professionnel pour un dosage adapté."
       }
     ],
     "contraindications": [
@@ -579,7 +586,8 @@
           "value": 7,
           "unit": "jours"
         },
-        "description": "Couper 3-4 rondelles de racine fraîche, faire bouillir dans l'eau pendant 10 minutes, puis boire lentement. Peut également être râpé dans des plats. Pour les nausées : commencer par de petites doses."
+        "description": "Couper 3-4 rondelles de racine fraîche, faire bouillir dans l'eau pendant 10 minutes, puis boire lentement. Peut également être râpé dans des plats. Pour les nausées : commencer par de petites doses.",
+        "dose_disclaimer": "Information générale non personnalisée. Consultez un professionnel pour un dosage adapté."
       }
     ],
     "contraindications": [
@@ -673,7 +681,8 @@
           "value": 14,
           "unit": "jours"
         },
-        "description": "Infuser 2g de fleurs séchées dans de l'eau chaude pendant 10 minutes. Boire bien chaud, de préférence le soir après le repas pour favoriser le sommeil et la digestion. Peut être consommée quotidiennement."
+        "description": "Infuser 2g de fleurs séchées dans de l'eau chaude pendant 10 minutes. Boire bien chaud, de préférence le soir après le repas pour favoriser le sommeil et la digestion. Peut être consommée quotidiennement.",
+        "dose_disclaimer": "Information générale non personnalisée. Consultez un professionnel pour un dosage adapté."
       }
     ],
     "contraindications": [
@@ -758,7 +767,8 @@
           "value": 7,
           "unit": "jours"
         },
-        "description": "Infuser 2g de feuilles séchées dans de l'eau chaude pendant 10 minutes. Boire après les repas pour faciliter la digestion. Pour les maux de tête : application locale d'huile essentielle diluée (avec de l'huile neutre, ex: tournesol), sur les tempes (adultes uniquement)."
+        "description": "Infuser 2g de feuilles séchées dans de l'eau chaude pendant 10 minutes. Boire après les repas pour faciliter la digestion. Pour les maux de tête : application locale d'huile essentielle diluée (avec de l'huile neutre, ex: tournesol), sur les tempes (adultes uniquement).",
+        "dose_disclaimer": "Information générale non personnalisée. Consultez un professionnel pour un dosage adapté."
       }
     ],
     "contraindications": [
@@ -861,7 +871,8 @@
           "value": null,
           "unit": ""
         },
-        "description": "Consommer 1 à 3 tasses de café noir par jour (200-400mg de caféine) pour stimuler la concentration et réduire la fatigue. Éviter après 16h pour préserver le sommeil. Commencer par de petites doses si non habitué."
+        "description": "Consommer 1 à 3 tasses de café noir par jour (200-400mg de caféine) pour stimuler la concentration et réduire la fatigue. Éviter après 16h pour préserver le sommeil. Commencer par de petites doses si non habitué.",
+        "dose_disclaimer": "Information générale non personnalisée. Consultez un professionnel pour un dosage adapté."
       }
     ],
     "contraindications": [
@@ -946,7 +957,8 @@
           "value": null,
           "unit": ""
         },
-        "description": "Consommer 1 yaourt nature après un repas ou en collation pour aider à calmer l’acidité gastrique. Privilégier les yaourts nature sans sucre ajouté."
+        "description": "Consommer 1 yaourt nature après un repas ou en collation pour aider à calmer l’acidité gastrique. Privilégier les yaourts nature sans sucre ajouté.",
+        "dose_disclaimer": "Information générale non personnalisée. Consultez un professionnel pour un dosage adapté."
       }
     ],
     "contraindications": [
@@ -1016,7 +1028,8 @@
           "value": 5,
           "unit": "jours"
         },
-        "description": "Consommer 1 petit verre de jus d'ananas frais par jour ou 100g de fruit frais. La bromélaïne est plus concentrée dans le cœur de l'ananas. Consommer frais pour préserver les enzymes (la chaleur détruit la bromélaïne)."
+        "description": "Consommer 1 petit verre de jus d'ananas frais par jour ou 100g de fruit frais. La bromélaïne est plus concentrée dans le cœur de l'ananas. Consommer frais pour préserver les enzymes (la chaleur détruit la bromélaïne).",
+        "dose_disclaimer": "Information générale non personnalisée. Consultez un professionnel pour un dosage adapté."
       }
     ],
     "contraindications": [
@@ -1097,7 +1110,8 @@
           "value": null,
           "unit": ""
         },
-        "description": "Consommer 3 à 5 pruneaux réhydratés (trempés dans l'eau) par jour, de préférence le matin à jeun. Ou boire un verre de jus de pruneaux. Ne pas dépasser 8 pruneaux/jour. Boire beaucoup d'eau en parallèle."
+        "description": "Consommer 3 à 5 pruneaux réhydratés (trempés dans l'eau) par jour, de préférence le matin à jeun. Ou boire un verre de jus de pruneaux. Ne pas dépasser 8 pruneaux/jour. Boire beaucoup d'eau en parallèle.",
+        "dose_disclaimer": "Information générale non personnalisée. Consultez un professionnel pour un dosage adapté."
       }
     ],
     "contraindications": [
@@ -1182,7 +1196,8 @@
           "value": null,
           "unit": ""
         },
-        "description": "Prendre 20 à 30 ml de gel d’aloe vera pur avant les repas pour apaiser les brûlures d’estomac. Choisir un produit décoloré et sans aloïne."
+        "description": "Prendre 20 à 30 ml de gel d’aloe vera pur avant les repas pour apaiser les brûlures d’estomac. Choisir un produit décoloré et sans aloïne.",
+        "dose_disclaimer": "Information générale non personnalisée. Consultez un professionnel pour un dosage adapté."
       }
     ],
     "contraindications": [
@@ -1270,7 +1285,8 @@
           "value": null,
           "unit": ""
         },
-        "description": "Infuser 1 cuillère à café de graines de fenouil dans 200 ml d'eau chaude pendant 5 à 10 minutes. Boire après les repas pour faciliter la digestion et réduire les ballonnements."
+        "description": "Infuser 1 cuillère à café de graines de fenouil dans 200 ml d'eau chaude pendant 5 à 10 minutes. Boire après les repas pour faciliter la digestion et réduire les ballonnements.",
+        "dose_disclaimer": "Information générale non personnalisée. Consultez un professionnel pour un dosage adapté."
       }
     ],
     "contraindications": [

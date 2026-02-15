@@ -1,8 +1,11 @@
 // tradimedika-v1/src/pages/Home.jsx
 import { Helmet } from "react-helmet-async";
+import { ConsentModal, useConsent } from "../features/consent";
 import { Hero } from "../features/home-page";
 
 function Home() {
+  const { isModalOpen, grantConsent } = useConsent();
+
   return (
     <>
       <Helmet>
@@ -39,6 +42,7 @@ function Home() {
         />
       </Helmet>
       <Hero />
+      <ConsentModal isOpen={isModalOpen} onAccept={grantConsent} />
     </>
   );
 }

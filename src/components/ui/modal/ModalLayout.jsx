@@ -29,6 +29,7 @@ import { IoMdClose } from "react-icons/io";
  * - footer: Contenu du footer (optionnel, fixe)
  * - maxWidth: Largeur max de la modal (défaut: "lg")
  * - closeLabel: Label du bouton fermer (défaut: "Fermer")
+ * - showCloseButton: Afficher le bouton de fermeture (défaut: true)
  */
 function ModalLayout({
   isOpen,
@@ -40,6 +41,7 @@ function ModalLayout({
   footer,
   maxWidth = "lg",
   closeLabel = "Fermer",
+  showCloseButton = true,
 }) {
   const modalRef = useRef(null);
   const previousFocusRef = useRef(null);
@@ -50,6 +52,8 @@ function ModalLayout({
     lg: "md:max-w-lg",
     xl: "md:max-w-xl",
     "2xl": "md:max-w-2xl",
+    "3xl": "md:max-w-3xl",
+    "4xl": "md:max-w-4xl",
   };
 
   useEffect(() => {
@@ -72,14 +76,14 @@ function ModalLayout({
 
   useEffect(() => {
     const handleEscape = (e) => {
-      if (e.key === "Escape" && isOpen) {
+      if (e.key === "Escape" && isOpen && showCloseButton) {
         onClose();
       }
     };
 
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, showCloseButton]);
 
   useEffect(() => {
     if (isOpen) {
@@ -99,8 +103,8 @@ function ModalLayout({
     <>
       {/* Backdrop */}
       <div
-        className="animate-in fade-in transition-color fixed top-20 right-0 bottom-0 left-0 z-50 bg-black/60 duration-150 motion-reduce:animate-none"
-        onClick={onClose}
+        className="animate-in fade-in transition-color fixed inset-0 z-50 bg-black/60 duration-150 motion-reduce:animate-none"
+        onClick={showCloseButton ? onClose : undefined}
         aria-hidden="true"
       />
 
@@ -120,16 +124,20 @@ function ModalLayout({
               id="modal-title"
               className="flex items-center gap-2 text-lg font-semibold text-neutral-900 dark:text-neutral-100"
             >
-              {Icon && <Icon className="text-xl" aria-hidden="true" />}
+              {Icon && (
+                <Icon className="text-xl lg:text-2xl" aria-hidden="true" />
+              )}
               {title}
             </h2>
-            <button
-              onClick={onClose}
-              aria-label={closeLabel}
-              className="flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-lg bg-neutral-600/90 p-1.5 text-white transition-colors hover:bg-red-700 dark:bg-neutral-500 dark:text-white dark:hover:bg-red-800"
-            >
-              <IoMdClose className="text-2xl" />
-            </button>
+            {showCloseButton && (
+              <button
+                onClick={onClose}
+                aria-label={closeLabel}
+                className="flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-lg bg-neutral-600/90 p-1.5 text-white transition-colors hover:bg-red-700 dark:bg-neutral-500 dark:text-white dark:hover:bg-red-800"
+              >
+                <IoMdClose className="text-2xl" />
+              </button>
+            )}
           </div>
           {subtitle && (
             <p className="mt-2 text-sm text-neutral-600 transition-colors duration-150 dark:text-neutral-400">
@@ -163,6 +171,7 @@ ModalLayout.propTypes = {
   footer: PropTypes.node,
   maxWidth: PropTypes.oneOf(["sm", "md", "lg", "xl", "2xl"]),
   closeLabel: PropTypes.string,
+  showCloseButton: PropTypes.bool,
 };
 
 export default ModalLayout;

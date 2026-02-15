@@ -17,7 +17,7 @@ import { GiSprout } from "react-icons/gi";
  * @returns {JSX.Element}
  */
 export default function HeroHeader({
-  badgeText = "Version Bêta · v0.54.4",
+  badgeText = "Version Bêta · v0.55.0",
   title = "Prenez soin de vous",
   titleHighlight = "naturellement",
   description = "Solutions préventives et produits naturels pour le quotidien, à votre portée.",

@@ -12,8 +12,8 @@ function RemedyResultDetailsSymptomsSection({ symptoms }) {
           Symptômes
         </h2>
         <InfoTooltip
-          title="Symptômes traités"
-          message="Cette section vous guide sur la meilleure façon de conserver, de ce fournir et d'utiliser ce produit au quotidien."
+          title="Peut soulager"
+          message="Usage documenté pour ces symptômes dans les pratiques traditionnelles. Les effets peuvent varier et ne remplacent pas les conseils d’un professionnel de santé."
         />
       </div>
       <div className="flex flex-wrap gap-2">

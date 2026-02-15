@@ -2,6 +2,53 @@
 
 ---
 
+## [0.55.0] - 2026-02-15
+
+### Added
+
+- **User Consent System**
+  - Added `ConsentModal` component for collecting user consent on first visit
+  - Added `useConsent` hook to manage consent state with localStorage persistence
+  - Integrated consent context and provider in application architecture
+  - Consent modal appears on initial app load and blocks access until accepted
+
+- **Red Flags Warning System**
+  - Added `RedFlagsModal` component to display emergency warnings for severe symptoms
+  - Added `useRedFlags` hook to detect dangerous symptom patterns
+  - Added `redFlagsConfig.js` with comprehensive list of critical symptoms requiring immediate medical attention
+  - Integrated red flags detection in symptom search workflow
+  - Warning modal automatically triggers when dangerous symptoms are detected
+
+- **Emergency Alert Page**
+  - Added dedicated `/urgence` route for emergency situations
+  - Created `EmergencyAlert` page with clear instructions to contact emergency services
+  - Integrated emergency redirect in red flags detection flow
+
+### Changed
+
+- **Enhanced Symptom Search**
+  - Updated `useSymptomSearchForm` hook to integrate red flags validation before search
+  - Modified search flow to check for critical symptoms and trigger warnings appropriately
+
+- **Updated Application Routes**
+  - Added emergency alert route to router configuration
+  - Integrated consent and red flags modals in main application flow
+
+- **Database Enhancements**
+  - Updated `db.json` with additional remedy information
+  - Enhanced data structure for better red flags detection
+
+- **Page Updates**
+  - Modified `Home` page to integrate consent modal
+  - Updated `RemedyResult` page to handle red flags warnings
+  - Enhanced `RemedyResultDetails` page with improved safety information display
+  - Updated `RemedyResultDetailsUsagesList` with better user guidance
+
+- **Provider Architecture**
+  - Integrated consent provider in `AppProviders` for global state management
+
+---
+
 ## [0.54.4] - 2026-02-15
 
 ### Fixed
