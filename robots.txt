@@ -1,0 +1,20 @@
+# robots.txt pour Tradimedika
+# https://tradimedika.com
+
+# Permettre tous les robots d'explorer le site
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://tradimedika.com/sitemap.xml
+
+# Règles spécifiques pour les pages dynamiques
+Allow: /remedes
+Allow: /remedes/*
+
+# Bloquer les fichiers techniques (optionnel)
+Disallow: /*.json$
+Disallow: /assets/
+
+# Crawl-delay pour être respectueux des serveurs (optionnel)
+# Crawl-delay: 1

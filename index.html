@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://*.googletagmanager.com https://*.google-analytics.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' https: data:; connect-src 'self' https: https://cdn-icons-png.flaticon.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; base-uri 'self'; form-action 'self'"
+    />
+    <link rel="preconnect" href="https://tradimedika.com" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon.svg"
+      class="rotate-90 rotate-x-180"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Single Page Apps for GitHub Pages -->
+    <!-- Script to handle redirects from 404.html -->
+    <script>
+      // Single Page Apps for GitHub Pages
+      // MIT License
+      // https://github.com/rafgraph/spa-github-pages
+
+      // This script checks to see if a redirect is present in the query string,
+      // converts it back into the correct url and adds it to the
+      // browser's history using window.history.replaceState(...),
+      // which won't cause the browser to attempt to load the new url.
+      // When the single page app is loaded further down in this file,
+      // the correct url will be waiting in the browser's history for
+      // the single page app to route accordingly.
+
+      (function (l) {
+        if (l.search[1] === "/") {
+          var decoded = l.search
+            .slice(1)
+            .split("&")
+            .map(function (s) {
+              return s.replace(/~and~/g, "&");
+            })
+            .join("?");
+          window.history.replaceState(
+            null,
+            null,
+            l.pathname.slice(0, -1) + decoded + l.hash,
+          );
+        }
+      })(window.location);
+    </script>
+
+    <!-- SEO Meta Tags -->
+    <meta
+      name="description"
+      content="TRADIMEDIKA - Solutions préventives et produits naturels pour le quotidien, à votre portée."
+    />
+    <meta
+      name="keywords"
+      content="produits naturels, plantes médicinales, symptômes, santé naturelle, traitement naturel, phytothérapie"
+    />
+    <meta name="author" content="Pierre MAZELAYGUE" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://tradimedika.com/" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <meta
+      name="theme-color"
+      content="#10b981"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#064e3b"
+      media="(prefers-color-scheme: dark)"
+    />
+
+    <title>
+      TRADIMEDIKA - Solutions préventives et produits naturels pour le
+      quotidien, à votre portée.
+    </title>
+    <script type="module" crossorigin src="/assets/index-DLX45XN4.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BNVgr77t.css">
+  </head>
+  <body>
+    <!-- Google Consent Mode v2 - DOIT être avant React -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      window.gtag = gtag;
+
+      gtag("consent", "default", {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: "denied",
+        functionality_storage: "denied",
+        personalization_storage: "denied",
+        security_storage: "granted",
+        wait_for_update: 500,
+      });
+    </script>
+
+    <div id="root"></div>
+  </body>
+</html>
