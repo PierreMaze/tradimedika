@@ -20,7 +20,7 @@ export default function ConsentModal({ isOpen, onAccept }) {
         onClose={() => {}}
         title="Prototype — Utilisation des données"
         icon={IoShieldCheckmarkOutline}
-        subtitle="Votre confidentialité est importante — ces données sont utilisées à des fins informatives dans le cadre d&pos;un prototype."
+        subtitle="Votre confidentialité est importante — ces données sont utilisées à des fins informatives dans le cadre d'un prototype."
         maxWidth="4xl"
         showCloseButton={false}
         footer={
