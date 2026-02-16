@@ -48,7 +48,7 @@ export default function HeroHeader({
       </div>
 
       {/* Texte descriptif */}
-      <p className="animate-fade-in-up max-w-3xl text-center text-base text-neutral-600 transition-colors duration-150 ease-in-out motion-reduce:animate-none motion-reduce:opacity-100 lg:text-xl 2xl:max-w-5xl 2xl:text-2xl dark:text-neutral-400">
+      <p className="animate-fade-in-up max-w-3xl text-center text-base text-amber-600 transition-colors duration-150 ease-in-out motion-reduce:animate-none motion-reduce:opacity-100 lg:text-xl 2xl:max-w-5xl 2xl:text-2xl dark:text-amber-400">
         {description}
       </p>
     </div>

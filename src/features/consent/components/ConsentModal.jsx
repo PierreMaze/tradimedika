@@ -18,9 +18,9 @@ export default function ConsentModal({ isOpen, onAccept }) {
       <ModalLayout
         isOpen={isOpen}
         onClose={() => {}}
-        title="Utilisation de vos données de santé"
+        title="Prototype — Utilisation des données"
         icon={IoShieldCheckmarkOutline}
-        subtitle="Votre confidentialité est importante pour nous"
+        subtitle="Votre confidentialité est importante — ces données sont utilisées à des fins informatives dans le cadre d&pos;un prototype."
         maxWidth="4xl"
         showCloseButton={false}
         footer={
@@ -39,7 +39,7 @@ export default function ConsentModal({ isOpen, onAccept }) {
         <div className="space-y-4">
           <div className="rounded-lg border border-neutral-200 bg-neutral-50 p-4 dark:border-neutral-700 dark:bg-neutral-800/50">
             <h3 className="mb-2 font-semibold text-neutral-900 dark:text-neutral-100">
-              Traitement de données sensibles
+              Traitement des données
             </h3>
             <ul className="space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
               <li className="flex items-start gap-2">
@@ -47,8 +47,8 @@ export default function ConsentModal({ isOpen, onAccept }) {
                   •
                 </span>
                 <span>
-                  Nous traitons des données sensibles (symptômes, allergies)
-                  pour vous proposer des informations personnalisées
+                  Les données collectées sont utilisées uniquement pour la
+                  démonstration du prototype.
                 </span>
               </li>
               <li className="flex items-start gap-2">
@@ -56,27 +56,24 @@ export default function ConsentModal({ isOpen, onAccept }) {
                   •
                 </span>
                 <span>
-                  Ces données restent{" "}
+                  Ces informations restent{" "}
                   <strong>locales sur votre appareil</strong> (stockage
-                  localStorage dans votre navigateur)
+                  localStorage dans votre navigateur).
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="mt-1 text-emerald-600 dark:text-emerald-400">
                   •
                 </span>
-                <span>
-                  <strong>Aucune transmission</strong> de vos données de santé à
-                  des serveurs tiers
-                </span>
+                <span>Aucune donnée n’est transmise à des serveurs tiers.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="mt-1 text-emerald-600 dark:text-emerald-400">
                   •
                 </span>
                 <span>
-                  Vous pouvez effacer vos données à tout moment via les
-                  Paramètres
+                  Vous pouvez effacer ces données à tout moment via les
+                  Paramètres.
                 </span>
               </li>
             </ul>
@@ -89,7 +86,7 @@ export default function ConsentModal({ isOpen, onAccept }) {
             aria-expanded={isDetailsOpen}
           >
             <span className="font-medium text-neutral-900 dark:text-neutral-100">
-              En savoir plus sur vos droits RGPD
+              En savoir plus sur vos droits
             </span>
             <IoChevronDown
               className={`text-neutral-900 transition-transform dark:text-neutral-100 ${isDetailsOpen ? "rotate-180" : ""}`}
@@ -101,12 +98,12 @@ export default function ConsentModal({ isOpen, onAccept }) {
             <div className="animate-fade-in-down space-y-3 rounded-lg border border-neutral-200 bg-white p-4 dark:border-neutral-700 dark:bg-neutral-800">
               <div>
                 <h4 className="mb-1 font-semibold text-neutral-900 dark:text-neutral-100">
-                  Conformité RGPD
+                  Conformité
                 </h4>
                 <p className="text-sm text-neutral-700 dark:text-neutral-300">
-                  Tradimedika respecte le Règlement Général sur la Protection
-                  des Données (RGPD). Vos données de santé sont traitées à des
-                  fins informatives uniquement.
+                  Ce prototype respecte les bonnes pratiques de confidentialité.
+                  Les données sont utilisées uniquement à des fins
+                  démonstratives.
                 </p>
               </div>
 
@@ -115,9 +112,9 @@ export default function ConsentModal({ isOpen, onAccept }) {
                   Vos droits
                 </h4>
                 <ul className="space-y-1 text-sm text-neutral-700 dark:text-neutral-300">
-                  <li>• Droit d&apos;accès à vos données</li>
+                  <li>• Droit d&pos;accès aux données collectées</li>
                   <li>• Droit de rectification</li>
-                  <li>• Droit d&apos;effacement (via Paramètres)</li>
+                  <li>• Droit d&pos;effacement via les Paramètres</li>
                   <li>• Droit de retirer votre consentement à tout moment</li>
                 </ul>
               </div>
@@ -127,10 +124,9 @@ export default function ConsentModal({ isOpen, onAccept }) {
                   Stockage local uniquement
                 </h4>
                 <p className="text-sm text-neutral-700 dark:text-neutral-300">
-                  Vos données restent sur votre appareil. Elles ne sont ni
-                  transmises, ni stockées sur nos serveurs. Effacer les données
-                  de votre navigateur supprimera définitivement toutes vos
-                  informations.
+                  Les données restent sur votre appareil. Elles ne sont ni
+                  transmises ni stockées sur nos serveurs. Les effacer dans
+                  votre navigateur supprimera toutes les informations.
                 </p>
               </div>
             </div>
@@ -141,9 +137,8 @@ export default function ConsentModal({ isOpen, onAccept }) {
               <strong className="text-amber-700 dark:text-amber-400">
                 Important :
               </strong>{" "}
-              Les informations fournies par Tradimedika sont à caractère
-              éducatif uniquement. Elles ne remplacent en aucun cas l&apos;avis
-              d&apos;un professionnel de santé.
+              Tradimedika est actuellement un <strong>prototype</strong>. Les
+              informations fournies sont à caractère démonstratif uniquement.
             </p>
           </div>
 
@@ -153,12 +148,11 @@ export default function ConsentModal({ isOpen, onAccept }) {
               checked={consentChecked}
               onChange={(e) => setConsentChecked(e.target.checked)}
               className="mt-1 h-4 w-4 cursor-pointer rounded border-neutral-300 text-emerald-600 focus:ring-2 focus:ring-emerald-500 dark:border-neutral-600"
-              aria-label="Accepter le traitement de mes données de santé"
+              aria-label="Accepter le traitement des données"
             />
             <span className="text-sm text-neutral-900 dark:text-neutral-100">
-              J&apos;accepte le traitement de mes données de santé à des fins
-              informatives et j&apos;ai compris que ces informations ne
-              remplacent pas l&apos;avis d&apos;un professionnel de santé.
+              J&apos;accepte le traitement de mes données à des fins
+              démonstratives dans le cadre de ce prototype.
             </span>
           </label>
         </div>
