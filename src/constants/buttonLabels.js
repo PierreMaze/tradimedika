@@ -89,8 +89,7 @@ export const BUTTON_CLEAR_HISTORY = "Effacer tout l'historique";
  * Placeholder text for symptom input field
  * @type {string}
  */
-export const PLACEHOLDER_SYMPTOMS =
-  "Entrez vos symptômes (ex: fatigue, digestion...)";
+export const PLACEHOLDER_SYMPTOMS = "Sélectionner votre symptôme";
 
 /**
  * Message displayed when symptom limit (5) is reached

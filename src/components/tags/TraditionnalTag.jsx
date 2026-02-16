@@ -20,11 +20,11 @@ function TraditionnalTag({ className = "", showLabel = true }) {
   const tooltipContent = (
     <>
       <h3 className="mb-1 text-lg font-semibold text-neutral-900 dark:text-white">
-        Traditionnel
+        Lorem
       </h3>
       <p className="text-sm text-neutral-900 dark:text-white">
-        Ce produit naturel repose principalement sur un usage traditionnel. Son
-        efficacité n&apos;est pas validée par des études scientifiques solides.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit possimus
+        repellendus tempora voluptatem
       </p>
     </>
   );
@@ -36,7 +36,7 @@ function TraditionnalTag({ className = "", showLabel = true }) {
         className={`transition-color inline-flex items-center gap-1.5 rounded-md bg-amber-100 px-3 py-1.5 text-xs font-semibold text-amber-800 duration-150 lg:text-sm 2xl:text-base dark:bg-amber-900 dark:text-amber-200 ${className}`}
       >
         <FiInfo className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
-        {showLabel && "Traditionnel"}
+        {showLabel && "Lorem"}
       </span>
     </Tooltip>
   );

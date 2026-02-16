@@ -32,8 +32,8 @@ function RemedyResultDetailsUsagesList({ uses }) {
               </h2>
             </button>
             <InfoTooltip
-              title="Méthode de préparation et d'utilisation"
-              message="Information générale non personnalisée. Ces indications sont fournies à titre informatif. Consultez un professionnel de santé pour un dosage adapté"
+              title="Utilisation"
+              message="Lorem ipsum dolor sit amet consectetur adipisicing elit possimus repellendus tempora voluptatem"
               iconColor="text-emerald-600 dark:text-emerald-500"
             />
           </div>

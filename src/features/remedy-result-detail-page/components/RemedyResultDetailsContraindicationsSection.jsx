@@ -36,8 +36,8 @@ function RemedyResultDetailsContraindicationsSection({ contraindications }) {
             Contre-indication
           </h2>
           <InfoTooltip
-            title="Incompatibilités"
-            message="Cette section vous indiquent les situations ou traitements pour lesquels ce produit est déconseillé. Cliquez sur un terme médical en souligné pour en savoir plus."
+            title="Contre-indication"
+            message="Lorem ipsum dolor sit amet consectetur adipisicing elit possimus repellendus tempora voluptatem"
             iconColor="text-red-700 dark:text-red-500"
           />
         </div>

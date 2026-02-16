@@ -17,14 +17,14 @@ import { GiSprout } from "react-icons/gi";
  * @returns {JSX.Element}
  */
 export default function HeroHeader({
-  badgeText = "Version Bêta · v0.55.0",
+  badgeText = "Prototype · v0.55.5",
   title = "Prenez soin de vous",
   titleHighlight = "naturellement",
-  description = "Solutions préventives et produits naturels pour le quotidien, à votre portée.",
+  description = "Ce site est un prototype et n'est pas destiné à être utilisé pour des fins médicales.",
 }) {
   return (
     <div className="flex flex-col items-center gap-y-4 lg:gap-y-6 2xl:gap-y-8">
-      {/* Badge "Version Bêta · v0.54.4" */}
+      {/* Badge "Prototype · v0.55.5" */}
       <div className="mx-auto w-fit">
         <div className="border-dark/60 text-dark animate-fade-in-down flex items-center gap-2 rounded-lg border-2 bg-white px-4 py-2 shadow-md transition-colors duration-150 ease-in-out motion-reduce:animate-none motion-reduce:opacity-100 dark:border-emerald-500/60 dark:bg-emerald-950 dark:text-emerald-400">
           <GiSprout className="items-center text-lg text-emerald-600 transition-colors duration-150 ease-in-out dark:text-emerald-400" />

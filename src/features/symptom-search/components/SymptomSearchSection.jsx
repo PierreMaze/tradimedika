@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import ListSymptomTag from "./ListSymptomTag";
-import SymptomCounter from "./SymptomCounter";
 import { SymptomsForm } from "./form";
 
 /**
@@ -26,7 +25,7 @@ export default function SymptomSearchSection({
   selectedSymptoms,
   onSubmit,
   onFocus,
-  placeholder = "Entrez vos symptômes (ex: fatigue, digestion...)",
+  placeholder = "Séléctionner vos symptômes",
 }) {
   return (
     <>
@@ -47,7 +46,7 @@ export default function SymptomSearchSection({
       />
 
       {/* Compteur de symptômes */}
-      <SymptomCounter count={selectedSymptoms.length} />
+      {/* <SymptomCounter count={selectedSymptoms.length} /> */}
     </>
   );
 }

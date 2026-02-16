@@ -56,7 +56,7 @@ export default function SymptomsForm({
   onSymptomSelect,
   onRemoveSymptom,
   selectedSymptoms = [],
-  placeholder = "Entrez vos symptômes...",
+  placeholder = "Sélectionner vos symptômes",
   onSubmit = null,
   onFocus = null,
 }) {

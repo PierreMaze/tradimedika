@@ -5,71 +5,77 @@
 export const TAG_LABELS_CATEGORIES = [
   {
     id: "verified",
-    label: "Usage",
+    label: "Lorem",
     icon: "verified",
     options: [
       {
         id: "verified",
-        label: "Reconnu",
-        description: "Soutenu scientifiquement ou par des professionnels",
+        label: "Lorem",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit possimus repellendus tempora voluptatem",
         color: "green",
       },
       {
         id: "traditional",
-        label: "Traditionnel",
+        label: "Lorem",
         description:
-          "Usage traditionnel sans soutien scientifique (produit naturel de grand-mère)",
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit possimus repellendus tempora voluptatem",
         color: "amber",
       },
     ],
   },
   {
     id: "pregnancy",
-    label: "Grossesse",
+    label: "Lorem",
     icon: "pregnancy",
     options: [
       {
         id: "ok",
-        label: "Sans danger",
-        description: "Compatible avec la grossesse",
+        label: "Lorem",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit possimus repellendus tempora voluptatem",
         color: "green",
       },
       {
         id: "variant",
-        label: "À vérifier",
-        description: "Données insuffisantes ou usage conditionnel",
+        label: "Lorem",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit possimus repellendus tempora voluptatem",
         color: "amber",
       },
       {
         id: "interdit",
-        label: "Non recommandé",
-        description: "Contre-indiqué pendant la grossesse",
+        label: "Lorem",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit possimus repellendus tempora voluptatem",
         color: "red",
       },
     ],
   },
   {
     id: "ageLimit",
-    label: "Limite d'âge",
+    label: "Lorem",
     icon: "age",
     options: [
       {
         id: "allAges",
-        label: "Tout âge",
-        description: "Utilisable chez l'enfant sans limite d'âge",
+        label: "Lorem",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit possimus repellendus tempora voluptatem",
         color: "green",
       },
       {
         id: "withLimit",
-        label: "Avec limite d'âge",
-        description: "Limite d'âge minimum requise",
+        label: "Lorem",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit possimus repellendus tempora voluptatem",
         color: "amber",
       },
       {
         id: "adultOnly",
-        label: "Adultes uniquement",
+        label: "Lorem",
         description:
-          "Réservé uniquement aux adultes, ne pas utiliser chez l'enfant",
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit possimus repellendus tempora voluptatem",
         color: "red",
       },
     ],

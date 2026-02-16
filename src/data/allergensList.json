@@ -1,236 +1,236 @@
 [
   {
     "id": "ail",
-    "name": "Ail",
-    "description": "Allergie spécifique à l'ail. Sélectionnez cet allergène si vous êtes allergique uniquement à l'ail et non aux autres alliums.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Ail"]
   },
   {
     "id": "allium",
-    "name": "Allium",
-    "description": "Famille botanique regroupant l'ail, l'oignon, le poireau et l'échalote.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Ail", "Oignon"]
   },
   {
     "id": "aloe-vera",
-    "name": "Aloe vera",
-    "description": "Allergie spécifique à l'aloe vera. Sélectionnez cet allergène si vous êtes allergique uniquement à l'aloe vera.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Aloe vera"]
   },
   {
     "id": "aloine",
-    "name": "Aloïne",
-    "description": "Composé laxatif irritant présent dans le latex jaune de l'aloe vera (entre l'écorce et le gel).",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Aloe vera"]
   },
   {
     "id": "ananas",
-    "name": "Ananas",
-    "description": "Allergie spécifique à l'ananas. Sélectionnez cet allergène si vous êtes allergique uniquement à l'ananas.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Ananas"]
   },
   {
     "id": "apiacees",
-    "name": "Apiacées",
-    "description": "Famille botanique incluant fenouil, carotte, céleri, anis et persil",
-    "remedies": ["Fenouil"]
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
+    "remedies": ["Ananas"]
   },
   {
     "id": "asteracees",
-    "name": "Astéracées",
-    "description": "Famille botanique incluant camomille, tournesol, pissenlit",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Camomille"]
   },
   {
     "id": "banane",
-    "name": "Banane",
-    "description": "Allergie spécifique à la banane. Sélectionnez cet allergène si vous êtes allergique uniquement à la banane.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Banane"]
   },
   {
     "id": "venin-abeille",
-    "name": "Venin d'abeille",
-    "description": "Venin d'hyménoptères (abeilles, guêpes) et produits de la ruche",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Ananas"]
   },
   {
     "id": "bromelaine",
-    "name": "Bromélaïne",
-    "description": "Enzyme protéolytique naturellement présente dans l'ananas. ",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Ananas"]
   },
   {
     "id": "cafe",
-    "name": "Café",
-    "description": "Allergie spécifique au café. Sélectionnez cet allergène si vous êtes allergique uniquement au café.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Café noir"]
   },
   {
     "id": "cafeine",
-    "name": "Caféine",
-    "description": "Stimulant du système nerveux central. Peut provoquer anxiété, palpitations, insomnie et tremblements chez les personnes sensibles.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Café noir"]
   },
   {
     "id": "camomille",
-    "name": "Camomille",
-    "description": "Allergie spécifique à la camomille. Sélectionnez cet allergène si vous êtes allergique uniquement à la camomille.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Camomille"]
   },
   {
     "id": "citron",
-    "name": "Citron",
-    "description": "Allergie spécifique au citron. Sélectionnez cet allergène si vous êtes allergique uniquement au citron et non aux autres agrumes.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Citron"]
   },
   {
     "id": "agrumes",
-    "name": "Agrumes",
-    "description": "Citrons, oranges, pamplemousses, clémentines et autres agrumes",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Citron"]
   },
   {
     "id": "clou-de-girofle",
-    "name": "Clou de girofle",
-    "description": "Allergie spécifique au clou de girofle. Sélectionnez cet allergène si vous êtes allergique uniquement au clou de girofle.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Clou de girofle"]
   },
   {
     "id": "eugenol",
-    "name": "Eugénol",
-    "description": "Composé aromatique présent dans le clou de girofle, la cannelle et le basilic.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Clou de girofle"]
   },
   {
     "id": "fenouil",
-    "name": "Fenouil",
-    "description": "Allergie spécifique au fenouil. Sélectionnez cet allergène si vous êtes allergique uniquement au fenouil.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Fenouil"]
   },
   {
     "id": "fodmap",
-    "name": "FODMAP",
-    "description": "FODMAP signifie Fermentable Oligosaccharides, Disaccharides, Monosaccharides And Polyols.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Ail", "Fenouil", "Miel", "Oignon"]
   },
   {
     "id": "gingembre",
-    "name": "Gingembre",
-    "description": "Allergie spécifique au gingembre. Sélectionnez cet allergène si vous êtes allergique uniquement au gingembre.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Gingembre frais"]
   },
   {
     "id": "lactose",
-    "name": "Lactose",
-    "description": "Sucre du lait pouvant provoquer une intolérance digestive",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Yaourt nature"]
   },
   {
     "id": "lait",
-    "name": "Lait",
-    "description": "Protéines et sucres présents dans le lait de vache et ses dérivés",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Yaourt nature"]
   },
   {
     "id": "lamiacees",
-    "name": "Lamiacées",
-    "description": "Famille botanique regroupant menthe, basilic, thym, romarin, lavande et sauge.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Menthe poivrée"]
   },
   {
     "id": "latex",
-    "name": "Latex",
-    "description": "Substance présente sous la peau de certaines plantes",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Aloe vera"]
   },
   {
     "id": "latex-fruit",
-    "name": "Syndrome latex-fruit",
-    "description": "Allergie croisée entre le latex et certains fruits (banane, avocat, kiwi, châtaigne). Chez certaines personnes, le système immunitaire confond les deux.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Banane"]
   },
   {
     "id": "menthe",
-    "name": "Menthe poivrée",
-    "description": "Allergie spécifique à la menthe poivrée. Sélectionnez cet allergène si vous êtes allergique uniquement à la menthe poivrée.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Menthe poivrée"]
   },
   {
     "id": "menthol",
-    "name": "Menthol",
-    "description": "Composé aromatique de la menthe.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Menthe poivrée"]
   },
   {
     "id": "miel",
-    "name": "Miel",
-    "description": "Allergie spécifique au miel. Sélectionnez cet allergène si vous êtes allergique uniquement au miel.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Miel"]
   },
   {
     "id": "oignon",
-    "name": "Oignon",
-    "description": "Allergie spécifique à l'oignon. Sélectionnez cet allergène si vous êtes allergique uniquement à l'oignon.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Oignon"]
   },
   {
     "id": "pollen",
-    "name": "Pollen",
-    "description": "Pollens de graminées, arbres et plantes diverses",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": []
   },
   {
     "id": "propolis",
-    "name": "Propolis",
-    "description": "Résine collectée par les abeilles, naturellement présente en traces dans le miel.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Miel"]
   },
   {
     "id": "pruneau",
-    "name": "Pruneau",
-    "description": "Allergie spécifique au pruneau. Sélectionnez cet allergène si vous êtes allergique uniquement au pruneau et non aux autres rosacées.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Pruneaux"]
   },
   {
     "id": "riz",
-    "name": "Riz",
-    "description": "Allergie spécifique au riz. Sélectionnez cet allergène si vous êtes allergique uniquement au riz.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Riz blanc"]
   },
   {
     "id": "rosacees",
-    "name": "Rosacées",
-    "description": "Famille botanique regroupant prunes, pêches, abricots, cerises, amandes et pommes. Allergies croisées fréquentes entre ces fruits.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Pruneaux"]
   },
   {
     "id": "sorbitol",
-    "name": "Sorbitol",
-    "description": "Polyol (sucre-alcool) naturellement présent dans les pruneaux et autres fruits. Fait partie des FODMAP. Effet laxatif.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Pruneaux"]
   },
   {
     "id": "sulfites",
-    "name": "Sulfites",
-    "description": "Composés soufrés naturellement présents ou utilisés comme conservateurs.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Ail", "Café noir", "Oignon"]
   },
   {
     "id": "yaourt",
-    "name": "Yaourt",
-    "description": "Allergie spécifique au yaourt. Sélectionnez cet allergène si vous êtes allergique uniquement au yaourt et aux protéines laitières fermentées.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Yaourt nature"]
   },
   {
     "id": "zingiberacees",
-    "name": "Zingibéracées",
-    "description": "Famille botanique regroupant gingembre, curcuma, cardamome et galanga. Les allergies peuvent être croisées entre ces épices.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": ["Gingembre frais"]
   },
   {
     "id": "gluten",
-    "name": "Gluten",
-    "description": "Composant du blé et de céréales proches. Les allergies peuvent être croisées entre ces substances.",
+    "name": "Allergie",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit",
     "remedies": []
   }
 ]

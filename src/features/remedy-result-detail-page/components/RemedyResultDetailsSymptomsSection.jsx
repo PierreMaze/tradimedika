@@ -12,8 +12,8 @@ function RemedyResultDetailsSymptomsSection({ symptoms }) {
           Symptômes
         </h2>
         <InfoTooltip
-          title="Peut soulager"
-          message="Usage documenté pour ces symptômes dans les pratiques traditionnelles. Les effets peuvent varier et ne remplacent pas les conseils d’un professionnel de santé."
+          title="Symptômes"
+          message="Lorem ipsum dolor sit amet consectetur adipisicing elit possimus repellendus tempora voluptatem"
         />
       </div>
       <div className="flex flex-wrap gap-2">

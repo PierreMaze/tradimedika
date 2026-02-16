@@ -70,8 +70,8 @@ export function InfoTooltip({
           Indications d&apos;usage
         </p>
         <p className="mt-1 text-sm leading-relaxed text-neutral-800 lg:text-base dark:text-neutral-200">
-          Les badges résument le niveau de fiabilité et les conditions
-          d&apos;usage. Cliquer sur un badge pour en savoir plus.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit possimus
+          repellendus tempora voluptatem
         </p>
       </div>
     );

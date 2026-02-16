@@ -32,15 +32,15 @@ function ChildrenAgeTag({ age, className = "", showLabel = true }) {
 
   if (isAdultOnly) {
     colorClasses = "bg-red-100 text-red-800 dark:bg-red-900 dark:text-white";
-    label = "Adultes uniquement";
+    label = "Lorem";
     tooltipContent = (
       <>
         <h3 className="mb-1 text-lg font-semibold text-neutral-900 dark:text-white">
-          Adultes uniquement
+          Lorem
         </h3>
         <p className="text-sm text-neutral-900 dark:text-white">
-          Ce produit naturel est réservé à l&apos;adulte et ne doit pas être
-          utilisé chez l&apos;enfant.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit possimus
+          repellendus tempora voluptatem
         </p>
       </>
     );
@@ -48,15 +48,15 @@ function ChildrenAgeTag({ age, className = "", showLabel = true }) {
   } else if (isAllAges) {
     colorClasses =
       "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200";
-    label = "Tout public";
+    label = "Lorem";
     tooltipContent = (
       <>
         <h3 className="mb-1 text-lg font-semibold text-neutral-900 dark:text-white">
-          Tout public
+          Lorem
         </h3>
         <p className="text-sm text-neutral-900 dark:text-white">
-          Ce produit naturel peut être utilisé chez l&apos;enfant sans limite
-          d&apos;âge, dans le respect des doses recommandées.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit possimus
+          repellendus tempora voluptatem
         </p>
       </>
     );
@@ -64,15 +64,15 @@ function ChildrenAgeTag({ age, className = "", showLabel = true }) {
   } else if (hasLimit) {
     colorClasses =
       "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200";
-    label = `Enfants +${age} ans`;
+    label = `Lorem`;
     tooltipContent = (
       <>
         <h3 className="mb-1 text-lg font-semibold text-neutral-900 dark:text-white">
-          Enfants +{age} ans
+          Lorem
         </h3>
         <p className="text-sm text-neutral-900 dark:text-white">
-          Ce produit naturel peut être utilisé chez l&apos;enfant à partir de{" "}
-          {age} ans, dans le respect des doses recommandées.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit possimus
+          repellendus tempora voluptatem
         </p>
       </>
     );

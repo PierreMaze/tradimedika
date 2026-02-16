@@ -12,8 +12,8 @@ function RemedyResultDetailsPropertiesSection({ properties }) {
           Propriétés
         </h2>
         <InfoTooltip
-          title="Effets et caractéristiques observés"
-          message="Cette section résument les principaux effets et caractéristiques de ce produit. Cliquez sur une propriété soulignée pour en savoir plus."
+          title="Propriétés"
+          message="Lorem ipsum dolor sit amet consectetur adipisicing elit possimus repellendus tempora voluptatem"
         />
       </div>
       <div className="flex flex-wrap gap-x-2 gap-y-4">

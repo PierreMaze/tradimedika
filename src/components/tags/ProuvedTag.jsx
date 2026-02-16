@@ -21,12 +21,11 @@ function ProuvedTag({ className = "", showLabel = true }) {
   const tooltipContent = (
     <>
       <h3 className="mb-1 text-lg font-semibold text-neutral-900 dark:text-white">
-        Reconnu
+        Lorem
       </h3>
       <p className="text-sm text-neutral-900 dark:text-white">
-        Ce produit naturel est soutenu par des données scientifiques et/ou
-        reconnu par des professionnels de santé dans un cadre d&apos;usage
-        défini.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit possimus
+        repellendus tempora voluptatem
       </p>
     </>
   );
@@ -41,7 +40,7 @@ function ProuvedTag({ className = "", showLabel = true }) {
           className="h-4 w-4 lg:h-5 lg:w-5"
           aria-hidden="true"
         />
-        {showLabel && "Reconnu"}
+        {showLabel && "Lorem"}
       </span>
     </Tooltip>
   );

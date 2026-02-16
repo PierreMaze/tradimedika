@@ -23,50 +23,50 @@ import { Tooltip } from "../ui/tooltip";
 
 const VARIANT_CONFIG = {
   ok: {
-    label: "Grossesse",
+    label: "Lorem",
     colorClasses:
       "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
     tooltipContent: (
       <>
         <h3 className="mb-1 text-lg font-semibold text-neutral-900 dark:text-white">
-          Grossesse
+          Lorem
         </h3>
         <p className="text-sm text-neutral-900 dark:text-white">
-          &apos;usage de ce produit naturel est considéré comme compatible avec
-          la grossesse aux doses indiquées.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit possimus
+          repellendus tempora voluptate
         </p>
       </>
     ),
     Icon: IoMdCheckmarkCircleOutline,
   },
   variant: {
-    label: "Grossesse",
+    label: "Lorem",
     colorClasses:
       "bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200",
     tooltipContent: (
       <>
         <h3 className="mb-1 text-lg font-semibold text-neutral-900 dark:text-white">
-          Grossesse
+          Lorem
         </h3>
         <p className="text-sm text-neutral-900 dark:text-white">
-          Données insuffisantes ou usage conditionnel. Consulter un
-          professionnel de santé avant utilisation.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit possimus
+          repellendus tempora voluptatem
         </p>
       </>
     ),
     Icon: FiInfo,
   },
   interdit: {
-    label: "Grossesse",
+    label: "Lorem",
     colorClasses: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-50",
     tooltipContent: (
       <>
         <h3 className="mb-1 text-lg font-semibold text-neutral-900 dark:text-white">
-          Grossesse
+          Lorem
         </h3>
         <p className="text-sm text-neutral-900 dark:text-white">
-          Ce produit naturel est contre-indiqué pendant la grossesse. Ne pas
-          utiliser.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit possimus
+          repellendus tempora voluptatem
         </p>
       </>
     ),

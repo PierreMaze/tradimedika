@@ -33,8 +33,8 @@ function RemedyResultDetailsTipsSection({ tips }) {
             Conseils
           </h2>
           <InfoTooltip
-            title="Astuces pratiques"
-            message="Cette section vous guide sur la meilleure façon de conserver, de ce fournir et d'utiliser ce produit au quotidien."
+            title="Conseil"
+            message="Lorem ipsum dolor sit amet consectetur adipisicing elit possimus repellendus tempora voluptatem"
             iconColor="text-sky-600 dark:text-sky-500"
           />
         </div>
