@@ -4,8 +4,10 @@ import { createBrowserRouter } from "react-router-dom";
 import GoogleAnalytics from "../components/analytics/GoogleAnalytics";
 import { LoadingFallback } from "../components/ui/animation";
 import { AllergiesProvider } from "../features/allergens-search";
+import { ProtectedRoute } from "../features/auth";
 import { CookieConsentProvider } from "../features/cookie-consent/context/CookieConsentContext";
 import LayoutApp from "../layout/LayoutApp";
+import LayoutDashboard from "../layout/LayoutDashboard";
 import LayoutRemedyResult from "../layout/LayoutRemedyResult";
 
 // Lazy-loaded page components for code-splitting
@@ -19,6 +21,8 @@ const PolitiqueConfidentialite = lazy(
   () => import("../pages/PolitiqueConfidentialite"),
 );
 const GestionCookies = lazy(() => import("../pages/GestionCookies"));
+const LoginPage = lazy(() => import("../features/auth/components/LoginPage"));
+const Dashboard = lazy(() => import("../pages/Dashboard"));
 
 /**
  * Router Configuration - React Router v6.30.2 with Data Router API
@@ -27,10 +31,14 @@ const GestionCookies = lazy(() => import("../pages/GestionCookies"));
  * - / → Home page (Hero component)
  * - /remedes → Remedy results list (nested in LayoutRemedyResult)
  * - /remedes/:slug → Remedy detail page (nested in LayoutRemedyResult)
+ * - /urgence → Emergency alert page
+ * - /login → Login page (pro authentication)
+ * - /dashboard → Dashboard pro (protected, requires auth)
  * - * → NotFound page (404 error)
  *
  * Layout Structure:
- * - LayoutApp: Global layout (Header + Outlet + Footer) wraps all routes
+ * - LayoutApp: Global layout (Header + Outlet + Footer) wraps public routes
+ * - LayoutDashboard: Pro layout (Sidebar + Outlet) wraps dashboard routes
  * - LayoutRemedyResult: Specific layout for remedy pages (includes BreadCrumb)
  *
  * Performance Optimizations:
@@ -119,12 +127,39 @@ const router = createBrowserRouter(
           ),
         },
         {
+          path: "login",
+          element: (
+            <Suspense fallback={<LoadingFallback />}>
+              <LoginPage />
+            </Suspense>
+          ),
+        },
+        {
           path: "*",
           element: (
             <Suspense fallback={<LoadingFallback />}>
               <NotFound />
             </Suspense>
           ),
+        },
+      ],
+    },
+    {
+      path: "dashboard",
+      element: <ProtectedRoute />,
+      children: [
+        {
+          element: <LayoutDashboard />,
+          children: [
+            {
+              index: true,
+              element: (
+                <Suspense fallback={<LoadingFallback />}>
+                  <Dashboard />
+                </Suspense>
+              ),
+            },
+          ],
         },
       ],
     },

@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { AuthProvider } from "../features/auth";
 import { ConsentProvider } from "../features/consent";
 import { ExternalLinkProvider } from "../features/external-link/context/ExternalLinkContext";
 import {
@@ -16,6 +17,7 @@ import {
  * - AccessibilityProvider (high contrast)
  * - ExternalLinkProvider (confirmation liens externes)
  * - ConsentProvider (consentement RGPD)
+ * - AuthProvider (authentification pro — prototype)
  *
  * Performance: Réduit le nombre de composants dans l'arbre React
  *
@@ -28,7 +30,9 @@ export default function AppProviders({ children }) {
       <PerformanceProvider>
         <AccessibilityProvider>
           <ExternalLinkProvider>
-            <ConsentProvider>{children}</ConsentProvider>
+            <ConsentProvider>
+              <AuthProvider>{children}</AuthProvider>
+            </ConsentProvider>
           </ExternalLinkProvider>
         </AccessibilityProvider>
       </PerformanceProvider>
