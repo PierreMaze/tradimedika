@@ -263,7 +263,7 @@ export default function AllergyForm({
             ref={listRef}
             id="allergies-listbox"
             role="listbox"
-            className="dark:bg-dark absolute z-50 mt-2 max-h-80 w-full overflow-y-auto rounded-lg border border-neutral-200 bg-white shadow-lg transition duration-200 ease-in-out dark:border-neutral-700"
+            className="dark:bg-dark absolute z-50 mt-2 max-h-80 w-full overflow-y-auto rounded-lg border border-neutral-200 bg-white text-start shadow-lg transition duration-200 ease-in-out dark:border-neutral-700"
           >
             {filteredAllergens.length > 0 ? (
               filteredAllergens.map((allergen, index) => (
