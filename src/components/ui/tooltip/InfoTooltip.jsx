@@ -70,8 +70,8 @@ export function InfoTooltip({
           Indications d&apos;usage
         </p>
         <p className="mt-1 text-sm leading-relaxed text-neutral-800 lg:text-base dark:text-neutral-200">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit possimus
-          repellendus tempora voluptatem
+          Il décrit les indications de grossesse et d&apos;âge de ce produit
+          recommandé.
         </p>
       </div>
     );
@@ -100,7 +100,7 @@ export function InfoTooltip({
         placement={placement}
         hoverDelay={200}
         hideDelay={100}
-        className="bg-white shadow-2xl dark:bg-neutral-900"
+        className="border-2 border-dashed bg-white dark:bg-neutral-900"
         {...tooltipProps}
       >
         <button

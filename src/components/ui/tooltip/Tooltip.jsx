@@ -86,8 +86,8 @@ export function Tooltip({
   const tooltipClasses = `
     ${Z_INDEX_CLASSES.TOOLTIP}
     rounded-lg shadow-lg px-3 py-2 text-sm
-    bg-white text-neutral-900 border border-neutral-200
-    dark:bg-neutral-900 dark:text-white dark:border-neutral-700
+    bg-white text-neutral-900 border-2 border-dashed border-neutral-300
+    dark:bg-neutral-900 dark:text-white dark:border-neutral-500
     ${animationClass}
     ${className}
   `

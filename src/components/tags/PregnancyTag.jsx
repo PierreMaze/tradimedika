@@ -31,9 +31,9 @@ const VARIANT_CONFIG = {
         <h3 className="mb-1 text-lg font-semibold text-neutral-900 dark:text-white">
           Grossesse
         </h3>
-        <p className="text-sm text-neutral-900 dark:text-white">
-          &apos;usage de ce produit naturel est considéré comme compatible avec
-          la grossesse aux doses indiquées.
+        <p className="text-base text-neutral-900 dark:text-white">
+          Ce produit naturel peut être utilisé pendant la grossesse aux doses
+          recommandé par un professionnel de santé.
         </p>
       </>
     ),
@@ -48,7 +48,7 @@ const VARIANT_CONFIG = {
         <h3 className="mb-1 text-lg font-semibold text-neutral-900 dark:text-white">
           Grossesse
         </h3>
-        <p className="text-sm text-neutral-900 dark:text-white">
+        <p className="text-base text-neutral-900 dark:text-white">
           Données insuffisantes ou usage conditionnel. Consulter un
           professionnel de santé avant utilisation.
         </p>
@@ -64,7 +64,7 @@ const VARIANT_CONFIG = {
         <h3 className="mb-1 text-lg font-semibold text-neutral-900 dark:text-white">
           Grossesse
         </h3>
-        <p className="text-sm text-neutral-900 dark:text-white">
+        <p className="text-base text-neutral-900 dark:text-white">
           Ce produit naturel est contre-indiqué pendant la grossesse. Ne pas
           utiliser.
         </p>

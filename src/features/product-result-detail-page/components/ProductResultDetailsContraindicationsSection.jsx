@@ -37,7 +37,7 @@ function ProductResultDetailsContraindicationsSection({ contraindications }) {
           </h2>
           <InfoTooltip
             title="Contre-indication"
-            message="Lorem ipsum dolor sit amet consectetur adipisicing elit possimus repellendus tempora voluptatem"
+            message="Ce produit contient des contre-indications ci-dessous."
             iconColor="text-red-700 dark:text-red-500"
           />
         </div>

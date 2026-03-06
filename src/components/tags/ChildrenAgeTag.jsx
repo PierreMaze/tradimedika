@@ -38,7 +38,7 @@ function ChildrenAgeTag({ age, className = "", showLabel = true }) {
         <h3 className="mb-1 text-lg font-semibold text-neutral-900 dark:text-white">
           Adultes uniquement
         </h3>
-        <p className="text-sm text-neutral-900 dark:text-white">
+        <p className="text-base text-neutral-900 dark:text-white">
           Ce produit naturel est réservé à l&apos;adulte et ne doit pas être
           utilisé chez l&apos;enfant.
         </p>
@@ -54,9 +54,10 @@ function ChildrenAgeTag({ age, className = "", showLabel = true }) {
         <h3 className="mb-1 text-lg font-semibold text-neutral-900 dark:text-white">
           Tout public
         </h3>
-        <p className="text-sm text-neutral-900 dark:text-white">
+        <p className="text-base text-neutral-900 dark:text-white">
           Ce produit naturel peut être utilisé chez l&apos;enfant sans limite
-          d&apos;âge, dans le respect des doses recommandées.
+          d&apos;âge, dans le respect des doses recommandé par un professionnel
+          de santé.
         </p>
       </>
     );
@@ -70,7 +71,7 @@ function ChildrenAgeTag({ age, className = "", showLabel = true }) {
         <h3 className="mb-1 text-lg font-semibold text-neutral-900 dark:text-white">
           Enfants +{age} ans
         </h3>
-        <p className="text-sm text-neutral-900 dark:text-white">
+        <p className="text-base text-neutral-900 dark:text-white">
           Ce produit naturel peut être utilisé chez l&apos;enfant à partir de{" "}
           {age} ans, dans le respect des doses recommandées.
         </p>

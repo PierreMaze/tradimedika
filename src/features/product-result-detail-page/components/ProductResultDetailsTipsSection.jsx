@@ -34,7 +34,7 @@ function ProductResultDetailsTipsSection({ tips }) {
           </h2>
           <InfoTooltip
             title="Conseil"
-            message="Lorem ipsum dolor sit amet consectetur adipisicing elit possimus repellendus tempora voluptatem"
+            message="Voir les conseils ci-dessous."
             iconColor="text-sky-600 dark:text-sky-500"
           />
         </div>

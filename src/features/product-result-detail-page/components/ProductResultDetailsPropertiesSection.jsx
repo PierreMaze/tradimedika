@@ -13,7 +13,7 @@ function ProductResultDetailsPropertiesSection({ properties }) {
         </h2>
         <InfoTooltip
           title="Propriétés"
-          message="Lorem ipsum dolor sit amet consectetur adipisicing elit possimus repellendus tempora voluptatem"
+          message="Ce produit contient des propriétés ci-dessous."
         />
       </div>
       <div className="flex flex-wrap gap-x-2 gap-y-4">

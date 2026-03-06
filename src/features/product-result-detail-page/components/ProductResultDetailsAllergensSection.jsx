@@ -13,7 +13,7 @@ function ProductResultDetailsAllergensSection({ allergens }) {
         </h2>
         <InfoTooltip
           title="Allergènes"
-          message="Lorem ipsum dolor sit amet consectetur adipisicing elit possimus repellendus tempora voluptatem"
+          message="Ce produit contient des allergènes ci-dessous."
         />
       </div>
       <div className="flex flex-wrap gap-x-2 gap-y-4">
