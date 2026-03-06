@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import FeedbackLink from "../components/ui/feedback/FeedbackLink";
+import { useAuth } from "../features/auth";
 import { useConsent } from "../features/consent";
 import {
   generateProductSEOMeta,
@@ -27,6 +28,7 @@ function ProductResultDetails() {
   const { slug } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
   const { hasConsent } = useConsent();
   const selectedProducts = location.state?.symptoms || [];
   // const isRecommended = location.state?.isRecommended || false;
@@ -35,10 +37,12 @@ function ProductResultDetails() {
   const { hasUserAllergens, allergenNames } = useProductAllergyCheck(product);
 
   useEffect(() => {
-    if (!hasConsent) {
+    if (!isAuthenticated) {
+      navigate("/login", { replace: true });
+    } else if (!hasConsent) {
       navigate("/", { replace: true });
     }
-  }, [hasConsent, navigate]);
+  }, [isAuthenticated, hasConsent, navigate]);
 
   if (notFound) {
     return <ProductResultNotFound variant="remedy-not-found" />;

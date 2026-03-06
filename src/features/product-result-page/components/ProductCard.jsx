@@ -6,6 +6,7 @@ import { HiArrowRight } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import { ChildrenAgeTag, PregnancyTag } from "../../../components/tags";
 import { InfoTooltip } from "../../../components/ui/tooltip";
+import { useAuth } from "../../../features/auth";
 import useGAEvent from "../../../hooks/useGAEvent";
 import { capitalizeFirstLetter } from "../../../utils/capitalizeFirstLetter";
 import { useVisibleItems } from "../hooks/useTruncatePropertiesItems";
@@ -26,6 +27,7 @@ function ProductCard({
   isFiltered = false,
   isRecommended = false,
 }) {
+  const { isAuthenticated } = useAuth();
   const trackEvent = useGAEvent();
   const {
     name,
@@ -75,9 +77,17 @@ function ProductCard({
       className={`transition-transform duration-150 hover:scale-102 motion-reduce:hover:scale-100 ${cardClasses}`}
     >
       <Link
-        to={`/products/${generateSlug(name)}`}
-        state={{ symptoms: selectedSymptoms, isRecommended }}
-        aria-label={`Voir les détails de ${name}${isFiltered ? " (contient des allergènes)" : ""}${isRecommended ? " (recommandé)" : ""}`}
+        to={isAuthenticated ? `/products/${generateSlug(name)}` : "/login"}
+        state={
+          isAuthenticated
+            ? { symptoms: selectedSymptoms, isRecommended }
+            : undefined
+        }
+        aria-label={
+          isAuthenticated
+            ? `Voir les détails de ${name}${isFiltered ? " (contient des allergènes)" : ""}${isRecommended ? " (recommandé)" : ""}`
+            : `Se connecter pour voir ${name}`
+        }
         className="block h-full"
         onClick={handleProductClick}
       >
@@ -156,85 +166,97 @@ function ProductCard({
               </p>
             )}
 
-            {/* Propriétés */}
-            {properties && properties.length > 0 && (
-              <div className="mt-4 flex flex-col gap-2 text-xs lg:text-sm 2xl:text-base">
-                <h4 className="text-start text-xs font-semibold text-neutral-700 lg:text-sm 2xl:text-base dark:text-neutral-300">
-                  Propriétés
-                </h4>
-                <div className="relative">
-                  <div
-                    className="pointer-events-none invisible absolute top-0 left-0 flex gap-2"
-                    aria-hidden="true"
-                  >
-                    {properties.map((prop, index) => (
-                      <span
-                        key={`measure-${index}`}
-                        ref={(el) => (itemRefs.current[index] = el)}
-                        className="inline-flex shrink-0 items-center gap-1 rounded-md bg-emerald-100 px-3 py-1.5 font-medium text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200"
+            {isAuthenticated && (
+              <>
+                {/* Propriétés */}
+                {properties && properties.length > 0 && (
+                  <div className="mt-4 flex flex-col gap-2 text-xs lg:text-sm 2xl:text-base">
+                    <h4 className="text-start text-xs font-semibold text-neutral-700 lg:text-sm 2xl:text-base dark:text-neutral-300">
+                      Propriétés
+                    </h4>
+                    <div className="relative">
+                      <div
+                        className="pointer-events-none invisible absolute top-0 left-0 flex gap-2"
+                        aria-hidden="true"
                       >
-                        {capitalizeFirstLetter(prop.name, true)}
-                      </span>
-                    ))}
-                    <span
-                      ref={counterRef}
-                      className="inline-flex shrink-0 items-center gap-1 rounded-md bg-emerald-100 px-3 py-1.5 font-medium text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200"
-                    >
-                      +99
-                    </span>
+                        {properties.map((prop, index) => (
+                          <span
+                            key={`measure-${index}`}
+                            ref={(el) => (itemRefs.current[index] = el)}
+                            className="inline-flex shrink-0 items-center gap-1 rounded-md bg-emerald-100 px-3 py-1.5 font-medium text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200"
+                          >
+                            {capitalizeFirstLetter(prop.name, true)}
+                          </span>
+                        ))}
+                        <span
+                          ref={counterRef}
+                          className="inline-flex shrink-0 items-center gap-1 rounded-md bg-emerald-100 px-3 py-1.5 font-medium text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200"
+                        >
+                          +99
+                        </span>
+                      </div>
+                      <div
+                        ref={containerRef}
+                        className="flex gap-2 overflow-hidden"
+                        data-testid="properties-container"
+                      >
+                        {properties
+                          .slice(0, visibleCount)
+                          .map((prop, index) => (
+                            <span
+                              key={index}
+                              className={`inline-flex shrink-0 items-center gap-1 rounded-md bg-emerald-100 px-3 py-1.5 font-medium text-emerald-800 transition-all duration-150 dark:bg-emerald-900 dark:text-emerald-200 ${textClasses}`}
+                            >
+                              {capitalizeFirstLetter(prop.name, true)}
+                            </span>
+                          ))}
+                        {visibleCount < properties.length && (
+                          <span
+                            className={`inline-flex shrink-0 items-center gap-1 rounded-md bg-emerald-100 px-3 py-1.5 font-medium text-emerald-800 transition-all duration-150 dark:bg-emerald-900 dark:text-emerald-200${textClasses}`}
+                          >
+                            +{properties.length - visibleCount}
+                          </span>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                  <div
-                    ref={containerRef}
-                    className="flex gap-2 overflow-hidden"
-                    data-testid="properties-container"
-                  >
-                    {properties.slice(0, visibleCount).map((prop, index) => (
-                      <span
-                        key={index}
-                        className={`inline-flex shrink-0 items-center gap-1 rounded-md bg-emerald-100 px-3 py-1.5 font-medium text-emerald-800 transition-all duration-150 dark:bg-emerald-900 dark:text-emerald-200 ${textClasses}`}
-                      >
-                        {capitalizeFirstLetter(prop.name, true)}
-                      </span>
-                    ))}
-                    {visibleCount < properties.length && (
-                      <span
-                        className={`inline-flex shrink-0 items-center gap-1 rounded-md bg-emerald-100 px-3 py-1.5 font-medium text-emerald-800 transition-all duration-150 dark:bg-emerald-900 dark:text-emerald-200${textClasses}`}
-                      >
-                        +{properties.length - visibleCount}
-                      </span>
-                    )}
+                )}
+
+                {/* Tags de sécurité */}
+                <div className={`mt-2 flex flex-col ${textClasses}`}>
+                  <InfoTooltip
+                    size="sm"
+                    variant="inline"
+                    label="Indications d'usage"
+                  />
+                  <div className="flex flex-wrap gap-2">
+                    {/* {verifiedByProfessional ? <ProuvedTag /> : <TraditionnalTag />} */}
+                    <PregnancyTag
+                      variant={
+                        pregnancySafe?.safe === true
+                          ? "ok"
+                          : pregnancySafe?.safe === false
+                            ? "interdit"
+                            : "variant"
+                      }
+                    />
+                    <ChildrenAgeTag age={childrenAge} />
                   </div>
                 </div>
-              </div>
+              </>
             )}
 
-            {/* Tags de sécurité */}
-            <div className={`mt-2 flex flex-col ${textClasses}`}>
-              <InfoTooltip
-                size="sm"
-                variant="inline"
-                label="Indications d'usage"
-              />
-              <div className="flex flex-wrap gap-2">
-                {/* {verifiedByProfessional ? <ProuvedTag /> : <TraditionnalTag />} */}
-                <PregnancyTag
-                  variant={
-                    pregnancySafe?.safe === true
-                      ? "ok"
-                      : pregnancySafe?.safe === false
-                        ? "interdit"
-                        : "variant"
-                  }
-                />
-                <ChildrenAgeTag age={childrenAge} />
-              </div>
-            </div>
+            {!isAuthenticated && (
+              <p className="mt-4 text-center text-xs text-neutral-500 italic lg:text-sm dark:text-neutral-400">
+                Connectez-vous pour voir tous les détails
+              </p>
+            )}
 
             {/* Indicateur "Voir plus" */}
             <div
               className={`transition-color mt-4 flex items-center justify-end gap-1 text-xs font-semibold text-emerald-600 duration-150 group-hover:text-emerald-700 lg:text-sm 2xl:text-base dark:text-emerald-400 dark:group-hover:text-emerald-300 ${textClasses}`}
             >
-              <span>Voir plus</span>
+              <span>{isAuthenticated ? "Voir plus" : "Se connecter"}</span>
               <HiArrowRight
                 className="h-4 w-4 transition-transform duration-150 group-hover:translate-x-1"
                 aria-hidden="true"
