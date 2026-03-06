@@ -16,9 +16,13 @@ function Disclaimer() {
           Les informations présentées sont fournies à{" "}
           <span className="font-semibold text-amber-700 dark:text-amber-400">
             titre informatif et ne remplacent pas un avis/traitement médical
-            professionnel. Ne JAMAIS utilisez ce site à des fins médicales{" "}
+            professionnel
           </span>
-          .
+          . Consultez{" "}
+          <span className="font-bold text-amber-700 dark:text-amber-400">
+            TOUJOURS
+          </span>{" "}
+          un médecin en cas de doute.
         </p>
       </div>
     </div>

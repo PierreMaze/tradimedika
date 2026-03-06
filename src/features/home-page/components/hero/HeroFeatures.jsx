@@ -5,7 +5,7 @@ import { FaCheck } from "react-icons/fa6";
  * Liste des features par défaut
  */
 const DEFAULT_FEATURES = [
-  "Sources traçables (EMA, PubMed)",
+  "Sources référencées",
   "Recherche simplifiée",
   "Respect de vos données",
   "Espace pro dédié",
