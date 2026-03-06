@@ -2,6 +2,127 @@
 
 ---
 
+## [0.60.1] - 2026-03-06
+
+### Fixed
+
+- Fixed product details page crash caused by `remedy` → `product` prop mismatch in `ProductResultDetails`
+- Fixed `filterProductsByTags` accessing `result.remedy` instead of `result.product`
+- Fixed `ProductResultList` crash (`Cannot read properties of undefined`) due to mismatched prop names
+- Fixed `FilterProductResult` crash with defensive guards on `matchedSymptoms`
+- Fixed search history displaying old symptom names instead of product names
+
+### Changed
+
+- Search history now saves selected product names instead of symptoms
+
+---
+
+## [0.60.0] - 2026-03-06
+
+### Added
+
+- **Settings Page** (`/dashboard/parametres`)
+  - Created dedicated `SettingsPage` as a full page replacing the modal for logged-in users
+  - Added route `dashboard/parametres` in the Router with lazy loading
+  - Settings page includes: theme, performance, accessibility, history, cookies management, and reset
+
+### Changed
+
+- **Header**
+  - Added dashboard icon (`IoGridOutline`) visible only when authenticated, placed left of profile icon
+  - Settings button now only appears in the header when user is **not** logged in
+- **Sidebar**
+  - "Paramètres" is now an active navigation link to `/dashboard/parametres` (no longer disabled)
+  - Removed settings modal trigger from sidebar
+
+---
+
+## [0.59.0] - 2026-03-06
+
+### Added
+
+- **Product Catalogue Page**
+  - Moved product search and allergy inputs from Hero to `ProductResult` page
+  - Shows all products by default when no search is active
+  - Integrated `ProductSearchSection` and `AllergySectionToggle` at the top of the catalogue
+  - Added search history saving via `useSearchHistory` when products are selected
+  - Reads `?products=X,Y` query params from sidebar history clicks
+
+### Changed
+
+- **Hero Page**
+  - Simplified `HeroSearch` to a single "Voir les produits naturels" CTA button
+  - Removed search inputs and history from Hero
+- **Sidebar**
+  - Activated "Catalogue" link pointing to `/products`
+  - History clicks now navigate to `/products?products=X,Y`
+- **Routes**
+  - Changed route path from `/remedes` to `/products` across all files
+  - Updated `BreadCrumb`, `ProductCard`, `ProductResultDetailsNavigation`, `NotFound`, `linkLabels`
+
+---
+
+## [0.58.0] - 2026-03-06
+
+### Added
+
+- **Pro Authentication System**
+  - Added `AuthProvider` and `useAuth` hook for session management with localStorage persistence
+  - Added `LoginPage` with email/password form and demo credentials
+  - Added `ProtectedRoute` component for guarding dashboard routes
+  - Added `ProfilPage` displaying user info and logout
+
+- **Dashboard Layout**
+  - Added `LayoutDashboard` with collapsible sidebar and responsive mobile overlay
+  - Added `Sidebar` component with navigation items, history section, and logout
+  - Added `useSidebar` hook for collapse state management with localStorage persistence
+
+### Changed
+
+- **Header**
+  - Profile icon now links to `/dashboard/profil` when authenticated, `/login` when not
+  - Logo redirects to home when not logged in
+
+---
+
+## [0.57.0] - 2026-03-06
+
+### Changed
+
+- **Complete Rename: Symptom → Product**
+  - Renamed all feature folders: `symptom-search` → `product-search`, `remedy-result-page` → `product-result-page`, `remedy-result-detail-page` → `product-result-detail-page`, `remedy-filter` → `product-filter`
+  - Renamed all components, hooks, utils, and test files from symptom/remedy naming to product naming
+  - Updated all imports, exports, and references across the entire codebase
+  - Updated data structure keys from `remedy` to `product` in matcher and filter utilities
+
+### Removed
+
+- Removed all old `symptom-search`, `remedy-result-page`, `remedy-result-detail-page`, and `remedy-filter` feature folders (replaced by product equivalents)
+- Removed `LayoutRemedyResult` (replaced by `LayoutProductResult`)
+- Removed old page components: `RemedyResult`, `RemedyResultDetails`
+
+---
+
+## [0.56.0] - 2026-03-06
+
+### Added
+
+- **Search History**
+  - Added `SearchHistoryModal` component for viewing and managing search history
+  - Added `SearchHistoryItem` component displaying product pills, result count, and delete action
+  - Added `useSearchHistory` hook with localStorage persistence, duplicate detection, and max 10 entries
+  - History entries support retrocompatibility with old `symptoms` field format
+
+### Changed
+
+- **Hero Features**
+  - Updated `HeroFeatures` component text and descriptions
+  - Updated `HeroHeader` with revised messaging
+  - Updated `HeroButtons` component
+
+---
+
 ## [0.55.0] - 2026-02-15
 
 ### Added

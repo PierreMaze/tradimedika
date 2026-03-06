@@ -48,7 +48,7 @@ export const URL_PRIVACY = "/privacy-policy";
 export const URL_HOME = "/";
 
 /**
- * URL for remedies listing page
+ * URL for products catalog page
  * @type {string}
  */
-export const URL_REMEDIES = "/remedes";
+export const URL_PRODUCTS = "/products";

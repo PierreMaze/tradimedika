@@ -124,7 +124,7 @@ SearchHistoryModal.propTypes = {
   history: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      symptoms: PropTypes.arrayOf(PropTypes.string).isRequired,
+      products: PropTypes.arrayOf(PropTypes.string),
       timestamp: PropTypes.number.isRequired,
       resultCount: PropTypes.number,
     }),

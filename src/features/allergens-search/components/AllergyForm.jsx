@@ -6,7 +6,7 @@ import { IoMdClose } from "react-icons/io";
 import { BUTTON_PRIMARY_STYLES } from "../../../constants/buttonStyles";
 import allergensList from "../../../data/allergensList.json";
 import { useClickOutside } from "../../../hooks/useClickOutside";
-import { normalizeForMatching } from "../../symptom-search/utils/normalizeSymptom";
+import { normalizeForMatching } from "../../product-search/utils/normalize";
 import { useAllergies } from "../context/AllergiesContext";
 
 // Fonction pour capitaliser la première lettre

@@ -1,4 +1,4 @@
-// tradimedika-v1/src/routes/Router.jsx
+// tradimedika/src/routes/Router.jsx
 import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import GoogleAnalytics from "../components/analytics/GoogleAnalytics";
@@ -8,13 +8,15 @@ import { ProtectedRoute } from "../features/auth";
 import { CookieConsentProvider } from "../features/cookie-consent/context/CookieConsentContext";
 import LayoutApp from "../layout/LayoutApp";
 import LayoutDashboard from "../layout/LayoutDashboard";
-import LayoutRemedyResult from "../layout/LayoutRemedyResult";
+import LayoutProductResult from "../layout/LayoutProductResult";
 
 // Lazy-loaded page components for code-splitting
 const Home = lazy(() => import("../pages/Home"));
 const NotFound = lazy(() => import("../pages/NotFound"));
-const RemedyResult = lazy(() => import("../pages/RemedyResult"));
-const RemedyResultDetails = lazy(() => import("../pages/RemedyResultDetails"));
+const ProductResult = lazy(() => import("../pages/ProductResult"));
+const ProductResultDetails = lazy(
+  () => import("../pages/ProductResultDetails"),
+);
 const EmergencyAlert = lazy(() => import("../pages/EmergencyAlert"));
 const MentionsLegales = lazy(() => import("../pages/MentionsLegales"));
 const PolitiqueConfidentialite = lazy(
@@ -24,14 +26,15 @@ const GestionCookies = lazy(() => import("../pages/GestionCookies"));
 const LoginPage = lazy(() => import("../features/auth/components/LoginPage"));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
 const ProfilPage = lazy(() => import("../pages/ProfilPage"));
+const SettingsPage = lazy(() => import("../pages/SettingsPage"));
 
 /**
  * Router Configuration - React Router v6.30.2 with Data Router API
  *
  * Routes:
  * - / → Home page (Hero component)
- * - /remedes → Remedy results list (nested in LayoutRemedyResult)
- * - /remedes/:slug → Remedy detail page (nested in LayoutRemedyResult)
+ * - /products → Product results list (nested in LayoutProductResult)
+ * - /products/:slug → Product detail page (nested in LayoutProductResult)
  * - /urgence → Emergency alert page
  * - /login → Login page (pro authentication)
  * - /dashboard → Dashboard pro (protected, requires auth)
@@ -41,7 +44,7 @@ const ProfilPage = lazy(() => import("../pages/ProfilPage"));
  * Layout Structure:
  * - LayoutApp: Global layout (Header + Outlet + Footer) wraps public routes
  * - LayoutDashboard: Pro layout (Sidebar + Outlet) wraps dashboard routes
- * - LayoutRemedyResult: Specific layout for remedy pages (includes BreadCrumb)
+ * - LayoutProductResult: Specific layout for remedy pages (includes BreadCrumb)
  *
  * Performance Optimizations:
  * - Lazy loading: All pages loaded with React.lazy() for code-splitting
@@ -75,14 +78,14 @@ const router = createBrowserRouter(
           ),
         },
         {
-          path: "remedes",
-          element: <LayoutRemedyResult />,
+          path: "products",
+          element: <LayoutProductResult />,
           children: [
             {
               index: true,
               element: (
                 <Suspense fallback={<LoadingFallback />}>
-                  <RemedyResult />
+                  <ProductResult />
                 </Suspense>
               ),
             },
@@ -90,7 +93,7 @@ const router = createBrowserRouter(
               path: ":slug",
               element: (
                 <Suspense fallback={<LoadingFallback />}>
-                  <RemedyResultDetails />
+                  <ProductResultDetails />
                 </Suspense>
               ),
             },
@@ -166,6 +169,14 @@ const router = createBrowserRouter(
               element: (
                 <Suspense fallback={<LoadingFallback />}>
                   <ProfilPage />
+                </Suspense>
+              ),
+            },
+            {
+              path: "parametres",
+              element: (
+                <Suspense fallback={<LoadingFallback />}>
+                  <SettingsPage />
                 </Suspense>
               ),
             },

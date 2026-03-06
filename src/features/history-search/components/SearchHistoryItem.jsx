@@ -2,44 +2,27 @@
 import PropTypes from "prop-types";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 
-import allergensList from "../../../data/allergensList.json";
-
-// Migration v0.52.0 : IDs anglais → français
-const ALLERGEN_MIGRATION_MAP = {
-  citrus: "agrumes",
-  asteraceae: "asteracees",
-  "bee-venom": "venin-abeille",
-  "pollen-olive": "pollen-olivier",
-};
-
 /**
- * Helper function to capitalize the first letter of a symptom
- * @param {string} symptom - Symptom to capitalize
- * @returns {string} - Capitalized symptom
+ * Helper function to capitalize the first letter
+ * @param {string} str
+ * @returns {string}
  */
-const capitalizeSymptom = (symptom) => {
-  return symptom.charAt(0).toUpperCase() + symptom.slice(1);
+const capitalize = (str) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
 };
-
-/**
- * Helper function to migrate old English allergen IDs to French
- * @param {string} id - Allergen ID to migrate
- * @returns {string} - Migrated ID or original if no migration needed
- */
-const migrateAllergenId = (id) => ALLERGEN_MIGRATION_MAP[id] || id;
 
 /**
  * SearchHistoryItem Component
  *
  * Displays a single search history entry with:
- * - Symptom pills (tags)
+ * - Product pills (tags)
  * - Result count badge
  * - Delete button
  * - Click to re-run search
  *
  * @component
  * @param {Object} props
- * @param {Object} props.search - Search entry object { id, symptoms[], timestamp, resultCount }
+ * @param {Object} props.search - Search entry object { id, products[], timestamp, resultCount }
  * @param {Function} props.onClick - Callback when item is clicked (re-run search)
  * @param {Function} props.onRemove - Callback when delete button is clicked
  */
@@ -49,13 +32,15 @@ export default function SearchHistoryItem({ search, onClick, onRemove }) {
   };
 
   const handleRemove = (e) => {
-    e.stopPropagation(); // Prevent triggering onClick
+    e.stopPropagation();
     onRemove(search.id);
   };
 
+  const products = search.products ?? [];
+
   return (
     <li className="group animate-fade-in-down relative motion-reduce:animate-none motion-reduce:opacity-100">
-      {/* Delete button (top-right, outside main button to avoid nesting) */}
+      {/* Delete button */}
       <button
         onClick={handleRemove}
         className="group absolute top-1/3 right-4 z-10 cursor-pointer rounded-sm bg-red-100 p-1 text-sm text-red-700 transition-all duration-200 group-hover:opacity-100 hover:bg-red-700 hover:text-white lg:opacity-0 dark:bg-red-700/75 dark:text-white dark:hover:bg-red-800/60"
@@ -67,45 +52,23 @@ export default function SearchHistoryItem({ search, onClick, onRemove }) {
       <button
         onClick={handleClick}
         className="dark:bg-dark w-full cursor-pointer rounded-lg border-2 border-neutral-200 bg-white p-4 text-left shadow-sm transition-all duration-200 hover:border-emerald-200 hover:shadow-md dark:border-neutral-700"
-        aria-label={`Relancer la recherche : ${search.symptoms.join(", ")}`}
+        aria-label={`Relancer la recherche : ${products.join(", ")}`}
       >
         <div className="mb-3 flex flex-col gap-2">
-          {/* Ligne 1 : Symptômes (vert) */}
+          {/* Ligne 1 : Produits (vert) */}
           <div className="inline-flex flex-wrap items-center gap-2">
             <p className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-              Symptômes :
+              Produits :
             </p>
-            {search.symptoms.map((symptom, index) => (
+            {products.map((product, index) => (
               <span
-                key={`symptom-${search.id}-${index}`}
+                key={`product-${search.id}-${index}`}
                 className="rounded-md bg-emerald-50 px-2.5 py-1 text-sm font-medium text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300"
               >
-                {capitalizeSymptom(symptom)}
+                {capitalize(product)}
               </span>
             ))}
           </div>
-
-          {/* Ligne 2 : Allergies (rouge) - rétrocompatibilité avec ?? [] */}
-          {(search.allergies ?? []).length > 0 && (
-            <div className="inline-flex flex-wrap items-center gap-2">
-              <p className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
-                Allergies :
-              </p>
-              {(search.allergies ?? []).map((allergenId, index) => {
-                const migratedId = migrateAllergenId(allergenId);
-                const allergen = allergensList.find((a) => a.id === migratedId);
-                return allergen ? (
-                  <span
-                    key={`allergy-${search.id}-${index}`}
-                    className="rounded-md bg-sky-50 px-2.5 py-1 text-sm font-medium text-sky-700 dark:bg-sky-900/30 dark:text-sky-300"
-                    title={allergen.description}
-                  >
-                    {allergen.name}
-                  </span>
-                ) : null;
-              })}
-            </div>
-          )}
         </div>
 
         {/* Result count badge */}
@@ -118,17 +81,6 @@ export default function SearchHistoryItem({ search, onClick, onRemove }) {
                 •
               </span>
             </span>
-            {(search.filteredCount ?? 0) > 0 && (
-              <span className="font-semibold text-sky-600 dark:text-sky-400">
-                {search.filteredCount}{" "}
-                {search.filteredCount > 1
-                  ? "produits masqués"
-                  : "produit masqué"}
-                <span className="pl-2 text-neutral-400 dark:text-neutral-500">
-                  •
-                </span>
-              </span>
-            )}
 
             <time
               className="text-neutral-700 dark:text-neutral-300"
@@ -146,20 +98,18 @@ export default function SearchHistoryItem({ search, onClick, onRemove }) {
 SearchHistoryItem.propTypes = {
   search: PropTypes.shape({
     id: PropTypes.string.isRequired,
-    symptoms: PropTypes.arrayOf(PropTypes.string).isRequired,
+    products: PropTypes.arrayOf(PropTypes.string),
     timestamp: PropTypes.number.isRequired,
     resultCount: PropTypes.number,
-    filteredCount: PropTypes.number, // Optionnel (remèdes masqués)
-    allergies: PropTypes.arrayOf(PropTypes.string), // Optionnel (rétrocompatibilité)
   }).isRequired,
   onClick: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
 };
 
 /**
- * Formats a timestamp as relative time (e.g., "il y a 5 min")
- * @param {number} timestamp - Timestamp in milliseconds
- * @returns {string} - Formatted relative time
+ * Formats a timestamp as relative time
+ * @param {number} timestamp
+ * @returns {string}
  */
 function formatRelativeTime(timestamp) {
   const now = Date.now();

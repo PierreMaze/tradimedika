@@ -63,7 +63,7 @@ describe("NotFound", () => {
         name: /Explorer les remèdes/i,
       });
       expect(remediesLink).toBeInTheDocument();
-      expect(remediesLink).toHaveAttribute("href", "/remedes");
+      expect(remediesLink).toHaveAttribute("href", "/products");
     });
 
     it("should render both action buttons", () => {

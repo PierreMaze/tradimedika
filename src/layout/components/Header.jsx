@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { memo } from "react";
 import { FaUserCircle } from "react-icons/fa";
+import { IoGridOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 import { useAuth } from "../../features/auth";
@@ -9,7 +10,7 @@ import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { useScrollDirection } from "../../hooks/useScrollDirection";
 import LogoTradimedika from "./LogoTradimedika";
 
-function Header({ sticky = false }) {
+function Header({ sticky = false, fullWidth = false }) {
   const scrollDirection = useScrollDirection();
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   const { isAuthenticated } = useAuth();
@@ -24,10 +25,23 @@ function Header({ sticky = false }) {
           : `fixed top-0 right-0 left-0 z-100 ${shouldHide ? "-translate-y-full" : "translate-y-0"}`
       }`}
     >
-      <div className="border-out border-dark/80 dark:border-light/60 mx-auto flex h-20 w-full items-center border-b-2 border-dashed transition-colors duration-150 ease-out lg:w-3/4">
+      <div
+        className={`border-out border-dark/80 dark:border-light/60 mx-auto flex h-20 w-full items-center border-b-2 border-dashed transition-colors duration-150 ease-out ${fullWidth ? "" : "lg:w-3/4"}`}
+      >
         <div className="mx-4 flex w-full items-center justify-between py-6 lg:mx-8">
           <LogoTradimedika />
           <div className="flex items-center gap-x-0 lg:gap-x-2 2xl:gap-x-4">
+            {isAuthenticated && (
+              <Link
+                to="/dashboard"
+                aria-label="Dashboard"
+                className="group flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center p-2"
+              >
+                <div className="flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
+                  <IoGridOutline className="text-dark dark:text-light text-xl transition-colors duration-200 lg:text-2xl 2xl:text-3xl" />
+                </div>
+              </Link>
+            )}
             <Link
               to={isAuthenticated ? "/dashboard/profil" : "/login"}
               aria-label={isAuthenticated ? "Mon profil" : "Se connecter"}
@@ -37,7 +51,7 @@ function Header({ sticky = false }) {
                 <FaUserCircle className="text-dark dark:text-light text-xl transition-colors duration-200 lg:text-2xl 2xl:text-3xl" />
               </div>
             </Link>
-            <SettingsButton />
+            {!isAuthenticated && <SettingsButton />}
           </div>
         </div>
       </div>
@@ -47,6 +61,7 @@ function Header({ sticky = false }) {
 
 Header.propTypes = {
   sticky: PropTypes.bool,
+  fullWidth: PropTypes.bool,
 };
 
 export default memo(Header);

@@ -5,10 +5,10 @@ import { FaCheck } from "react-icons/fa6";
  * Liste des features par défaut
  */
 const DEFAULT_FEATURES = [
-  "+100 produits naturels",
-  "Source référencée",
-  "Recherche simplifié",
+  "Sources traçables (EMA, PubMed)",
+  "Recherche simplifiée",
   "Respect de vos données",
+  "Espace pro dédié",
 ];
 
 /**

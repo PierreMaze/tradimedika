@@ -32,7 +32,7 @@ export default function LayoutDashboard() {
               isCollapsed ? "lg:ml-16" : "lg:ml-64"
             }`}
           >
-            <Header sticky />
+            <Header sticky fullWidth />
 
             {/* Mobile header bar */}
             <div className="flex items-center gap-3 border-b border-neutral-200 px-4 py-3 lg:hidden dark:border-neutral-700">
@@ -53,7 +53,7 @@ export default function LayoutDashboard() {
               <Outlet />
             </main>
 
-            <Footer />
+            <Footer fullWidth />
           </div>
         </div>
       </SettingsModalProvider>

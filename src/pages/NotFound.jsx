@@ -39,7 +39,7 @@ function NotFound() {
           <Button as="link" to="/" variant="primary">
             Retour à l&apos;accueil
           </Button>
-          <Button as="link" to="/remedes" variant="secondary">
+          <Button as="link" to="/products" variant="secondary">
             Explorer les produits naturels
           </Button>
         </div>

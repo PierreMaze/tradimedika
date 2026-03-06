@@ -18,9 +18,9 @@ import { GiSprout } from "react-icons/gi";
  */
 export default function HeroHeader({
   badgeText = "Prototype · v0.55.5",
-  title = "Prenez soin de vous",
-  titleHighlight = "naturellement",
-  description = "Ce site est un prototype et n'est pas destiné à être utilisé pour des fins médicales.",
+  title = "Chaque produit naturel",
+  titleHighlight = "mérite une source",
+  description = "Informez-vous en toute confiance. La base de données des produits naturels.",
 }) {
   return (
     <div className="flex flex-col items-center gap-y-4 lg:gap-y-6 2xl:gap-y-8">
@@ -48,7 +48,7 @@ export default function HeroHeader({
       </div>
 
       {/* Texte descriptif */}
-      <p className="animate-fade-in-up max-w-3xl text-center text-base text-amber-600 transition-colors duration-150 ease-in-out motion-reduce:animate-none motion-reduce:opacity-100 lg:text-xl 2xl:max-w-5xl 2xl:text-2xl dark:text-amber-400">
+      <p className="animate-fade-in-up max-w-3xl text-center text-base text-neutral-500 transition-colors duration-150 ease-in-out motion-reduce:animate-none motion-reduce:opacity-100 lg:text-xl 2xl:max-w-5xl 2xl:text-2xl dark:text-neutral-400">
         {description}
       </p>
     </div>

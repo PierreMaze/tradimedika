@@ -15,7 +15,7 @@ import {
 } from "react-icons/io5";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../features/auth";
-import { useSearchHistory } from "../../features/history-search";
+import { useSearchHistory } from "../../features/history-search/hooks/useSearchHistory";
 
 const SIDEBAR_COLLAPSED_KEY = "tradimedika-sidebar-collapsed";
 
@@ -27,10 +27,9 @@ const NAV_ITEMS = [
     end: true,
   },
   {
-    to: "/dashboard/catalogue",
+    to: "/products",
     label: "Catalogue",
     icon: IoFolderOpenOutline,
-    disabled: true,
   },
   {
     to: "/dashboard/favoris",
@@ -48,7 +47,6 @@ const NAV_ITEMS = [
     to: "/dashboard/parametres",
     label: "Paramètres",
     icon: IoSettingsOutline,
-    disabled: true,
   },
 ];
 
@@ -103,8 +101,8 @@ function SidebarHistory({ isCollapsed }) {
 
   const handleSelect = (search) => {
     const params = new URLSearchParams();
-    params.set("symptoms", search.symptoms.join(","));
-    navigate(`/remedes?${params.toString()}`);
+    params.set("products", (search.products ?? []).join(","));
+    navigate(`/products?${params.toString()}`);
   };
 
   if (isCollapsed) {
@@ -156,7 +154,7 @@ function SidebarHistory({ isCollapsed }) {
               <IoTimeOutline className="mt-0.5 shrink-0 text-sm text-neutral-400 dark:text-neutral-500" />
               <div className="min-w-0 flex-1">
                 <p className="truncate text-xs font-medium text-neutral-700 dark:text-neutral-300">
-                  {search.symptoms.join(", ")}
+                  {(search.products ?? []).join(", ")}
                 </p>
                 <p className="text-[10px] text-neutral-400 dark:text-neutral-500">
                   {search.resultCount ?? 0} résultat

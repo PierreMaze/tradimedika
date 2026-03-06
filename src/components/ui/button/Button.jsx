@@ -18,7 +18,7 @@ import ExternalLink from "../links/ExternalLink";
  * <Button variant="primary" onClick={handleClick}>Cliquez-moi</Button>
  *
  * // Navigation interne (React Router)
- * <Button as="link" to="/remedes" variant="primary">Voir remèdes</Button>
+ * <Button as="link" to="/products" variant="primary">Voir remèdes</Button>
  *
  * // Lien externe avec confirmation
  * <Button as="external" href="https://github.com" siteName="GitHub">

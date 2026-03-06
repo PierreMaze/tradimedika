@@ -5,6 +5,7 @@ import Disclaimer from "../components/disclaimer/Disclaimer";
 import CookieBanner from "../features/cookie-consent/components/CookieBanner";
 import ExternalLinkConfirmationModal from "../features/external-link/components/ExternalLinkConfirmationModal";
 import { SettingsModalProvider } from "../features/settings";
+import SettingsModal from "../features/settings/components/SettingsModal";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 
@@ -48,6 +49,7 @@ function LayoutApp() {
           <Footer className="mt-auto" />
           <CookieBanner />
           <ExternalLinkConfirmationModal />
+          <SettingsModal />
         </div>
       </div>
     </SettingsModalProvider>

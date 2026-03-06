@@ -149,8 +149,8 @@ export default function HeroButtons({
           disabled={isLoading}
           aria-label={
             isDisabled
-              ? "Sélectionnez au moins un symptôme"
-              : "Découvrir les produits naturels"
+              ? "Sélectionnez au moins un produit"
+              : "Rechercher les produits naturels"
           }
           aria-busy={isLoading}
           aria-disabled={isDisabled}
@@ -175,7 +175,7 @@ export default function HeroButtons({
             </>
           ) : (
             <>
-              <span>Voir les produits</span>
+              <span>Rechercher</span>
               <IoMdArrowForward className="text-xl" />
             </>
           )}
@@ -185,11 +185,11 @@ export default function HeroButtons({
         {isDisabled && !isLoading && showPrimaryTooltip && (
           <div className="absolute -top-30 left-1/2 z-50 w-72 -translate-x-1/2 rounded-lg bg-neutral-100 px-4 py-3 text-center shadow-2xl dark:bg-neutral-900">
             <p className="font-semibold text-black dark:text-white">
-              Aucun symptôme sélectionné
+              Aucun produit sélectionné
             </p>
             <p className="mt-1 text-xs text-neutral-700 dark:text-neutral-200">
-              Veuillez choisir au moins un symptôme dans le champ de recherche
-              ci-dessus pour découvrir nos produits naturels
+              Veuillez choisir au moins un produit dans le champ de recherche
+              ci-dessus
             </p>
             <div className="absolute -bottom-2 left-1/2 h-0 w-0 -translate-x-1/2 border-t-8 border-r-8 border-l-8 border-t-neutral-100 border-r-transparent border-l-transparent dark:border-t-neutral-900"></div>
           </div>

@@ -1,4 +1,4 @@
-// tradimedika-v1/src/components/navigation/BreadCrumb.jsx
+// tradimedika/src/components/navigation/BreadCrumb.jsx
 import PropTypes from "prop-types";
 import { useMemo } from "react";
 import { Helmet } from "react-helmet-async";
@@ -6,85 +6,44 @@ import { IoChevronForward } from "react-icons/io5";
 import { NavLink, useLocation, useParams } from "react-router-dom";
 import { LINK_INTERNAL_STYLES } from "../../constants/linkStyles";
 import db from "../../data/db.json";
-import { getRemedyBySlug } from "../../features/remedy-result-page";
+import { getProductBySlug } from "../../features/product-result-page";
 import { formatBreadcrumbLabel } from "./utils/formatBreadcrumbLabel";
 
 /**
  * BreadCrumb Component - Navigation breadcrumb trail
- *
- * Displays a dynamic breadcrumb navigation based on the current route.
- * Provides clear visual hierarchy and clickable links to parent pages.
- *
- * Hierarchy:
- * - / → "Accueil"
- * - /remedies → "Accueil > Remèdes"
- * - /remedies/:slug → "Accueil > Remèdes > [Nom du remède]"
- *
- * Features:
- * - Dynamic path generation using useLocation()
- * - Clickable links with NavLink (except last segment)
- * - Responsive mobile-first design
- * - Dark mode support
- * - ARIA accessible
  */
 
-/**
- * Convert URL segment to readable label
- *
- * Priorité de transformation :
- * 1. Si c'est un slug et qu'on a le nom du remède depuis la DB → utiliser le nom exact
- * 2. Si c'est un segment avec label statique (ex: "remedes") → utiliser le label
- * 3. Sinon → formater le segment avec formatSegmentLabel (décodage URI + capitalisation)
- *
- * @param {string} segment - URL segment (e.g., "remedes", "citron", "thé-vert", "th%C3%A9-vert")
- * @param {boolean} isSlug - Whether segment is a remedy slug
- * @param {string|null} remedyName - Name of the remedy if found
- * @returns {string} Human-readable label
- */
-const segmentToLabel = (segment, isSlug = false, remedyName = null) => {
-  // Priorité 1: Nom du remède depuis la DB (garantit l'exactitude)
-  if (isSlug && remedyName) {
-    return remedyName; // Affiche "Citron" au lieu de "citron"
+const segmentToLabel = (segment, isSlug = false, productName = null) => {
+  if (isSlug && productName) {
+    return productName;
   }
 
-  // Priorité 2: Labels statiques pour les routes connues
   const labels = {
-    remedes: "Produits naturels",
+    products: "Catalogue",
   };
 
   if (labels[segment]) {
     return labels[segment];
   }
 
-  // Priorité 3: Formatage intelligent du segment
-  // (décode URI, remplace tirets par espaces, capitalise)
   return formatBreadcrumbLabel(segment);
 };
 
-/**
- * Build breadcrumb path array from current location
- * @param {string} pathname - Current URL pathname
- * @param {Object} params - URL parameters from useParams()
- * @param {string|null} remedyName - Name of the remedy if on detail page
- * @returns {Array} Array of {label, path} objects
- */
-const buildBreadcrumbPath = (pathname, params, remedyName = null) => {
+const buildBreadcrumbPath = (pathname, params, productName = null) => {
   const breadcrumbs = [{ label: "Accueil", path: "/" }];
 
-  // Remove leading/trailing slashes and split
   const segments = pathname.replace(/^\/|\/$/g, "").split("/");
 
-  // Build cumulative path
   let currentPath = "";
 
   segments.forEach((segment) => {
-    if (!segment) return; // Skip empty segments
+    if (!segment) return;
 
     currentPath += `/${segment}`;
     const isSlug = params.slug && segment === params.slug;
 
     breadcrumbs.push({
-      label: segmentToLabel(segment, isSlug, remedyName),
+      label: segmentToLabel(segment, isSlug, productName),
       path: currentPath,
     });
   });
@@ -92,10 +51,7 @@ const buildBreadcrumbPath = (pathname, params, remedyName = null) => {
   return breadcrumbs;
 };
 
-/**
- * BreadcrumbItem - Individual breadcrumb link or text
- */
-function BreadcrumbItem({ item, isLast, selectedSymptoms }) {
+function BreadcrumbItem({ item, isLast, selectedProducts }) {
   return (
     <li className="flex items-center gap-2">
       {!isLast ? (
@@ -103,8 +59,8 @@ function BreadcrumbItem({ item, isLast, selectedSymptoms }) {
           <NavLink
             to={item.path}
             state={
-              item.path === "/remedes" && selectedSymptoms.length > 0
-                ? { symptoms: selectedSymptoms }
+              item.path === "/products" && selectedProducts.length > 0
+                ? { products: selectedProducts }
                 : undefined
             }
             className={LINK_INTERNAL_STYLES}
@@ -132,28 +88,22 @@ BreadcrumbItem.propTypes = {
     path: PropTypes.string.isRequired,
   }).isRequired,
   isLast: PropTypes.bool.isRequired,
-  selectedSymptoms: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selectedProducts: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-/**
- * BreadCrumb - Main breadcrumb navigation component
- */
 function BreadCrumb() {
   const location = useLocation();
   const params = useParams();
-  const selectedSymptoms = location.state?.symptoms || [];
+  const selectedProducts = location.state?.products || [];
 
-  // Récupérer le remède si on est sur une page de détail
-  const remedy = params.slug ? getRemedyBySlug(params.slug, db) : null;
+  const product = params.slug ? getProductBySlug(params.slug, db) : null;
 
-  // Build breadcrumb path from current route
   const pathSegments = buildBreadcrumbPath(
     location.pathname,
     params,
-    remedy?.name,
+    product?.name,
   );
 
-  // Générer structured data JSON-LD pour le breadcrumb
   const breadcrumbSchema = useMemo(() => {
     const baseUrl = import.meta.env.VITE_BASE_URL || "https://tradimedika.com";
 
@@ -169,7 +119,6 @@ function BreadCrumb() {
     };
   }, [pathSegments]);
 
-  // Don't show breadcrumb on home page (only one segment)
   if (pathSegments.length <= 1) {
     return null;
   }
@@ -188,7 +137,7 @@ function BreadCrumb() {
               key={item.path}
               item={item}
               isLast={index === pathSegments.length - 1}
-              selectedSymptoms={selectedSymptoms}
+              selectedProducts={selectedProducts}
             />
           ))}
         </ol>

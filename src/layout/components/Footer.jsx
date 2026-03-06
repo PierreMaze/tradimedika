@@ -6,12 +6,14 @@ import { LINK_COOKIES_PAGE } from "../../constants/buttonLabels";
 import { LINK_EXTERNAL_STYLES } from "../../constants/linkStyles";
 import LogoTradimedika from "./LogoTradimedika";
 
-const Footer = ({ className = "" }) => {
+const Footer = ({ className = "", fullWidth = false }) => {
   return (
     <footer
       className={`bg-light text-dark dark:bg-dark dark:text-light animate-fade-in-up w-full transition-colors duration-150 ease-out motion-reduce:animate-none motion-reduce:opacity-100 lg:py-4 ${className}`}
     >
-      <div className="border-dark/80 dark:border-light/60 mx-auto flex w-full flex-col items-center justify-center border-t-2 border-dashed py-4 transition-colors duration-150 ease-out lg:w-3/4">
+      <div
+        className={`border-dark/80 dark:border-light/60 mx-auto flex w-full flex-col items-center justify-center border-t-2 border-dashed py-4 transition-colors duration-150 ease-out ${fullWidth ? "" : "lg:w-3/4"}`}
+      >
         {/* Logo */}
         <div className="mb-4">
           <LogoTradimedika />
@@ -44,6 +46,7 @@ const Footer = ({ className = "" }) => {
 
 Footer.propTypes = {
   className: PropTypes.string,
+  fullWidth: PropTypes.bool,
 };
 
 export default memo(Footer);
