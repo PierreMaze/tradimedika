@@ -23,6 +23,7 @@ const PolitiqueConfidentialite = lazy(
 const GestionCookies = lazy(() => import("../pages/GestionCookies"));
 const LoginPage = lazy(() => import("../features/auth/components/LoginPage"));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
+const ProfilPage = lazy(() => import("../pages/ProfilPage"));
 
 /**
  * Router Configuration - React Router v6.30.2 with Data Router API
@@ -34,6 +35,7 @@ const Dashboard = lazy(() => import("../pages/Dashboard"));
  * - /urgence → Emergency alert page
  * - /login → Login page (pro authentication)
  * - /dashboard → Dashboard pro (protected, requires auth)
+ * - /dashboard/profil → Profile page (protected)
  * - * → NotFound page (404 error)
  *
  * Layout Structure:
@@ -156,6 +158,14 @@ const router = createBrowserRouter(
               element: (
                 <Suspense fallback={<LoadingFallback />}>
                   <Dashboard />
+                </Suspense>
+              ),
+            },
+            {
+              path: "profil",
+              element: (
+                <Suspense fallback={<LoadingFallback />}>
+                  <ProfilPage />
                 </Suspense>
               ),
             },
