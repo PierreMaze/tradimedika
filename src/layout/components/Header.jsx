@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { memo } from "react";
 import { FaUserCircle } from "react-icons/fa";
-import { IoGridOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 import { useAuth } from "../../features/auth";
@@ -31,17 +30,6 @@ function Header({ sticky = false, fullWidth = false }) {
         <div className="mx-4 flex w-full items-center justify-between py-6 lg:mx-8">
           <LogoTradimedika />
           <div className="flex items-center gap-x-0 lg:gap-x-2 2xl:gap-x-4">
-            {isAuthenticated && (
-              <Link
-                to="/dashboard"
-                aria-label="Dashboard"
-                className="group flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center p-2"
-              >
-                <div className="flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
-                  <IoGridOutline className="text-dark dark:text-light text-xl transition-colors duration-200 lg:text-2xl 2xl:text-3xl" />
-                </div>
-              </Link>
-            )}
             <Link
               to={isAuthenticated ? "/dashboard/profil" : "/login"}
               aria-label={isAuthenticated ? "Mon profil" : "Se connecter"}

@@ -1,10 +1,10 @@
 // tradimedika/src/routes/Router.jsx
 import { lazy, Suspense } from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 import GoogleAnalytics from "../components/analytics/GoogleAnalytics";
 import { LoadingFallback } from "../components/ui/animation";
 import { AllergiesProvider } from "../features/allergens-search";
-import { ProtectedRoute } from "../features/auth";
+import { ProtectedRoute, useAuth } from "../features/auth";
 import { CookieConsentProvider } from "../features/cookie-consent/context/CookieConsentContext";
 import LayoutApp from "../layout/LayoutApp";
 import LayoutDashboard from "../layout/LayoutDashboard";
@@ -29,22 +29,49 @@ const ProfilPage = lazy(() => import("../pages/ProfilPage"));
 const SettingsPage = lazy(() => import("../pages/SettingsPage"));
 
 /**
+ * RootLayout - Global providers wrapper for all routes
+ */
+function RootLayout() {
+  return (
+    <CookieConsentProvider>
+      <AllergiesProvider>
+        <GoogleAnalytics />
+        <Outlet />
+      </AllergiesProvider>
+    </CookieConsentProvider>
+  );
+}
+
+/**
+ * ProductLayoutSwitch - Conditional layout for product pages
+ * Renders LayoutDashboard (with sidebar) when authenticated,
+ * LayoutApp (public layout) when not.
+ */
+function ProductLayoutSwitch() {
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? <LayoutDashboard /> : <LayoutApp />;
+}
+
+/**
  * Router Configuration - React Router v6.30.2 with Data Router API
  *
  * Routes:
  * - / → Home page (Hero component)
- * - /products → Product results list (nested in LayoutProductResult)
- * - /products/:slug → Product detail page (nested in LayoutProductResult)
+ * - /products → Product results list (conditional layout: sidebar if auth'd)
+ * - /products/:slug → Product detail page (conditional layout: sidebar if auth'd)
  * - /urgence → Emergency alert page
  * - /login → Login page (pro authentication)
  * - /dashboard → Dashboard pro (protected, requires auth)
  * - /dashboard/profil → Profile page (protected)
+ * - /dashboard/parametres → Settings page (protected)
  * - * → NotFound page (404 error)
  *
  * Layout Structure:
- * - LayoutApp: Global layout (Header + Outlet + Footer) wraps public routes
- * - LayoutDashboard: Pro layout (Sidebar + Outlet) wraps dashboard routes
- * - LayoutProductResult: Specific layout for remedy pages (includes BreadCrumb)
+ * - RootLayout: Global providers (CookieConsent, Allergies, Analytics)
+ * - LayoutApp: Public layout (Header + Outlet + Footer) wraps public routes
+ * - LayoutDashboard: Pro layout (Sidebar + Header + Outlet) wraps dashboard routes
+ * - ProductLayoutSwitch: Conditional layout for /products (LayoutDashboard if auth'd, LayoutApp if not)
+ * - LayoutProductResult: Specific layout for product pages (includes BreadCrumb)
  *
  * Performance Optimizations:
  * - Lazy loading: All pages loaded with React.lazy() for code-splitting
@@ -60,125 +87,128 @@ const SettingsPage = lazy(() => import("../pages/SettingsPage"));
 const router = createBrowserRouter(
   [
     {
-      element: (
-        <CookieConsentProvider>
-          <AllergiesProvider>
-            <GoogleAnalytics />
-            <LayoutApp />
-          </AllergiesProvider>
-        </CookieConsentProvider>
-      ),
+      element: <RootLayout />,
       children: [
         {
-          index: true,
-          element: (
-            <Suspense fallback={<LoadingFallback />}>
-              <Home />
-            </Suspense>
-          ),
-        },
-        {
-          path: "products",
-          element: <LayoutProductResult />,
+          element: <LayoutApp />,
           children: [
             {
               index: true,
               element: (
                 <Suspense fallback={<LoadingFallback />}>
-                  <ProductResult />
+                  <Home />
                 </Suspense>
               ),
             },
             {
-              path: ":slug",
+              path: "mentions-legales",
               element: (
                 <Suspense fallback={<LoadingFallback />}>
-                  <ProductResultDetails />
+                  <MentionsLegales />
+                </Suspense>
+              ),
+            },
+            {
+              path: "politique-confidentialite",
+              element: (
+                <Suspense fallback={<LoadingFallback />}>
+                  <PolitiqueConfidentialite />
+                </Suspense>
+              ),
+            },
+            {
+              path: "gestion-cookies",
+              element: (
+                <Suspense fallback={<LoadingFallback />}>
+                  <GestionCookies />
+                </Suspense>
+              ),
+            },
+            {
+              path: "urgence",
+              element: (
+                <Suspense fallback={<LoadingFallback />}>
+                  <EmergencyAlert />
+                </Suspense>
+              ),
+            },
+            {
+              path: "login",
+              element: (
+                <Suspense fallback={<LoadingFallback />}>
+                  <LoginPage />
+                </Suspense>
+              ),
+            },
+            {
+              path: "*",
+              element: (
+                <Suspense fallback={<LoadingFallback />}>
+                  <NotFound />
                 </Suspense>
               ),
             },
           ],
         },
         {
-          path: "mentions-legales",
-          element: (
-            <Suspense fallback={<LoadingFallback />}>
-              <MentionsLegales />
-            </Suspense>
-          ),
-        },
-        {
-          path: "politique-confidentialite",
-          element: (
-            <Suspense fallback={<LoadingFallback />}>
-              <PolitiqueConfidentialite />
-            </Suspense>
-          ),
-        },
-        {
-          path: "gestion-cookies",
-          element: (
-            <Suspense fallback={<LoadingFallback />}>
-              <GestionCookies />
-            </Suspense>
-          ),
-        },
-        {
-          path: "urgence",
-          element: (
-            <Suspense fallback={<LoadingFallback />}>
-              <EmergencyAlert />
-            </Suspense>
-          ),
-        },
-        {
-          path: "login",
-          element: (
-            <Suspense fallback={<LoadingFallback />}>
-              <LoginPage />
-            </Suspense>
-          ),
-        },
-        {
-          path: "*",
-          element: (
-            <Suspense fallback={<LoadingFallback />}>
-              <NotFound />
-            </Suspense>
-          ),
-        },
-      ],
-    },
-    {
-      path: "dashboard",
-      element: <ProtectedRoute />,
-      children: [
-        {
-          element: <LayoutDashboard />,
+          path: "products",
+          element: <ProductLayoutSwitch />,
           children: [
             {
-              index: true,
-              element: (
-                <Suspense fallback={<LoadingFallback />}>
-                  <Dashboard />
-                </Suspense>
-              ),
+              element: <LayoutProductResult />,
+              children: [
+                {
+                  index: true,
+                  element: (
+                    <Suspense fallback={<LoadingFallback />}>
+                      <ProductResult />
+                    </Suspense>
+                  ),
+                },
+                {
+                  path: ":slug",
+                  element: (
+                    <Suspense fallback={<LoadingFallback />}>
+                      <ProductResultDetails />
+                    </Suspense>
+                  ),
+                },
+              ],
             },
+          ],
+        },
+        {
+          path: "dashboard",
+          element: <ProtectedRoute />,
+          children: [
             {
-              path: "profil",
-              element: (
-                <Suspense fallback={<LoadingFallback />}>
-                  <ProfilPage />
-                </Suspense>
-              ),
-            },
-            {
-              path: "parametres",
-              element: (
-                <Suspense fallback={<LoadingFallback />}>
-                  <SettingsPage />
-                </Suspense>
-              ),
+              element: <LayoutDashboard />,
+              children: [
+                {
+                  index: true,
+                  element: (
+                    <Suspense fallback={<LoadingFallback />}>
+                      <Dashboard />
+                    </Suspense>
+                  ),
+                },
+                {
+                  path: "profil",
+                  element: (
+                    <Suspense fallback={<LoadingFallback />}>
+                      <ProfilPage />
+                    </Suspense>
+                  ),
+                },
+                {
+                  path: "parametres",
+                  element: (
+                    <Suspense fallback={<LoadingFallback />}>
+                      <SettingsPage />
+                    </Suspense>
+                  ),
+                },
+              ],
             },
           ],
         },

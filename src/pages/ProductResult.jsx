@@ -12,6 +12,7 @@ import {
   AllergySectionToggle,
   useAllergies,
 } from "../features/allergens-search";
+import { useAuth } from "../features/auth";
 import { useConsent } from "../features/consent";
 import { useSearchHistory } from "../features/history-search/hooks/useSearchHistory";
 import {
@@ -42,6 +43,7 @@ import { useRedFlags } from "../features/red-flags/hooks/useRedFlags";
 
 function ProductResult() {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
   const { hasConsent } = useConsent();
   const {
     canUseRemedy,
@@ -254,16 +256,18 @@ function ProductResult() {
         <meta name="twitter:description" content={pageDescription} />
       </Helmet>
 
-      {/* Bouton Retour */}
-      <div className="animate-fade-in flex items-center gap-3 delay-300 motion-reduce:animate-none motion-reduce:opacity-100">
-        <Button
-          as="link"
-          to="/"
-          variant="primary"
-          icon={HiArrowLeft}
-          ariaLabel="Retour à l'accueil"
-        />
-      </div>
+      {/* Bouton Retour (masqué si authentifié, la sidebar fournit la navigation) */}
+      {!isAuthenticated && (
+        <div className="animate-fade-in flex items-center gap-3 delay-300 motion-reduce:animate-none motion-reduce:opacity-100">
+          <Button
+            as="link"
+            to="/"
+            variant="primary"
+            icon={HiArrowLeft}
+            ariaLabel="Retour à l'accueil"
+          />
+        </div>
+      )}
 
       <div className="text-dark dark:text-light transition-color mt-8 flex flex-col items-center gap-y-4 text-center duration-150 ease-in-out lg:mt-4">
         <h1 className="text-3xl font-bold lg:text-4xl">
@@ -343,16 +347,18 @@ function ProductResult() {
         />
       </div>
 
-      <div className="animate-fade-in mt-12 flex w-full justify-center delay-1000 motion-reduce:animate-none motion-reduce:opacity-100">
-        <Button
-          as="link"
-          to="/"
-          variant="primary"
-          ariaLabel="Retour à l'accueil"
-        >
-          Retour à l&apos;accueil
-        </Button>
-      </div>
+      {!isAuthenticated && (
+        <div className="animate-fade-in mt-12 flex w-full justify-center delay-1000 motion-reduce:animate-none motion-reduce:opacity-100">
+          <Button
+            as="link"
+            to="/"
+            variant="primary"
+            ariaLabel="Retour à l'accueil"
+          >
+            Retour à l&apos;accueil
+          </Button>
+        </div>
+      )}
 
       <FeedbackLink />
 

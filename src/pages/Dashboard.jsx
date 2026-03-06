@@ -1,9 +1,11 @@
 import {
+  IoArrowForwardOutline,
   IoDocumentTextOutline,
   IoFlaskOutline,
   IoFolderOpenOutline,
   IoSearchOutline,
 } from "react-icons/io5";
+import { Link } from "react-router-dom";
 import { useAuth } from "../features/auth";
 
 const SECTIONS = [
@@ -13,6 +15,7 @@ const SECTIONS = [
     icon: IoFolderOpenOutline,
     color: "emerald",
     done: true,
+    to: "/products",
   },
   {
     title: "Interactions",
@@ -42,7 +45,7 @@ const COLOR_CLASSES = {
   emerald: {
     bg: "bg-emerald-100 dark:bg-emerald-900/30",
     icon: "text-emerald-600 dark:text-emerald-400",
-    border: "border-indigo-200 dark:border-emerald-800",
+    border: "border-emerald-200 dark:border-emerald-800",
   },
   amber: {
     bg: "bg-amber-100 dark:bg-amber-900/30",
@@ -93,36 +96,49 @@ export default function Dashboard() {
           const colors = COLOR_CLASSES[section.color];
           const Icon = section.icon;
 
+          const Wrapper = section.to ? Link : "div";
+          const wrapperProps = section.to ? { to: section.to } : {};
+
           return (
-            <div
+            <Wrapper
               key={section.title}
-              className={`rounded-xl border ${colors.border} bg-white p-6 ${section.done === true ? "" : "opacity-60"} dark:bg-neutral-800`}
+              {...wrapperProps}
+              className={`rounded-xl border-2 ${colors.border} bg-white p-6 dark:bg-neutral-800 ${
+                section.done
+                  ? "transition-shadow hover:shadow-lg"
+                  : "border-dashed opacity-60"
+              } ${section.to ? "group block no-underline" : ""}`}
             >
               <div className="flex items-start gap-4">
                 <div
-                  className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${section.done === true ? "" : "opacity-60"}`}
+                  className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${section.done ? "" : "opacity-60"}`}
                 >
                   <Icon className={`text-xl ${colors.icon}`} />
                 </div>
-                <div>
+                <div className="min-w-0 flex-1">
                   <h2 className="font-semibold text-neutral-800 dark:text-white">
                     {section.title}
                   </h2>
                   <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
                     {section.description}
                   </p>
-                  <span
-                    className={`font-medium0 mt-3 inline-block rounded px-2 py-0.5 text-xs ${
-                      section.done
-                        ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300"
-                        : "bg-neutral-200 text-neutral-500 opacity-60 dark:bg-neutral-700 dark:text-neutral-400"
-                    }`}
-                  >
-                    {section.done ? "Disponible" : "Prochainement"}
-                  </span>
+                  <div className="mt-3 flex items-center justify-between">
+                    <span
+                      className={`inline-block rounded px-2 py-0.5 text-xs font-medium ${
+                        section.done
+                          ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300"
+                          : "bg-neutral-200 text-neutral-500 opacity-60 dark:bg-neutral-700 dark:text-neutral-400"
+                      }`}
+                    >
+                      {section.done ? "Disponible" : "Prochainement"}
+                    </span>
+                    {section.to && (
+                      <IoArrowForwardOutline className="text-lg text-neutral-400 transition-transform group-hover:translate-x-1 dark:text-neutral-500" />
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
+            </Wrapper>
           );
         })}
       </div>

@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 import { IoChevronForward } from "react-icons/io5";
 import { NavLink, useLocation, useParams } from "react-router-dom";
+import { useAuth } from "../../features/auth";
 import { LINK_INTERNAL_STYLES } from "../../constants/linkStyles";
 import db from "../../data/db.json";
 import { getProductBySlug } from "../../features/product-result-page";
@@ -29,8 +30,17 @@ const segmentToLabel = (segment, isSlug = false, productName = null) => {
   return formatBreadcrumbLabel(segment);
 };
 
-const buildBreadcrumbPath = (pathname, params, productName = null) => {
-  const breadcrumbs = [{ label: "Accueil", path: "/" }];
+const buildBreadcrumbPath = (
+  pathname,
+  params,
+  productName = null,
+  isAuthenticated = false,
+) => {
+  const breadcrumbs = [
+    isAuthenticated
+      ? { label: "Dashboard", path: "/dashboard" }
+      : { label: "Accueil", path: "/" },
+  ];
 
   const segments = pathname.replace(/^\/|\/$/g, "").split("/");
 
@@ -94,6 +104,7 @@ BreadcrumbItem.propTypes = {
 function BreadCrumb() {
   const location = useLocation();
   const params = useParams();
+  const { isAuthenticated } = useAuth();
   const selectedProducts = location.state?.products || [];
 
   const product = params.slug ? getProductBySlug(params.slug, db) : null;
@@ -102,6 +113,7 @@ function BreadCrumb() {
     location.pathname,
     params,
     product?.name,
+    isAuthenticated,
   );
 
   const breadcrumbSchema = useMemo(() => {

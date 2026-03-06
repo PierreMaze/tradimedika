@@ -30,6 +30,7 @@ const NAV_ITEMS = [
     to: "/products",
     label: "Catalogue",
     icon: IoFolderOpenOutline,
+    badge: "NEW",
   },
   {
     to: "/dashboard/favoris",
@@ -42,11 +43,6 @@ const NAV_ITEMS = [
     label: "Exports PDF",
     icon: IoDocumentTextOutline,
     disabled: true,
-  },
-  {
-    to: "/dashboard/parametres",
-    label: "Paramètres",
-    icon: IoSettingsOutline,
   },
 ];
 
@@ -90,7 +86,16 @@ function SidebarLink({ item, isCollapsed }) {
       title={isCollapsed ? item.label : undefined}
     >
       <Icon className="shrink-0 text-lg" />
-      {!isCollapsed && <span>{item.label}</span>}
+      {!isCollapsed && (
+        <>
+          <span>{item.label}</span>
+          {item.badge && (
+            <span className="ml-auto rounded bg-emerald-100 px-1.5 py-0.5 text-[10px] font-bold text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400">
+              {item.badge}
+            </span>
+          )}
+        </>
+      )}
     </NavLink>
   );
 }
@@ -108,7 +113,7 @@ function SidebarHistory({ isCollapsed }) {
   if (isCollapsed) {
     return (
       <div
-        className="flex flex-1 flex-col items-center border-t border-neutral-200 py-4 dark:border-neutral-700"
+        className="flex flex-1 flex-col items-center border-t-2 border-dashed border-neutral-200 py-4 dark:border-neutral-700"
         title={`Historique (${history.length})`}
       >
         <div className="relative">
@@ -124,7 +129,7 @@ function SidebarHistory({ isCollapsed }) {
   }
 
   return (
-    <div className="flex flex-1 flex-col border-t border-neutral-200 dark:border-neutral-700">
+    <div className="flex flex-1 flex-col border-t-2 border-dashed border-neutral-200 dark:border-neutral-700">
       <div className="flex items-center justify-between px-4 pt-3 pb-2">
         <p className="text-xs font-semibold tracking-wide text-neutral-400 uppercase dark:text-neutral-500">
           Historique
@@ -190,6 +195,7 @@ SidebarLink.propTypes = {
     icon: PropTypes.elementType.isRequired,
     end: PropTypes.bool,
     disabled: PropTypes.bool,
+    badge: PropTypes.string,
   }).isRequired,
   isCollapsed: PropTypes.bool.isRequired,
 };
@@ -249,7 +255,7 @@ export default function Sidebar({
         } ${isSidebarOpen ? "w-64 translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
       >
         {/* Sidebar header */}
-        <div className="flex items-center justify-between border-b border-neutral-200 px-4 py-4 dark:border-neutral-700">
+        <div className="border-dark/80 dark:border-light/60 flex h-20 items-center justify-between border-b-2 border-dashed px-4">
           {!isCollapsed && (
             <div className="min-w-0">
               <p className="text-sm font-semibold text-neutral-800 dark:text-white">
@@ -294,8 +300,16 @@ export default function Sidebar({
         {/* History */}
         <SidebarHistory isCollapsed={isCollapsed} />
 
-        {/* Logout */}
-        <div className="border-t border-neutral-200 px-3 py-4 dark:border-neutral-700">
+        {/* Settings + Logout */}
+        <div className="space-y-1 border-t-2 border-dashed border-neutral-300 px-3 py-4 dark:border-neutral-600">
+          <SidebarLink
+            item={{
+              to: "/dashboard/parametres",
+              label: "Paramètres",
+              icon: IoSettingsOutline,
+            }}
+            isCollapsed={isCollapsed}
+          />
           <button
             onClick={logout}
             className={`flex w-full cursor-pointer items-center rounded-lg px-3 py-2.5 text-sm font-medium text-red-600 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20 ${

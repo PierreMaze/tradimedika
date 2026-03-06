@@ -2,6 +2,25 @@
 
 ---
 
+## [0.61.0] - 2026-03-06
+
+### Added
+
+- **Conditional product layout** — `/products` pages now display the dashboard layout (sidebar + header) when authenticated, and the public layout when not
+- **Dashboard cards** — Catalogue card is now clickable with a link to `/products`, arrow icon, and `border-2` styling (solid for available, dashed for upcoming)
+- **Sidebar "NEW" badge** — Green tag on the Catalogue nav item to highlight the new feature
+
+### Changed
+
+- **Router** — Restructured with a `RootLayout` providing global providers and a `ProductLayoutSwitch` for conditional layout on `/products`
+- **Sidebar** — Moved "Paramètres" to the bottom section above "Se déconnecter"; aligned header separator height (`h-20`) with the main header
+- **Header** — Removed dashboard grid icon (`IoGridOutline`) for authenticated users (sidebar provides navigation)
+- **Logo** — Now uses `<Link>` and redirects to `/dashboard` when authenticated, `/` otherwise
+- **BreadCrumb** — Root breadcrumb shows "Dashboard" (`/dashboard`) when authenticated instead of "Accueil" (`/`)
+- **ProductResult** — Back buttons (top arrow + bottom "Retour à l'accueil") hidden when authenticated
+
+---
+
 ## [0.60.1] - 2026-03-06
 
 ### Fixed
