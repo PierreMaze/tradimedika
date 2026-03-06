@@ -8,7 +8,6 @@ import {
   ChildrenAgeTag,
   PregnancyTag,
   ProuvedTag,
-  RecommendedTag,
   TraditionnalTag,
 } from "../../../components/tags";
 import { InfoTooltip } from "../../../components/ui/tooltip";
@@ -109,7 +108,7 @@ function ProductCard({
               {/* Tags en overlay (top-right) : Recommandé et/ou Allergène */}
               {(isRecommended || isFiltered) && (
                 <div className="absolute top-4 right-4 z-10 flex flex-col gap-2">
-                  {isRecommended && <RecommendedTag className="shadow-md" />}
+                  {/* {isRecommended && <RecommendedTag className="shadow-md" />} */}
                   {isFiltered && (
                     <span
                       className="inline-flex shrink-0 items-center gap-1 rounded-md bg-amber-100 px-3 py-1.5 text-sm font-medium text-amber-800 shadow-md lg:text-base 2xl:text-lg dark:bg-amber-900 dark:text-amber-200"

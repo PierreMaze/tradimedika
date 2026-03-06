@@ -1,7 +1,7 @@
 import {
-  IoFolderOpenOutline,
-  IoFlaskOutline,
   IoDocumentTextOutline,
+  IoFlaskOutline,
+  IoFolderOpenOutline,
   IoSearchOutline,
 } from "react-icons/io5";
 import { useAuth } from "../features/auth";
@@ -12,6 +12,7 @@ const SECTIONS = [
     description: "Parcourir les produits naturels par catégorie et propriété",
     icon: IoFolderOpenOutline,
     color: "emerald",
+    done: true,
   },
   {
     title: "Interactions",
@@ -19,18 +20,21 @@ const SECTIONS = [
       "Vérifier les interactions entre produits naturels et médicaments",
     icon: IoFlaskOutline,
     color: "amber",
+    done: false,
   },
   {
     title: "Exports PDF",
     description: "Générer des fiches d'information pour vos patients",
     icon: IoDocumentTextOutline,
     color: "blue",
+    done: false,
   },
   {
     title: "Recherche avancée",
     description: "Filtrer par grossesse, enfants, allergènes, niveau de preuve",
     icon: IoSearchOutline,
     color: "purple",
+    done: false,
   },
 ];
 
@@ -38,7 +42,7 @@ const COLOR_CLASSES = {
   emerald: {
     bg: "bg-emerald-100 dark:bg-emerald-900/30",
     icon: "text-emerald-600 dark:text-emerald-400",
-    border: "border-emerald-200 dark:border-emerald-800",
+    border: "border-indigo-200 dark:border-emerald-800",
   },
   amber: {
     bg: "bg-amber-100 dark:bg-amber-900/30",
@@ -92,11 +96,11 @@ export default function Dashboard() {
           return (
             <div
               key={section.title}
-              className={`rounded-xl border ${colors.border} bg-white p-6 opacity-60 dark:bg-neutral-800`}
+              className={`rounded-xl border ${colors.border} bg-white p-6 ${section.done === true ? "" : "opacity-60"} dark:bg-neutral-800`}
             >
               <div className="flex items-start gap-4">
                 <div
-                  className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${colors.bg}`}
+                  className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${section.done === true ? "" : "opacity-60"}`}
                 >
                   <Icon className={`text-xl ${colors.icon}`} />
                 </div>
@@ -107,8 +111,14 @@ export default function Dashboard() {
                   <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
                     {section.description}
                   </p>
-                  <span className="mt-3 inline-block rounded bg-neutral-200 px-2 py-0.5 text-xs font-medium text-neutral-500 dark:bg-neutral-700 dark:text-neutral-400">
-                    Prochainement
+                  <span
+                    className={`font-medium0 mt-3 inline-block rounded px-2 py-0.5 text-xs ${
+                      section.done
+                        ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300"
+                        : "bg-neutral-200 text-neutral-500 opacity-60 dark:bg-neutral-700 dark:text-neutral-400"
+                    }`}
+                  >
+                    {section.done ? "Disponible" : "Prochainement"}
                   </span>
                 </div>
               </div>

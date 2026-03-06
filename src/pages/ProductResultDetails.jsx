@@ -12,10 +12,7 @@ import {
   ProductResultDetailsHeader,
   ProductResultDetailsNavigation,
   ProductResultDetailsPropertiesSection,
-  ProductResultDetailsRecommendedBanner,
-  ProductResultDetailsSymptomsSection,
   ProductResultDetailsTipsSection,
-  ProductResultDetailsUsagesList,
   useProductAllergyCheck,
   useProductDetails,
 } from "../features/product-result-detail-page";
@@ -32,7 +29,7 @@ function ProductResultDetails() {
   const navigate = useNavigate();
   const { hasConsent } = useConsent();
   const selectedProducts = location.state?.symptoms || [];
-  const isRecommended = location.state?.isRecommended || false;
+  // const isRecommended = location.state?.isRecommended || false;
 
   const { product, safeImageUrl, notFound } = useProductDetails(slug);
   const { hasUserAllergens, allergenNames } = useProductAllergyCheck(product);
@@ -77,7 +74,7 @@ function ProductResultDetails() {
           variant="top"
         />
 
-        {isRecommended && <ProductResultDetailsRecommendedBanner />}
+        {/* {isRecommended && <ProductResultDetailsRecommendedBanner />} */}
 
         {hasUserAllergens && (
           <ProductResultDetailsAllergyWarning allergenNames={allergenNames} />
@@ -89,34 +86,34 @@ function ProductResultDetails() {
           typeColors={typeColors}
         />
 
-        <div className="mb-6 grid grid-cols-1 gap-4 lg:grid-cols-6 lg:gap-6">
+        <div className="mb-6 grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-6">
           <div className="lg:col-span-2">
             <ProductResultDetailsPropertiesSection
               properties={product.properties}
             />
           </div>
-          <div className="lg:col-span-2">
+          {/* <div className="lg:col-span-4">
             <ProductResultDetailsSymptomsSection symptoms={product.symptoms} />
-          </div>
+          </div> */}
           <div className="lg:col-span-2">
             <ProductResultDetailsAllergensSection
               allergens={product.allergens}
             />
           </div>
 
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-2">
             <ProductResultDetailsContraindicationsSection
               contraindications={product.contraindications}
             />
           </div>
 
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-2">
             <ProductResultDetailsTipsSection tips={product.tips} />
           </div>
-
+          {/* 
           <div className="lg:col-span-6">
             <ProductResultDetailsUsagesList uses={product.uses} />
-          </div>
+          </div> */}
         </div>
 
         <ProductResultDetailsNavigation
