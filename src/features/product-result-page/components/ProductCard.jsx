@@ -4,12 +4,7 @@ import { memo } from "react";
 import { FiInfo } from "react-icons/fi";
 import { HiArrowRight } from "react-icons/hi2";
 import { Link } from "react-router-dom";
-import {
-  ChildrenAgeTag,
-  PregnancyTag,
-  ProuvedTag,
-  TraditionnalTag,
-} from "../../../components/tags";
+import { ChildrenAgeTag, PregnancyTag } from "../../../components/tags";
 import { InfoTooltip } from "../../../components/ui/tooltip";
 import useGAEvent from "../../../hooks/useGAEvent";
 import { capitalizeFirstLetter } from "../../../utils/capitalizeFirstLetter";
@@ -221,7 +216,7 @@ function ProductCard({
                 label="Indications d'usage"
               />
               <div className="flex flex-wrap gap-2">
-                {verifiedByProfessional ? <ProuvedTag /> : <TraditionnalTag />}
+                {/* {verifiedByProfessional ? <ProuvedTag /> : <TraditionnalTag />} */}
                 <PregnancyTag
                   variant={
                     pregnancySafe?.safe === true

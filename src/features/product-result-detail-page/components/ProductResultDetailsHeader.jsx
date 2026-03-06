@@ -1,10 +1,5 @@
 import PropTypes from "prop-types";
-import {
-  ChildrenAgeTag,
-  PregnancyTag,
-  ProuvedTag,
-  TraditionnalTag,
-} from "../../../components/tags";
+import { ChildrenAgeTag, PregnancyTag } from "../../../components/tags";
 import { InfoTooltip } from "../../../components/ui/tooltip";
 import ImageCredit from "./ImageCredit";
 import SourcesSection from "./ProductResultDetailsSourcesSection";
@@ -44,11 +39,11 @@ function ProductResultDetailsHeader({ product, safeImageUrl }) {
         <div className="flex flex-col">
           <InfoTooltip size="sm" variant="inline" label="Indications d'usage" />
           <div className="my-1 flex flex-wrap items-center gap-2">
-            {product.verifiedByProfessional ? (
+            {/* {product.verifiedByProfessional ? (
               <ProuvedTag />
             ) : (
               <TraditionnalTag />
-            )}
+            )} */}
 
             <PregnancyTag
               variant={

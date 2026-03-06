@@ -7,7 +7,7 @@ function Disclaimer() {
       role="alert"
       aria-live="polite"
     >
-      <div className="container mx-auto flex items-center justify-center gap-3 lg:gap-4">
+      <div className="mx-auto flex w-full items-center justify-center gap-3 lg:gap-4">
         <HiExclamationTriangle
           className="transition-color flex h-5 w-5 shrink-0 text-amber-700 duration-150 ease-in-out lg:h-6 lg:w-6 dark:text-amber-400"
           aria-hidden="true"

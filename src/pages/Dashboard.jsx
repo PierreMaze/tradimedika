@@ -3,6 +3,10 @@ import {
   IoDocumentTextOutline,
   IoFlaskOutline,
   IoFolderOpenOutline,
+  IoLibraryOutline,
+  IoMedkitOutline,
+  IoPeopleOutline,
+  IoPulseOutline,
   IoSearchOutline,
 } from "react-icons/io5";
 import { Link } from "react-router-dom";
@@ -39,6 +43,34 @@ const SECTIONS = [
     color: "purple",
     done: false,
   },
+  {
+    title: "Niveau de preuve scientifique",
+    description: "Consulter les études et la fiabilité des recommandations",
+    icon: IoLibraryOutline,
+    color: "indigo",
+    done: false,
+  },
+  {
+    title: "Protocoles naturels",
+    description: "Créer des recommandations naturelles pour vos patients",
+    icon: IoMedkitOutline,
+    color: "teal",
+    done: false,
+  },
+  {
+    title: "Contribution médicale",
+    description: "Proposer des données ou corrections pour enrichir la base",
+    icon: IoPeopleOutline,
+    color: "sky",
+    done: false,
+  },
+  {
+    title: "Veille scientifique",
+    description: "Suivre les nouvelles études sur les médecines naturelles",
+    icon: IoPulseOutline,
+    color: "green",
+    done: false,
+  },
 ];
 
 const COLOR_CLASSES = {
@@ -61,6 +93,26 @@ const COLOR_CLASSES = {
     bg: "bg-purple-100 dark:bg-purple-900/30",
     icon: "text-purple-600 dark:text-purple-400",
     border: "border-purple-200 dark:border-purple-800",
+  },
+  indigo: {
+    bg: "bg-indigo-100 dark:bg-indigo-900/30",
+    icon: "text-indigo-600 dark:text-indigo-400",
+    border: "border-indigo-200 dark:border-indigo-800",
+  },
+  teal: {
+    bg: "bg-teal-100 dark:bg-teal-900/30",
+    icon: "text-teal-600 dark:text-teal-400",
+    border: "border-teal-200 dark:border-teal-800",
+  },
+  sky: {
+    bg: "bg-sky-100 dark:bg-sky-900/30",
+    icon: "text-sky-600 dark:text-sky-400",
+    border: "border-sky-200 dark:border-sky-800",
+  },
+  green: {
+    bg: "bg-green-100 dark:bg-green-900/30",
+    icon: "text-green-600 dark:text-green-400",
+    border: "border-green-200 dark:border-green-800",
   },
 };
 

@@ -12,7 +12,6 @@ import {
   AllergySectionToggle,
   useAllergies,
 } from "../features/allergens-search";
-import { useAuth } from "../features/auth";
 import { useConsent } from "../features/consent";
 import { useSearchHistory } from "../features/history-search/hooks/useSearchHistory";
 import {
@@ -43,7 +42,6 @@ import { useRedFlags } from "../features/red-flags/hooks/useRedFlags";
 
 function ProductResult() {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
   const { hasConsent } = useConsent();
   const {
     canUseRemedy,
@@ -256,18 +254,16 @@ function ProductResult() {
         <meta name="twitter:description" content={pageDescription} />
       </Helmet>
 
-      {/* Bouton Retour (masqué si authentifié, la sidebar fournit la navigation) */}
-      {!isAuthenticated && (
-        <div className="animate-fade-in flex items-center gap-3 delay-300 motion-reduce:animate-none motion-reduce:opacity-100">
-          <Button
-            as="link"
-            to="/"
-            variant="primary"
-            icon={HiArrowLeft}
-            ariaLabel="Retour à l'accueil"
-          />
-        </div>
-      )}
+      {/* Bouton Retour */}
+      <div className="animate-fade-in flex items-center gap-3 delay-300 motion-reduce:animate-none motion-reduce:opacity-100">
+        <Button
+          as="link"
+          to="/"
+          variant="primary"
+          icon={HiArrowLeft}
+          ariaLabel="Retour à l'accueil"
+        />
+      </div>
 
       <div className="text-dark dark:text-light transition-color mt-8 flex flex-col items-center gap-y-4 text-center duration-150 ease-in-out lg:mt-4">
         <h1 className="text-3xl font-bold lg:text-4xl">
@@ -275,7 +271,7 @@ function ProductResult() {
         </h1>
 
         {/* Section recherche + allergies */}
-        <div className="mt-4 flex w-full max-w-2xl flex-col gap-y-4">
+        <div className="mt-4 flex hidden w-full max-w-2xl flex-col gap-y-4">
           <AllergySectionToggle
             isFilteringEnabled={isFilteringEnabled}
             onFilteringChange={handleFilteringChange}
@@ -294,7 +290,7 @@ function ProductResult() {
 
         {/* Filtres */}
         {safeProducts.length > 0 && (
-          <div className="my-6 flex w-full justify-center">
+          <div className="mb-6 flex hidden w-full justify-center">
             <div className="flex flex-col items-center gap-4 md:flex-row md:items-center">
               <FilterButton
                 onClick={openModal}
@@ -339,7 +335,7 @@ function ProductResult() {
             {productsWithRecommendation.length > 1 ? "s" : ""}
           </p>
         )}
-
+        <span className="my-4 w-2/3 border-t-2 border-dashed text-neutral-600 dark:text-neutral-400"></span>
         <ProductResultList
           products={productsWithRecommendation}
           hasMatchingProducts={safeProducts.length > 0}
@@ -347,18 +343,16 @@ function ProductResult() {
         />
       </div>
 
-      {!isAuthenticated && (
-        <div className="animate-fade-in mt-12 flex w-full justify-center delay-1000 motion-reduce:animate-none motion-reduce:opacity-100">
-          <Button
-            as="link"
-            to="/"
-            variant="primary"
-            ariaLabel="Retour à l'accueil"
-          >
-            Retour à l&apos;accueil
-          </Button>
-        </div>
-      )}
+      <div className="animate-fade-in mt-12 flex w-full justify-center delay-1000 motion-reduce:animate-none motion-reduce:opacity-100">
+        <Button
+          as="link"
+          to="/"
+          variant="primary"
+          ariaLabel="Retour à l'accueil"
+        >
+          Retour à l&apos;accueil
+        </Button>
+      </div>
 
       <FeedbackLink />
 
