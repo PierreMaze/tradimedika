@@ -13,8 +13,7 @@ import {
   useAllergies,
 } from "../features/allergens-search";
 import { useConsent } from "../features/consent";
-import RedFlagsModal from "../features/red-flags/components/RedFlagsModal";
-import { useRedFlags } from "../features/red-flags/hooks/useRedFlags";
+import { useSearchHistory } from "../features/history-search/hooks/useSearchHistory";
 import {
   FilterButton,
   FilterModal,
@@ -25,10 +24,11 @@ import {
   FilterProductResult,
   ProductResultList,
 } from "../features/product-result-page";
-import { useSearchHistory } from "../features/history-search/hooks/useSearchHistory";
 import { ProductSearchSection } from "../features/product-search";
 import { useProductTags } from "../features/product-search/hooks/useProductTags";
 import { normalizeForMatching } from "../features/product-search/utils/normalize";
+import RedFlagsModal from "../features/red-flags/components/RedFlagsModal";
+import { useRedFlags } from "../features/red-flags/hooks/useRedFlags";
 
 /**
  * ProductResult Page - Catalogue de produits naturels
@@ -290,7 +290,7 @@ function ProductResult() {
 
         {/* Filtres */}
         {safeProducts.length > 0 && (
-          <div className="mb-6 flex w-full justify-center">
+          <div className="my-6 flex w-full justify-center">
             <div className="flex flex-col items-center gap-4 md:flex-row md:items-center">
               <FilterButton
                 onClick={openModal}
