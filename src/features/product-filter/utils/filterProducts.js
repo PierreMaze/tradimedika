@@ -39,9 +39,9 @@ export function filterProductsByTags(products, activeFilters = {}) {
 
     if (hasPregnancyFilters) {
       const matchesPregnancy =
-        (pregnancy.ok && product.pregnancySafe === true) ||
-        (pregnancy.variant && product.pregnancySafe === null) ||
-        (pregnancy.interdit && product.pregnancySafe === false);
+        (pregnancy.ok && product.pregnancySafe?.safe === true) ||
+        (pregnancy.variant && product.pregnancySafe?.safe === null) ||
+        (pregnancy.interdit && product.pregnancySafe?.safe === false);
 
       if (!matchesPregnancy) return false;
     }

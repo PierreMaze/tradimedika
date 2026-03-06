@@ -54,7 +54,7 @@ function ProductCard({
       product_type: type,
       product_id: product.id,
       is_verified: verifiedByProfessional,
-      pregnancy_safe: pregnancySafe,
+      pregnancy_safe: pregnancySafe?.safe,
       has_allergens: isFiltered,
       from_symptoms: selectedSymptoms.join(", "),
     });
@@ -224,9 +224,9 @@ function ProductCard({
                 {verifiedByProfessional ? <ProuvedTag /> : <TraditionnalTag />}
                 <PregnancyTag
                   variant={
-                    pregnancySafe === true
+                    pregnancySafe?.safe === true
                       ? "ok"
-                      : pregnancySafe === false
+                      : pregnancySafe?.safe === false
                         ? "interdit"
                         : "variant"
                   }
@@ -266,7 +266,13 @@ ProductCard.propTypes = {
       }),
     ),
     image: PropTypes.string,
-    pregnancySafe: PropTypes.bool,
+    pregnancySafe: PropTypes.shape({
+      safe: PropTypes.bool,
+      trimester: PropTypes.arrayOf(PropTypes.number),
+      details: PropTypes.string,
+      precautions: PropTypes.string,
+      source: PropTypes.string,
+    }),
     childrenAge: PropTypes.number,
     verifiedByProfessional: PropTypes.bool,
   }).isRequired,

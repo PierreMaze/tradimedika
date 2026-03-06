@@ -10,7 +10,13 @@ describe("filterRemedies", () => {
     {
       remedy: {
         name: "Gingembre",
-        pregnancySafe: true,
+        pregnancySafe: {
+          safe: true,
+          trimester: [],
+          details: "",
+          precautions: "",
+          source: "",
+        },
         verifiedByProfessional: true,
         childrenAge: null,
       },
@@ -18,7 +24,13 @@ describe("filterRemedies", () => {
     {
       remedy: {
         name: "Thym",
-        pregnancySafe: null,
+        pregnancySafe: {
+          safe: null,
+          trimester: [],
+          details: "",
+          precautions: "",
+          source: "",
+        },
         verifiedByProfessional: false,
         childrenAge: null,
       },
@@ -26,7 +38,13 @@ describe("filterRemedies", () => {
     {
       remedy: {
         name: "Persil",
-        pregnancySafe: false,
+        pregnancySafe: {
+          safe: false,
+          trimester: [],
+          details: "",
+          precautions: "",
+          source: "",
+        },
         verifiedByProfessional: true,
         childrenAge: 12,
       },
@@ -34,7 +52,13 @@ describe("filterRemedies", () => {
     {
       remedy: {
         name: "Camomille",
-        pregnancySafe: true,
+        pregnancySafe: {
+          safe: true,
+          trimester: [],
+          details: "",
+          precautions: "",
+          source: "",
+        },
         verifiedByProfessional: false,
         childrenAge: null,
       },
@@ -42,7 +66,13 @@ describe("filterRemedies", () => {
     {
       remedy: {
         name: "Sauge",
-        pregnancySafe: false,
+        pregnancySafe: {
+          safe: false,
+          trimester: [],
+          details: "",
+          precautions: "",
+          source: "",
+        },
         verifiedByProfessional: false,
         childrenAge: 18,
       },
@@ -50,7 +80,13 @@ describe("filterRemedies", () => {
     {
       remedy: {
         name: "Miel",
-        pregnancySafe: true,
+        pregnancySafe: {
+          safe: true,
+          trimester: [],
+          details: "",
+          precautions: "",
+          source: "",
+        },
         verifiedByProfessional: true,
         childrenAge: 12,
       },
@@ -78,7 +114,9 @@ describe("filterRemedies", () => {
 
         // Gingembre, Camomille, Miel
         expect(result).toHaveLength(3);
-        expect(result.every((r) => r.remedy.pregnancySafe === true)).toBe(true);
+        expect(result.every((r) => r.remedy.pregnancySafe?.safe === true)).toBe(
+          true,
+        );
       });
 
       it("devrait filtrer les remèdes avec pregnancy variant", () => {
@@ -91,7 +129,7 @@ describe("filterRemedies", () => {
 
         // Thym
         expect(result).toHaveLength(1);
-        expect(result[0].remedy.pregnancySafe).toBe(null);
+        expect(result[0].remedy.pregnancySafe?.safe).toBe(null);
       });
 
       it("devrait filtrer les remèdes avec pregnancy interdit", () => {
@@ -104,9 +142,9 @@ describe("filterRemedies", () => {
 
         // Persil, Sauge
         expect(result).toHaveLength(2);
-        expect(result.every((r) => r.remedy.pregnancySafe === false)).toBe(
-          true,
-        );
+        expect(
+          result.every((r) => r.remedy.pregnancySafe?.safe === false),
+        ).toBe(true);
       });
 
       it("devrait filtrer avec plusieurs filtres de grossesse (OU logique)", () => {
@@ -122,8 +160,8 @@ describe("filterRemedies", () => {
         expect(
           result.every(
             (r) =>
-              r.remedy.pregnancySafe === true ||
-              r.remedy.pregnancySafe === null,
+              r.remedy.pregnancySafe?.safe === true ||
+              r.remedy.pregnancySafe?.safe === null,
           ),
         ).toBe(true);
       });
@@ -243,7 +281,7 @@ describe("filterRemedies", () => {
         expect(
           result.every(
             (r) =>
-              r.remedy.pregnancySafe === true &&
+              r.remedy.pregnancySafe?.safe === true &&
               r.remedy.verifiedByProfessional === true,
           ),
         ).toBe(true);
@@ -263,7 +301,7 @@ describe("filterRemedies", () => {
         expect(
           result.every(
             (r) =>
-              r.remedy.pregnancySafe === false &&
+              r.remedy.pregnancySafe?.safe === false &&
               r.remedy.verifiedByProfessional === false,
           ),
         ).toBe(true);
@@ -325,8 +363,8 @@ describe("filterRemedies", () => {
         expect(
           result.every(
             (r) =>
-              (r.remedy.pregnancySafe === true ||
-                r.remedy.pregnancySafe === null) &&
+              (r.remedy.pregnancySafe?.safe === true ||
+                r.remedy.pregnancySafe?.safe === null) &&
               r.remedy.verifiedByProfessional === true,
           ),
         ).toBe(true);

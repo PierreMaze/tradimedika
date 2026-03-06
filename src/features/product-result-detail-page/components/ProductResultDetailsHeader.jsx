@@ -52,9 +52,9 @@ function ProductResultDetailsHeader({ product, safeImageUrl }) {
 
             <PregnancyTag
               variant={
-                product.pregnancySafe === true
+                product.pregnancySafe?.safe === true
                   ? "ok"
-                  : product.pregnancySafe === false
+                  : product.pregnancySafe?.safe === false
                     ? "interdit"
                     : "variant"
               }
@@ -76,7 +76,13 @@ ProductResultDetailsHeader.propTypes = {
     type: PropTypes.string.isRequired,
     description: PropTypes.string,
     verifiedByProfessional: PropTypes.bool,
-    pregnancySafe: PropTypes.bool,
+    pregnancySafe: PropTypes.shape({
+      safe: PropTypes.bool,
+      trimester: PropTypes.arrayOf(PropTypes.number),
+      details: PropTypes.string,
+      precautions: PropTypes.string,
+      source: PropTypes.string,
+    }),
     childrenAge: PropTypes.number,
     imageCredit: PropTypes.shape({
       author: PropTypes.string,

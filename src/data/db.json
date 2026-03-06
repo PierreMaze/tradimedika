@@ -50,7 +50,13 @@
       "Lorem ipsum dolor sit amet consectetur"
     ],
     "image": "https://cdn-icons-png.flaticon.com/512/6866/6866584.png",
-    "pregnancySafe": true,
+    "pregnancySafe": {
+      "safe": true,
+      "trimester": [],
+      "details": "",
+      "precautions": "",
+      "source": ""
+    },
     "childrenAge": null,
     "allergens": ["agrumes", "citron"],
     "alternatives": [],
@@ -125,7 +131,13 @@
       "Lorem ipsum dolor sit amet consectetur"
     ],
     "image": "https://cdn-icons-png.flaticon.com/512/15618/15618168.png",
-    "pregnancySafe": true,
+    "pregnancySafe": {
+      "safe": true,
+      "trimester": [],
+      "details": "",
+      "precautions": "",
+      "source": ""
+    },
     "childrenAge": null,
     "allergens": ["allium", "fodmap", "sulfites", "oignon"],
     "alternatives": [],
@@ -206,7 +218,13 @@
       "Lorem ipsum dolor sit amet consectetur"
     ],
     "image": "https://cdn-icons-png.flaticon.com/512/7014/7014075.png ",
-    "pregnancySafe": false,
+    "pregnancySafe": {
+      "safe": false,
+      "trimester": [],
+      "details": "",
+      "precautions": "",
+      "source": ""
+    },
     "childrenAge": 12,
     "allergens": ["eugenol", "clou-de-girofle"],
     "alternatives": [],
@@ -284,7 +302,13 @@
       "Lorem ipsum dolor sit amet consectetur adipisicing"
     ],
     "image": "https://cdn-icons-png.flaticon.com/512/3413/3413290.png ",
-    "pregnancySafe": true,
+    "pregnancySafe": {
+      "safe": true,
+      "trimester": [],
+      "details": "",
+      "precautions": "",
+      "source": ""
+    },
     "childrenAge": 1,
     "allergens": ["fodmap", "propolis", "miel"],
     "alternatives": [],
@@ -367,7 +391,13 @@
       "Lorem ipsum dolor sit amet consectetur adipisicing"
     ],
     "image": "https://cdn-icons-png.flaticon.com/512/15618/15618172.png",
-    "pregnancySafe": false,
+    "pregnancySafe": {
+      "safe": false,
+      "trimester": [],
+      "details": "",
+      "precautions": "",
+      "source": ""
+    },
     "childrenAge": null,
     "allergens": ["allium", "fodmap", "sulfites", "ail"],
     "alternatives": [],
@@ -442,7 +472,13 @@
       "Lorem ipsum dolor sit amet consectetur adipisicing"
     ],
     "image": "https://cdn-icons-png.flaticon.com/512/2714/2714036.png",
-    "pregnancySafe": true,
+    "pregnancySafe": {
+      "safe": true,
+      "trimester": [],
+      "details": "",
+      "precautions": "",
+      "source": ""
+    },
     "childrenAge": null,
     "allergens": ["riz"],
     "alternatives": [6],
@@ -516,7 +552,13 @@
       "Lorem ipsum dolor sit amet consectetur adipisicing elit possimus repellendus tempora voluptatem"
     ],
     "image": "https://cdn-icons-png.flaticon.com/512/2990/2990514.png ",
-    "pregnancySafe": true,
+    "pregnancySafe": {
+      "safe": true,
+      "trimester": [],
+      "details": "",
+      "precautions": "",
+      "source": ""
+    },
     "childrenAge": null,
     "allergens": ["latex-fruit", "banane"],
     "alternatives": [],
@@ -596,7 +638,13 @@
       "Lorem ipsum dolor sit amet consectetur"
     ],
     "image": "https://cdn-icons-png.flaticon.com/512/5281/5281043.png",
-    "pregnancySafe": null,
+    "pregnancySafe": {
+      "safe": null,
+      "trimester": [],
+      "details": "",
+      "precautions": "",
+      "source": ""
+    },
     "childrenAge": 6,
     "allergens": ["zingiberacees", "gingembre"],
     "alternatives": [],
@@ -680,7 +728,13 @@
       "Lorem ipsum dolor sit amet consectetur"
     ],
     "image": "https://cdn-icons-png.flaticon.com/512/8868/8868834.png ",
-    "pregnancySafe": false,
+    "pregnancySafe": {
+      "safe": false,
+      "trimester": [],
+      "details": "",
+      "precautions": "",
+      "source": ""
+    },
     "childrenAge": 12,
     "allergens": ["asteracees", "camomille"],
     "alternatives": [10],
@@ -764,7 +818,13 @@
       "Lorem ipsum dolor sit amet consectetur adipisicing"
     ],
     "image": "https://cdn-icons-png.flaticon.com/512/6692/6692125.png",
-    "pregnancySafe": false,
+    "pregnancySafe": {
+      "safe": false,
+      "trimester": [],
+      "details": "",
+      "precautions": "",
+      "source": ""
+    },
     "childrenAge": 6,
     "allergens": ["lamiacees", "menthol", "menthe"],
     "alternatives": [24],
@@ -853,7 +913,13 @@
       "Lorem ipsum dolor sit amet consectetur adipisicing"
     ],
     "image": "https://cdn-icons-png.flaticon.com/512/3219/3219300.png",
-    "pregnancySafe": null,
+    "pregnancySafe": {
+      "safe": null,
+      "trimester": [],
+      "details": "",
+      "precautions": "",
+      "source": ""
+    },
     "childrenAge": 12,
     "allergens": ["cafeine", "sulfites", "cafe"],
     "alternatives": [],
@@ -927,7 +993,13 @@
       "Lorem ipsum dolor sit amet consectetur adipisicing"
     ],
     "image": "https://cdn-icons-png.flaticon.com/512/5771/5771679.png",
-    "pregnancySafe": true,
+    "pregnancySafe": {
+      "safe": true,
+      "trimester": [],
+      "details": "",
+      "precautions": "",
+      "source": ""
+    },
     "childrenAge": 3,
     "allergens": ["lait", "lactose", "yaourt"],
     "alternatives": [],
@@ -998,7 +1070,13 @@
       "Lorem ipsum dolor sit amet consectetur adipisicing"
     ],
     "image": "https://cdn-icons-png.flaticon.com/512/18651/18651070.png",
-    "pregnancySafe": true,
+    "pregnancySafe": {
+      "safe": true,
+      "trimester": [],
+      "details": "",
+      "precautions": "",
+      "source": ""
+    },
     "childrenAge": 6,
     "allergens": ["bromelaine", "ananas"],
     "alternatives": [],
@@ -1079,7 +1157,13 @@
       "Lorem ipsum dolor sit amet consectetur adipisicing"
     ],
     "image": "https://cdn-icons-png.flaticon.com/512/15841/15841651.png",
-    "pregnancySafe": true,
+    "pregnancySafe": {
+      "safe": true,
+      "trimester": [],
+      "details": "",
+      "precautions": "",
+      "source": ""
+    },
     "childrenAge": null,
     "allergens": ["rosacees", "sorbitol", "pruneau"],
     "alternatives": [],
@@ -1162,7 +1246,13 @@
       "Lorem ipsum dolor sit amet consectetur adipisicing"
     ],
     "image": "https://cdn-icons-png.flaticon.com/512/5389/5389056.png",
-    "pregnancySafe": false,
+    "pregnancySafe": {
+      "safe": false,
+      "trimester": [],
+      "details": "",
+      "precautions": "",
+      "source": ""
+    },
     "childrenAge": 12,
     "allergens": ["latex", "aloine", "aloe-vera"],
     "alternatives": [],
@@ -1247,7 +1337,13 @@
       "Lorem ipsum dolor sit amet consectetur adipisicing"
     ],
     "image": "https://cdn-icons-png.flaticon.com/512/5281/5281082.png",
-    "pregnancySafe": null,
+    "pregnancySafe": {
+      "safe": null,
+      "trimester": [],
+      "details": "",
+      "precautions": "",
+      "source": ""
+    },
     "childrenAge": 3,
     "allergens": ["apiacees", "fodmap", "fenouil"],
     "alternatives": [],

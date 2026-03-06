@@ -2,6 +2,18 @@
 
 ---
 
+## [0.62.0] - 2026-03-06
+
+### Changed
+
+- **`pregnancySafe` data model** — Transformed from a simple `boolean | null` to a structured object with `safe`, `trimester`, `details`, `precautions`, and `source` properties in `db.json` (all 16 products updated)
+- **ProductCard** — Updated to access `pregnancySafe.safe` instead of `pregnancySafe` directly, updated PropTypes
+- **ProductResultDetailsHeader** — Updated to access `pregnancySafe.safe`, updated PropTypes
+- **filterProducts** — Updated pregnancy filter logic to use `pregnancySafe.safe`
+- **filterProducts tests** — Updated mock data and assertions to match the new `pregnancySafe` object structure
+
+---
+
 ## [0.61.0] - 2026-03-06
 
 ### Added
