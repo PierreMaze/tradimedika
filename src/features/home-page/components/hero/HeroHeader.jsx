@@ -36,7 +36,7 @@ export default function HeroHeader({
 
       {/* Titre principal */}
       <div className="animate-fade-in-up text-center delay-200 motion-reduce:animate-none motion-reduce:opacity-100">
-        <h1 className="text-5xl font-semibold lg:text-7xl 2xl:text-8xl">
+        <h1 className="text-3xl font-semibold lg:text-7xl 2xl:text-8xl">
           <span className="text-dark dark:text-light transition-colors duration-150 ease-in-out">
             {title}
           </span>
