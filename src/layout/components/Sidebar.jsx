@@ -7,6 +7,7 @@ import {
   IoDocumentTextOutline,
   IoFlaskOutline,
   IoFolderOpenOutline,
+  IoHelpCircleOutline,
   IoLibraryOutline,
   IoLogOutOutline,
   IoMedkitOutline,
@@ -380,8 +381,18 @@ export default function Sidebar({
         {/* History */}
         <SidebarHistory isCollapsed={isCollapsed} onNavigate={onClose} />
 
-        {/* Settings + Logout */}
+        {/* Help + Settings + Logout */}
         <div className="space-y-1 border-t-2 border-dashed border-neutral-300 px-3 py-4 dark:border-neutral-600">
+          <SidebarLink
+            item={{
+              to: "/dashboard/comment-ca-marche",
+              label: "Comment ça marche ?",
+              icon: IoHelpCircleOutline,
+              badge: "NOUVEAU",
+            }}
+            isCollapsed={isCollapsed}
+            onNavigate={onClose}
+          />
           <SidebarLink
             item={{
               to: "/dashboard/parametres",

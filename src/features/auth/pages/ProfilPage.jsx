@@ -5,7 +5,7 @@ import {
   IoShieldCheckmarkOutline,
 } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../features/auth";
+import { useAuth } from "..";
 
 export default function ProfilPage() {
   const { userEmail, logout } = useAuth();

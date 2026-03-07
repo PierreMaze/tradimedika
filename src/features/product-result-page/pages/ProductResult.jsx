@@ -6,34 +6,31 @@ import { HiArrowLeft } from "react-icons/hi";
 import { useLocation } from "react-router-dom";
 // [DISABLED] Red flags — useNavigate conservé pour future feature
 // import { useNavigate } from "react-router-dom";
-import Button from "../components/ui/button/Button";
-import FeedbackLink from "../components/ui/feedback/FeedbackLink";
-import db from "../data/db.json";
+import Button from "../../../components/ui/button/Button";
+import FeedbackLink from "../../../components/ui/feedback/FeedbackLink";
+import db from "../../../data/db.json";
 import {
   AllergyFilterInfo,
   AllergySectionToggle,
   useAllergies,
-} from "../features/allergens-search";
-import { useAuth } from "../features/auth";
+} from "../../allergens-search";
+import { useAuth } from "../../auth";
 // [DISABLED] Red flags modal — conservé pour future feature
-// import { useConsent } from "../features/consent";
-import { useSearchHistory } from "../features/history-search/hooks/useSearchHistory";
+// import { useConsent } from "../../consent";
+import { useSearchHistory } from "../../history-search/hooks/useSearchHistory";
 import {
   FilterButton,
   FilterModal,
   filterProductsByTags,
   useProductFilters,
-} from "../features/product-filter";
-import {
-  FilterProductResult,
-  ProductResultList,
-} from "../features/product-result-page";
-import { ProductSearchSection } from "../features/product-search";
-import { useProductTags } from "../features/product-search/hooks/useProductTags";
-import { normalizeForMatching } from "../features/product-search/utils/normalize";
+} from "../../product-filter";
+import { FilterProductResult, ProductResultList } from "..";
+import { ProductSearchSection } from "../../product-search";
+import { useProductTags } from "../../product-search/hooks/useProductTags";
+import { normalizeForMatching } from "../../product-search/utils/normalize";
 // [DISABLED] Red flags modal — conservé pour future feature
-// import RedFlagsModal from "../features/red-flags/components/RedFlagsModal";
-// import { useRedFlags } from "../features/red-flags/hooks/useRedFlags";
+// import RedFlagsModal from "../../red-flags/components/RedFlagsModal";
+// import { useRedFlags } from "../../red-flags/hooks/useRedFlags";
 
 /**
  * ProductResult Page - Catalogue de produits naturels

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IoChevronDown, IoWarning } from "react-icons/io5";
 import { RiDeleteBin2Fill } from "react-icons/ri";
-import { ModalButton, ModalLayout } from "../components/ui/modal";
+import { ModalButton, ModalLayout } from "../../../components/ui/modal";
 import {
   ACCESSIBILITY_EXTERNAL_LINK_DESC,
   ACCESSIBILITY_EXTERNAL_LINK_LABEL,
@@ -14,16 +14,16 @@ import {
   SETTINGS_PERFORMANCE_LABEL,
   SETTINGS_RESET_LABEL,
   SETTINGS_THEME_LABEL,
-} from "../constants/buttonLabels";
-import { COOKIE_CATEGORIES } from "../features/cookie-consent/constants/cookieConfig";
-import { usePerformance } from "../features/settings/context/PerformanceContext";
-import AllergiesToggle from "../features/settings/components/AllergiesToggle";
-import AnalyticsToggle from "../features/settings/components/AnalyticsToggle";
-import DarkModeToggle from "../features/settings/components/DarkModeToggle";
-import ExternalLinkConfirmToggle from "../features/settings/components/ExternalLinkConfirmToggle";
-import HighContrastToggle from "../features/settings/components/HighContrastToggle";
-import HistoryToggle from "../features/settings/components/HistoryToggle";
-import PerformanceToggle from "../features/settings/components/PerformanceToggle";
+} from "../../../constants/buttonLabels";
+import { COOKIE_CATEGORIES } from "../../cookie-consent/constants/cookieConfig";
+import { usePerformance } from "../context/PerformanceContext";
+import AllergiesToggle from "../components/AllergiesToggle";
+import AnalyticsToggle from "../components/AnalyticsToggle";
+import DarkModeToggle from "../components/DarkModeToggle";
+import ExternalLinkConfirmToggle from "../components/ExternalLinkConfirmToggle";
+import HighContrastToggle from "../components/HighContrastToggle";
+import HistoryToggle from "../components/HistoryToggle";
+import PerformanceToggle from "../components/PerformanceToggle";
 
 export default function SettingsPage() {
   const { isHighPerformance } = usePerformance();

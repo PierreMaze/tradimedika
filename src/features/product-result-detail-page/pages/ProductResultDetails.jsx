@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import FeedbackLink from "../components/ui/feedback/FeedbackLink";
-import { useAuth } from "../features/auth";
-import { useConsent } from "../features/consent";
+import FeedbackLink from "../../../components/ui/feedback/FeedbackLink";
+import { useAuth } from "../../auth";
+import { useConsent } from "../../consent";
 import {
   generateProductSEOMeta,
   getTypeColors,
@@ -21,8 +21,8 @@ import {
   ProductResultDetailsUsagesList,
   useProductAllergyCheck,
   useProductDetails,
-} from "../features/product-result-detail-page";
-import { ProductResultNotFound } from "../features/product-result-page";
+} from "..";
+import { ProductResultNotFound } from "../../product-result-page";
 
 /**
  * ProductResultDetails Page

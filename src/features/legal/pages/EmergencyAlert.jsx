@@ -1,8 +1,8 @@
 import { Helmet } from "react-helmet-async";
 import { PiSealWarningFill } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
-import Button from "../components/ui/button/Button";
-import { EMERGENCY_CONTACTS } from "../constants/redFlagsConfig";
+import Button from "../../../components/ui/button/Button";
+import { EMERGENCY_CONTACTS } from "../../../constants/redFlagsConfig";
 
 function EmergencyAlert() {
   const navigate = useNavigate();

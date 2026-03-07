@@ -1,8 +1,11 @@
+import { useState } from "react";
 import {
   IoArrowForwardOutline,
+  IoCloseOutline,
   IoDocumentTextOutline,
   IoFlaskOutline,
   IoFolderOpenOutline,
+  IoHelpCircleOutline,
   IoLibraryOutline,
   IoMedkitOutline,
   IoPeopleOutline,
@@ -13,7 +16,20 @@ import {
 import { Link } from "react-router-dom";
 import { ROLES, useAuth } from "../features/auth";
 
+const DASHBOARD_VISITED_KEY = "tradimedika-dashboard-visited";
+
 const SECTIONS = [
+  {
+    id: "how-it-works",
+    title: "Comment ça marche ?",
+    description:
+      "Découvrez les valeurs, la direction et le fonctionnement de Tradimedika.",
+    icon: IoHelpCircleOutline,
+    color: "cyan",
+    done: true,
+    to: "/dashboard/comment-ca-marche",
+    roles: [ROLES.PATIENT, ROLES.PRO, ROLES.ADMIN],
+  },
   {
     title: "Gestion des données",
     description: "Gérer les produits naturels de la base de données (CRUD).",
@@ -96,6 +112,11 @@ const SECTIONS = [
 ];
 
 const COLOR_CLASSES = {
+  cyan: {
+    bg: "bg-cyan-100 dark:bg-cyan-900/30",
+    icon: "text-cyan-600 dark:text-cyan-400",
+    border: "border-cyan-200 dark:border-cyan-800",
+  },
   emerald: {
     bg: "bg-emerald-100 dark:bg-emerald-900/30",
     icon: "text-emerald-600 dark:text-emerald-400",
@@ -166,6 +187,14 @@ const WELCOME_TITLES = {
 
 export default function Dashboard() {
   const { userEmail, userRole } = useAuth();
+  const [showOnboarding, setShowOnboarding] = useState(
+    () => !localStorage.getItem(DASHBOARD_VISITED_KEY),
+  );
+
+  const dismissOnboarding = () => {
+    setShowOnboarding(false);
+    localStorage.setItem(DASHBOARD_VISITED_KEY, "true");
+  };
 
   const visibleSections = SECTIONS.filter(
     (section) => !section.roles || section.roles.includes(userRole),
@@ -183,6 +212,36 @@ export default function Dashboard() {
           <span className="font-medium text-emerald-600">{userEmail}</span>
         </p>
       </div>
+
+      {/* Onboarding tooltip — first visit only */}
+      {showOnboarding && (
+        <div className="mb-6 flex items-center gap-3 rounded-lg border border-cyan-300 bg-cyan-50 px-4 py-3 dark:border-cyan-700 dark:bg-cyan-900/20">
+          <IoHelpCircleOutline className="shrink-0 text-xl text-cyan-600 dark:text-cyan-400" />
+          <p className="flex-1 text-sm font-medium text-cyan-800 dark:text-cyan-300">
+            Nouveau sur Tradimedika ? Consultez la section{" "}
+            <Link
+              to="/dashboard/comment-ca-marche"
+              className="underline hover:text-cyan-900 dark:hover:text-cyan-200"
+            >
+              Comment ça marche ?
+            </Link>{" "}
+            pour bien démarrer !
+          </p>
+          <button
+            onClick={dismissOnboarding}
+            className="shrink-0 cursor-pointer rounded-md px-3 py-1 text-xs font-semibold text-cyan-700 transition-colors hover:bg-cyan-100 dark:text-cyan-300 dark:hover:bg-cyan-800/40"
+          >
+            Compris
+          </button>
+          <button
+            onClick={dismissOnboarding}
+            className="shrink-0 cursor-pointer rounded p-0.5 text-cyan-500 transition-colors hover:text-cyan-700 dark:text-cyan-400 dark:hover:text-cyan-200"
+            aria-label="Fermer"
+          >
+            <IoCloseOutline className="text-lg" />
+          </button>
+        </div>
+      )}
 
       {/* Prototype notice — hidden for patient */}
       {userRole !== ROLES.PATIENT && (

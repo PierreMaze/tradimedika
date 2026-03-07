@@ -1,7 +1,7 @@
 import { LiaBalanceScaleSolid } from "react-icons/lia";
 import { Link } from "react-router-dom";
-import Button from "../components/ui/button/Button";
-import ExternalLink from "../components/ui/links/ExternalLink";
+import Button from "../../../components/ui/button/Button";
+import ExternalLink from "../../../components/ui/links/ExternalLink";
 
 export default function MentionsLegales() {
   return (

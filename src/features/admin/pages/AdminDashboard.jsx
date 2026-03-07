@@ -4,9 +4,9 @@ import {
   IoRefreshOutline,
   IoServerOutline,
 } from "react-icons/io5";
-import AdminProductForm from "../features/admin/components/AdminProductForm";
-import AdminProductTable from "../features/admin/components/AdminProductTable";
-import { useAdminData } from "../features/admin/hooks/useAdminData";
+import AdminProductForm from "../components/AdminProductForm";
+import AdminProductTable from "../components/AdminProductTable";
+import { useAdminData } from "../hooks/useAdminData";
 
 export default function AdminDashboard() {
   const {

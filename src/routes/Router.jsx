@@ -13,25 +13,45 @@ import LayoutProductResult from "../layout/LayoutProductResult";
 // Lazy-loaded page components for code-splitting
 const Home = lazy(() => import("../pages/Home"));
 const NotFound = lazy(() => import("../pages/NotFound"));
-const ProductResult = lazy(() => import("../pages/ProductResult"));
+const ProductResult = lazy(
+  () => import("../features/product-result-page/pages/ProductResult"),
+);
 const ProductResultDetails = lazy(
-  () => import("../pages/ProductResultDetails"),
+  () =>
+    import("../features/product-result-detail-page/pages/ProductResultDetails"),
 );
-const EmergencyAlert = lazy(() => import("../pages/EmergencyAlert"));
-const MentionsLegales = lazy(() => import("../pages/MentionsLegales"));
+const EmergencyAlert = lazy(
+  () => import("../features/legal/pages/EmergencyAlert"),
+);
+const MentionsLegales = lazy(
+  () => import("../features/legal/pages/MentionsLegales"),
+);
 const PolitiqueConfidentialite = lazy(
-  () => import("../pages/PolitiqueConfidentialite"),
+  () => import("../features/legal/pages/PolitiqueConfidentialite"),
 );
-const GestionCookies = lazy(() => import("../pages/GestionCookies"));
+const GestionCookies = lazy(
+  () => import("../features/legal/pages/GestionCookies"),
+);
 const LoginPage = lazy(() => import("../features/auth/components/LoginPage"));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
-const ProfilPage = lazy(() => import("../pages/ProfilPage"));
-const SettingsPage = lazy(() => import("../pages/SettingsPage"));
-const AdminDashboard = lazy(() => import("../pages/AdminDashboard"));
-const EvidenceLevelPage = lazy(() => import("../pages/EvidenceLevelPage"));
+const ProfilPage = lazy(() => import("../features/auth/pages/ProfilPage"));
+const SettingsPage = lazy(
+  () => import("../features/settings/pages/SettingsPage"),
+);
+const AdminDashboard = lazy(
+  () => import("../features/admin/pages/AdminDashboard"),
+);
+const EvidenceLevelPage = lazy(
+  () => import("../features/evidence-level/pages/EvidenceLevelPage"),
+);
 const AdvancedSearchPage = lazy(() =>
   import("../features/advanced-search").then((module) => ({
     default: module.AdvancedSearchPage,
+  })),
+);
+const HowItWorksPage = lazy(() =>
+  import("../features/onboarding").then((module) => ({
+    default: module.HowItWorksPage,
   })),
 );
 
@@ -226,6 +246,14 @@ const router = createBrowserRouter(
                   element: (
                     <Suspense fallback={<LoadingFallback />}>
                       <SettingsPage />
+                    </Suspense>
+                  ),
+                },
+                {
+                  path: "comment-ca-marche",
+                  element: (
+                    <Suspense fallback={<LoadingFallback />}>
+                      <HowItWorksPage />
                     </Suspense>
                   ),
                 },

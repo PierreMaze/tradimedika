@@ -2,7 +2,7 @@ import { FiInfo } from "react-icons/fi";
 import { HiExclamationTriangle } from "react-icons/hi2";
 import { IoMdSettings } from "react-icons/io";
 import { Link } from "react-router-dom";
-import ExternalLink from "../components/ui/links/ExternalLink";
+import ExternalLink from "../../../components/ui/links/ExternalLink";
 export default function PolitiqueConfidentialite() {
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-8">

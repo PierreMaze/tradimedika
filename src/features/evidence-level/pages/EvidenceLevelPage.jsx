@@ -4,7 +4,7 @@ import {
   EvidenceLevelStats,
   EvidenceLevelTable,
   useEvidenceData,
-} from "../features/evidence-level";
+} from "..";
 
 export default function EvidenceLevelPage() {
   const { products, stats } = useEvidenceData();
