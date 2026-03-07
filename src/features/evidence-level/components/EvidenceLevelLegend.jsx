@@ -5,7 +5,7 @@ import {
 
 export default function EvidenceLevelLegend() {
   return (
-    <div className="mb-6 rounded-lg border-2 border-dashed border-indigo-300/60 bg-indigo-50/50 p-4 dark:border-indigo-500/30 dark:bg-indigo-900/10">
+    <div className="mb-6 rounded-lg border-2 border-dashed border-blue-300/60 bg-blue-50/50 p-4 dark:border-blue-500/30 dark:bg-blue-900/10">
       <h2 className="mb-3 text-sm font-semibold text-neutral-800 dark:text-white">
         Échelle de preuve (HAS)
       </h2>

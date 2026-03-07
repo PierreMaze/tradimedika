@@ -89,7 +89,7 @@ export default function EvidenceLevelTable({ products }) {
               <th className="px-4 py-3">Niveau</th>
               <th className="hidden px-4 py-3 sm:table-cell">Sources sci.</th>
               <th className="hidden px-4 py-3 sm:table-cell">Sources trad.</th>
-              <th className="hidden px-4 py-3 md:table-cell">Vérifié</th>
+              <th className="hidden px-4 py-3">Vérifié</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-neutral-100 dark:divide-neutral-700">
@@ -101,13 +101,13 @@ export default function EvidenceLevelTable({ products }) {
                 <td className="px-4 py-3">
                   <Link
                     to={`/products/${generateSlug(product.name)}`}
-                    className="font-medium text-emerald-600 hover:underline dark:text-emerald-400"
+                    className="text-base font-medium text-emerald-600 hover:underline dark:text-emerald-400"
                   >
                     {product.name}
                   </Link>
                 </td>
                 <td className="px-4 py-3">
-                  <span className="rounded bg-neutral-100 px-2 py-0.5 text-xs capitalize dark:bg-neutral-700">
+                  <span className="rounded bg-neutral-100 px-2 py-0.5 text-sm capitalize dark:bg-neutral-700">
                     {product.type}
                   </span>
                 </td>
@@ -115,27 +115,27 @@ export default function EvidenceLevelTable({ products }) {
                   {product.evidenceLevel && (
                     <EvidenceBadge
                       level={product.evidenceLevel}
-                      showLabel={false}
+                      showLabel={true}
                     />
                   )}
                 </td>
                 <td className="hidden px-4 py-3 sm:table-cell">
-                  <span className="text-xs text-neutral-500 dark:text-neutral-400">
+                  <span className="text-base text-neutral-500 dark:text-neutral-400">
                     {product.sources?.scientific?.length || 0}
                   </span>
                 </td>
                 <td className="hidden px-4 py-3 sm:table-cell">
-                  <span className="text-xs text-neutral-500 dark:text-neutral-400">
+                  <span className="text-base text-neutral-500 dark:text-neutral-400">
                     {product.sources?.traditional?.length || 0}
                   </span>
                 </td>
-                <td className="hidden px-4 py-3 md:table-cell">
+                <td className="hidden px-4 py-3">
                   {product.verifiedByProfessional ? (
-                    <span className="rounded bg-emerald-100 px-2 py-0.5 text-xs text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
+                    <span className="rounded bg-emerald-100 px-2 py-0.5 text-base text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
                       Oui
                     </span>
                   ) : (
-                    <span className="rounded bg-neutral-100 px-2 py-0.5 text-xs text-neutral-500 dark:bg-neutral-700 dark:text-neutral-400">
+                    <span className="rounded bg-neutral-100 px-2 py-0.5 text-base text-neutral-500 dark:bg-neutral-700 dark:text-neutral-400">
                       Non
                     </span>
                   )}

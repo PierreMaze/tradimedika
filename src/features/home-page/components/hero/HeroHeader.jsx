@@ -17,7 +17,7 @@ import { GiSprout } from "react-icons/gi";
  * @returns {JSX.Element}
  */
 export default function HeroHeader({
-  badgeText = "Prototype · v0.63.0",
+  badgeText = "Prototype · v0.64.1",
   title = "Chaque produit naturel",
   titleHighlight = "mérite une source",
   description = "Informez-vous en toute confiance. Avec la base de données des produits naturels.",

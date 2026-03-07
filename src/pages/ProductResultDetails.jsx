@@ -10,10 +10,15 @@ import {
   ProductResultDetailsAllergensSection,
   ProductResultDetailsAllergyWarning,
   ProductResultDetailsContraindicationsSection,
+  ProductResultDetailsEfficacyScore,
   ProductResultDetailsHeader,
+  ProductResultDetailsInteractionsSection,
   ProductResultDetailsNavigation,
   ProductResultDetailsPropertiesSection,
+  ProductResultDetailsSimilarProducts,
+  ProductResultDetailsSourcesSection,
   ProductResultDetailsTipsSection,
+  ProductResultDetailsUsagesList,
   useProductAllergyCheck,
   useProductDetails,
 } from "../features/product-result-detail-page";
@@ -90,34 +95,32 @@ function ProductResultDetails() {
           typeColors={typeColors}
         />
 
-        <div className="mb-6 grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-6">
-          <div className="lg:col-span-2">
-            <ProductResultDetailsPropertiesSection
-              properties={product.properties}
-            />
-          </div>
-          {/* <div className="lg:col-span-4">
-            <ProductResultDetailsSymptomsSection symptoms={product.symptoms} />
-          </div> */}
-          <div className="lg:col-span-2">
-            <ProductResultDetailsAllergensSection
-              allergens={product.allergens}
-            />
-          </div>
+        <div className="mb-6 grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-6">
+          <ProductResultDetailsEfficacyScore properties={product.properties} />
 
-          <div className="lg:col-span-2">
-            <ProductResultDetailsContraindicationsSection
-              contraindications={product.contraindications}
-            />
-          </div>
+          <ProductResultDetailsPropertiesSection
+            properties={product.properties}
+          />
 
-          <div className="lg:col-span-2">
-            <ProductResultDetailsTipsSection tips={product.tips} />
-          </div>
-          {/* 
-          <div className="lg:col-span-6">
-            <ProductResultDetailsUsagesList uses={product.uses} />
-          </div> */}
+          <ProductResultDetailsUsagesList uses={product.uses} />
+
+          <ProductResultDetailsContraindicationsSection
+            contraindications={product.contraindications}
+          />
+
+          <ProductResultDetailsInteractionsSection
+            interactions={product.interactions}
+          />
+
+          <ProductResultDetailsAllergensSection allergens={product.allergens} />
+
+          <ProductResultDetailsTipsSection tips={product.tips} />
+
+          <ProductResultDetailsSourcesSection sources={product.sources} />
+        </div>
+
+        <div className="mb-6">
+          <ProductResultDetailsSimilarProducts product={product} />
         </div>
 
         <ProductResultDetailsNavigation

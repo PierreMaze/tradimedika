@@ -62,39 +62,41 @@ export default function AdminProductTable({ products, onEdit, onDelete }) {
                 key={product.id}
                 className="bg-light dark:bg-dark text-neutral-700 transition-colors hover:bg-neutral-50 dark:text-neutral-300 dark:hover:bg-neutral-800/50"
               >
-                <td className="px-4 py-3 font-mono text-xs text-neutral-400">
+                <td className="px-4 py-3 font-mono text-base text-neutral-500 dark:text-neutral-400">
                   {product.id}
                 </td>
-                <td className="px-4 py-3 font-medium">{product.name}</td>
+                <td className="w-40 px-4 py-3 font-semibold text-emerald-600 dark:text-emerald-400">
+                  {product.name}
+                </td>
                 <td className="px-4 py-3">
-                  <span className="rounded bg-neutral-100 px-2 py-0.5 text-xs dark:bg-neutral-700">
+                  <span className="rounded bg-neutral-100 px-2 py-0.5 text-sm font-medium dark:bg-neutral-700">
                     {product.type}
                   </span>
                 </td>
                 <td className="px-4 py-3">
                   {product.pregnancySafe?.safe === true && (
-                    <span className="rounded bg-emerald-100 px-2 py-0.5 text-xs text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
+                    <span className="rounded bg-emerald-100 px-2 py-0.5 text-sm font-medium text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
                       OK
                     </span>
                   )}
                   {product.pregnancySafe?.safe === false && (
-                    <span className="rounded bg-red-100 px-2 py-0.5 text-xs text-red-700 dark:bg-red-900/30 dark:text-red-400">
+                    <span className="rounded bg-red-100 px-2 py-0.5 text-sm font-medium text-red-700 dark:bg-red-900/30 dark:text-red-400">
                       Interdit
                     </span>
                   )}
                   {product.pregnancySafe?.safe === null && (
-                    <span className="rounded bg-amber-100 px-2 py-0.5 text-xs text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+                    <span className="rounded bg-amber-100 px-2 py-0.5 text-sm font-medium text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
                       Précaution
                     </span>
                   )}
                 </td>
                 <td className="px-4 py-3 whitespace-nowrap">
                   {product.childrenAge === null ? (
-                    <span className="rounded bg-emerald-100 px-2 py-0.5 text-xs text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
+                    <span className="rounded bg-emerald-100 px-2 py-0.5 text-sm font-medium text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
                       Tous âges
                     </span>
                   ) : (
-                    <span className="rounded bg-teal-100 px-2 py-0.5 text-xs text-teal-700 dark:bg-teal-900/30 dark:text-teal-400">
+                    <span className="rounded bg-amber-100 px-2 py-0.5 text-sm font-medium text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
                       {product.childrenAge}+ ans
                     </span>
                   )}
@@ -105,7 +107,7 @@ export default function AdminProductTable({ products, onEdit, onDelete }) {
                       {(product.properties ?? []).map((p, i) => (
                         <span
                           key={i}
-                          className="rounded bg-purple-100 px-1.5 py-0.5 text-[10px] text-purple-700 dark:bg-purple-900/30 dark:text-purple-400"
+                          className="rounded bg-purple-100 px-1.5 py-0.5 text-sm font-medium text-purple-700 dark:bg-purple-900/30 dark:text-purple-400"
                         >
                           {p.name}
                         </span>
@@ -123,14 +125,14 @@ export default function AdminProductTable({ products, onEdit, onDelete }) {
                       {product.allergens.map((a, i) => (
                         <span
                           key={i}
-                          className="rounded bg-amber-100 px-1.5 py-0.5 text-[10px] text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
+                          className="rounded bg-amber-100 px-1.5 py-0.5 text-sm font-medium text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
                         >
                           {a}
                         </span>
                       ))}
                     </div>
                   ) : (
-                    <span className="text-xs text-neutral-400 dark:text-neutral-500">
+                    <span className="text-sm text-neutral-400 dark:text-neutral-500">
                       —
                     </span>
                   )}

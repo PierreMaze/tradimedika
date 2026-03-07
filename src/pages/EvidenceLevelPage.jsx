@@ -14,7 +14,7 @@ export default function EvidenceLevelPage() {
       {/* Header */}
       <div className="mb-8">
         <h1 className="flex items-center gap-3 text-2xl font-bold text-neutral-800 dark:text-white">
-          <IoLibraryOutline className="text-indigo-600 dark:text-indigo-400" />
+          <IoLibraryOutline className="text-blue-600 dark:text-blue-400" />
           Niveau de preuve scientifique
         </h1>
         <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">

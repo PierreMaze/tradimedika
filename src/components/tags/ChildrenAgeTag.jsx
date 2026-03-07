@@ -87,7 +87,7 @@ function ChildrenAgeTag({ age, className = "", showLabel = true }) {
     <Tooltip content={tooltipContent} placement="top" hoverDelay={200}>
       <span
         data-testid="children-tag"
-        className={`transition-color inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-semibold duration-150 lg:text-sm 2xl:text-base ${colorClasses} ${className}`}
+        className={`transition-color inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-semibold duration-150 lg:text-sm 2xl:text-sm ${colorClasses} ${className}`}
       >
         <Icon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
         {showLabel && label}

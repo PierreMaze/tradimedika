@@ -22,8 +22,8 @@ export const EVIDENCE_LEVELS = {
     description: "Présomption scientifique",
     detail: "Essais randomisés de faible puissance, études comparatives",
     colorClasses:
-      "bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-200",
-    dotColor: "bg-blue-500",
+      "bg-sky-100 text-sky-800 dark:bg-sky-900/40 dark:text-sky-200",
+    dotColor: "bg-sky-500",
     icon: IoInformationCircleOutline,
   },
   C: {
@@ -33,7 +33,7 @@ export const EVIDENCE_LEVELS = {
     detail: "Études cas-témoins, séries de cas",
     colorClasses:
       "bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200",
-    dotColor: "bg-amber-500",
+    dotColor: "bg-yellow-500",
     icon: IoAlertCircleOutline,
   },
   D: {
@@ -41,9 +41,8 @@ export const EVIDENCE_LEVELS = {
     shortLabel: "D",
     description: "Accord d'experts",
     detail: "Usage traditionnel, aucune donnée clinique",
-    colorClasses:
-      "bg-neutral-200 text-neutral-700 dark:bg-neutral-700 dark:text-neutral-300",
-    dotColor: "bg-neutral-400",
+    colorClasses: "bg-red-100 text-red-800 dark:bg-red-700 dark:text-red-200",
+    dotColor: "bg-red-500",
     icon: IoHelpCircleOutline,
   },
 };

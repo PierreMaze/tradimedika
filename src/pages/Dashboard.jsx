@@ -39,7 +39,8 @@ const SECTIONS = [
       "Filtrer par grossesse, enfants, allergènes, niveau de preuve.",
     icon: IoSearchOutline,
     color: "purple",
-    done: false,
+    done: true,
+    to: "/dashboard/recherche-avancee",
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
   {
@@ -143,9 +144,24 @@ const COLOR_CLASSES = {
 };
 
 const WELCOME_TITLES = {
-  [ROLES.PATIENT]: "Bienvenue sur Tradimedika",
-  [ROLES.PRO]: "Bienvenue sur Tradimedika Pro",
-  [ROLES.ADMIN]: "Bienvenue sur Tradimedika Admin",
+  [ROLES.PATIENT]: (
+    <>
+      Bienvenue sur votre{" "}
+      <span className="text-emerald-600">Espace Particulier</span>
+    </>
+  ),
+  [ROLES.PRO]: (
+    <>
+      Bienvenue sur votre{" "}
+      <span className="text-emerald-600">Espace Professionnel</span>
+    </>
+  ),
+  [ROLES.ADMIN]: (
+    <>
+      Bienvenue sur votre{" "}
+      <span className="text-emerald-600">Espace Administrateur</span>
+    </>
+  ),
 };
 
 export default function Dashboard() {
@@ -163,7 +179,8 @@ export default function Dashboard() {
           {WELCOME_TITLES[userRole] || "Bienvenue sur Tradimedika"}
         </h1>
         <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
-          Connecté en tant que {userEmail}
+          Connecté en tant que{" "}
+          <span className="font-medium text-emerald-600">{userEmail}</span>
         </p>
       </div>
 

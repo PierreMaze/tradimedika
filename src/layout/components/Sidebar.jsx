@@ -7,7 +7,6 @@ import {
   IoDocumentTextOutline,
   IoFlaskOutline,
   IoFolderOpenOutline,
-  IoGridOutline,
   IoLibraryOutline,
   IoLogOutOutline,
   IoMedkitOutline,
@@ -20,6 +19,8 @@ import {
   IoTimeOutline,
   IoTrashOutline,
 } from "react-icons/io5";
+import { RiHome4Line } from "react-icons/ri";
+
 import { NavLink, useNavigate } from "react-router-dom";
 import { ROLES, useAuth } from "../../features/auth";
 import { useSearchHistory } from "../../features/history-search/hooks/useSearchHistory";
@@ -29,8 +30,8 @@ const SIDEBAR_COLLAPSED_KEY = "tradimedika-sidebar-collapsed";
 const ALL_NAV_ITEMS = [
   {
     to: "/dashboard",
-    label: "Dashboard",
-    icon: IoGridOutline,
+    label: "Accueil",
+    icon: RiHome4Line,
     end: true,
     roles: [ROLES.PATIENT, ROLES.PRO, ROLES.ADMIN],
   },
@@ -38,28 +39,27 @@ const ALL_NAV_ITEMS = [
     to: "/dashboard/admin",
     label: "Gestion données",
     icon: IoServerOutline,
-    badge: "NEW",
+    badge: "ADMIN",
     roles: [ROLES.ADMIN],
   },
   {
     to: "/products",
     label: "Catalogue",
     icon: IoFolderOpenOutline,
-    badge: "NEW",
     roles: [ROLES.PATIENT, ROLES.PRO, ROLES.ADMIN],
   },
   {
-    to: "/dashboard/recherche",
+    to: "/dashboard/recherche-avancee",
     label: "Recherche avancée",
     icon: IoSearchOutline,
-    disabled: true,
+    badge: "NOUVEAU",
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
   {
     to: "/dashboard/preuves",
     label: "Niveau de preuve",
     icon: IoLibraryOutline,
-    badge: "NEW",
+    badge: "NOUVEAU",
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
   {

@@ -2,6 +2,30 @@
 
 ---
 
+## [0.64.1] - 2026-03-07
+
+### Added
+
+- **Advanced Search page** — Full multi-criteria search at `/dashboard/recherche-avancee` (PRO/ADMIN only) with sidebar filters + results grid (e-commerce pattern)
+- **9 search filters** — Text search, product type, therapeutic category (8 categories derived from properties), properties (23 unique), pregnancy safety, children age (5 thresholds), allergen exclusion (with inline search), evidence level (A/B/C/D), professional verification
+- **`useAdvancedSearch` hook** — `useReducer`-based state management orchestrating all filters with AND between categories, OR within a category
+- **Mobile filter drawer** — Responsive drawer for filters on mobile/tablet with "See results" button
+- **Sort options** — Sort results by name, evidence level, or type (ascending/descending)
+- **Efficacy score section** — Visual progress bars showing average property score and per-property breakdown in product detail page
+- **Interactions section** — Drug and natural product interactions with severity levels (high/moderate/low) and color-coded cards
+- **Similar products section** — Grid of up to 4 similar products based on shared properties and type
+- **`interactions` field in `db.json`** — Added to all 16 products (empty array, ready for data population)
+- **Sources section reactivated** — `ProductResultDetailsSourcesSection` now displayed in product detail page
+- **Usages section reactivated** — `ProductResultDetailsUsagesList` uncommented and displayed in product detail page
+
+### Changed
+
+- **Sidebar navigation** — "Recherche avancée" link enabled with "NEW" badge, route updated to `/dashboard/recherche-avancee`
+- **Product detail page layout** — Refactored from `lg:grid-cols-4` to `lg:grid-cols-2` with 8 sections: efficacy score, properties, usages, contraindications, interactions, allergens, tips, sources + similar products below
+- **HeroHeader** — Updated version badge to v0.64.1
+
+---
+
 ## [0.63.0] - 2026-03-07
 
 ### Added

@@ -29,6 +29,11 @@ const ProfilPage = lazy(() => import("../pages/ProfilPage"));
 const SettingsPage = lazy(() => import("../pages/SettingsPage"));
 const AdminDashboard = lazy(() => import("../pages/AdminDashboard"));
 const EvidenceLevelPage = lazy(() => import("../pages/EvidenceLevelPage"));
+const AdvancedSearchPage = lazy(() =>
+  import("../features/advanced-search").then((module) => ({
+    default: module.AdvancedSearchPage,
+  })),
+);
 
 const LeafFall = lazy(() =>
   import("../components/ui/animation").then((module) => ({
@@ -233,6 +238,22 @@ const router = createBrowserRouter(
                       element: (
                         <Suspense fallback={<LoadingFallback />}>
                           <AdminDashboard />
+                        </Suspense>
+                      ),
+                    },
+                  ],
+                },
+                {
+                  path: "recherche-avancee",
+                  element: (
+                    <ProtectedRoute allowedRoles={[ROLES.PRO, ROLES.ADMIN]} />
+                  ),
+                  children: [
+                    {
+                      index: true,
+                      element: (
+                        <Suspense fallback={<LoadingFallback />}>
+                          <AdvancedSearchPage />
                         </Suspense>
                       ),
                     },

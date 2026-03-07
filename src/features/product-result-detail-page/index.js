@@ -12,6 +12,10 @@ export { default as ProductResultDetailsContraindicationsSection } from "./compo
 export { default as ProductResultDetailsTipsSection } from "./components/ProductResultDetailsTipsSection";
 export { default as ProductResultDetailsAllergensSection } from "./components/ProductResultDetailsAllergensSection";
 export { default as ImageCredit } from "./components/ImageCredit";
+export { default as ProductResultDetailsEfficacyScore } from "./components/ProductResultDetailsEfficacyScore";
+export { default as ProductResultDetailsInteractionsSection } from "./components/ProductResultDetailsInteractionsSection";
+export { default as ProductResultDetailsSimilarProducts } from "./components/ProductResultDetailsSimilarProducts";
+export { default as ProductResultDetailsSourcesSection } from "./components/ProductResultDetailsSourcesSection";
 
 // Hooks
 export { useProductDetails } from "./hooks/useProductDetails";
