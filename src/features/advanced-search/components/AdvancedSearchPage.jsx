@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { IoSearchOutline } from "react-icons/io5";
 import { useAdvancedSearch } from "../hooks/useAdvancedSearch";
 import MobileFilterDrawer from "./mobile/MobileFilterDrawer";
 import SearchHeader from "./SearchHeader";
@@ -42,10 +41,6 @@ function AdvancedSearchPage() {
         {/* Titre de la page */}
         <div className="mb-6">
           <div className="flex items-center gap-3">
-            <IoSearchOutline
-              className="h-6 w-6 text-emerald-600 dark:text-emerald-400"
-              aria-hidden="true"
-            />
             <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">
               Recherche avancée
             </h1>

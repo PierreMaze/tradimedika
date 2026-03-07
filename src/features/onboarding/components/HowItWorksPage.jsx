@@ -6,7 +6,6 @@ import {
   IoEyeOutline,
   IoFlaskOutline,
   IoGlobeOutline,
-  IoHelpCircleOutline,
   IoLeafOutline,
   IoLibraryOutline,
   IoListOutline,
@@ -135,10 +134,6 @@ export default function HowItWorksPage() {
       {/* Header */}
       <div>
         <h1 className="flex items-center gap-3 text-2xl font-bold text-neutral-800 lg:text-3xl dark:text-white">
-          <IoHelpCircleOutline
-            className="h-8 w-8 text-emerald-600 dark:text-emerald-400"
-            aria-hidden="true"
-          />
           Comment ça marche ?
         </h1>
         <p className="mt-2 text-neutral-600 dark:text-neutral-400">
@@ -158,7 +153,7 @@ export default function HowItWorksPage() {
             return (
               <div
                 key={value.title}
-                className="rounded-xl border border-emerald-200 bg-emerald-50 p-5 dark:border-emerald-800 dark:bg-emerald-900/20"
+                className="rounded-xl border-2 border-dashed border-emerald-200 bg-emerald-50 p-5 dark:border-emerald-800 dark:bg-emerald-900/20"
               >
                 <Icon
                   className="mb-3 text-2xl text-emerald-600 dark:text-emerald-400"
@@ -187,7 +182,7 @@ export default function HowItWorksPage() {
             return (
               <div
                 key={step.step}
-                className="flex gap-4 rounded-xl border border-neutral-200 bg-white p-5 dark:border-neutral-700 dark:bg-neutral-800"
+                className="flex gap-4 rounded-xl border-2 border-neutral-200 bg-white p-5 dark:border-neutral-700 dark:bg-neutral-800"
               >
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-sm font-bold text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">
                   {step.step}
