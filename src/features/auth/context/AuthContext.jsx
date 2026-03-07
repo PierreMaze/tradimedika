@@ -6,6 +6,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import { ACCOUNTS } from "../constants/accounts";
 
 const AuthContext = createContext(undefined);
 
@@ -16,7 +17,7 @@ function getStoredSession() {
     const item = window.localStorage.getItem(AUTH_STORAGE_KEY);
     if (!item) return null;
     const parsed = JSON.parse(item);
-    if (parsed && parsed.authenticated && parsed.email) {
+    if (parsed && parsed.authenticated && parsed.email && parsed.role) {
       return parsed;
     }
     return null;
@@ -30,22 +31,19 @@ export function AuthProvider({ children }) {
 
   const isAuthenticated = session?.authenticated === true;
   const userEmail = session?.email || null;
+  const userRole = session?.role || null;
 
   const login = useCallback((email, password) => {
-    const envEmail = import.meta.env.VITE_PRO_EMAIL || "admin@tradimedika.com";
-    const envPassword = import.meta.env.VITE_PRO_PASSWORD || "Tradi2026!";
+    const account = ACCOUNTS.find(
+      (a) => a.email === email && a.password === password,
+    );
 
-    if (!envEmail || !envPassword) {
-      console.error("Configuration manquante");
-      // return { success: false, error: "Configuration manquante" };
-    }
-
-    if (
-      email === envEmail ||
-      (email === "admin@tradimedika.com" && password === envPassword) ||
-      password === "Tradi2026!"
-    ) {
-      const newSession = { authenticated: true, email };
+    if (account) {
+      const newSession = {
+        authenticated: true,
+        email: account.email,
+        role: account.role,
+      };
       window.localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(newSession));
       setSession(newSession);
       return { success: true };
@@ -63,10 +61,11 @@ export function AuthProvider({ children }) {
     () => ({
       isAuthenticated,
       userEmail,
+      userRole,
       login,
       logout,
     }),
-    [isAuthenticated, userEmail, login, logout],
+    [isAuthenticated, userEmail, userRole, login, logout],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

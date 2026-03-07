@@ -1,10 +1,17 @@
 // tradimedika-v1/src/pages/Home.jsx
 import { Helmet } from "react-helmet-async";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../features/auth";
 import { ConsentModal, useConsent } from "../features/consent";
 import { Hero } from "../features/home-page";
 
 function Home() {
+  const { isAuthenticated } = useAuth();
   const { isModalOpen, grantConsent } = useConsent();
+
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" replace />;
+  }
 
   return (
     <>

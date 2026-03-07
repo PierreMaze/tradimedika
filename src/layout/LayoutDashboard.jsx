@@ -1,12 +1,20 @@
 import { IoMenuOutline } from "react-icons/io5";
 import { Outlet } from "react-router-dom";
+import { useAuth, ROLES } from "../features/auth";
 import { CookieConsentProvider } from "../features/cookie-consent/context/CookieConsentContext";
 import { SettingsModalProvider } from "../features/settings";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Sidebar, { useSidebar } from "./components/Sidebar";
 
+const ROLE_HEADER_LABELS = {
+  [ROLES.PATIENT]: "Tradimedika",
+  [ROLES.PRO]: "Tradimedika Pro",
+  [ROLES.ADMIN]: "Tradimedika Admin",
+};
+
 export default function LayoutDashboard() {
+  const { userRole } = useAuth();
   const {
     isCollapsed,
     isSidebarOpen,
@@ -34,8 +42,8 @@ export default function LayoutDashboard() {
           >
             <Header sticky fullWidth />
 
-            {/* Mobile header bar */}
-            <div className="flex items-center gap-3 border-b border-neutral-200 px-4 py-3 lg:hidden dark:border-neutral-700">
+            {/* Mobile header bar — sticky sous le Header */}
+            <div className="sticky top-0 z-30 flex items-center gap-3 border-b border-neutral-200 bg-white px-4 py-3 lg:hidden dark:border-neutral-700 dark:bg-neutral-800">
               <button
                 onClick={openSidebar}
                 className="cursor-pointer rounded-lg p-1.5 text-neutral-600 hover:bg-neutral-100 dark:text-neutral-400 dark:hover:bg-neutral-700"
@@ -44,7 +52,7 @@ export default function LayoutDashboard() {
                 <IoMenuOutline className="text-xl" />
               </button>
               <span className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
-                Tradimedika Pro
+                {ROLE_HEADER_LABELS[userRole] || "Tradimedika"}
               </span>
             </div>
 

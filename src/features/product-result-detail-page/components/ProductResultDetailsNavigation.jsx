@@ -1,8 +1,11 @@
 import PropTypes from "prop-types";
 import { HiArrowLeft } from "react-icons/hi2";
 import Button from "../../../components/ui/button/Button";
+import { useAuth } from "../../../features/auth";
 
 function ProductResultDetailsNavigation({ selectedSymptoms, variant = "top" }) {
+  const { isAuthenticated } = useAuth();
+
   if (variant === "top") {
     return (
       <div className="animate-fade-in-up mb-6 flex items-center gap-3 delay-300 motion-reduce:animate-none motion-reduce:opacity-100">
@@ -32,14 +35,16 @@ function ProductResultDetailsNavigation({ selectedSymptoms, variant = "top" }) {
       >
         Retour aux résultats
       </Button>
-      <Button
-        as="link"
-        to="/"
-        variant="secondary"
-        ariaLabel="Retour à l'accueil"
-      >
-        Nouvelle recherche
-      </Button>
+      {!isAuthenticated && (
+        <Button
+          as="link"
+          to="/"
+          variant="secondary"
+          ariaLabel="Retour à l'accueil"
+        >
+          Nouvelle recherche
+        </Button>
+      )}
     </div>
   );
 }

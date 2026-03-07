@@ -1,50 +1,116 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   IoChevronBackOutline,
   IoChevronForwardOutline,
   IoCloseOutline,
   IoDocumentTextOutline,
+  IoFlaskOutline,
   IoFolderOpenOutline,
   IoGridOutline,
+  IoLibraryOutline,
   IoLogOutOutline,
+  IoMedkitOutline,
+  IoPeopleOutline,
+  IoPulseOutline,
+  IoSearchOutline,
+  IoServerOutline,
   IoSettingsOutline,
   IoStarOutline,
   IoTimeOutline,
   IoTrashOutline,
 } from "react-icons/io5";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../../features/auth";
+import { ROLES, useAuth } from "../../features/auth";
 import { useSearchHistory } from "../../features/history-search/hooks/useSearchHistory";
 
 const SIDEBAR_COLLAPSED_KEY = "tradimedika-sidebar-collapsed";
 
-const NAV_ITEMS = [
+const ALL_NAV_ITEMS = [
   {
     to: "/dashboard",
     label: "Dashboard",
     icon: IoGridOutline,
     end: true,
+    roles: [ROLES.PATIENT, ROLES.PRO, ROLES.ADMIN],
   },
   {
     to: "/products",
     label: "Catalogue",
     icon: IoFolderOpenOutline,
     badge: "NEW",
+    roles: [ROLES.PATIENT, ROLES.PRO, ROLES.ADMIN],
   },
   {
-    to: "/dashboard/favoris",
-    label: "Favoris",
-    icon: IoStarOutline,
+    to: "/dashboard/admin",
+    label: "Gestion données",
+    icon: IoServerOutline,
+    badge: "NEW",
+    roles: [ROLES.ADMIN],
+  },
+  {
+    to: "/dashboard/interactions",
+    label: "Interactions",
+    icon: IoFlaskOutline,
     disabled: true,
+    roles: [ROLES.PRO, ROLES.ADMIN],
   },
   {
     to: "/dashboard/exports",
     label: "Exports PDF",
     icon: IoDocumentTextOutline,
     disabled: true,
+    roles: [ROLES.PRO, ROLES.ADMIN],
+  },
+  {
+    to: "/dashboard/recherche",
+    label: "Recherche avancée",
+    icon: IoSearchOutline,
+    disabled: true,
+    roles: [ROLES.PRO, ROLES.ADMIN],
+  },
+  {
+    to: "/dashboard/preuves",
+    label: "Niveau de preuve",
+    icon: IoLibraryOutline,
+    disabled: true,
+    roles: [ROLES.PRO, ROLES.ADMIN],
+  },
+  {
+    to: "/dashboard/protocoles",
+    label: "Protocoles",
+    icon: IoMedkitOutline,
+    disabled: true,
+    roles: [ROLES.PRO, ROLES.ADMIN],
+  },
+  {
+    to: "/dashboard/favoris",
+    label: "Favoris",
+    icon: IoStarOutline,
+    disabled: true,
+    roles: [ROLES.PRO, ROLES.ADMIN],
+  },
+  {
+    to: "/dashboard/contribution",
+    label: "Contribution",
+    icon: IoPeopleOutline,
+    disabled: true,
+    roles: [ROLES.PRO, ROLES.ADMIN],
+  },
+  {
+    to: "/dashboard/veille",
+    label: "Veille scientifique",
+    icon: IoPulseOutline,
+    disabled: true,
+    roles: [ROLES.PRO, ROLES.ADMIN],
   },
 ];
+
+const ROLE_SIDEBAR_LABELS = {
+  [ROLES.PATIENT]: "Espace Patient",
+  [ROLES.PRO]: "Espace Pro",
+  [ROLES.ADMIN]: "Espace Admin",
+};
 
 function SidebarLink({ item, isCollapsed }) {
   const Icon = item.icon;
@@ -236,7 +302,12 @@ export default function Sidebar({
   onClose,
   onToggleCollapsed,
 }) {
-  const { userEmail, logout } = useAuth();
+  const { userEmail, userRole, logout } = useAuth();
+
+  const navItems = useMemo(
+    () => ALL_NAV_ITEMS.filter((item) => item.roles.includes(userRole)),
+    [userRole],
+  );
 
   return (
     <>
@@ -259,7 +330,7 @@ export default function Sidebar({
           {!isCollapsed && (
             <div className="min-w-0">
               <p className="text-sm font-semibold text-neutral-800 dark:text-white">
-                Espace Pro
+                {ROLE_SIDEBAR_LABELS[userRole] || "Espace"}
               </p>
               <p className="truncate text-xs text-neutral-500 dark:text-neutral-400">
                 {userEmail}
@@ -291,8 +362,8 @@ export default function Sidebar({
         </div>
 
         {/* Navigation */}
-        <nav className="space-y-1 px-3 py-4">
-          {NAV_ITEMS.map((item) => (
+        <nav className="space-y-1 overflow-y-auto px-3 py-4">
+          {navItems.map((item) => (
             <SidebarLink key={item.to} item={item} isCollapsed={isCollapsed} />
           ))}
         </nav>

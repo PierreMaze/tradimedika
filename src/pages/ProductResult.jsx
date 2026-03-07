@@ -3,7 +3,9 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { HiArrowLeft } from "react-icons/hi";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+// [DISABLED] Red flags — useNavigate conservé pour future feature
+// import { useNavigate } from "react-router-dom";
 import Button from "../components/ui/button/Button";
 import FeedbackLink from "../components/ui/feedback/FeedbackLink";
 import db from "../data/db.json";
@@ -12,7 +14,9 @@ import {
   AllergySectionToggle,
   useAllergies,
 } from "../features/allergens-search";
-import { useConsent } from "../features/consent";
+import { useAuth } from "../features/auth";
+// [DISABLED] Red flags modal — conservé pour future feature
+// import { useConsent } from "../features/consent";
 import { useSearchHistory } from "../features/history-search/hooks/useSearchHistory";
 import {
   FilterButton,
@@ -27,8 +31,9 @@ import {
 import { ProductSearchSection } from "../features/product-search";
 import { useProductTags } from "../features/product-search/hooks/useProductTags";
 import { normalizeForMatching } from "../features/product-search/utils/normalize";
-import RedFlagsModal from "../features/red-flags/components/RedFlagsModal";
-import { useRedFlags } from "../features/red-flags/hooks/useRedFlags";
+// [DISABLED] Red flags modal — conservé pour future feature
+// import RedFlagsModal from "../features/red-flags/components/RedFlagsModal";
+// import { useRedFlags } from "../features/red-flags/hooks/useRedFlags";
 
 /**
  * ProductResult Page - Catalogue de produits naturels
@@ -41,8 +46,11 @@ import { useRedFlags } from "../features/red-flags/hooks/useRedFlags";
  */
 
 function ProductResult() {
-  const navigate = useNavigate();
-  const { hasConsent } = useConsent();
+  // [DISABLED] Red flags — navigate conservé pour future feature
+  // const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+  // [DISABLED] Red flags modal — conservé pour future feature
+  // const { hasConsent } = useConsent();
   const {
     canUseRemedy,
     userAllergies,
@@ -50,40 +58,44 @@ function ProductResult() {
     enableFiltering,
     disableFiltering,
   } = useAllergies();
-  const {
-    answers: redFlagsAnswers,
-    setAnswer: setRedFlagAnswer,
-    allQuestionsAnswered,
-    hasRedFlags,
-    isModalOpen: isRedFlagsModalOpen,
-    disclaimerAccepted,
-    acceptDisclaimer,
-    openModal: openRedFlagsModal,
-    closeModal: closeRedFlagsModal,
-    saveSession: saveRedFlagsSession,
-    isSessionValidated,
-  } = useRedFlags();
+  // [DISABLED] Red flags modal — conservé pour future feature
+  // const {
+  //   answers: redFlagsAnswers,
+  //   setAnswer: setRedFlagAnswer,
+  //   allQuestionsAnswered,
+  //   hasRedFlags,
+  //   isModalOpen: isRedFlagsModalOpen,
+  //   disclaimerAccepted,
+  //   acceptDisclaimer,
+  //   openModal: openRedFlagsModal,
+  //   closeModal: closeRedFlagsModal,
+  //   saveSession: saveRedFlagsSession,
+  //   isSessionValidated,
+  // } = useRedFlags();
 
-  useEffect(() => {
-    if (!hasConsent) {
-      navigate("/", { replace: true });
-    }
-  }, [hasConsent, navigate]);
+  // [DISABLED] Red flags — consent redirect
+  // useEffect(() => {
+  //   if (!hasConsent) {
+  //     navigate("/", { replace: true });
+  //   }
+  // }, [hasConsent, navigate]);
 
-  useEffect(() => {
-    if (hasConsent && !isSessionValidated()) {
-      openRedFlagsModal();
-    }
-  }, [hasConsent, isSessionValidated, openRedFlagsModal]);
+  // [DISABLED] Red flags — modal auto-open
+  // useEffect(() => {
+  //   if (hasConsent && !isSessionValidated()) {
+  //     openRedFlagsModal();
+  //   }
+  // }, [hasConsent, isSessionValidated, openRedFlagsModal]);
 
-  const handleRedFlagsComplete = useCallback(() => {
-    if (hasRedFlags) {
-      navigate("/urgence", { replace: true });
-    } else {
-      saveRedFlagsSession();
-      closeRedFlagsModal();
-    }
-  }, [hasRedFlags, saveRedFlagsSession, closeRedFlagsModal, navigate]);
+  // [DISABLED] Red flags — completion handler
+  // const handleRedFlagsComplete = useCallback(() => {
+  //   if (hasRedFlags) {
+  //     navigate("/urgence", { replace: true });
+  //   } else {
+  //     saveRedFlagsSession();
+  //     closeRedFlagsModal();
+  //   }
+  // }, [hasRedFlags, saveRedFlagsSession, closeRedFlagsModal, navigate]);
 
   const {
     isModalOpen,
@@ -254,16 +266,18 @@ function ProductResult() {
         <meta name="twitter:description" content={pageDescription} />
       </Helmet>
 
-      {/* Bouton Retour */}
-      <div className="animate-fade-in flex items-center gap-3 delay-300 motion-reduce:animate-none motion-reduce:opacity-100">
-        <Button
-          as="link"
-          to="/"
-          variant="primary"
-          icon={HiArrowLeft}
-          ariaLabel="Retour à l'accueil"
-        />
-      </div>
+      {/* Bouton Retour — masqué si connecté */}
+      {!isAuthenticated && (
+        <div className="animate-fade-in flex items-center gap-3 delay-300 motion-reduce:animate-none motion-reduce:opacity-100">
+          <Button
+            as="link"
+            to="/"
+            variant="primary"
+            icon={HiArrowLeft}
+            ariaLabel="Retour à l'accueil"
+          />
+        </div>
+      )}
 
       <div className="text-dark dark:text-light transition-color mt-8 flex flex-col items-center gap-y-4 text-center duration-150 ease-in-out lg:mt-4">
         <h1 className="text-3xl font-bold lg:text-4xl">
@@ -343,16 +357,19 @@ function ProductResult() {
         />
       </div>
 
-      <div className="animate-fade-in mt-12 flex w-full justify-center delay-1000 motion-reduce:animate-none motion-reduce:opacity-100">
-        <Button
-          as="link"
-          to="/"
-          variant="primary"
-          ariaLabel="Retour à l'accueil"
-        >
-          Retour à l&apos;accueil
-        </Button>
-      </div>
+      {/* Bouton Retour bas — masqué si connecté */}
+      {!isAuthenticated && (
+        <div className="animate-fade-in mt-12 flex w-full justify-center delay-1000 motion-reduce:animate-none motion-reduce:opacity-100">
+          <Button
+            as="link"
+            to="/"
+            variant="primary"
+            ariaLabel="Retour à l'accueil"
+          >
+            Retour à l&apos;accueil
+          </Button>
+        </div>
+      )}
 
       <FeedbackLink />
 
@@ -365,7 +382,8 @@ function ProductResult() {
         onApplyFilters={applyFilters}
       />
 
-      <RedFlagsModal
+      {/* [DISABLED] Red flags modal — conservé pour future feature */}
+      {/* <RedFlagsModal
         isOpen={isRedFlagsModalOpen}
         onClose={closeRedFlagsModal}
         onComplete={handleRedFlagsComplete}
@@ -374,7 +392,7 @@ function ProductResult() {
         disclaimerAccepted={disclaimerAccepted}
         acceptDisclaimer={acceptDisclaimer}
         allQuestionsAnswered={allQuestionsAnswered}
-      />
+      /> */}
     </>
   );
 }

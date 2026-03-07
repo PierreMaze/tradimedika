@@ -8,9 +8,10 @@ import {
   IoPeopleOutline,
   IoPulseOutline,
   IoSearchOutline,
+  IoServerOutline,
 } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { useAuth } from "../features/auth";
+import { useAuth, ROLES } from "../features/auth";
 
 const SECTIONS = [
   {
@@ -20,6 +21,16 @@ const SECTIONS = [
     color: "emerald",
     done: true,
     to: "/products",
+    roles: [ROLES.PATIENT, ROLES.PRO, ROLES.ADMIN],
+  },
+  {
+    title: "Gestion des données",
+    description: "Gérer les produits naturels de la base de données (CRUD)",
+    icon: IoServerOutline,
+    color: "rose",
+    done: true,
+    to: "/dashboard/admin",
+    roles: [ROLES.ADMIN],
   },
   {
     title: "Interactions",
@@ -28,6 +39,7 @@ const SECTIONS = [
     icon: IoFlaskOutline,
     color: "amber",
     done: false,
+    roles: [ROLES.PRO, ROLES.ADMIN],
   },
   {
     title: "Exports PDF",
@@ -35,6 +47,7 @@ const SECTIONS = [
     icon: IoDocumentTextOutline,
     color: "blue",
     done: false,
+    roles: [ROLES.PRO, ROLES.ADMIN],
   },
   {
     title: "Recherche avancée",
@@ -42,6 +55,7 @@ const SECTIONS = [
     icon: IoSearchOutline,
     color: "purple",
     done: false,
+    roles: [ROLES.PRO, ROLES.ADMIN],
   },
   {
     title: "Niveau de preuve scientifique",
@@ -49,6 +63,7 @@ const SECTIONS = [
     icon: IoLibraryOutline,
     color: "indigo",
     done: false,
+    roles: [ROLES.PRO, ROLES.ADMIN],
   },
   {
     title: "Protocoles naturels",
@@ -56,6 +71,7 @@ const SECTIONS = [
     icon: IoMedkitOutline,
     color: "teal",
     done: false,
+    roles: [ROLES.PRO, ROLES.ADMIN],
   },
   {
     title: "Contribution médicale",
@@ -63,6 +79,7 @@ const SECTIONS = [
     icon: IoPeopleOutline,
     color: "sky",
     done: false,
+    roles: [ROLES.PRO, ROLES.ADMIN],
   },
   {
     title: "Veille scientifique",
@@ -70,6 +87,7 @@ const SECTIONS = [
     icon: IoPulseOutline,
     color: "green",
     done: false,
+    roles: [ROLES.PRO, ROLES.ADMIN],
   },
 ];
 
@@ -114,37 +132,54 @@ const COLOR_CLASSES = {
     icon: "text-green-600 dark:text-green-400",
     border: "border-green-200 dark:border-green-800",
   },
+  rose: {
+    bg: "bg-rose-100 dark:bg-rose-900/30",
+    icon: "text-rose-600 dark:text-rose-400",
+    border: "border-rose-200 dark:border-rose-800",
+  },
+};
+
+const WELCOME_TITLES = {
+  [ROLES.PATIENT]: "Bienvenue sur Tradimedika",
+  [ROLES.PRO]: "Bienvenue sur Tradimedika Pro",
+  [ROLES.ADMIN]: "Bienvenue sur Tradimedika Admin",
 };
 
 export default function Dashboard() {
-  const { userEmail } = useAuth();
+  const { userEmail, userRole } = useAuth();
+
+  const visibleSections = SECTIONS.filter(
+    (section) => !section.roles || section.roles.includes(userRole),
+  );
 
   return (
     <div className="mx-auto max-w-5xl">
       {/* Welcome */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-neutral-800 dark:text-white">
-          Bienvenue sur Tradimedika Pro
+          {WELCOME_TITLES[userRole] || "Bienvenue sur Tradimedika"}
         </h1>
         <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
           Connecté en tant que {userEmail}
         </p>
       </div>
 
-      {/* Prototype notice */}
-      <div className="mb-8 rounded-lg border-2 border-dashed border-amber-400/60 bg-amber-50 p-4 dark:border-amber-500/40 dark:bg-amber-900/20">
-        <p className="text-sm font-medium text-amber-800 dark:text-amber-300">
-          Prototype — Les sections ci-dessous sont en cours de développement.
-        </p>
-        <p className="mt-1 text-xs text-amber-700 dark:text-amber-400">
-          Cette interface évoluera en fonction des retours des professionnels de
-          santé.
-        </p>
-      </div>
+      {/* Prototype notice — hidden for patient */}
+      {userRole !== ROLES.PATIENT && (
+        <div className="mb-8 rounded-lg border-2 border-dashed border-amber-400/60 bg-amber-50 p-4 dark:border-amber-500/40 dark:bg-amber-900/20">
+          <p className="text-sm font-medium text-amber-800 dark:text-amber-300">
+            Prototype — Les sections ci-dessous sont en cours de développement.
+          </p>
+          <p className="mt-1 text-xs text-amber-700 dark:text-amber-400">
+            Cette interface évoluera en fonction des retours des professionnels
+            de santé.
+          </p>
+        </div>
+      )}
 
       {/* Section cards */}
       <div className="grid gap-4 sm:grid-cols-2">
-        {SECTIONS.map((section) => {
+        {visibleSections.map((section) => {
           const colors = COLOR_CLASSES[section.color];
           const Icon = section.icon;
 

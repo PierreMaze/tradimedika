@@ -4,7 +4,7 @@ import { createBrowserRouter, Outlet } from "react-router-dom";
 import GoogleAnalytics from "../components/analytics/GoogleAnalytics";
 import { LoadingFallback } from "../components/ui/animation";
 import { AllergiesProvider } from "../features/allergens-search";
-import { ProtectedRoute, useAuth } from "../features/auth";
+import { ProtectedRoute, useAuth, ROLES } from "../features/auth";
 import { CookieConsentProvider } from "../features/cookie-consent/context/CookieConsentContext";
 import LayoutApp from "../layout/LayoutApp";
 import LayoutDashboard from "../layout/LayoutDashboard";
@@ -27,10 +27,12 @@ const LoginPage = lazy(() => import("../features/auth/components/LoginPage"));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
 const ProfilPage = lazy(() => import("../pages/ProfilPage"));
 const SettingsPage = lazy(() => import("../pages/SettingsPage"));
+const AdminDashboard = lazy(() => import("../pages/AdminDashboard"));
 
 /**
  * RootLayout - Global providers wrapper for all routes
  */
+// eslint-disable-next-line react-refresh/only-export-components -- Layout interne utilisé uniquement dans le router
 function RootLayout() {
   return (
     <CookieConsentProvider>
@@ -47,6 +49,7 @@ function RootLayout() {
  * Renders LayoutDashboard (with sidebar) when authenticated,
  * LayoutApp (public layout) when not.
  */
+// eslint-disable-next-line react-refresh/only-export-components -- Layout interne utilisé uniquement dans le router
 function ProductLayoutSwitch() {
   const { isAuthenticated } = useAuth();
   return isAuthenticated ? <LayoutDashboard /> : <LayoutApp />;
@@ -56,32 +59,21 @@ function ProductLayoutSwitch() {
  * Router Configuration - React Router v6.30.2 with Data Router API
  *
  * Routes:
- * - / → Home page (Hero component)
+ * - / → Home page (Hero component, redirects to /dashboard if authenticated)
  * - /products → Product results list (conditional layout: sidebar if auth'd)
  * - /products/:slug → Product detail page (conditional layout: sidebar if auth'd)
  * - /urgence → Emergency alert page
  * - /login → Login page (pro authentication)
- * - /dashboard → Dashboard pro (protected, requires auth)
+ * - /dashboard → Dashboard (protected, requires auth)
  * - /dashboard/profil → Profile page (protected)
  * - /dashboard/parametres → Settings page (protected)
+ * - /dashboard/admin → Admin CRUD page (protected, admin only)
  * - * → NotFound page (404 error)
  *
- * Layout Structure:
- * - RootLayout: Global providers (CookieConsent, Allergies, Analytics)
- * - LayoutApp: Public layout (Header + Outlet + Footer) wraps public routes
- * - LayoutDashboard: Pro layout (Sidebar + Header + Outlet) wraps dashboard routes
- * - ProductLayoutSwitch: Conditional layout for /products (LayoutDashboard if auth'd, LayoutApp if not)
- * - LayoutProductResult: Specific layout for product pages (includes BreadCrumb)
- *
- * Performance Optimizations:
- * - Lazy loading: All pages loaded with React.lazy() for code-splitting
- * - Suspense: Each route wrapped with Suspense for loading states
- * - Code splitting: Pages loaded on-demand, reducing initial bundle size
- *
- * Using createBrowserRouter (Data Router API) for:
- * - ScrollRestoration support
- * - React Router v7 compatibility
- * - Better performance and features
+ * Role-based access:
+ * - patient: Dashboard + Catalogue only
+ * - pro: All features
+ * - admin: All features + admin CRUD
  */
 
 const router = createBrowserRouter(
@@ -207,6 +199,20 @@ const router = createBrowserRouter(
                       <SettingsPage />
                     </Suspense>
                   ),
+                },
+                {
+                  path: "admin",
+                  element: <ProtectedRoute allowedRoles={[ROLES.ADMIN]} />,
+                  children: [
+                    {
+                      index: true,
+                      element: (
+                        <Suspense fallback={<LoadingFallback />}>
+                          <AdminDashboard />
+                        </Suspense>
+                      ),
+                    },
+                  ],
                 },
               ],
             },
