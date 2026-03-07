@@ -2,6 +2,24 @@
 
 ---
 
+## [0.65.0] - 2026-03-07
+
+### Added
+
+- **"How it works" page** — New onboarding page at `/dashboard/comment-ca-marche` explaining values, app tutorial, upcoming features, and project direction (`HowItWorksPage` in `src/features/onboarding/`)
+- **Dashboard onboarding tooltip** — First-visit banner encouraging users to visit the "How it works" page, dismissed via `tradimedika-dashboard-visited` localStorage key
+- **"How it works" Dashboard card** — New cyan-colored section card at the top of the Dashboard grid, accessible to all authenticated roles
+- **Sidebar "Comment ça marche ?" link** — Added in the bottom section (above Settings) with "NOUVEAU" badge
+- **Legal feature folder** — Created `src/features/legal/` with barrel exports for all legal pages
+
+### Changed
+
+- **Pages reorganized into feature folders** — Moved 10 pages from `src/pages/` to their respective feature directories: `AdminDashboard` → `features/admin/pages/`, `EvidenceLevelPage` → `features/evidence-level/pages/`, `ProfilPage` → `features/auth/pages/`, `SettingsPage` → `features/settings/pages/`, `ProductResult` → `features/product-result-page/pages/`, `ProductResultDetails` → `features/product-result-detail-page/pages/`, legal pages → `features/legal/pages/`
+- **Router lazy imports updated** — All page imports now reference their new feature folder locations
+- **HeroHeader** — Updated version badge to v0.65.0
+
+---
+
 ## [0.64.1] - 2026-03-07
 
 ### Added
