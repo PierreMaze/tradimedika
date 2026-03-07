@@ -215,13 +215,13 @@ export default function Dashboard() {
 
       {/* Onboarding tooltip — first visit only */}
       {showOnboarding && (
-        <div className="mb-6 flex items-center gap-3 rounded-lg border border-cyan-300 bg-cyan-50 px-4 py-3 dark:border-cyan-700 dark:bg-cyan-900/20">
-          <IoHelpCircleOutline className="shrink-0 text-xl text-cyan-600 dark:text-cyan-400" />
-          <p className="flex-1 text-sm font-medium text-cyan-800 dark:text-cyan-300">
+        <div className="mb-6 flex items-center gap-3 rounded-lg border-2 border-dashed border-emerald-300 bg-emerald-50 px-4 py-3 dark:border-emerald-700 dark:bg-emerald-900/20">
+          <IoHelpCircleOutline className="shrink-0 text-xl text-emerald-700 dark:text-emerald-400" />
+          <p className="flex-1 text-sm font-medium text-emerald-800 dark:text-emerald-300">
             Nouveau sur Tradimedika ? Consultez la section{" "}
             <Link
               to="/dashboard/comment-ca-marche"
-              className="underline hover:text-cyan-900 dark:hover:text-cyan-200"
+              className="font-semibold text-emerald-600 underline decoration-2 underline-offset-2 hover:text-emerald-700 dark:hover:text-emerald-200"
             >
               Comment ça marche ?
             </Link>{" "}
@@ -229,13 +229,13 @@ export default function Dashboard() {
           </p>
           <button
             onClick={dismissOnboarding}
-            className="shrink-0 cursor-pointer rounded-md px-3 py-1 text-xs font-semibold text-cyan-700 transition-colors hover:bg-cyan-100 dark:text-cyan-300 dark:hover:bg-cyan-800/40"
+            className="shrink-0 cursor-pointer rounded-md bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700 transition-colors hover:bg-emerald-200 dark:text-emerald-300 dark:hover:bg-emerald-800/40"
           >
             Compris
           </button>
           <button
             onClick={dismissOnboarding}
-            className="shrink-0 cursor-pointer rounded p-0.5 text-cyan-500 transition-colors hover:text-cyan-700 dark:text-cyan-400 dark:hover:text-cyan-200"
+            className="shrink-0 cursor-pointer rounded p-0.5 text-emerald-600 transition-colors hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300"
             aria-label="Fermer"
           >
             <IoCloseOutline className="text-lg" />

@@ -110,9 +110,7 @@ const UPCOMING_FEATURES = [
 function SectionTitle({ icon: Icon, children, color = "emerald" }) {
   const colorClasses = {
     emerald: "text-emerald-600 dark:text-emerald-400",
-    cyan: "text-cyan-600 dark:text-cyan-400",
-    amber: "text-amber-600 dark:text-amber-400",
-    indigo: "text-indigo-600 dark:text-indigo-400",
+    sky: "text-sky-600 dark:text-sky-400",
   };
 
   return (
@@ -128,7 +126,7 @@ function SectionTitle({ icon: Icon, children, color = "emerald" }) {
 SectionTitle.propTypes = {
   icon: PropTypes.elementType.isRequired,
   children: PropTypes.node.isRequired,
-  color: PropTypes.oneOf(["emerald", "cyan", "amber", "indigo"]),
+  color: PropTypes.oneOf(["emerald", "emerald", "sky"]),
 };
 
 export default function HowItWorksPage() {
@@ -138,7 +136,7 @@ export default function HowItWorksPage() {
       <div>
         <h1 className="flex items-center gap-3 text-2xl font-bold text-neutral-800 lg:text-3xl dark:text-white">
           <IoHelpCircleOutline
-            className="h-8 w-8 text-cyan-600 dark:text-cyan-400"
+            className="h-8 w-8 text-emerald-600 dark:text-emerald-400"
             aria-hidden="true"
           />
           Comment ça marche ?
@@ -180,7 +178,7 @@ export default function HowItWorksPage() {
 
       {/* Tutoriel */}
       <section>
-        <SectionTitle icon={IoCompassOutline} color="cyan">
+        <SectionTitle icon={IoCompassOutline} color="emerald">
           Comment utiliser l&apos;application
         </SectionTitle>
         <div className="mt-4 space-y-4">
@@ -191,13 +189,13 @@ export default function HowItWorksPage() {
                 key={step.step}
                 className="flex gap-4 rounded-xl border border-neutral-200 bg-white p-5 dark:border-neutral-700 dark:bg-neutral-800"
               >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-cyan-100 text-sm font-bold text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-300">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-sm font-bold text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">
                   {step.step}
                 </div>
                 <div className="min-w-0 flex-1">
                   <h3 className="flex items-center gap-2 font-semibold text-neutral-800 dark:text-white">
                     <Icon
-                      className="text-lg text-cyan-600 dark:text-cyan-400"
+                      className="text-lg text-emerald-600 dark:text-emerald-400"
                       aria-hidden="true"
                     />
                     {step.title}
@@ -208,7 +206,7 @@ export default function HowItWorksPage() {
                   {step.link && (
                     <Link
                       to={step.link.to}
-                      className="mt-2 inline-block text-sm font-medium text-cyan-600 hover:text-cyan-700 dark:text-cyan-400 dark:hover:text-cyan-300"
+                      className="mt-2 inline-block text-sm font-medium text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300"
                     >
                       {step.link.label} &rarr;
                     </Link>
@@ -222,7 +220,7 @@ export default function HowItWorksPage() {
 
       {/* Fonctionnalités à venir */}
       <section>
-        <SectionTitle icon={IoRocketOutline} color="amber">
+        <SectionTitle icon={IoRocketOutline} color="sky">
           Fonctionnalités à venir
         </SectionTitle>
         <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
@@ -235,10 +233,10 @@ export default function HowItWorksPage() {
             return (
               <div
                 key={feature.title}
-                className="flex items-start gap-3 rounded-xl border-2 border-dashed border-amber-300 bg-amber-50 p-4 dark:border-amber-600/40 dark:bg-amber-900/10"
+                className="flex items-start gap-3 rounded-xl border-2 border-dashed border-sky-300 bg-sky-50 p-4 dark:border-sky-600/40 dark:bg-sky-900/10"
               >
                 <Icon
-                  className="mt-0.5 shrink-0 text-lg text-amber-600 dark:text-amber-400"
+                  className="mt-0.5 shrink-0 text-lg text-sky-600 dark:text-sky-400"
                   aria-hidden="true"
                 />
                 <div className="min-w-0">
@@ -246,7 +244,7 @@ export default function HowItWorksPage() {
                     <h3 className="text-sm font-semibold text-neutral-800 dark:text-white">
                       {feature.title}
                     </h3>
-                    <span className="rounded bg-amber-200 px-1.5 py-0.5 text-[10px] font-bold text-amber-800 dark:bg-amber-800/40 dark:text-amber-300">
+                    <span className="rounded bg-sky-200 px-1.5 py-0.5 text-[10px] font-bold text-sky-800 dark:bg-sky-800/40 dark:text-sky-300">
                       Prochainement
                     </span>
                   </div>
@@ -261,8 +259,8 @@ export default function HowItWorksPage() {
       </section>
 
       {/* Direction du projet */}
-      <section className="rounded-xl border border-indigo-200 bg-indigo-50 p-6 dark:border-indigo-800 dark:bg-indigo-900/20">
-        <SectionTitle icon={IoCheckmarkCircleOutline} color="indigo">
+      <section className="rounded-xl border-2 border-dashed border-emerald-200 bg-emerald-50 p-6 dark:border-emerald-800 dark:bg-emerald-900/20">
+        <SectionTitle icon={IoCheckmarkCircleOutline} color="emerald">
           Direction du projet
         </SectionTitle>
         <div className="mt-4 space-y-3 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
@@ -280,11 +278,16 @@ export default function HowItWorksPage() {
             connues.
           </p>
           <p>
-            À terme, la plateforme proposera des{" "}
+            À terme, la plateforme avec des fondations solides, la proposera des{" "}
             <strong>partenariats avec des laboratoires</strong> et des{" "}
             <strong>organismes de formation</strong> pour enrichir la base de
             données et offrir des outils toujours plus adaptés aux besoins des
             praticiens.
+          </p>
+          <p>
+            Nous ne proposons pas de produits, mais un{" "}
+            <strong>outil d&apos;information</strong> (prototype actuel avec
+            catalogue) pour les professionnels de santé.
           </p>
         </div>
       </section>
