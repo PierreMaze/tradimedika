@@ -11,21 +11,12 @@ import {
   IoServerOutline,
 } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { useAuth, ROLES } from "../features/auth";
+import { ROLES, useAuth } from "../features/auth";
 
 const SECTIONS = [
   {
-    title: "Catalogue",
-    description: "Parcourir les produits naturels par catégorie et propriété",
-    icon: IoFolderOpenOutline,
-    color: "emerald",
-    done: true,
-    to: "/products",
-    roles: [ROLES.PATIENT, ROLES.PRO, ROLES.ADMIN],
-  },
-  {
     title: "Gestion des données",
-    description: "Gérer les produits naturels de la base de données (CRUD)",
+    description: "Gérer les produits naturels de la base de données (CRUD).",
     icon: IoServerOutline,
     color: "rose",
     done: true,
@@ -33,25 +24,19 @@ const SECTIONS = [
     roles: [ROLES.ADMIN],
   },
   {
-    title: "Interactions",
+    title: "Catalogue",
     description:
-      "Vérifier les interactions entre produits naturels et médicaments",
-    icon: IoFlaskOutline,
-    color: "amber",
-    done: false,
-    roles: [ROLES.PRO, ROLES.ADMIN],
-  },
-  {
-    title: "Exports PDF",
-    description: "Générer des fiches d'information pour vos patients",
-    icon: IoDocumentTextOutline,
-    color: "blue",
-    done: false,
-    roles: [ROLES.PRO, ROLES.ADMIN],
+      "Parcourir par ordre alphabétique et rechercher des produits naturels.",
+    icon: IoFolderOpenOutline,
+    color: "emerald",
+    done: true,
+    to: "/products",
+    roles: [ROLES.PATIENT, ROLES.PRO, ROLES.ADMIN],
   },
   {
     title: "Recherche avancée",
-    description: "Filtrer par grossesse, enfants, allergènes, niveau de preuve",
+    description:
+      "Filtrer par grossesse, enfants, allergènes, niveau de preuve.",
     icon: IoSearchOutline,
     color: "purple",
     done: false,
@@ -59,15 +44,33 @@ const SECTIONS = [
   },
   {
     title: "Niveau de preuve scientifique",
-    description: "Consulter les études et la fiabilité des recommandations",
+    description: "Consulter les études et la fiabilité des recommandations.",
     icon: IoLibraryOutline,
     color: "indigo",
+    done: true,
+    to: "/dashboard/preuves",
+    roles: [ROLES.PRO, ROLES.ADMIN],
+  },
+  {
+    title: "Interactions",
+    description:
+      "Vérifier les interactions entre produits naturels et médicaments.",
+    icon: IoFlaskOutline,
+    color: "amber",
+    done: false,
+    roles: [ROLES.PRO, ROLES.ADMIN],
+  },
+  {
+    title: "Exports PDF",
+    description: "Générer des fiches d'information pour vos patients.",
+    icon: IoDocumentTextOutline,
+    color: "blue",
     done: false,
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
   {
     title: "Protocoles naturels",
-    description: "Créer des recommandations naturelles pour vos patients",
+    description: "Créer des recommandations naturelles pour vos patients.",
     icon: IoMedkitOutline,
     color: "teal",
     done: false,
@@ -75,7 +78,7 @@ const SECTIONS = [
   },
   {
     title: "Contribution médicale",
-    description: "Proposer des données ou corrections pour enrichir la base",
+    description: "Proposer des données ou corrections pour enrichir la base.",
     icon: IoPeopleOutline,
     color: "sky",
     done: false,
@@ -83,7 +86,7 @@ const SECTIONS = [
   },
   {
     title: "Veille scientifique",
-    description: "Suivre les nouvelles études sur les médecines naturelles",
+    description: "Suivre les nouvelles études sur les médecines naturelles.",
     icon: IoPulseOutline,
     color: "green",
     done: false,

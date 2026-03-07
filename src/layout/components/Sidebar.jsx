@@ -35,13 +35,6 @@ const ALL_NAV_ITEMS = [
     roles: [ROLES.PATIENT, ROLES.PRO, ROLES.ADMIN],
   },
   {
-    to: "/products",
-    label: "Catalogue",
-    icon: IoFolderOpenOutline,
-    badge: "NEW",
-    roles: [ROLES.PATIENT, ROLES.PRO, ROLES.ADMIN],
-  },
-  {
     to: "/dashboard/admin",
     label: "Gestion données",
     icon: IoServerOutline,
@@ -49,18 +42,11 @@ const ALL_NAV_ITEMS = [
     roles: [ROLES.ADMIN],
   },
   {
-    to: "/dashboard/interactions",
-    label: "Interactions",
-    icon: IoFlaskOutline,
-    disabled: true,
-    roles: [ROLES.PRO, ROLES.ADMIN],
-  },
-  {
-    to: "/dashboard/exports",
-    label: "Exports PDF",
-    icon: IoDocumentTextOutline,
-    disabled: true,
-    roles: [ROLES.PRO, ROLES.ADMIN],
+    to: "/products",
+    label: "Catalogue",
+    icon: IoFolderOpenOutline,
+    badge: "NEW",
+    roles: [ROLES.PATIENT, ROLES.PRO, ROLES.ADMIN],
   },
   {
     to: "/dashboard/recherche",
@@ -73,6 +59,20 @@ const ALL_NAV_ITEMS = [
     to: "/dashboard/preuves",
     label: "Niveau de preuve",
     icon: IoLibraryOutline,
+    badge: "NEW",
+    roles: [ROLES.PRO, ROLES.ADMIN],
+  },
+  {
+    to: "/dashboard/interactions",
+    label: "Interactions",
+    icon: IoFlaskOutline,
+    disabled: true,
+    roles: [ROLES.PRO, ROLES.ADMIN],
+  },
+  {
+    to: "/dashboard/exports",
+    label: "Exports PDF",
+    icon: IoDocumentTextOutline,
     disabled: true,
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
@@ -112,7 +112,7 @@ const ROLE_SIDEBAR_LABELS = {
   [ROLES.ADMIN]: "Espace Admin",
 };
 
-function SidebarLink({ item, isCollapsed }) {
+function SidebarLink({ item, isCollapsed, onNavigate }) {
   const Icon = item.icon;
 
   if (item.disabled) {
@@ -140,6 +140,7 @@ function SidebarLink({ item, isCollapsed }) {
     <NavLink
       to={item.to}
       end={item.end}
+      onClick={onNavigate}
       className={({ isActive }) =>
         `flex items-center rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
           isCollapsed ? "justify-center" : "gap-3"
@@ -166,7 +167,7 @@ function SidebarLink({ item, isCollapsed }) {
   );
 }
 
-function SidebarHistory({ isCollapsed }) {
+function SidebarHistory({ isCollapsed, onNavigate }) {
   const { history, removeSearch, clearHistory } = useSearchHistory();
   const navigate = useNavigate();
 
@@ -174,6 +175,7 @@ function SidebarHistory({ isCollapsed }) {
     const params = new URLSearchParams();
     params.set("products", (search.products ?? []).join(","));
     navigate(`/products?${params.toString()}`);
+    onNavigate?.();
   };
 
   if (isCollapsed) {
@@ -252,6 +254,7 @@ function SidebarHistory({ isCollapsed }) {
 
 SidebarHistory.propTypes = {
   isCollapsed: PropTypes.bool.isRequired,
+  onNavigate: PropTypes.func,
 };
 
 SidebarLink.propTypes = {
@@ -264,6 +267,7 @@ SidebarLink.propTypes = {
     badge: PropTypes.string,
   }).isRequired,
   isCollapsed: PropTypes.bool.isRequired,
+  onNavigate: PropTypes.func,
 };
 
 // eslint-disable-next-line react-refresh/only-export-components -- Hook co-localisé avec son composant
@@ -364,12 +368,17 @@ export default function Sidebar({
         {/* Navigation */}
         <nav className="space-y-1 overflow-y-auto px-3 py-4">
           {navItems.map((item) => (
-            <SidebarLink key={item.to} item={item} isCollapsed={isCollapsed} />
+            <SidebarLink
+              key={item.to}
+              item={item}
+              isCollapsed={isCollapsed}
+              onNavigate={onClose}
+            />
           ))}
         </nav>
 
         {/* History */}
-        <SidebarHistory isCollapsed={isCollapsed} />
+        <SidebarHistory isCollapsed={isCollapsed} onNavigate={onClose} />
 
         {/* Settings + Logout */}
         <div className="space-y-1 border-t-2 border-dashed border-neutral-300 px-3 py-4 dark:border-neutral-600">
@@ -380,6 +389,7 @@ export default function Sidebar({
               icon: IoSettingsOutline,
             }}
             isCollapsed={isCollapsed}
+            onNavigate={onClose}
           />
           <button
             onClick={logout}

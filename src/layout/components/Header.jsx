@@ -12,7 +12,7 @@ import LogoTradimedika from "./LogoTradimedika";
 function Header({ sticky = false, fullWidth = false }) {
   const scrollDirection = useScrollDirection();
   const isDesktop = useMediaQuery("(min-width: 1024px)");
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, userName, userTitle } = useAuth();
 
   const shouldHide = !sticky && !isDesktop && scrollDirection === "down";
 
@@ -33,11 +33,22 @@ function Header({ sticky = false, fullWidth = false }) {
             <Link
               to={isAuthenticated ? "/dashboard/profil" : "/login"}
               aria-label={isAuthenticated ? "Mon profil" : "Se connecter"}
-              className="group flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center p-2"
+              className="group flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center gap-2 p-2"
             >
-              <div className="flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
-                <FaUserCircle className="text-dark dark:text-light text-xl transition-colors duration-200 lg:text-2xl 2xl:text-3xl" />
-              </div>
+              {isAuthenticated && userName ? (
+                <div className="flex items-center gap-2 transition-transform duration-200 group-hover:scale-105">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-sm font-bold text-white lg:h-9 lg:w-9 lg:text-base 2xl:h-10 2xl:w-10">
+                    {userName.charAt(0).toUpperCase()}
+                  </div>
+                  <span className="hidden text-sm font-medium text-neutral-700 lg:inline dark:text-neutral-300">
+                    {userTitle} {userName}
+                  </span>
+                </div>
+              ) : (
+                <div className="flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
+                  <FaUserCircle className="text-dark dark:text-light text-xl transition-colors duration-200 lg:text-2xl 2xl:text-3xl" />
+                </div>
+              )}
             </Link>
             {!isAuthenticated && <SettingsButton />}
           </div>

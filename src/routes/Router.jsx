@@ -1,5 +1,5 @@
 // tradimedika/src/routes/Router.jsx
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { createBrowserRouter, Outlet } from "react-router-dom";
 import GoogleAnalytics from "../components/analytics/GoogleAnalytics";
 import { LoadingFallback } from "../components/ui/animation";
@@ -28,17 +28,41 @@ const Dashboard = lazy(() => import("../pages/Dashboard"));
 const ProfilPage = lazy(() => import("../pages/ProfilPage"));
 const SettingsPage = lazy(() => import("../pages/SettingsPage"));
 const AdminDashboard = lazy(() => import("../pages/AdminDashboard"));
+const EvidenceLevelPage = lazy(() => import("../pages/EvidenceLevelPage"));
+
+const LeafFall = lazy(() =>
+  import("../components/ui/animation").then((module) => ({
+    default: module.LeafFall,
+  })),
+);
 
 /**
  * RootLayout - Global providers wrapper for all routes
+ * LeafFall est monté ici (une seule fois) pour persister à travers toutes les navigations
  */
 // eslint-disable-next-line react-refresh/only-export-components -- Layout interne utilisé uniquement dans le router
 function RootLayout() {
+  const [showLeafFall, setShowLeafFall] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowLeafFall(true), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <CookieConsentProvider>
       <AllergiesProvider>
         <GoogleAnalytics />
-        <Outlet />
+        <div className="bg-light dark:bg-dark relative min-h-screen transition-colors duration-150 ease-out">
+          {showLeafFall && (
+            <Suspense fallback={null}>
+              <LeafFall />
+            </Suspense>
+          )}
+          <div className="relative z-10 min-h-screen">
+            <Outlet />
+          </div>
+        </div>
       </AllergiesProvider>
     </CookieConsentProvider>
   );
@@ -209,6 +233,22 @@ const router = createBrowserRouter(
                       element: (
                         <Suspense fallback={<LoadingFallback />}>
                           <AdminDashboard />
+                        </Suspense>
+                      ),
+                    },
+                  ],
+                },
+                {
+                  path: "preuves",
+                  element: (
+                    <ProtectedRoute allowedRoles={[ROLES.PRO, ROLES.ADMIN]} />
+                  ),
+                  children: [
+                    {
+                      index: true,
+                      element: (
+                        <Suspense fallback={<LoadingFallback />}>
+                          <EvidenceLevelPage />
                         </Suspense>
                       ),
                     },

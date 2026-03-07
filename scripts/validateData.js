@@ -362,9 +362,42 @@ if (invalidImageCredits === 0) {
   errors += invalidImageCredits;
 }
 
-// ==================== 8. VÉRIFIER STRUCTURE DES SYNONYMES ====================
+// ==================== 8. VÉRIFIER LES NIVEAUX DE PREUVE ====================
 
-console.log("📝 Vérification 8: Structure des synonymes...");
+console.log("📝 Vérification 8: Validation des niveaux de preuve...");
+
+const validEvidenceLevels = ["A", "B", "C", "D"];
+let invalidEvidenceLevels = 0;
+
+db.forEach((remedy) => {
+  if (!remedy.evidenceLevel) {
+    console.error(
+      `  ❌ ${remedy.name} (id:${remedy.id}) : evidenceLevel manquant`,
+    );
+    invalidEvidenceLevels++;
+  } else if (!validEvidenceLevels.includes(remedy.evidenceLevel)) {
+    console.error(
+      `  ❌ ${remedy.name} (id:${remedy.id}) : evidenceLevel invalide "${remedy.evidenceLevel}" (attendu: A, B, C ou D)`,
+    );
+    invalidEvidenceLevels++;
+  }
+});
+
+if (invalidEvidenceLevels === 0) {
+  const levelCounts = {};
+  validEvidenceLevels.forEach((l) => {
+    levelCounts[l] = db.filter((r) => r.evidenceLevel === l).length;
+  });
+  console.log(
+    `  ✅ Niveaux de preuve valides (A:${levelCounts.A}, B:${levelCounts.B}, C:${levelCounts.C}, D:${levelCounts.D})\n`,
+  );
+} else {
+  errors += invalidEvidenceLevels;
+}
+
+// ==================== 9. VÉRIFIER STRUCTURE DES SYNONYMES ====================
+
+console.log("📝 Vérification 9: Structure des synonymes...");
 
 let synonymCount = 0;
 let invalidSynonyms = 0;
@@ -386,7 +419,7 @@ if (invalidSynonyms === 0) {
   errors += invalidSynonyms;
 }
 
-// ==================== 8. STATISTIQUES ====================
+// ==================== 10. STATISTIQUES ====================
 
 console.log("📊 Statistiques :");
 console.log(
@@ -402,8 +435,17 @@ const remediesWithImageCredit = db.filter((r) => r.imageCredit).length;
 console.log(
   `  • Crédits d'images      : ${remediesWithImageCredit}/${db.length} produits naturels avec crédit`,
 );
+const evidenceLevelCounts = { A: 0, B: 0, C: 0, D: 0 };
+db.forEach((r) => {
+  if (r.evidenceLevel && evidenceLevelCounts[r.evidenceLevel] !== undefined) {
+    evidenceLevelCounts[r.evidenceLevel]++;
+  }
+});
+console.log(
+  `  • Niveaux de preuve      : A:${evidenceLevelCounts.A} B:${evidenceLevelCounts.B} C:${evidenceLevelCounts.C} D:${evidenceLevelCounts.D}`,
+);
 
-// ==================== 9. RÉSULTAT FINAL ====================
+// ==================== 11. RÉSULTAT FINAL ====================
 
 console.log("\n" + "=".repeat(60));
 if (errors === 0 && warnings === 0) {

@@ -2,6 +2,40 @@
 
 ---
 
+## [0.63.0] - 2026-03-07
+
+### Added
+
+- **Evidence level feature** — Full "Niveau de preuve scientifique" section (HAS scale A/B/C/D) with dedicated page at `/dashboard/preuves` (PRO/ADMIN only)
+- **EvidenceBadge component** — Reusable badge with tooltip showing level description, integrated in `ProductCard` and `ProductResultDetailsHeader`
+- **Evidence level page components** — `EvidenceLevelStats` (4 stat cards), `EvidenceLevelLegend` (HAS scale explanation), `EvidenceLevelTable` (filterable/searchable table with pagination)
+- **`useEvidenceData` hook** — Data hook computing stats per evidence level from `db.json`
+- **`evidenceLevel` field in `db.json`** — All 16 products assigned a level (A:2, B:6, C:3, D:5)
+- **Evidence level validation** — New check in `validateData.js` ensuring all products have a valid `evidenceLevel` (A/B/C/D)
+- **Profile avatar in Header** — Shows user initials in a green circle + title/name (e.g., "Dr. Martin") when authenticated
+- **`name` and `title` fields in accounts** — Added to all 3 demo accounts, stored in auth session
+- **ExternalLinkConfirmationModal in LayoutDashboard** — Fixed external links (source, credit, feedback) not working in dashboard context
+- **SettingsModal in LayoutDashboard** — Settings modal now accessible from dashboard pages
+
+### Changed
+
+- **LeafFall moved to RootLayout** — Animation mounted once at root level, no longer restarts when navigating between layouts (performance improvement)
+- **LayoutApp simplified** — Removed LeafFall, background, and z-index wrapper (handled by RootLayout)
+- **LayoutDashboard simplified** — Removed LeafFall, background, and z-index wrapper (handled by RootLayout)
+- **Sidebar** — "Niveau de preuve" nav item enabled with "NEW" badge; sidebar now closes on mobile/tablet when clicking a navigation link
+- **Dashboard home** — "Niveau de preuve scientifique" card marked as available with link to `/dashboard/preuves`; reordered sections
+- **Disclaimer** — Updated wording with emergency number (15) and phone icon
+- **InfoTooltip** — Updated label from "Indications d'usage" to "Usage recommandé" with improved description
+- **HeroHeader** — Updated version badge to v0.63.0; refined description text
+- **AdminProductTable** — Added explicit background class on table rows for LeafFall visibility fix
+
+### Fixed
+
+- **External links broken in dashboard** — `ExternalLinkConfirmationModal` was only rendered in `LayoutApp`, now also in `LayoutDashboard`
+- **Sidebar not closing on mobile** — Added `onNavigate` callback to `SidebarLink` and `SidebarHistory` that triggers sidebar close
+
+---
+
 ## [0.62.0] - 2026-03-06
 
 ### Changed

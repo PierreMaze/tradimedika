@@ -32,6 +32,8 @@ export function AuthProvider({ children }) {
   const isAuthenticated = session?.authenticated === true;
   const userEmail = session?.email || null;
   const userRole = session?.role || null;
+  const userName = session?.name || null;
+  const userTitle = session?.title || null;
 
   const login = useCallback((email, password) => {
     const account = ACCOUNTS.find(
@@ -43,6 +45,8 @@ export function AuthProvider({ children }) {
         authenticated: true,
         email: account.email,
         role: account.role,
+        name: account.name,
+        title: account.title,
       };
       window.localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(newSession));
       setSession(newSession);
@@ -62,10 +66,12 @@ export function AuthProvider({ children }) {
       isAuthenticated,
       userEmail,
       userRole,
+      userName,
+      userTitle,
       login,
       logout,
     }),
-    [isAuthenticated, userEmail, userRole, login, logout],
+    [isAuthenticated, userEmail, userRole, userName, userTitle, login, logout],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

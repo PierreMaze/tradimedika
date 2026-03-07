@@ -1,4 +1,5 @@
 import { HiExclamationTriangle } from "react-icons/hi2";
+import { IoCall } from "react-icons/io5";
 
 function Disclaimer() {
   return (
@@ -16,11 +17,10 @@ function Disclaimer() {
           Les informations présentées sont fournies à{" "}
           <span className="font-semibold text-amber-700 dark:text-amber-400">
             titre informatif et ne remplacent pas un avis/traitement médical
-            professionnel
           </span>
-          . Consultez{" "}
+          . En cas de doute,{" "}
           <span className="font-bold text-amber-700 dark:text-amber-400">
-            TOUJOURS
+            consulter ou composer le 15 <IoCall className="inline h-4 w-4" />
           </span>{" "}
           un médecin en cas de doute.
         </p>

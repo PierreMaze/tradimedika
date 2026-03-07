@@ -60,7 +60,7 @@ export default function AdminProductTable({ products, onEdit, onDelete }) {
             {paginated.map((product) => (
               <tr
                 key={product.id}
-                className="text-neutral-700 transition-colors hover:bg-neutral-50 dark:text-neutral-300 dark:hover:bg-neutral-800/50"
+                className="bg-light dark:bg-dark text-neutral-700 transition-colors hover:bg-neutral-50 dark:text-neutral-300 dark:hover:bg-neutral-800/50"
               >
                 <td className="px-4 py-3 font-mono text-xs text-neutral-400">
                   {product.id}

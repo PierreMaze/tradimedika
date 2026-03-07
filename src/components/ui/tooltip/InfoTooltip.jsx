@@ -67,11 +67,11 @@ export function InfoTooltip({
     return (
       <div className="max-w-xs sm:max-w-sm lg:max-w-md">
         <p className="text-lg font-semibold text-black dark:text-white">
-          Indications d&apos;usage
+          Usage recommandé
         </p>
         <p className="mt-1 text-sm leading-relaxed text-neutral-800 lg:text-base dark:text-neutral-200">
-          Il décrit les indications de grossesse et d&apos;âge de ce produit
-          recommandé.
+          Il décrit l&apos;usage durant la grossesse et l&apos;indication
+          d&apos;âge recommandés pour ce produit.
         </p>
       </div>
     );

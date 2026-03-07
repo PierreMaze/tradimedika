@@ -2,7 +2,9 @@ import { IoMenuOutline } from "react-icons/io5";
 import { Outlet } from "react-router-dom";
 import { useAuth, ROLES } from "../features/auth";
 import { CookieConsentProvider } from "../features/cookie-consent/context/CookieConsentContext";
+import ExternalLinkConfirmationModal from "../features/external-link/components/ExternalLinkConfirmationModal";
 import { SettingsModalProvider } from "../features/settings";
+import SettingsModal from "../features/settings/components/SettingsModal";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Sidebar, { useSidebar } from "./components/Sidebar";
@@ -26,7 +28,7 @@ export default function LayoutDashboard() {
   return (
     <CookieConsentProvider>
       <SettingsModalProvider>
-        <div className="bg-light dark:bg-dark flex min-h-screen">
+        <div className="flex min-h-screen">
           <Sidebar
             isCollapsed={isCollapsed}
             isSidebarOpen={isSidebarOpen}
@@ -63,6 +65,8 @@ export default function LayoutDashboard() {
 
             <Footer fullWidth />
           </div>
+          <ExternalLinkConfirmationModal />
+          <SettingsModal />
         </div>
       </SettingsModalProvider>
     </CookieConsentProvider>

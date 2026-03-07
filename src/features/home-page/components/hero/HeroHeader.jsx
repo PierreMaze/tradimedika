@@ -17,10 +17,10 @@ import { GiSprout } from "react-icons/gi";
  * @returns {JSX.Element}
  */
 export default function HeroHeader({
-  badgeText = "Prototype · v0.62.0",
+  badgeText = "Prototype · v0.63.0",
   title = "Chaque produit naturel",
   titleHighlight = "mérite une source",
-  description = "Informez-vous en toute confiance. La base de données des produits naturels.",
+  description = "Informez-vous en toute confiance. Avec la base de données des produits naturels.",
 }) {
   return (
     <div className="flex flex-col items-center gap-y-4 lg:gap-y-6 2xl:gap-y-8">

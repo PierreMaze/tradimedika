@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { ChildrenAgeTag, PregnancyTag } from "../../../components/tags";
+import { EvidenceBadge } from "../../../features/evidence-level";
 import { InfoTooltip } from "../../../components/ui/tooltip";
 import ImageCredit from "./ImageCredit";
 import SourcesSection from "./ProductResultDetailsSourcesSection";
@@ -56,6 +57,9 @@ function ProductResultDetailsHeader({ product, safeImageUrl }) {
             />
 
             <ChildrenAgeTag age={product.childrenAge} />
+            {product.evidenceLevel && (
+              <EvidenceBadge level={product.evidenceLevel} />
+            )}
           </div>
 
           <SourcesSection sources={product.sources} />
@@ -79,6 +83,7 @@ ProductResultDetailsHeader.propTypes = {
       source: PropTypes.string,
     }),
     childrenAge: PropTypes.number,
+    evidenceLevel: PropTypes.oneOf(["A", "B", "C", "D"]),
     imageCredit: PropTypes.shape({
       author: PropTypes.string,
       source: PropTypes.string,

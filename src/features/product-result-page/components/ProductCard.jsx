@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { ChildrenAgeTag, PregnancyTag } from "../../../components/tags";
 import { InfoTooltip } from "../../../components/ui/tooltip";
 import { useAuth } from "../../../features/auth";
+import { EvidenceBadge } from "../../../features/evidence-level";
 import useGAEvent from "../../../hooks/useGAEvent";
 import { capitalizeFirstLetter } from "../../../utils/capitalizeFirstLetter";
 import { useVisibleItems } from "../hooks/useTruncatePropertiesItems";
@@ -38,6 +39,7 @@ function ProductCard({
     pregnancySafe,
     childrenAge,
     verifiedByProfessional,
+    evidenceLevel,
   } = product;
 
   const { containerRef, itemRefs, counterRef, visibleCount } = useVisibleItems(
@@ -227,7 +229,7 @@ function ProductCard({
                   <InfoTooltip
                     size="sm"
                     variant="inline"
-                    label="Indications d'usage"
+                    label="Usage recommandé"
                   />
                   <div className="flex flex-wrap gap-2">
                     {/* {verifiedByProfessional ? <ProuvedTag /> : <TraditionnalTag />} */}
@@ -241,6 +243,7 @@ function ProductCard({
                       }
                     />
                     <ChildrenAgeTag age={childrenAge} />
+                    {evidenceLevel && <EvidenceBadge level={evidenceLevel} />}
                   </div>
                 </div>
               </>
@@ -292,6 +295,7 @@ ProductCard.propTypes = {
     }),
     childrenAge: PropTypes.number,
     verifiedByProfessional: PropTypes.bool,
+    evidenceLevel: PropTypes.oneOf(["A", "B", "C", "D"]),
   }).isRequired,
   selectedSymptoms: PropTypes.arrayOf(PropTypes.string).isRequired,
   matchedSymptoms: PropTypes.arrayOf(PropTypes.string),
