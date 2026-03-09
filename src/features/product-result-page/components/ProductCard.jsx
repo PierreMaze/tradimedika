@@ -170,11 +170,15 @@ function ProductCard({
               <>
                 {/* Propriétés */}
                 {properties && properties.length > 0 && (
-                  <div className="mt-4 flex flex-col gap-2 text-xs lg:text-sm 2xl:text-base">
-                    <h4 className="text-start text-xs font-semibold text-neutral-700 lg:text-sm 2xl:text-base dark:text-neutral-300">
-                      Propriétés
-                    </h4>
-                    <div className="relative">
+                  <div className="flex flex-col gap-2 text-xs lg:text-sm 2xl:text-base">
+                    <InfoTooltip
+                      size="sm"
+                      variant="inline"
+                      label="Propriétés"
+                      title="Propriétés"
+                      message="Les propriétés indiquent les effets et caractéristiques du produit."
+                    />
+                    <div className="relative -mt-2">
                       <div
                         className="pointer-events-none invisible absolute top-0 left-0 flex gap-2"
                         aria-hidden="true"
@@ -227,6 +231,8 @@ function ProductCard({
                     size="sm"
                     variant="inline"
                     label="Niveau de preuve"
+                    title="Niveau de preuve"
+                    message="Le niveau de preuve indique le niveau de preuves scientifiques disponibles pour soutenir l'efficacité et la sécurité du produit."
                   />
                   <div className="flex flex-wrap gap-2">
                     {evidenceLevel && <EvidenceBadge level={evidenceLevel} />}
@@ -239,6 +245,8 @@ function ProductCard({
                     size="sm"
                     variant="inline"
                     label="Usage recommandé"
+                    title="Usage recommandé"
+                    message="Les tags de sécurité indiquent si le produit est recommandé pour certaines catégories de personnes."
                   />
                   <div className="flex flex-wrap gap-2">
                     {/* {verifiedByProfessional ? <ProuvedTag /> : <TraditionnalTag />} */}

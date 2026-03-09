@@ -3,10 +3,10 @@ import { memo } from "react";
 import { HiArrowRight } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import { ChildrenAgeTag, PregnancyTag } from "../../../components/tags";
+import { InfoTooltip } from "../../../components/ui/tooltip";
 import { EvidenceBadge } from "../../../features/evidence-level";
 import { capitalizeFirstLetter } from "../../../utils/capitalizeFirstLetter";
 import { generateSlug } from "../../product-result-page/utils/productMatcher";
-
 /**
  * Carte produit pour la recherche avancée
  * Version adaptée de ProductCard pour le contexte B2B
@@ -68,8 +68,15 @@ function SearchResultCard({ product }) {
           )}
 
           {/* Propriétés (max 3) */}
+          <InfoTooltip
+            size="sm"
+            variant="inline"
+            label="Propriétés"
+            title="Propriétés"
+            message="Les propriétés indiquent les effets et caractéristiques du produit."
+          />
           {properties && properties.length > 0 && (
-            <div className="mb-6 flex flex-wrap gap-2">
+            <div className="mb-2 flex flex-wrap gap-2">
               {properties.slice(0, 3).map((prop, index) => (
                 <span
                   key={index}
@@ -79,31 +86,43 @@ function SearchResultCard({ product }) {
                 </span>
               ))}
               {properties.length > 3 && (
-                <span className="rounded-md bg-emerald-100 px-2 py-0.5 text-[10px] font-medium text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200">
+                <span className="rounded-md bg-emerald-100 px-2 py-0.5 text-base font-medium text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200">
                   +{properties.length - 3}
                 </span>
               )}
             </div>
           )}
-
-          <div className="mb-3 flex flex-wrap gap-2">
+          <InfoTooltip
+            size="sm"
+            variant="inline"
+            label="Niveau de preuve"
+            title="Niveau de preuve"
+            message="Le niveau de preuve indique la qualité des études scientifiques qui soutiennent l'efficacité du produit."
+          />
+          <div className="mb-2 flex flex-wrap gap-2">
             {evidenceLevel && <EvidenceBadge level={evidenceLevel} />}
           </div>
 
           {/* Tags de sécurité */}
-          <div className="mb-3 flex flex-wrap gap-2">
+          <InfoTooltip
+            size="sm"
+            variant="inline"
+            label="Usage recommandé"
+            title="Usage recommandé"
+            message="Les tags de sécurité indiquent si le produit est recommandé pour certaines catégories de personnes."
+          />
+          <div className="mb-2 flex flex-wrap gap-2">
             <PregnancyTag variant={pregnancyVariant} />
             <ChildrenAgeTag age={childrenAge} />
           </div>
-
-          {/* CTA */}
-          <div className="mt-3 flex items-center justify-end gap-1 text-base font-semibold text-emerald-600 transition-colors duration-150 group-hover:text-emerald-700 dark:text-emerald-400 dark:group-hover:text-emerald-300">
-            <span>Voir la fiche</span>
-            <HiArrowRight
-              className="h-3.5 w-3.5 transition-transform duration-150 group-hover:translate-x-1"
-              aria-hidden="true"
-            />
-          </div>
+        </div>
+        {/* CTA */}
+        <div className="mr-3 mb-3 flex items-center justify-end gap-1 text-base font-semibold text-emerald-600 transition-colors duration-150 group-hover:text-emerald-700 dark:text-emerald-400 dark:group-hover:text-emerald-300">
+          <span>Voir la fiche</span>
+          <HiArrowRight
+            className="h-3.5 w-3.5 transition-transform duration-150 group-hover:translate-x-1"
+            aria-hidden="true"
+          />
         </div>
       </div>
     </Link>
