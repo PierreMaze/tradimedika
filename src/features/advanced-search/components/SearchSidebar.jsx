@@ -10,7 +10,6 @@ import PregnancyFilter from "./filters/PregnancyFilter";
 import PropertyFilter from "./filters/PropertyFilter";
 import TextSearchFilter from "./filters/TextSearchFilter";
 import TypeFilter from "./filters/TypeFilter";
-import VerificationFilter from "./filters/VerificationFilter";
 
 /**
  * Calcule le nombre de filtres actifs dans un objet de filtres booléens
@@ -32,6 +31,7 @@ function SearchSidebar({
   onToggleAllergen,
   onToggleAlphabet,
   onResetAll,
+  onResetCategory,
 }) {
   const typesCount = useMemo(() => countActive(filters.types), [filters.types]);
   const categoriesCount = useMemo(
@@ -54,15 +54,11 @@ function SearchSidebar({
     () => countActive(filters.evidenceLevel),
     [filters.evidenceLevel],
   );
-  const verificationCount = useMemo(
-    () => countActive(filters.verification),
-    [filters.verification],
-  );
 
   return (
     <div className="flex flex-col">
-      {/* Header */}
-      <div className="mb-3 flex items-center justify-between border-b border-neutral-200 px-4 py-3 dark:border-neutral-700">
+      {/* Header — Sticky */}
+      <div className="sticky top-0 z-10 mb-3 flex items-center justify-between border-b border-neutral-200 bg-white px-4 py-3 dark:border-neutral-700 dark:bg-neutral-800">
         <h2 className="text-sm font-bold tracking-wide text-neutral-900 uppercase dark:text-neutral-100">
           Filtres
         </h2>
@@ -92,7 +88,11 @@ function SearchSidebar({
       </FilterSection>
 
       {/* Filtres accordéon */}
-      <FilterSection label="Type de produit" count={typesCount}>
+      <FilterSection
+        defaultOpen={false}
+        label="Type de produit"
+        count={typesCount}
+      >
         <TypeFilter activeFilters={filters.types} onToggle={onToggleFilter} />
       </FilterSection>
 
@@ -119,24 +119,6 @@ function SearchSidebar({
         />
       </FilterSection>
 
-      <FilterSection label="Sécurité grossesse" count={pregnancyCount}>
-        <PregnancyFilter
-          activeFilters={filters.pregnancy}
-          onToggle={onToggleFilter}
-        />
-      </FilterSection>
-
-      <FilterSection
-        label="Âge enfants"
-        count={childrenCount}
-        defaultOpen={false}
-      >
-        <ChildrenAgeFilter
-          activeFilters={filters.childrenAge}
-          onToggle={onToggleFilter}
-        />
-      </FilterSection>
-
       <FilterSection
         label="Allergènes à exclure"
         count={filters.excludedAllergens.length}
@@ -149,23 +131,38 @@ function SearchSidebar({
       </FilterSection>
 
       <FilterSection
-        label="Niveau de preuve"
-        count={evidenceCount}
-        defaultOpen={false}
+        label="Sécurité grossesse"
+        count={pregnancyCount}
+        showReset={true}
+        onReset={() => onResetCategory("pregnancy")}
       >
-        <EvidenceLevelFilter
-          activeFilters={filters.evidenceLevel}
+        <PregnancyFilter
+          activeFilters={filters.pregnancy}
           onToggle={onToggleFilter}
         />
       </FilterSection>
 
       <FilterSection
-        label="Vérification"
-        count={verificationCount}
-        defaultOpen={false}
+        label="Âge enfants"
+        count={childrenCount}
+        showReset={true}
+        onReset={() => onResetCategory("childrenAge")}
       >
-        <VerificationFilter
-          activeFilters={filters.verification}
+        <ChildrenAgeFilter
+          activeFilters={filters.childrenAge}
+          onToggle={onToggleFilter}
+        />
+      </FilterSection>
+
+      <FilterSection
+        label="Niveau de preuve"
+        count={evidenceCount}
+        defaultOpen={false}
+        showReset={true}
+        onReset={() => onResetCategory("evidenceLevel")}
+      >
+        <EvidenceLevelFilter
+          activeFilters={filters.evidenceLevel}
           onToggle={onToggleFilter}
         />
       </FilterSection>
@@ -182,6 +179,7 @@ SearchSidebar.propTypes = {
   onToggleAllergen: PropTypes.func.isRequired,
   onToggleAlphabet: PropTypes.func.isRequired,
   onResetAll: PropTypes.func.isRequired,
+  onResetCategory: PropTypes.func.isRequired,
 };
 
 export default SearchSidebar;

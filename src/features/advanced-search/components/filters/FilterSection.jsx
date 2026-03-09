@@ -1,13 +1,28 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { HiChevronDown, HiChevronUp } from "react-icons/hi2";
+import { IoReloadOutline } from "react-icons/io5";
 
 /**
  * Section accordéon réutilisable pour les filtres de la sidebar
  * S'inspire du FilterAccordion existant mais adapté pour la sidebar
  */
-function FilterSection({ label, children, defaultOpen = true, count = 0 }) {
+function FilterSection({
+  label,
+  children,
+  defaultOpen = true,
+  count = 0,
+  onReset = null,
+  showReset = false,
+}) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
+
+  const handleReset = (e) => {
+    e.stopPropagation();
+    if (onReset) {
+      onReset();
+    }
+  };
 
   return (
     <div className="border-b border-neutral-200 dark:border-neutral-700">
@@ -41,6 +56,16 @@ function FilterSection({ label, children, defaultOpen = true, count = 0 }) {
 
       {isOpen && (
         <div className="px-4 pb-3 motion-reduce:transition-none">
+          {showReset && count > 0 && onReset && (
+            <button
+              onClick={handleReset}
+              className="mb-2 flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-100"
+              aria-label="Réinitialiser les filtres de cette section"
+            >
+              <IoReloadOutline className="h-3.5 w-3.5" />
+              Réinitialiser
+            </button>
+          )}
           {children}
         </div>
       )}
@@ -53,6 +78,8 @@ FilterSection.propTypes = {
   children: PropTypes.node.isRequired,
   defaultOpen: PropTypes.bool,
   count: PropTypes.number,
+  onReset: PropTypes.func,
+  showReset: PropTypes.bool,
 };
 
 export default FilterSection;

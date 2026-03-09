@@ -30,7 +30,7 @@ function EvidenceLevelFilter({ activeFilters, onToggle }) {
               className={`h-2 w-2 rounded-full ${COLOR_CLASSES[level.color]}`}
               aria-hidden="true"
             />
-            <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+            <span className="w-full text-sm font-medium text-neutral-700 dark:text-neutral-300">
               {level.label}
             </span>
           </div>

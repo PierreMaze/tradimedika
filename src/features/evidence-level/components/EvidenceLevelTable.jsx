@@ -4,6 +4,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { generateSlug } from "../../product-result-page/utils/productMatcher";
 import EvidenceBadge from "./EvidenceBadge";
+import SourcesTooltip from "./SourcesTooltip";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -120,14 +121,16 @@ export default function EvidenceLevelTable({ products }) {
                   )}
                 </td>
                 <td className="hidden px-4 py-3 sm:table-cell">
-                  <span className="text-base text-neutral-500 dark:text-neutral-400">
-                    {product.sources?.scientific?.length || 0}
-                  </span>
+                  <SourcesTooltip
+                    sources={product.sources || {}}
+                    type="scientific"
+                  />
                 </td>
                 <td className="hidden px-4 py-3 sm:table-cell">
-                  <span className="text-base text-neutral-500 dark:text-neutral-400">
-                    {product.sources?.traditional?.length || 0}
-                  </span>
+                  <SourcesTooltip
+                    sources={product.sources || {}}
+                    type="traditional"
+                  />
                 </td>
                 <td className="hidden px-4 py-3">
                   {product.verifiedByProfessional ? (

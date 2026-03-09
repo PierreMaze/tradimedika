@@ -26,6 +26,7 @@ function AdvancedSearchPage() {
     toggleAlphabet,
     setSort,
     resetAll,
+    resetCategory,
   } = useAdvancedSearch();
 
   return (
@@ -54,7 +55,7 @@ function AdvancedSearchPage() {
         {/* Layout principal */}
         <div className="flex gap-6">
           {/* Sidebar filtres — Desktop uniquement */}
-          <aside className="hidden w-90 shrink-0 lg:block">
+          <aside className="hidden w-full shrink-0 lg:block lg:w-90">
             <div
               className="sticky top-24 overflow-y-auto rounded-lg border border-neutral-200 bg-white shadow-sm dark:border-neutral-700 dark:bg-neutral-800"
               style={{ maxHeight: "calc(100vh - 7rem)" }}
@@ -68,6 +69,7 @@ function AdvancedSearchPage() {
                 onToggleAllergen={toggleAllergen}
                 onToggleAlphabet={toggleAlphabet}
                 onResetAll={resetAll}
+                onResetCategory={resetCategory}
               />
             </div>
           </aside>
@@ -103,6 +105,7 @@ function AdvancedSearchPage() {
         onToggleAllergen={toggleAllergen}
         onToggleAlphabet={toggleAlphabet}
         onResetAll={resetAll}
+        onResetCategory={resetCategory}
       />
     </>
   );

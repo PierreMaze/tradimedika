@@ -2,6 +2,7 @@ import {
   EVIDENCE_LEVEL_ORDER,
   EVIDENCE_LEVELS,
 } from "../constants/evidenceLevelConfig";
+import EvidenceLevelMethodology from "./EvidenceLevelMethodology";
 
 export default function EvidenceLevelLegend() {
   return (
@@ -33,6 +34,7 @@ export default function EvidenceLevelLegend() {
           );
         })}
       </div>
+      <EvidenceLevelMethodology />
     </div>
   );
 }

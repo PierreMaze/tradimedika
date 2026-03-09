@@ -2,6 +2,29 @@
 
 ---
 
+## [0.65.1] - 2026-03-09
+
+### Added
+
+- **SourcesTooltip component** — Interactive tooltip displaying scientific and traditional sources in the Evidence Level table with hover-to-preview and click-to-pin functionality, clickable external links, and mobile-friendly behavior (`src/features/evidence-level/components/SourcesTooltip.jsx`)
+- **EvidenceLevelMethodology component** — Expandable dropdown section in Evidence Level Legend explaining GRADE system, evidence pyramid, evaluation criteria, and international standards (`src/features/evidence-level/components/EvidenceLevelMethodology.jsx`)
+- **Reset buttons in filter sections** — Added "Réinitialiser" buttons to checkbox-based filter sections (Pregnancy, Children Age, Evidence Level) in Advanced Search sidebar
+- **Search bars with removable tags** — Added search inputs and removable tag chips to Category and Property filters following the Allergen filter pattern for consistent UX
+- **Sticky sidebar header** — Search sidebar header ("Filtres" + "Tout effacer" button) now remains visible when scrolling through filter list
+
+### Changed
+
+- **EvidenceLevelTable** — Replaced static source counts with interactive `<SourcesTooltip>` components for both scientific and traditional sources columns
+- **EvidenceLevelLegend** — Integrated `<EvidenceLevelMethodology>` dropdown at the bottom for detailed methodology documentation
+- **FilterSection component** — Added `showReset` and `onReset` props to support granular reset functionality for specific filter categories
+- **CategoryFilter** — Complete rewrite with search bar, filtered list, and removable tag chips (previously checkbox-only)
+- **PropertyFilter** — Complete rewrite with search bar, filtered list, and removable tag chips (previously checkbox-only)
+- **SearchSidebar** — Added `sticky top-0 z-10 bg-white dark:bg-neutral-800` classes to header for always-visible filter controls; wired up `onResetCategory` prop for reset buttons
+- **AdvancedSearchPage** — Destructured and passed `resetCategory` function from `useAdvancedSearch` hook to SearchSidebar
+- **MobileFilterDrawer** — Added `onResetCategory` prop support for mobile filter reset functionality
+
+---
+
 ## [0.65.0] - 2026-03-07
 
 ### Added
