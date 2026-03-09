@@ -39,7 +39,7 @@ function SearchResultCard({ product }) {
       <div className="flex h-full flex-col overflow-hidden rounded-lg bg-white shadow-md ring-2 ring-emerald-500 transition-all duration-150 hover:scale-102 hover:shadow-lg hover:ring-emerald-600 motion-reduce:hover:scale-100 dark:bg-neutral-800 dark:ring-emerald-600">
         {/* Image */}
         {image && (
-          <div className="bg-light dark:bg-dark relative aspect-square w-full overflow-hidden">
+          <div className="relative aspect-square w-full overflow-hidden bg-neutral-50 dark:bg-neutral-700/50">
             <img
               src={image}
               alt={`${name} - ${type}`}
@@ -86,11 +86,14 @@ function SearchResultCard({ product }) {
             </div>
           )}
 
+          <div className="mb-3 flex flex-wrap gap-2">
+            {evidenceLevel && <EvidenceBadge level={evidenceLevel} />}
+          </div>
+
           {/* Tags de sécurité */}
           <div className="mb-3 flex flex-wrap gap-2">
             <PregnancyTag variant={pregnancyVariant} />
             <ChildrenAgeTag age={childrenAge} />
-            {evidenceLevel && <EvidenceBadge level={evidenceLevel} />}
           </div>
 
           {/* CTA */}

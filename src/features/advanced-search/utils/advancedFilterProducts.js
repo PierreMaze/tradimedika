@@ -42,6 +42,7 @@ function productMatchesCategory(product, categoryId) {
 export function advancedFilterProducts(products, filters) {
   const {
     textSearch = "",
+    alphabet = [],
     types = {},
     categories = {},
     properties = {},
@@ -61,13 +62,18 @@ export function advancedFilterProducts(products, filters) {
   const hasEvidenceFilters = Object.values(evidenceLevel).some(Boolean);
   const hasVerificationFilters = Object.values(verification).some(Boolean);
   const hasTextSearch = textSearch.trim().length > 0;
+  const hasAlphabetFilters = alphabet.length > 0;
 
   return products.filter((product) => {
-    // Filtre textuel : nom contient la recherche
     if (hasTextSearch) {
       const normalizedSearch = normalizeText(textSearch);
       const normalizedName = normalizeText(product.name);
       if (!normalizedName.includes(normalizedSearch)) return false;
+    }
+
+    if (hasAlphabetFilters) {
+      const firstLetter = product.name.charAt(0).toUpperCase();
+      if (!alphabet.includes(firstLetter)) return false;
     }
 
     // Filtre par type (OU au sein de la catégorie)

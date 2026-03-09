@@ -17,6 +17,7 @@ coverage
 
 # Editor directories and files
 docs/ISSUE_TEMPLATE.md
+docs/brainstorming/
 docs/PR_TEMPLATE.md
 CLAUDE.md
 .continue/

@@ -21,8 +21,7 @@ function Disclaimer() {
           . En cas de doute,{" "}
           <span className="font-bold text-amber-700 dark:text-amber-400">
             consulter ou composer le 15 <IoCall className="inline h-4 w-4" />
-          </span>{" "}
-          un médecin en cas de doute.
+          </span>
         </p>
       </div>
     </div>

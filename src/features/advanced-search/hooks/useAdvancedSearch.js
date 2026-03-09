@@ -9,6 +9,7 @@ import {
 
 const INITIAL_STATE = {
   textSearch: "",
+  alphabet: [],
   types: {},
   categories: {},
   properties: {},
@@ -46,6 +47,15 @@ function searchReducer(state, action) {
       return { ...state, excludedAllergens: next };
     }
 
+    case "TOGGLE_ALPHABET": {
+      const letter = action.payload;
+      const current = state.alphabet;
+      const next = current.includes(letter)
+        ? current.filter((l) => l !== letter)
+        : [...current, letter];
+      return { ...state, alphabet: next };
+    }
+
     case "SET_SORT":
       return {
         ...state,
@@ -57,8 +67,11 @@ function searchReducer(state, action) {
       return { ...INITIAL_STATE };
 
     case "RESET_CATEGORY":
-      if (action.payload === "excludedAllergens") {
-        return { ...state, excludedAllergens: [] };
+      if (
+        action.payload === "excludedAllergens" ||
+        action.payload === "alphabet"
+      ) {
+        return { ...state, [action.payload]: [] };
       }
       return { ...state, [action.payload]: {} };
 
@@ -90,7 +103,6 @@ export function useAdvancedSearch() {
     [filteredProducts, state.sortBy, state.sortOrder],
   );
 
-  // Nombre total de filtres actifs
   const activeFiltersCount = useMemo(() => {
     let count = 0;
     if (state.textSearch.trim()) count++;
@@ -108,6 +120,7 @@ export function useAdvancedSearch() {
       });
     });
     count += state.excludedAllergens.length;
+    count += state.alphabet.length;
     return count;
   }, [state]);
 
@@ -121,6 +134,10 @@ export function useAdvancedSearch() {
 
   const toggleAllergen = useCallback((allergenId) => {
     dispatch({ type: "TOGGLE_ALLERGEN", payload: allergenId });
+  }, []);
+
+  const toggleAlphabet = useCallback((letter) => {
+    dispatch({ type: "TOGGLE_ALPHABET", payload: letter });
   }, []);
 
   const setSort = useCallback((sortBy, sortOrder) => {
@@ -148,6 +165,7 @@ export function useAdvancedSearch() {
     setTextSearch,
     toggleFilter,
     toggleAllergen,
+    toggleAlphabet,
     setSort,
     resetAll,
     resetCategory,

@@ -43,7 +43,7 @@ export default function EvidenceLevelTable({ products }) {
               setPage(0);
             }}
             placeholder="Rechercher un produit..."
-            className="w-full rounded-lg border border-neutral-300 bg-white py-2 pr-4 pl-9 text-sm text-neutral-800 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 dark:border-neutral-600 dark:bg-neutral-700 dark:text-white"
+            className="w-full rounded-lg border-2 border-neutral-300 bg-white py-2 pr-4 pl-9 text-sm text-neutral-800 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 dark:border-neutral-600 dark:bg-neutral-700 dark:text-white"
           />
         </div>
         <div className="flex gap-1.5">
@@ -80,9 +80,9 @@ export default function EvidenceLevelTable({ products }) {
       </div>
 
       {/* Tableau */}
-      <div className="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-700">
+      <div className="overflow-x-auto rounded-lg border-2 border-dashed border-neutral-200 dark:border-neutral-700">
         <table className="w-full text-left text-sm">
-          <thead className="bg-neutral-50 text-xs font-medium tracking-wide text-neutral-500 uppercase dark:bg-neutral-800 dark:text-neutral-400">
+          <thead className="bg-neutral-100 text-xs font-medium tracking-wide text-neutral-500 uppercase dark:bg-neutral-800 dark:text-neutral-400">
             <tr>
               <th className="px-4 py-3">Nom</th>
               <th className="px-4 py-3">Type</th>
@@ -92,11 +92,11 @@ export default function EvidenceLevelTable({ products }) {
               <th className="hidden px-4 py-3">Vérifié</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-neutral-100 dark:divide-neutral-700">
+          <tbody className="divide-y-2 divide-dashed divide-neutral-200 dark:divide-neutral-700">
             {paginated.map((product) => (
               <tr
                 key={product.id}
-                className="bg-light dark:bg-dark text-neutral-700 transition-colors hover:bg-neutral-50 dark:text-neutral-300 dark:hover:bg-neutral-800/50"
+                className="dark:bg-dark bg-white text-neutral-700 transition-colors hover:bg-neutral-50 dark:text-neutral-300 dark:hover:bg-neutral-800/50"
               >
                 <td className="px-4 py-3">
                   <Link
@@ -107,7 +107,7 @@ export default function EvidenceLevelTable({ products }) {
                   </Link>
                 </td>
                 <td className="px-4 py-3">
-                  <span className="rounded bg-neutral-100 px-2 py-0.5 text-sm capitalize dark:bg-neutral-700">
+                  <span className="rounded bg-neutral-200 px-2 py-0.5 text-sm capitalize dark:bg-neutral-700">
                     {product.type}
                   </span>
                 </td>

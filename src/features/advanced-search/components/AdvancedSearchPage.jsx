@@ -23,6 +23,7 @@ function AdvancedSearchPage() {
     setTextSearch,
     toggleFilter,
     toggleAllergen,
+    toggleAlphabet,
     setSort,
     resetAll,
   } = useAdvancedSearch();
@@ -65,6 +66,7 @@ function AdvancedSearchPage() {
                 onTextSearch={setTextSearch}
                 onToggleFilter={toggleFilter}
                 onToggleAllergen={toggleAllergen}
+                onToggleAlphabet={toggleAlphabet}
                 onResetAll={resetAll}
               />
             </div>
@@ -99,6 +101,7 @@ function AdvancedSearchPage() {
         onTextSearch={setTextSearch}
         onToggleFilter={toggleFilter}
         onToggleAllergen={toggleAllergen}
+        onToggleAlphabet={toggleAlphabet}
         onResetAll={resetAll}
       />
     </>

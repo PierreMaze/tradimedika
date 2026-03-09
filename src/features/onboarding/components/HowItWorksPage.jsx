@@ -273,7 +273,8 @@ export default function HowItWorksPage() {
             connues.
           </p>
           <p>
-            À terme, la plateforme avec des fondations solides, la proposera des{" "}
+            À terme, avec des fondations solides et une communauté active, la
+            plateforme proposera des{" "}
             <strong>partenariats avec des laboratoires</strong> et des{" "}
             <strong>organismes de formation</strong> pour enrichir la base de
             données et offrir des outils toujours plus adaptés aux besoins des

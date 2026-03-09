@@ -12,13 +12,13 @@ export default function EvidenceLevelStats({ stats }) {
         return (
           <div
             key={level}
-            className="rounded-lg border border-neutral-200 bg-white p-4 dark:border-neutral-700 dark:bg-neutral-800"
+            className="rounded-lg border-2 border-dashed border-neutral-200 bg-white p-4 dark:border-neutral-700 dark:bg-neutral-800"
           >
             <div className="flex items-center gap-2">
               <span
                 className={`h-3 w-3 rounded-full ${config.dotColor}`}
               ></span>
-              <span className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
+              <span className="text-xs font-semibold text-neutral-500 dark:text-neutral-400">
                 {config.label}
               </span>
             </div>

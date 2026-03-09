@@ -4,8 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { HiArrowLeft } from "react-icons/hi";
 import { useLocation } from "react-router-dom";
-// [DISABLED] Red flags — useNavigate conservé pour future feature
-// import { useNavigate } from "react-router-dom";
+import { CatalogSearch, FilterProductResult, ProductResultList } from "..";
 import Button from "../../../components/ui/button/Button";
 import FeedbackLink from "../../../components/ui/feedback/FeedbackLink";
 import db from "../../../data/db.json";
@@ -15,8 +14,6 @@ import {
   useAllergies,
 } from "../../allergens-search";
 import { useAuth } from "../../auth";
-// [DISABLED] Red flags modal — conservé pour future feature
-// import { useConsent } from "../../consent";
 import { useSearchHistory } from "../../history-search/hooks/useSearchHistory";
 import {
   FilterButton,
@@ -24,7 +21,6 @@ import {
   filterProductsByTags,
   useProductFilters,
 } from "../../product-filter";
-import { FilterProductResult, ProductResultList } from "..";
 import { ProductSearchSection } from "../../product-search";
 import { useProductTags } from "../../product-search/hooks/useProductTags";
 import { normalizeForMatching } from "../../product-search/utils/normalize";
@@ -187,6 +183,19 @@ function ProductResult() {
   const [showFilteredByAllergies, setShowFilteredByAllergies] = useState(false);
   const [resetFilterKey, setResetFilterKey] = useState(0);
 
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedLetter, setSelectedLetter] = useState(null);
+
+  const handleLetterClick = useCallback((letter) => {
+    setSelectedLetter((prev) => (prev === letter ? null : letter));
+    setSearchQuery("");
+  }, []);
+
+  const handleSearchChange = useCallback((query) => {
+    setSearchQuery(query);
+    setSelectedLetter(null);
+  }, []);
+
   const displayProducts = useMemo(() => {
     const base = safeProducts.map((item) => ({ ...item, isFiltered: false }));
 
@@ -216,24 +225,41 @@ function ProductResult() {
     setFilteredByTags(products);
   }, []);
 
-  // Appliquer le filtre par tags de propriétés
   const filteredProducts = useMemo(() => {
     return filterProductsByTags(filteredByTags, appliedFilters);
   }, [filteredByTags, appliedFilters]);
 
-  // Recommandation : premier produit non-allergène
+  const searchFilteredProducts = useMemo(() => {
+    let filtered = filteredProducts;
+
+    if (searchQuery.trim()) {
+      const normalizedQuery = normalizeForMatching(searchQuery);
+      filtered = filtered.filter((item) =>
+        normalizeForMatching(item.product.name).includes(normalizedQuery),
+      );
+    }
+
+    if (selectedLetter) {
+      filtered = filtered.filter((item) =>
+        item.product.name.toUpperCase().startsWith(selectedLetter),
+      );
+    }
+
+    return filtered;
+  }, [filteredProducts, searchQuery, selectedLetter]);
+
   const productsWithRecommendation = useMemo(() => {
-    const recommendedIndex = filteredProducts.findIndex(
+    const recommendedIndex = searchFilteredProducts.findIndex(
       (item) => !item.isFiltered,
     );
-    return filteredProducts.map((item, index) => {
+    return searchFilteredProducts.map((item, index) => {
       const shouldBeRecommended = index === recommendedIndex;
       if (item.isRecommended === shouldBeRecommended) {
         return item;
       }
       return { ...item, isRecommended: shouldBeRecommended };
     });
-  }, [filteredProducts]);
+  }, [searchFilteredProducts]);
 
   const pageTitle =
     selectedProducts.length > 0
@@ -331,6 +357,14 @@ function ProductResult() {
           </div>
         )}
 
+        <CatalogSearch
+          searchQuery={searchQuery}
+          onSearchChange={handleSearchChange}
+          selectedLetter={selectedLetter}
+          onLetterClick={handleLetterClick}
+        />
+
+        <span className="my-4 w-2/3 border-t-2 border-dashed text-neutral-600 dark:text-neutral-400"></span>
         {/* Compteur de résultats */}
         {productsWithRecommendation.length > 0 && safeProducts.length > 0 && (
           <p
@@ -346,7 +380,6 @@ function ProductResult() {
             {productsWithRecommendation.length > 1 ? "s" : ""}
           </p>
         )}
-        <span className="my-4 w-2/3 border-t-2 border-dashed text-neutral-600 dark:text-neutral-400"></span>
         <ProductResultList
           products={productsWithRecommendation}
           hasMatchingProducts={safeProducts.length > 0}

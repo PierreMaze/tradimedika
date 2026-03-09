@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useMemo } from "react";
 import AllergenFilter from "./filters/AllergenFilter";
+import AlphabetFilter from "./filters/AlphabetFilter";
 import CategoryFilter from "./filters/CategoryFilter";
 import ChildrenAgeFilter from "./filters/ChildrenAgeFilter";
 import EvidenceLevelFilter from "./filters/EvidenceLevelFilter";
@@ -29,6 +30,7 @@ function SearchSidebar({
   onTextSearch,
   onToggleFilter,
   onToggleAllergen,
+  onToggleAlphabet,
   onResetAll,
 }) {
   const typesCount = useMemo(() => countActive(filters.types), [filters.types]);
@@ -76,6 +78,18 @@ function SearchSidebar({
 
       {/* Recherche textuelle */}
       <TextSearchFilter value={filters.textSearch} onChange={onTextSearch} />
+
+      {/* Filtre alphabétique */}
+      <FilterSection
+        label="Filtrer par première lettre"
+        count={filters.alphabet.length}
+        defaultOpen={true}
+      >
+        <AlphabetFilter
+          selectedLetters={filters.alphabet}
+          onToggle={onToggleAlphabet}
+        />
+      </FilterSection>
 
       {/* Filtres accordéon */}
       <FilterSection label="Type de produit" count={typesCount}>
@@ -166,6 +180,7 @@ SearchSidebar.propTypes = {
   onTextSearch: PropTypes.func.isRequired,
   onToggleFilter: PropTypes.func.isRequired,
   onToggleAllergen: PropTypes.func.isRequired,
+  onToggleAlphabet: PropTypes.func.isRequired,
   onResetAll: PropTypes.func.isRequired,
 };
 

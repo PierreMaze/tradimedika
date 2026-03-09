@@ -140,6 +140,9 @@ function ProductCard({
                 className={`mx-auto h-full w-2/3 object-scale-down p-4 transition-colors duration-150 lg:w-3/4 2xl:w-4/5 ${imageClasses}`}
                 loading="lazy"
               />
+              <span className="absolute top-2 left-2 rounded-md bg-white/90 px-3 py-1.5 text-sm font-semibold tracking-wide text-neutral-700 uppercase shadow-md dark:bg-neutral-800/90 dark:text-neutral-300">
+                {type}
+              </span>
             </div>
           )}
 
@@ -152,11 +155,6 @@ function ProductCard({
               >
                 {name}
               </h3>
-              <span
-                className={`bg-light shrink-0 rounded-md px-3 py-1.5 text-xs font-semibold tracking-wide text-black uppercase lg:text-sm 2xl:text-base dark:bg-neutral-600 dark:text-white ${textClasses}`}
-              >
-                {type}
-              </span>
             </div>
 
             {/* Description (truncate sur 3 lignes) */}
@@ -224,6 +222,17 @@ function ProductCard({
                   </div>
                 )}
 
+                <div className={`mt-2 flex flex-col ${textClasses}`}>
+                  <InfoTooltip
+                    size="sm"
+                    variant="inline"
+                    label="Niveau de preuve"
+                  />
+                  <div className="flex flex-wrap gap-2">
+                    {evidenceLevel && <EvidenceBadge level={evidenceLevel} />}
+                  </div>
+                </div>
+
                 {/* Tags de sécurité */}
                 <div className={`mt-2 flex flex-col ${textClasses}`}>
                   <InfoTooltip
@@ -243,7 +252,6 @@ function ProductCard({
                       }
                     />
                     <ChildrenAgeTag age={childrenAge} />
-                    {evidenceLevel && <EvidenceBadge level={evidenceLevel} />}
                   </div>
                 </div>
               </>

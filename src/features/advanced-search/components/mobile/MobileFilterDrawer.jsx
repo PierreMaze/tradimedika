@@ -15,6 +15,7 @@ function MobileFilterDrawer({
   onTextSearch,
   onToggleFilter,
   onToggleAllergen,
+  onToggleAlphabet,
   onResetAll,
 }) {
   if (!isOpen) return null;
@@ -61,6 +62,7 @@ function MobileFilterDrawer({
             onTextSearch={onTextSearch}
             onToggleFilter={onToggleFilter}
             onToggleAllergen={onToggleAllergen}
+            onToggleAlphabet={onToggleAlphabet}
             onResetAll={onResetAll}
           />
         </div>
@@ -88,6 +90,7 @@ MobileFilterDrawer.propTypes = {
   onTextSearch: PropTypes.func.isRequired,
   onToggleFilter: PropTypes.func.isRequired,
   onToggleAllergen: PropTypes.func.isRequired,
+  onToggleAlphabet: PropTypes.func.isRequired,
   onResetAll: PropTypes.func.isRequired,
 };
 
