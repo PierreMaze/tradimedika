@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import { ChildrenAgeTag, PregnancyTag } from "../../../components/tags";
 import { InfoTooltip } from "../../../components/ui/tooltip";
 import { useAuth } from "../../../features/auth";
-import { EvidenceBadge } from "../../../features/evidence-level";
 import useGAEvent from "../../../hooks/useGAEvent";
 import { capitalizeFirstLetter } from "../../../utils/capitalizeFirstLetter";
 import { useVisibleItems } from "../hooks/useTruncatePropertiesItems";
@@ -39,7 +38,7 @@ function ProductCard({
     pregnancySafe,
     childrenAge,
     verifiedByProfessional,
-    evidenceLevel,
+    // evidenceLevel,
   } = product;
 
   const { containerRef, itemRefs, counterRef, visibleCount } = useVisibleItems(
@@ -226,7 +225,7 @@ function ProductCard({
                   </div>
                 )}
 
-                <div className={`mt-2 flex flex-col ${textClasses}`}>
+                {/* <div className={`mt-2 flex flex-col ${textClasses}`}>
                   <InfoTooltip
                     size="sm"
                     variant="inline"
@@ -237,7 +236,7 @@ function ProductCard({
                   <div className="flex flex-wrap gap-2">
                     {evidenceLevel && <EvidenceBadge level={evidenceLevel} />}
                   </div>
-                </div>
+                </div> */}
 
                 {/* Tags de sécurité */}
                 <div className={`mt-2 flex flex-col ${textClasses}`}>

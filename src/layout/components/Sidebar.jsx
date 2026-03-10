@@ -1,8 +1,6 @@
 import PropTypes from "prop-types";
 import { useMemo, useState } from "react";
 import {
-  IoChevronBackOutline,
-  IoChevronForwardOutline,
   IoCloseOutline,
   IoDocumentTextOutline,
   IoFlaskOutline,
@@ -21,6 +19,10 @@ import {
   IoTrashOutline,
 } from "react-icons/io5";
 import { RiHome4Line } from "react-icons/ri";
+import {
+  TbLayoutSidebarLeftCollapseFilled,
+  TbLayoutSidebarLeftExpandFilled,
+} from "react-icons/tb";
 
 import { NavLink, useNavigate } from "react-router-dom";
 import { ROLES, useAuth } from "../../features/auth";
@@ -351,9 +353,9 @@ export default function Sidebar({
             }
           >
             {isCollapsed ? (
-              <IoChevronForwardOutline className="text-xl" />
+              <TbLayoutSidebarLeftExpandFilled className="text-xl" />
             ) : (
-              <IoChevronBackOutline className="text-xl" />
+              <TbLayoutSidebarLeftCollapseFilled className="text-xl" />
             )}
           </button>
           {/* Close button (mobile) */}

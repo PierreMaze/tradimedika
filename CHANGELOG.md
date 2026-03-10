@@ -2,6 +2,17 @@
 
 ---
 
+## [0.65.3] - 2026-03-10
+
+### Changed
+
+- **Homepage features** — Updated feature list in `HeroFeatures` component to accurately reflect current capabilities: replaced "Recherche simplifiée" with "Recherche avancée", added "Niveaux de preuve", removed "Espace pro dédié" (future feature)
+- **"How it works" tutorial steps** — Updated all 4 tutorial step descriptions in `HowItWorksPage` for clarity and accuracy: Step 1 now points to advanced search catalog, Step 2 renamed to "Filtrer et rechercher" with detailed filter descriptions, Step 3 enhanced with "scores d'efficacité" and "sources scientifiques référencées", Step 4 improved with methodology focus and explicit A-D level descriptions
+- **Tutorial step links** — Corrected Step 1 link from `/products` to `/dashboard/recherche-avancee` to match current routing structure
+- **Role-based flags removal** — Removed unused `roles: "pro"` parameters from tutorial steps 2 and 4 in `HowItWorksPage`
+
+---
+
 ## [0.65.2] - 2026-03-10
 
 ### Added

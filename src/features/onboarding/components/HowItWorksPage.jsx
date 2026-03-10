@@ -43,33 +43,31 @@ const TUTORIAL_STEPS = [
     icon: IoListOutline,
     title: "Parcourir le catalogue",
     description:
-      "Accédez à la liste complète des produits naturels référencés, classés par ordre alphabétique. Chaque fiche affiche le type de produit, ses propriétés principales et les tags de sécurité (grossesse, enfants, vérification professionnelle).",
-    link: { to: "/products", label: "Voir le catalogue" },
+      "Accédez à la liste complète des produits naturels référencés via la recherche avancée. Chaque fiche affiche le type de produit, ses propriétés principales et les tags de sécurité (grossesse, enfants, vérification professionnelle).",
+    link: { to: "/dashboard/recherche-avancee", label: "Recherche avancée" },
   },
   {
     step: 2,
     icon: IoSearchOutline,
-    title: "Utiliser la recherche avancée",
+    title: "Filtrer et rechercher",
     description:
-      "Filtrez les produits par type, catégorie thérapeutique, propriétés, compatibilité grossesse, âge enfant, allergènes et niveau de preuve. Combinez plusieurs critères pour affiner vos résultats selon les besoins de votre patient.",
+      "Utilisez les filtres avancés pour affiner vos résultats : type de produit, catégorie thérapeutique, propriétés spécifiques, compatibilité grossesse, âge enfant, allergènes et niveau de preuve scientifique. Combinez plusieurs critères pour des recherches précises.",
     link: { to: "/dashboard/recherche-avancee", label: "Recherche avancée" },
-    roles: "pro",
   },
   {
     step: 3,
     icon: IoBookOutline,
     title: "Consulter les fiches détaillées",
     description:
-      "Chaque produit dispose d'une fiche complète : propriétés thérapeutiques avec scores, symptômes associés, contre-indications, allergènes, conseils d'utilisation et sources scientifiques.",
+      "Chaque produit dispose d'une fiche complète avec propriétés thérapeutiques et scores d'efficacité, symptômes associés, contre-indications, allergènes, conseils d'utilisation et sources scientifiques référencées.",
   },
   {
     step: 4,
     icon: IoEyeOutline,
     title: "Vérifier les niveaux de preuve",
     description:
-      "Consultez la page dédiée aux niveaux de preuve scientifique pour comprendre la fiabilité des données. Chaque propriété est classée de A (preuve solide) à D (usage traditionnel).",
+      "Consultez la méthodologie des niveaux de preuve scientifique pour évaluer la fiabilité des données. Chaque propriété est classée de A (preuve scientifique solide) à D (usage traditionnel uniquement).",
     link: { to: "/dashboard/preuves", label: "Niveaux de preuve" },
-    roles: "pro",
   },
 ];
 

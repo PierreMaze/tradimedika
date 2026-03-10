@@ -1,27 +1,25 @@
 import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import FeedbackLink from "../../../components/ui/feedback/FeedbackLink";
-import { useAuth } from "../../auth";
-import { useConsent } from "../../consent";
 import {
   generateProductSEOMeta,
   getTypeColors,
   ProductResultDetailsAllergensSection,
   ProductResultDetailsAllergyWarning,
   ProductResultDetailsContraindicationsSection,
-  ProductResultDetailsEfficacyScore,
   ProductResultDetailsHeader,
   ProductResultDetailsInteractionsSection,
   ProductResultDetailsNavigation,
   ProductResultDetailsPropertiesSection,
   ProductResultDetailsSimilarProducts,
-  ProductResultDetailsSourcesSection,
   ProductResultDetailsTipsSection,
   ProductResultDetailsUsagesList,
   useProductAllergyCheck,
   useProductDetails,
 } from "..";
+import FeedbackLink from "../../../components/ui/feedback/FeedbackLink";
+import { useAuth } from "../../auth";
+import { useConsent } from "../../consent";
 import { ProductResultNotFound } from "../../product-result-page";
 
 /**
@@ -96,27 +94,19 @@ function ProductResultDetails() {
         />
 
         <div className="mb-6 grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-6">
-          <ProductResultDetailsEfficacyScore properties={product.properties} />
-
           <ProductResultDetailsPropertiesSection
             properties={product.properties}
           />
-
-          <ProductResultDetailsUsagesList uses={product.uses} />
-
-          <ProductResultDetailsContraindicationsSection
-            contraindications={product.contraindications}
-          />
-
+          <ProductResultDetailsAllergensSection allergens={product.allergens} />
+          {/* <ProductResultDetailsEfficacyScore properties={product.properties} /> */}
           <ProductResultDetailsInteractionsSection
             interactions={product.interactions}
           />
-
-          <ProductResultDetailsAllergensSection allergens={product.allergens} />
-
+          <ProductResultDetailsContraindicationsSection
+            contraindications={product.contraindications}
+          />
+          <ProductResultDetailsUsagesList uses={product.uses} />
           <ProductResultDetailsTipsSection tips={product.tips} />
-
-          <ProductResultDetailsSourcesSection sources={product.sources} />
         </div>
 
         <div className="mb-6">

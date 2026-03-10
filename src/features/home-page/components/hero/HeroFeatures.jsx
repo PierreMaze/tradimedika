@@ -6,9 +6,9 @@ import { FaCheck } from "react-icons/fa6";
  */
 const DEFAULT_FEATURES = [
   "Sources référencées",
-  "Recherche simplifiée",
+  "Recherche avancée",
+  "Niveaux de preuve",
   "Respect de vos données",
-  "Espace pro dédié",
 ];
 
 /**
