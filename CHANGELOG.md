@@ -2,6 +2,43 @@
 
 ---
 
+## [0.65.2] - 2026-03-10
+
+### Added
+
+- **symptomPropertyMap data structure** — Added explicit symptom-to-property mapping in `db.json` for all 5 products with 22 total entries, replacing cartesian product approach to ensure accurate evidence level display per symptom-property combination
+- **LegalDisclaimer component** — Collapsible section with red theme displaying legal framework, usage limits, professional responsibility, and update information for evidence-based medicine (`src/features/evidence-level/components/LegalDisclaimer.jsx`)
+- **AlertSignalsSection component** — Collapsible section with orange theme explaining methodological alert signals: heterogeneity, publication bias, small sample sizes, and standardization issues (`src/features/evidence-level/components/AlertSignalsSection.jsx`)
+- **TransparencySection component** — Collapsible section with blue theme documenting source traceability: DOI/PMID identifiers, publication metadata, study types, and versioning system (`src/features/evidence-level/components/TransparencySection.jsx`)
+- **AgeCriteriaSection component** — Collapsible section with amber theme explaining age-based contraindications and pediatric safety criteria (`src/features/evidence-level/components/AgeCriteriaSection.jsx`)
+- **Nested methodology dropdowns** — Restructured `EvidenceLevelMethodology` with 6 sub-sections: Tradimedika Algorithm (open by default), Study Type Hierarchy, Adapted GRADE System, Methodological Evaluation Tools, Statistical Indicators, Evaluation Criteria, and Sources
+- **Dual-view table system** — Added tabbed interface with "Product View" and "Symptom View" in Evidence Level table, allowing users to explore data from different perspectives
+- **Symptom View aggregation** — Aggregated data display showing total studies, participants, and alerts per symptom across all products
+- **2 new allergens** — Added "curcuma" and "produits-de-la-ruche" to allergensList.json (now 41 total allergens)
+- **6 new symptoms** — Added "anxiété légère", "arthrose", "ballonnements", "douleurs articulaires", "inflammation", "inflammations cutanées", "mal de gorge", "mal des transports", "maux de tête", "nausées", "nausées de grossesse", "syndrome intestin irritable", "toux", "toux nocturne", "troubles du sommeil", "vomissements" to symptomList.json (now 18 total symptoms)
+
+### Changed
+
+- **EvidenceLevelTable ProductView** — Completely restructured to use `symptomPropertyMap` instead of cartesian product, displaying one row per symptom-property mapping with specific evidence level for each combination
+- **Evidence level display logic** — Changed from global product-level evidence to specific symptom-property-level evidence (e.g., Gingembre shows level A for antiémétique on nausea, level B for anti-inflammatoire on joint pain)
+- **Table column structure** — Reorganized ProductView columns to: Product, Symptom, Property, Evidence Level, Data, Alerts (separated property from evidence level)
+- **EvidenceLevelMethodology** — Wrapped all content sections in bordered containers with proper spacing and added `MethodologySubsection` component for nested collapsible sections
+- **LegalDisclaimer, AlertSignalsSection, TransparencySection, AgeCriteriaSection** — Wrapped dropdown content in `rounded-lg border bg-white p-4` containers for visual consistency
+- **Table scrolling** — Added `maxHeight: 600px` with `overflow-y-auto` and sticky headers (`sticky top-0 z-10`) to both ProductView and SymptomView tables
+- **Tab labels** — Made tab text responsive: full labels on desktop ("Vue par produit"), short labels on mobile ("Produits")
+- **Allergen IDs in db.json** — Normalized all allergen references to match allergensList.json IDs: "zingiberaceae" → "zingiberacees", "lamiaceae" → "lamiacees", "astéracées" → "asteracees", "produits de la ruche" → "produits-de-la-ruche"
+- **Gingembre symptomPropertyMap** — Added 2 entries for anti-inflammatory property (joint pain, inflammation) with evidence level B
+- **Miel symptomPropertyMap** — Added entry for antimicrobial property on cough with evidence level C
+- **Curcuma symptomPropertyMap** — Split inflammation entry into 2 separate rows: anti-inflammatory (level B) and antioxidant (level D)
+
+### Fixed
+
+- **Evidence level accuracy** — Fixed mismatch where table displayed global product evidence level instead of specific symptom-property evidence level from scientificStudies
+- **Cartesian product bug** — Eliminated incorrect symptom-property combinations (e.g., "Gingembre treats nausea with anti-inflammatory property" no longer appears)
+- **Data validation** — All 17 symptoms from symptomPropertyMap now exist in symptomList.json, all 10 allergens used in db.json now exist in allergensList.json
+
+---
+
 ## [0.65.1] - 2026-03-09
 
 ### Added
