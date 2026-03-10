@@ -9,8 +9,10 @@ export const EVIDENCE_LEVELS = {
   A: {
     label: "Niveau A",
     shortLabel: "A",
-    description: "Preuve scientifique établie",
-    detail: "Méta-analyses, essais randomisés de forte puissance",
+    description: "Preuve scientifique solide",
+    detail: "≥1 méta-analyse de qualité OU ≥2 RCT de bonne qualité",
+    fullDetail:
+      "Méta-analyses, revues systématiques de haute qualité, essais cliniques randomisés (RCT) de forte puissance avec résultats cohérents",
     colorClasses:
       "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-200",
     borderClasses: "border-emerald-500",
@@ -20,8 +22,11 @@ export const EVIDENCE_LEVELS = {
   B: {
     label: "Niveau B",
     shortLabel: "B",
-    description: "Présomption scientifique",
-    detail: "Essais randomisés de faible puissance, études comparatives",
+    description: "Preuve scientifique probable",
+    detail:
+      "RCT individuels de qualité acceptable OU études observationnelles solides",
+    fullDetail:
+      "Essais cliniques randomisés de qualité acceptable, études comparatives non randomisées bien conduites",
     colorClasses:
       "bg-sky-100 text-sky-800 dark:bg-sky-900/40 dark:text-sky-200",
     borderClasses: "border-sky-500",
@@ -31,8 +36,11 @@ export const EVIDENCE_LEVELS = {
   C: {
     label: "Niveau C",
     shortLabel: "C",
-    description: "Faible niveau de preuve",
-    detail: "Études cas-témoins, séries de cas",
+    description: "Preuve limitée",
+    detail:
+      "Études observationnelles limitées OU RCT de faible qualité OU études pré-cliniques prometteuses",
+    fullDetail:
+      "Études cas-témoins, séries de cas, études de cohorte de faible puissance, études pré-cliniques",
     colorClasses:
       "bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200",
     borderClasses: "border-amber-500",
@@ -42,8 +50,11 @@ export const EVIDENCE_LEVELS = {
   D: {
     label: "Niveau D",
     shortLabel: "D",
-    description: "Accord d'experts",
-    detail: "Usage traditionnel, aucune donnée clinique",
+    description: "Preuve insuffisante",
+    detail:
+      "Usage traditionnel documenté uniquement OU rapports de cas OU aucune étude identifiée",
+    fullDetail:
+      "Accord d'experts, consensus professionnel, usage traditionnel sans données cliniques probantes",
     colorClasses:
       "bg-zinc-200 text-zinc-800 dark:bg-zinc-700 dark:text-zinc-200",
     borderClasses: "border-zinc-500",

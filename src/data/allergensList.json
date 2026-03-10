@@ -228,6 +228,18 @@
     "remedies": ["Gingembre frais"]
   },
   {
+    "id": "curcuma",
+    "name": "Curcuma",
+    "description": "Allergie spécifique au curcuma. Sélectionnez cet allergène si vous êtes allergique uniquement au curcuma.",
+    "remedies": ["Curcuma"]
+  },
+  {
+    "id": "produits-de-la-ruche",
+    "name": "Produits de la ruche",
+    "description": "Ensemble des produits issus de la ruche : miel, propolis, gelée royale, pollen. Allergies croisées fréquentes.",
+    "remedies": ["Miel"]
+  },
+  {
     "id": "gluten",
     "name": "Gluten",
     "description": "Composant du blé et de céréales proches. Les allergies peuvent être croisées entre ces substances.",

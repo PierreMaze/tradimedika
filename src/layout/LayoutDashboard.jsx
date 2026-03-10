@@ -1,5 +1,6 @@
 import { IoMenuOutline } from "react-icons/io5";
 import { Outlet } from "react-router-dom";
+import PrototypeDisclaimer from "../components/common/PrototypeDisclaimer";
 import { useAuth, ROLES } from "../features/auth";
 import { CookieConsentProvider } from "../features/cookie-consent/context/CookieConsentContext";
 import ExternalLinkConfirmationModal from "../features/external-link/components/ExternalLinkConfirmationModal";
@@ -43,6 +44,7 @@ export default function LayoutDashboard() {
             }`}
           >
             <Header sticky fullWidth />
+            <PrototypeDisclaimer />
 
             {/* Mobile header bar — sticky sous le Header */}
             <div className="sticky top-0 z-30 flex items-center gap-3 border-b border-neutral-200 bg-white px-4 py-3 lg:hidden dark:border-neutral-700 dark:bg-neutral-800">
