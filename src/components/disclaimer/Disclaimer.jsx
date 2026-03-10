@@ -1,5 +1,4 @@
 import { HiExclamationTriangle } from "react-icons/hi2";
-import { IoCall } from "react-icons/io5";
 
 function Disclaimer() {
   return (
@@ -14,14 +13,20 @@ function Disclaimer() {
           aria-hidden="true"
         />
         <p className="transition-color text-sm font-medium tracking-wider text-amber-900 duration-150 ease-in-out lg:text-base dark:text-amber-50">
-          Les informations présentées sont fournies à{" "}
-          <span className="font-semibold text-amber-700 dark:text-amber-400">
-            titre informatif et ne remplacent pas un avis/traitement médical
-          </span>
-          . En cas de doute,{" "}
+          {" "}
+          Les informations présentées sont fondées sur des{" "}
           <span className="font-bold text-amber-700 dark:text-amber-400">
-            consulter ou composer le 15 <IoCall className="inline h-4 w-4" />
+            sources scientifiques référencées
           </span>
+          (Vidal, Cochrane, PubMed…). Cette plateforme constitue un{" "}
+          <span className="font-bold text-amber-700 dark:text-amber-400">
+            outil documentaire
+          </span>{" "}
+          d&apos;aide à{" "}
+          <span className="font-bold text-amber-700 dark:text-amber-400">
+            l&apos;analyse des données
+          </span>{" "}
+          relatives aux produits naturels.
         </p>
       </div>
     </div>

@@ -25,7 +25,7 @@ function EvidenceBadge({ level, className = "", showLabel = true }) {
         data-testid="evidence-badge"
         className={`transition-color inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-semibold duration-150 lg:text-sm ${config.colorClasses} ${className}`}
       >
-        <Icon className="hidden h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
+        <Icon className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" />
         {showLabel && config.label}
       </span>
     </Tooltip>
