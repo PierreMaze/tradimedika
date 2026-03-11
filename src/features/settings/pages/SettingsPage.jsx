@@ -10,19 +10,19 @@ import {
   ARIA_RESET_STORAGE,
   SETTINGS_ACCESSIBILITY_LABEL,
   SETTINGS_COOKIES_LABEL,
-  SETTINGS_HISTORY_LABEL,
+  // SETTINGS_HISTORY_LABEL, // Disabled - history section commented out
   SETTINGS_PERFORMANCE_LABEL,
   SETTINGS_RESET_LABEL,
   SETTINGS_THEME_LABEL,
 } from "../../../constants/buttonLabels";
 import { COOKIE_CATEGORIES } from "../../cookie-consent/constants/cookieConfig";
 import { usePerformance } from "../context/PerformanceContext";
-import AllergiesToggle from "../components/AllergiesToggle";
+// import AllergiesToggle from "../components/AllergiesToggle"; // Disabled - allergies section commented out
 import AnalyticsToggle from "../components/AnalyticsToggle";
 import DarkModeToggle from "../components/DarkModeToggle";
 import ExternalLinkConfirmToggle from "../components/ExternalLinkConfirmToggle";
 import HighContrastToggle from "../components/HighContrastToggle";
-import HistoryToggle from "../components/HistoryToggle";
+// import HistoryToggle from "../components/HistoryToggle"; // Disabled - history section commented out
 import PerformanceToggle from "../components/PerformanceToggle";
 
 export default function SettingsPage() {
@@ -30,7 +30,7 @@ export default function SettingsPage() {
   const [showResetConfirm, setShowResetConfirm] = useState(false);
   const [isAccessibilitySectionOpen, setIsAccessibilitySectionOpen] =
     useState(false);
-  const [isHistorySectionOpen, setIsHistorySectionOpen] = useState(false);
+  // const [isHistorySectionOpen, setIsHistorySectionOpen] = useState(false); // Disabled - history section commented out
   const [isCookieSectionOpen, setIsCookieSectionOpen] = useState(false);
 
   const handleConfirmReset = () => {
@@ -154,8 +154,8 @@ export default function SettingsPage() {
           )}
         </div>
 
-        {/* History section */}
-        <div className="border-t border-neutral-200 pt-6 transition-colors duration-150 dark:border-neutral-700">
+        {/* History section - DISABLED */}
+        {/* <div className="border-t border-neutral-200 pt-6 transition-colors duration-150 dark:border-neutral-700">
           <button
             onClick={() => setIsHistorySectionOpen(!isHistorySectionOpen)}
             className="mb-4 flex w-full cursor-pointer items-center justify-between text-left transition-colors duration-150 hover:opacity-80"
@@ -247,7 +247,7 @@ export default function SettingsPage() {
               </div>
             </div>
           )}
-        </div>
+        </div> */}
 
         {/* Cookie management section */}
         <div className="border-t border-neutral-200 pt-6 transition-colors duration-150 dark:border-neutral-700">

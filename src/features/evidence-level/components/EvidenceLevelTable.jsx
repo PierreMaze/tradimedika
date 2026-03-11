@@ -63,6 +63,17 @@ export default function EvidenceLevelTable() {
 
   return (
     <div>
+      {/* Header */}
+      <div className="mb-4">
+        <h2 className="text-lg font-bold text-neutral-800 dark:text-white">
+          Base de données des preuves scientifiques
+        </h2>
+        <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+          Recherchez et consultez les niveaux de preuve scientifique pour chaque
+          produit naturel, symptôme et propriété thérapeutique.
+        </p>
+      </div>
+
       {/* Barre de recherche + filtres GRADE */}
       <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center">
         <div className="relative flex-1">

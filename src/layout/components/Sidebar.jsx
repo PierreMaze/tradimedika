@@ -1,15 +1,18 @@
 import PropTypes from "prop-types";
 import { useMemo, useState } from "react";
 import {
+  IoChatbubblesOutline,
   IoCloseOutline,
   IoDocumentTextOutline,
   IoFlaskOutline,
+  IoFlaskSharp,
   IoFolderOpenOutline,
   IoHelpCircleOutline,
   IoLibraryOutline,
   IoLogOutOutline,
   IoMedkitOutline,
   IoPeopleOutline,
+  IoPersonOutline,
   IoPulseOutline,
   IoSearchOutline,
   IoServerOutline,
@@ -35,6 +38,7 @@ const ALL_NAV_ITEMS = [
     to: "/dashboard",
     label: "Accueil",
     icon: RiHome4Line,
+    badge: "NOUVEAU",
     end: true,
     roles: [ROLES.PATIENT, ROLES.PRO, ROLES.ADMIN],
   },
@@ -49,20 +53,21 @@ const ALL_NAV_ITEMS = [
     to: "/products",
     label: "Catalogue",
     icon: IoFolderOpenOutline,
+    badge: "INSTABLE",
     roles: [ROLES.PATIENT, ROLES.PRO, ROLES.ADMIN],
   },
   {
     to: "/dashboard/recherche-avancee",
     label: "Recherche avancée",
     icon: IoSearchOutline,
-    badge: "NOUVEAU",
+    badge: "INSTABLE",
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
   {
     to: "/dashboard/preuves",
     label: "Niveau de preuve",
     icon: IoLibraryOutline,
-    badge: "NOUVEAU",
+    badge: "INSTABLE",
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
   {
@@ -94,11 +99,39 @@ const ALL_NAV_ITEMS = [
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
   {
+    to: "/dashboard/historique",
+    label: "Historique",
+    icon: IoTimeOutline,
+    disabled: true,
+    roles: [ROLES.PRO, ROLES.ADMIN],
+  },
+  {
+    to: "/dashboard/forum",
+    label: "Forum médical",
+    icon: IoChatbubblesOutline,
+    disabled: true,
+    roles: [ROLES.PRO, ROLES.ADMIN],
+  },
+  {
+    to: "/dashboard/espace-patient",
+    label: "Espace patient",
+    icon: IoPersonOutline,
+    disabled: true,
+    roles: [ROLES.ADMIN],
+  },
+  {
+    to: "/dashboard/espace-scientifique",
+    label: "Espace scientifique",
+    icon: IoFlaskSharp,
+    disabled: true,
+    roles: [ROLES.ADMIN],
+  },
+  {
     to: "/dashboard/contribution",
     label: "Contribution",
     icon: IoPeopleOutline,
     disabled: true,
-    roles: [ROLES.PRO, ROLES.ADMIN],
+    roles: [ROLES.ADMIN],
   },
   {
     to: "/dashboard/veille",
@@ -155,14 +188,26 @@ function SidebarLink({ item, isCollapsed, onNavigate }) {
       }
       title={isCollapsed ? item.label : undefined}
     >
-      <Icon className="shrink-0 text-lg" />
-      {!isCollapsed && (
+      {({ isActive }) => (
         <>
-          <span>{item.label}</span>
-          {item.badge && (
-            <span className="ml-auto rounded bg-emerald-100 px-1.5 py-0.5 text-[10px] font-bold text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400">
-              {item.badge}
-            </span>
+          <Icon className="shrink-0 text-lg" />
+          {!isCollapsed && (
+            <>
+              <span>{item.label}</span>
+              {item.badge && (
+                <span
+                  className={`ml-auto rounded px-1.5 py-0.5 text-[10px] font-bold ${
+                    item.badge === "INSTABLE"
+                      ? "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-200"
+                      : item.badge === "NOUVEAU" && isActive
+                        ? "bg-emerald-50 text-emerald-600 dark:bg-emerald-900/20 dark:text-emerald-300"
+                        : "bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400"
+                  }`}
+                >
+                  {item.badge}
+                </span>
+              )}
+            </>
           )}
         </>
       )}
@@ -203,8 +248,11 @@ function SidebarHistory({ isCollapsed, onNavigate }) {
     <div className="flex flex-1 flex-col border-t-2 border-dashed border-neutral-200 dark:border-neutral-700">
       <div className="flex items-center justify-between px-4 pt-3 pb-2">
         <p className="text-xs font-semibold tracking-wide text-neutral-400 uppercase dark:text-neutral-500">
-          Historique
+          Accès Rapide
         </p>
+        <span className="mr-2 ml-auto rounded bg-neutral-200 px-1.5 py-0.5 text-[10px] font-medium text-neutral-500 dark:bg-neutral-700 dark:text-neutral-500">
+          Bientôt
+        </span>
         {history.length > 0 && (
           <button
             onClick={clearHistory}
@@ -218,7 +266,7 @@ function SidebarHistory({ isCollapsed, onNavigate }) {
       <div className="flex-1 space-y-1 overflow-y-auto px-3 pb-3">
         {history.length === 0 ? (
           <p className="px-1 py-2 text-xs text-neutral-400 dark:text-neutral-500">
-            Aucune recherche
+            Aucun historique existant
           </p>
         ) : (
           history.map((search) => (

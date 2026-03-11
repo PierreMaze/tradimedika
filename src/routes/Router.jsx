@@ -3,6 +3,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { createBrowserRouter, Outlet } from "react-router-dom";
 import GoogleAnalytics from "../components/analytics/GoogleAnalytics";
 import { LoadingFallback } from "../components/ui/animation";
+// import ScrollToTop from "../components/ui/ScrollToTop"; // Temporarily disabled for debugging navigation issues
 import { AllergiesProvider } from "../features/allergens-search";
 import { ProtectedRoute, useAuth, ROLES } from "../features/auth";
 import { CookieConsentProvider } from "../features/cookie-consent/context/CookieConsentContext";
@@ -78,6 +79,7 @@ function RootLayout() {
     <CookieConsentProvider>
       <AllergiesProvider>
         <GoogleAnalytics />
+        {/* <ScrollToTop /> */}
         <div className="bg-light dark:bg-dark relative min-h-screen transition-colors duration-150 ease-out">
           {showLeafFall && (
             <Suspense fallback={null}>

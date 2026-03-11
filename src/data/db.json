@@ -361,7 +361,7 @@
   {
     "id": 2,
     "name": "Miel",
-    "type": "aliment",
+    "type": "substance",
     "description": "Produit naturel des abeilles avec propriétés antimicrobiennes démontrées. Efficace pour la toux nocturne chez l'enfant selon plusieurs études. ATTENTION : contre-indiqué chez les nourrissons < 1 an (risque botulisme).",
     "symptoms": ["toux", "mal de gorge", "toux nocturne"],
     "badForSymptoms": [],

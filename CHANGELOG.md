@@ -2,6 +2,111 @@
 
 ---
 
+## [0.66.5] - 2026-03-11
+
+### Added
+
+- **ScrollToTop component** — Added automatic scroll-to-top on route changes using React Router's `useLocation` hook (`src/components/ui/ScrollToTop.jsx`)
+- **New upcoming features** — Added 4 new features to roadmap: Search history (all users), Medical forum (PRO/ADMIN), Simplified patient space (PATIENT), Scientific space (PRO/ADMIN)
+- **New sidebar menu items** — Added menu entries for upcoming features: History, Medical forum, Patient space, Scientific space with appropriate role restrictions
+
+### Changed
+
+- **Evidence Level Stats header** — Added title "Statistiques des niveaux de preuve" and description explaining scientific evidence distribution
+- **Evidence Level Table header** — Added title "Base de données des preuves scientifiques" and description for search functionality
+- **Scientific Details Modal** — All accordion sections now open by default for immediate full visibility of scientific information
+- **Instable badge color** — Changed "INSTABLE" badge from amber to red (`bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-200`) in Sidebar, Dashboard, and HowItWorksPage for better visual distinction
+- **NOUVEAU badge styling** — Made "NOUVEAU" badge background lighter (`bg-emerald-50`) when active in Sidebar for better visibility
+- **Prototype tags in Dashboard** — Added "Prototype" (amber) and "Instable" (red) tags to Catalogue, Advanced Search, and Evidence Level cards
+- **HowItWorksPage tutorial tags** — Added "Prototype" and "Instable" tags to all 4 tutorial steps with updated descriptions
+- **Dashboard onboarding banner** — Improved responsive layout with flex-col on mobile, flex-row on desktop, better button alignment
+- **Prototype disclaimer text** — Updated HowItWorksPage direction section to clarify prototypes don't replace medical advice
+- **Feature list in Dashboard** — Reordered sections: moved Favorites before new features, reorganized with better color coding
+- **History sidebar section** — Renamed from "Historique" to "Accès Rapide" with "Bientôt" badge
+
+### Fixed
+
+- **Product details navigation bug** — Removed `hasConsent` verification that was redirecting users to home/dashboard when clicking product cards
+- **Settings history section** — Disabled/commented out search history and allergies sections (lines 157-250) as features are not yet implemented
+
+### Removed
+
+- **Consent check on product pages** — Removed unnecessary consent verification from `ProductResultDetails` that was blocking navigation
+
+---
+
+## [0.66.4] - 2026-03-11
+
+### Added
+
+- **Profile page enhancements** — Added detailed upcoming features list in prototype banner: Professional info (RPPS, specialty, address), Password/email modification, Notification preferences, Connection history
+
+### Changed
+
+- **HowItWorksPage feature order** — Reorganized upcoming features: Interactions, Protocols, History, Forum, Scientific watch, PDF exports, Scientific space, Patient space, Scientific contribution
+
+---
+
+## [0.66.3] - 2026-03-11
+
+### Added
+
+- **Dashboard feature cards** — Added 5 new upcoming feature cards: Favorites, Search history, Medical forum, Simplified patient space, Scientific space with appropriate role-based visibility
+
+### Changed
+
+- **Sidebar icons** — Added new icons: `IoChatbubblesOutline`, `IoPersonOutline`, `IoFlaskSharp` for new features
+- **Dashboard icons** — Added missing icons for all new features and reorganized imports
+- **Feature descriptions** — Enhanced descriptions for all new features with specific use cases and GDPR mention for patient space
+
+---
+
+## [0.66.2] - 2026-03-11
+
+### Changed
+
+- **Evidence Level page layout** — Improved information architecture with clear headers and descriptions for Stats and Table sections
+- **Modal UX** — All scientific details sections expand by default for better information accessibility
+
+---
+
+## [0.66.1] - 2026-03-11
+
+### Added
+
+- **Navigation scroll restoration** — Implemented automatic scroll to top on all route changes for better UX
+
+### Fixed
+
+- **Product details access** — Fixed critical bug where consent check was preventing authenticated users from viewing product details, causing unwanted redirects to dashboard
+
+---
+
+## [0.66.0] - 2026-03-11
+
+### Added
+
+- **Status badges system** — Implemented comprehensive badge system with "INSTABLE" (red), "NOUVEAU" (emerald), "ADMIN", and "Prototype" tags across application
+- **Prototype warnings** — Added prototype notices and disclaimers to Dashboard, Evidence Level, and tutorial pages
+
+### Changed
+
+- **Visual feedback enhancement** — Complete redesign of status indicators with color-coded badges for feature maturity levels
+- **Badge accessibility** — Improved active state styling for "NOUVEAU" badge with lighter background
+- **Onboarding improvements** — Enhanced onboarding banner with responsive layout and better mobile support
+
+---
+
+## [0.65.4] - 2026-03-11
+
+### Changed
+
+- **Account updates** — Updated test accounts in `accounts.js` with refined credentials
+- **Login page styling** — Minor layout adjustments for better visual consistency
+- **Database refinements** — Updated product data in `db.json`
+
+---
+
 ## [0.65.3] - 2026-03-10
 
 ### Changed

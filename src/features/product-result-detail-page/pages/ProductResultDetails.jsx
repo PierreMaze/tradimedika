@@ -19,7 +19,6 @@ import {
 } from "..";
 import FeedbackLink from "../../../components/ui/feedback/FeedbackLink";
 import { useAuth } from "../../auth";
-import { useConsent } from "../../consent";
 import { ProductResultNotFound } from "../../product-result-page";
 
 /**
@@ -32,7 +31,6 @@ function ProductResultDetails() {
   const location = useLocation();
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
-  const { hasConsent } = useConsent();
   const selectedProducts = location.state?.symptoms || [];
   // const isRecommended = location.state?.isRecommended || false;
 
@@ -42,10 +40,8 @@ function ProductResultDetails() {
   useEffect(() => {
     if (!isAuthenticated) {
       navigate("/login", { replace: true });
-    } else if (!hasConsent) {
-      navigate("/", { replace: true });
     }
-  }, [isAuthenticated, hasConsent, navigate]);
+  }, [isAuthenticated, navigate]);
 
   if (notFound) {
     return <ProductResultNotFound variant="remedy-not-found" />;

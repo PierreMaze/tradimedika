@@ -5,19 +5,19 @@ export const ROLES = {
 };
 
 export const ROLE_LABELS = {
-  [ROLES.PATIENT]: "Particulier",
+  // [ROLES.PATIENT]: "Particulier",
   [ROLES.PRO]: "Professionnel",
   [ROLES.ADMIN]: "Administrateur",
 };
 
 export const ACCOUNTS = [
-  {
-    email: "patient@tradimedika.com",
-    password: "Tradi2026!",
-    role: ROLES.PATIENT,
-    name: "Dupont",
-    title: "M.",
-  },
+  // {
+  //   email: "patient@tradimedika.com",
+  //   password: "Tradi2026!",
+  //   role: ROLES.PATIENT,
+  //   name: "Dupont",
+  //   title: "M.",
+  // },
   {
     email: "pro@tradimedika.com",
     password: "Tradi2026!",

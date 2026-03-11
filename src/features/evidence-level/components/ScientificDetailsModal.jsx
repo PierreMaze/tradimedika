@@ -180,6 +180,7 @@ export default function ScientificDetailsModal({ evidence, onClose }) {
             <AccordionSection
               title="Hiérarchie des Études"
               icon={IoListOutline}
+              defaultOpen={true}
             >
               <div className="space-y-2">
                 <p className="text-xs">
@@ -247,7 +248,11 @@ export default function ScientificDetailsModal({ evidence, onClose }) {
           )}
 
           {/* 3. Système GRADE */}
-          <AccordionSection title="Système GRADE" icon={IoRibbonOutline}>
+          <AccordionSection
+            title="Système GRADE"
+            icon={IoRibbonOutline}
+            defaultOpen={true}
+          >
             <div className="space-y-2">
               <div
                 className={`rounded p-3 ${
@@ -293,6 +298,7 @@ export default function ScientificDetailsModal({ evidence, onClose }) {
             <AccordionSection
               title="Qualité Méthodologique"
               icon={IoShieldCheckmarkOutline}
+              defaultOpen={true}
             >
               <div className="space-y-3">
                 {evidence.methodologicalQuality.rob2 && (
@@ -344,6 +350,7 @@ export default function ScientificDetailsModal({ evidence, onClose }) {
             <AccordionSection
               title="Indicateurs Statistiques"
               icon={IoStatsChartOutline}
+              defaultOpen={true}
             >
               <div className="space-y-3">
                 {evidence.statisticalIndicators.heterogeneity && (
@@ -393,6 +400,7 @@ export default function ScientificDetailsModal({ evidence, onClose }) {
             <AccordionSection
               title="Standardisation du Produit"
               icon={IoFlaskOutline}
+              defaultOpen={true}
             >
               <div className="space-y-2">
                 {evidence.productStandardization.extract && (
@@ -437,6 +445,7 @@ export default function ScientificDetailsModal({ evidence, onClose }) {
             <AccordionSection
               title={`Signaux d'Alerte (${evidence.alerts.length})`}
               icon={IoAlertCircleOutline}
+              defaultOpen={true}
             >
               <div className="space-y-2">
                 {evidence.alerts.map((alert, idx) => (
@@ -484,6 +493,7 @@ export default function ScientificDetailsModal({ evidence, onClose }) {
             <AccordionSection
               title="Transparence & Traçabilité"
               icon={IoEyeOutline}
+              defaultOpen={true}
             >
               <div className="space-y-2 text-xs">
                 {evidence.transparency.fundingSources && (

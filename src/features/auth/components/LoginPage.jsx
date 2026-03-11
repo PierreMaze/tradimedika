@@ -3,7 +3,6 @@ import {
   IoLockClosedOutline,
   IoMailOutline,
   IoMedkitOutline,
-  IoPersonOutline,
   IoShieldCheckmarkOutline,
 } from "react-icons/io5";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -11,14 +10,6 @@ import { ACCOUNTS } from "../constants/accounts";
 import { useAuth } from "../context/AuthContext";
 
 const ACCOUNT_META = {
-  patient: {
-    icon: IoPersonOutline,
-    label: "Particulier",
-    description: "Accès au catalogue",
-    color:
-      "border-sky-300 bg-sky-50 hover:border-sky-400 dark:border-sky-700 dark:bg-sky-900/20 dark:hover:border-sky-600",
-    iconColor: "text-sky-600 dark:text-sky-400",
-  },
   pro: {
     icon: IoMedkitOutline,
     label: "Professionnel",
@@ -194,7 +185,7 @@ export default function LoginPage() {
           </div>
 
           <p className="mt-6 text-center text-xs text-neutral-400 dark:text-neutral-500">
-            Prototype — Mot de passe : Tradi2026!
+            Prototype — TRADIMEDIKA 2026
           </p>
         </div>
       </div>

@@ -52,9 +52,17 @@ export default function ProfilPage() {
         <p className="text-sm font-medium text-amber-800 dark:text-amber-300">
           Prototype — La gestion de profil sera enrichie prochainement.
         </p>
-        <p className="mt-1 text-xs text-amber-700 dark:text-amber-400">
-          Modification du mot de passe, préférences, historique de connexion.
+        <p className="mt-2 text-xs text-amber-700 dark:text-amber-400">
+          Fonctionnalités à venir :
         </p>
+        <ul className="mt-1 list-inside list-disc space-y-0.5 text-xs text-amber-700 dark:text-amber-400">
+          <li>
+            Informations professionnelles (n° RPPS, spécialité, adresse cabinet)
+          </li>
+          <li>Modification du mot de passe et email</li>
+          <li>Préférences de notifications</li>
+          <li>Historique de connexion et activité</li>
+        </ul>
       </div>
 
       {/* Logout */}

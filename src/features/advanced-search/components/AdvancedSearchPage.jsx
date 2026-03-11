@@ -48,7 +48,8 @@ function AdvancedSearchPage() {
             </h1>
           </div>
           <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
-            Explorez le catalogue avec des filtres multi-critères
+            Explorez le catalogue avec des filtres multi-critères, puis
+            sélectionnez un produit pour le voir plus en détails.
           </p>
         </div>
 

@@ -4,8 +4,6 @@ import { HiArrowRight } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import { ChildrenAgeTag, PregnancyTag } from "../../../components/tags";
 import { InfoTooltip } from "../../../components/ui/tooltip";
-import { EvidenceBadge } from "../../../features/evidence-level";
-import { capitalizeFirstLetter } from "../../../utils/capitalizeFirstLetter";
 import { generateSlug } from "../../product-result-page/utils/productMatcher";
 /**
  * Carte produit pour la recherche avancée
@@ -16,11 +14,11 @@ function SearchResultCard({ product }) {
     name,
     type,
     description,
-    properties,
+    // properties,
     image,
     pregnancySafe,
     childrenAge,
-    evidenceLevel,
+    // evidenceLevel,
   } = product;
 
   const pregnancyVariant =
@@ -60,14 +58,12 @@ function SearchResultCard({ product }) {
           <h3 className="mb-1 text-lg font-bold text-neutral-900 lg:text-xl dark:text-neutral-100">
             {name}
           </h3>
-
           {description && (
             <p className="mb-6 line-clamp-2 text-base leading-relaxed text-neutral-600 lg:text-sm dark:text-neutral-400">
               {description}
             </p>
           )}
-
-          {/* Propriétés (max 3) */}
+          {/* Propriétés (max 3)
           <InfoTooltip
             size="sm"
             variant="inline"
@@ -101,8 +97,7 @@ function SearchResultCard({ product }) {
           />
           <div className="mb-2 flex flex-wrap gap-2">
             {evidenceLevel && <EvidenceBadge level={evidenceLevel} />}
-          </div>
-
+          </div> */}
           {/* Tags de sécurité */}
           <InfoTooltip
             size="sm"

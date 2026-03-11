@@ -12,6 +12,11 @@ import {
   IoPulseOutline,
   IoSearchOutline,
   IoServerOutline,
+  IoStarOutline,
+  IoTimeOutline,
+  IoChatbubblesOutline,
+  IoPersonOutline,
+  IoFlaskSharp,
 } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { ROLES, useAuth } from "../features/auth";
@@ -26,6 +31,7 @@ const SECTIONS = [
       "Découvrez les valeurs, la direction et le fonctionnement de Tradimedika.",
     icon: IoHelpCircleOutline,
     color: "cyan",
+    prototype: true,
     done: true,
     to: "/dashboard/comment-ca-marche",
     roles: [ROLES.PATIENT, ROLES.PRO, ROLES.ADMIN],
@@ -46,6 +52,8 @@ const SECTIONS = [
     icon: IoFolderOpenOutline,
     color: "emerald",
     done: true,
+    prototype: true,
+    instable: true,
     to: "/products",
     roles: [ROLES.PATIENT, ROLES.PRO, ROLES.ADMIN],
   },
@@ -56,6 +64,8 @@ const SECTIONS = [
     icon: IoSearchOutline,
     color: "purple",
     done: true,
+    prototype: true,
+    instable: true,
     to: "/dashboard/recherche-avancee",
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
@@ -65,6 +75,8 @@ const SECTIONS = [
     icon: IoLibraryOutline,
     color: "indigo",
     done: true,
+    prototype: true,
+    instable: true,
     to: "/dashboard/preuves",
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
@@ -94,6 +106,50 @@ const SECTIONS = [
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
   {
+    title: "Favoris",
+    description: "Sauvegarder et organiser vos produits favoris.",
+    icon: IoStarOutline,
+    color: "amber",
+    done: false,
+    roles: [ROLES.PRO, ROLES.ADMIN],
+  },
+  {
+    title: "Historique de recherche",
+    description:
+      "Consulter l'historique de vos recherches et consultations (catalogue, fiches produits, recherche avancée, niveaux de preuve).",
+    icon: IoTimeOutline,
+    color: "purple",
+    done: false,
+    roles: [ROLES.PATIENT, ROLES.PRO, ROLES.ADMIN],
+  },
+  {
+    title: "Forum médical",
+    description:
+      "Échanger avec d'autres professionnels sur les produits naturels, interactions et retours d'expérience.",
+    icon: IoChatbubblesOutline,
+    color: "blue",
+    done: false,
+    roles: [ROLES.PRO, ROLES.ADMIN],
+  },
+  {
+    title: "Espace patient simplifié",
+    description:
+      "Interface adaptée et sécurisée (RGPD) pour les patients avec fonctionnalités essentielles.",
+    icon: IoPersonOutline,
+    color: "green",
+    done: false,
+    roles: [ROLES.PATIENT],
+  },
+  {
+    title: "Espace scientifique",
+    description:
+      "Accéder aux fiches scientifiques détaillées et publications pour chaque produit.",
+    icon: IoFlaskSharp,
+    color: "indigo",
+    done: false,
+    roles: [ROLES.PRO, ROLES.ADMIN],
+  },
+  {
     title: "Contribution médicale",
     description: "Proposer des données ou corrections pour enrichir la base.",
     icon: IoPeopleOutline,
@@ -105,7 +161,7 @@ const SECTIONS = [
     title: "Veille scientifique",
     description: "Suivre les nouvelles études sur les médecines naturelles.",
     icon: IoPulseOutline,
-    color: "green",
+    color: "cyan",
     done: false,
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
@@ -215,31 +271,35 @@ export default function Dashboard() {
 
       {/* Onboarding tooltip — first visit only */}
       {showOnboarding && (
-        <div className="mb-6 flex items-center gap-3 rounded-lg border-2 border-dashed border-emerald-300 bg-emerald-50 px-4 py-3 dark:border-emerald-700 dark:bg-emerald-900/20">
-          <IoHelpCircleOutline className="shrink-0 text-xl text-emerald-700 dark:text-emerald-400" />
-          <p className="flex-1 text-sm font-medium text-emerald-800 dark:text-emerald-300">
-            Nouveau sur Tradimedika ? Consultez la section{" "}
-            <Link
-              to="/dashboard/comment-ca-marche"
-              className="font-semibold text-emerald-600 underline decoration-2 underline-offset-2 hover:text-emerald-700 dark:hover:text-emerald-200"
+        <div className="mb-6 flex flex-col gap-3 rounded-lg border-2 border-dashed border-emerald-300 bg-emerald-50 px-4 py-3 lg:flex-row lg:items-start lg:justify-between dark:border-emerald-700 dark:bg-emerald-900/20">
+          <div className="inline-flex items-center gap-2">
+            <IoHelpCircleOutline className="shrink-0 text-xl text-emerald-700 dark:text-emerald-400" />
+            <p className="flex-1 text-sm font-medium text-emerald-800 dark:text-emerald-300">
+              Nouveau sur Tradimedika ? Consultez la section{" "}
+              <Link
+                to="/dashboard/comment-ca-marche"
+                className="font-semibold text-emerald-600 underline decoration-2 underline-offset-2 hover:text-emerald-700 dark:hover:text-emerald-200"
+              >
+                Comment ça marche ?
+              </Link>{" "}
+              pour bien démarrer !
+            </p>
+          </div>
+          <div className="ml-6 flex items-center gap-2">
+            <button
+              onClick={dismissOnboarding}
+              className="shrink-0 cursor-pointer rounded-md bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700 transition-colors hover:bg-emerald-200 dark:text-emerald-800 dark:hover:bg-emerald-800/80"
             >
-              Comment ça marche ?
-            </Link>{" "}
-            pour bien démarrer !
-          </p>
-          <button
-            onClick={dismissOnboarding}
-            className="shrink-0 cursor-pointer rounded-md bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700 transition-colors hover:bg-emerald-200 dark:text-emerald-300 dark:hover:bg-emerald-800/40"
-          >
-            Compris
-          </button>
-          <button
-            onClick={dismissOnboarding}
-            className="shrink-0 cursor-pointer rounded p-0.5 text-emerald-600 transition-colors hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300"
-            aria-label="Fermer"
-          >
-            <IoCloseOutline className="text-lg" />
-          </button>
+              Compris
+            </button>
+            <button
+              onClick={dismissOnboarding}
+              className="shrink-0 cursor-pointer rounded p-0.5 text-emerald-600 transition-colors hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300"
+              aria-label="Fermer"
+            >
+              <IoCloseOutline className="text-lg" />
+            </button>
+          </div>
         </div>
       )}
 
@@ -289,15 +349,27 @@ export default function Dashboard() {
                     {section.description}
                   </p>
                   <div className="mt-3 flex items-center justify-between">
-                    <span
-                      className={`inline-block rounded px-2 py-0.5 text-xs font-medium ${
-                        section.done
-                          ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300"
-                          : "bg-neutral-200 text-neutral-500 opacity-60 dark:bg-neutral-700 dark:text-neutral-400"
-                      }`}
-                    >
-                      {section.done ? "Disponible" : "Prochainement"}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span
+                        className={`inline-block rounded px-2 py-0.5 text-xs font-medium ${
+                          section.done
+                            ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300"
+                            : "bg-neutral-200 text-neutral-500 opacity-60 dark:bg-neutral-700 dark:text-neutral-400"
+                        }`}
+                      >
+                        {section.done ? "Disponible" : "Prochainement"}
+                      </span>
+                      {section.prototype && (
+                        <span className="inline-block rounded bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+                          Prototype
+                        </span>
+                      )}
+                      {section.instable && (
+                        <span className="inline-block rounded bg-red-100 px-2 py-0.5 text-xs font-medium text-red-700 dark:bg-red-900/30 dark:text-red-200">
+                          Instable
+                        </span>
+                      )}
+                    </div>
                     {section.to && (
                       <IoArrowForwardOutline className="text-lg text-neutral-400 transition-transform group-hover:translate-x-1 dark:text-neutral-500" />
                     )}

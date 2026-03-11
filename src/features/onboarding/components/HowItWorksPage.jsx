@@ -1,18 +1,22 @@
 import PropTypes from "prop-types";
 import {
   IoBookOutline,
+  IoChatbubblesOutline,
   IoCheckmarkCircleOutline,
   IoCompassOutline,
   IoEyeOutline,
   IoFlaskOutline,
+  IoFlaskSharp,
   IoGlobeOutline,
   IoLeafOutline,
   IoLibraryOutline,
   IoListOutline,
   IoPeopleOutline,
+  IoPersonOutline,
   IoRocketOutline,
   IoSearchOutline,
   IoShieldCheckmarkOutline,
+  IoTimeOutline,
 } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
@@ -33,7 +37,7 @@ const VALUES = [
     icon: IoPeopleOutline,
     title: "Accessibilité",
     description:
-      "Les informations sont présentées de manière claire et compréhensible, aussi bien pour les professionnels de santé que pour le grand public.",
+      "Les informations sont présentées de manière claire et compréhensible, aussi bien pour les professionnels de santé que pour les étudiants en médecine.",
   },
 ];
 
@@ -43,31 +47,39 @@ const TUTORIAL_STEPS = [
     icon: IoListOutline,
     title: "Parcourir le catalogue",
     description:
-      "Accédez à la liste complète des produits naturels référencés via la recherche avancée. Chaque fiche affiche le type de produit, ses propriétés principales et les tags de sécurité (grossesse, enfants, vérification professionnelle).",
-    link: { to: "/dashboard/recherche-avancee", label: "Recherche avancée" },
+      "Accédez à la liste complète des produits naturels par ordre alphabétique. Utilisez la recherche pour trouver rapidement un produit spécifique. Chaque fiche affiche le type de produit, ses propriétés principales et les tags de sécurité (grossesse, enfants, vérification professionnelle).",
+    link: { to: "/products", label: "Catalogue" },
+    prototype: true,
+    instable: true,
   },
   {
     step: 2,
     icon: IoSearchOutline,
-    title: "Filtrer et rechercher",
+    title: "Recherche avancée",
     description:
-      "Utilisez les filtres avancés pour affiner vos résultats : type de produit, catégorie thérapeutique, propriétés spécifiques, compatibilité grossesse, âge enfant, allergènes et niveau de preuve scientifique. Combinez plusieurs critères pour des recherches précises.",
+      "Utilisez les filtres avancés pour affiner vos résultats : type de produit, catégorie thérapeutique, propriétés spécifiques, compatibilité grossesse, âge enfant, allergènes et niveau de preuve scientifique. Combinez plusieurs critères pour des recherches précises adaptées à vos besoins cliniques.",
     link: { to: "/dashboard/recherche-avancee", label: "Recherche avancée" },
+    prototype: true,
+    instable: true,
   },
   {
     step: 3,
     icon: IoBookOutline,
     title: "Consulter les fiches détaillées",
     description:
-      "Chaque produit dispose d'une fiche complète avec propriétés thérapeutiques et scores d'efficacité, symptômes associés, contre-indications, allergènes, conseils d'utilisation et sources scientifiques référencées.",
+      "Chaque produit dispose d'une fiche complète avec propriétés thérapeutiques, symptômes associés, contre-indications, allergènes, conseils d'utilisation et sources scientifiques référencées. Les scores d'efficacité seront ajoutés prochainement.",
+    prototype: true,
+    instable: true,
   },
   {
     step: 4,
     icon: IoEyeOutline,
     title: "Vérifier les niveaux de preuve",
     description:
-      "Consultez la méthodologie des niveaux de preuve scientifique pour évaluer la fiabilité des données. Chaque propriété est classée de A (preuve scientifique solide) à D (usage traditionnel uniquement).",
+      "Consultez la méthodologie des niveaux de preuve scientifique pour évaluer la fiabilité des données. Chaque propriété est classée selon le système GRADE : de A (preuve scientifique solide) à D (usage traditionnel uniquement). Cette page explique comment interpréter ces niveaux.",
     link: { to: "/dashboard/preuves", label: "Niveaux de preuve" },
+    prototype: true,
+    instable: true,
   },
 ];
 
@@ -85,22 +97,47 @@ const UPCOMING_FEATURES = [
       "Création de recommandations personnalisées pour vos patients à partir de la base de données.",
   },
   {
-    icon: IoRocketOutline,
-    title: "Exports PDF",
+    icon: IoTimeOutline,
+    title: "Historique de recherche",
     description:
-      "Génération de fiches d'information formatées à remettre à vos patients.",
+      "Consultez l'historique complet de vos recherches et consultations (catalogue, fiches produits, recherche avancée, niveaux de preuve).",
   },
   {
-    icon: IoPeopleOutline,
-    title: "Contribution médicale",
+    icon: IoChatbubblesOutline,
+    title: "Forum médical",
     description:
-      "Possibilité pour les professionnels de proposer des corrections et enrichissements de la base.",
+      "Espace d'échange sécurisé entre professionnels pour partager retours d'expérience sur les produits, interactions et cas cliniques.",
   },
   {
     icon: IoGlobeOutline,
     title: "Veille scientifique",
     description:
       "Suivi des nouvelles publications et études sur les médecines naturelles.",
+  },
+  {
+    icon: IoRocketOutline,
+    title: "Exports PDF",
+    description:
+      "Génération de fiches d'information formatées à remettre à vos patients.",
+  },
+
+  {
+    icon: IoFlaskSharp,
+    title: "Espace scientifique",
+    description:
+      "Accès aux fiches scientifiques détaillées, publications et études pour chaque produit naturel référencé.",
+  },
+  {
+    icon: IoPersonOutline,
+    title: "Espace patient simplifié",
+    description:
+      "Interface dédiée et sécurisée (RGPD) pour les patients avec accès aux fonctionnalités essentielles de consultation.",
+  },
+  {
+    icon: IoPeopleOutline,
+    title: "Contribution scientifique",
+    description:
+      "Possibilité pour les professionnels de proposer des corrections et enrichissements de la base.",
   },
 ];
 
@@ -186,13 +223,25 @@ export default function HowItWorksPage() {
                   {step.step}
                 </div>
                 <div className="min-w-0 flex-1">
-                  <h3 className="flex items-center gap-2 font-semibold text-neutral-800 dark:text-white">
-                    <Icon
-                      className="text-lg text-emerald-600 dark:text-emerald-400"
-                      aria-hidden="true"
-                    />
-                    {step.title}
-                  </h3>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h3 className="flex items-center gap-2 font-semibold text-neutral-800 dark:text-white">
+                      <Icon
+                        className="text-lg text-emerald-600 dark:text-emerald-400"
+                        aria-hidden="true"
+                      />
+                      {step.title}
+                    </h3>
+                    {step.prototype && (
+                      <span className="inline-block rounded bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+                        Prototype
+                      </span>
+                    )}
+                    {step.instable && (
+                      <span className="inline-block rounded bg-red-100 px-2 py-0.5 text-xs font-medium text-red-700 dark:bg-red-900/30 dark:text-red-200">
+                        Instable
+                      </span>
+                    )}
+                  </div>
                   <p className="mt-1 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
                     {step.description}
                   </p>
@@ -280,8 +329,13 @@ export default function HowItWorksPage() {
           </p>
           <p>
             Nous ne proposons pas de produits, mais un{" "}
-            <strong>outil d&apos;information</strong> (prototype actuel avec
-            catalogue) pour les professionnels de santé.
+            <strong>outil d&apos;information</strong> pour les professionnels de
+            santé.{" "}
+            <strong>
+              Les fonctionnalités actuelles (Catalogue, Recherche avancée,
+              Niveaux de preuve) sont des prototypes et ne remplacent pas un
+              avis médical professionnel.
+            </strong>
           </p>
         </div>
       </section>
