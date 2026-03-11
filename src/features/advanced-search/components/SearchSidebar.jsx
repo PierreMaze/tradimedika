@@ -95,18 +95,6 @@ function SearchSidebar({
       >
         <TypeFilter activeFilters={filters.types} onToggle={onToggleFilter} />
       </FilterSection>
-
-      <FilterSection
-        label="Symptômes"
-        count={symptomsCount}
-        defaultOpen={false}
-      >
-        <SymptomFilter
-          activeFilters={filters.symptoms}
-          onToggle={onToggleFilter}
-        />
-      </FilterSection>
-
       <FilterSection
         label="Propriétés"
         count={propertiesCount}
@@ -118,15 +106,26 @@ function SearchSidebar({
           uniqueProperties={uniqueProperties}
         />
       </FilterSection>
-
       <FilterSection
-        label="Allergènes à exclure"
-        count={filters.excludedAllergens.length}
+        label="Symptômes"
+        count={symptomsCount}
         defaultOpen={false}
       >
-        <AllergenFilter
-          excludedAllergens={filters.excludedAllergens}
-          onToggle={onToggleAllergen}
+        <SymptomFilter
+          activeFilters={filters.symptoms}
+          onToggle={onToggleFilter}
+        />
+      </FilterSection>
+      <FilterSection
+        label="Niveau de preuve"
+        count={evidenceCount}
+        defaultOpen={false}
+        showReset={true}
+        onReset={() => onResetCategory("evidenceLevel")}
+      >
+        <EvidenceLevelFilter
+          activeFilters={filters.evidenceLevel}
+          onToggle={onToggleFilter}
         />
       </FilterSection>
 
@@ -153,17 +152,14 @@ function SearchSidebar({
           onToggle={onToggleFilter}
         />
       </FilterSection>
-
       <FilterSection
-        label="Niveau de preuve"
-        count={evidenceCount}
+        label="Allergènes à exclure"
+        count={filters.excludedAllergens.length}
         defaultOpen={false}
-        showReset={true}
-        onReset={() => onResetCategory("evidenceLevel")}
       >
-        <EvidenceLevelFilter
-          activeFilters={filters.evidenceLevel}
-          onToggle={onToggleFilter}
+        <AllergenFilter
+          excludedAllergens={filters.excludedAllergens}
+          onToggle={onToggleAllergen}
         />
       </FilterSection>
     </div>

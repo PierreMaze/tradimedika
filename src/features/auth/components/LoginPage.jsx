@@ -156,31 +156,33 @@ export default function LoginPage() {
               Comptes de démonstration
             </p>
             <div className="space-y-2">
-              {ACCOUNTS.map((account) => {
-                const meta = ACCOUNT_META[account.role];
-                const Icon = meta.icon;
-                return (
-                  <button
-                    key={account.role}
-                    onClick={() => handleDemoLogin(account)}
-                    disabled={isLoading}
-                    className={`flex w-full cursor-pointer items-center gap-3 rounded-lg border-2 px-4 py-3 text-left transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${meta.color}`}
-                  >
-                    <Icon className={`shrink-0 text-xl ${meta.iconColor}`} />
-                    <div className="min-w-0 flex-1">
-                      <p className="text-sm font-medium text-neutral-800 dark:text-white">
-                        {meta.label}
-                      </p>
-                      <p className="text-xs text-neutral-500 dark:text-neutral-400">
-                        {meta.description}
-                      </p>
-                    </div>
-                    <span className="shrink-0 text-[10px] text-neutral-400 dark:text-neutral-500">
-                      {account.email}
-                    </span>
-                  </button>
-                );
-              })}
+              {ACCOUNTS.filter((account) => account.role !== "admin").map(
+                (account) => {
+                  const meta = ACCOUNT_META[account.role];
+                  const Icon = meta.icon;
+                  return (
+                    <button
+                      key={account.role}
+                      onClick={() => handleDemoLogin(account)}
+                      disabled={isLoading}
+                      className={`flex w-full cursor-pointer items-center gap-3 rounded-lg border-2 px-4 py-3 text-left transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${meta.color}`}
+                    >
+                      <Icon className={`shrink-0 text-xl ${meta.iconColor}`} />
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-medium text-neutral-800 dark:text-white">
+                          {meta.label}
+                        </p>
+                        <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                          {meta.description}
+                        </p>
+                      </div>
+                      <span className="shrink-0 text-[10px] text-neutral-400 dark:text-neutral-500">
+                        {account.email}
+                      </span>
+                    </button>
+                  );
+                },
+              )}
             </div>
           </div>
 

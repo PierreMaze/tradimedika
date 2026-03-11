@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
+import { FaDisease, FaHandHoldingMedical, FaRssSquare } from "react-icons/fa";
 import {
   IoBookOutline,
   IoChatbubblesOutline,
   IoCheckmarkCircleOutline,
   IoCompassOutline,
+  IoDocumentTextOutline,
   IoEyeOutline,
-  IoFlaskOutline,
   IoFlaskSharp,
-  IoGlobeOutline,
   IoLeafOutline,
   IoLibraryOutline,
   IoListOutline,
@@ -16,8 +16,11 @@ import {
   IoRocketOutline,
   IoSearchOutline,
   IoShieldCheckmarkOutline,
+  IoStarOutline,
   IoTimeOutline,
 } from "react-icons/io5";
+import { MdOutlineCompareArrows } from "react-icons/md";
+
 import { Link } from "react-router-dom";
 
 const VALUES = [
@@ -85,59 +88,71 @@ const TUTORIAL_STEPS = [
 
 const UPCOMING_FEATURES = [
   {
-    icon: IoFlaskOutline,
-    title: "Interactions médicamenteuses",
+    icon: MdOutlineCompareArrows,
+    title: "Interactions",
     description:
-      "Base de données des interactions entre produits naturels et médicaments, avec niveaux de sévérité.",
+      "Vérifier les interactions entre produits naturels et médicaments.",
   },
   {
-    icon: IoCompassOutline,
-    title: "Protocoles naturels",
+    icon: FaDisease,
+    title: "Recherche par pathogène",
     description:
-      "Création de recommandations personnalisées pour vos patients à partir de la base de données.",
+      "Rechercher des produits naturels spécifiques pour un pathogène donné.",
   },
+  {
+    icon: IoDocumentTextOutline,
+    title: "Exports PDF",
+    description: "Générer des fiches d'information pour vos patients.",
+  },
+
+  {
+    icon: IoStarOutline,
+    title: "Favoris",
+    description: "Sauvegarder et organiser vos produits favoris.",
+  },
+  {
+    icon: FaHandHoldingMedical,
+    title: "Protocoles naturels",
+    description: "Créer des recommandations naturelles pour vos patients.",
+  },
+
   {
     icon: IoTimeOutline,
     title: "Historique de recherche",
     description:
-      "Consultez l'historique complet de vos recherches et consultations (catalogue, fiches produits, recherche avancée, niveaux de preuve).",
-  },
-  {
-    icon: IoChatbubblesOutline,
-    title: "Forum médical",
-    description:
-      "Espace d'échange sécurisé entre professionnels pour partager retours d'expérience sur les produits, interactions et cas cliniques.",
-  },
-  {
-    icon: IoGlobeOutline,
-    title: "Veille scientifique",
-    description:
-      "Suivi des nouvelles publications et études sur les médecines naturelles.",
-  },
-  {
-    icon: IoRocketOutline,
-    title: "Exports PDF",
-    description:
-      "Génération de fiches d'information formatées à remettre à vos patients.",
-  },
-
-  {
-    icon: IoFlaskSharp,
-    title: "Espace scientifique",
-    description:
-      "Accès aux fiches scientifiques détaillées, publications et études pour chaque produit naturel référencé.",
+      "Consulter l'historique de vos recherches et consultations (catalogue, fiches produits, recherche avancée, niveaux de preuve).",
   },
   {
     icon: IoPersonOutline,
     title: "Espace patient simplifié",
     description:
-      "Interface dédiée et sécurisée (RGPD) pour les patients avec accès aux fonctionnalités essentielles de consultation.",
+      "Interface adaptée et sécurisée (RGPD) pour les patients avec fonctionnalités essentielles.",
+  },
+  {
+    icon: IoFlaskSharp,
+    title: "Espace scientifique",
+    description:
+      "Accéder aux fiches scientifiques détaillées et publications pour chaque produit.",
+  },
+
+  {
+    icon: FaRssSquare,
+    title: "Veille médicale",
+    description:
+      "Suivre les nouvelles études sur les médecines naturelles avec un flux RSS personnalisé.",
   },
   {
     icon: IoPeopleOutline,
     title: "Contribution scientifique",
     description:
-      "Possibilité pour les professionnels de proposer des corrections et enrichissements de la base.",
+      "Proposer des corrections et enrichissements de la base de données.",
+  },
+
+  {
+    icon: IoChatbubblesOutline,
+    title: "Forum médical",
+    description:
+      "Échanger avec d'autres professionnels sur les produits naturels, interactions et retours d'expérience.",
   },
 ];
 

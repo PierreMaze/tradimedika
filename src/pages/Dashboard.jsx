@@ -1,23 +1,22 @@
 import { useState } from "react";
+import { FaDisease, FaHandHoldingMedical, FaRssSquare } from "react-icons/fa";
 import {
   IoArrowForwardOutline,
+  IoChatbubblesOutline,
   IoCloseOutline,
   IoDocumentTextOutline,
-  IoFlaskOutline,
+  IoFlaskSharp,
   IoFolderOpenOutline,
   IoHelpCircleOutline,
-  IoLibraryOutline,
-  IoMedkitOutline,
   IoPeopleOutline,
-  IoPulseOutline,
+  IoPersonOutline,
   IoSearchOutline,
   IoServerOutline,
   IoStarOutline,
   IoTimeOutline,
-  IoChatbubblesOutline,
-  IoPersonOutline,
-  IoFlaskSharp,
 } from "react-icons/io5";
+import { MdOutlineCompareArrows } from "react-icons/md";
+import { PiBooksFill } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import { ROLES, useAuth } from "../features/auth";
 
@@ -48,7 +47,7 @@ const SECTIONS = [
   {
     title: "Catalogue",
     description:
-      "Parcourir par ordre alphabétique et rechercher des produits naturels.",
+      "Parcourir et rechercher des produits naturels, avec accès à leurs fiches détaillées.",
     icon: IoFolderOpenOutline,
     color: "emerald",
     done: true,
@@ -60,7 +59,7 @@ const SECTIONS = [
   {
     title: "Recherche avancée",
     description:
-      "Filtrer par grossesse, enfants, allergènes, niveau de preuve.",
+      "Filtrer les produits naturelles pour croisée les données (type, propriété, symptômes, niveau de preuve, etc).",
     icon: IoSearchOutline,
     color: "purple",
     done: true,
@@ -71,8 +70,9 @@ const SECTIONS = [
   },
   {
     title: "Niveau de preuve scientifique",
-    description: "Consulter les études et la fiabilité des recommandations.",
-    icon: IoLibraryOutline,
+    description:
+      "Consulter les études et la fiabilité des recommandations de chaque produits naturelles de la BDD (sourcée).",
+    icon: PiBooksFill,
     color: "indigo",
     done: true,
     prototype: true,
@@ -81,11 +81,20 @@ const SECTIONS = [
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
   {
-    title: "Interactions",
+    title: "Interactions médicamenteuses",
     description:
       "Vérifier les interactions entre produits naturels et médicaments.",
-    icon: IoFlaskOutline,
+    icon: MdOutlineCompareArrows,
     color: "amber",
+    done: false,
+    roles: [ROLES.PRO, ROLES.ADMIN],
+  },
+  {
+    title: "Recherche par pathogène",
+    description:
+      "Rechercher des produits naturels spécifiques pour un pathogène donné.",
+    icon: FaDisease,
+    color: "lime",
     done: false,
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
@@ -98,18 +107,19 @@ const SECTIONS = [
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
   {
-    title: "Protocoles naturels",
-    description: "Créer des recommandations naturelles pour vos patients.",
-    icon: IoMedkitOutline,
-    color: "teal",
-    done: false,
-    roles: [ROLES.PRO, ROLES.ADMIN],
-  },
-  {
     title: "Favoris",
     description: "Sauvegarder et organiser vos produits favoris.",
     icon: IoStarOutline,
     color: "amber",
+    done: false,
+    roles: [ROLES.PRO, ROLES.ADMIN],
+  },
+
+  {
+    title: "Protocoles naturels",
+    description: "Créer des recommandations naturelles pour vos patients.",
+    icon: FaHandHoldingMedical,
+    color: "teal",
     done: false,
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
@@ -123,11 +133,20 @@ const SECTIONS = [
     roles: [ROLES.PATIENT, ROLES.PRO, ROLES.ADMIN],
   },
   {
-    title: "Forum médical",
+    title: "Veille médicale",
     description:
-      "Échanger avec d'autres professionnels sur les produits naturels, interactions et retours d'expérience.",
-    icon: IoChatbubblesOutline,
-    color: "blue",
+      "Suivre les nouvelles études sur les médecines naturelles avec un flux RSS personnalisé.",
+    icon: FaRssSquare,
+    color: "cyan",
+    done: false,
+    roles: [ROLES.PRO, ROLES.ADMIN],
+  },
+  {
+    title: "Espace scientifique",
+    description:
+      "Espace dédié au professionnel de santé pour accéder aux fiches scientifiques détaillées et publications pour chaque produit naturel.",
+    icon: IoFlaskSharp,
+    color: "indigo",
     done: false,
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
@@ -138,30 +157,25 @@ const SECTIONS = [
     icon: IoPersonOutline,
     color: "green",
     done: false,
-    roles: [ROLES.PATIENT],
+    roles: [ROLES.PRO, ROLES.PATIENT],
   },
+
   {
-    title: "Espace scientifique",
+    title: "Contribution scientifique",
     description:
-      "Accéder aux fiches scientifiques détaillées et publications pour chaque produit.",
-    icon: IoFlaskSharp,
-    color: "indigo",
-    done: false,
-    roles: [ROLES.PRO, ROLES.ADMIN],
-  },
-  {
-    title: "Contribution médicale",
-    description: "Proposer des données ou corrections pour enrichir la base.",
+      "Proposer des corrections et enrichissements de la base de données.",
     icon: IoPeopleOutline,
     color: "sky",
     done: false,
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
+
   {
-    title: "Veille scientifique",
-    description: "Suivre les nouvelles études sur les médecines naturelles.",
-    icon: IoPulseOutline,
-    color: "cyan",
+    title: "Forum médical",
+    description:
+      "Échanger avec d'autres professionnels sur les produits naturels, interactions et retours d'expérience.",
+    icon: IoChatbubblesOutline,
+    color: "blue",
     done: false,
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
@@ -217,6 +231,11 @@ const COLOR_CLASSES = {
     bg: "bg-rose-100 dark:bg-rose-900/30",
     icon: "text-rose-600 dark:text-rose-400",
     border: "border-rose-200 dark:border-rose-800",
+  },
+  lime: {
+    bg: "bg-lime-100 dark:bg-lime-900/30",
+    icon: "text-lime-600 dark:text-lime-400",
+    border: "border-lime-200 dark:border-lime-800",
   },
 };
 

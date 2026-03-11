@@ -1,19 +1,16 @@
 import PropTypes from "prop-types";
 import { useMemo, useState } from "react";
+import { FaDisease, FaHandHoldingMedical, FaRssSquare } from "react-icons/fa";
 import {
   IoChatbubblesOutline,
   IoCloseOutline,
   IoDocumentTextOutline,
-  IoFlaskOutline,
   IoFlaskSharp,
   IoFolderOpenOutline,
   IoHelpCircleOutline,
-  IoLibraryOutline,
   IoLogOutOutline,
-  IoMedkitOutline,
   IoPeopleOutline,
   IoPersonOutline,
-  IoPulseOutline,
   IoSearchOutline,
   IoServerOutline,
   IoSettingsOutline,
@@ -21,6 +18,8 @@ import {
   IoTimeOutline,
   IoTrashOutline,
 } from "react-icons/io5";
+import { MdOutlineCompareArrows } from "react-icons/md";
+import { PiBooksFill } from "react-icons/pi";
 import { RiHome4Line } from "react-icons/ri";
 import {
   TbLayoutSidebarLeftCollapseFilled,
@@ -56,6 +55,7 @@ const ALL_NAV_ITEMS = [
     badge: "INSTABLE",
     roles: [ROLES.PATIENT, ROLES.PRO, ROLES.ADMIN],
   },
+
   {
     to: "/dashboard/recherche-avancee",
     label: "Recherche avancée",
@@ -66,14 +66,29 @@ const ALL_NAV_ITEMS = [
   {
     to: "/dashboard/preuves",
     label: "Niveau de preuve",
-    icon: IoLibraryOutline,
+    icon: PiBooksFill,
     badge: "INSTABLE",
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
+
   {
     to: "/dashboard/interactions",
     label: "Interactions",
-    icon: IoFlaskOutline,
+    icon: MdOutlineCompareArrows,
+    disabled: true,
+    roles: [ROLES.PRO, ROLES.ADMIN],
+  },
+  {
+    to: "/dashboard/pathogenes",
+    label: "Recherche par pathogène",
+    icon: FaDisease,
+    disabled: true,
+    roles: [ROLES.PRO, ROLES.ADMIN],
+  },
+  {
+    to: "/dashboard/protocoles",
+    label: "Protocoles",
+    icon: FaHandHoldingMedical,
     disabled: true,
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
@@ -85,9 +100,9 @@ const ALL_NAV_ITEMS = [
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
   {
-    to: "/dashboard/protocoles",
-    label: "Protocoles",
-    icon: IoMedkitOutline,
+    to: "/dashboard/historique",
+    label: "Historique",
+    icon: IoTimeOutline,
     disabled: true,
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
@@ -98,20 +113,15 @@ const ALL_NAV_ITEMS = [
     disabled: true,
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
+
   {
-    to: "/dashboard/historique",
-    label: "Historique",
-    icon: IoTimeOutline,
+    to: "/dashboard/veille",
+    label: "Veille",
+    icon: FaRssSquare,
     disabled: true,
     roles: [ROLES.PRO, ROLES.ADMIN],
   },
-  {
-    to: "/dashboard/forum",
-    label: "Forum médical",
-    icon: IoChatbubblesOutline,
-    disabled: true,
-    roles: [ROLES.PRO, ROLES.ADMIN],
-  },
+
   {
     to: "/dashboard/espace-patient",
     label: "Espace patient",
@@ -134,9 +144,9 @@ const ALL_NAV_ITEMS = [
     roles: [ROLES.ADMIN],
   },
   {
-    to: "/dashboard/veille",
-    label: "Veille scientifique",
-    icon: IoPulseOutline,
+    to: "/dashboard/forum",
+    label: "Forum médical",
+    icon: IoChatbubblesOutline,
     disabled: true,
     roles: [ROLES.PRO, ROLES.ADMIN],
   },

@@ -14,6 +14,9 @@ const COLOR_CLASSES = {
 function EvidenceLevelFilter({ activeFilters, onToggle }) {
   return (
     <div className="space-y-1">
+      <p className="text-xs text-neutral-500 dark:text-neutral-400">
+        Basé sur le GRADE
+      </p>
       {EVIDENCE_LEVELS.map((level) => (
         <label
           key={level.id}
