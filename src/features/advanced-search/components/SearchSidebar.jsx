@@ -2,12 +2,12 @@ import PropTypes from "prop-types";
 import { useMemo } from "react";
 import AllergenFilter from "./filters/AllergenFilter";
 import AlphabetFilter from "./filters/AlphabetFilter";
-import CategoryFilter from "./filters/CategoryFilter";
 import ChildrenAgeFilter from "./filters/ChildrenAgeFilter";
 import EvidenceLevelFilter from "./filters/EvidenceLevelFilter";
 import FilterSection from "./filters/FilterSection";
 import PregnancyFilter from "./filters/PregnancyFilter";
 import PropertyFilter from "./filters/PropertyFilter";
+import SymptomFilter from "./filters/SymptomFilter";
 import TextSearchFilter from "./filters/TextSearchFilter";
 import TypeFilter from "./filters/TypeFilter";
 
@@ -34,9 +34,9 @@ function SearchSidebar({
   onResetCategory,
 }) {
   const typesCount = useMemo(() => countActive(filters.types), [filters.types]);
-  const categoriesCount = useMemo(
-    () => countActive(filters.categories),
-    [filters.categories],
+  const symptomsCount = useMemo(
+    () => countActive(filters.symptoms),
+    [filters.symptoms],
   );
   const propertiesCount = useMemo(
     () => countActive(filters.properties),
@@ -97,12 +97,12 @@ function SearchSidebar({
       </FilterSection>
 
       <FilterSection
-        label="Catégorie thérapeutique"
-        count={categoriesCount}
+        label="Symptômes"
+        count={symptomsCount}
         defaultOpen={false}
       >
-        <CategoryFilter
-          activeFilters={filters.categories}
+        <SymptomFilter
+          activeFilters={filters.symptoms}
           onToggle={onToggleFilter}
         />
       </FilterSection>

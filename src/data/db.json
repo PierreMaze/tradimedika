@@ -72,34 +72,41 @@
       {
         "symptom": "nausées",
         "properties": ["antiémétique"],
-        "evidenceLevel": "A"
+        "evidenceLevel": "A",
+        "evidenceBaseId": "gingembre-nausees-antiemetique"
       },
       {
         "symptom": "vomissements",
         "properties": ["antiémétique"],
-        "evidenceLevel": "A"
+        "evidenceLevel": "A",
+        "evidenceBaseId": "gingembre-vomissements-antiemetique"
       },
       {
         "symptom": "mal des transports",
         "properties": ["antiémétique"],
-        "evidenceLevel": "A"
+        "evidenceLevel": "A",
+        "evidenceBaseId": "gingembre-maltransports-antiemetique"
       },
       {
         "symptom": "nausées de grossesse",
         "properties": ["antiémétique"],
-        "evidenceLevel": "A"
+        "evidenceLevel": "A",
+        "evidenceBaseId": "gingembre-nauseesGrossesse-antiemetique"
       },
       {
         "symptom": "douleurs articulaires",
         "properties": ["anti-inflammatoire"],
-        "evidenceLevel": "B"
+        "evidenceLevel": "B",
+        "evidenceBaseId": "gingembre-douleursArticulaires-antiinflammatoire"
       },
       {
         "symptom": "inflammation",
         "properties": ["anti-inflammatoire"],
-        "evidenceLevel": "B"
+        "evidenceLevel": "B",
+        "evidenceBaseId": "gingembre-douleursArticulaires-antiinflammatoire"
       }
     ],
+    "evidenceBaseKey": "gingembre",
     "evidenceDetails": {
       "lastReviewed": "2024-02-15",
       "studyCount": 12,
@@ -262,24 +269,29 @@
       {
         "symptom": "douleurs articulaires",
         "properties": ["anti-inflammatoire"],
-        "evidenceLevel": "B"
+        "evidenceLevel": "B",
+        "evidenceBaseId": "curcuma-douleursArticulaires-antiinflammatoire"
       },
       {
         "symptom": "inflammation",
         "properties": ["anti-inflammatoire"],
-        "evidenceLevel": "B"
+        "evidenceLevel": "B",
+        "evidenceBaseId": "curcuma-inflammation-antiinflammatoire"
       },
       {
         "symptom": "inflammation",
         "properties": ["antioxydant"],
-        "evidenceLevel": "D"
+        "evidenceLevel": "D",
+        "evidenceBaseId": "curcuma-inflammation-antioxydant"
       },
       {
         "symptom": "arthrose",
         "properties": ["anti-inflammatoire"],
-        "evidenceLevel": "B"
+        "evidenceLevel": "B",
+        "evidenceBaseId": "curcuma-arthrose-antiinflammatoire"
       }
     ],
+    "evidenceBaseKey": "curcuma",
     "evidenceDetails": {
       "lastReviewed": "2024-01-20",
       "studyCount": 8,
@@ -413,24 +425,29 @@
       {
         "symptom": "toux",
         "properties": ["antitussif"],
-        "evidenceLevel": "B"
+        "evidenceLevel": "B",
+        "evidenceBaseId": "miel-toux-antitussif"
       },
       {
         "symptom": "mal de gorge",
         "properties": ["antimicrobien"],
-        "evidenceLevel": "C"
+        "evidenceLevel": "C",
+        "evidenceBaseId": "miel-malGorge-antimicrobien"
       },
       {
         "symptom": "toux nocturne",
         "properties": ["antitussif"],
-        "evidenceLevel": "B"
+        "evidenceLevel": "B",
+        "evidenceBaseId": "miel-touxNocturne-antitussif"
       },
       {
         "symptom": "toux",
         "properties": ["antimicrobien"],
-        "evidenceLevel": "C"
+        "evidenceLevel": "C",
+        "evidenceBaseId": "miel-malGorge-antimicrobien"
       }
     ],
+    "evidenceBaseKey": "miel",
     "evidenceDetails": {
       "lastReviewed": "2023-11-10",
       "studyCount": 6,
@@ -565,24 +582,29 @@
       {
         "symptom": "troubles digestifs",
         "properties": ["antispasmodique", "carminatif"],
-        "evidenceLevel": "C"
+        "evidenceLevel": "C",
+        "evidenceBaseId": "menthepoivree-troublesDigestifs-antispasmodique"
       },
       {
         "symptom": "ballonnements",
         "properties": ["carminatif"],
-        "evidenceLevel": "C"
+        "evidenceLevel": "C",
+        "evidenceBaseId": "menthepoivree-ballonnements-carminatif"
       },
       {
         "symptom": "syndrome intestin irritable",
         "properties": ["antispasmodique"],
-        "evidenceLevel": "C"
+        "evidenceLevel": "C",
+        "evidenceBaseId": "menthepoivree-sii-antispasmodique"
       },
       {
         "symptom": "maux de tête",
         "properties": ["antispasmodique"],
-        "evidenceLevel": "D"
+        "evidenceLevel": "D",
+        "evidenceBaseId": "menthepoivree-mauxTete-antispasmodique"
       }
     ],
+    "evidenceBaseKey": "menthe-poivree",
     "evidenceDetails": {
       "lastReviewed": "2023-09-15",
       "studyCount": 4,
@@ -726,24 +748,29 @@
       {
         "symptom": "anxiété légère",
         "properties": ["anxiolytique léger"],
-        "evidenceLevel": "D"
+        "evidenceLevel": "D",
+        "evidenceBaseId": "camomille-anxieteLegere-anxiolytiqueLeger"
       },
       {
         "symptom": "troubles du sommeil",
         "properties": ["anxiolytique léger"],
-        "evidenceLevel": "D"
+        "evidenceLevel": "D",
+        "evidenceBaseId": "camomille-troublesSommeil-anxiolytiqueLeger"
       },
       {
         "symptom": "troubles digestifs",
         "properties": ["anti-inflammatoire"],
-        "evidenceLevel": "D"
+        "evidenceLevel": "D",
+        "evidenceBaseId": "camomille-troublesDigestifs-antiinflammatoire"
       },
       {
         "symptom": "inflammations cutanées",
         "properties": ["anti-inflammatoire"],
-        "evidenceLevel": "D"
+        "evidenceLevel": "D",
+        "evidenceBaseId": "camomille-inflammationsCutanees-antiinflammatoire"
       }
     ],
+    "evidenceBaseKey": "camomille",
     "evidenceDetails": {
       "lastReviewed": "2023-10-05",
       "studyCount": 2,

@@ -5,7 +5,7 @@
  * Même pattern que filterProducts.js existant
  */
 
-import { AGE_THRESHOLDS, THERAPEUTIC_CATEGORIES } from "./searchConstants";
+import { AGE_THRESHOLDS } from "./searchConstants";
 
 /**
  * Normalise une chaîne pour la comparaison (minuscules, sans accents)
@@ -23,13 +23,32 @@ function normalizeText(text) {
  * Un produit appartient à une catégorie si au moins une de ses properties
  * a une category qui fait partie du mapping de la catégorie thérapeutique
  */
-function productMatchesCategory(product, categoryId) {
-  const category = THERAPEUTIC_CATEGORIES.find((c) => c.id === categoryId);
-  if (!category) return false;
+// function productMatchesCategory(product, categoryId) {
+//   const category = THERAPEUTIC_CATEGORIES.find((c) => c.id === categoryId);
+//   if (!category) return false;
 
-  return (product.properties || []).some((prop) =>
-    category.mappedCategories.includes(prop.category),
-  );
+//   return (product.properties || []).some((prop) =>
+//     category.mappedCategories.includes(prop.category),
+//   );
+// }
+
+/**
+ * Vérifie si un produit traite un symptôme
+ * Un produit traite un symptôme si le symptôme est présent dans le tableau symptoms du produit
+ */
+function productMatchesSymptom(product, symptomId) {
+  if (!product.symptoms || !Array.isArray(product.symptoms)) return false;
+
+  // Normalise le symptomId pour la comparaison
+  const normalizedSymptomId = normalizeText(symptomId);
+
+  return product.symptoms.some((symptom) => {
+    const normalizedSymptom = normalizeText(symptom);
+    return (
+      normalizedSymptom.includes(normalizedSymptomId) ||
+      normalizedSymptomId.includes(normalizedSymptom)
+    );
+  });
 }
 
 /**
@@ -44,7 +63,7 @@ export function advancedFilterProducts(products, filters) {
     textSearch = "",
     alphabet = [],
     types = {},
-    categories = {},
+    symptoms = {},
     properties = {},
     pregnancy = {},
     childrenAge = {},
@@ -54,7 +73,7 @@ export function advancedFilterProducts(products, filters) {
   } = filters;
 
   const hasTypeFilters = Object.values(types).some(Boolean);
-  const hasCategoryFilters = Object.values(categories).some(Boolean);
+  const hasSymptomFilters = Object.values(symptoms).some(Boolean);
   const hasPropertyFilters = Object.values(properties).some(Boolean);
   const hasPregnancyFilters = Object.values(pregnancy).some(Boolean);
   const hasChildrenAgeFilters = Object.values(childrenAge).some(Boolean);
@@ -84,13 +103,13 @@ export function advancedFilterProducts(products, filters) {
       if (!activeTypes.includes(product.type)) return false;
     }
 
-    // Filtre par catégorie thérapeutique (OU au sein de la catégorie)
-    if (hasCategoryFilters) {
-      const activeCategories = Object.entries(categories)
+    // Filtre par symptômes (OU au sein de la catégorie)
+    if (hasSymptomFilters) {
+      const activeSymptoms = Object.entries(symptoms)
         .filter(([, active]) => active)
-        .map(([catId]) => catId);
-      const matchesAny = activeCategories.some((catId) =>
-        productMatchesCategory(product, catId),
+        .map(([symptomId]) => symptomId);
+      const matchesAny = activeSymptoms.some((symptomId) =>
+        productMatchesSymptom(product, symptomId),
       );
       if (!matchesAny) return false;
     }

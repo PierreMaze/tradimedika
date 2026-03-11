@@ -14,7 +14,7 @@ export default function TransparencySection() {
     <div className="mb-6">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between rounded-lg border-2 border-dashed border-blue-200 bg-blue-100 px-4 py-3 text-left transition-colors hover:bg-blue-200 dark:bg-blue-900/30 dark:hover:bg-blue-900/50"
+        className="flex w-full items-center justify-between rounded-lg border-2 border-blue-200 bg-blue-100 px-4 py-3 text-left transition-colors hover:bg-blue-200 dark:bg-blue-900/30 dark:hover:bg-blue-900/50"
         aria-expanded={isOpen}
       >
         <span className="text-base font-semibold text-blue-900 dark:text-blue-200">

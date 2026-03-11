@@ -11,7 +11,7 @@ const INITIAL_STATE = {
   textSearch: "",
   alphabet: [],
   types: {},
-  categories: {},
+  symptoms: {},
   properties: {},
   pregnancy: {},
   childrenAge: {},
@@ -108,7 +108,7 @@ export function useAdvancedSearch() {
     if (state.textSearch.trim()) count++;
     [
       "types",
-      "categories",
+      "symptoms",
       "properties",
       "pregnancy",
       "childrenAge",

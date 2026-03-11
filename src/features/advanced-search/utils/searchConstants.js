@@ -157,3 +157,27 @@ export const AGE_THRESHOLDS = {
   age6: 6,
   age12: 12,
 };
+
+/**
+ * Liste des symptômes disponibles
+ * Générée à partir de src/data/symptomList.json
+ */
+export const SYMPTOM_LIST = [
+  { id: "anxiete-legere", label: "Anxiété légère" },
+  { id: "arthrose", label: "Arthrose" },
+  { id: "ballonnements", label: "Ballonnements" },
+  { id: "douleurs-articulaires", label: "Douleurs articulaires" },
+  { id: "inflammation", label: "Inflammation" },
+  { id: "inflammations-cutanees", label: "Inflammations cutanées" },
+  { id: "mal-de-gorge", label: "Mal de gorge" },
+  { id: "mal-des-transports", label: "Mal des transports" },
+  { id: "maux-de-tete", label: "Maux de tête" },
+  { id: "nausees", label: "Nausées" },
+  { id: "nausees-de-grossesse", label: "Nausées de grossesse" },
+  { id: "syndrome-intestin-irritable", label: "Syndrome intestin irritable" },
+  { id: "toux", label: "Toux" },
+  { id: "toux-nocturne", label: "Toux nocturne" },
+  { id: "troubles-digestifs", label: "Troubles digestifs" },
+  { id: "troubles-du-sommeil", label: "Troubles du sommeil" },
+  { id: "vomissements", label: "Vomissements" },
+];

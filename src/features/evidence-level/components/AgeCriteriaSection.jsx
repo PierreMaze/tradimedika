@@ -14,16 +14,16 @@ export default function AgeCriteriaSection() {
     <div className="mb-6">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between rounded-lg border-2 border-dashed border-amber-200 bg-amber-100 px-4 py-3 text-left transition-colors hover:bg-amber-200 dark:border-amber-800 dark:bg-amber-900/30 dark:hover:bg-amber-900/50"
+        className="flex w-full items-center justify-between rounded-lg border-2 border-amber-300 bg-amber-100 px-4 py-3 text-left transition-colors hover:bg-amber-200 dark:border-amber-800 dark:bg-amber-900/30 dark:hover:bg-amber-900/50"
         aria-expanded={isOpen}
       >
         <span className="text-base font-semibold text-amber-900 dark:text-amber-200">
           Critères d&apos;âge des études et exclusions
         </span>
         {isOpen ? (
-          <IoChevronUp className="h-5 w-5 text-amber-700 dark:text-amber-400" />
+          <IoChevronUp className="h-5 w-5 text-amber-600 dark:text-amber-400" />
         ) : (
-          <IoChevronDown className="h-5 w-5 text-amber-700 dark:text-amber-400" />
+          <IoChevronDown className="h-5 w-5 text-amber-600 dark:text-amber-400" />
         )}
       </button>
 

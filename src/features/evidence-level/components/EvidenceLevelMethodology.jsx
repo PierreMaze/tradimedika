@@ -1,5 +1,5 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
+import { useState } from "react";
 import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 
 // Sous-composant pour les dropdowns internes
@@ -40,16 +40,16 @@ export default function EvidenceLevelMethodology() {
     <div className="mb-6">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between rounded-lg border-2 border-dashed border-neutral-200 bg-neutral-100 px-4 py-3 text-left transition-colors hover:bg-neutral-200 dark:border-neutral-700 dark:bg-neutral-800 dark:hover:bg-neutral-700"
+        className="flex w-full items-center justify-between rounded-lg border-2 border-emerald-500 bg-emerald-100 px-4 py-3 text-left transition-colors hover:bg-emerald-200 dark:border-emerald-600 dark:bg-emerald-800 dark:hover:bg-emerald-700"
         aria-expanded={isOpen}
       >
-        <span className="text-base font-semibold text-neutral-800 dark:text-white">
+        <span className="text-base font-semibold text-emerald-800 dark:text-white">
           Méthodologie scientifique complète
         </span>
         {isOpen ? (
-          <IoChevronUp className="h-5 w-5 text-neutral-600 dark:text-neutral-400" />
+          <IoChevronUp className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
         ) : (
-          <IoChevronDown className="h-5 w-5 text-neutral-600 dark:text-neutral-400" />
+          <IoChevronDown className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
         )}
       </button>
 

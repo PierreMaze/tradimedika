@@ -12,7 +12,7 @@ export default function AlertSignalsSection() {
     <div className="mb-6">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between rounded-lg border-2 border-dashed border-orange-200 bg-orange-100 px-4 py-3 text-left transition-colors hover:bg-orange-200 dark:border-orange-800 dark:bg-orange-900/30 dark:hover:bg-orange-900/50"
+        className="flex w-full items-center justify-between rounded-lg border-2 border-orange-300 bg-orange-100 px-4 py-3 text-left transition-colors hover:bg-orange-200 dark:border-orange-800 dark:bg-orange-900/30 dark:hover:bg-orange-900/50"
         aria-expanded={isOpen}
       >
         <div className="flex items-center gap-2">

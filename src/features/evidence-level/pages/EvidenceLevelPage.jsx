@@ -10,7 +10,7 @@ import {
 import EvidenceLevelMethodology from "../components/EvidenceLevelMethodology";
 
 export default function EvidenceLevelPage() {
-  const { products, stats } = useEvidenceData();
+  const { stats } = useEvidenceData();
 
   return (
     <div className="mx-auto max-w-6xl">
@@ -43,8 +43,8 @@ export default function EvidenceLevelPage() {
       {/* 5. Stats par niveau */}
       <EvidenceLevelStats stats={stats} />
 
-      {/* 7. Tableau filtrable */}
-      <EvidenceLevelTable products={products} />
+      {/* 7. Tableau médical professionnel (prototype) */}
+      <EvidenceLevelTable />
     </div>
   );
 }

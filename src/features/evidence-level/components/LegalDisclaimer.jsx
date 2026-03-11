@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  IoChevronDown,
-  IoChevronUp,
-  IoShieldCheckmarkOutline,
-} from "react-icons/io5";
+import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 
 export default function LegalDisclaimer() {
   const [isOpen, setIsOpen] = useState(true); // Ouvert par défaut
@@ -12,11 +8,10 @@ export default function LegalDisclaimer() {
     <div className="mb-6">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between rounded-lg border-2 border-dashed border-red-300 bg-red-100 px-4 py-3 text-left transition-colors hover:bg-red-200 dark:bg-red-900/30 dark:hover:bg-red-900/50"
+        className="flex w-full items-center justify-between rounded-lg border-2 border-red-300 bg-red-100 px-4 py-3 text-left transition-colors hover:bg-red-200 dark:bg-red-900/30 dark:hover:bg-red-900/50"
         aria-expanded={isOpen}
       >
         <div className="flex items-center gap-2">
-          <IoShieldCheckmarkOutline className="h-5 w-5 text-red-600 dark:text-red-400" />
           <span className="text-base font-semibold text-red-900 dark:text-red-200">
             Cadre légal et responsabilités
           </span>
@@ -31,11 +26,14 @@ export default function LegalDisclaimer() {
       {isOpen && (
         <div className="mt-4 rounded-lg border border-red-200 bg-white p-4 dark:border-red-800 dark:bg-neutral-900/50">
           <div className="space-y-3 text-xs text-neutral-700 dark:text-neutral-400">
-            <p className="rounded-md border border-red-200 bg-red-50 p-3 dark:border-red-800 dark:bg-red-900/20">
+            <p className="rounded-md border-2 border-dashed border-red-200 bg-red-50 p-3 dark:border-red-800 dark:bg-red-900/20">
               <strong className="text-red-900 dark:text-red-200">
                 Tradimedika
               </strong>{" "}
-              est un <strong>outil d&apos;information scientifique</strong>{" "}
+              est un{" "}
+              <strong className="text-red-900 dark:text-red-200">
+                outil d&apos;information scientifique
+              </strong>{" "}
               destiné exclusivement aux professionnels de santé qualifiés.
             </p>
 
@@ -105,12 +103,16 @@ export default function LegalDisclaimer() {
               </p>
             </div>
 
-            <div className="rounded-md border border-blue-200 bg-blue-50 p-3 dark:border-blue-800 dark:bg-blue-900/20">
-              <p className="text-blue-900 dark:text-blue-300">
-                <strong>Note importante</strong> : Les produits naturels peuvent
-                interagir avec des médicaments ou être contre-indiqués dans
-                certaines situations cliniques. Une évaluation individuelle par
-                un professionnel de santé est indispensable.
+            <div className="rounded-md border-2 border-dashed border-amber-200 bg-amber-50 p-3 dark:border-amber-800 dark:bg-amber-900/20">
+              <p className="text-amber-900 dark:text-amber-300">
+                <strong>Note importante</strong> : Les produits naturels peuvent{" "}
+                <strong>interagir avec des médicaments</strong> ou être{" "}
+                <strong>contre-indiqués</strong> dans certaines situations
+                cliniques.{" "}
+                <strong>
+                  Une évaluation individuelle par un professionnel de santé est
+                  indispensable.
+                </strong>
               </p>
             </div>
           </div>
