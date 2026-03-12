@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { MaintenanceModal } from "../components/maintenance";
 import { AuthProvider } from "../features/auth";
 import { ConsentProvider } from "../features/consent";
 import { ExternalLinkProvider } from "../features/external-link/context/ExternalLinkContext";
@@ -25,18 +26,27 @@ import {
  * @param {React.ReactNode} props.children - Composants enfants
  */
 export default function AppProviders({ children }) {
+  // Configuration : activer/désactiver le mode maintenance
+  const isMaintenanceMode = true;
+
   return (
-    <ThemeProvider>
-      <PerformanceProvider>
-        <AccessibilityProvider>
-          <ExternalLinkProvider>
-            <ConsentProvider>
-              <AuthProvider>{children}</AuthProvider>
-            </ConsentProvider>
-          </ExternalLinkProvider>
-        </AccessibilityProvider>
-      </PerformanceProvider>
-    </ThemeProvider>
+    <>
+      {/* Modal de maintenance (z-index max, bloque tout) */}
+      <MaintenanceModal isActive={isMaintenanceMode} />
+
+      {/* Application normale */}
+      <ThemeProvider>
+        <PerformanceProvider>
+          <AccessibilityProvider>
+            <ExternalLinkProvider>
+              <ConsentProvider>
+                <AuthProvider>{children}</AuthProvider>
+              </ConsentProvider>
+            </ExternalLinkProvider>
+          </AccessibilityProvider>
+        </PerformanceProvider>
+      </ThemeProvider>
+    </>
   );
 }
 
